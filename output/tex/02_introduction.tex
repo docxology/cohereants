@@ -1,0 +1,374 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{Liberation Serif}
+  \setmonofont[]{Liberation Mono}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1.5cm,top=1.5cm,bottom=1.5cm,left=1.5cm,right=1.5cm,includeheadfoot]{geometry}
+\usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
+\lstset{defaultdialect=[5.3]Lua}
+\lstset{defaultdialect=[x86masm]Assembler}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{3}
+% Enable graphics inclusion and ensure figure numbering works
+\usepackage{graphicx}
+\renewcommand{\figurename}{Figure}
+
+% Configure fonts for Unicode support with fallbacks
+\usepackage{newunicodechar}
+\newunicodechar{⁴}{\textsuperscript{4}}
+\newunicodechar{₄}{\textsubscript{4}}
+
+% Enhanced code block styling for better contrast and readability
+\usepackage{fancyvrb}
+\usepackage{xcolor}
+\usepackage{listings}
+
+% Define custom colors for code blocks
+\definecolor{codebg}{RGB}{245, 245, 245}      % Light gray background
+\definecolor{codeborder}{RGB}{200, 200, 200}  % Medium gray border
+\definecolor{codefg}{RGB}{50, 50, 50}         % Dark gray text
+
+% Configure Verbatim environment for inline code
+\DefineVerbatimEnvironment{Verbatim}{Verbatim}{%
+    fontsize=\small,
+    frame=single,
+    framerule=0.5pt,
+    framesep=3pt,
+    rulecolor=\color{codeborder},
+    bgcolor=\color{codebg},
+    fgcolor=\color{codefg}
+}
+
+% Configure code block styling
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{%
+    fontsize=\footnotesize,
+    frame=single,
+    framerule=0.5pt,
+    framesep=5pt,
+    rulecolor=\color{codeborder},
+    bgcolor=\color{codebg},
+    fgcolor=\color{codefg}
+}
+
+% Style inline code with \texttt
+\renewcommand{\texttt}[1]{%
+    \colorbox{codebg}{\color{codefg}\ttfamily #1}%
+}
+
+% Configure listings package for code blocks
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\footnotesize\ttfamily\color{codefg},
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    commentstyle=\color{codefg},
+    deletekeywords={...},
+    escapeinside={\%*}{*)},
+    extendedchars=true,
+    frame=single,
+    framerule=0.5pt,
+    framesep=5pt,
+    keepspaces=true,
+    keywordstyle=\color{codefg},
+    language=Python,
+    morekeywords={*,...},
+    numbers=left,
+    numbersep=5pt,
+    numberstyle=\tiny\color{codefg},
+    rulecolor=\color{codeborder},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    stepnumber=1,
+    stringstyle=\color{codefg},
+    tabsize=2,
+    title=\lstname
+}
+
+% Override any Pandoc default lstset configurations
+\AtBeginDocument{
+    \lstset{
+        backgroundcolor=\color{codebg},
+        basicstyle=\footnotesize\ttfamily\color{codefg},
+        frame=single,
+        framerule=0.5pt,
+        framesep=5pt,
+        rulecolor=\color{codeborder},
+        numbers=left,
+        numbersep=5pt,
+        numberstyle=\tiny\color{codefg}
+    }
+}
+
+% Configure hyperref colors consistently
+\AtBeginDocument{
+% Override pandoc's hidelinks setting with consistent options
+\hypersetup{
+    colorlinks=true,
+    allcolors=red,
+    linkcolor=red,
+    urlcolor=red,
+    citecolor=red,
+    filecolor=red,
+    menucolor=red,
+    linktoc=all
+}
+}
+
+% Simple page break support for document structure
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={blue},
+  citecolor={blue},
+  urlcolor={blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{02 introduction}
+\author{Project Author\\ ORCID: 0000-0000-0000-0000\\ Email: author@example.com}
+\date{August 19, 2025}
+
+\begin{document}
+\maketitle
+
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\setstretch{1.2}
+\section{Introduction}\label{sec:introduction}
+
+\subsection{Overview}\label{overview}
+
+This is an example project that demonstrates the generic repository
+structure for tested code, manuscript editing, and PDF rendering. The
+work presents a novel optimization framework with comprehensive
+theoretical analysis and experimental validation.
+
+\subsection{Project Structure}\label{project-structure}
+
+The project follows a standardized structure:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\passthrough{\lstinline!src/!}} - Source code with
+  comprehensive test coverage
+\item
+  \textbf{\passthrough{\lstinline!tests/!}} - Test files ensuring 100\%
+  coverage
+\item
+  \textbf{\passthrough{\lstinline!scripts/!}} - Project-specific scripts
+  for generating figures and data
+\item
+  \textbf{\passthrough{\lstinline!markdown/!}} - Source markdown files
+  for the manuscript
+\item
+  \textbf{\passthrough{\lstinline!output/!}} - Generated outputs (PDFs,
+  figures, data)
+\item
+  \textbf{\passthrough{\lstinline!repo\_utilities/!}} - Generic utility
+  scripts for any project
+\end{itemize}
+
+\subsection{Key Features}\label{key-features}
+
+\subsubsection{Test-Driven Development}\label{test-driven-development}
+
+All source code must have 100\% test coverage before PDF generation
+proceeds, as enforced by the build system.
+
+\subsubsection{Automated Script
+Execution}\label{automated-script-execution}
+
+Project-specific scripts in the \passthrough{\lstinline!scripts/!}
+directory are automatically executed to generate figures and data,
+ensuring reproducibility.
+
+\subsubsection{Markdown to PDF Pipeline}\label{markdown-to-pdf-pipeline}
+
+Individual markdown modules are converted to PDFs, and a combined
+document is generated with proper cross-referencing.
+
+\subsubsection{Generic and Reusable}\label{generic-and-reusable}
+
+The utility scripts can be used with any project that follows this
+structure, making it easy to adopt for new research projects.
+
+\subsection{Manuscript Organization}\label{manuscript-organization}
+
+The manuscript is organized into several key sections:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Abstract} (Section \ref{sec:abstract}): Research overview and
+  key contributions
+\item
+  \textbf{Introduction} (Section \ref{sec:introduction}): Overview and
+  project structure
+\item
+  \textbf{Methodology} (Section \ref{sec:methodology}): Mathematical
+  framework and algorithms
+\item
+  \textbf{Experimental Results} (Section
+  \ref{sec:experimental_results}): Performance evaluation and validation
+\item
+  \textbf{Discussion} (Section \ref{sec:discussion}): Theoretical
+  implications and comparisons
+\item
+  \textbf{Conclusion} (Section \ref{sec:conclusion}): Summary and future
+  directions
+\end{enumerate}
+
+\subsection{Example Figure}\label{example-figure}
+
+The following figure was generated by the example script:
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/example_figure.png}
+\caption{Example project figure showing a mathematical function}
+\label{fig:example_figure}
+\end{figure}
+
+This demonstrates how figures are automatically integrated into the
+manuscript with proper cross-referencing capabilities. The figure shows
+a mathematical function that demonstrates the project's capabilities. As
+shown in Figure \ref{fig:example_figure}, the system generates
+high-quality visualizations that are automatically integrated into the
+manuscript.
+
+\subsection{Data Availability}\label{data-availability}
+
+All generated data is saved alongside figures for reproducibility:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Figures}: PNG format in
+  \passthrough{\lstinline!output/figures/!}
+\item
+  \textbf{Data}: NPZ and CSV formats in
+  \passthrough{\lstinline!output/data/!}
+\item
+  \textbf{PDFs}: Individual and combined documents in
+  \passthrough{\lstinline!output/pdf/!}
+\item
+  \textbf{LaTeX}: Source files in \passthrough{\lstinline!output/tex/!}
+\end{itemize}
+
+\subsection{Usage}\label{usage}
+
+To generate the complete manuscript:
+
+\begin{lstlisting}[language=bash]
+# Clean previous outputs
+./repo_utilities/clean_output.sh
+
+# Generate everything (tests + scripts + PDFs)
+./repo_utilities/render_pdf.sh
+\end{lstlisting}
+
+The system will automatically: 1. Run all tests with 100\% coverage
+requirement 2. Execute project-specific scripts to generate figures and
+data 3. Validate markdown references and images 4. Generate individual
+and combined PDFs 5. Export LaTeX source files
+
+\subsection{Customization}\label{customization}
+
+This template can be customized for any project by:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Adding project-specific scripts to \passthrough{\lstinline!scripts/!}
+\item
+  Modifying markdown files in \passthrough{\lstinline!markdown/!}
+\item
+  Setting environment variables for author information
+\item
+  Adjusting LaTeX preamble in \passthrough{\lstinline!00\_preamble.md!}
+\item
+  Adding new sections with proper cross-references
+\end{enumerate}
+
+\subsection{Cross-Referencing System}\label{cross-referencing-system}
+
+The manuscript demonstrates comprehensive cross-referencing:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Section References}: Use
+  \passthrough{\lstinline!\\ref\{sec:section\_name\}!} to reference
+  sections
+\item
+  \textbf{Equation References}: Use
+  \passthrough{\lstinline!\\eqref\{eq:objective\}!} to reference
+  equations (see Section \ref{sec:methodology})
+\item
+  \textbf{Figure References}: Use
+  \passthrough{\lstinline!\\ref\{fig:figure\_name\}!} to reference
+  figures
+\item
+  \textbf{Table References}: Use
+  \passthrough{\lstinline!\\ref\{tab:table\_name\}!} to reference tables
+\end{itemize}
+
+All references are automatically numbered and updated when the document
+is regenerated. For example, the main objective function
+\eqref{eq:objective} is defined in the methodology section.
+
+\end{document}
