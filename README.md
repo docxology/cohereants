@@ -1,137 +1,96 @@
-# 🚀 Research Project Template
+# cohereants
 
-> **Template Repository** - Click "Use this template" to create a new research project with this structure
+**When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus**
 
-A revolutionary system for solving complex problems. This template provides a standardized structure that can be adapted for any research or development project.
+A comprehensive research project investigating the vibrational theory of olfaction in insects, exploring how insects may detect infrared radiation from semiochemicals rather than relying solely on molecular binding mechanisms.
 
-## 🎯 What This Template Provides
+## Research Overview
 
-This is a **GitHub Template Repository** that gives you:
+This project investigates the hypothesis that insect olfaction operates through the detection of infrared electromagnetic radiation emitted by semiochemicals, rather than through traditional molecular binding mechanisms. We examine evidence from multiple domains including:
 
-- ✅ **Complete project structure** with clear separation of concerns
-- ✅ **Test-driven development** setup with 100% coverage requirements
-- ✅ **Automated PDF generation** from markdown sources
-- ✅ **Thin orchestrator pattern** for maintainable code
-- ✅ **Ready-to-use utilities** for any research project
-- ✅ **Professional documentation** structure
+- **Morphology**: The structure and arrangement of insect antennae and sensilla
+- **Neurology**: The rapid response times of olfactory receptor neurons  
+- **Behavior**: Observed insect responses to different stimuli
+- **Spectroscopy**: The infrared emission spectra of insect semiochemicals
 
-## 🚀 Quick Start
+## Key Research Questions
 
-1. **Click "Use this template"** above to create a new repository
-2. **Clone your new repository**
-3. **Customize the project name** and configuration
-4. **Start building your research project!**
+1. How do insects achieve such rapid olfactory response times (1-5 ms)?
+2. What explains the morphological adaptations of antennae and sensilla?
+3. How do insects discriminate between different semiochemicals?
+4. What role does infrared radiation play in insect perception?
 
-**📖 Need help?** See **[`HOW_TO_USE.md`](HOW_TO_USE.md)** for comprehensive guidance from basic usage to advanced workflows.
+## Theoretical Framework
+
+The vibrational theory of olfaction proposes that insects detect the unique electromagnetic signatures of molecules rather than their geometric or chemical properties. This theory provides a unified explanation for:
+
+- The rapid response times of insect olfaction
+- The morphological adaptations of antennae and sensilla
+- The behavioral responses to different semichemicals
+- The evolutionary diversity of sensilla types across insect taxa
 
 ## Project Structure
 
-The project follows a standardized structure with clear separation of concerns:
+The project follows a standardized research structure:
 
-```mermaid
-graph TB
-    subgraph "Project Components"
-        SRC[src/<br/>Core business logic<br/>100% tested]
-        TESTS[tests/<br/>Test suite<br/>100% coverage]
-        SCRIPTS[scripts/<br/>Thin orchestrators<br/>Use src/ methods]
-        MD[markdown/<br/>Documentation<br/>Cross-referenced]
-        REPO_UTILS[repo_utilities/<br/>Build tools<br/>Generic utilities]
-        OUTPUT[output/<br/>Generated files<br/>PDFs, figures, data]
-    end
-    
-    subgraph "Thin Orchestrator Pattern"
-        SRC -->|"provides tested methods"| SCRIPTS
-        SCRIPTS -->|"import & use"| SRC
-        SCRIPTS -->|"generate"| OUTPUT
-        TESTS -->|"validate"| SRC
-    end
-    
-    subgraph "Build Pipeline"
-        RENDER[render_pdf.sh<br/>Orchestrator]
-        RENDER -->|"runs tests"| TESTS
-        RENDER -->|"executes scripts"| SCRIPTS
-        RENDER -->|"builds PDFs"| OUTPUT
-    end
-    
-    classDef core fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-    classDef pattern fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
-    classDef pipeline fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
-    classDef output fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    
-    class SRC,TESTS,SCRIPTS,MD,REPO_UTILS core
-    class SRC,SCRIPTS pattern
-    class RENDER pipeline
-    class OUTPUT output
-```
-
-- **`src/`** - **Core business logic** with comprehensive test coverage (100% required)
-- **`tests/`** - Test files ensuring all `src/` functionality works correctly
-- **`scripts/`** - **Thin orchestrators** that use `src/` methods to generate figures and data
+- **`src/`** - Source code with comprehensive test coverage for data analysis
+- **`tests/`** - Test files ensuring 100% coverage of analysis functions
+- **`scripts/`** - Project-specific scripts for generating figures and data
 - **`markdown/`** - Source markdown files for the manuscript
 - **`output/`** - Generated outputs (PDFs, figures, data)
-- **`repo_utilities/`** - Generic utility scripts for any project
-
-## Key Architectural Principles
-
-### 🏗️ **Thin Orchestrator Pattern**
-The project follows a **thin orchestrator pattern** where:
-
-- **`src/`** contains **ALL** business logic, algorithms, and mathematical implementations
-- **`scripts/`** are **lightweight wrappers** that import and use `src/` methods
-- **`tests/`** ensure **100% coverage** of `src/` functionality
-- **`render_pdf.sh`** orchestrates the entire pipeline
-
-### 🔗 **Scripts as Integration Examples**
-Scripts in `scripts/` demonstrate proper integration with `src/` modules:
-
-- **Import** mathematical functions from `src/example.py`
-- **Use** tested methods for all computation
-- **Handle** visualization, I/O, and orchestration
-- **Generate** figures and data outputs
-- **Validate** that `src/` integration works correctly
-
-**Example**: `example_figure.py` imports `add_numbers()`, `calculate_average()`, etc. from `src/example.py` and uses them to process data before visualization.
+- **`repo_utilities/`** - Utility scripts for project management
 
 ## Key Features
 
 ### Test-Driven Development
-All source code in `src/` must have **100% test coverage** before PDF generation proceeds. This ensures that the methods used by scripts are fully validated.
+All source code must have 100% test coverage before PDF generation proceeds, as enforced by the build system.
 
 ### Automated Script Execution
-Project-specific scripts in the `scripts/` directory are automatically executed to generate figures and data. These scripts **import and use** the tested methods from `src/`, demonstrating proper integration patterns.
+Project-specific scripts in the `scripts/` directory are automatically executed to generate figures and data, ensuring reproducibility.
 
 ### Markdown to PDF Pipeline
-Individual markdown modules are converted to PDFs with proper figure integration, and a combined document is generated with comprehensive cross-referencing.
+Individual markdown modules are converted to PDFs, and a combined document is generated with proper cross-referencing.
 
-### Generic and Reusable
-The utility scripts can be used with any project that follows this structure, making it easy to adopt for new research projects.
+### Research Data Analysis
+Comprehensive functions for analyzing:
+- Sensilla dimensions and optimal detection wavelengths
+- Atmospheric transmission in infrared windows
+- Cuticular hydrocarbon spectra
+- Behavioral response data
+- Response time comparisons across sensory modalities
 
-## 🛠️ Quick Start
+## Manuscript Organization
 
-### 1. Prerequisites
+The manuscript is organized into several key sections:
 
-Install required system dependencies:
+1. **Abstract** (Section \ref{sec:abstract}): Research overview and key findings
+2. **Introduction** (Section \ref{sec:introduction}): Background on olfaction and limitations of current theories
+3. **Methodology** (Section \ref{sec:methodology}): The vibrational theory and evidence from morphology
+4. **Experimental Results** (Section \ref{sec:experimental_results}): Neurological, behavioral, and spectroscopic evidence
+5. **Discussion** (Section \ref{sec:discussion}): Implications and broader significance
+6. **Conclusion** (Section \ref{sec:conclusion}): Summary and future research directions
 
-```bash
-# Ubuntu/Debian
-sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended fonts-dejavu
+## Example Figures
 
-# macOS (using Homebrew)
-brew install pandoc
-brew install --cask mactex
-```
+The project generates several key visualizations:
 
-### 2. Python Dependencies
+- **Atmospheric Transmission**: Shows infrared transmission windows in Earth's atmosphere
+- **Sensilla Dimensions**: Plots insect sensilla morphology and optimal detection wavelengths
+- **CHC Spectra**: Example cuticular hydrocarbon infrared spectra
+- **Response Time Comparison**: Comparison across different sensory modalities
 
-```bash
-# Using uv (recommended)
-uv sync
+## Data Availability
 
-# Or using pip
-pip install -r requirements.txt
-```
+All generated data is saved alongside figures for reproducibility:
 
-### 3. Generate Manuscript
+- **Figures**: PNG format in `output/figures/`
+- **Data**: NPZ and CSV formats in `output/data/`
+- **PDFs**: Individual and combined documents in `output/pdf/`
+- **LaTeX**: Source files in `output/tex/`
+
+## Usage
+
+To generate the complete manuscript:
 
 ```bash
 # Clean previous outputs
@@ -141,219 +100,48 @@ pip install -r requirements.txt
 ./repo_utilities/render_pdf.sh
 ```
 
-## 🔧 Customization
+The system will automatically:
+1. Run all tests with 100% coverage requirement
+2. Execute project-specific scripts to generate figures and data
+3. Validate markdown references and images
+4. Generate individual and combined PDFs
+5. Export LaTeX source files
 
-### Project Metadata
+## Research Significance
 
-Set environment variables to customize output:
+Understanding the vibrational basis of insect olfaction has implications for:
 
-```bash
-export AUTHOR_NAME="Your Name"
-export AUTHOR_ORCID="0000-0000-0000-0000"
-export AUTHOR_EMAIL="your.email@example.com"
-export DOI="10.5281/zenodo.12345678"
-export PROJECT_TITLE="Your Project Title"
-```
+- **Entomology**: Fundamental understanding of insect perception and behavior
+- **Evolutionary Biology**: How organisms adapt to exploit environmental niches
+- **Biomimetics**: Developing new technologies inspired by insect sensory systems
+- **Agriculture**: More targeted and environmentally friendly pest control methods
+- **Conservation**: Understanding how environmental changes affect insect populations
 
-### Adding Project-Specific Scripts
+## Authors
 
-Place Python scripts in the `scripts/` directory. They should:
+- **Tucker Chambers**
+- **Daniel A. Friedman**
 
-- **Import methods from `src/` modules** (thin orchestrator pattern)
-- **Use `src/` methods for all computation** (never implement algorithms)
-- **Generate figures/data** using tested methods
-- **Print file paths to stdout**
-- **Handle errors gracefully**
-- **Save outputs to appropriate directories**
+## License
 
-Example script structure:
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-```python
-#!/usr/bin/env python3
-"""Example project script demonstrating thin orchestrator pattern."""
+## Contributing
 
-from example import add_numbers, calculate_average  # Import from src/
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
-def main():
-    # Use src/ methods for computation
-    data = [1, 2, 3, 4, 5]
-    avg = calculate_average(data)  # From src/example.py
-    
-    # Script handles visualization and output
-    # ... visualization code ...
-    
-    # Print paths for the system to capture
-    print("path/to/generated/file.png")
+## Acknowledgments
 
-if __name__ == "__main__":
-    main()
-```
+This research builds upon the pioneering work of Dr. Philip S. Callahan and others who first proposed the vibrational theory of olfaction in the 1960s and 1970s.
 
-### Markdown Structure
+## Future Research Directions
 
-- `00_preamble.md` - LaTeX preamble and styling
-- `01_introduction.md` - Project introduction
-- Additional numbered markdown files for sections
+While the evidence presented here is compelling, much work remains to be done to fully validate the vibrational theory. Key areas for future research include:
 
-## 📊 Testing
+1. **Direct Experimental Validation**: Testing the responses of insect sensilla to specific infrared frequencies
+2. **Behavioral Studies**: Investigating how insects respond to infrared radiation in the absence of molecular stimuli
+3. **Neural Recording**: Measuring the responses of olfactory receptor neurons to infrared stimulation
+4. **Comparative Studies**: Examining the infrared detection capabilities across different insect taxa
+5. **Environmental Studies**: Understanding how changes in the infrared environment affect insect behavior
 
-The system enforces 100% test coverage:
-
-```bash
-# Run tests with coverage
-pytest tests/ --cov=src --cov-report=html
-
-# Or using uv
-uv run pytest tests/ --cov=src --cov-report=html
-```
-
-## 📤 Output
-
-Generated outputs are organized in the `output/` directory:
-
-```mermaid
-graph TD
-    OUTPUT[output/] --> PDFS[pdf/<br/>Individual + Combined PDFs]
-    OUTPUT --> FIGS[figures/<br/>PNG files from scripts]
-    OUTPUT --> DATA[data/<br/>CSV, NPZ files]
-    OUTPUT --> TEX[tex/<br/>LaTeX source files]
-    
-    classDef dir fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
-    classDef files fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    
-    class OUTPUT dir
-    class PDFS,FIGS,DATA,TEX files
-```
-
-- **`output/pdf/`** - Individual and combined PDFs
-- **`output/tex/`** - LaTeX source files
-- **`output/data/`** - Data files (CSV, NPZ, etc.)
-- **`output/figures/`** - Generated figures (PNG, etc.)
-
-## 🔍 How It Works
-
-```mermaid
-flowchart TD
-    START([Start render_pdf.sh]) --> CLEAN[Clean all outputs]
-    CLEAN --> TESTS[Run tests with 100% coverage]
-    TESTS --> SCRIPTS[Execute all scripts]
-    SCRIPTS --> VALIDATE[Validate markdown]
-    VALIDATE --> GLOSSARY[Generate glossary from src/]
-    GLOSSARY --> BUILD[Build PDFs]
-    BUILD --> SUCCESS[Complete]
-    
-    TESTS -->|Fail| FAIL1[Tests failed]
-    SCRIPTS -->|Fail| FAIL2[Scripts failed]
-    VALIDATE -->|Fail| FAIL3[Validation failed]
-    
-    FAIL1 --> END([Exit with error])
-    FAIL2 --> END
-    FAIL3 --> END
-    
-    SUCCESS --> END
-    
-    classDef success fill:#e8f5e8,stroke:#2e7d32,stroke-width:2px
-    classDef failure fill:#ffebee,stroke:#c62828,stroke-width:2px
-    classDef process fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
-    
-    class SUCCESS success
-    class FAIL1,FAIL2,FAIL3 failure
-    class CLEAN,TESTS,SCRIPTS,VALIDATE,GLOSSARY,BUILD process
-```
-
-1. **Test Validation**: Ensures 100% test coverage
-2. **Script Execution**: Runs all Python scripts in `scripts/` (validating src/ integration)
-3. **Markdown Discovery**: Finds all `.md` files in `markdown/`
-4. **PDF Generation**: Creates individual and combined PDFs
-5. **Output Organization**: Places outputs in organized subdirectories
-
-## 📚 Documentation
-
-- **[`HOW_TO_USE.md`](HOW_TO_USE.md)** - **Complete usage guide** from basic to advanced
-- **[`repo_utilities/README.md`](repo_utilities/README.md)** - Detailed utility documentation
-- **[`ARCHITECTURE.md`](ARCHITECTURE.md)** - System architecture overview
-- **[`WORKFLOW.md`](WORKFLOW.md)** - Development workflow guide
-- **[`MARKDOWN_TEMPLATE_GUIDE.md`](MARKDOWN_TEMPLATE_GUIDE.md)** - Markdown and cross-referencing guide
-- **[`EXAMPLES.md`](EXAMPLES.md)** - Project renaming examples
-- **[`THIN_ORCHESTRATOR_SUMMARY.md`](THIN_ORCHESTRATOR_SUMMARY.md)** - Thin orchestrator pattern implementation
-- **[`EXAMPLES_SHOWCASE.md`](EXAMPLES_SHOWCASE.md)** - Real-world usage examples
-- **[`ROADMAP.md`](ROADMAP.md)** - Development roadmap and future plans
-- **[`SECURITY.md`](SECURITY.md)** - Security policy and best practices
-- **[`TEMPLATE_DESCRIPTION.md`](TEMPLATE_DESCRIPTION.md)** - Template overview and features
-
-## 🤝 Contributing
-
-1. Ensure all tests pass with 100% coverage
-2. Follow the established project structure
-3. Add tests for new functionality
-4. Update documentation as needed
-5. **Maintain thin orchestrator pattern** - scripts use src/ methods
-
-For detailed contribution guidelines, see **[`CONTRIBUTING.md`](CONTRIBUTING.md)** and **[`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md)**.
-
-## 📄 License
-
-This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.
-
-## 📚 Citation
-
-If you use this template in your research, please cite:
-
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16903352.svg)](https://doi.org/10.5281/zenodo.16903352)
-
-**BibTeX:**
-```bibtex
-@software{friedman_daniel_ari_2025_16903352,
-  author       = {Daniel Ari Friedman},
-  title        = {docxology/template: 0.1},
-  month        = aug,
-  year         = 2025,
-  publisher    = {Zenodo},
-  version      = {0.1},
-  doi          = {10.5281/zenodo.16903352},
-  url          = {https://doi.org/10.5281/zenodo.16903352}
-}
-```
-
-**Plain text:**
-Daniel Ari Friedman. (2025). docxology/template: 0.1 (0.1). Zenodo. https://doi.org/10.5281/zenodo.16903352
-
-## 🆘 Troubleshooting
-
-### Common Issues
-
-- **Tests Fail**: Ensure 100% coverage and all tests pass
-- **Scripts Fail**: Check Python dependencies and error handling
-- **PDF Generation Fails**: Verify pandoc and xelatex installation
-- **Coverage Below 100%**: Add tests for uncovered code
-
-### Getting Help
-
-- Check the **[`repo_utilities/README.md`](repo_utilities/README.md)** for detailed troubleshooting
-- Review the test output for specific error messages
-- Ensure all required dependencies are installed
-- See **[`FAQ.md`](FAQ.md)** for common questions and solutions
-
-## 🔄 Migration from QuadMath
-
-This template was adapted from the QuadMath project. To migrate your existing project:
-
-1. Copy the `repo_utilities/` folder to your project
-2. Adapt the `src/`, `tests/`, and `scripts/` structure
-3. Update markdown files to match the expected format
-4. Set appropriate environment variables for your project
-5. Run the utility scripts to validate the setup
-
-## 🏗️ Architecture Benefits
-
-The thin orchestrator pattern provides:
-
-- **Maintainability**: Single source of truth for business logic
-- **Testability**: Fully tested core functionality
-- **Reusability**: Scripts can use any `src/` method
-- **Clarity**: Clear separation of concerns
-- **Quality**: Automated validation of the entire system
-
----
-
-**Happy coding and writing! 🎉**
+The vibrational theory of olfaction represents a paradigm shift in our understanding of insect perception and behavior, opening new avenues for research into insect cognition, evolution, and their role in the natural world.

@@ -1,103 +1,32 @@
 # Introduction {#sec:introduction}
 
-## Overview
+Olfaction is the ability to detect free-floating molecules in an organism's immediate environment, a sense known as "smell". It is a well-conserved trait across biology, with broad functional and neurological similarities across diverse taxa. In more specific terms, olfaction is the observed relationship between a volatile stimulus' presence, its proximal arrival to a sensory organ (such as a nose or antenna), and the corresponding neurological response and organismal behavior. This paper will be focusing in particular on olfaction in Insecta.
 
-This is an example project that demonstrates the generic repository structure for tested code, manuscript editing, and PDF rendering. The work presents a novel optimization framework with comprehensive theoretical analysis and experimental validation.
+The classical theories of olfaction are based on the shape of molecules and their corresponding fit with differentially selective olfactory receptors (ORs) found on the cellular membranes of olfactory receptor neurons (ORNs). This is known as the stereochemical theory of olfaction, or the lock-and-key method — an odor molecule "fits" or "docks" with a specific receptor, and initiates an ionic cascade that becomes a measurable neural response. It has been found that individual odors can fit with many different ORs during one sensing event, and so even with a relatively restricted set of ORs (there are only hundreds of known receptor types, but billions of perceptible odors), it is theorized that their combinatorial activation allows for high-precision odor encoding despite most receptors having general low specificity (i.e. broadly tuned).
 
-## Project Structure
+## Limitations of Stereochemical Theory
 
-The project follows a standardized structure:
+The stereochemical theory of olfaction has several limitations. The most salient is the fact that molecules that have near-identical shapes and chemical structures, and would thus have similar effects on ORs, have been found instead to have different odors and incite different behavioral and neurological responses. Examples such as ferrocene and nickelocene, which have different odors yet identical shapes, refute a stereochemical theory of olfaction.
 
-- **`src/`** - Source code with comprehensive test coverage
-- **`tests/`** - Test files ensuring 100% coverage
-- **`scripts/`** - Project-specific scripts for generating figures and data
-- **`markdown/`** - Source markdown files for the manuscript
-- **`output/`** - Generated outputs (PDFs, figures, data)
-- **`repo_utilities/`** - Generic utility scripts for any project
+This evidence has been elaborated on with studies investigating ORN responses to deuterated homologues of known odor molecules. Deuteration is the substitution of natural hydrogen with a heavier isotope. This affects the weight (and emission spectra) of a molecule, but not its shape. Studies on mammalian and insect ORNs, both with extracted neurons and via behavioral conditioning assays, demonstrate that deuteration does in fact elicit unique responses and that deuterated homologues "smell" differently. This strongly suggests that olfaction is not primarily mediated at receptor surfaces.
 
-## Key Features
+Another limitation of the stereochemical theory of olfaction is its possible incompatibility with super low-latency ORN reaction times, reported on the order of 1 to 5 ms in insects. These low latency responses, comparable to photoreceptor and auditory receptor response times, suggest that the "olfactive" response might also be due to wave detection, i.e. (infrared) radiant waves being emitted by the semiochemicals and picked up by the antennal sensilla.
 
-### Test-Driven Development
-All source code must have 100% test coverage before PDF generation proceeds, as enforced by the build system.
+## The Vibrational Theory Alternative
 
-### Automated Script Execution
-Project-specific scripts in the `scripts/` directory are automatically executed to generate figures and data, ensuring reproducibility.
+The vibrational, or spectroscopic, theory of olfaction proposes that it is the unique electromagnetic radiation emitted by free-floating odor molecules that animals are detecting, rather than geometric or chemical information at the binding surface of ORs. A compelling circumstance in support of the vibrational theory is the fact that the Earth's atmosphere has transmission windows in the mid- and long-infrared (2 to 30+ microns), precisely in the range of electromagnetic emissions from semiochemicals like cuticular hydrocarbons and pheromones.
 
-### Markdown to PDF Pipeline
-Individual markdown modules are converted to PDFs, and a combined document is generated with proper cross-referencing.
+This paper will explore the evidence for this vibrational theory through morphological, neurological, behavioral, and experimental data from insect studies, with particular focus on the role of infrared detection in insect perception and behavior.
 
-### Generic and Reusable
-The utility scripts can be used with any project that follows this structure, making it easy to adopt for new research projects.
+## Figure References
 
-## Manuscript Organization
+The research presented in this paper is supported by several key figures that demonstrate the principles of infrared detection in insects:
 
-The manuscript is organized into several key sections:
+- **Figure \ref{fig:atmospheric_transmission}**: Atmospheric transmission windows in the infrared range, showing the optimal wavelengths for insect semiochemical detection
+- **Figure \ref{fig:sensilla_wavelength_matching}**: Correlation between sensilla dimensions and optimal detection wavelengths
+- **Figure \ref{fig:chc_spectra_example}**: Example cuticular hydrocarbon spectra showing characteristic infrared emission peaks
+- **Figure \ref{fig:response_time_comparison}**: Comparison of response times between traditional olfaction and infrared detection
+- **Figure \ref{fig:experimental_setup}**: Experimental setup for testing infrared detection capabilities
+- **Figure \ref{fig:convergence_plot}**: Convergence analysis demonstrating the effectiveness of vibrational detection methods
 
-1. **Abstract** (Section \ref{sec:abstract}): Research overview and key contributions
-2. **Introduction** (Section \ref{sec:introduction}): Overview and project structure
-3. **Methodology** (Section \ref{sec:methodology}): Mathematical framework and algorithms
-4. **Experimental Results** (Section \ref{sec:experimental_results}): Performance evaluation and validation
-5. **Discussion** (Section \ref{sec:discussion}): Theoretical implications and comparisons
-6. **Conclusion** (Section \ref{sec:conclusion}): Summary and future directions
-
-## Example Figure
-
-The following figure was generated by the example script:
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]{../output/figures/example_figure.png}
-\caption{Example project figure showing a mathematical function}
-\label{fig:example_figure}
-\end{figure}
-
-This demonstrates how figures are automatically integrated into the manuscript with proper cross-referencing capabilities. The figure shows a mathematical function that demonstrates the project's capabilities. As shown in Figure \ref{fig:example_figure}, the system generates high-quality visualizations that are automatically integrated into the manuscript.
-
-## Data Availability
-
-All generated data is saved alongside figures for reproducibility:
-
-- **Figures**: PNG format in `output/figures/`
-- **Data**: NPZ and CSV formats in `output/data/`
-- **PDFs**: Individual and combined documents in `output/pdf/`
-- **LaTeX**: Source files in `output/tex/`
-
-## Usage
-
-To generate the complete manuscript:
-
-```bash
-# Clean previous outputs
-./repo_utilities/clean_output.sh
-
-# Generate everything (tests + scripts + PDFs)
-./repo_utilities/render_pdf.sh
-```
-
-The system will automatically:
-1. Run all tests with 100% coverage requirement
-2. Execute project-specific scripts to generate figures and data
-3. Validate markdown references and images
-4. Generate individual and combined PDFs
-5. Export LaTeX source files
-
-## Customization
-
-This template can be customized for any project by:
-
-1. Adding project-specific scripts to `scripts/`
-2. Modifying markdown files in `markdown/`
-3. Setting environment variables for author information
-4. Adjusting LaTeX preamble in `00_preamble.md`
-5. Adding new sections with proper cross-references
-
-## Cross-Referencing System
-
-The manuscript demonstrates comprehensive cross-referencing:
-
-- **Section References**: Use `\ref{sec:section_name}` to reference sections
-- **Equation References**: Use `\eqref{eq:objective}` to reference equations (see Section \ref{sec:methodology})
-- **Figure References**: Use `\ref{fig:figure_name}` to reference figures
-- **Table References**: Use `\ref{tab:table_name}` to reference tables
-
-All references are automatically numbered and updated when the document is regenerated. For example, the main objective function \eqref{eq:objective} is defined in the methodology section.
+For detailed mathematical formulations of these concepts, see Section \ref{sec:mathematical_appendix}.

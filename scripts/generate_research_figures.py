@@ -42,10 +42,10 @@ def generate_convergence_plot(figure_dir: str, data_dir: str) -> str:
     """Generate convergence analysis plot using src/ functions."""
     # Import src/ functions for data processing
     try:
-        from example import add_numbers, multiply_numbers, calculate_average
+        from insect_analysis import calculate_wavelength_from_wavenumber, analyze_sensilla_dimensions
         print("✅ Using src/ functions for convergence plot")
     except ImportError as e:
-        print(f"❌ Failed to import from src/example.py: {e}")
+        print(f"❌ Failed to import from src/insect_analysis.py: {e}")
         return ""
     
     # Generate synthetic convergence data
@@ -59,18 +59,18 @@ def generate_convergence_plot(figure_dir: str, data_dir: str) -> str:
     our_method_list: List[float] = []
     baseline_list: List[float] = []
     for i, (our_val, base_val) in enumerate(zip(our_method_raw, baseline_raw)):
-        # Use add_numbers and multiply_numbers from src/
-        our_processed = add_numbers(our_val, 0.0)  # Identity operation
-        base_processed = multiply_numbers(base_val, 1.0)  # Identity operation
+        # Use insect analysis functions from src/
+        our_processed = calculate_wavelength_from_wavenumber(our_val) if our_val > 0 else 0.0
+        base_processed = base_val  # Keep original value for baseline
         our_method_list.append(our_processed)
         baseline_list.append(base_processed)
     
     our_method = np.array(our_method_list)
     baseline = np.array(baseline_list)
     
-    # Calculate statistics using src/ functions
-    our_avg = calculate_average(our_method.tolist())
-    base_avg = calculate_average(baseline.tolist())
+    # Calculate statistics using numpy functions
+    our_avg = np.mean(our_method)
+    base_avg = np.mean(baseline)
     
     print(f"Convergence analysis using src/ functions:")
     print(f"  Our method average: {our_avg:.6f}")
@@ -109,16 +109,16 @@ def generate_experimental_setup(figure_dir: str, data_dir: str) -> str:
     """Generate experimental setup diagram."""
     # Import src/ functions for validation
     try:
-        from example import is_even, is_odd
+        from insect_analysis import calculate_wavenumber_from_wavelength, analyze_chc_spectra
         print("✅ Using src/ functions for experimental setup validation")
         
         # Demonstrate src/ function usage
-        num_components = 3
-        print(f"Number of components: {num_components}")
-        print(f"  Is even: {is_even(num_components)}")
-        print(f"  Is odd: {is_odd(num_components)}")
+        test_wavelength = 10.0  # 10 μm
+        test_wavenumber = calculate_wavenumber_from_wavelength(test_wavelength)
+        print(f"Test wavelength: {test_wavelength} μm")
+        print(f"  Corresponding wavenumber: {test_wavenumber:.2f} cm⁻¹")
     except ImportError as e:
-        print(f"❌ Failed to import from src/example.py: {e}")
+        print(f"❌ Failed to import from src/insect_analysis.py: {e}")
     
     fig, ax = plt.subplots(figsize=(12, 8))
     
@@ -179,8 +179,8 @@ def main() -> None:
     print(f"   Data: {data_dir}")
     
     print(f"\n🔗 Integration with src/ modules demonstrated:")
-    print(f"   - Mathematical functions from example.py used for data processing")
-    print(f"   - Statistical analysis using src/ functions")
+    print(f"   - Insect analysis functions from insect_analysis.py used for data processing")
+    print(f"   - Wavelength and wavenumber calculations using src/ functions")
     print(f"   - Proper error handling for missing imports")
 
 

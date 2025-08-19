@@ -31,11 +31,11 @@ FIGURE_DIR="$OUTPUT_DIR/figures"
 LATEX_TEMP_DIR="$OUTPUT_DIR/latex_temp"
 
 # Author/metadata (configurable)
-AUTHOR_NAME="${AUTHOR_NAME:-Project Author}"
+AUTHOR_NAME="${AUTHOR_NAME:-Tucker Chambers, Daniel A. Friedman}"
 AUTHOR_ORCID="${AUTHOR_ORCID:-0000-0000-0000-0000}"
-AUTHOR_EMAIL="${AUTHOR_EMAIL:-author@example.com}"
+AUTHOR_EMAIL="${AUTHOR_EMAIL:-authors@example.com}"
 DOI="${DOI:-}"
-PROJECT_TITLE="${PROJECT_TITLE:-Project Title}"
+PROJECT_TITLE="${PROJECT_TITLE:-cohereants}"
 
 if [ -n "$DOI" ]; then
     AUTHOR_TEX="$AUTHOR_NAME\\\\ ORCID: $AUTHOR_ORCID\\\\ Email: $AUTHOR_EMAIL\\\\ DOI: $DOI"

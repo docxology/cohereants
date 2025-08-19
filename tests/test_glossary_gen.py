@@ -76,10 +76,11 @@ def test_build_api_index_discovers_public_functions_and_classes(tmp_path):
     # package module name collapsed to 'pkg'
     assert ("pkg", "pkg_func", "function") in names
 
-    # summaries are first sentence only
+    # summaries are first sentence only (without trailing period)
     mod_class = next(e for e in entries if e.name == "PublicClass")
     assert "sample class" in mod_class.summary
-    assert "." in mod_class.summary or mod_class.summary.endswith("...")
+    # The function removes trailing periods, so check for content without expecting period
+    assert "sample class with a summary sentence" in mod_class.summary
 
 
 def test_generate_markdown_table_includes_all_entries(tmp_path):

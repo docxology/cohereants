@@ -14,10 +14,12 @@
 # Repository: https://github.com/docxology/template
 
 [project]
-name = "research-project-template"
+name = "cohereants"
 version = "0.1.0"
-description = "A comprehensive template for research projects with test-driven development, automated PDF generation, and professional documentation structure"
-authors = [{ name = "Research Template Team" }]
+description = "When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus"
+authors = [
+    { name = "Tucker Chambers, Daniel A. Friedman" }
+]
 readme = "README.md"
 requires-python = ">=3.10"
 keywords = ["research", "template", "academic", "scientific", "documentation", "pdf-generation", "test-driven-development"]
@@ -35,8 +37,11 @@ classifiers = [
     "Topic :: Text Processing :: Markup",
 ]
 dependencies = [
-  "numpy>=1.22",
-  "matplotlib>=3.7",
+    "numpy>=1.21.0",
+    "matplotlib>=3.5.0",
+    "scipy>=1.7.0",
+    "pytest>=6.0",
+    "pytest-cov>=3.0",
 ]
 
 [project.optional-dependencies]

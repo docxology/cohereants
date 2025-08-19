@@ -32,13 +32,22 @@ class ApiEntry:
 def _first_sentence(doc: str | None) -> str:
     if not doc:
         return ""
-    # Split on double newline or period for a short summary
-    parts = doc.strip().split("\n\n", 1)
-    first = parts[0]
+    
+    # Clean up the document and split into sentences
+    cleaned = doc.strip()
+    
+    # Split on periods to get sentences
+    sentences = cleaned.split('.')
+    first_sentence = sentences[0].strip()
+    
+    # Handle newlines within the first sentence
+    first_sentence = ' '.join(first_sentence.split())
+    
     # Keep it short
-    if len(first) > 200:
-        first = first[:197] + "..."
-    return " ".join(first.split())
+    if len(first_sentence) > 200:
+        first_sentence = first_sentence[:197] + "..."
+    
+    return first_sentence
 
 
 def _iter_py_files(root: str) -> Iterable[str]:

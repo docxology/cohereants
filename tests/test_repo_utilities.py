@@ -34,7 +34,7 @@ class TestGenerateGlossary:
     def test_repo_root(self):
         """Test _repo_root function returns correct path."""
         repo_path = _repo_root()
-        assert os.path.basename(repo_path) == "template"
+        assert os.path.basename(repo_path) == "cohereAnts"
         assert os.path.exists(repo_path)
     
     def test_ensure_glossary_file_new_file(self, tmp_path):
@@ -111,7 +111,7 @@ class TestValidateMarkdown:
     def test_repo_root(self):
         """Test _repo_root function returns correct path."""
         repo_path = validate_repo_root()
-        assert os.path.basename(repo_path) == "template"
+        assert os.path.basename(repo_path) == "cohereAnts"
         assert os.path.exists(repo_path)
     
     def test_find_markdown_files(self, tmp_path):

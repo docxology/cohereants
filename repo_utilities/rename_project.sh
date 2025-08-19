@@ -14,19 +14,19 @@ set -euo pipefail
 # =============================================================================
 
 # Project Identity
-PROJECT_NAME="my-awesome-project"           # Lowercase, kebab-case for URLs
-PROJECT_CALLSIGN="MAP"                      # Short acronym/identifier
-PROJECT_DESCRIPTION="A revolutionary system for solving complex problems"  # One-line description
+PROJECT_NAME="cohereants"                           # Lowercase, kebab-case for URLs
+PROJECT_CALLSIGN="cohereants"                       # Short acronym/identifier
+PROJECT_DESCRIPTION="When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus"  # One-line description
 
 # Author Information
-AUTHOR_NAME="Dr. Jane Smith"
+AUTHOR_NAME="Tucker Chambers, Daniel A. Friedman"
 AUTHOR_ORCID="0000-0000-0000-0000"
-AUTHOR_EMAIL="jane.smith@university.edu"
-DOI="10.5281/zenodo.12345678"              # Leave empty if not published yet
+AUTHOR_EMAIL="authors@example.com"
+DOI=""                                              # Leave empty if not published yet
 
 # Technical Details
-PYTHON_VERSION=">=3.10"                     # Minimum Python version
-LICENSE="MIT"                               # License type (MIT, Apache-2.0, GPL-3.0, etc.)
+PYTHON_VERSION=">=3.10"                             # Minimum Python version
+LICENSE="MIT"                                       # License type (MIT, Apache-2.0, GPL-3.0, etc.)
 
 # =============================================================================
 # SCRIPT LOGIC - DO NOT EDIT BELOW THIS LINE
