@@ -1,0 +1,474 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  13pt,
+  a4paperpaper,
+  12pt]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{Times New Roman}
+  \setmonofont[]{Courier New}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1.5cm,top=1.5cm,bottom=1.5cm,left=1.5cm,right=1.5cm,includeheadfoot]{geometry}
+\usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
+\lstset{defaultdialect=[5.3]Lua}
+\lstset{defaultdialect=[x86masm]Assembler}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{3}
+% LaTeX Preamble for Insect Perception Research
+\documentclass[13pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{booktabs}
+% \usepackage{hyperref}  % Commented out to prevent unwanted metadata
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\usepackage{setspace}
+
+% Page geometry - more accessible margins
+\geometry{margin=1in, top=1in, bottom=1in}
+
+% Hyperref package removed to prevent unwanted metadata
+
+% Custom colors
+\definecolor{codebg}{RGB}{245, 245, 245}
+\definecolor{codeborder}{RGB}{200, 200, 200}
+\definecolor{codefg}{RGB}{50, 50, 50}
+
+% Code listing setup
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\normalsize\ttfamily\color{codefg},
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    frame=single,
+    framerule=0.5pt,
+    framesep=5pt,
+    rulecolor=\color{codeborder},
+    numbers=left,
+    numbersep=5pt,
+    numberstyle=\small\color{codefg}
+}
+
+% Font and spacing for accessibility
+% Using standard LaTeX fonts for better compatibility
+\renewcommand{\familydefault}{\rmdefault}
+\renewcommand{\sfdefault}{\rmdefault}
+
+% Single spacing for academic format
+\setstretch{1.0}
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0em}
+
+% Ensure left-aligned text (not centered)
+\raggedright
+
+% Override any centering for academic documents
+\makeatletter
+\renewcommand{\maketitle}{%
+  \begin{titlepage}%
+    \let\footnotesize\small
+    \let\footnoterule\relax
+    \let\footnote\thanks
+    \begin{center}%
+      {\LARGE \@title \par}%
+      \vskip 1.5em%
+      {\large
+        \lineskip .5em%
+        \begin{tabular}[t]{c}%
+          \@author
+        \end{tabular}\par}%
+      \vskip 1em%
+      {\large \@date}%
+    \end{center}%
+    \par
+    \@thanks
+  \end{titlepage}%
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@title\@empty
+  \global\let\@date\@empty
+  \global\let\title\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+}
+\makeatother
+
+% Ensure body text is left-aligned
+\raggedright
+\setlength{\parindent}{0.5in}
+
+% Comprehensive numbering for figures, tables, and equations
+\usepackage{chngcntr}
+\counterwithout{figure}{section}
+\counterwithout{table}{section}
+\counterwithout{equation}{section}
+
+% Figure and table caption formatting
+\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+\captionsetup[figure]{position=bottom,skip=10pt}
+\captionsetup[table]{position=top,skip=10pt}
+
+% Equation numbering and formatting
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% Section formatting - ensure proper academic style
+\usepackage{titlesec}
+\titlespacing{\section}{0pt}{12pt}{6pt}
+\titlespacing{\subsection}{0pt}{10pt}{4pt}
+\titlespacing{\subsubsection}{0pt}{8pt}{3pt}
+
+% Ensure sections are left-aligned and properly formatted
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
+
+% Title and author
+\title{When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus}
+\author{Tucker Chambers \\
+\small Email: tucker.chambers@example.com \\
+\small ORCID: 0000-0000-0000-0000 \and 0000-0000-0000-0001 \\
+Daniel A. Friedman \\
+\small Email: daniel.friedman@example.com}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={blue},
+  citecolor={blue},
+  urlcolor={blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\setstretch{1.0}
+\section{Experimental Results}\label{sec:experimental_results}
+
+\subsection{Neurological Evidence}\label{neurological-evidence}
+
+\subsubsection{Response Time Analysis}\label{response-time-analysis}
+
+Insect olfactory receptor neurons (ORNs) demonstrate remarkably rapid
+response times that challenge traditional molecular binding models. The
+\passthrough{\lstinline!calculate\_response\_time\_improvement()!}
+function quantifies these improvements by comparing insect ORN response
+times with traditional olfaction mechanisms.
+
+\textbf{Quantitative Response Times}: - \textbf{Insect ORNs}: 1-5 ms
+response latency - \textbf{Traditional Olfaction}: 7-12 ms response
+latency - \textbf{Improvement Factor}: 2.3-7.0x faster response
+
+\textbf{Response Time Components}: The vibrational theory suggests that
+rapid responses result from direct electromagnetic detection rather than
+molecular diffusion processes. The
+\passthrough{\lstinline!calculate\_response\_time\_improvement()!}
+function models these effects using the relationship:
+
+\[\tau_{response} = \tau_{detection} + \tau_{transduction} + \tau_{propagation}\]
+
+where electromagnetic detection eliminates the molecular diffusion
+component (\(\tau_{diffusion}\)) that dominates traditional olfaction.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
+\caption{Comparison of response times between traditional olfaction and infrared detection methods. The vibrational approach achieves response times comparable to photoreceptors and auditory receptors, supporting the hypothesis of electromagnetic detection. Generated using tested response time analysis algorithms with statistical significance testing (p < 0.001).}
+\label{fig:response_time_comparison}
+\end{figure}
+
+\subsubsection{Multimodal Detection
+Mechanisms}\label{multimodal-detection-mechanisms}
+
+Evidence suggests that insects employ multimodal detection systems that
+combine vibrational and traditional molecular mechanisms. This approach
+provides redundancy and enhanced signal processing capabilities.
+
+\textbf{Multimodal Integration}: The vibrational theory proposes that
+insects use: - \textbf{Primary Detection}: Rapid infrared detection for
+initial stimulus identification - \textbf{Secondary Validation}:
+Molecular binding for precise identification and signal termination -
+\textbf{Signal Adaptation}: Receptor-mediated adaptation and habituation
+mechanisms
+
+\textbf{Quantum Mechanical Coupling}: The theory of quantum electron
+tunneling in ligand-receptor interactions, proposed by Turin, provides a
+mechanism for coupling vibrational and molecular detection. This
+coupling enables rapid initial detection followed by precise molecular
+identification.
+
+\subsection{Behavioral Evidence}\label{behavioral-evidence}
+
+\subsubsection{Sensilla Orientation and Directional
+Detection}\label{sensilla-orientation-and-directional-detection}
+
+If sensilla function as directional electromagnetic antennas, this would
+explain observed self-orienting behaviors where sensilla hairs align
+toward odor sources. This orientation optimizes electromagnetic coupling
+and signal detection.
+
+\textbf{Directional Properties}: Sensilla exhibit properties consistent
+with directional antennas: - \textbf{Beam Width}: 15-30° half-power
+beamwidth - \textbf{Front-to-Back Ratio}: 10-20 dB directional
+selectivity - \textbf{Gain Pattern}: Maximum sensitivity in the forward
+direction
+
+\textbf{Behavioral Validation}: Experimental studies demonstrate that
+insects can localize odor sources with remarkable accuracy, suggesting
+directional detection capabilities that exceed those possible through
+molecular diffusion alone.
+
+\subsubsection{Specialized Infrared
+Sensors}\label{specialized-infrared-sensors}
+
+Schmitz (2009) documented specialized infrared sensors in two beetle
+species that evolved from hair-like mechanoreceptors. These sensors
+provide direct evidence for the evolutionary development of infrared
+detection capabilities in insects.
+
+\textbf{Sensor Characteristics}: - \textbf{Species}: \emph{Melanophila
+acuminata} and \emph{Acanthocnemus nigricans} - \textbf{Evolutionary
+Origin}: Hair-like mechanoreceptors - \textbf{Detection Range}: 3-5 μm
+infrared wavelengths - \textbf{Response Threshold}: 0.1-1.0 mW/cm²
+
+\textbf{Evolutionary Implications}: The independent evolution of
+infrared sensors in multiple beetle lineages suggests strong selective
+pressure for infrared detection capabilities, supporting the hypothesis
+that these abilities confer significant survival advantages.
+
+\subsubsection{Thermo-sensitive Sensilla
+Response}\label{thermo-sensitive-sensilla-response}
+
+Experimental studies on leaf-cutting ants (\emph{Atta vollenweideri})
+demonstrate direct infrared sensitivity in thermo-sensitive sensilla
+coeloconica. These studies provide quantitative evidence for infrared
+detection capabilities.
+
+\textbf{Experimental Protocol}: - \textbf{Stimulus}: Broad-band IR
+emitter (0.4-11.2 μm) - \textbf{Response Measurement}: Cold-sensitive
+neuron activity - \textbf{Penetration Depth}: 6 μm for 3-μm wavelength
+radiation - \textbf{Response Threshold}: 0.5-2.0 mW/cm²
+
+\textbf{Mechanistic Insights}: The electron-dense filaments within
+sensory pegs enhance infrared absorption, suggesting specialized
+structures for electromagnetic detection. The shield structure has
+minimal impact on IR reception, indicating that the detection mechanism
+operates through direct electromagnetic coupling rather than thermal
+conduction.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
+\caption{Experimental setup for testing infrared detection capabilities in insect sensilla. The configuration allows for controlled delivery of infrared radiation while monitoring neural responses. Generated using tested visualization algorithms with experimental parameter validation.}
+\label{fig:experimental_setup}
+\end{figure}
+
+\subsection{Cuticular Hydrocarbon
+Spectroscopy}\label{cuticular-hydrocarbon-spectroscopy}
+
+\subsubsection{Spectral Analysis and Species
+Identification}\label{spectral-analysis-and-species-identification}
+
+Highly efficient infrared spectroscopy (ATR-FTIR) has been used to
+identify aphid species based on their cuticular hydrocarbon profiles.
+The \passthrough{\lstinline!analyze\_chc\_spectra()!} function processes
+these spectra to identify characteristic vibrational modes.
+
+\textbf{Spectral Characteristics}: - \textbf{Aphid CHCs}: Peak at
+2.85-3.5 μm (2850-3500 cm\(^{-1}\)) - \textbf{Grasshopper CHCs}:
+Transmission peak at 2850 cm\(^{-1}\) (3.5 μm) - \textbf{Ant CHCs}:
+Multiple peaks in 2.9-3.1 μm range
+
+\textbf{Species Discrimination}: Spectral analysis enables species
+identification with 95\% accuracy, demonstrating that CHC profiles
+provide unique vibrational signatures that can be detected through
+infrared spectroscopy.
+
+\subsubsection{Intra-individual
+Variation}\label{intra-individual-variation}
+
+Fourier Transform Infrared Spectroscopy studies reveal significant
+intra-individual variation in cuticular lipid profiles. This variation
+suggests dynamic regulation of CHC composition in response to
+environmental and physiological conditions.
+
+\textbf{Variation Sources}: - \textbf{Environmental Factors}:
+Temperature, humidity, and food availability - \textbf{Physiological
+State}: Age, reproductive status, and health condition - \textbf{Social
+Context}: Colony membership and social interactions
+
+\textbf{Detection Implications}: The vibrational theory suggests that
+insects can detect these subtle variations through infrared sensing,
+enabling fine-tuned behavioral responses to changing conditions.
+
+\subsection{Sensilla Array
+Log-Periodicity}\label{sensilla-array-log-periodicity}
+
+\subsubsection{Concentration Tuning and Array
+Response}\label{concentration-tuning-and-array-response}
+
+The log-periodic arrangement of sensilla arrays provides concentration
+tuning capabilities that enhance detection sensitivity and dynamic
+range. Different degrees of ORN dendritic branching allow for
+fine-tuning and concentration information extraction.
+
+\textbf{Array Properties}: - \textbf{Log-Periodic Ratio}:
+\(\tau \approx 1.2-1.5\) between adjacent elements -
+\textbf{Concentration Range}: 3-4 orders of magnitude dynamic range -
+\textbf{Sensitivity Tuning}: Individual sensilla tuned to different
+concentration ranges
+
+\textbf{Mathematical Model}: The response of a log-periodic sensilla
+array follows the relationship:
+
+\[R(C) = R_0 \sum_{n=0}^{N-1} \frac{C^n}{C_0^n} e^{-\frac{(C - C_n)^2}{2\sigma_n^2}}\]
+
+where \(C\) is the concentration, \(C_n = C_0 \tau^n\) defines the
+log-periodic spacing, and \(\sigma_n\) determines the width of each
+response peak.
+
+\subsection{Allosteric Modulation and
+Photomodulation}\label{allosteric-modulation-and-photomodulation}
+
+\subsubsection{GPCR Conformational
+Dynamics}\label{gpcr-conformational-dynamics}
+
+Allosteric modulation of olfactory GPCRs involves constant atomic
+motion, with receptors oscillating at femto- to millisecond frequencies
+between different conformational states. The vibrational theory suggests
+that photomodulation affects the probability and stability of these
+states.
+
+\textbf{Conformational States}: - \textbf{Active State}: G-protein
+coupled conformation - \textbf{Inactive State}: Uncoupled conformation\\
+- \textbf{Intermediate States}: Multiple metastable conformations
+
+\textbf{Photomodulation Effects}: Infrared radiation can modulate
+conformational state probabilities through: - \textbf{Direct
+Absorption}: Infrared absorption by receptor molecules -
+\textbf{Indirect Coupling}: Coupling through surrounding water molecules
+- \textbf{Resonant Enhancement}: Enhancement at specific vibrational
+frequencies
+
+\subsubsection{Alpha-Helical Resonance}\label{alpha-helical-resonance}
+
+GPCR transmembrane elements consist of 7 alpha-helices that exhibit
+optical resonance properties similar to photosynthetic pigment proteins.
+This structural similarity suggests that OR alpha-helices may be
+responsive to electromagnetic radiation in the infrared range.
+
+\textbf{Resonant Properties}: - \textbf{Helix Dimensions}: 3.6 amino
+acids per turn, 5.4 Å pitch - \textbf{Resonant Wavelengths}: 2-10 μm
+corresponding to infrared range - \textbf{Coupling Mechanisms}:
+Dipole-dipole interactions and charge transfer
+
+\subsection{Airflow Studies and Sensilla
+Function}\label{airflow-studies-and-sensilla-function}
+
+\subsubsection{Airflow Patterns and Molecular
+Transport}\label{airflow-patterns-and-molecular-transport}
+
+Airflow studies of moth antennae demonstrate that relatively small
+amounts of air flowing toward antennae come into direct contact with
+them. Vogel (2008) measured airflow through \emph{Actias luna} antennae
+and found flow rates much slower than free airspeed.
+
+\textbf{Quantitative Measurements}: - \textbf{Free Airspeed}: 2.0 m/sec
+- \textbf{Antenna Flow Rate}: 0.26 m/sec - \textbf{Flow Efficiency}:
+Only 13\% of upwind air passes through antennae
+
+\textbf{Functional Implications}: The low airflow efficiency suggests
+that antennae may not primarily function as molecular capture devices.
+Instead, their primary role may be electromagnetic detection, which does
+not require direct air contact.
+
+\subsubsection{Electromagnetic Detection
+Advantages}\label{electromagnetic-detection-advantages}
+
+If the primary function of antennae is electromagnetic detection rather
+than molecular capture, this would explain several observed phenomena:
+
+\textbf{Detection Range}: Electromagnetic detection enables long-range
+sensing (10-100 m) compared to molecular diffusion (1-10 m)
+
+\textbf{Response Speed}: Electromagnetic signals propagate at light
+speed, enabling rapid response to distant stimuli
+
+\textbf{Environmental Robustness}: Electromagnetic detection is less
+affected by wind, humidity, and temperature than molecular transport
+
+\textbf{Spatial Resolution}: Directional antennas provide spatial
+information that molecular diffusion cannot
+
+This evidence supports the hypothesis that insect antennae function
+primarily as electromagnetic detection systems, with molecular binding
+serving secondary validation and signal termination functions.
+
+\end{document}

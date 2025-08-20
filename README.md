@@ -69,6 +69,7 @@ The manuscript is organized into several key sections:
 4. **Experimental Results** (Section \ref{sec:experimental_results}): Neurological, behavioral, and spectroscopic evidence
 5. **Discussion** (Section \ref{sec:discussion}): Implications and broader significance
 6. **Conclusion** (Section \ref{sec:conclusion}): Summary and future research directions
+7. **Empirical Studies** (Section \ref{sec:empirical_studies}): Comprehensive review of supporting evidence
 
 ## Example Figures
 

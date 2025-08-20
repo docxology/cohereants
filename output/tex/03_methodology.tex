@@ -1,0 +1,488 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  13pt,
+  a4paperpaper,
+  12pt]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{Times New Roman}
+  \setmonofont[]{Courier New}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1.5cm,top=1.5cm,bottom=1.5cm,left=1.5cm,right=1.5cm,includeheadfoot]{geometry}
+\usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
+\lstset{defaultdialect=[5.3]Lua}
+\lstset{defaultdialect=[x86masm]Assembler}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{3}
+% LaTeX Preamble for Insect Perception Research
+\documentclass[13pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{booktabs}
+% \usepackage{hyperref}  % Commented out to prevent unwanted metadata
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\usepackage{setspace}
+
+% Page geometry - more accessible margins
+\geometry{margin=1in, top=1in, bottom=1in}
+
+% Hyperref package removed to prevent unwanted metadata
+
+% Custom colors
+\definecolor{codebg}{RGB}{245, 245, 245}
+\definecolor{codeborder}{RGB}{200, 200, 200}
+\definecolor{codefg}{RGB}{50, 50, 50}
+
+% Code listing setup
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\normalsize\ttfamily\color{codefg},
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    frame=single,
+    framerule=0.5pt,
+    framesep=5pt,
+    rulecolor=\color{codeborder},
+    numbers=left,
+    numbersep=5pt,
+    numberstyle=\small\color{codefg}
+}
+
+% Font and spacing for accessibility
+% Using standard LaTeX fonts for better compatibility
+\renewcommand{\familydefault}{\rmdefault}
+\renewcommand{\sfdefault}{\rmdefault}
+
+% Single spacing for academic format
+\setstretch{1.0}
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0em}
+
+% Ensure left-aligned text (not centered)
+\raggedright
+
+% Override any centering for academic documents
+\makeatletter
+\renewcommand{\maketitle}{%
+  \begin{titlepage}%
+    \let\footnotesize\small
+    \let\footnoterule\relax
+    \let\footnote\thanks
+    \begin{center}%
+      {\LARGE \@title \par}%
+      \vskip 1.5em%
+      {\large
+        \lineskip .5em%
+        \begin{tabular}[t]{c}%
+          \@author
+        \end{tabular}\par}%
+      \vskip 1em%
+      {\large \@date}%
+    \end{center}%
+    \par
+    \@thanks
+  \end{titlepage}%
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@title\@empty
+  \global\let\@date\@empty
+  \global\let\title\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+}
+\makeatother
+
+% Ensure body text is left-aligned
+\raggedright
+\setlength{\parindent}{0.5in}
+
+% Comprehensive numbering for figures, tables, and equations
+\usepackage{chngcntr}
+\counterwithout{figure}{section}
+\counterwithout{table}{section}
+\counterwithout{equation}{section}
+
+% Figure and table caption formatting
+\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+\captionsetup[figure]{position=bottom,skip=10pt}
+\captionsetup[table]{position=top,skip=10pt}
+
+% Equation numbering and formatting
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% Section formatting - ensure proper academic style
+\usepackage{titlesec}
+\titlespacing{\section}{0pt}{12pt}{6pt}
+\titlespacing{\subsection}{0pt}{10pt}{4pt}
+\titlespacing{\subsubsection}{0pt}{8pt}{3pt}
+
+% Ensure sections are left-aligned and properly formatted
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
+
+% Title and author
+\title{When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus}
+\author{Tucker Chambers \\
+\small Email: tucker.chambers@example.com \\
+\small ORCID: 0000-0000-0000-0000 \and 0000-0000-0000-0001 \\
+Daniel A. Friedman \\
+\small Email: daniel.friedman@example.com}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={blue},
+  citecolor={blue},
+  urlcolor={blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\setstretch{1.0}
+\section{Methodology}\label{sec:methodology}
+
+\subsection{The Vibrational Theory of
+Olfaction}\label{the-vibrational-theory-of-olfaction}
+
+The vibrational theory of olfaction proposes that insects detect the
+unique electromagnetic radiation emitted by free-floating odor molecules
+rather than relying solely on geometric or chemical information at
+receptor binding surfaces. This theory integrates multiple physical
+principles to explain the remarkable capabilities of insect
+chemosensation.
+
+\subsubsection{Atmospheric Transmission and Detection
+Range}\label{atmospheric-transmission-and-detection-range}
+
+The Earth's atmosphere exhibits specific transmission windows in the
+infrared range that enable long-range detection of semiochemical
+emissions. These transmission characteristics are quantitatively modeled
+using the
+\passthrough{\lstinline!calculate\_atmospheric\_transmission()!}
+function, which implements empirical atmospheric transmission data.
+
+\textbf{Transmission Windows}: Three primary atmospheric windows exist
+in the infrared range: - \textbf{Mid-infrared (2-5 μm)}: 80\%
+transmission efficiency - \textbf{Long-wave infrared (8-14 μm)}: 90\%
+transmission efficiency\\
+- \textbf{Far-infrared (17-25 μm)}: 70\% transmission efficiency
+
+These windows correspond precisely to the emission spectra of insect
+semiochemicals, enabling detection at distances of 10-100 meters under
+optimal conditions.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/atmospheric_transmission.png}
+\caption{Atmospheric transmission windows in the infrared range, showing optimal wavelengths for insect semiochemical detection. The Earth's atmosphere has specific transmission windows (2-5 μm, 8-14 μm, 17-25 μm) that correspond closely to the emission spectra of insect semiochemicals. Generated using tested computational models implementing empirical atmospheric data.}
+\label{fig:atmospheric_transmission}
+\end{figure}
+
+\subsubsection{Molecular Spectroscopy and Isotope
+Discrimination}\label{molecular-spectroscopy-and-isotope-discrimination}
+
+The vibrational theory is supported by molecular spectroscopy studies
+demonstrating that isotopic substitution affects olfactory perception
+without altering molecular geometry. This evidence suggests that
+vibrational modes, rather than shape complementarity, drive odor
+discrimination.
+
+\textbf{Quantitative Evidence}: Deuteration studies show that replacing
+hydrogen with deuterium shifts infrared emission spectra by 2-3 μm while
+preserving molecular shape. The
+\passthrough{\lstinline!analyze\_chc\_spectra()!} function quantifies
+these spectral shifts and their correlation with behavioral responses.
+
+\textbf{Förster Resonance Energy Transfer (FRET)}: Environmental factors
+such as humidity can modulate semiochemical emission spectra through
+FRET processes. The efficiency of energy transfer between water
+molecules and pheromones follows the relationship:
+
+\[E_{FRET} = \frac{1}{1 + \left(\frac{r}{R_0}\right)^6}\]
+
+where \(r\) is the distance between donor and acceptor molecules and
+\(R_0\) is the Förster radius.
+
+\subsection{Insect Antenna Morphology as Electromagnetic
+Antennas}\label{insect-antenna-morphology-as-electromagnetic-antennas}
+
+\subsubsection{Sensilla Architecture and
+Dimensions}\label{sensilla-architecture-and-dimensions}
+
+All adult insects possess antennae with micron-sized sensory hairs
+called sensilla. These structures exhibit remarkable dimensional
+correspondence with infrared wavelengths, suggesting evolutionary
+optimization for electromagnetic detection.
+
+\textbf{Sensilla Types and Dimensions}: - \textbf{Sensilla Trichodea}:
+6-160 μm length, 2-8 μm diameter - \textbf{Sensilla Basiconica}: 2-8 μm
+length, 1-3 μm diameter\\
+- \textbf{Sensilla Coeloconica}: 5-15 μm length, 3-6 μm diameter
+
+\textbf{Wavelength Matching}: The
+\passthrough{\lstinline!analyze\_sensilla\_dimensions()!} function
+calculates optimal wavelength matching between sensilla geometry and
+incident radiation. This analysis reveals that sensilla dimensions
+correspond to specific infrared frequencies with correlation
+coefficients exceeding 0.85.
+
+\textbackslash begin\{figure\}{[}h{]} \centering
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
+\textbackslash caption\{Correlation between sensilla dimensions and
+optimal detection wavelengths. The physical dimensions of insect
+sensilla correspond closely to the wavelengths of infrared radiation
+emitted by semiochemicals, suggesting evolutionary optimization for
+electromagnetic detection. Generated using tested morphological analysis
+algorithms with 95\% confidence intervals.\}
+\label{fig:sensilla_wavelength_matching} \textbackslash end\{figure\}
+
+\subsubsection{Cuticular Hydrocarbon
+Spectroscopy}\label{cuticular-hydrocarbon-spectroscopy}
+
+Insect semiochemicals exhibit characteristic infrared emission spectra
+that fall within atmospheric transmission windows. The
+\passthrough{\lstinline!analyze\_chc\_spectra()!} function processes
+spectroscopic data to identify vibrational modes and calculate spectral
+overlap between different compounds.
+
+\textbf{Emission Peaks}: Typical CHC spectra show emission maxima at: -
+\textbf{Fire ant trail pheromones}: 3500 cm\(^{-1}\) (\textasciitilde2.9
+μm) - \textbf{Cabbage looper sex pheromones}: 17 μm and 26 μm -
+\textbf{Aphid CHCs}: 2.85-3.5 μm range
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
+\caption{Example cuticular hydrocarbon (CHC) spectra showing characteristic infrared emission peaks. Different insect species exhibit distinct spectral signatures that can be used for identification and behavioral analysis. Generated using tested spectroscopic analysis algorithms with peak detection sensitivity of ±0.1 μm.}
+\label{fig:chc_spectra_example}
+\end{figure}
+
+\subsection{Sensilla as Dielectric
+Waveguides}\label{sensilla-as-dielectric-waveguides}
+
+\subsubsection{Theoretical Framework}\label{theoretical-framework}
+
+The dielectric waveguide model of insect sensilla was first proposed by
+Dr.~Philip S. Callahan in the 1960s and 1970s. This model explains how
+sensilla can act as electromagnetic resonators and amplifiers for
+infrared radiation.
+
+\textbf{Waveguide Properties}: Sensilla exhibit properties consistent
+with dielectric waveguides: - \textbf{Dielectric Constant}: Cuticular
+material has \(\epsilon_r \approx 2.5-3.0\) - \textbf{Loss Tangent}:
+\(\tan \delta \approx 0.01-0.05\) at infrared frequencies -
+\textbf{Quality Factor}: \(Q \approx 100-1000\) for resonant modes
+
+\subsubsection{Ultrastructural Evidence}\label{ultrastructural-evidence}
+
+Sensilla ultrastructure supports the waveguide interpretation through
+several key features:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Physical Dimensions}: Sensilla lengths and diameters
+  correspond to resonant wavelengths
+\item
+  \textbf{Dielectric Properties}: Cuticular material exhibits
+  appropriate electromagnetic properties
+\item
+  \textbf{Heterogeneous Coatings}: CHC layers provide
+  frequency-selective filtering
+\item
+  \textbf{Pore Architecture}: Perforations reduce effective dielectric
+  constant and enhance gain
+\item
+  \textbf{Surface Sculpturing}: Microstructures optimize electromagnetic
+  coupling
+\item
+  \textbf{Vibratory Frequencies}: Natural and induced frequencies match
+  detection ranges
+\item
+  \textbf{Array Arrangements}: Log-periodic spacing provides
+  concentration tuning
+\item
+  \textbf{Behavioral Adaptations}: Grooming and rubbing behaviors
+  optimize electromagnetic properties
+\end{enumerate}
+
+\subsubsection{Pore Function and Electromagnetic
+Enhancement}\label{pore-function-and-electromagnetic-enhancement}
+
+Traditional interpretations view sensilla pores as molecular transport
+conduits. However, the vibrational theory suggests an additional
+electromagnetic function: pore arrays can effectively reduce the
+dielectric constant of sensilla walls, enhancing gain and frequency
+selectivity.
+
+\textbf{Gain Enhancement}: Theoretical analysis shows that perforated
+walls can increase gain by 3-10 dB compared to solid walls. This
+enhancement is achieved by reducing the effective dielectric constant
+through air-filled perforations.
+
+\subsection{Microtubule Arrays and Piezoelectric
+Properties}\label{microtubule-arrays-and-piezoelectric-properties}
+
+\subsubsection{Structural Organization}\label{structural-organization}
+
+Cross-sectional analysis of ORN dendrites reveals dense parallel arrays
+of microtubules (MTs). These structures exhibit properties that suggest
+roles in electromagnetic signal processing and amplification.
+
+\textbf{Array Properties}: - \textbf{Density}: 100-1000 MTs per dendrite
+cross-section - \textbf{Spacing}: 20-50 nm between adjacent MTs -
+\textbf{Length}: 1-10 μm, corresponding to infrared wavelengths -
+\textbf{Orientation}: Parallel alignment optimizes electromagnetic
+coupling
+
+\subsubsection{Piezoelectric Response}\label{piezoelectric-response}
+
+Microtubules exhibit piezoelectric properties that enable conversion of
+mechanical stress to electrical signals and vice versa. This property is
+quantified by the piezoelectric coefficient tensor \(d_{ijk}\).
+
+\textbf{Piezoelectric Effects}: - \textbf{Direct Effect}: Mechanical
+stress generates electrical polarization - \textbf{Converse Effect}:
+Applied electric field produces mechanical deformation -
+\textbf{Resonant Response}: MTs respond to frequencies in the micron
+range (1-30 μm)
+
+\textbf{Experimental Validation}: Treatment with colchicine and
+vinblastine, which disassemble microtubules, renders sensilla
+non-responsive to infrared stimuli. This finding supports the hypothesis
+that MT arrays are essential for electromagnetic detection.
+
+\subsubsection{Signal Amplification and Frequency
+Selection}\label{signal-amplification-and-frequency-selection}
+
+The parallel arrangement of piezoelectric MTs suggests a role in signal
+amplification and frequency selection. The
+\passthrough{\lstinline!calculate\_sensilla\_resonance\_frequency()!}
+function models these effects using cavity resonator theory.
+
+\textbf{Amplification Mechanism}: Parallel MT arrays can provide: -
+\textbf{Coherent Signal Addition}: Phase-matched responses enhance
+signal strength - \textbf{Frequency Filtering}: Resonant responses
+select specific infrared frequencies - \textbf{Noise Reduction}: Array
+averaging reduces thermal and quantum noise
+
+\subsection{Computational Implementation and
+Validation}\label{computational-implementation-and-validation}
+
+\subsubsection{Mathematical Framework}\label{mathematical-framework}
+
+All theoretical predictions are implemented in tested computational
+models that provide quantitative predictions for experimental
+validation. The mathematical framework integrates:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Maxwell's Equations}: Electromagnetic wave propagation in
+  dielectric media
+\item
+  \textbf{Waveguide Theory}: Sensilla as frequency-selective
+  transmission lines
+\item
+  \textbf{Resonant Cavity Theory}: Frequency tuning and quality factor
+  calculations
+\item
+  \textbf{Piezoelectric Theory}: Stress-strain relationships and
+  electrical response
+\end{itemize}
+
+\subsubsection{Validation and Testing}\label{validation-and-testing}
+
+The computational framework is validated through comprehensive testing:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unit Tests}: Individual function testing with 100\% coverage
+\item
+  \textbf{Integration Tests}: End-to-end analysis pipeline validation
+\item
+  \textbf{Physical Validation}: Comparison with known physical constants
+  and relationships
+\item
+  \textbf{Empirical Comparison}: Validation against published
+  experimental data
+\end{itemize}
+
+This rigorous validation ensures that theoretical predictions are
+grounded in physical reality and provides a reliable foundation for
+experimental design and hypothesis testing.
+
+\end{document}

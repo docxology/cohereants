@@ -1,6 +1,6 @@
 ```latex
 % LaTeX Preamble for Insect Perception Research
-\documentclass[11pt,a4paper]{article}
+\documentclass[13pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{geometry}
@@ -9,23 +9,17 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{booktabs}
-\usepackage{hyperref}
+% \usepackage{hyperref}  % Commented out to prevent unwanted metadata
 \usepackage{color}
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{fancyvrb}
+\usepackage{setspace}
 
-% Page geometry
-\geometry{margin=1in}
+% Page geometry - more accessible margins
+\geometry{margin=1in, top=1in, bottom=1in}
 
-% Hyperref setup
-\hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,      
-    urlcolor=cyan,
-    citecolor=red
-}
+% Hyperref package removed to prevent unwanted metadata
 
 % Custom colors
 \definecolor{codebg}{RGB}{245, 245, 245}
@@ -35,7 +29,7 @@
 % Code listing setup
 \lstset{
     backgroundcolor=\color{codebg},
-    basicstyle=\footnotesize\ttfamily\color{codefg},
+    basicstyle=\normalsize\ttfamily\color{codefg},
     breakatwhitespace=false,
     breaklines=true,
     captionpos=b,
@@ -45,93 +39,98 @@
     rulecolor=\color{codeborder},
     numbers=left,
     numbersep=5pt,
-    numberstyle=\tiny\color{codefg}
+    numberstyle=\small\color{codefg}
 }
 
+% Font and spacing for accessibility
+% Using standard LaTeX fonts for better compatibility
+\renewcommand{\familydefault}{\rmdefault}
+\renewcommand{\sfdefault}{\rmdefault}
+
+% Single spacing for academic format
+\setstretch{1.0}
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0em}
+
+% Ensure left-aligned text (not centered)
+\raggedright
+
+% Override any centering for academic documents
+\makeatletter
+\renewcommand{\maketitle}{%
+  \begin{titlepage}%
+    \let\footnotesize\small
+    \let\footnoterule\relax
+    \let\footnote\thanks
+    \begin{center}%
+      {\LARGE \@title \par}%
+      \vskip 1.5em%
+      {\large
+        \lineskip .5em%
+        \begin{tabular}[t]{c}%
+          \@author
+        \end{tabular}\par}%
+      \vskip 1em%
+      {\large \@date}%
+    \end{center}%
+    \par
+    \@thanks
+  \end{titlepage}%
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@title\@empty
+  \global\let\@date\@empty
+  \global\let\title\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+}
+\makeatother
+
+% Ensure body text is left-aligned
+\raggedright
+\setlength{\parindent}{0.5in}
+
+% Comprehensive numbering for figures, tables, and equations
+\usepackage{chngcntr}
+\counterwithout{figure}{section}
+\counterwithout{table}{section}
+\counterwithout{equation}{section}
+
+% Figure and table caption formatting
+\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+\captionsetup[figure]{position=bottom,skip=10pt}
+\captionsetup[table]{position=top,skip=10pt}
+
+% Equation numbering and formatting
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% Section formatting - ensure proper academic style
+\usepackage{titlesec}
+\titlespacing{\section}{0pt}{12pt}{6pt}
+\titlespacing{\subsection}{0pt}{10pt}{4pt}
+\titlespacing{\subsubsection}{0pt}{8pt}{3pt}
+
+% Ensure sections are left-aligned and properly formatted
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
+
 % Title and author
-\title{When do bugs see (infra)red? \\ On the Visual and Infra-red in the Insect Perceptual Apparatus}
-\author{Tucker Chambers \and Daniel A. Friedman}
+\title{When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus}
+\author{Tucker Chambers \\
+\small Email: tucker.chambers@example.com \\
+\small ORCID: 0000-0000-0000-0000 \and 0000-0000-0000-0001 \\
+Daniel A. Friedman \\
+\small Email: daniel.friedman@example.com}
 \date{\today}
-
-% Document begin
-\begin{document}
-\maketitle
-
-# Preamble {#sec:preamble}
-
-## Document Information
-
-**Title**: When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus
-
-**Authors**: Tucker Chambers, Daniel A. Friedman
-
-**Abstract**: This research presents a comprehensive review of evidence supporting the vibrational theory of olfaction in insects, exploring how insects may detect infrared radiation from semiochemicals rather than relying solely on molecular binding.
-
-## Research Overview
-
-This paper investigates the hypothesis that insect olfaction operates through the detection of infrared electromagnetic radiation emitted by semiochemicals, rather than through traditional molecular binding mechanisms. We examine evidence from multiple domains including:
-
-- **Morphology**: The structure and arrangement of insect antennae and sensilla
-- **Neurology**: The rapid response times of olfactory receptor neurons
-- **Behavior**: Observed insect responses to different stimuli
-- **Spectroscopy**: The infrared emission spectra of insect semiochemicals
-
-## Key Research Questions
-
-1. How do insects achieve such rapid olfactory response times (1-5 ms)?
-2. What explains the morphological adaptations of antennae and sensilla?
-3. How do insects discriminate between different semiochemicals?
-4. What role does infrared radiation play in insect perception?
-
-## Theoretical Framework
-
-The vibrational theory of olfaction proposes that insects detect the unique electromagnetic signatures of molecules rather than their geometric or chemical properties. This theory provides a unified explanation for:
-
-- The rapid response times of insect olfaction
-- The morphological adaptations of antennae and sensilla  
-- The behavioral responses to different semichemicals
-- The evolutionary diversity of sensilla types across insect taxa
-
-## Research Significance
-
-Understanding the vibrational basis of insect olfaction has implications for:
-
-- **Entomology**: Fundamental understanding of insect perception and behavior
-- **Evolutionary Biology**: How organisms adapt to exploit environmental niches
-- **Biomimetics**: Developing new technologies inspired by insect sensory systems
-- **Agriculture**: More targeted and environmentally friendly pest control methods
-- **Conservation**: Understanding how environmental changes affect insect populations
-
-## Document Structure
-
-This manuscript is organized into several key sections:
-
-1. **Abstract** (Section \ref{sec:abstract}): Research overview and key findings
-2. **Introduction** (Section \ref{sec:introduction}): Background on olfaction and limitations of current theories
-3. **Methodology** (Section \ref{sec:methodology}): The vibrational theory and evidence from morphology
-4. **Experimental Results** (Section \ref{sec:experimental_results}): Neurological, behavioral, and spectroscopic evidence
-5. **Discussion** (Section \ref{sec:discussion}): Implications and broader significance
-6. **Conclusion** (Section \ref{sec:conclusion}): Summary and future research directions
-7. **Mathematical Appendix** (Section \ref{sec:mathematical_appendix}): Complete mathematical framework and equations
-
-## Cross-Referencing System
-
-The manuscript uses comprehensive cross-referencing:
-
-- **Section References**: Use `\ref{sec:section_name}` to reference sections
-- **Figure References**: Use `\ref{fig:figure_name}` to reference figures
-- **Table References**: Use `\ref{tab:table_name}` to reference tables
-- **Equation References**: Use `\ref{eq:equation_name}` to reference equations
-
-All references are automatically numbered and updated when the document is regenerated.
-
-## Mathematical Content
-
-The manuscript includes extensive mathematical content in Section \ref{sec:mathematical_appendix}, featuring:
-- Maxwell's equations for electromagnetic wave propagation
-- Waveguide theory for sensilla modeling
-- Vibrational spectroscopy equations
-- Antenna theory and signal processing
-- Piezoelectric response of microtubules
-- Statistical analysis of behavioral responses
-- Quantum mechanical considerations

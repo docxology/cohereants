@@ -1,0 +1,62 @@
+=== INTEGRATED ANALYSIS SUMMARY ===
+
+SYSTEM PERFORMANCE METRICS:
+  Information Processing Score: -6.96e+01
+  Material Performance Score: 4.49e+01
+  Overall System Efficiency: nan
+  Total Information Content: -74.60 bits
+  Receptor Specificity: 0.605
+  Neural Encoding Efficiency: 1.5406 bits/energy
+  Information Capacity: 7.92e+12 bits/s
+
+=== COMPREHENSIVE FERMI ESTIMATION ANALYSIS ===
+
+MOLECULAR INFORMATION CONTENT:
+  Total: -74.60 bits (-9.32 bytes)
+  Translational: -107.60 bits
+  Rotational: 3.00 bits
+  Vibrational: 30.00 bits
+
+RECEPTOR BINDING SPECIFICITY:
+  Binding entropy: 0.65 bits
+  Specificity index: 0.605
+  Signal-to-noise ratio: -0.71
+
+NEURAL ENCODING EFFICIENCY:
+  Channel capacity: 1.66 bits
+  Information rate: 166.33 bits
+  Encoding efficiency: 1.5406 bits/energy
+
+ENVIRONMENTAL INFORMATION:
+  Total environmental bits: 17.61 bits
+  Temperature: 8.64 bits
+  Humidity: 5.64 bits
+  Pressure: 3.32 bits
+
+SYSTEM SUMMARY:
+  Total system information: 109.99 bits
+  Information density: 0.110 bits/kJ
+
+=== COMPREHENSIVE META-MATERIAL ANALYSIS ===
+
+DIELECTRIC PROPERTIES:
+  Frequency range: 10.00 - 1000.00 THz
+  Average refractive index: 1.161
+  Absorption coefficient range: 2.56e+04 - 4.71e+07 m⁻¹
+
+PLASMONIC PROPERTIES:
+  Resonance frequency: 0.01 THz
+  Resonance wavelength: 43999.55 μm
+  Quality factor: 3.00
+  Field enhancement: 0.64
+
+QUANTUM COUPLING:
+  Number of energy levels: 3
+  Average transition rate: 1.00e-12 s⁻¹
+  Coupling matrix size: (2, 2)
+
+INFORMATION CAPACITY:
+  Channel capacity: 7.92e+12 bits/s
+  Signal-to-noise ratio: 241.43
+  Information density: 3.07e+22 bits/(J·m)
+  Quantum limit: 1.32e+13 bits/s

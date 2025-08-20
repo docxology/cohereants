@@ -1,0 +1,687 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  13pt,
+  a4paperpaper,
+  12pt]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{Times New Roman}
+  \setmonofont[]{Courier New}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1.5cm,top=1.5cm,bottom=1.5cm,left=1.5cm,right=1.5cm,includeheadfoot]{geometry}
+\usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
+\lstset{defaultdialect=[5.3]Lua}
+\lstset{defaultdialect=[x86masm]Assembler}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{3}
+% LaTeX Preamble for Insect Perception Research
+\documentclass[13pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{booktabs}
+% \usepackage{hyperref}  % Commented out to prevent unwanted metadata
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\usepackage{setspace}
+
+% Page geometry - more accessible margins
+\geometry{margin=1in, top=1in, bottom=1in}
+
+% Hyperref package removed to prevent unwanted metadata
+
+% Custom colors
+\definecolor{codebg}{RGB}{245, 245, 245}
+\definecolor{codeborder}{RGB}{200, 200, 200}
+\definecolor{codefg}{RGB}{50, 50, 50}
+
+% Code listing setup
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\normalsize\ttfamily\color{codefg},
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    frame=single,
+    framerule=0.5pt,
+    framesep=5pt,
+    rulecolor=\color{codeborder},
+    numbers=left,
+    numbersep=5pt,
+    numberstyle=\small\color{codefg}
+}
+
+% Font and spacing for accessibility
+% Using standard LaTeX fonts for better compatibility
+\renewcommand{\familydefault}{\rmdefault}
+\renewcommand{\sfdefault}{\rmdefault}
+
+% Single spacing for academic format
+\setstretch{1.0}
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0em}
+
+% Ensure left-aligned text (not centered)
+\raggedright
+
+% Override any centering for academic documents
+\makeatletter
+\renewcommand{\maketitle}{%
+  \begin{titlepage}%
+    \let\footnotesize\small
+    \let\footnoterule\relax
+    \let\footnote\thanks
+    \begin{center}%
+      {\LARGE \@title \par}%
+      \vskip 1.5em%
+      {\large
+        \lineskip .5em%
+        \begin{tabular}[t]{c}%
+          \@author
+        \end{tabular}\par}%
+      \vskip 1em%
+      {\large \@date}%
+    \end{center}%
+    \par
+    \@thanks
+  \end{titlepage}%
+  \setcounter{footnote}{0}%
+  \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@title\@empty
+  \global\let\@date\@empty
+  \global\let\title\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+}
+\makeatother
+
+% Ensure body text is left-aligned
+\raggedright
+\setlength{\parindent}{0.5in}
+
+% Comprehensive numbering for figures, tables, and equations
+\usepackage{chngcntr}
+\counterwithout{figure}{section}
+\counterwithout{table}{section}
+\counterwithout{equation}{section}
+
+% Figure and table caption formatting
+\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+\captionsetup[figure]{position=bottom,skip=10pt}
+\captionsetup[table]{position=top,skip=10pt}
+
+% Equation numbering and formatting
+\usepackage{amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% Section formatting - ensure proper academic style
+\usepackage{titlesec}
+\titlespacing{\section}{0pt}{12pt}{6pt}
+\titlespacing{\subsection}{0pt}{10pt}{4pt}
+\titlespacing{\subsubsection}{0pt}{8pt}{3pt}
+
+% Ensure sections are left-aligned and properly formatted
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
+
+% Title and author
+\title{When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus}
+\author{Tucker Chambers \\
+\small Email: tucker.chambers@example.com \\
+\small ORCID: 0000-0000-0000-0000 \and 0000-0000-0000-0001 \\
+Daniel A. Friedman \\
+\small Email: daniel.friedman@example.com}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={blue},
+  citecolor={blue},
+  urlcolor={blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\setstretch{1.0}
+\section{Ant Stack Implementation
+Appendix}\label{sec:ant_stack_appendix}
+
+\subsection{Introduction}\label{introduction}
+
+This appendix provides a comprehensive mapping of how the cohereAnts
+research framework can be implemented within ``The Ant Stack''
+computational architecture. The Ant Stack, as described by Friedman
+(2025), offers a modular, three-layer framework for emulating ant
+intelligence from physical embodiment to collective cognition. Here we
+demonstrate how our vibrational theory of olfaction, spectroscopic
+analysis, and behavioral modeling can be systematically integrated into
+this standardized computational framework.
+
+\textbf{Implementation Strategy}: We map cohereAnts modules to Ant Stack
+layers using explicit I/O contracts, ensuring reproducible experiments
+while maintaining the biological plausibility of our theoretical
+framework.
+
+\subsection{Layer-by-Layer
+Integration}\label{layer-by-layer-integration}
+
+\subsubsection{AntBody Layer: Physical Simulation and
+Sensing}\label{antbody-layer-physical-simulation-and-sensing}
+
+\paragraph{Sensilla Morphology
+Integration}\label{sensilla-morphology-integration}
+
+The cohereAnts sensilla analysis module maps directly to AntBody's
+morphological modeling:
+
+\begin{lstlisting}[language=Python]
+# AntBody sensilla configuration
+class AntBodySensilla:
+    def __init__(self, species_preset: str):
+        # Load species-specific sensilla parameters
+        self.lengths = load_sensilla_lengths(species_preset)
+        self.diameters = load_sensilla_diameters(species_preset)
+        self.optimal_wavelengths = self._calculate_resonance()
+    
+    def _calculate_resonance(self):
+        # Implement cohereAnts resonance theory
+        return self.lengths * 4  # Quarter-wavelength resonance
+\end{lstlisting}
+
+\textbf{I/O Contract}: - \textbf{Observations}: Sensilla dimensions
+(μm), resonance frequencies (THz), quality factors - \textbf{Actions}:
+Antenna positioning, sensilla orientation - \textbf{Physics}: 1 kHz
+update rate, contact dynamics for substrate interaction
+
+\paragraph{Spectroscopy and Atmospheric
+Transmission}\label{spectroscopy-and-atmospheric-transmission}
+
+Integration of cohereAnts atmospheric transmission models:
+
+\begin{lstlisting}[language=Python]
+class AntBodySpectroscopy:
+    def __init__(self, environment_preset: str):
+        self.transmission_curves = load_atmospheric_data(environment_preset)
+        self.spectral_resolution = 0.01  # μm
+        
+    def get_transmission(self, wavelength: float, distance: float) -> float:
+        # Implement cohereAnts atmospheric transmission model
+        return calculate_atmospheric_transmission(wavelength, distance)
+\end{lstlisting}
+
+\textbf{Configuration Parameters}: - Atmospheric windows: 2-5 μm, 8-14
+μm, 17-25 μm - Transmission coefficients: 0.7-0.9 for optimal windows -
+Distance-dependent attenuation models
+
+\subsubsection{AntBrain Layer: Neural
+Architecture}\label{antbrain-layer-neural-architecture}
+
+\paragraph{Olfactory Processing
+Pipeline}\label{olfactory-processing-pipeline}
+
+Mapping cohereAnts vibrational theory to AntBrain's AL→MB→CX
+architecture:
+
+\begin{lstlisting}[language=Python]
+class AntBrainOlfaction:
+    def __init__(self, neuron_count: int = 100000):
+        # Antennal Lobe (AL) - odor coding
+        self.al_neurons = self._initialize_al_circuit()
+        # Mushroom Body (MB) - associative learning
+        self.mb_neurons = self._initialize_mb_circuit()
+        # Central Complex (CX) - spatial integration
+        self.cx_neurons = self._initialize_cx_circuit()
+    
+    def _initialize_al_circuit(self):
+        # Implement cohereAnts vibrational detection theory
+        # Each glomerulus responds to specific molecular vibrations
+        return VibrationalGlomeruliCircuit()
+    
+    def _initialize_mb_circuit(self):
+        # Kenyon cells for odor-memory associations
+        return KenyonCellCircuit()
+    
+    def _initialize_cx_circuit(self):
+        # Ring attractor for heading representation
+        return RingAttractorCircuit()
+\end{lstlisting}
+
+\textbf{Neural Implementation Details}: - \textbf{AL Layer}: 50
+glomeruli, each tuned to specific vibrational frequencies - \textbf{MB
+Layer}: 2500 Kenyon cells with sparse coding (5\% activity) - \textbf{CX
+Layer}: 16-heading ring attractor with 100 neurons per heading
+
+\paragraph{Vibrational Detection
+Circuit}\label{vibrational-detection-circuit}
+
+Implementation of cohereAnts electromagnetic theory:
+
+\begin{lstlisting}[language=Python]
+class VibrationalGlomeruliCircuit:
+    def __init__(self):
+        self.frequency_tuning = np.linspace(2, 25, 50)  # μm to THz
+        self.quality_factors = np.ones(50) * 100
+        
+    def process_spectral_input(self, spectral_data: np.ndarray) -> np.ndarray:
+        # Implement cohereAnts resonance detection
+        responses = np.zeros(50)
+        for i, freq in enumerate(self.frequency_tuning):
+            responses[i] = self._calculate_vibrational_response(spectral_data, freq)
+        return responses
+    
+    def _calculate_vibrational_response(self, spectrum: np.ndarray, 
+                                     resonant_freq: float) -> float:
+        # Apply cohereAnts electromagnetic coupling model
+        coupling_strength = self._calculate_coupling(spectrum, resonant_freq)
+        return coupling_strength * self.quality_factors[i]
+\end{lstlisting}
+
+\subsubsection{AntMind Layer: Cognitive
+Modeling}\label{antmind-layer-cognitive-modeling}
+
+\paragraph{Active Inference for Olfactory
+Search}\label{active-inference-for-olfactory-search}
+
+Integration of cohereAnts behavioral models with active inference:
+
+\begin{lstlisting}[language=Python]
+class AntMindOlfaction:
+    def __init__(self):
+        self.generative_model = self._build_olfactory_model()
+        self.policy_horizon = 2.0  # seconds
+        
+    def _build_olfactory_model(self):
+        # Implement cohereAnts behavioral predictions
+        return OlfactoryGenerativeModel()
+    
+    def select_policy(self, current_state: Dict) -> np.ndarray:
+        # Active inference policy selection
+        expected_free_energy = self._calculate_efe()
+        return self._minimize_free_energy(expected_free_energy)
+    
+    def _calculate_efe(self) -> Dict[str, float]:
+        # Decompose into epistemic and pragmatic value
+        return {
+            'epistemic': self._calculate_epistemic_value(),
+            'pragmatic': self._calculate_pragmatic_value()
+        }
+\end{lstlisting}
+
+\paragraph{Stigmergy for Trail
+Following}\label{stigmergy-for-trail-following}
+
+Implementation of cohereAnts pheromone dynamics:
+
+\begin{lstlisting}[language=Python]
+class AntMindStigmergy:
+    def __init__(self):
+        self.pheromone_field = np.zeros((100, 100))
+        self.decay_rate = 0.01
+        self.diffusion_coefficient = 0.1
+        
+    def update_pheromone_field(self, deposits: List[Tuple[int, int, float]]):
+        # Implement cohereAnts pheromone diffusion model
+        for x, y, amount in deposits:
+            self.pheromone_field[x, y] += amount
+        
+        # Apply diffusion and decay
+        self.pheromone_field = self._diffuse_and_decay()
+    
+    def _diffuse_and_decay(self) -> np.ndarray:
+        # Fick's law implementation from cohereAnts
+        laplacian = self._calculate_laplacian(self.pheromone_field)
+        diffusion = self.diffusion_coefficient * laplacian
+        decay = -self.decay_rate * self.pheromone_field
+        return self.pheromone_field + diffusion + decay
+\end{lstlisting}
+
+\subsection{Species-Specific
+Implementations}\label{species-specific-implementations}
+
+\subsubsection{Formica Species
+Configuration}\label{formica-species-configuration}
+
+\begin{lstlisting}[language=Python]
+# Formica species preset for Ant Stack
+FORMICA_PRESET = {
+    'body': {
+        'sensilla_lengths': [15.2, 18.7, 22.1, 19.8, 16.5],  # μm
+        'sensilla_diameters': [2.1, 2.8, 3.2, 2.9, 2.3],     # μm
+        'optimal_wavelengths': [60.8, 74.8, 88.4, 79.2, 66.0], # μm
+        'antenna_length': 2.5,  # mm
+        'leg_count': 6,
+        'body_mass': 0.015  # g
+    },
+    'brain': {
+        'al_glomeruli_count': 50,
+        'mb_kenyon_cells': 2500,
+        'cx_heading_resolution': 16,
+        'spiking_threshold': 0.1,
+        'learning_rate': 0.01
+    },
+    'mind': {
+        'policy_horizon': 2.0,  # seconds
+        'pheromone_decay': 0.01,
+        'diffusion_coefficient': 0.1,
+        'exploration_rate': 0.2
+    }
+}
+\end{lstlisting}
+
+\subsubsection{Camponotus Species
+Configuration}\label{camponotus-species-configuration}
+
+\begin{lstlisting}[language=Python]
+# Camponotus species preset for Ant Stack
+CAMPONOTUS_PRESET = {
+    'body': {
+        'sensilla_lengths': [22.5, 28.1, 31.7, 26.8, 24.3],  # μm
+        'sensilla_diameters': [3.2, 4.1, 4.8, 4.2, 3.6],     # μm
+        'optimal_wavelengths': [90.0, 112.4, 126.8, 107.2, 97.2], # μm
+        'antenna_length': 3.8,  # mm
+        'leg_count': 6,
+        'body_mass': 0.045  # g
+    },
+    'brain': {
+        'al_glomeruli_count': 60,
+        'mb_kenyon_cells': 3000,
+        'cx_heading_resolution': 20,
+        'spiking_threshold': 0.08,
+        'learning_rate': 0.015
+    },
+    'mind': {
+        'policy_horizon': 2.5,  # seconds
+        'pheromone_decay': 0.008,
+        'diffusion_coefficient': 0.12,
+        'exploration_rate': 0.15
+    }
+}
+\end{lstlisting}
+
+\subsection{Evaluation and
+Benchmarking}\label{evaluation-and-benchmarking}
+
+\subsubsection{Navigation Performance
+Metrics}\label{navigation-performance-metrics}
+
+\begin{lstlisting}[language=Python]
+class AntStackEvaluator:
+    def __init__(self, test_scenarios: List[str]):
+        self.scenarios = test_scenarios
+        self.metrics = {}
+    
+    def evaluate_navigation(self, ant_stack: AntStack) -> Dict[str, float]:
+        results = {}
+        for scenario in self.scenarios:
+            if scenario == 'trail_following':
+                results[scenario] = self._evaluate_trail_following(ant_stack)
+            elif scenario == 'food_search':
+                results[scenario] = self._evaluate_food_search(ant_stack)
+            elif scenario == 'nest_return':
+                results[scenario] = self._evaluate_nest_return(ant_stack)
+        return results
+    
+    def _evaluate_trail_following(self, ant_stack: AntStack) -> float:
+        # Implement cohereAnts trail following metrics
+        trail_deviation = self._calculate_trail_deviation()
+        pheromone_detection = self._calculate_pheromone_detection()
+        return self._combine_metrics([trail_deviation, pheromone_detection])
+    
+    def _evaluate_food_search(self, ant_stack: AntStack) -> float:
+        # Implement cohereAnts search efficiency metrics
+        search_time = self._measure_search_time()
+        energy_efficiency = self._calculate_energy_efficiency()
+        return self._combine_metrics([search_time, energy_efficiency])
+\end{lstlisting}
+
+\subsubsection{Robustness Testing}\label{robustness-testing}
+
+\begin{lstlisting}[language=Python]
+class RobustnessTester:
+    def __init__(self):
+        self.noise_levels = [0.01, 0.05, 0.1, 0.2]
+        self.adversary_types = ['sensor_noise', 'pheromone_contamination', 'path_obstruction']
+    
+    def test_noise_robustness(self, ant_stack: AntStack) -> Dict[str, float]:
+        results = {}
+        for noise_level in self.noise_levels:
+            performance = self._run_noisy_scenario(ant_stack, noise_level)
+            results[f'noise_{noise_level}'] = performance
+        return results
+    
+    def test_adversary_robustness(self, ant_stack: AntStack) -> Dict[str, float]:
+        results = {}
+        for adversary in self.adversary_types:
+            performance = self._run_adversarial_scenario(ant_stack, adversary)
+            results[f'adversary_{adversary}'] = performance
+        return results
+\end{lstlisting}
+
+\subsection{Implementation Workflow}\label{implementation-workflow}
+
+\subsubsection{Development Pipeline}\label{development-pipeline}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Module Mapping}: Identify cohereAnts functions for Ant Stack
+  integration
+\item
+  \textbf{I/O Contract Definition}: Establish standardized interfaces
+  between layers
+\item
+  \textbf{Species Preset Creation}: Develop parameterized configurations
+\item
+  \textbf{Testing Framework}: Implement evaluation metrics and
+  benchmarks
+\item
+  \textbf{Documentation}: Create implementation guides and examples
+\end{enumerate}
+
+\subsubsection{Code Organization}\label{code-organization}
+
+\begin{lstlisting}
+ant_stack_cohereants/
+├── antbody/
+│   ├── sensilla_physics.py      # cohereAnts vibrational theory
+│   ├── spectroscopy_sensors.py  # atmospheric transmission models
+│   └── morphology_models.py     # species-specific parameters
+├── antbrain/
+│   ├── olfactory_circuits.py    # AL→MB→CX implementation
+│   ├── vibrational_detection.py # electromagnetic coupling
+│   └── learning_mechanisms.py   # STDP and plasticity
+├── antmind/
+│   ├── olfactory_inference.py   # active inference models
+│   ├── stigmergy_models.py      # pheromone dynamics
+│   └── behavioral_policies.py   # search and navigation
+├── presets/
+│   ├── formica_config.py        # Formica species preset
+│   ├── camponotus_config.py     # Camponotus species preset
+│   └── custom_species.py        # Template for new species
+└── evaluation/
+    ├── navigation_tests.py      # Trail following, search
+    ├── robustness_tests.py      # Noise, adversary testing
+    └── performance_metrics.py   # Standardized benchmarks
+\end{lstlisting}
+
+\subsection{Integration Benefits}\label{integration-benefits}
+
+\subsubsection{Reproducibility}\label{reproducibility}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Standardized I/O}: All experiments use consistent interfaces
+\item
+  \textbf{Version Pinning}: Dependencies and parameters are explicitly
+  tracked
+\item
+  \textbf{Seed Management}: Reproducible random number generation
+\item
+  \textbf{Artifact Tracking}: Complete experiment provenance
+\end{itemize}
+
+\subsubsection{Extensibility}\label{extensibility}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Species Presets}: Easy addition of new ant species
+\item
+  \textbf{Module Swapping}: Interchangeable components across layers
+\item
+  \textbf{Parameter Tuning}: Systematic exploration of parameter space
+\item
+  \textbf{Benchmark Addition}: New evaluation scenarios
+\end{itemize}
+
+\subsubsection{Validation}\label{validation}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Biological Plausibility}: Grounded in empirical data
+\item
+  \textbf{Performance Metrics}: Quantified success criteria
+\item
+  \textbf{Robustness Testing}: Resilience to real-world challenges
+\item
+  \textbf{Cross-Species Transfer}: Generalization across taxa
+\end{itemize}
+
+\subsection{Future Directions}\label{future-directions}
+
+\subsubsection{Advanced Learning
+Mechanisms}\label{advanced-learning-mechanisms}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Meta-Learning}: Adaptation across different environments
+\item
+  \textbf{Collective Intelligence}: Emergent behaviors in colonies
+\item
+  \textbf{Transfer Learning}: Knowledge transfer between species
+\end{itemize}
+
+\subsubsection{Hardware Integration}\label{hardware-integration}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Robotic Platforms}: Physical ant-inspired robots
+\item
+  \textbf{Sensor Networks}: Distributed environmental monitoring
+\item
+  \textbf{Edge Computing}: Efficient on-device processing
+\end{itemize}
+
+\subsubsection{Biological Validation}\label{biological-validation}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Field Studies}: Comparison with natural ant behavior
+\item
+  \textbf{Neural Recording}: Validation against biological data
+\item
+  \textbf{Evolutionary Analysis}: Phylogenetic patterns in behavior
+\end{itemize}
+
+\subsection{Conclusion}\label{conclusion}
+
+The integration of cohereAnts research into the Ant Stack framework
+provides a robust, reproducible platform for studying ant intelligence.
+By mapping our vibrational theory of olfaction, spectroscopic analysis,
+and behavioral modeling to the standardized three-layer architecture, we
+create a comprehensive system that bridges theoretical insights with
+computational implementation.
+
+This implementation enables systematic exploration of ant behavior
+across species, environments, and experimental conditions while
+maintaining the biological plausibility that underpins our research. The
+modular design facilitates both hypothesis testing in myrmecology and
+applications in swarm robotics, cognitive security, and AI alignment.
+
+\textbf{Key Contributions}: 1. \textbf{Systematic Integration}:
+Methodical mapping of cohereAnts to Ant Stack layers 2. \textbf{Species
+Parameterization}: Reproducible configurations for multiple ant taxa 3.
+\textbf{Evaluation Framework}: Standardized metrics and robustness
+testing 4. \textbf{Implementation Workflow}: Clear development pipeline
+and code organization 5. \textbf{Future Roadmap}: Extensibility and
+validation pathways
+
+The resulting framework serves as a bridge between theoretical
+entomology and computational neuroscience, enabling reproducible
+research that advances our understanding of both natural ant
+intelligence and artificial intelligence systems.
+
+\end{document}
