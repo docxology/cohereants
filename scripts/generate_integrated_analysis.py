@@ -210,7 +210,11 @@ def create_metamaterial_properties_figure(analysis_results):
     ax1.set_title('Dielectric Response vs Frequency', fontweight='bold')
     ax1.legend()
     ax1.grid(True, alpha=0.3)
-    ax1.set_xscale('log')
+    # Use log scale where frequency spans orders of magnitude
+    try:
+        ax1.set_xscale('log')
+    except Exception:
+        pass
     
     # Panel 2: Refractive index and absorption
     ax2_twin = ax2.twinx()
@@ -225,7 +229,10 @@ def create_metamaterial_properties_figure(analysis_results):
     ax2_twin.set_ylabel('Absorption Coefficient (m⁻¹)', fontweight='bold', color='magenta')
     ax2.set_title('Optical Properties vs Frequency', fontweight='bold')
     ax2.grid(True, alpha=0.3)
-    ax2.set_xscale('log')
+    try:
+        ax2.set_xscale('log')
+    except Exception:
+        pass
     
     # Combine legends
     lines = line1 + line2
@@ -277,6 +284,16 @@ def create_metamaterial_properties_figure(analysis_results):
         ax4.text(bar.get_x() + bar.get_width()/2., height + 0.01,
                 f'{value:.2f}', ha='center', va='bottom', fontweight='bold')
     
+    # Add a concise caption metadata file for this figure
+    try:
+        out_dir = os.path.join('output', 'figures')
+        os.makedirs(out_dir, exist_ok=True)
+        caption_file = os.path.join(out_dir, 'metamaterial_properties.caption.txt')
+        with open(caption_file, 'w') as cf:
+            cf.write('Meta-material dielectric and plasmonic response computed from MetaMaterialAnalyzer outputs. Shows epsilon real/imag, refractive index, absorption, resonance Q and field enhancement. Values are example outputs from integrated analysis.\n')
+    except Exception:
+        pass
+
     plt.tight_layout()
     return fig
 

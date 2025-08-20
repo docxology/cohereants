@@ -65,35 +65,42 @@ class PlotStyler:
     ]
 
     ACADEMIC_STYLES = {
+        # Use valid matplotlib rcParam keys (see rcParams.keys())
         'nature': {
             'font.family': 'sans-serif',
             'font.size': 7,
             'font.weight': 'normal',
-            'axes_linewidth': 0.5,
-            'tick_length': 2,
-            'tick_width': 0.5,
-            'grid_alpha': 0.3,
-            'figure_dpi': 600
+            'axes.linewidth': 0.5,
+            'xtick.major.size': 2,
+            'ytick.major.size': 2,
+            'xtick.major.width': 0.5,
+            'ytick.major.width': 0.5,
+            'grid.alpha': 0.3,
+            'figure.dpi': 600
         },
         'science': {
             'font.family': 'sans-serif',
             'font.size': 8,
             'font.weight': 'normal',
-            'axes_linewidth': 0.8,
-            'tick_length': 3,
-            'tick_width': 0.8,
-            'grid_alpha': 0.4,
-            'figure_dpi': 600
+            'axes.linewidth': 0.8,
+            'xtick.major.size': 3,
+            'ytick.major.size': 3,
+            'xtick.major.width': 0.8,
+            'ytick.major.width': 0.8,
+            'grid.alpha': 0.4,
+            'figure.dpi': 600
         },
         'ieee': {
             'font.family': 'serif',
             'font.size': 8,
             'font.weight': 'normal',
-            'axes_linewidth': 0.5,
-            'tick_length': 2.5,
-            'tick_width': 0.5,
-            'grid_alpha': 0.3,
-            'figure_dpi': 300
+            'axes.linewidth': 0.5,
+            'xtick.major.size': 2.5,
+            'ytick.major.size': 2.5,
+            'xtick.major.width': 0.5,
+            'ytick.major.width': 0.5,
+            'grid.alpha': 0.3,
+            'figure.dpi': 300
         }
     }
 
@@ -116,7 +123,10 @@ class PlotStyler:
         """
         if style == 'default':
             # Reset to matplotlib defaults with some improvements
-            plt.style.use('default')
+            try:
+                plt.style.use('default')
+            except Exception as e:
+                warnings.warn(f"Failed to apply base style 'default': {e}")
             plt.rcParams.update({
                 'font.size': 10,
                 'font.family': 'sans-serif',
@@ -126,17 +136,28 @@ class PlotStyler:
                 'figure.dpi': 150
             })
         elif style in self.ACADEMIC_STYLES:
-            plt.style.use('default')
+            try:
+                plt.style.use('default')
+            except Exception:
+                # If applying the default style fails, continue and attempt to update rcParams
+                warnings.warn("Could not apply default style; continuing with rcParams update")
             settings = self.ACADEMIC_STYLES[style]
             try:
                 plt.rcParams.update(settings)
-            except KeyError as e:
-                # Handle invalid matplotlib parameters gracefully
-                warnings.warn(f"Some style parameters may be invalid: {e}")
-                # Update only valid parameters
-                valid_settings = {k: v for k, v in settings.items() if k in plt.rcParams}
-                if valid_settings:
-                    plt.rcParams.update(valid_settings)
+            except Exception as e:
+                # Handle invalid matplotlib parameters gracefully (KeyError or other)
+                warnings.warn(f"Some style parameters may be invalid or update failed: {e}")
+                # Update only valid parameters where possible
+                try:
+                    valid_settings = {k: v for k, v in settings.items() if k in plt.rcParams}
+                    if valid_settings:
+                        try:
+                            plt.rcParams.update(valid_settings)
+                        except Exception as e2:
+                            warnings.warn(f"Failed to update partial rcParams: {e2}")
+                except Exception:
+                    # In case plt.rcParams is not subscriptable or other failure
+                    pass
         else:
             try:
                 plt.style.use(style)
@@ -298,14 +319,33 @@ class AdvancedVisualizer:
         self.styler.format_axes(ax1, xlabel='Wavenumber (cm⁻¹)',
                                ylabel='Intensity (a.u.)', title=title)
 
-        # Derivative plot for peak detection
+        # Derivative plot for peak detection and confidence interval shading
         if len(intensities) > 5:
-            from scipy import signal
+            from scipy import signal, stats
             derivative = np.gradient(intensities)
-            ax2.plot(wavenumbers, derivative, color=colors[1], linewidth=1.5)
+            # Estimate a simple moving standard deviation as a proxy for variability
+            window = min(7, max(3, len(intensities)//20))
+            pad = window // 2
+            mov_std = np.array([np.std(intensities[max(0, i-pad):min(len(intensities), i+pad+1)]) for i in range(len(intensities))])
+
+            ax2.plot(wavenumbers, derivative, color=colors[1], linewidth=1.5, label='Derivative')
+            # Shade +/- 1 std around derivative to show confidence region
+            ax2.fill_between(wavenumbers, derivative - mov_std, derivative + mov_std, color=colors[1], alpha=0.2)
             ax2.axhline(y=0, color='black', linestyle='--', alpha=0.5)
             self.styler.format_axes(ax2, xlabel='Wavenumber (cm⁻¹)',
-                                   ylabel='Derivative', title='First Derivative')
+                                   ylabel='Derivative', title='First Derivative (with local std)')
+
+            # If peaks not provided, try to detect using SciPy's find_peaks
+            if peaks is None:
+                try:
+                    peaks_idx, _ = signal.find_peaks(intensities, prominence=(np.max(intensities)*0.05))
+                    peaks = wavenumbers[peaks_idx]
+                    peak_vals = intensities[peaks_idx]
+                    # annotate peaks on main axis
+                    for x, y in zip(peaks, peak_vals):
+                        ax1.annotate(f'{x:.1f}', xy=(x, y), xytext=(0, 6), textcoords='offset points', ha='center', fontsize=8)
+                except Exception:
+                    peaks = None
 
         plt.tight_layout()
         return fig

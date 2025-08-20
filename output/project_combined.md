@@ -17,6 +17,20 @@ The vibrational theory of olfaction proposes that insects detect infrared electr
 
 \newpage
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
+\caption{Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.}
+\label{fig:experimental_setup}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
+\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
+\label{fig:convergence_plot}
+\end{figure}
+
 
 
 
@@ -93,6 +107,20 @@ All theoretical predictions are implemented in tested computational models that 
 - **Environmental Studies**: Analysis of atmospheric transmission effects on detection range
 
 This integrated approach ensures that theoretical predictions are grounded in empirical reality and provides a framework for future experimental validation of the vibrational theory.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
+\caption{Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.}
+\label{fig:experimental_setup}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
+\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
+\label{fig:convergence_plot}
+\end{figure}
+
 
 
 
@@ -255,6 +283,20 @@ The computational framework is validated through comprehensive testing:
 - **Empirical Comparison**: Validation against published experimental data
 
 This rigorous validation ensures that theoretical predictions are grounded in physical reality and provides a reliable foundation for experimental design and hypothesis testing.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
+\caption{Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.}
+\label{fig:experimental_setup}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
+\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
+\label{fig:convergence_plot}
+\end{figure}
+
 
 
 
@@ -435,6 +477,20 @@ If the primary function of antennae is electromagnetic detection rather than mol
 **Spatial Resolution**: Directional antennas provide spatial information that molecular diffusion cannot
 
 This evidence supports the hypothesis that insect antennae function primarily as electromagnetic detection systems, with molecular binding serving secondary validation and signal termination functions.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
+\caption{Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.}
+\label{fig:experimental_setup}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
+\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
+\label{fig:convergence_plot}
+\end{figure}
+
 
 
 
@@ -617,6 +673,20 @@ The vibrational theory of olfaction represents a paradigm shift in our understan
 **Empirical Foundation**: All theoretical predictions are implemented in tested computational models that provide quantitative predictions for experimental validation. The mathematical framework developed in Section \ref{sec:mathematical_appendix} provides the theoretical foundation for testing these hypotheses and developing new experimental approaches to validate the vibrational theory of olfaction in insects.
 
 This theory opens up new avenues for research into insect behavior, cognition, and evolution, and could have significant implications for fields ranging from agriculture to conservation to technology development. The remarkable adaptations of insect antennae and sensilla suggest that nature has evolved solutions to the problem of infrared detection that may surpass our current technological capabilities.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
+\caption{Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.}
+\label{fig:experimental_setup}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
+\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
+\label{fig:convergence_plot}
+\end{figure}
+
 
 
 
@@ -804,6 +874,20 @@ The vibrational theory opens numerous research opportunities:
 The remarkable adaptations of insect antennae and sensilla suggest that nature has evolved solutions to the problem of infrared detection that may surpass our current technological capabilities. As we continue to explore this fascinating area of research, we may discover that insects are not just simple creatures responding to chemical cues, but sophisticated organisms with a rich and complex sensory world that operates in wavelengths invisible to our own eyes.
 
 This realization could fundamentally change how we think about insect behavior, evolution, and their role in the natural world, opening new avenues for research and technological development that could benefit humanity while preserving the remarkable biodiversity of our planet.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
+\caption{Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.}
+\label{fig:experimental_setup}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
+\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
+\label{fig:convergence_plot}
+\end{figure}
+
 
 
 
@@ -1344,6 +1428,20 @@ This mathematical appendix provides the theoretical foundation for understanding
 - Performance limits based on fundamental physical principles
 
 The mathematical framework demonstrates that the vibrational theory is not only biologically plausible but also mathematically rigorous, providing testable predictions for future experimental validation. This integration of theory, computation, and empirical validation represents a comprehensive approach to understanding the remarkable capabilities of insect chemosensation.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
+\caption{Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.}
+\label{fig:experimental_setup}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
+\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
+\label{fig:convergence_plot}
+\end{figure}
+
 
 
 
@@ -1606,6 +1704,20 @@ The empirical evidence presented in this section provides strong support for the
 - **Educational Resources**: Quantitative understanding of insect perception
 
 This integrated approach maximizes "fractal intelligence" by ensuring empirical accuracy, falsifiable evidence, and grounding claims in tested computational methods that yield accessible visualizations and quantitative predictions.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
+\caption{Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.}
+\label{fig:experimental_setup}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
+\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
+\label{fig:convergence_plot}
+\end{figure}
+
 
 
 
@@ -1999,6 +2111,20 @@ This implementation enables systematic exploration of ant behavior across specie
 5. **Future Roadmap**: Extensibility and validation pathways
 
 The resulting framework serves as a bridge between theoretical entomology and computational neuroscience, enabling reproducible research that advances our understanding of both natural ant intelligence and artificial intelligence systems.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
+\caption{Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.}
+\label{fig:experimental_setup}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
+\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
+\label{fig:convergence_plot}
+\end{figure}
+
 
 
 
@@ -2311,3 +2437,17 @@ For complete mathematical formulations and source code implementation, see Secti
 | `visualization` | `get_colorblind_palette` | function | Get a colorblind-friendly color palette |
 | `visualization` | `set_plot_style` | function | Set the global plot style |
 <!-- END: AUTO-API-GLOSSARY -->
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
+\caption{Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.}
+\label{fig:experimental_setup}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
+\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
+\label{fig:convergence_plot}
+\end{figure}
+

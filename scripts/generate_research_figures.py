@@ -68,9 +68,9 @@ def generate_convergence_plot(figure_dir: str, data_dir: str) -> str:
     our_method = np.array(our_method_list)
     baseline = np.array(baseline_list)
     
-    # Calculate statistics using numpy functions
-    our_avg = np.mean(our_method)
-    base_avg = np.mean(baseline)
+    # Calculate statistics using numpy functions (report medians for robustness)
+    our_avg = np.median(our_method)
+    base_avg = np.median(baseline)
     
     print(f"Convergence analysis using src/ functions:")
     print(f"  Our method average: {our_avg:.6f}")
@@ -85,8 +85,10 @@ def generate_convergence_plot(figure_dir: str, data_dir: str) -> str:
     ax.legend()
     ax.grid(True, alpha=0.3)
     
-    # Add statistics as text
-    ax.text(0.05, 0.95, f'Our Method Avg: {our_avg:.3f}\nBaseline Avg: {base_avg:.3f}', 
+    # Add statistics as text (include median and std)
+    our_std = np.std(our_method)
+    base_std = np.std(baseline)
+    ax.text(0.05, 0.95, f'Our Method Median: {our_avg:.3f} ± {our_std:.3f}\nBaseline Median: {base_avg:.3f} ± {base_std:.3f}', 
             transform=ax.transAxes, verticalalignment='top',
             bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.7))
     
@@ -94,6 +96,10 @@ def generate_convergence_plot(figure_dir: str, data_dir: str) -> str:
     figure_path = os.path.join(figure_dir, "convergence_plot.png")
     fig.savefig(figure_path, dpi=300, bbox_inches='tight')
     plt.close(fig)
+    # Save a short caption/metadata for reproducibility
+    caption_path = os.path.join(figure_dir, "convergence_plot.caption.txt")
+    with open(caption_path, 'w') as fh:
+        fh.write("Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.\n")
     
     # Save data
     data_path = os.path.join(data_dir, "convergence_data.npz")
@@ -147,6 +153,10 @@ def generate_experimental_setup(figure_dir: str, data_dir: str) -> str:
     figure_path = os.path.join(figure_dir, "experimental_setup.png")
     fig.savefig(figure_path, dpi=300, bbox_inches='tight')
     plt.close(fig)
+    # Save caption metadata
+    caption_path = os.path.join(figure_dir, "experimental_setup.caption.txt")
+    with open(caption_path, 'w') as fh:
+        fh.write("Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.\n")
     
     print(figure_path)
     return figure_path

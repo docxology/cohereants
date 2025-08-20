@@ -268,6 +268,31 @@ class TestUtilityFunctions:
         assert isinstance(fig, plt.Figure)
         plt.close(fig)
 
+    def test_plot_spectral_analysis_auto_peak_detection(self):
+        """Test spectral plotting with automatic peak detection when peaks=None."""
+        visualizer = AdvancedVisualizer()
+
+        # Construct two clear Gaussian peaks
+        wavenumbers = np.linspace(2500, 3000, 500)
+        intensities = (
+            np.exp(-((wavenumbers - 2700) / 10) ** 2)
+            + 0.8 * np.exp(-((wavenumbers - 2900) / 8) ** 2)
+        )
+
+        fig = visualizer.plot_spectral_analysis(wavenumbers, intensities, peaks=None)
+        assert isinstance(fig, plt.Figure)
+        # Main axis should have text annotations for peaks if detection worked
+        ax_main = fig.axes[0]
+        assert len(ax_main.texts) >= 1
+        plt.close(fig)
+
+    def test_get_colors_with_cmap(self):
+        """Test color generation with a named matplotlib colormap."""
+        styler = PlotStyler()
+        colors = styler.get_colors(5, 'viridis')
+        assert len(colors) == 5
+        assert all(isinstance(c, str) for c in colors)
+
 
 class TestVisualizationEdgeCases:
     """Test edge cases and error conditions."""

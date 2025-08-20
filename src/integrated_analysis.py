@@ -240,12 +240,18 @@ class IntegratedAnalyzer:
         # Molecular information breakdown
         fermi = analysis_results['fermi_analysis']
         molecular_labels = ['Translational', 'Rotational', 'Vibrational']
-        molecular_values = [
+        molecular_values = np.array([
             fermi['molecular']['translational_bits'],
             fermi['molecular']['rotational_bits'],
             fermi['molecular']['vibrational_bits']
-        ]
-        
+        ], dtype=float)
+
+        # Ensure pie chart receives non-negative values. Clip negatives to zero and
+        # provide a small epsilon fallback to avoid matplotlib ValueError when sum==0.
+        molecular_values = np.clip(molecular_values, 0.0, None)
+        if np.sum(molecular_values) == 0:
+            molecular_values = np.ones_like(molecular_values) * 1e-6
+
         ax1.pie(molecular_values, labels=molecular_labels, autopct='%1.1f%%')
         ax1.set_title('Molecular Information Content Distribution')
         

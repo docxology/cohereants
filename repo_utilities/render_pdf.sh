@@ -267,6 +267,15 @@ create_ide_friendly_pdf() {
   log_info "Creating IDE-friendly PDF version..."
   
   # Use different settings optimized for IDE viewing
+  # Create a sanitized preamble for IDE-friendly PDF: remove documentclass and begin/end document
+  local ide_preamble="$LATEX_TEMP_DIR/preamble_ide.tex"
+  if [ -f "$preamble_tex" ]; then
+    # remove documentclass, begin/end document, maketitle and titlepage blocks
+    sed -e '/\\documentclass/Id' -e '/\\begin{document}/Id' -e '/\\end{document}/Id' -e '/\\maketitle/Id' -e '/\\begin{titlepage}/,/\\end{titlepage}/Id' "$preamble_tex" > "$ide_preamble" || cp "$preamble_tex" "$ide_preamble"
+  else
+    touch "$ide_preamble"
+  fi
+
   local pandoc_args=(
     -f markdown+implicit_figures+tex_math_dollars+tex_math_single_backslash+raw_tex+autolink_bare_uris
     -s
@@ -298,7 +307,7 @@ create_ide_friendly_pdf() {
     --highlight-style=espresso
     --listings
     --resource-path="$MARKDOWN_DIR:$OUTPUT_DIR:$LATEX_TEMP_DIR:$REPO_ROOT"
-    -H "$preamble_tex"
+    -H "$ide_preamble"
     -o "$ide_pdf"
   )
   
@@ -306,8 +315,43 @@ create_ide_friendly_pdf() {
     log_info "✅ Created IDE-friendly PDF: $ide_pdf"
     return 0
   else
-    log_error "❌ Failed to create IDE-friendly PDF"
-    return 1
+    log_warn "Initial IDE-friendly pandoc run failed; retrying without custom preamble..."
+    # Retry without including custom preamble to avoid LaTeX preamble mismatches
+    local pandoc_fallback=(
+      -f markdown+implicit_figures+tex_math_dollars+tex_math_single_backslash+raw_tex+autolink_bare_uris
+      -s
+      -V title="$PROJECT_TITLE"
+      -V author="$AUTHOR_TEX"
+      -V date="$(date '+%B %d, %Y')"
+      --pdf-engine=pdflatex
+      --toc
+      --toc-depth=3
+      --number-sections
+      -V secnumdepth=3
+      -V mainfont="Times New Roman"
+      -V monofont="Courier New"
+      -V fontsize=13pt
+      -V linestretch=1.5
+      -V geometry:margin=2.5cm
+      -V geometry:top=2.2cm
+      -V geometry:bottom=2.2cm
+      -V geometry:left=3cm
+      -V geometry:right=3cm
+      -V geometry:includeheadfoot
+      -V colorlinks=false
+      --highlight-style=espresso
+      --listings
+      --resource-path="$MARKDOWN_DIR:$OUTPUT_DIR:$LATEX_TEMP_DIR:$REPO_ROOT"
+      -o "$ide_pdf"
+    )
+
+    if pandoc "$combined_md" "${pandoc_fallback[@]}"; then
+      log_info "✅ Created IDE-friendly PDF (fallback): $ide_pdf"
+      return 0
+    else
+      log_error "❌ Failed to create IDE-friendly PDF (both primary and fallback)"
+      return 1
+    fi
   fi
 }
 
@@ -688,6 +732,31 @@ build_combined() {
         printf '\n\\newpage\n\n' >> "$combined_md"
       fi
       cat "$MARKDOWN_DIR/${other_modules[$i]}" >> "$combined_md"
+      # If a caption file exists for a figure in the module's output, append a LaTeX figure block
+      # The convention: for a figure named foo.png, a caption file foo.caption.txt may exist in output/figures
+      # We append a small markdown block with raw LaTeX to include the figure and caption in the combined document.
+      module_basename="${other_modules[$i]%.md}"
+      # Search output figures for captions that match module basename or known figure names
+      if [ -d "$FIGURE_DIR" ]; then
+        while IFS= read -r -d '' capfile; do
+          fname=$(basename "$capfile")
+          figstem="${fname%.caption.txt}"
+          # Append raw LaTeX figure only if the image exists
+          if [ -f "$FIGURE_DIR/${figstem}.png" ]; then
+            # Read and sanitize caption (first 3 lines) for safe inclusion
+            caption=$(sed -n '1,3p' "$capfile" | tr -d '\n' | sed 's/"/\\"/g')
+            cat >> "$combined_md" << EOF
+\\begin{figure}[h]
+\\centering
+\\includegraphics[width=0.8\\textwidth]{../output/figures/${figstem}.png}
+\\caption{${caption}}
+\\label{fig:${figstem}}
+\\end{figure}
+
+EOF
+          fi
+        done < <(find "$FIGURE_DIR" -maxdepth 1 -name "*.caption.txt" -print0 || true)
+      fi
       # Add extra spacing after each section for better separation
       if [ $i -lt $((${#other_modules[@]} - 1)) ]; then
         printf '\n\n' >> "$combined_md"
@@ -851,6 +920,15 @@ main() {
   
   # Extract the LaTeX preamble including \begin{document} and \maketitle
   sed -n '/^```latex$/,/^```$/p' "$PREAMBLE_MD" | sed '1d;$d' > "$preamble_tex"
+
+  # Sanitize preamble: remove any duplicate \documentclass or \begin{document} lines
+  if command -v awk >/dev/null 2>&1; then
+    awk '!/\\documentclass/ || ++dc==1' "$preamble_tex" > "$preamble_tex.tmp" || true
+    mv "$preamble_tex.tmp" "$preamble_tex"
+    # Remove multiple \begin{document} / \end{document} occurrences if present
+    awk '!/\\begin\{document\}/ || ++bd==1' "$preamble_tex" > "$preamble_tex.tmp" || true
+    mv "$preamble_tex.tmp" "$preamble_tex"
+  fi
   
   if [ ! -s "$preamble_tex" ]; then
     log_error "Failed to extract LaTeX preamble from $PREAMBLE_MD"
