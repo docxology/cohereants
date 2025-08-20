@@ -235,6 +235,16 @@ class TestCreateSampleIntegratedAnalysis:
         assert analysis_results == {'test': 'result'}
 
 
+def test_integrated_analysis_save_figures_moved(tmp_path):
+    """Moved test from ad-hoc file into thematic integrated tests."""
+    analyzer, results = create_sample_integrated_analysis()
+    figs = analyzer.create_visualization_figures(results)
+    outdir = tmp_path / 'figs'
+    analyzer.save_analysis_figures(figs, output_dir=str(outdir))
+    saved = list(outdir.glob('*.png'))
+    assert len(saved) >= 1
+
+
 class TestIntegratedAnalysisMainExecution:
     """Test the main execution block of integrated_analysis module."""
     

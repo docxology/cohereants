@@ -24,13 +24,6 @@ The vibrational theory of olfaction proposes that insects detect infrared electr
 \label{fig:experimental_setup}
 \end{figure}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
-\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
-\label{fig:convergence_plot}
-\end{figure}
-
 
 
 
@@ -112,13 +105,6 @@ This integrated approach ensures that theoretical predictions are grounded in em
 \includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
 \caption{Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.}
 \label{fig:experimental_setup}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
-\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
-\label{fig:convergence_plot}
 \end{figure}
 
 
@@ -288,13 +274,6 @@ This rigorous validation ensures that theoretical predictions are grounded in ph
 \includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
 \caption{Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.}
 \label{fig:experimental_setup}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
-\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
-\label{fig:convergence_plot}
 \end{figure}
 
 
@@ -484,13 +463,6 @@ This evidence supports the hypothesis that insect antennae function primarily as
 \label{fig:experimental_setup}
 \end{figure}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
-\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
-\label{fig:convergence_plot}
-\end{figure}
-
 
 
 
@@ -678,13 +650,6 @@ This theory opens up new avenues for research into insect behavior, cognition, a
 \includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
 \caption{Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.}
 \label{fig:experimental_setup}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
-\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
-\label{fig:convergence_plot}
 \end{figure}
 
 
@@ -879,13 +844,6 @@ This realization could fundamentally change how we think about insect behavior, 
 \includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
 \caption{Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.}
 \label{fig:experimental_setup}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
-\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
-\label{fig:convergence_plot}
 \end{figure}
 
 
@@ -1435,13 +1393,6 @@ The mathematical framework demonstrates that the vibrational theory is not only 
 \label{fig:experimental_setup}
 \end{figure}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
-\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
-\label{fig:convergence_plot}
-\end{figure}
-
 
 
 
@@ -1709,13 +1660,6 @@ This integrated approach maximizes "fractal intelligence" by ensuring empirical 
 \includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
 \caption{Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.}
 \label{fig:experimental_setup}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
-\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
-\label{fig:convergence_plot}
 \end{figure}
 
 
@@ -2118,13 +2062,6 @@ The resulting framework serves as a bridge between theoretical entomology and co
 \label{fig:experimental_setup}
 \end{figure}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
-\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
-\label{fig:convergence_plot}
-\end{figure}
-
 
 
 
@@ -2442,12 +2379,5 @@ For complete mathematical formulations and source code implementation, see Secti
 \includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
 \caption{Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.}
 \label{fig:experimental_setup}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]{../output/figures/convergence_plot.png}
-\caption{Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.}
-\label{fig:convergence_plot}
 \end{figure}
 

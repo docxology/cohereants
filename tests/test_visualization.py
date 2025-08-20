@@ -179,6 +179,23 @@ class TestAdvancedVisualizer:
 
         plt.close(fig)
 
+
+def test_visualization_and_integrated_figures_moved(tmp_path):
+    """Moved tests from ad-hoc file into thematic visualization tests."""
+    styler = PlotStyler()
+    colors = styler.get_colors(4, palette='nonexistent_palette')
+    assert len(colors) == 4
+
+    fig, axes = styler.create_figure_grid(1, 1)
+    assert fig is not None
+    plt.close(fig)
+
+    visualizer = AdvancedVisualizer()
+    data_dict = {f'panel{i}': {'x': np.linspace(0, 1, 10), 'y': np.linspace(i, i+1, 10)} for i in range(5)}
+    fig2 = visualizer.plot_multi_panel_analysis(data_dict)
+    assert fig2 is not None
+    plt.close(fig2)
+
     @patch('src.visualization.plt')
     def test_create_interactive_plot_matplotlib_fallback(self, mock_plt):
         """Test interactive plot fallback to matplotlib."""

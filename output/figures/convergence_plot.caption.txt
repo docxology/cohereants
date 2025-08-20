@@ -1,1 +1,0 @@
-Convergence plot comparing algorithmic objective values. Medians and std reported. Data generated synthetically; processed with calculate_wavelength_from_wavenumber for demonstration.

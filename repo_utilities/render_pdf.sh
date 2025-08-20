@@ -566,7 +566,6 @@ EOF
       sed -i "s|src=\"figures/|src=\"$figures_dir/|g" "$html_out"
       
       # Convert LaTeX \includegraphics commands to HTML img tags
-      sed -i "s|\\includegraphics\[width=0\.9\\textwidth\]{\.\./output/figures/convergence_plot\.png}|<img src=\"$figures_dir/convergence_plot.png\" alt=\"Convergence Plot\" style=\"max-width: 100%; height: auto;\">|g" "$html_out"
       sed -i "s|\\includegraphics\[width=0\.9\\textwidth\]{\.\./output/figures/experimental_setup\.png}|<img src=\"$figures_dir/experimental_setup.png\" alt=\"Experimental Setup\" style=\"max-width: 100%; height: auto;\">|g" "$html_out"
       sed -i "s|\\includegraphics\[width=0\.8\\textwidth\]{\.\./output/figures/example_figure\.png}|<img src=\"$figures_dir/example_figure.png\" alt=\"Example Figure\" style=\"max-width: 100%; height: auto;\">|g" "$html_out"
       

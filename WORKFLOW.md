@@ -348,3 +348,20 @@ This ensures:
 This workflow ensures that the generic project template maintains the highest standards of code quality, documentation coherence, and maintainability while providing a clear, scalable structure for development and collaboration.
 
 For more details on architecture and implementation, see **[`ARCHITECTURE.md`](ARCHITECTURE.md)** and **[`THIN_ORCHESTRATOR_SUMMARY.md`](THIN_ORCHESTRATOR_SUMMARY.md)**.
+
+
+## Test organization (project policy)
+
+Tests are grouped by theme to improve discoverability and maintainability. Place tests under `tests/` and follow these conventions:
+
+- **Core & physics**: `tests/test_core.py`, `tests/test_core_physics.py`
+- **Configuration**: `tests/test_config.py`
+- **Spectroscopy**: `tests/test_spectroscopy_*.py`
+- **Visualization**: `tests/test_visualization.py`, `tests/test_visualization_additional.py`, `tests/test_visualization_reload.py`
+- **Integration / frameworks**: `tests/test_integrated_analysis.py`, `tests/test_meta_material_framework.py`, `tests/test_fermi_estimation.py`, `tests/test_insect_analysis*.py`
+- **Behavioral**: `tests/test_behavioral_analysis.py`
+- **Utilities & docs**: `tests/test_glossary_gen*.py`, `tests/test_repo_utilities.py`, `tests/test_utils.py`
+
+Ad-hoc or temporary test collections should be avoided. If you create short-term helper test files while developing, migrate their tests into the appropriate thematic file before merging and remove the temporary files. This repository follows that policy (several ad-hoc tests were consolidated into thematic files during the current refactor).
+
+When adding tests, include a one-line comment at the top of the test function indicating why the test exists (what branch/edge-case it covers) so future reviewers can keep tests aligned to the 100% coverage requirement.

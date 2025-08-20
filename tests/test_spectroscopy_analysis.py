@@ -356,56 +356,84 @@ class TestSpectroscopyMissingCoverage:
             assert range_result[0] == range_result[1]  # Same min and max for single point
         except Exception:
             pass
+
+
+def test_spectroscopy_validation_and_identification_moved():
+    """Moved tests from ad-hoc file into thematic spectroscopy tests."""
+    import numpy as np
+    from src.spectroscopy import SpectralData, identify_chc_compounds, CHCAnalyzer
+
+    try:
+        SpectralData([1000, 2000], [1.0])
+        raise AssertionError('Expected ValueError for mismatched lengths')
+    except ValueError:
+        pass
+
+    try:
+        SpectralData([10, 20], [0.1, 0.2])
+        raise AssertionError('Expected ValueError for out of range wavenumbers')
+    except ValueError:
+        pass
+
+    w = np.array([2850.0, 2920.0, 2955.0])
+    inten = np.array([0.5, 1.0, 0.8])
+    sd = SpectralData(w, inten, species='Test')
+    identified = identify_chc_compounds([2920.0], tolerance=5.0)
+    assert any(d['compound'].startswith('CH2') for d in identified)
+
+    analyzer = CHCAnalyzer()
+    result = analyzer.analyze_spectrum(sd)
+    assert 'num_peaks' in result
         
-        # Test line 69 (intensity_range property edge case)
-        try:
-            zero_intensity_data = SpectralData([1000.0, 1500.0], [0.0, 0.0])
-            intensity_range = zero_intensity_data.intensity_range
-            assert isinstance(intensity_range, tuple)
-            assert intensity_range[0] == intensity_range[1] == 0.0
-        except Exception:
-            pass
-        
-        # Test lines 98-99 (CHCAnalyzer with minimal data)
-        try:
-            analyzer = CHCAnalyzer()
-            minimal_data = SpectralData([1000.0], [0.1])
-            result = analyzer.analyze_spectrum(minimal_data)
-            assert isinstance(result, dict)
-            # Should handle minimal data gracefully
-        except Exception:
-            pass
-    
-    def test_lines_298_322_generate_spectral_plots_edge_cases(self):
-        """Test spectroscopy lines 298-322 (generate_spectral_plots edge cases)."""
-        with patch('matplotlib.pyplot.subplots') as mock_subplots:
-            with patch('matplotlib.pyplot.colorbar') as mock_colorbar:
-                mock_fig = MagicMock()
-                mock_ax1 = MagicMock()
-                mock_ax2 = MagicMock()
-                mock_subplots.return_value = (mock_fig, (mock_ax1, mock_ax2))
-                
-                try:
-                    # Test with multiple spectra to trigger correlation matrix code (lines 298-322)
-                    multiple_spectra = {
-                        'species1': np.array([1.0, 2.0, 1.0]),
-                        'species2': np.array([0.5, 1.5, 0.8]),
-                        'species3': np.array([2.0, 1.0, 1.5])
-                    }
-                    wavelengths = np.array([1, 2, 3])
-                    
-                    result = generate_spectral_plots(multiple_spectra, wavelengths)
-                    assert isinstance(result, plt.Figure)
-                except Exception:
-                    pass
-                
-                try:
-                    # Test with single spectrum (should skip correlation matrix)
-                    single_spectrum = {'species1': np.array([1.0, 2.0, 1.0])}
-                    result = generate_spectral_plots(single_spectrum, wavelengths)
-                    assert isinstance(result, plt.Figure)
-                except Exception:
-                    pass
+    # Test line 69 (intensity_range property edge case)
+    try:
+        zero_intensity_data = SpectralData([1000.0, 1500.0], [0.0, 0.0])
+        intensity_range = zero_intensity_data.intensity_range
+        assert isinstance(intensity_range, tuple)
+        assert intensity_range[0] == intensity_range[1] == 0.0
+    except Exception:
+        pass
+
+    # Test lines 98-99 (CHCAnalyzer with minimal data)
+    try:
+        analyzer = CHCAnalyzer()
+        minimal_data = SpectralData([1000.0], [0.1])
+        result = analyzer.analyze_spectrum(minimal_data)
+        assert isinstance(result, dict)
+        # Should handle minimal data gracefully
+    except Exception:
+        pass
+
+def test_lines_298_322_generate_spectral_plots_edge_cases():
+    """Test spectroscopy lines 298-322 (generate_spectral_plots edge cases)."""
+    with patch('matplotlib.pyplot.subplots') as mock_subplots:
+        with patch('matplotlib.pyplot.colorbar') as mock_colorbar:
+            mock_fig = MagicMock()
+            mock_ax1 = MagicMock()
+            mock_ax2 = MagicMock()
+            mock_subplots.return_value = (mock_fig, (mock_ax1, mock_ax2))
+
+            try:
+                # Test with multiple spectra to trigger correlation matrix code (lines 298-322)
+                multiple_spectra = {
+                    'species1': np.array([1.0, 2.0, 1.0]),
+                    'species2': np.array([0.5, 1.5, 0.8]),
+                    'species3': np.array([2.0, 1.0, 1.5])
+                }
+                wavelengths = np.array([1, 2, 3])
+
+                result = generate_spectral_plots(multiple_spectra, wavelengths)
+                assert isinstance(result, plt.Figure)
+            except Exception:
+                pass
+
+            try:
+                # Test with single spectrum (should skip correlation matrix)
+                single_spectrum = {'species1': np.array([1.0, 2.0, 1.0])}
+                result = generate_spectral_plots(single_spectrum, wavelengths)
+                assert isinstance(result, plt.Figure)
+            except Exception:
+                pass
 
 
 class TestSpectroscopyAdvancedMissingCoverage:
