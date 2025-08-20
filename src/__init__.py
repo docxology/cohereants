@@ -68,7 +68,25 @@ try:
     from .insect_analysis import (
         run_comprehensive_analysis
     )
-    
+
+    from .config import (
+        ConfigManager,
+        get_config,
+        init_config,
+        set_temperature,
+        set_plot_style,
+        enable_verbose_logging,
+        set_random_seed
+    )
+
+    from .visualization import (
+        AdvancedVisualizer,
+        PlotStyler,
+        create_publication_figure,
+        get_colorblind_palette,
+        create_subplots
+    )
+
 except ImportError:
     # Fallback for when running tests or as standalone script
     import sys
@@ -119,6 +137,24 @@ except ImportError:
         run_comprehensive_analysis
     )
 
+    from src.config import (
+        ConfigManager,
+        get_config,
+        init_config,
+        set_temperature,
+        set_plot_style,
+        enable_verbose_logging,
+        set_random_seed
+    )
+
+    from src.visualization import (
+        AdvancedVisualizer,
+        PlotStyler,
+        create_publication_figure,
+        get_colorblind_palette,
+        create_subplots
+    )
+
 # Package-level exports
 __all__ = [
     # Core physics functions
@@ -156,7 +192,23 @@ __all__ = [
     
     # Comprehensive analysis
     'run_comprehensive_analysis',
-    
+
+    # Configuration system
+    'ConfigManager',
+    'get_config',
+    'init_config',
+    'set_temperature',
+    'set_plot_style',
+    'enable_verbose_logging',
+    'set_random_seed',
+
+    # Advanced visualization
+    'AdvancedVisualizer',
+    'PlotStyler',
+    'create_publication_figure',
+    'get_colorblind_palette',
+    'create_subplots',
+
     # Package utilities
     'get_package_info',
     'run_demo_analysis'

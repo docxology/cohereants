@@ -3964,16 +3964,37 @@ Calculate comprehensive statistics for behavioral response data \\
 \passthrough{\lstinline!behavioral!} &
 \passthrough{\lstinline!generate\_behavioral\_plots!} & function &
 Generate behavioral response plots \\
+\passthrough{\lstinline!config!} &
+\passthrough{\lstinline!ConfigManager!} & class & Centralized
+configuration manager for insect analysis \\
+\passthrough{\lstinline!config!} &
+\passthrough{\lstinline!enable\_verbose\_logging!} & function & Enable
+verbose logging for debugging \\
+\passthrough{\lstinline!config!} & \passthrough{\lstinline!get\_config!}
+& function & Get the global configuration manager instance \\
+\passthrough{\lstinline!config!} &
+\passthrough{\lstinline!init\_config!} & function & Initialize the
+global configuration manager \\
+\passthrough{\lstinline!config!} &
+\passthrough{\lstinline!set\_plot\_style!} & function & Set matplotlib
+plot style \\
+\passthrough{\lstinline!config!} &
+\passthrough{\lstinline!set\_random\_seed!} & function & Set random seed
+for reproducible results \\
+\passthrough{\lstinline!config!} &
+\passthrough{\lstinline!set\_temperature!} & function & Set analysis
+temperature in Kelvin \\
 \passthrough{\lstinline!core!} &
 \passthrough{\lstinline!calculate\_atmospheric\_transmission!} &
-function & Calculate atmospheric transmission for given wavelengths \\
+function & Calculate atmospheric transmission for given wavelengths in
+the infrared spectrum \\
 \passthrough{\lstinline!core!} &
 \passthrough{\lstinline!calculate\_response\_time\_improvement!} &
 function & Calculate the improvement in response time compared to
 traditional olfaction \\
 \passthrough{\lstinline!core!} &
 \passthrough{\lstinline!calculate\_wavelength\_from\_wavenumber!} &
-function & Convert wavenumber (cm\^{}-1) to wavelength (μm) \\
+function & Convert wavenumber (cm⁻¹) to wavelength (μm) \\
 \passthrough{\lstinline!core!} &
 \passthrough{\lstinline!calculate\_wavenumber\_from\_wavelength!} &
 function & Convert wavelength (μm) to wavenumber (cm\^{}-1) \\
@@ -4058,6 +4079,24 @@ Generate spectral plots for multiple compounds \\
 \passthrough{\lstinline!spectroscopy!} &
 \passthrough{\lstinline!identify\_chc\_compounds!} & function & Identify
 potential CHC compounds based on peak positions \\
+\passthrough{\lstinline!visualization!} &
+\passthrough{\lstinline!AdvancedVisualizer!} & class & Advanced
+visualization tools for insect analysis data \\
+\passthrough{\lstinline!visualization!} &
+\passthrough{\lstinline!PlotStyler!} & class & Advanced plot styling and
+theming system \\
+\passthrough{\lstinline!visualization!} &
+\passthrough{\lstinline!create\_publication\_figure!} & function &
+Create a publication-ready figure with optimal styling \\
+\passthrough{\lstinline!visualization!} &
+\passthrough{\lstinline!create\_subplots!} & function & Create subplots
+with consistent styling \\
+\passthrough{\lstinline!visualization!} &
+\passthrough{\lstinline!get\_colorblind\_palette!} & function & Get a
+colorblind-friendly color palette \\
+\passthrough{\lstinline!visualization!} &
+\passthrough{\lstinline!set\_plot\_style!} & function & Set the global
+plot style \\
 \end{longtable}
 
 \end{document}

@@ -194,7 +194,7 @@ text-align: center;
 <header id="title-block-header">
 <h1 class="title">cohereants</h1>
 <p class="author">Tucker C. Chambers, Daniel A. Friedman</p>
-<p class="date">August 19, 2025</p>
+<p class="date">August 20, 2025</p>
 </header>
 <nav id="TOC" role="doc-toc">
 <ul>
@@ -3397,189 +3397,268 @@ implementation, see Section .</p>
 <td>Generate behavioral response plots</td>
 </tr>
 <tr class="even">
+<td><code>config</code></td>
+<td><code>ConfigManager</code></td>
+<td>class</td>
+<td>Centralized configuration manager for insect analysis</td>
+</tr>
+<tr class="odd">
+<td><code>config</code></td>
+<td><code>enable_verbose_logging</code></td>
+<td>function</td>
+<td>Enable verbose logging for debugging</td>
+</tr>
+<tr class="even">
+<td><code>config</code></td>
+<td><code>get_config</code></td>
+<td>function</td>
+<td>Get the global configuration manager instance</td>
+</tr>
+<tr class="odd">
+<td><code>config</code></td>
+<td><code>init_config</code></td>
+<td>function</td>
+<td>Initialize the global configuration manager</td>
+</tr>
+<tr class="even">
+<td><code>config</code></td>
+<td><code>set_plot_style</code></td>
+<td>function</td>
+<td>Set matplotlib plot style</td>
+</tr>
+<tr class="odd">
+<td><code>config</code></td>
+<td><code>set_random_seed</code></td>
+<td>function</td>
+<td>Set random seed for reproducible results</td>
+</tr>
+<tr class="even">
+<td><code>config</code></td>
+<td><code>set_temperature</code></td>
+<td>function</td>
+<td>Set analysis temperature in Kelvin</td>
+</tr>
+<tr class="odd">
 <td><code>core</code></td>
 <td><code>calculate_atmospheric_transmission</code></td>
 <td>function</td>
-<td>Calculate atmospheric transmission for given wavelengths</td>
+<td>Calculate atmospheric transmission for given wavelengths in the
+infrared spectrum</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>core</code></td>
 <td><code>calculate_response_time_improvement</code></td>
 <td>function</td>
 <td>Calculate the improvement in response time compared to traditional
 olfaction</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>core</code></td>
 <td><code>calculate_wavelength_from_wavenumber</code></td>
 <td>function</td>
-<td>Convert wavenumber (cm^-1) to wavelength (μm)</td>
+<td>Convert wavenumber (cm⁻¹) to wavelength (μm)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>core</code></td>
 <td><code>calculate_wavenumber_from_wavelength</code></td>
 <td>function</td>
 <td>Convert wavelength (μm) to wavenumber (cm^-1)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>core</code></td>
 <td><code>safe_division</code></td>
 <td>function</td>
 <td>Safely perform division, returning infinity if denominator is
 zero</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>core</code></td>
 <td><code>validate_numeric_inputs</code></td>
 <td>function</td>
 <td>Validate that all numeric inputs are finite numbers</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>fermi_estimation</code></td>
 <td><code>FermiEstimator</code></td>
 <td>class</td>
 <td>Comprehensive Fermi Estimation analyzer for olfaction and infrared
 sensing</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>fermi_estimation</code></td>
 <td><code>create_sample_fermi_analysis</code></td>
 <td>function</td>
 <td>Create a sample Fermi analysis for demonstration</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>glossary_gen</code></td>
 <td><code>ApiEntry</code></td>
 <td>class</td>
 <td>Represents a public API entry from source code</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>glossary_gen</code></td>
 <td><code>build_api_index</code></td>
 <td>function</td>
 <td>Scan <code>src_dir</code> and collect public functions/classes with
 summaries</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>glossary_gen</code></td>
 <td><code>generate_markdown_table</code></td>
 <td>function</td>
 <td>Generate a Markdown table from API entries</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>glossary_gen</code></td>
 <td><code>inject_between_markers</code></td>
 <td>function</td>
 <td>Replace content between begin_marker and end_marker (inclusive
 markers preserved)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>insect_analysis</code></td>
 <td><code>run_comprehensive_analysis</code></td>
 <td>function</td>
 <td>Run comprehensive analysis using all available frameworks</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>integrated_analysis</code></td>
 <td><code>IntegratedAnalyzer</code></td>
 <td>class</td>
 <td>Integrated analyzer combining Fermi Estimation and meta-material
 frameworks</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>integrated_analysis</code></td>
 <td><code>create_sample_integrated_analysis</code></td>
 <td>function</td>
 <td>Create a sample integrated analysis for demonstration</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>meta_material_framework</code></td>
 <td><code>MetaMaterialAnalyzer</code></td>
 <td>class</td>
 <td>Comprehensive meta-material analyzer for olfaction and infrared
 sensing</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>meta_material_framework</code></td>
 <td><code>create_sample_metamaterial_analysis</code></td>
 <td>function</td>
 <td>Create a sample meta-material analysis for demonstration</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>sensilla</code></td>
 <td><code>SensillaData</code></td>
 <td>class</td>
 <td>Container for sensilla measurement data with validation</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>sensilla</code></td>
 <td><code>analyze_sensilla_dimensions</code></td>
 <td>function</td>
 <td>Analyze sensilla dimensions and calculate optimal detection
 wavelengths</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>sensilla</code></td>
 <td><code>calculate_sensilla_resonance_frequency</code></td>
 <td>function</td>
 <td>Calculate the fundamental resonance frequency of a sensillum</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>sensilla</code></td>
 <td><code>calculate_wavelength_matching</code></td>
 <td>function</td>
 <td>Calculate wavelength matching between sensilla dimensions and
 incident radiation</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>sensilla</code></td>
 <td><code>generate_sensilla_visualization</code></td>
 <td>function</td>
 <td>Generate a visualization of sensilla dimensions and optimal
 wavelengths</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>spectroscopy</code></td>
 <td><code>CHCAnalyzer</code></td>
 <td>class</td>
 <td>Analyzer for cuticular hydrocarbon spectra</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>spectroscopy</code></td>
 <td><code>PeakFinder</code></td>
 <td>class</td>
 <td>Peak detection and analysis for spectral data</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>spectroscopy</code></td>
 <td><code>SpectralData</code></td>
 <td>class</td>
 <td>Container for spectral data with validation and analysis
 methods</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>spectroscopy</code></td>
 <td><code>analyze_chc_spectra</code></td>
 <td>function</td>
 <td>Analyze cuticular hydrocarbon (CHC) infrared spectra</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>spectroscopy</code></td>
 <td><code>calculate_spectral_overlap</code></td>
 <td>function</td>
 <td>Calculate spectral overlap between two spectra</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>spectroscopy</code></td>
 <td><code>generate_spectral_plots</code></td>
 <td>function</td>
 <td>Generate spectral plots for multiple compounds</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>spectroscopy</code></td>
 <td><code>identify_chc_compounds</code></td>
 <td>function</td>
 <td>Identify potential CHC compounds based on peak positions</td>
+</tr>
+<tr class="even">
+<td><code>visualization</code></td>
+<td><code>AdvancedVisualizer</code></td>
+<td>class</td>
+<td>Advanced visualization tools for insect analysis data</td>
+</tr>
+<tr class="odd">
+<td><code>visualization</code></td>
+<td><code>PlotStyler</code></td>
+<td>class</td>
+<td>Advanced plot styling and theming system</td>
+</tr>
+<tr class="even">
+<td><code>visualization</code></td>
+<td><code>create_publication_figure</code></td>
+<td>function</td>
+<td>Create a publication-ready figure with optimal styling</td>
+</tr>
+<tr class="odd">
+<td><code>visualization</code></td>
+<td><code>create_subplots</code></td>
+<td>function</td>
+<td>Create subplots with consistent styling</td>
+</tr>
+<tr class="even">
+<td><code>visualization</code></td>
+<td><code>get_colorblind_palette</code></td>
+<td>function</td>
+<td>Get a colorblind-friendly color palette</td>
+</tr>
+<tr class="odd">
+<td><code>visualization</code></td>
+<td><code>set_plot_style</code></td>
+<td>function</td>
+<td>Set the global plot style</td>
 </tr>
 </tbody>
 </table>

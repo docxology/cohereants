@@ -337,15 +337,25 @@ def calculate_spectral_overlap(spectrum1: np.ndarray,
         Dictionary with overlap analysis results
     """
     # Normalize spectra to 0-1 range
-    spectrum1_norm = (spectrum1 - np.min(spectrum1)) / (np.max(spectrum1) - np.min(spectrum1))
-    spectrum2_norm = (spectrum2 - np.min(spectrum2)) / (np.max(spectrum2) - np.min(spectrum2))
+    spectrum1_range = np.max(spectrum1) - np.min(spectrum1)
+    spectrum2_range = np.max(spectrum2) - np.min(spectrum2)
+
+    if spectrum1_range > 0:
+        spectrum1_norm = (spectrum1 - np.min(spectrum1)) / spectrum1_range
+    else:
+        spectrum1_norm = np.ones_like(spectrum1) * 0.5  # Constant spectrum
+
+    if spectrum2_range > 0:
+        spectrum2_norm = (spectrum2 - np.min(spectrum2)) / spectrum2_range
+    else:
+        spectrum2_norm = np.ones_like(spectrum2) * 0.5  # Constant spectrum
     
     # Calculate correlation coefficient
     correlation = np.corrcoef(spectrum1_norm, spectrum2_norm)[0, 1]
     
     # Calculate overlap integral
-    overlap_integral = np.trapz(np.minimum(spectrum1_norm, spectrum2_norm), wavelengths)
-    total_area = np.trapz(np.maximum(spectrum1_norm, spectrum2_norm), wavelengths)
+    overlap_integral = np.trapezoid(np.minimum(spectrum1_norm, spectrum2_norm), wavelengths)
+    total_area = np.trapezoid(np.maximum(spectrum1_norm, spectrum2_norm), wavelengths)
     overlap_ratio = overlap_integral / total_area if total_area > 0 else 0
     
     # Calculate spectral similarity index

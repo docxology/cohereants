@@ -520,7 +520,7 @@ class TestIntegration:
         wavenumbers = [2500, 2850, 2900]
         
         # Convert to wavelengths
-        wavelengths = [calculate_wavelength_from_wavenumber(w) for w in wavenumbers]
+        wavelengths = [calculate_wavelength_from_wavenumber(w).item() for w in wavenumbers]
         
         # Use in sensilla analysis
         lengths = wavelengths
@@ -529,6 +529,7 @@ class TestIntegration:
         result = analyze_sensilla_dimensions(lengths, diameters)
         
         # Check that results make sense
+        assert isinstance(result, dict)
         assert len(result['optimal_wavelengths_quarter']) == 3
         assert len(result['optimal_wavelengths_half']) == 3
         

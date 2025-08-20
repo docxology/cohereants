@@ -2,35 +2,81 @@
 Core utility functions for insect perception research.
 
 This module provides fundamental calculations and conversions used across
-the analysis pipeline.
+the analysis pipeline. It includes physics-based calculations for wavelength
+conversions, atmospheric transmission modeling, and response time analysis.
+
+Key Functions:
+- calculate_wavelength_from_wavenumber: Convert IR wavenumbers to wavelengths
+- calculate_wavenumber_from_wavelength: Convert IR wavelengths to wavenumbers
+- calculate_atmospheric_transmission: Model IR transmission through atmosphere
+- calculate_response_time_improvement: Compare traditional vs insect response times
+
+Examples:
+    >>> from src.core import calculate_wavelength_from_wavenumber
+    >>> wavelength = calculate_wavelength_from_wavenumber(2900)  # CHC peak
+    >>> print(f"Wavelength: {wavelength:.2f} μm")
+    Wavelength: 3.45 μm
+
+    >>> from src.core import calculate_atmospheric_transmission
+    >>> transmission = calculate_atmospheric_transmission([3, 10, 20])
+    >>> print(f"Transmission at 10μm: {transmission[1]:.2f}")
+    Transmission at 10μm: 0.90
 """
 
 import numpy as np
-from typing import Union, List
+from typing import Union, List, Optional
+import warnings
 
 
-def calculate_wavelength_from_wavenumber(wavenumber: Union[float, np.ndarray]) -> Union[float, np.ndarray]:
+def calculate_wavelength_from_wavenumber(wavenumber: Union[float, int, np.ndarray, List[float]]) -> Union[float, np.ndarray]:
     """
-    Convert wavenumber (cm^-1) to wavelength (μm).
-    
+    Convert wavenumber (cm⁻¹) to wavelength (μm).
+
+    This function converts infrared spectroscopy wavenumbers to wavelengths using
+    the relationship: wavelength = 10000 / wavenumber.
+
     Args:
-        wavenumber: Wavenumber in cm^-1 (scalar or array)
-        
+        wavenumber: Wavenumber in cm⁻¹ (scalar, int, or array-like). Must be positive.
+
     Returns:
         Wavelength in micrometers (scalar or array)
-        
+
     Raises:
-        ValueError: If wavenumber is zero or negative
+        ValueError: If wavenumber is zero, negative, or invalid
+        TypeError: If wavenumber cannot be converted to numeric array
+
+    Examples:
+        >>> calculate_wavelength_from_wavenumber(2900)  # CHC C-H stretch
+        3.4482758620689657
+
+        >>> import numpy as np
+        >>> wavenumbers = np.array([2500, 2900, 3000])
+        >>> calculate_wavelength_from_wavenumber(wavenumbers)
+        array([4.        , 3.44827586, 3.33333333])
+
+    Notes:
+        - Uses the standard IR spectroscopy conversion: λ(μm) = 10000 / ν(cm⁻¹)
+        - Common IR peaks: 2900 cm⁻¹ → 3.45 μm (C-H stretch)
+        - Handles both scalar and array inputs efficiently
+        - Optimized for performance with large arrays
     """
-    wavenumber = np.asarray(wavenumber)
-    
+    try:
+        wavenumber = np.asarray(wavenumber, dtype=np.float64)
+    except (ValueError, TypeError) as e:
+        raise TypeError(f"Cannot convert wavenumber to numeric array: {e}")
+
     if wavenumber.size == 0:
+        warnings.warn("Empty wavenumber array provided - returning empty wavelength array",
+                     UserWarning, stacklevel=2)
         return np.array([])
-    
-    if np.any(wavenumber <= 0):
-        raise ValueError("All wavenumbers must be positive")
-    
-    return 10000 / wavenumber
+
+    if np.any(wavenumber <= 0) or not np.all(np.isfinite(wavenumber)):
+        invalid_mask = (wavenumber <= 0) | ~np.isfinite(wavenumber)
+        invalid_values = wavenumber[invalid_mask]
+        raise ValueError(f"All wavenumbers must be positive and finite. Invalid values: {invalid_values}")
+
+    # Use vectorized operations for performance
+    return np.divide(10000.0, wavenumber, out=np.empty_like(wavenumber), dtype=np.float64)
 
 
 def calculate_wavenumber_from_wavelength(wavelength: Union[float, np.ndarray]) -> Union[float, np.ndarray]:
@@ -57,20 +103,42 @@ def calculate_wavenumber_from_wavelength(wavelength: Union[float, np.ndarray]) -
     return 10000 / wavelength
 
 
-def calculate_atmospheric_transmission(wavelengths: Union[np.ndarray, List[float], float], 
+def calculate_atmospheric_transmission(wavelengths: Union[np.ndarray, List[float], float],
                                     distance: Union[float, np.ndarray] = None) -> Union[float, np.ndarray]:
     """
-    Calculate atmospheric transmission for given wavelengths.
-    
+    Calculate atmospheric transmission for given wavelengths in the infrared spectrum.
+
+    This function models atmospheric transmission windows in the IR spectrum:
+    - Mid-IR window: 2-5 μm (80% transmission)
+    - Long-wave IR window: 8-14 μm (90% transmission)
+    - Far-IR window: 17-25 μm (70% transmission)
+    - Outside windows: 10% transmission
+
     Args:
-        wavelengths: Array, list, or scalar of wavelengths in μm
-        distance: Optional distance in meters (for future use)
-        
+        wavelengths: Array, list, or scalar of wavelengths in μm. Must be positive.
+        distance: Optional distance in meters (for future atmospheric modeling)
+
     Returns:
-        Array or scalar of transmission values (0-1)
-        
+        Array or scalar of transmission values between 0 and 1
+
     Raises:
         ValueError: If wavelengths contain non-positive values
+
+    Examples:
+        >>> calculate_atmospheric_transmission(10.0)  # LWIR window
+        0.9
+
+        >>> wavelengths = [3, 10, 20, 30]
+        >>> transmission = calculate_atmospheric_transmission(wavelengths)
+        >>> print(transmission)
+        array([0.8, 0.9, 0.7, 0.1])
+
+    Notes:
+        - Based on standard atmospheric IR transmission windows
+        - Mid-IR (2-5μm): Good for thermal imaging, some absorption by CO2/H2O
+        - LWIR (8-14μm): Excellent transmission, used by most IR cameras
+        - Far-IR (17-25μm): Moderate transmission, some water vapor absorption
+        - Distance parameter reserved for future atmospheric modeling
     """
     wavelengths = np.asarray(wavelengths)
     

@@ -247,8 +247,9 @@ class MetaMaterialAnalyzer:
         # Refractive index
         n = np.sqrt(epsilon_real * mu_real)
         
-        # Impedance
-        z = np.sqrt(mu_real / epsilon_real)
+        # Impedance - handle division by zero element-wise
+        epsilon_safe = np.where(np.abs(epsilon_real) < 1e-12, 1e-12, epsilon_real)
+        z = np.sqrt(mu_real / epsilon_safe)
         
         # Figure of merit (FOM) for epsilon-near-zero materials
         fom_enz = np.abs(epsilon_real) / (np.abs(epsilon_imag) + 1e-12)

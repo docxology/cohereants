@@ -2268,9 +2268,16 @@ For complete mathematical formulations and source code implementation, see Secti
 | `behavioral` | `calculate_power_analysis` | function | Calculate statistical power for the comparison |
 | `behavioral` | `calculate_response_statistics` | function | Calculate comprehensive statistics for behavioral response data |
 | `behavioral` | `generate_behavioral_plots` | function | Generate behavioral response plots |
-| `core` | `calculate_atmospheric_transmission` | function | Calculate atmospheric transmission for given wavelengths |
+| `config` | `ConfigManager` | class | Centralized configuration manager for insect analysis |
+| `config` | `enable_verbose_logging` | function | Enable verbose logging for debugging |
+| `config` | `get_config` | function | Get the global configuration manager instance |
+| `config` | `init_config` | function | Initialize the global configuration manager |
+| `config` | `set_plot_style` | function | Set matplotlib plot style |
+| `config` | `set_random_seed` | function | Set random seed for reproducible results |
+| `config` | `set_temperature` | function | Set analysis temperature in Kelvin |
+| `core` | `calculate_atmospheric_transmission` | function | Calculate atmospheric transmission for given wavelengths in the infrared spectrum |
 | `core` | `calculate_response_time_improvement` | function | Calculate the improvement in response time compared to traditional olfaction |
-| `core` | `calculate_wavelength_from_wavenumber` | function | Convert wavenumber (cm^-1) to wavelength (μm) |
+| `core` | `calculate_wavelength_from_wavenumber` | function | Convert wavenumber (cm⁻¹) to wavelength (μm) |
 | `core` | `calculate_wavenumber_from_wavelength` | function | Convert wavelength (μm) to wavenumber (cm^-1) |
 | `core` | `safe_division` | function | Safely perform division, returning infinity if denominator is zero |
 | `core` | `validate_numeric_inputs` | function | Validate that all numeric inputs are finite numbers |
@@ -2297,4 +2304,10 @@ For complete mathematical formulations and source code implementation, see Secti
 | `spectroscopy` | `calculate_spectral_overlap` | function | Calculate spectral overlap between two spectra |
 | `spectroscopy` | `generate_spectral_plots` | function | Generate spectral plots for multiple compounds |
 | `spectroscopy` | `identify_chc_compounds` | function | Identify potential CHC compounds based on peak positions |
+| `visualization` | `AdvancedVisualizer` | class | Advanced visualization tools for insect analysis data |
+| `visualization` | `PlotStyler` | class | Advanced plot styling and theming system |
+| `visualization` | `create_publication_figure` | function | Create a publication-ready figure with optimal styling |
+| `visualization` | `create_subplots` | function | Create subplots with consistent styling |
+| `visualization` | `get_colorblind_palette` | function | Get a colorblind-friendly color palette |
+| `visualization` | `set_plot_style` | function | Set the global plot style |
 <!-- END: AUTO-API-GLOSSARY -->

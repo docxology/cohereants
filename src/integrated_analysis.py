@@ -151,7 +151,8 @@ class IntegratedAnalyzer:
         material_performance_score = avg_refractive_index * plasmonic_quality * np.log10(info_capacity + 1)
         
         # Overall system efficiency
-        system_efficiency = (information_processing_score * material_performance_score) ** 0.5
+        product = information_processing_score * material_performance_score
+        system_efficiency = np.sqrt(np.abs(product)) if product >= 0 else 0.0
         
         return {
             'information_processing_score': information_processing_score,

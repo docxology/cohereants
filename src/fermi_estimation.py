@@ -78,7 +78,8 @@ class FermiEstimator:
             Dictionary with various information measures
         """
         # Translational entropy (3D ideal gas)
-        translational_entropy = 3/2 * np.log2(molecular_weight * 1.66e-27) + 15.0
+        molecular_mass = molecular_weight * 1.66e-27
+        translational_entropy = 3/2 * np.log2(molecular_mass) + 15.0 if molecular_mass > 0 else 0.0
         
         # Rotational entropy
         rotational_entropy = np.log2(symmetry_number) + 2.0
@@ -243,13 +244,16 @@ class FermiEstimator:
             Dictionary with environmental information measures
         """
         # Temperature information (assuming uniform distribution)
-        temp_info = np.log2((temperature_range[1] - temperature_range[0]) / 0.1)  # 0.1K resolution
-        
+        temp_diff = temperature_range[1] - temperature_range[0]
+        temp_info = np.log2(temp_diff / 0.1) if temp_diff > 0.1 else 0.0  # 0.1K resolution
+
         # Humidity information
-        humidity_info = np.log2((humidity_range[1] - humidity_range[0]) / 0.01)  # 1% resolution
-        
+        humidity_diff = humidity_range[1] - humidity_range[0]
+        humidity_info = np.log2(humidity_diff / 0.01) if humidity_diff > 0.01 else 0.0  # 1% resolution
+
         # Pressure information
-        pressure_info = np.log2((pressure_range[1] - pressure_range[0]) / 100)  # 100 Pa resolution
+        pressure_diff = pressure_range[1] - pressure_range[0]
+        pressure_info = np.log2(pressure_diff / 100) if pressure_diff > 100 else 0.0  # 100 Pa resolution
         
         total_info = temp_info + humidity_info + pressure_info
         
