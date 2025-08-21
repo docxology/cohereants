@@ -1,0 +1,1 @@
+Information rate and rate-coding metrics from deterministic time-series.

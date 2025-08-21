@@ -1,0 +1,1 @@
+Deterministic gradient-following trajectory under a simple active-inference step model.

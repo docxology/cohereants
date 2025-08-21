@@ -1,0 +1,1 @@
+Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.

@@ -50,7 +50,7 @@ This paper examines the vibrational theory through multiple analytical domains:
 4. **Spectroscopic Validation**: Measurement and analysis of semiochemical emission spectra
 5. **Computational Modeling**: Implementation of theoretical frameworks in tested computational models, cross-linked to unit tests
 
-Each objective maps to a tested function or class in `src/` and a corresponding figure or data artifact listed in the Symbols/Glossary I/O map.
+Each objective maps to a tested function or class in `src/` and a corresponding figure/data artifact. Detailed case studies are organized in the appendices: array directionality (\cref{sec:app_sensilla_array}), environmental channel (\cref{sec:app_environmental_channel}), detection limits (\cref{sec:app_detection_limits}), neural encoding (\cref{sec:app_neural_encoding}), spectral unmixing (\cref{sec:app_spectral_unmixing}), plasmonic geometry (\cref{sec:app_plasmonic_geometry}), active inference (\cref{sec:app_active_inference}).
 
 ### Explicit Hypotheses and Falsifiable Predictions
 - H1 (Resonance): Sensilla length/diameter distributions predict quarter/half‑wavelength resonances within 2–30 μm; correlation r ≥ 0.8 across species.

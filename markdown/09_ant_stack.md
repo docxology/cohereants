@@ -4,7 +4,7 @@
 
 This appendix provides a comprehensive mapping of how the cohereAnts research framework can be implemented within "The Ant Stack" computational architecture. The Ant Stack, as described by Friedman (2025), offers a modular, three-layer framework for emulating ant intelligence from physical embodiment to collective cognition. Here we demonstrate how our vibrational theory of olfaction, spectroscopic analysis, and behavioral modeling can be systematically integrated into this standardized computational framework.
 
-**Implementation Strategy**: We map cohereAnts modules to Ant Stack layers using explicit I/O contracts, ensuring reproducible experiments while maintaining the biological plausibility of our theoretical framework. The examples below are thin adapters that call `src/` functions; no scientific logic resides in these adapters.
+**Implementation Strategy**: We map cohereAnts modules to Ant Stack layers using explicit I/O contracts, ensuring reproducible experiments while maintaining the biological plausibility of our theoretical framework. The examples below are thin adapters that call `src/` functions; no scientific logic resides in these adapters. See also the dedicated appendices for array directionality (\cref{sec:app_sensilla_array}), environmental channel (\cref{sec:app_environmental_channel}), detection limits (\cref{sec:app_detection_limits}), neural encoding (\cref{sec:app_neural_encoding}), spectral unmixing (\cref{sec:app_spectral_unmixing}), plasmonic geometry (\cref{sec:app_plasmonic_geometry}), and active inference (\cref{sec:app_active_inference}).
 
 ## Layer-by-Layer Integration
 

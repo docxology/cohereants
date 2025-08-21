@@ -50,13 +50,13 @@ If sensilla function as directional electromagnetic antennas, this would explain
 - **Front-to-Back Ratio**: 10-20 dB directional selectivity
 - **Gain Pattern**: Maximum sensitivity in the forward direction
 
-**Behavioral validation**: Reported localization accuracy suggests directional detection that may be consistent with antenna‑like gain patterns; controlled IR‑only assays are required to disambiguate from volatile plume structure. We provide minimal falsifiers in the Discussion.
+**Behavioral validation**: Reported localization accuracy suggests directional detection that may be consistent with antenna‑like gain patterns; controlled IR‑only assays are required to disambiguate from volatile plume structure. See array directionality case study in \cref{sec:app_sensilla_array}. We provide minimal falsifiers in the Discussion.
 
 ### Specialized Infrared Sensors
 
 Schmitz (2009) documented specialized infrared sensors in two beetle species that evolved from hair-like mechanoreceptors. These sensors provide direct evidence for the evolutionary development of infrared detection capabilities in insects.
 
-**Sensor Characteristics**:
+**Sensor Characteristics** (plasmonic/geometry links in \cref{sec:app_plasmonic_geometry}):
 - **Species**: *Melanophila acuminata* and *Acanthocnemus nigricans*
 - **Evolutionary Origin**: Hair-like mechanoreceptors
 - **Detection Range**: 3-5 μm infrared wavelengths

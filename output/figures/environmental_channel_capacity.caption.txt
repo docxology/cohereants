@@ -1,0 +1,1 @@
+Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.

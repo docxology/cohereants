@@ -1,0 +1,1 @@
+Proxy Q-factor vs nanoparticle radius for fixed material parameters.

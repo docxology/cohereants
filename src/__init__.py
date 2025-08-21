@@ -87,6 +87,24 @@ try:
         create_subplots
     )
 
+    # Case-study modules (Appendices A–G)
+    from .case_studies import (
+        compute_beam_pattern,
+        array_gain,
+        design_log_periodic_array,
+        atmospheric_transmission_detailed,
+        channel_capacity_vs_env,
+        min_detectable_power,
+        snr_curve,
+        operating_point,
+        information_rate_time_series,
+        rate_coding_metrics,
+        nmf_unmix,
+        lda_baseline,
+        sweep_plasmonic_quality,
+        olfactory_active_inference_step,
+    )
+
 except ImportError:
     # Fallback for when running tests or as standalone script
     import sys
@@ -155,6 +173,24 @@ except ImportError:
         create_subplots
     )
 
+    # Case-study modules (Appendices A–G)
+    from src.case_studies import (
+        compute_beam_pattern,
+        array_gain,
+        design_log_periodic_array,
+        atmospheric_transmission_detailed,
+        channel_capacity_vs_env,
+        min_detectable_power,
+        snr_curve,
+        operating_point,
+        information_rate_time_series,
+        rate_coding_metrics,
+        nmf_unmix,
+        lda_baseline,
+        sweep_plasmonic_quality,
+        olfactory_active_inference_step,
+    )
+
 # Package-level exports
 __all__ = [
     # Core physics functions
@@ -208,6 +244,15 @@ __all__ = [
     'create_publication_figure',
     'get_colorblind_palette',
     'create_subplots',
+
+    # Case-study exports (Appendices A–G)
+    'compute_beam_pattern', 'array_gain', 'design_log_periodic_array',
+    'atmospheric_transmission_detailed', 'channel_capacity_vs_env',
+    'min_detectable_power', 'snr_curve', 'operating_point',
+    'information_rate_time_series', 'rate_coding_metrics',
+    'nmf_unmix', 'lda_baseline',
+    'sweep_plasmonic_quality',
+    'olfactory_active_inference_step',
 
     # Package utilities
     'get_package_info',

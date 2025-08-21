@@ -193,7 +193,7 @@ Daniel A. Friedman \\
 \begin{document}
 
 \thispagestyle{empty}
-\title{cohereants}
+\title{CohereAnts: Empirical and Theoretical Aspects of the Vibrational Model of Insect Olfaction}
 \author{Tucker C. Chambers, Daniel A. Friedman\\ Email: daniel@activeinference.institute}
 \date{\today}
 \maketitle
@@ -209,8 +209,8 @@ Daniel A. Friedman \\
 
 \section{Abstract}\label{sec:abstract}
 
-We evaluate the vibrational theory of olfaction, which posits that
-insects can detect infrared electromagnetic radiation emitted by
+We review and evaluate the vibrational theory of olfaction, which posits
+that insects can detect infrared electromagnetic radiation emitted by
 semiochemicals alongside or in addition to molecular binding mechanisms.
 Using morphological measurements, spectroscopic analyses, neural latency
 comparisons, and tested computational models implemented in
@@ -220,6 +220,16 @@ rapid, long‑range, and frequency‑specific chemosensation by leveraging
 infrared transmission windows and resonant biological structures, and
 that this mechanism yields falsifiable, quantitative predictions
 reproduced by our open tests and figures.
+
+We focus on seven case studies, which are explored in detail in
+Appendices: sensory array directionality
+(\cref{sec:app_sensilla_array}), environmental channel
+(\cref{sec:app_environmental_channel}), detection limits
+(\cref{sec:app_detection_limits}), neural encoding
+(\cref{sec:app_neural_encoding}), spectral unmixing
+(\cref{sec:app_spectral_unmixing}), plasmonic geometry
+(\cref{sec:app_plasmonic_geometry}), and active inference
+(\cref{sec:app_active_inference}).
 
 \textbf{Key results}: (i) Sensilla geometry aligns with predicted
 resonant wavelengths derived from dielectric waveguide models; (ii)
@@ -272,6 +282,13 @@ Symbols/Glossary.
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Information rate and rate-coding metrics from deterministic time-series.}
+\label{fig:neural_encoding_information_rate}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
 \caption{Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.}
 \label{fig:sensilla_wavelength_matching}
@@ -300,6 +317,13 @@ Symbols/Glossary.
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{NMF-unmixed components and reconstruction; simple two-class LDA baseline accuracy.}
+\label{fig:spectral_unmixing_components}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
 \caption{Architecture, cross-domain metrics, integration efficiency, and predictive capability.}
 \label{fig:integrated_analysis_cross_domain_synthesis}
@@ -310,6 +334,34 @@ Symbols/Glossary.
 \includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
 \caption{Response time comparison across sensory modalities.}
 \label{fig:response_time_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.}
+\label{fig:sensilla_array_beam_patterns}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Deterministic gradient-following trajectory under a simple active-inference step model.}
+\label{fig:active_inference_trajectory}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.}
+\label{fig:detection_limits_operating_points}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.}
+\label{fig:environmental_channel_capacity}
 \end{figure}
 
 \begin{figure}[h]
@@ -331,6 +383,13 @@ Symbols/Glossary.
 \includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
 \caption{Deterministic synthetic CHC spectrum with C–H stretch and bend regions for illustration.}
 \label{fig:chc_spectra_example}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Proxy Q-factor vs nanoparticle radius for fixed material parameters.}
+\label{fig:plasmonic_geometry_sweep}
 \end{figure}
 
 \newpage
@@ -478,8 +537,15 @@ domains:
 \end{enumerate}
 
 Each objective maps to a tested function or class in
-\passthrough{\lstinline!src/!} and a corresponding figure or data
-artifact listed in the Symbols/Glossary I/O map.
+\passthrough{\lstinline!src/!} and a corresponding figure/data artifact.
+Detailed case studies are organized in the appendices: array
+directionality (\cref{sec:app_sensilla_array}), environmental channel
+(\cref{sec:app_environmental_channel}), detection limits
+(\cref{sec:app_detection_limits}), neural encoding
+(\cref{sec:app_neural_encoding}), spectral unmixing
+(\cref{sec:app_spectral_unmixing}), plasmonic geometry
+(\cref{sec:app_plasmonic_geometry}), active inference
+(\cref{sec:app_active_inference}).
 
 \subsubsection{Explicit Hypotheses and Falsifiable
 Predictions}\label{explicit-hypotheses-and-falsifiable-predictions}
@@ -571,6 +637,13 @@ through the pipeline.
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Information rate and rate-coding metrics from deterministic time-series.}
+\label{fig:neural_encoding_information_rate}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
 \caption{Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.}
 \label{fig:sensilla_wavelength_matching}
@@ -599,6 +672,13 @@ through the pipeline.
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{NMF-unmixed components and reconstruction; simple two-class LDA baseline accuracy.}
+\label{fig:spectral_unmixing_components}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
 \caption{Architecture, cross-domain metrics, integration efficiency, and predictive capability.}
 \label{fig:integrated_analysis_cross_domain_synthesis}
@@ -609,6 +689,34 @@ through the pipeline.
 \includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
 \caption{Response time comparison across sensory modalities.}
 \label{fig:response_time_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.}
+\label{fig:sensilla_array_beam_patterns}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Deterministic gradient-following trajectory under a simple active-inference step model.}
+\label{fig:active_inference_trajectory}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.}
+\label{fig:detection_limits_operating_points}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.}
+\label{fig:environmental_channel_capacity}
 \end{figure}
 
 \begin{figure}[h]
@@ -630,6 +738,13 @@ through the pipeline.
 \includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
 \caption{Deterministic synthetic CHC spectrum with C–H stretch and bend regions for illustration.}
 \label{fig:chc_spectra_example}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Proxy Q-factor vs nanoparticle radius for fixed material parameters.}
+\label{fig:plasmonic_geometry_sweep}
 \end{figure}
 
 \newpage
@@ -662,6 +777,9 @@ validated by
 \passthrough{\lstinline!tests/test\_core.py::TestAtmosphericTransmission!}
 and
 \passthrough{\lstinline!tests/test\_core\_physics.py::TestAtmosphericTransmission!}.
+See also the environmental channel analysis in
+\cref{sec:app_environmental_channel} and detection limits in
+\cref{sec:app_detection_limits}.
 
 \textbf{Transmission Windows}: Three primary atmospheric windows exist
 in the infrared range: - \textbf{Mid-infrared (2-5 μm)}: 80\%
@@ -741,7 +859,8 @@ computes quarter/half‑wavelength predictions and aspect ratios. Tests in
 \passthrough{\lstinline!tests/test\_sensilla.py::TestSensillaAnalysis!}
 and
 \passthrough{\lstinline!tests/test\_insect\_analysis.py::TestSensillaAnalysis!}
-validate calculations.
+validate calculations. Directional array behavior and beam patterns are
+treated in \cref{sec:app_sensilla_array}.
 
 \Cref{fig:sensilla_wavelength_matching} for the sensilla-wavelength
 correlation. \textbackslash begin\{figure\}{[}h{]} \centering
@@ -761,7 +880,12 @@ Insect semiochemicals exhibit characteristic infrared emission spectra
 that fall within atmospheric transmission windows. The
 \passthrough{\lstinline!analyze\_chc\_spectra()!} function processes
 spectroscopic data to identify vibrational modes and calculate spectral
-overlap between different compounds.
+overlap between different compounds. Spectral unmixing and deterministic
+classification baselines are provided in
+\cref{sec:app_spectral_unmixing}. Neural encoding metrics for
+time-series are in \cref{sec:app_neural_encoding}. Plasmonic geometry
+sweeps appear in \cref{sec:app_plasmonic_geometry}. A behavioral
+active-inference stub is provided in \cref{sec:app_active_inference}.
 
 \textbf{Emission Peaks}: Typical CHC spectra show emission maxima at: -
 \textbf{Fire ant trail pheromones}: 3500 cm\(^{-1}\) (\textasciitilde2.9
@@ -977,6 +1101,13 @@ All scripts are thin orchestrators; no business logic resides outside
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Information rate and rate-coding metrics from deterministic time-series.}
+\label{fig:neural_encoding_information_rate}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
 \caption{Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.}
 \label{fig:sensilla_wavelength_matching}
@@ -1005,6 +1136,13 @@ All scripts are thin orchestrators; no business logic resides outside
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{NMF-unmixed components and reconstruction; simple two-class LDA baseline accuracy.}
+\label{fig:spectral_unmixing_components}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
 \caption{Architecture, cross-domain metrics, integration efficiency, and predictive capability.}
 \label{fig:integrated_analysis_cross_domain_synthesis}
@@ -1015,6 +1153,34 @@ All scripts are thin orchestrators; no business logic resides outside
 \includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
 \caption{Response time comparison across sensory modalities.}
 \label{fig:response_time_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.}
+\label{fig:sensilla_array_beam_patterns}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Deterministic gradient-following trajectory under a simple active-inference step model.}
+\label{fig:active_inference_trajectory}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.}
+\label{fig:detection_limits_operating_points}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.}
+\label{fig:environmental_channel_capacity}
 \end{figure}
 
 \begin{figure}[h]
@@ -1036,6 +1202,13 @@ All scripts are thin orchestrators; no business logic resides outside
 \includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
 \caption{Deterministic synthetic CHC spectrum with C–H stretch and bend regions for illustration.}
 \label{fig:chc_spectra_example}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Proxy Q-factor vs nanoparticle radius for fixed material parameters.}
+\label{fig:plasmonic_geometry_sweep}
 \end{figure}
 
 \newpage
@@ -1125,7 +1298,8 @@ direction
 \textbf{Behavioral validation}: Reported localization accuracy suggests
 directional detection that may be consistent with antenna‑like gain
 patterns; controlled IR‑only assays are required to disambiguate from
-volatile plume structure. We provide minimal falsifiers in the
+volatile plume structure. See array directionality case study in
+\cref{sec:app_sensilla_array}. We provide minimal falsifiers in the
 Discussion.
 
 \subsubsection{Specialized Infrared
@@ -1136,10 +1310,12 @@ species that evolved from hair-like mechanoreceptors. These sensors
 provide direct evidence for the evolutionary development of infrared
 detection capabilities in insects.
 
-\textbf{Sensor Characteristics}: - \textbf{Species}: \emph{Melanophila
-acuminata} and \emph{Acanthocnemus nigricans} - \textbf{Evolutionary
-Origin}: Hair-like mechanoreceptors - \textbf{Detection Range}: 3-5 μm
-infrared wavelengths - \textbf{Response Threshold}: 0.1-1.0 mW/cm²
+\textbf{Sensor Characteristics} (plasmonic/geometry links in
+\cref{sec:app_plasmonic_geometry}): - \textbf{Species}:
+\emph{Melanophila acuminata} and \emph{Acanthocnemus nigricans} -
+\textbf{Evolutionary Origin}: Hair-like mechanoreceptors -
+\textbf{Detection Range}: 3-5 μm infrared wavelengths - \textbf{Response
+Threshold}: 0.1-1.0 mW/cm²
 
 \textbf{Evolutionary Implications}: The independent evolution of
 infrared sensors in multiple beetle lineages suggests strong selective
@@ -1330,6 +1506,13 @@ serving secondary validation and signal termination functions.
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Information rate and rate-coding metrics from deterministic time-series.}
+\label{fig:neural_encoding_information_rate}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
 \caption{Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.}
 \label{fig:sensilla_wavelength_matching}
@@ -1358,6 +1541,13 @@ serving secondary validation and signal termination functions.
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{NMF-unmixed components and reconstruction; simple two-class LDA baseline accuracy.}
+\label{fig:spectral_unmixing_components}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
 \caption{Architecture, cross-domain metrics, integration efficiency, and predictive capability.}
 \label{fig:integrated_analysis_cross_domain_synthesis}
@@ -1368,6 +1558,34 @@ serving secondary validation and signal termination functions.
 \includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
 \caption{Response time comparison across sensory modalities.}
 \label{fig:response_time_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.}
+\label{fig:sensilla_array_beam_patterns}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Deterministic gradient-following trajectory under a simple active-inference step model.}
+\label{fig:active_inference_trajectory}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.}
+\label{fig:detection_limits_operating_points}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.}
+\label{fig:environmental_channel_capacity}
 \end{figure}
 
 \begin{figure}[h]
@@ -1389,6 +1607,13 @@ serving secondary validation and signal termination functions.
 \includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
 \caption{Deterministic synthetic CHC spectrum with C–H stretch and bend regions for illustration.}
 \label{fig:chc_spectra_example}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Proxy Q-factor vs nanoparticle radius for fixed material parameters.}
+\label{fig:plasmonic_geometry_sweep}
 \end{figure}
 
 \newpage
@@ -1456,9 +1681,10 @@ range possible through molecular diffusion alone.
 \textbf{Behavioral Validation}: Experimental studies demonstrate that
 insects can track pheromone trails with remarkable accuracy, suggesting
 directional detection capabilities that are consistent with
-electromagnetic antenna theory. Our figure scripts render modeled beam
-patterns from \passthrough{\lstinline!src/sensilla.py!} parameters
-without embedding business logic in scripts.
+electromagnetic antenna theory (see \cref{sec:app_sensilla_array}). Our
+figure scripts render modeled beam patterns from
+\passthrough{\lstinline!src/sensilla.py!} parameters without embedding
+business logic in scripts.
 
 \subsubsection{Necrophoresis and Parasite-Host
 Interactions}\label{necrophoresis-and-parasite-host-interactions}
@@ -1597,10 +1823,11 @@ olfaction through the concept of electron tunneling and phonon coupling.
 This integration provides a unified framework that explains both rapid
 detection and precise identification.
 
-\textbf{Quantum Effects}: The theory incorporates: - \textbf{Electron
-Tunneling}: Quantum mechanical charge transfer in receptors -
-\textbf{Phonon Coupling}: Vibrational energy transfer between molecules
-- \textbf{Resonant Enhancement}: Enhancement at specific vibrational
+\textbf{Quantum Effects}: The theory incorporates (with geometry sweeps
+in \cref{sec:app_plasmonic_geometry}): - \textbf{Electron Tunneling}:
+Quantum mechanical charge transfer in receptors - \textbf{Phonon
+Coupling}: Vibrational energy transfer between molecules -
+\textbf{Resonant Enhancement}: Enhancement at specific vibrational
 frequencies - \textbf{Coherent States}: Quantum superposition of
 different molecular states
 
@@ -1747,6 +1974,13 @@ detection that may surpass our current technological capabilities.
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Information rate and rate-coding metrics from deterministic time-series.}
+\label{fig:neural_encoding_information_rate}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
 \caption{Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.}
 \label{fig:sensilla_wavelength_matching}
@@ -1775,6 +2009,13 @@ detection that may surpass our current technological capabilities.
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{NMF-unmixed components and reconstruction; simple two-class LDA baseline accuracy.}
+\label{fig:spectral_unmixing_components}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
 \caption{Architecture, cross-domain metrics, integration efficiency, and predictive capability.}
 \label{fig:integrated_analysis_cross_domain_synthesis}
@@ -1785,6 +2026,34 @@ detection that may surpass our current technological capabilities.
 \includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
 \caption{Response time comparison across sensory modalities.}
 \label{fig:response_time_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.}
+\label{fig:sensilla_array_beam_patterns}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Deterministic gradient-following trajectory under a simple active-inference step model.}
+\label{fig:active_inference_trajectory}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.}
+\label{fig:detection_limits_operating_points}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.}
+\label{fig:environmental_channel_capacity}
 \end{figure}
 
 \begin{figure}[h]
@@ -1806,6 +2075,13 @@ detection that may surpass our current technological capabilities.
 \includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
 \caption{Deterministic synthetic CHC spectrum with C–H stretch and bend regions for illustration.}
 \label{fig:chc_spectra_example}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Proxy Q-factor vs nanoparticle radius for fixed material parameters.}
+\label{fig:plasmonic_geometry_sweep}
 \end{figure}
 
 \newpage
@@ -1896,7 +2172,9 @@ cross‑links are indexed in \cref{sec:symbols_glossary}.
 Implementation}\label{computational-implementation}
 
 All theoretical predictions are implemented in tested Python modules
-with 100\% test coverage:
+with 100\% test coverage; detailed case studies and expanded analyses
+are organized in
+\cref{sec:app_sensilla_array,sec:app_environmental_channel,sec:app_detection_limits,sec:app_neural_encoding,sec:app_spectral_unmixing,sec:app_plasmonic_geometry,sec:app_active_inference}:
 
 \begin{itemize}
 \tightlist
@@ -2239,6 +2517,13 @@ humanity while preserving the remarkable biodiversity of our planet.
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Information rate and rate-coding metrics from deterministic time-series.}
+\label{fig:neural_encoding_information_rate}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
 \caption{Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.}
 \label{fig:sensilla_wavelength_matching}
@@ -2267,6 +2552,13 @@ humanity while preserving the remarkable biodiversity of our planet.
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{NMF-unmixed components and reconstruction; simple two-class LDA baseline accuracy.}
+\label{fig:spectral_unmixing_components}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
 \caption{Architecture, cross-domain metrics, integration efficiency, and predictive capability.}
 \label{fig:integrated_analysis_cross_domain_synthesis}
@@ -2277,6 +2569,34 @@ humanity while preserving the remarkable biodiversity of our planet.
 \includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
 \caption{Response time comparison across sensory modalities.}
 \label{fig:response_time_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.}
+\label{fig:sensilla_array_beam_patterns}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Deterministic gradient-following trajectory under a simple active-inference step model.}
+\label{fig:active_inference_trajectory}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.}
+\label{fig:detection_limits_operating_points}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.}
+\label{fig:environmental_channel_capacity}
 \end{figure}
 
 \begin{figure}[h]
@@ -2298,6 +2618,13 @@ humanity while preserving the remarkable biodiversity of our planet.
 \includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
 \caption{Deterministic synthetic CHC spectrum with C–H stretch and bend regions for illustration.}
 \label{fig:chc_spectra_example}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Proxy Q-factor vs nanoparticle radius for fixed material parameters.}
+\label{fig:plasmonic_geometry_sweep}
 \end{figure}
 
 \newpage
@@ -2859,6 +3186,9 @@ target response.
   \passthrough{\lstinline!calculate\_wavelength\_from\_wavenumber!}/\passthrough{\lstinline!calculate\_wavenumber\_from\_wavelength!}
   → tests:
   \passthrough{\lstinline!tests/test\_core.py::TestWavelengthConversions!}
+\item
+  Planned appendices and corresponding src:
+  \cref{sec:app_sensilla_array,sec:app_environmental_channel,sec:app_detection_limits,sec:app_neural_encoding,sec:app_spectral_unmixing,sec:app_plasmonic_geometry,sec:app_active_inference}
 \end{itemize}
 
 \subsubsection{Adaptive Threshold
@@ -2979,6 +3309,13 @@ insect chemosensation.
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Information rate and rate-coding metrics from deterministic time-series.}
+\label{fig:neural_encoding_information_rate}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
 \caption{Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.}
 \label{fig:sensilla_wavelength_matching}
@@ -3007,6 +3344,13 @@ insect chemosensation.
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{NMF-unmixed components and reconstruction; simple two-class LDA baseline accuracy.}
+\label{fig:spectral_unmixing_components}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
 \caption{Architecture, cross-domain metrics, integration efficiency, and predictive capability.}
 \label{fig:integrated_analysis_cross_domain_synthesis}
@@ -3017,6 +3361,34 @@ insect chemosensation.
 \includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
 \caption{Response time comparison across sensory modalities.}
 \label{fig:response_time_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.}
+\label{fig:sensilla_array_beam_patterns}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Deterministic gradient-following trajectory under a simple active-inference step model.}
+\label{fig:active_inference_trajectory}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.}
+\label{fig:detection_limits_operating_points}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.}
+\label{fig:environmental_channel_capacity}
 \end{figure}
 
 \begin{figure}[h]
@@ -3038,6 +3410,13 @@ insect chemosensation.
 \includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
 \caption{Deterministic synthetic CHC spectrum with C–H stretch and bend regions for illustration.}
 \label{fig:chc_spectra_example}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Proxy Q-factor vs nanoparticle radius for fixed material parameters.}
+\label{fig:plasmonic_geometry_sweep}
 \end{figure}
 
 \newpage
@@ -3064,9 +3443,11 @@ frameworks provide quantitative, information-theoretic analysis of the
 empirical evidence, enabling cross-domain synthesis and predictive
 capability assessment. All results referenced here can be regenerated
 deterministically via
-\passthrough{\lstinline!scripts/generate\_integrated\_analysis.py!} and
-\passthrough{\lstinline!scripts/generate\_research\_figures.py!}, which
-import only \passthrough{\lstinline!src/!} logic.
+\passthrough{\lstinline!scripts/generate\_integrated\_analysis.py!},
+\passthrough{\lstinline!scripts/generate\_research\_figures.py!}, and
+the dedicated case-study scripts referenced in
+\cref{sec:app_sensilla_array,sec:app_environmental_channel,sec:app_detection_limits,sec:app_neural_encoding,sec:app_spectral_unmixing,sec:app_plasmonic_geometry,sec:app_active_inference}\passthrough{\lstinline!which import only!}src/`
+logic.
 
 \textbf{Evidence Integration}: The empirical studies are integrated
 through a unified analytical framework that quantifies the strength of
@@ -3591,6 +3972,13 @@ quantitative predictions.
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Information rate and rate-coding metrics from deterministic time-series.}
+\label{fig:neural_encoding_information_rate}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
 \caption{Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.}
 \label{fig:sensilla_wavelength_matching}
@@ -3619,6 +4007,13 @@ quantitative predictions.
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{NMF-unmixed components and reconstruction; simple two-class LDA baseline accuracy.}
+\label{fig:spectral_unmixing_components}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
 \caption{Architecture, cross-domain metrics, integration efficiency, and predictive capability.}
 \label{fig:integrated_analysis_cross_domain_synthesis}
@@ -3629,6 +4024,34 @@ quantitative predictions.
 \includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
 \caption{Response time comparison across sensory modalities.}
 \label{fig:response_time_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.}
+\label{fig:sensilla_array_beam_patterns}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Deterministic gradient-following trajectory under a simple active-inference step model.}
+\label{fig:active_inference_trajectory}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.}
+\label{fig:detection_limits_operating_points}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.}
+\label{fig:environmental_channel_capacity}
 \end{figure}
 
 \begin{figure}[h]
@@ -3650,6 +4073,13 @@ quantitative predictions.
 \includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
 \caption{Deterministic synthetic CHC spectrum with C–H stretch and bend regions for illustration.}
 \label{fig:chc_spectra_example}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Proxy Q-factor vs nanoparticle radius for fixed material parameters.}
+\label{fig:plasmonic_geometry_sweep}
 \end{figure}
 
 \newpage
@@ -3675,7 +4105,14 @@ layers using explicit I/O contracts, ensuring reproducible experiments
 while maintaining the biological plausibility of our theoretical
 framework. The examples below are thin adapters that call
 \passthrough{\lstinline!src/!} functions; no scientific logic resides in
-these adapters.
+these adapters. See also the dedicated appendices for array
+directionality (\cref{sec:app_sensilla_array}), environmental channel
+(\cref{sec:app_environmental_channel}), detection limits
+(\cref{sec:app_detection_limits}), neural encoding
+(\cref{sec:app_neural_encoding}), spectral unmixing
+(\cref{sec:app_spectral_unmixing}), plasmonic geometry
+(\cref{sec:app_plasmonic_geometry}), and active inference
+(\cref{sec:app_active_inference}).
 
 \subsection{Layer-by-Layer
 Integration}\label{layer-by-layer-integration}
@@ -4147,6 +4584,13 @@ intelligence and artificial intelligence systems.
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Information rate and rate-coding metrics from deterministic time-series.}
+\label{fig:neural_encoding_information_rate}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
 \caption{Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.}
 \label{fig:sensilla_wavelength_matching}
@@ -4175,6 +4619,13 @@ intelligence and artificial intelligence systems.
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{NMF-unmixed components and reconstruction; simple two-class LDA baseline accuracy.}
+\label{fig:spectral_unmixing_components}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
 \caption{Architecture, cross-domain metrics, integration efficiency, and predictive capability.}
 \label{fig:integrated_analysis_cross_domain_synthesis}
@@ -4185,6 +4636,34 @@ intelligence and artificial intelligence systems.
 \includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
 \caption{Response time comparison across sensory modalities.}
 \label{fig:response_time_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.}
+\label{fig:sensilla_array_beam_patterns}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Deterministic gradient-following trajectory under a simple active-inference step model.}
+\label{fig:active_inference_trajectory}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.}
+\label{fig:detection_limits_operating_points}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.}
+\label{fig:environmental_channel_capacity}
 \end{figure}
 
 \begin{figure}[h]
@@ -4206,6 +4685,13 @@ intelligence and artificial intelligence systems.
 \includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
 \caption{Deterministic synthetic CHC spectrum with C–H stretch and bend regions for illustration.}
 \label{fig:chc_spectra_example}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Proxy Q-factor vs nanoparticle radius for fixed material parameters.}
+\label{fig:plasmonic_geometry_sweep}
 \end{figure}
 
 \newpage
@@ -4853,7 +5339,9 @@ For detailed discussions of the concepts presented here, see:
 \subsection{Computational Framework
 Documentation}\label{computational-framework-documentation}
 
-The complete computational framework is documented with:
+The complete computational framework is documented with (appendix case
+studies:
+\cref{sec:app_sensilla_array,sec:app_environmental_channel,sec:app_detection_limits,sec:app_neural_encoding,sec:app_spectral_unmixing,sec:app_plasmonic_geometry,sec:app_active_inference}):
 
 \begin{itemize}
 \tightlist
@@ -4942,6 +5430,48 @@ Calculate comprehensive statistics for behavioral response data \\
 \passthrough{\lstinline!behavioral!} &
 \passthrough{\lstinline!generate\_behavioral\_plots!} & function &
 Generate behavioral response plots \\
+\passthrough{\lstinline!case\_studies.active\_inference!} &
+\passthrough{\lstinline!olfactory\_active\_inference\_step!} & function
+& Minimal deterministic update step for a 2D position under a gradient
+cue \\
+\passthrough{\lstinline!case\_studies.detection\_limits!} &
+\passthrough{\lstinline!min\_detectable\_power!} & function & Minimum
+detectable signal power using thermal noise floor and SNR threshold \\
+\passthrough{\lstinline!case\_studies.detection\_limits!} &
+\passthrough{\lstinline!operating\_point!} & function & Bundle operating
+point parameters deterministically \\
+\passthrough{\lstinline!case\_studies.detection\_limits!} &
+\passthrough{\lstinline!snr\_curve!} & function & SNR vs \\
+\passthrough{\lstinline!case\_studies.environmental\_channel!} &
+\passthrough{\lstinline!atmospheric\_transmission\_detailed!} & function
+& Compute a simple parametric atmospheric transmission curve \\
+\passthrough{\lstinline!case\_studies.environmental\_channel!} &
+\passthrough{\lstinline!channel\_capacity\_vs\_env!} & function & Map
+Shannon capacity across humidity×temperature grid \\
+\passthrough{\lstinline!case\_studies.neural\_encoding!} &
+\passthrough{\lstinline!information\_rate\_time\_series!} & function &
+Estimate information metrics using a Gaussian channel approximation \\
+\passthrough{\lstinline!case\_studies.neural\_encoding!} &
+\passthrough{\lstinline!rate\_coding\_metrics!} & function & Compute
+simple separability metrics (means/stds) deterministically \\
+\passthrough{\lstinline!case\_studies.plasmonic\_geometry!} &
+\passthrough{\lstinline!sweep\_plasmonic\_quality!} & function & Sweep Q
+factor with a simple inverse-loss proxy across radii \\
+\passthrough{\lstinline!case\_studies.sensilla\_array\_directionality!}
+& \passthrough{\lstinline!array\_gain!} & function & Compute a scalar
+array gain proxy as peak-to-mean power ratio \\
+\passthrough{\lstinline!case\_studies.sensilla\_array\_directionality!}
+& \passthrough{\lstinline!compute\_beam\_pattern!} & function & Compute
+a simplified 1D beam pattern over wavelengths \\
+\passthrough{\lstinline!case\_studies.sensilla\_array\_directionality!}
+& \passthrough{\lstinline!design\_log\_periodic\_array!} & function &
+Design a 1D log-periodic array of element positions \\
+\passthrough{\lstinline!case\_studies.spectral\_unmixing!} &
+\passthrough{\lstinline!lda\_baseline!} & function & Closed-form
+two-class LDA with equal covariance; returns accuracy on train \\
+\passthrough{\lstinline!case\_studies.spectral\_unmixing!} &
+\passthrough{\lstinline!nmf\_unmix!} & function & Deterministic, simple
+NMF via multiplicative updates \\
 \passthrough{\lstinline!config!} &
 \passthrough{\lstinline!ConfigManager!} & class & Centralized
 configuration manager for insect analysis \\
@@ -5086,6 +5616,13 @@ plot style \\
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Information rate and rate-coding metrics from deterministic time-series.}
+\label{fig:neural_encoding_information_rate}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
 \caption{Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.}
 \label{fig:sensilla_wavelength_matching}
@@ -5114,6 +5651,13 @@ plot style \\
 
 \begin{figure}[h]
 \raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{NMF-unmixed components and reconstruction; simple two-class LDA baseline accuracy.}
+\label{fig:spectral_unmixing_components}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
 \includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
 \caption{Architecture, cross-domain metrics, integration efficiency, and predictive capability.}
 \label{fig:integrated_analysis_cross_domain_synthesis}
@@ -5124,6 +5668,34 @@ plot style \\
 \includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
 \caption{Response time comparison across sensory modalities.}
 \label{fig:response_time_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.}
+\label{fig:sensilla_array_beam_patterns}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Deterministic gradient-following trajectory under a simple active-inference step model.}
+\label{fig:active_inference_trajectory}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.}
+\label{fig:detection_limits_operating_points}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.}
+\label{fig:environmental_channel_capacity}
 \end{figure}
 
 \begin{figure}[h]
@@ -5145,6 +5717,1453 @@ plot style \\
 \includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
 \caption{Deterministic synthetic CHC spectrum with C–H stretch and bend regions for illustration.}
 \label{fig:chc_spectra_example}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Proxy Q-factor vs nanoparticle radius for fixed material parameters.}
+\label{fig:plasmonic_geometry_sweep}
+\end{figure}
+
+\newpage
+
+\newpage
+
+\section{Appendix G: Active-Inference Behavioral Demo on IR
+Cues}\label{sec:app_active_inference}
+
+\subsection{Objective}\label{objective}
+
+Demonstrate a deterministic active-inference step for olfactory search
+under IR cues.
+
+\subsection{Planned Methods (src)}\label{planned-methods-src}
+
+\begin{itemize}
+\tightlist
+\item
+  \passthrough{\lstinline!src/behavioral\_models.py!}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \passthrough{\lstinline!olfactory\_active\_inference\_step(state, params)!}
+  \end{itemize}
+\end{itemize}
+
+\subsection{Planned Script and
+Outputs}\label{planned-script-and-outputs}
+
+\begin{itemize}
+\tightlist
+\item
+  Script:
+  \passthrough{\lstinline!scripts/generate\_active\_inference\_demo.py!}
+\item
+  Data:
+  \passthrough{\lstinline!output/data/active\_inference\_demo.npz!}
+\item
+  Figure:
+  \passthrough{\lstinline!output/figures/active\_inference\_trajectory.png!}
+\end{itemize}
+
+\subsection{Figure}\label{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Planned trajectories and belief updates for IR-guided search in a deterministic grid environment.}
+\label{fig:app_active_inference}
+\end{figure}
+
+\subsection{Equation References}\label{equation-references}
+
+\begin{itemize}
+\tightlist
+\item
+  Response/latency and information metrics: see
+  \cref{sec:mathematical_appendix}.
+\end{itemize}
+
+\subsection{Reproducibility}\label{reproducibility-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Run:
+  \passthrough{\lstinline!python3 scripts/generate\_active\_inference\_demo.py!}
+\item
+  Artifacts saved to \passthrough{\lstinline!output/data/!} and
+  \passthrough{\lstinline!output/figures/!}.
+\end{itemize}
+
+\subsection{Cross-References}\label{cross-references}
+
+\begin{itemize}
+\tightlist
+\item
+  Methods: \cref{sec:methodology}
+\item
+  Symbols: \cref{sec:symbols_glossary}
+\item
+  Math appendix: \cref{sec:mathematical_appendix}
+
+  \begin{figure}[h]
+  \raggedright
+  \includegraphics[width=0.8\textwidth]{../output/figures/composite_cross_domain_overview.png}
+  \caption{Composite overview: atmospheric transmission, sensilla resonance distribution, and CHC spectrum segment.}
+  \label{fig:composite_cross_domain_overview}
+  \end{figure}
+\end{itemize}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Information rate and rate-coding metrics from deterministic time-series.}
+\label{fig:neural_encoding_information_rate}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
+\caption{Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.}
+\label{fig:sensilla_wavelength_matching}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_metamaterial_properties.png}
+\caption{Dielectric response, refractive index/absorption, plasmonic resonance, and info capacity.}
+\label{fig:integrated_analysis_metamaterial_properties}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_information_analysis.png}
+\caption{Information content distribution, receptor specificity, neural encoding, and environmental bits.}
+\label{fig:integrated_analysis_information_analysis}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/atmospheric_transmission.png}
+\caption{Atmospheric IR transmission windows computed via src.core.calculate_atmospheric_transmission across 1–30 μm.}
+\label{fig:atmospheric_transmission}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{NMF-unmixed components and reconstruction; simple two-class LDA baseline accuracy.}
+\label{fig:spectral_unmixing_components}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
+\caption{Architecture, cross-domain metrics, integration efficiency, and predictive capability.}
+\label{fig:integrated_analysis_cross_domain_synthesis}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
+\caption{Response time comparison across sensory modalities.}
+\label{fig:response_time_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.}
+\label{fig:sensilla_array_beam_patterns}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Deterministic gradient-following trajectory under a simple active-inference step model.}
+\label{fig:active_inference_trajectory}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.}
+\label{fig:detection_limits_operating_points}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.}
+\label{fig:environmental_channel_capacity}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_summary.png}
+\caption{Composite summary of dielectric and absorption vs frequency with normalized performance metrics.}
+\label{fig:integrated_analysis_summary}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_system_performance.png}
+\caption{Information processing, material performance, and overall efficiency metrics.}
+\label{fig:integrated_analysis_system_performance}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
+\caption{Deterministic synthetic CHC spectrum with C–H stretch and bend regions for illustration.}
+\label{fig:chc_spectra_example}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Proxy Q-factor vs nanoparticle radius for fixed material parameters.}
+\label{fig:plasmonic_geometry_sweep}
+\end{figure}
+
+\newpage
+
+\newpage
+
+\section{Appendix C: Detection Limits and Operating
+Points}\label{sec:app_detection_limits}
+
+\subsection{Objective}\label{objective-1}
+
+Quantify minimum detectable power, SNR curves, and operating points for
+IR olfactory channels.
+
+\subsection{Planned Methods (src)}\label{planned-methods-src-1}
+
+\begin{itemize}
+\tightlist
+\item
+  \passthrough{\lstinline!src/detection\_limits.py!}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \passthrough{\lstinline!min\_detectable\_power(temperature\_k, bandwidth\_hz, snr\_min\_db)!}
+  \item
+    \passthrough{\lstinline!snr\_curve(signal\_power\_w, noise\_temp\_k, bandwidth\_hz)!}
+  \item
+    \passthrough{\lstinline!operating\_point(capacity\_bits\_s, snr\_db)!}
+  \end{itemize}
+\end{itemize}
+
+\subsection{Planned Script and
+Outputs}\label{planned-script-and-outputs-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Script:
+  \passthrough{\lstinline!scripts/generate\_detection\_limits.py!}
+\item
+  Data: \passthrough{\lstinline!output/data/detection\_limits.npz!}
+\item
+  Figure:
+  \passthrough{\lstinline!output/figures/detection\_limits\_operating\_points.png!}
+\end{itemize}
+
+\subsection{Figure}\label{figure-1}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power contours and operating regions vs bandwidth and temperature; SNR and capacity overlays.}
+\label{fig:app_detection_limits}
+\end{figure}
+
+\subsection{Equation References}\label{equation-references-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Minimum power: see \eqref{eq:min_power}
+\item
+  Capacity: see \eqref{eq:channel_capacity}
+\end{itemize}
+
+\subsection{Reproducibility}\label{reproducibility-2}
+
+\begin{itemize}
+\tightlist
+\item
+  Run:
+  \passthrough{\lstinline!python3 scripts/generate\_detection\_limits.py!}
+\item
+  Artifacts saved to \passthrough{\lstinline!output/data/!} and
+  \passthrough{\lstinline!output/figures/!}.
+\end{itemize}
+
+\subsection{Cross-References}\label{cross-references-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Methods: \cref{sec:methodology}
+\item
+  Symbols: \cref{sec:symbols_glossary}
+\item
+  Math appendix: \cref{sec:mathematical_appendix}
+
+  \begin{figure}[h]
+  \raggedright
+  \includegraphics[width=0.8\textwidth]{../output/figures/composite_cross_domain_overview.png}
+  \caption{Composite overview: atmospheric transmission, sensilla resonance distribution, and CHC spectrum segment.}
+  \label{fig:composite_cross_domain_overview}
+  \end{figure}
+\end{itemize}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Information rate and rate-coding metrics from deterministic time-series.}
+\label{fig:neural_encoding_information_rate}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
+\caption{Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.}
+\label{fig:sensilla_wavelength_matching}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_metamaterial_properties.png}
+\caption{Dielectric response, refractive index/absorption, plasmonic resonance, and info capacity.}
+\label{fig:integrated_analysis_metamaterial_properties}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_information_analysis.png}
+\caption{Information content distribution, receptor specificity, neural encoding, and environmental bits.}
+\label{fig:integrated_analysis_information_analysis}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/atmospheric_transmission.png}
+\caption{Atmospheric IR transmission windows computed via src.core.calculate_atmospheric_transmission across 1–30 μm.}
+\label{fig:atmospheric_transmission}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{NMF-unmixed components and reconstruction; simple two-class LDA baseline accuracy.}
+\label{fig:spectral_unmixing_components}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
+\caption{Architecture, cross-domain metrics, integration efficiency, and predictive capability.}
+\label{fig:integrated_analysis_cross_domain_synthesis}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
+\caption{Response time comparison across sensory modalities.}
+\label{fig:response_time_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.}
+\label{fig:sensilla_array_beam_patterns}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Deterministic gradient-following trajectory under a simple active-inference step model.}
+\label{fig:active_inference_trajectory}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.}
+\label{fig:detection_limits_operating_points}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.}
+\label{fig:environmental_channel_capacity}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_summary.png}
+\caption{Composite summary of dielectric and absorption vs frequency with normalized performance metrics.}
+\label{fig:integrated_analysis_summary}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_system_performance.png}
+\caption{Information processing, material performance, and overall efficiency metrics.}
+\label{fig:integrated_analysis_system_performance}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
+\caption{Deterministic synthetic CHC spectrum with C–H stretch and bend regions for illustration.}
+\label{fig:chc_spectra_example}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Proxy Q-factor vs nanoparticle radius for fixed material parameters.}
+\label{fig:plasmonic_geometry_sweep}
+\end{figure}
+
+\newpage
+
+\newpage
+
+\section{Appendix B: Environmental Channel
+Modeling}\label{sec:app_environmental_channel}
+
+\subsection{Objective}\label{objective-2}
+
+Model atmospheric transmission beyond plateau windows with
+humidity/temperature/path effects; map channel capacity versus
+environment.
+
+\subsection{Planned Methods (src)}\label{planned-methods-src-2}
+
+\begin{itemize}
+\tightlist
+\item
+  \passthrough{\lstinline!src/environmental\_channel.py!}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \passthrough{\lstinline!atmospheric\_transmission\_detailed(wavelengths, humidity, temperature\_k, path\_m)!}
+  \item
+    \passthrough{\lstinline!channel\_capacity\_vs\_env(material\_props, env\_grid)!}
+  \end{itemize}
+\end{itemize}
+
+\subsection{Planned Script and
+Outputs}\label{planned-script-and-outputs-2}
+
+\begin{itemize}
+\tightlist
+\item
+  Script:
+  \passthrough{\lstinline!scripts/generate\_environmental\_channel\_analysis.py!}
+\item
+  Data: \passthrough{\lstinline!output/data/environmental\_channel.npz!}
+\item
+  Figure:
+  \passthrough{\lstinline!output/figures/environmental\_channel\_capacity.png!}
+\end{itemize}
+
+\subsection{Figure}\label{figure-2}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Channel capacity as a function of humidity and temperature across IR wavelengths using detailed transmission modeling.}
+\label{fig:app_env_channel}
+\end{figure}
+
+\subsection{Equation References}\label{equation-references-2}
+
+\begin{itemize}
+\tightlist
+\item
+  Atmospheric transmission: see \eqref{eq:atmospheric_transmission}
+\item
+  Channel capacity: see \eqref{eq:channel_capacity}
+\end{itemize}
+
+\subsection{Reproducibility}\label{reproducibility-3}
+
+\begin{itemize}
+\tightlist
+\item
+  Run:
+  \passthrough{\lstinline!python3 scripts/generate\_environmental\_channel\_analysis.py!}
+\item
+  Artifacts saved to \passthrough{\lstinline!output/data/!} and
+  \passthrough{\lstinline!output/figures/!}.
+\end{itemize}
+
+\subsection{Cross-References}\label{cross-references-2}
+
+\begin{itemize}
+\tightlist
+\item
+  Methods: \cref{sec:methodology}
+\item
+  Symbols: \cref{sec:symbols_glossary}
+\item
+  Math appendix: \cref{sec:mathematical_appendix}
+
+  \begin{figure}[h]
+  \raggedright
+  \includegraphics[width=0.8\textwidth]{../output/figures/composite_cross_domain_overview.png}
+  \caption{Composite overview: atmospheric transmission, sensilla resonance distribution, and CHC spectrum segment.}
+  \label{fig:composite_cross_domain_overview}
+  \end{figure}
+\end{itemize}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Information rate and rate-coding metrics from deterministic time-series.}
+\label{fig:neural_encoding_information_rate}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
+\caption{Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.}
+\label{fig:sensilla_wavelength_matching}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_metamaterial_properties.png}
+\caption{Dielectric response, refractive index/absorption, plasmonic resonance, and info capacity.}
+\label{fig:integrated_analysis_metamaterial_properties}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_information_analysis.png}
+\caption{Information content distribution, receptor specificity, neural encoding, and environmental bits.}
+\label{fig:integrated_analysis_information_analysis}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/atmospheric_transmission.png}
+\caption{Atmospheric IR transmission windows computed via src.core.calculate_atmospheric_transmission across 1–30 μm.}
+\label{fig:atmospheric_transmission}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{NMF-unmixed components and reconstruction; simple two-class LDA baseline accuracy.}
+\label{fig:spectral_unmixing_components}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
+\caption{Architecture, cross-domain metrics, integration efficiency, and predictive capability.}
+\label{fig:integrated_analysis_cross_domain_synthesis}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
+\caption{Response time comparison across sensory modalities.}
+\label{fig:response_time_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.}
+\label{fig:sensilla_array_beam_patterns}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Deterministic gradient-following trajectory under a simple active-inference step model.}
+\label{fig:active_inference_trajectory}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.}
+\label{fig:detection_limits_operating_points}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.}
+\label{fig:environmental_channel_capacity}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_summary.png}
+\caption{Composite summary of dielectric and absorption vs frequency with normalized performance metrics.}
+\label{fig:integrated_analysis_summary}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_system_performance.png}
+\caption{Information processing, material performance, and overall efficiency metrics.}
+\label{fig:integrated_analysis_system_performance}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
+\caption{Deterministic synthetic CHC spectrum with C–H stretch and bend regions for illustration.}
+\label{fig:chc_spectra_example}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Proxy Q-factor vs nanoparticle radius for fixed material parameters.}
+\label{fig:plasmonic_geometry_sweep}
+\end{figure}
+
+\newpage
+
+\newpage
+
+\section{Appendix D: Neural Encoding Efficiency on
+Time-Series}\label{sec:app_neural_encoding}
+
+\subsection{Objective}\label{objective-3}
+
+Estimate information rate and rate-coding metrics from deterministic
+time-series and labels.
+
+\subsection{Planned Methods (src)}\label{planned-methods-src-3}
+
+\begin{itemize}
+\tightlist
+\item
+  \passthrough{\lstinline!src/neural\_encoding.py!}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \passthrough{\lstinline!information\_rate\_time\_series(responses, dt\_s, noise\_std)!}
+  \item
+    \passthrough{\lstinline!rate\_coding\_metrics(responses, labels)!}
+  \end{itemize}
+\end{itemize}
+
+\subsection{Planned Script and
+Outputs}\label{planned-script-and-outputs-3}
+
+\begin{itemize}
+\tightlist
+\item
+  Script:
+  \passthrough{\lstinline!scripts/generate\_neural\_encoding\_analysis.py!}
+\item
+  Data: \passthrough{\lstinline!output/data/neural\_encoding.npz!}
+\item
+  Figure:
+  \passthrough{\lstinline!output/figures/neural\_encoding\_information\_rate.png!}
+\end{itemize}
+
+\subsection{Figure}\label{figure-3}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Estimated information rate and classification metrics for IR-evoked response surrogates under controlled noise levels.}
+\label{fig:app_neural_encoding}
+\end{figure}
+
+\subsection{Equation References}\label{equation-references-3}
+
+\begin{itemize}
+\tightlist
+\item
+  Information rate: see \eqref{eq:channel_capacity}
+\item
+  Response time model: see \eqref{eq:response_time}
+\end{itemize}
+
+\subsection{Reproducibility}\label{reproducibility-4}
+
+\begin{itemize}
+\tightlist
+\item
+  Run:
+  \passthrough{\lstinline!python3 scripts/generate\_neural\_encoding\_analysis.py!}
+\item
+  Artifacts saved to \passthrough{\lstinline!output/data/!} and
+  \passthrough{\lstinline!output/figures/!}.
+\end{itemize}
+
+\subsection{Cross-References}\label{cross-references-3}
+
+\begin{itemize}
+\tightlist
+\item
+  Methods: \cref{sec:methodology}
+\item
+  Symbols: \cref{sec:symbols_glossary}
+\item
+  Math appendix: \cref{sec:mathematical_appendix}
+
+  \begin{figure}[h]
+  \raggedright
+  \includegraphics[width=0.8\textwidth]{../output/figures/composite_cross_domain_overview.png}
+  \caption{Composite overview: atmospheric transmission, sensilla resonance distribution, and CHC spectrum segment.}
+  \label{fig:composite_cross_domain_overview}
+  \end{figure}
+\end{itemize}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Information rate and rate-coding metrics from deterministic time-series.}
+\label{fig:neural_encoding_information_rate}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
+\caption{Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.}
+\label{fig:sensilla_wavelength_matching}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_metamaterial_properties.png}
+\caption{Dielectric response, refractive index/absorption, plasmonic resonance, and info capacity.}
+\label{fig:integrated_analysis_metamaterial_properties}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_information_analysis.png}
+\caption{Information content distribution, receptor specificity, neural encoding, and environmental bits.}
+\label{fig:integrated_analysis_information_analysis}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/atmospheric_transmission.png}
+\caption{Atmospheric IR transmission windows computed via src.core.calculate_atmospheric_transmission across 1–30 μm.}
+\label{fig:atmospheric_transmission}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{NMF-unmixed components and reconstruction; simple two-class LDA baseline accuracy.}
+\label{fig:spectral_unmixing_components}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
+\caption{Architecture, cross-domain metrics, integration efficiency, and predictive capability.}
+\label{fig:integrated_analysis_cross_domain_synthesis}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
+\caption{Response time comparison across sensory modalities.}
+\label{fig:response_time_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.}
+\label{fig:sensilla_array_beam_patterns}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Deterministic gradient-following trajectory under a simple active-inference step model.}
+\label{fig:active_inference_trajectory}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.}
+\label{fig:detection_limits_operating_points}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.}
+\label{fig:environmental_channel_capacity}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_summary.png}
+\caption{Composite summary of dielectric and absorption vs frequency with normalized performance metrics.}
+\label{fig:integrated_analysis_summary}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_system_performance.png}
+\caption{Information processing, material performance, and overall efficiency metrics.}
+\label{fig:integrated_analysis_system_performance}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
+\caption{Deterministic synthetic CHC spectrum with C–H stretch and bend regions for illustration.}
+\label{fig:chc_spectra_example}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Proxy Q-factor vs nanoparticle radius for fixed material parameters.}
+\label{fig:plasmonic_geometry_sweep}
+\end{figure}
+
+\newpage
+
+\newpage
+
+\section{Appendix F: Plasmonic Nano-Geometry
+Sweep}\label{sec:app_plasmonic_geometry}
+
+\subsection{Objective}\label{objective-4}
+
+Sweep nanoparticle radii and media to quantify resonance frequency,
+quality factor, and field enhancement relevant to receptor
+microstructures.
+
+\subsection{Planned Methods (src)}\label{planned-methods-src-4}
+
+\begin{itemize}
+\tightlist
+\item
+  \passthrough{\lstinline!src/meta\_sweep.py!}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \passthrough{\lstinline!sweep\_plasmonic\_quality(radii\_m, metal\_eps, medium\_eps)!}
+  \end{itemize}
+\end{itemize}
+
+\subsection{Planned Script and
+Outputs}\label{planned-script-and-outputs-4}
+
+\begin{itemize}
+\tightlist
+\item
+  Script:
+  \passthrough{\lstinline!scripts/generate\_plasmonic\_geometry\_sweep.py!}
+\item
+  Data: \passthrough{\lstinline!output/data/plasmonic\_geometry.npz!}
+\item
+  Figure:
+  \passthrough{\lstinline!output/figures/plasmonic\_geometry\_sweep.png!}
+\end{itemize}
+
+\subsection{Figure}\label{figure-4}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Resonance frequency, Q factor, and field enhancement as functions of nanoparticle radius and medium dielectric.}
+\label{fig:app_plasmonic_sweep}
+\end{figure}
+
+\subsection{Equation References}\label{equation-references-4}
+
+\begin{itemize}
+\tightlist
+\item
+  Resonance/wavelength: see plasmonic definitions in main text; material
+  equations in \cref{sec:mathematical_appendix}.
+\end{itemize}
+
+\subsection{Reproducibility}\label{reproducibility-5}
+
+\begin{itemize}
+\tightlist
+\item
+  Run:
+  \passthrough{\lstinline!python3 scripts/generate\_plasmonic\_geometry\_sweep.py!}
+\item
+  Artifacts saved to \passthrough{\lstinline!output/data/!} and
+  \passthrough{\lstinline!output/figures/!}.
+\end{itemize}
+
+\subsection{Cross-References}\label{cross-references-4}
+
+\begin{itemize}
+\tightlist
+\item
+  Methods: \cref{sec:methodology}
+\item
+  Symbols: \cref{sec:symbols_glossary}
+\item
+  Math appendix: \cref{sec:mathematical_appendix}
+
+  \begin{figure}[h]
+  \raggedright
+  \includegraphics[width=0.8\textwidth]{../output/figures/composite_cross_domain_overview.png}
+  \caption{Composite overview: atmospheric transmission, sensilla resonance distribution, and CHC spectrum segment.}
+  \label{fig:composite_cross_domain_overview}
+  \end{figure}
+\end{itemize}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Information rate and rate-coding metrics from deterministic time-series.}
+\label{fig:neural_encoding_information_rate}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
+\caption{Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.}
+\label{fig:sensilla_wavelength_matching}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_metamaterial_properties.png}
+\caption{Dielectric response, refractive index/absorption, plasmonic resonance, and info capacity.}
+\label{fig:integrated_analysis_metamaterial_properties}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_information_analysis.png}
+\caption{Information content distribution, receptor specificity, neural encoding, and environmental bits.}
+\label{fig:integrated_analysis_information_analysis}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/atmospheric_transmission.png}
+\caption{Atmospheric IR transmission windows computed via src.core.calculate_atmospheric_transmission across 1–30 μm.}
+\label{fig:atmospheric_transmission}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{NMF-unmixed components and reconstruction; simple two-class LDA baseline accuracy.}
+\label{fig:spectral_unmixing_components}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
+\caption{Architecture, cross-domain metrics, integration efficiency, and predictive capability.}
+\label{fig:integrated_analysis_cross_domain_synthesis}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
+\caption{Response time comparison across sensory modalities.}
+\label{fig:response_time_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.}
+\label{fig:sensilla_array_beam_patterns}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Deterministic gradient-following trajectory under a simple active-inference step model.}
+\label{fig:active_inference_trajectory}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.}
+\label{fig:detection_limits_operating_points}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.}
+\label{fig:environmental_channel_capacity}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_summary.png}
+\caption{Composite summary of dielectric and absorption vs frequency with normalized performance metrics.}
+\label{fig:integrated_analysis_summary}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_system_performance.png}
+\caption{Information processing, material performance, and overall efficiency metrics.}
+\label{fig:integrated_analysis_system_performance}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
+\caption{Deterministic synthetic CHC spectrum with C–H stretch and bend regions for illustration.}
+\label{fig:chc_spectra_example}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Proxy Q-factor vs nanoparticle radius for fixed material parameters.}
+\label{fig:plasmonic_geometry_sweep}
+\end{figure}
+
+\newpage
+
+\newpage
+
+\section{Appendix A: Sensilla Array Directionality and Beam
+Patterns}\label{sec:app_sensilla_array}
+
+\subsection{Objective}\label{objective-5}
+
+Quantify array directionality, beam patterns, and array gain for
+sensilla arrangements (log‑periodic and uniform), relating morphology to
+directional detection.
+
+\subsection{Planned Methods (src)}\label{planned-methods-src-5}
+
+\begin{itemize}
+\tightlist
+\item
+  \passthrough{\lstinline!src/antenna\_arrays.py!}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \passthrough{\lstinline!compute\_beam\_pattern(wavelengths, positions, gains)!}
+  \item
+    \passthrough{\lstinline!array\_gain(pattern)!}
+  \item
+    \passthrough{\lstinline!design\_log\_periodic\_array(min\_len\_um, max\_len\_um, tau, count)!}
+  \end{itemize}
+\end{itemize}
+
+\subsection{Planned Script and
+Outputs}\label{planned-script-and-outputs-5}
+
+\begin{itemize}
+\tightlist
+\item
+  Script:
+  \passthrough{\lstinline!scripts/generate\_sensilla\_array\_directionality.py!}
+\item
+  Data: \passthrough{\lstinline!output/data/sensilla\_array.npz!}
+\item
+  Figure:
+  \passthrough{\lstinline!output/figures/sensilla\_array\_beam\_patterns.png!}
+\item
+  Caption:
+  \passthrough{\lstinline!output/figures/sensilla\_array\_beam\_patterns.caption.txt!}
+\end{itemize}
+
+\subsection{Figure}\label{figure-5}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam patterns for sensilla arrays across infrared wavelengths; log‑periodic vs uniform arrays, showing half‑power beamwidth and side‑lobe structure.}
+\label{fig:app_sensilla_beam}
+\end{figure}
+
+\subsection{Equation References}\label{equation-references-5}
+
+\begin{itemize}
+\tightlist
+\item
+  Effective aperture: see \eqref{eq:effective_aperture}
+\item
+  Gain pattern: see \eqref{eq:gain_pattern}
+\end{itemize}
+
+\subsection{Reproducibility}\label{reproducibility-6}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Run:
+  \passthrough{\lstinline!python3 scripts/generate\_sensilla\_array\_directionality.py!}
+\item
+  Artifacts saved to \passthrough{\lstinline!output/data/!} and
+  \passthrough{\lstinline!output/figures/!}.
+\end{enumerate}
+
+\subsection{Cross-References}\label{cross-references-5}
+
+\begin{itemize}
+\tightlist
+\item
+  Methods: \cref{sec:methodology}
+\item
+  Symbols: \cref{sec:symbols_glossary}
+\item
+  Mathematical forms: \cref{sec:mathematical_appendix}
+
+  \begin{figure}[h]
+  \raggedright
+  \includegraphics[width=0.8\textwidth]{../output/figures/composite_cross_domain_overview.png}
+  \caption{Composite overview: atmospheric transmission, sensilla resonance distribution, and CHC spectrum segment.}
+  \label{fig:composite_cross_domain_overview}
+  \end{figure}
+\end{itemize}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Information rate and rate-coding metrics from deterministic time-series.}
+\label{fig:neural_encoding_information_rate}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
+\caption{Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.}
+\label{fig:sensilla_wavelength_matching}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_metamaterial_properties.png}
+\caption{Dielectric response, refractive index/absorption, plasmonic resonance, and info capacity.}
+\label{fig:integrated_analysis_metamaterial_properties}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_information_analysis.png}
+\caption{Information content distribution, receptor specificity, neural encoding, and environmental bits.}
+\label{fig:integrated_analysis_information_analysis}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/atmospheric_transmission.png}
+\caption{Atmospheric IR transmission windows computed via src.core.calculate_atmospheric_transmission across 1–30 μm.}
+\label{fig:atmospheric_transmission}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{NMF-unmixed components and reconstruction; simple two-class LDA baseline accuracy.}
+\label{fig:spectral_unmixing_components}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
+\caption{Architecture, cross-domain metrics, integration efficiency, and predictive capability.}
+\label{fig:integrated_analysis_cross_domain_synthesis}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
+\caption{Response time comparison across sensory modalities.}
+\label{fig:response_time_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.}
+\label{fig:sensilla_array_beam_patterns}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Deterministic gradient-following trajectory under a simple active-inference step model.}
+\label{fig:active_inference_trajectory}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.}
+\label{fig:detection_limits_operating_points}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.}
+\label{fig:environmental_channel_capacity}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_summary.png}
+\caption{Composite summary of dielectric and absorption vs frequency with normalized performance metrics.}
+\label{fig:integrated_analysis_summary}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_system_performance.png}
+\caption{Information processing, material performance, and overall efficiency metrics.}
+\label{fig:integrated_analysis_system_performance}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
+\caption{Deterministic synthetic CHC spectrum with C–H stretch and bend regions for illustration.}
+\label{fig:chc_spectra_example}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Proxy Q-factor vs nanoparticle radius for fixed material parameters.}
+\label{fig:plasmonic_geometry_sweep}
+\end{figure}
+
+\newpage
+
+\newpage
+
+\section{Appendix E: Spectral Unmixing and
+Classification}\label{sec:app_spectral_unmixing}
+
+\subsection{Objective}\label{objective-6}
+
+Unmix composite spectra and evaluate small, deterministic classification
+baselines on CHC features.
+
+\subsection{Planned Methods (src)}\label{planned-methods-src-6}
+
+\begin{itemize}
+\tightlist
+\item
+  \passthrough{\lstinline!src/spectral\_unmixing.py!}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \passthrough{\lstinline!nmf\_unmix(spectra, n\_components, seed=42)!}
+  \item
+    \passthrough{\lstinline!lda\_baseline(features, labels, seed=42)!}
+  \end{itemize}
+\end{itemize}
+
+\subsection{Planned Script and
+Outputs}\label{planned-script-and-outputs-6}
+
+\begin{itemize}
+\tightlist
+\item
+  Script:
+  \passthrough{\lstinline!scripts/generate\_spectral\_unmixing.py!}
+\item
+  Data: \passthrough{\lstinline!output/data/spectral\_unmixing.npz!}
+\item
+  Figure:
+  \passthrough{\lstinline!output/figures/spectral\_unmixing\_components.png!}
+\end{itemize}
+
+\subsection{Figure}\label{figure-6}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{Unmixed component spectra and reconstruction error across seeds; baseline classification accuracy on deterministic folds.}
+\label{fig:app_spectral_unmixing}
+\end{figure}
+
+\subsection{Equation References}\label{equation-references-6}
+
+\begin{itemize}
+\tightlist
+\item
+  Spectral overlap: see \eqref{eq:channel_capacity} analogs for
+  information metrics; overlap in main text.
+\end{itemize}
+
+\subsection{Reproducibility}\label{reproducibility-7}
+
+\begin{itemize}
+\tightlist
+\item
+  Run:
+  \passthrough{\lstinline!python3 scripts/generate\_spectral\_unmixing.py!}
+\item
+  Artifacts saved to \passthrough{\lstinline!output/data/!} and
+  \passthrough{\lstinline!output/figures/!}.
+\end{itemize}
+
+\subsection{Cross-References}\label{cross-references-6}
+
+\begin{itemize}
+\tightlist
+\item
+  Methods: \cref{sec:methodology}
+\item
+  Symbols: \cref{sec:symbols_glossary}
+\item
+  Math appendix: \cref{sec:mathematical_appendix}
+
+  \begin{figure}[h]
+  \raggedright
+  \includegraphics[width=0.8\textwidth]{../output/figures/composite_cross_domain_overview.png}
+  \caption{Composite overview: atmospheric transmission, sensilla resonance distribution, and CHC spectrum segment.}
+  \label{fig:composite_cross_domain_overview}
+  \end{figure}
+\end{itemize}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/neural_encoding_information_rate.png}
+\caption{Information rate and rate-coding metrics from deterministic time-series.}
+\label{fig:neural_encoding_information_rate}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
+\caption{Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.}
+\label{fig:sensilla_wavelength_matching}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_metamaterial_properties.png}
+\caption{Dielectric response, refractive index/absorption, plasmonic resonance, and info capacity.}
+\label{fig:integrated_analysis_metamaterial_properties}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_information_analysis.png}
+\caption{Information content distribution, receptor specificity, neural encoding, and environmental bits.}
+\label{fig:integrated_analysis_information_analysis}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/atmospheric_transmission.png}
+\caption{Atmospheric IR transmission windows computed via src.core.calculate_atmospheric_transmission across 1–30 μm.}
+\label{fig:atmospheric_transmission}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/spectral_unmixing_components.png}
+\caption{NMF-unmixed components and reconstruction; simple two-class LDA baseline accuracy.}
+\label{fig:spectral_unmixing_components}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
+\caption{Architecture, cross-domain metrics, integration efficiency, and predictive capability.}
+\label{fig:integrated_analysis_cross_domain_synthesis}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
+\caption{Response time comparison across sensory modalities.}
+\label{fig:response_time_comparison}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
+\caption{Beam pattern vs wavelength for log-periodic sensilla array; normalized power and array gain.}
+\label{fig:sensilla_array_beam_patterns}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/active_inference_trajectory.png}
+\caption{Deterministic gradient-following trajectory under a simple active-inference step model.}
+\label{fig:active_inference_trajectory}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/detection_limits_operating_points.png}
+\caption{Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.}
+\label{fig:detection_limits_operating_points}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/environmental_channel_capacity.png}
+\caption{Shannon capacity (bits/s) across humidity and temperature with simple transmission/noise model.}
+\label{fig:environmental_channel_capacity}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_summary.png}
+\caption{Composite summary of dielectric and absorption vs frequency with normalized performance metrics.}
+\label{fig:integrated_analysis_summary}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/integrated_analysis_system_performance.png}
+\caption{Information processing, material performance, and overall efficiency metrics.}
+\label{fig:integrated_analysis_system_performance}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
+\caption{Deterministic synthetic CHC spectrum with C–H stretch and bend regions for illustration.}
+\label{fig:chc_spectra_example}
+\end{figure}
+
+\begin{figure}[h]
+\raggedright
+\includegraphics[width=0.8\textwidth]{../output/figures/plasmonic_geometry_sweep.png}
+\caption{Proxy Q-factor vs nanoparticle radius for fixed material parameters.}
+\label{fig:plasmonic_geometry_sweep}
 \end{figure}
 
 \end{document}

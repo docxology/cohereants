@@ -232,6 +232,48 @@ The `render_pdf.sh` script automatically:
 - **Figures**: Ensure outputs are generated and referenced
 - **PDFs**: Ensure final documents include all figures
 
+### 4–10. Case-Study Generators (Appendices A–G)
+Each script is a thin orchestrator that produces figures (with captions) and data `.npz` for its appendix. Business logic will be in `src/` modules; current versions include deterministic placeholders pending implementation.
+
+- `generate_sensilla_array_directionality.py` → Appendix A (`sec:app_sensilla_array`)
+  - Figures: `output/figures/sensilla_array_beam_patterns.png`
+  - Data: `output/data/sensilla_array.npz`
+- `generate_environmental_channel_analysis.py` → Appendix B (`sec:app_environmental_channel`)
+  - Figures: `output/figures/environmental_channel_capacity.png`
+  - Data: `output/data/environmental_channel.npz`
+- `generate_detection_limits.py` → Appendix C (`sec:app_detection_limits`)
+  - Figures: `output/figures/detection_limits_operating_points.png`
+  - Data: `output/data/detection_limits.npz`
+- `generate_neural_encoding_analysis.py` → Appendix D (`sec:app_neural_encoding`)
+  - Figures: `output/figures/neural_encoding_information_rate.png`
+  - Data: `output/data/neural_encoding.npz`
+- `generate_spectral_unmixing.py` → Appendix E (`sec:app_spectral_unmixing`)
+  - Figures: `output/figures/spectral_unmixing_components.png`
+  - Data: `output/data/spectral_unmixing.npz`
+- `generate_plasmonic_geometry_sweep.py` → Appendix F (`sec:app_plasmonic_geometry`)
+  - Figures: `output/figures/plasmonic_geometry_sweep.png`
+  - Data: `output/data/plasmonic_geometry.npz`
+- `generate_active_inference_demo.py` → Appendix G (`sec:app_active_inference`)
+  - Figures: `output/figures/active_inference_trajectory.png`
+  - Data: `output/data/active_inference_demo.npz`
+
+### Orchestrator
+- `run_all_case_studies.py`: Runs the seven case-study scripts non-redundantly, ensuring all figures/data exist for the PDF pipeline.
+
+### 3. `generate_integrated_analysis.py` - Integrated Cross-Domain Figures
+**Purpose**: Produces multi-panel figures and a textual report by composing `src/fermi_estimation`, `src/meta_material_framework`, and `src/integrated_analysis`.
+**Outputs**:
+- Figures to `output/figures/` with captions:
+  - `integrated_analysis_information_analysis.png`
+  - `integrated_analysis_metamaterial_properties.png`
+  - `integrated_analysis_system_performance.png`
+  - `integrated_analysis_cross_domain_synthesis.png`
+- Report to `output/figures/integrated_analysis_report.txt`
+- Data to `output/data/integrated_analysis.npz` containing dielectric arrays, plasmonic scalars, information-capacity metrics, and performance metrics for reproducibility.
+**Notes**:
+- Uses `src/visualization.set_plot_style('science')` and deterministic seed via `src/config.set_random_seed(42)`.
+- Contains no business logic; all computation delegated to `src/` modules.
+
 ## Summary
 
 The `scripts/` directory demonstrates the **thin orchestrator pattern** where:

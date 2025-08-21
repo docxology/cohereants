@@ -607,7 +607,7 @@ def main():
         print(f"\nSuccessfully generated {len(figures)} integrated analysis figures!")
         print(f"Output directory: {output_dir}")
         
-        # Generate analysis report
+        # Generate analysis report and persist core numeric data
         print("\nGenerating integrated analysis report...")
         integrated_analyzer = IntegratedAnalyzer()
         
@@ -636,6 +636,47 @@ def main():
         with open(report_filename, 'w') as f:
             f.write(report)
         print(f"Saved analysis report: {report_filename}")
+
+        # Save integrated analysis numeric outputs to output/data for reproducibility
+        data_output_dir = os.path.join("output", "data")
+        os.makedirs(data_output_dir, exist_ok=True)
+        performance_metrics = integrated_analyzer.calculate_system_performance_metrics(analysis_results)
+
+        # Flatten nested dicts into a single namespace for .npz saving
+        dielec = analysis_results['metamaterial_analysis']['dielectric']
+        plasm = analysis_results['metamaterial_analysis']['plasmonic']
+        info_cap = analysis_results['metamaterial_analysis']['information_capacity']
+
+        np.savez(
+            os.path.join(data_output_dir, "integrated_analysis.npz"),
+            # Dielectric arrays
+            frequency=dielec.get('frequency'),
+            epsilon_real=dielec.get('epsilon_real'),
+            epsilon_imag=dielec.get('epsilon_imag'),
+            refractive_index=dielec.get('refractive_index'),
+            absorption_coefficient=dielec.get('absorption_coefficient'),
+            # Plasmonic scalars
+            plasmonic_resonance_frequency_hz=plasm.get('resonance_frequency_hz'),
+            plasmonic_resonance_wavelength_m=plasm.get('resonance_wavelength_m'),
+            plasmonic_quality_factor=plasm.get('quality_factor'),
+            plasmonic_field_enhancement=plasm.get('field_enhancement'),
+            # Information capacity scalars
+            channel_capacity_bits_per_sec=info_cap.get('channel_capacity_bits_per_sec'),
+            info_signal_to_noise_ratio=info_cap.get('signal_to_noise_ratio'),
+            information_density_bits_per_joule_meter=info_cap.get('information_density_bits_per_joule_meter'),
+            quantum_limit_bits_per_sec=info_cap.get('quantum_limit_bits_per_sec'),
+            # Performance metrics
+            information_processing_score=performance_metrics['information_processing_score'],
+            material_performance_score=performance_metrics['material_performance_score'],
+            system_efficiency=performance_metrics['system_efficiency'],
+            total_information_content_bits=performance_metrics['total_information_content_bits'],
+            receptor_specificity_index=performance_metrics['receptor_specificity_index'],
+            neural_encoding_efficiency=performance_metrics['neural_encoding_efficiency'],
+            average_refractive_index=performance_metrics['average_refractive_index'],
+            plasmonic_quality_factor_pm=performance_metrics['plasmonic_quality_factor'],
+            information_capacity_bits_per_sec_pm=performance_metrics['information_capacity_bits_per_sec']
+        )
+        print(f"Saved integrated analysis data: {os.path.join(data_output_dir, 'integrated_analysis.npz')}")
 
         # Also generate a composite summary figure
         summary_fig = create_composite_summary_figure(analysis_results, integrated_analyzer.calculate_system_performance_metrics(analysis_results))

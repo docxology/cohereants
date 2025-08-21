@@ -250,7 +250,7 @@ For detailed discussions of the concepts presented here, see:
 
 ## Computational Framework Documentation
 
-The complete computational framework is documented with:
+The complete computational framework is documented with (appendix case studies: \cref{sec:app_sensilla_array,sec:app_environmental_channel,sec:app_detection_limits,sec:app_neural_encoding,sec:app_spectral_unmixing,sec:app_plasmonic_geometry,sec:app_active_inference}):
 
 - **100% Test Coverage**: All functions are tested with comprehensive unit and integration tests
 - **Performance Benchmarks**: Execution speed and memory efficiency metrics
@@ -278,6 +278,20 @@ For complete mathematical formulations and source code implementation, see Secti
 | `behavioral` | `calculate_power_analysis` | function | Calculate statistical power for the comparison |
 | `behavioral` | `calculate_response_statistics` | function | Calculate comprehensive statistics for behavioral response data |
 | `behavioral` | `generate_behavioral_plots` | function | Generate behavioral response plots |
+| `case_studies.active_inference` | `olfactory_active_inference_step` | function | Minimal deterministic update step for a 2D position under a gradient cue |
+| `case_studies.detection_limits` | `min_detectable_power` | function | Minimum detectable signal power using thermal noise floor and SNR threshold |
+| `case_studies.detection_limits` | `operating_point` | function | Bundle operating point parameters deterministically |
+| `case_studies.detection_limits` | `snr_curve` | function | SNR vs |
+| `case_studies.environmental_channel` | `atmospheric_transmission_detailed` | function | Compute a simple parametric atmospheric transmission curve |
+| `case_studies.environmental_channel` | `channel_capacity_vs_env` | function | Map Shannon capacity across humidity×temperature grid |
+| `case_studies.neural_encoding` | `information_rate_time_series` | function | Estimate information metrics using a Gaussian channel approximation |
+| `case_studies.neural_encoding` | `rate_coding_metrics` | function | Compute simple separability metrics (means/stds) deterministically |
+| `case_studies.plasmonic_geometry` | `sweep_plasmonic_quality` | function | Sweep Q factor with a simple inverse-loss proxy across radii |
+| `case_studies.sensilla_array_directionality` | `array_gain` | function | Compute a scalar array gain proxy as peak-to-mean power ratio |
+| `case_studies.sensilla_array_directionality` | `compute_beam_pattern` | function | Compute a simplified 1D beam pattern over wavelengths |
+| `case_studies.sensilla_array_directionality` | `design_log_periodic_array` | function | Design a 1D log-periodic array of element positions |
+| `case_studies.spectral_unmixing` | `lda_baseline` | function | Closed-form two-class LDA with equal covariance; returns accuracy on train |
+| `case_studies.spectral_unmixing` | `nmf_unmix` | function | Deterministic, simple NMF via multiplicative updates |
 | `config` | `ConfigManager` | class | Centralized configuration manager for insect analysis |
 | `config` | `enable_verbose_logging` | function | Enable verbose logging for debugging |
 | `config` | `get_config` | function | Get the global configuration manager instance |

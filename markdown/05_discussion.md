@@ -25,7 +25,7 @@ The detection of sexual and trail pheromones represents another area where the v
 
 **Detection Range**: The vibrational theory explains how insects can detect pheromones at distances of 10-100 meters, far exceeding the range possible through molecular diffusion alone.
 
-**Behavioral Validation**: Experimental studies demonstrate that insects can track pheromone trails with remarkable accuracy, suggesting directional detection capabilities that are consistent with electromagnetic antenna theory. Our figure scripts render modeled beam patterns from `src/sensilla.py` parameters without embedding business logic in scripts.
+**Behavioral Validation**: Experimental studies demonstrate that insects can track pheromone trails with remarkable accuracy, suggesting directional detection capabilities that are consistent with electromagnetic antenna theory (see \cref{sec:app_sensilla_array}). Our figure scripts render modeled beam patterns from `src/sensilla.py` parameters without embedding business logic in scripts.
 
 ### Necrophoresis and Parasite-Host Interactions
 
@@ -106,7 +106,7 @@ The vibrational theory does not necessarily contradict existing theories of olfa
 
 The vibrational theory integrates with quantum mechanical models of olfaction through the concept of electron tunneling and phonon coupling. This integration provides a unified framework that explains both rapid detection and precise identification.
 
-**Quantum Effects**: The theory incorporates:
+**Quantum Effects**: The theory incorporates (with geometry sweeps in \cref{sec:app_plasmonic_geometry}):
 - **Electron Tunneling**: Quantum mechanical charge transfer in receptors
 - **Phonon Coupling**: Vibrational energy transfer between molecules
 - **Resonant Enhancement**: Enhancement at specific vibrational frequencies

@@ -5,7 +5,7 @@
 This section presents a comprehensive review of empirical evidence supporting the vibrational theory of olfaction and infrared sensing in insects. The evidence spans multiple domains including molecular spectroscopy, behavioral studies, morphological analysis, and quantum mechanical modeling. Each study is analyzed for its implications regarding the vibrational theory and its relationship to traditional stereochemical models.
 
 **Analytical Framework**: The analysis presented here is grounded in tested computational models implemented in the `src` directory, including the comprehensive Fermi Estimation framework and meta-material analytical framework. These frameworks provide quantitative, information-theoretic analysis of the empirical evidence, enabling cross-domain synthesis and predictive capability assessment.
-All results referenced here can be regenerated deterministically via `scripts/generate_integrated_analysis.py` and `scripts/generate_research_figures.py`, which import only `src/` logic.
+All results referenced here can be regenerated deterministically via `scripts/generate_integrated_analysis.py`, `scripts/generate_research_figures.py`, and the dedicated case-study scripts referenced in \cref{sec:app_sensilla_array,sec:app_environmental_channel,sec:app_detection_limits,sec:app_neural_encoding,sec:app_spectral_unmixing,sec:app_plasmonic_geometry,sec:app_active_inference}` which import only `src/` logic.
 
 **Evidence Integration**: The empirical studies are integrated through a unified analytical framework that quantifies the strength of evidence across different domains and provides testable predictions for future experimental validation.
 

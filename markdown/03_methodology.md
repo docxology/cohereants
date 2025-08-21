@@ -7,6 +7,7 @@ The vibrational theory of olfaction proposes that insects detect the unique elec
 ### Atmospheric Transmission and Detection Range
 
 The Earth's atmosphere exhibits specific transmission windows in the infrared range that enable long-range detection of semiochemical emissions. These transmission characteristics are modeled using `src/core.py::calculate_atmospheric_transmission(wavelengths, distance=None) -> Union[float, np.ndarray]`, validated by `tests/test_core.py::TestAtmosphericTransmission` and `tests/test_core_physics.py::TestAtmosphericTransmission`.
+See also the environmental channel analysis in \cref{sec:app_environmental_channel} and detection limits in \cref{sec:app_detection_limits}.
 
 **Transmission Windows**: Three primary atmospheric windows exist in the infrared range:
 - **Mid-infrared (2-5 μm)**: 80% transmission efficiency
@@ -50,6 +51,7 @@ All adult insects possess antennae with micron-sized sensory hairs called sensil
 - **Sensilla Coeloconica**: 5-15 μm length, 3-6 μm diameter
 
 **Wavelength matching**: `src/sensilla.py::analyze_sensilla_dimensions(lengths, diameters)` computes quarter/half‑wavelength predictions and aspect ratios. Tests in `tests/test_sensilla.py::TestSensillaAnalysis` and `tests/test_insect_analysis.py::TestSensillaAnalysis` validate calculations.
+Directional array behavior and beam patterns are treated in \cref{sec:app_sensilla_array}.
 
 \Cref{fig:sensilla_wavelength_matching} for the sensilla-wavelength correlation.
 \begin{figure}[h]
@@ -62,6 +64,7 @@ All adult insects possess antennae with micron-sized sensory hairs called sensil
 ### Cuticular Hydrocarbon Spectroscopy
 
 Insect semiochemicals exhibit characteristic infrared emission spectra that fall within atmospheric transmission windows. The `analyze_chc_spectra()` function processes spectroscopic data to identify vibrational modes and calculate spectral overlap between different compounds.
+Spectral unmixing and deterministic classification baselines are provided in \cref{sec:app_spectral_unmixing}. Neural encoding metrics for time-series are in \cref{sec:app_neural_encoding}. Plasmonic geometry sweeps appear in \cref{sec:app_plasmonic_geometry}. A behavioral active-inference stub is provided in \cref{sec:app_active_inference}.
 
 **Emission Peaks**: Typical CHC spectra show emission maxima at:
 - **Fire ant trail pheromones**: 3500 cm$^{-1}$ (~2.9 μm)

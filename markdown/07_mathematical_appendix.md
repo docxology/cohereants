@@ -501,6 +501,7 @@ where $\mathbf{R}$ is the response matrix and $\mathbf{y}$ is the target respons
 - `src/sensilla.py::analyze_sensilla_dimensions` → tests: `tests/test_sensilla.py::TestSensillaAnalysis`
 - `src/spectroscopy.py::analyze_chc_spectra` → tests: `tests/test_spectroscopy_analysis.py::TestAnalyzeChcSpectra`
 - Conversions `calculate_wavelength_from_wavenumber`/`calculate_wavenumber_from_wavelength` → tests: `tests/test_core.py::TestWavelengthConversions`
+- Planned appendices and corresponding src: \cref{sec:app_sensilla_array,sec:app_environmental_channel,sec:app_detection_limits,sec:app_neural_encoding,sec:app_spectral_unmixing,sec:app_plasmonic_geometry,sec:app_active_inference}
 
 ### Adaptive Threshold Mechanism
 

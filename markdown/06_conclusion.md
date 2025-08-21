@@ -31,7 +31,7 @@ The vibrational theory of olfaction provides a unified framework that integrates
 
 ### Computational Implementation
 
-All theoretical predictions are implemented in tested Python modules with 100% test coverage:
+All theoretical predictions are implemented in tested Python modules with 100% test coverage; detailed case studies and expanded analyses are organized in \cref{sec:app_sensilla_array,sec:app_environmental_channel,sec:app_detection_limits,sec:app_neural_encoding,sec:app_spectral_unmixing,sec:app_plasmonic_geometry,sec:app_active_inference}:
 
 - **Core Physics**: `calculate_atmospheric_transmission()`, `calculate_response_time_improvement()`
 - **Morphological Analysis**: `analyze_sensilla_dimensions()`, `calculate_sensilla_resonance_frequency()`

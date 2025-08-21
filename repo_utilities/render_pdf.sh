@@ -187,10 +187,14 @@ run_project_scripts() {
   export MPLBACKEND=Agg
   log_info "Using runner: $runner"
   
-  # Find ALL Python scripts in the scripts directory
+  # Prefer running orchestrators first, then other scripts if any
   local scripts=()
+  if [ -f "$scripts_dir/run_all_case_studies.py" ]; then
+    scripts+=("$scripts_dir/run_all_case_studies.py")
+  fi
+  # Add other top-level scripts (excluding orchestrator duplicates)
   while IFS= read -r -d '' script; do
-    if [[ "$script" == *.py ]]; then
+    if [[ "$script" == *.py && "$(basename "$script")" != "run_all_case_studies.py" ]]; then
       scripts+=("$script")
     fi
   done < <(find "$scripts_dir" -maxdepth 1 -name "*.py" -print0)

@@ -214,6 +214,9 @@ validated by
 \passthrough{\lstinline!tests/test\_core.py::TestAtmosphericTransmission!}
 and
 \passthrough{\lstinline!tests/test\_core\_physics.py::TestAtmosphericTransmission!}.
+See also the environmental channel analysis in
+\cref{sec:app_environmental_channel} and detection limits in
+\cref{sec:app_detection_limits}.
 
 \textbf{Transmission Windows}: Three primary atmospheric windows exist
 in the infrared range: - \textbf{Mid-infrared (2-5 μm)}: 80\%
@@ -293,7 +296,8 @@ computes quarter/half‑wavelength predictions and aspect ratios. Tests in
 \passthrough{\lstinline!tests/test\_sensilla.py::TestSensillaAnalysis!}
 and
 \passthrough{\lstinline!tests/test\_insect\_analysis.py::TestSensillaAnalysis!}
-validate calculations.
+validate calculations. Directional array behavior and beam patterns are
+treated in \cref{sec:app_sensilla_array}.
 
 \Cref{fig:sensilla_wavelength_matching} for the sensilla-wavelength
 correlation. \textbackslash begin\{figure\}{[}h{]} \centering
@@ -313,7 +317,12 @@ Insect semiochemicals exhibit characteristic infrared emission spectra
 that fall within atmospheric transmission windows. The
 \passthrough{\lstinline!analyze\_chc\_spectra()!} function processes
 spectroscopic data to identify vibrational modes and calculate spectral
-overlap between different compounds.
+overlap between different compounds. Spectral unmixing and deterministic
+classification baselines are provided in
+\cref{sec:app_spectral_unmixing}. Neural encoding metrics for
+time-series are in \cref{sec:app_neural_encoding}. Plasmonic geometry
+sweeps appear in \cref{sec:app_plasmonic_geometry}. A behavioral
+active-inference stub is provided in \cref{sec:app_active_inference}.
 
 \textbf{Emission Peaks}: Typical CHC spectra show emission maxima at: -
 \textbf{Fire ant trail pheromones}: 3500 cm\(^{-1}\) (\textasciitilde2.9

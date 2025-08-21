@@ -839,7 +839,9 @@ For detailed discussions of the concepts presented here, see:
 \subsection{Computational Framework
 Documentation}\label{computational-framework-documentation}
 
-The complete computational framework is documented with:
+The complete computational framework is documented with (appendix case
+studies:
+\cref{sec:app_sensilla_array,sec:app_environmental_channel,sec:app_detection_limits,sec:app_neural_encoding,sec:app_spectral_unmixing,sec:app_plasmonic_geometry,sec:app_active_inference}):
 
 \begin{itemize}
 \tightlist
@@ -928,6 +930,48 @@ Calculate comprehensive statistics for behavioral response data \\
 \passthrough{\lstinline!behavioral!} &
 \passthrough{\lstinline!generate\_behavioral\_plots!} & function &
 Generate behavioral response plots \\
+\passthrough{\lstinline!case\_studies.active\_inference!} &
+\passthrough{\lstinline!olfactory\_active\_inference\_step!} & function
+& Minimal deterministic update step for a 2D position under a gradient
+cue \\
+\passthrough{\lstinline!case\_studies.detection\_limits!} &
+\passthrough{\lstinline!min\_detectable\_power!} & function & Minimum
+detectable signal power using thermal noise floor and SNR threshold \\
+\passthrough{\lstinline!case\_studies.detection\_limits!} &
+\passthrough{\lstinline!operating\_point!} & function & Bundle operating
+point parameters deterministically \\
+\passthrough{\lstinline!case\_studies.detection\_limits!} &
+\passthrough{\lstinline!snr\_curve!} & function & SNR vs \\
+\passthrough{\lstinline!case\_studies.environmental\_channel!} &
+\passthrough{\lstinline!atmospheric\_transmission\_detailed!} & function
+& Compute a simple parametric atmospheric transmission curve \\
+\passthrough{\lstinline!case\_studies.environmental\_channel!} &
+\passthrough{\lstinline!channel\_capacity\_vs\_env!} & function & Map
+Shannon capacity across humidity×temperature grid \\
+\passthrough{\lstinline!case\_studies.neural\_encoding!} &
+\passthrough{\lstinline!information\_rate\_time\_series!} & function &
+Estimate information metrics using a Gaussian channel approximation \\
+\passthrough{\lstinline!case\_studies.neural\_encoding!} &
+\passthrough{\lstinline!rate\_coding\_metrics!} & function & Compute
+simple separability metrics (means/stds) deterministically \\
+\passthrough{\lstinline!case\_studies.plasmonic\_geometry!} &
+\passthrough{\lstinline!sweep\_plasmonic\_quality!} & function & Sweep Q
+factor with a simple inverse-loss proxy across radii \\
+\passthrough{\lstinline!case\_studies.sensilla\_array\_directionality!}
+& \passthrough{\lstinline!array\_gain!} & function & Compute a scalar
+array gain proxy as peak-to-mean power ratio \\
+\passthrough{\lstinline!case\_studies.sensilla\_array\_directionality!}
+& \passthrough{\lstinline!compute\_beam\_pattern!} & function & Compute
+a simplified 1D beam pattern over wavelengths \\
+\passthrough{\lstinline!case\_studies.sensilla\_array\_directionality!}
+& \passthrough{\lstinline!design\_log\_periodic\_array!} & function &
+Design a 1D log-periodic array of element positions \\
+\passthrough{\lstinline!case\_studies.spectral\_unmixing!} &
+\passthrough{\lstinline!lda\_baseline!} & function & Closed-form
+two-class LDA with equal covariance; returns accuracy on train \\
+\passthrough{\lstinline!case\_studies.spectral\_unmixing!} &
+\passthrough{\lstinline!nmf\_unmix!} & function & Deterministic, simple
+NMF via multiplicative updates \\
 \passthrough{\lstinline!config!} &
 \passthrough{\lstinline!ConfigManager!} & class & Centralized
 configuration manager for insect analysis \\
