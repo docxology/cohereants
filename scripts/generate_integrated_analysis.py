@@ -28,6 +28,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 from integrated_analysis import IntegratedAnalyzer
 from fermi_estimation import FermiEstimator
 from meta_material_framework import MetaMaterialAnalyzer
+from visualization import AdvancedVisualizer, set_plot_style
+from config import set_random_seed
 
 # Suppress warnings for cleaner output
 warnings.filterwarnings('ignore')
@@ -41,10 +43,12 @@ def create_comprehensive_analysis_figures():
     """
     print("Creating comprehensive integrated analysis figures...")
     
-    # Initialize analyzers
+    # Initialize analyzers and styling
     integrated_analyzer = IntegratedAnalyzer()
     fermi_estimator = FermiEstimator()
     meta_material_analyzer = MetaMaterialAnalyzer()
+    set_random_seed(42)
+    set_plot_style('science')
     
     # Create sample data for analysis
     odorant_properties = {
@@ -55,7 +59,7 @@ def create_comprehensive_analysis_figures():
     
     receptor_properties = {
         'binding_energies': np.array([-25.0, -20.0, -15.0, -10.0, -5.0]),
-        'response_amplitudes': np.random.normal(1.0, 0.3, 100),
+        'response_amplitudes': np.random.default_rng(42).normal(1.0, 0.3, 100),
         'epsilon_inf': 2.0,
         'omega_p': 5e15,
         'gamma': 1e13,
@@ -524,9 +528,56 @@ def create_cross_domain_synthesis_figure(analysis_results):
     plt.tight_layout()
     return fig
 
+
+def create_composite_summary_figure(analysis_results, performance_metrics):
+    """Create a concise composite multipanel summary using visualization utilities."""
+    visualizer = AdvancedVisualizer(style='science')
+
+    metamaterial = analysis_results['metamaterial_analysis']
+    frequency_thz = metamaterial['dielectric']['frequency'] / 1e12
+
+    # Build panels for multi-panel analysis
+    data_dict = {
+        'Dielectric (n)': {
+            'x': frequency_thz,
+            'y': metamaterial['dielectric']['refractive_index'],
+            'xlabel': 'Frequency (THz)',
+            'ylabel': 'Refractive Index'
+        },
+        'Absorption (α)': {
+            'x': frequency_thz,
+            'y': metamaterial['dielectric']['absorption_coefficient'],
+            'xlabel': 'Frequency (THz)',
+            'ylabel': 'Absorption (m⁻¹)'
+        },
+        'Performance (Norm)': {
+            'x': np.arange(3),
+            'y': np.array([
+                performance_metrics['information_processing_score'],
+                performance_metrics['material_performance_score'],
+                performance_metrics['system_efficiency']
+            ]) / max(1e-12, max(
+                performance_metrics['information_processing_score'],
+                performance_metrics['material_performance_score'],
+                performance_metrics['system_efficiency']
+            )),
+            'xlabel': 'Metrics Index',
+            'ylabel': 'Normalized Value'
+        }
+    }
+
+    fig = visualizer.plot_multi_panel_analysis(data_dict, title='Integrated Analysis Summary')
+    return fig
+
 def main():
     """Main function to generate all figures."""
     print("Starting integrated analysis figure generation...")
+    os.environ.setdefault("MPLBACKEND", "Agg")
+    try:
+        set_random_seed(42)
+        set_plot_style('science')
+    except Exception:
+        np.random.seed(42)
     
     try:
         # Create all figures
@@ -540,6 +591,17 @@ def main():
             filename = f"{output_dir}/integrated_analysis_{name}.png"
             fig.savefig(filename, dpi=300, bbox_inches='tight')
             print(f"Saved: {filename}")
+
+        # Write captions for core figures
+        captions = {
+            'information_analysis': 'Information content distribution, receptor specificity, neural encoding, and environmental bits.',
+            'metamaterial_properties': 'Dielectric response, refractive index/absorption, plasmonic resonance, and info capacity.',
+            'system_performance': 'Information processing, material performance, and overall efficiency metrics.',
+            'cross_domain_synthesis': 'Architecture, cross-domain metrics, integration efficiency, and predictive capability.'
+        }
+        for key, text in captions.items():
+            with open(f"{output_dir}/integrated_analysis_{key}.caption.txt", 'w') as cf:
+                cf.write(text)
         
         plt.close('all')
         print(f"\nSuccessfully generated {len(figures)} integrated analysis figures!")
@@ -553,7 +615,7 @@ def main():
         odorant_properties = {'molecular_weight': 150.0, 'symmetry_number': 2, 'vibrational_modes': 15}
         receptor_properties = {
             'binding_energies': np.array([-25.0, -20.0, -15.0, -10.0, -5.0]),
-            'response_amplitudes': np.random.normal(1.0, 0.3, 100),
+            'response_amplitudes': np.random.default_rng(42).normal(1.0, 0.3, 100),
             'epsilon_inf': 2.0, 'omega_p': 5e15, 'gamma': 1e13,
             'particle_radius': 50e-9, 'metal_dielectric': -10.0 + 1j, 'medium_dielectric': 1.5,
             'frequency_bandwidth': 1e12, 'signal_power': 1e-6
@@ -574,6 +636,14 @@ def main():
         with open(report_filename, 'w') as f:
             f.write(report)
         print(f"Saved analysis report: {report_filename}")
+
+        # Also generate a composite summary figure
+        summary_fig = create_composite_summary_figure(analysis_results, integrated_analyzer.calculate_system_performance_metrics(analysis_results))
+        summary_path = f"{output_dir}/integrated_analysis_summary.png"
+        summary_fig.savefig(summary_path, dpi=300, bbox_inches='tight')
+        with open(f"{output_dir}/integrated_analysis_summary.caption.txt", 'w') as cf:
+            cf.write('Composite summary of dielectric and absorption vs frequency with normalized performance metrics.')
+        plt.close(summary_fig)
         
     except Exception as e:
         print(f"Error generating figures: {e}")

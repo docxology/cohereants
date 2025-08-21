@@ -6,16 +6,19 @@
 
 Insect olfactory receptor neurons (ORNs) demonstrate remarkably rapid response times that challenge traditional molecular binding models. The `calculate_response_time_improvement()` function quantifies these improvements by comparing insect ORN response times with traditional olfaction mechanisms.
 
-**Quantitative response times** (representative literature ranges):
+**Quantitative response times** (representative literature ranges; reproduced in code):
 - **Insect ORNs**: 1-5 ms response latency
 - **Traditional Olfaction**: 7-12 ms response latency
 - **Improvement Factor**: 2.3-7.0x faster response
 
-**Response time components**: We model latencies as the sum of detection, transduction, and propagation. `src/core.py::calculate_response_time_improvement` (see `tests/test_core.py::TestResponseTimeImprovement`) compares modeled latencies with literature baselines:
+**Response time components**: We model latencies as the sum of detection, transduction, and propagation. `src/core.py::calculate_response_time_improvement` (see `tests/test_core.py::TestResponseTimeImprovement`) compares modeled latencies with literature baselines and emits derived summaries consumed by the figure scripts:
 
-$$\tau_{response} = \tau_{detection} + \tau_{transduction} + \tau_{propagation}$$
+\begin{equation}
+\tau_{response} = \tau_{detection} + \tau_{transduction} + \tau_{propagation}
+\label{eq:response_time_components}
+\end{equation}
 
-where vibrational/electromagnetic contributions may reduce or bypass diffusion-limited components.
+where vibrational/electromagnetic contributions may reduce or bypass diffusion-limited components. The corresponding figure is generated deterministically by `scripts/generate_research_figures.py`.
 
 \Cref{fig:response_time_comparison} for response time comparisons.
 \begin{figure}[h]
@@ -47,7 +50,7 @@ If sensilla function as directional electromagnetic antennas, this would explain
 - **Front-to-Back Ratio**: 10-20 dB directional selectivity
 - **Gain Pattern**: Maximum sensitivity in the forward direction
 
-**Behavioral validation**: Reported localization accuracy suggests directional detection that may be consistent with antenna-like gain patterns; controlled IR‑only assays are required to disambiguate from volatile plume structure.
+**Behavioral validation**: Reported localization accuracy suggests directional detection that may be consistent with antenna‑like gain patterns; controlled IR‑only assays are required to disambiguate from volatile plume structure. We provide minimal falsifiers in the Discussion.
 
 ### Specialized Infrared Sensors
 
@@ -71,7 +74,7 @@ Experimental studies on leaf-cutting ants (*Atta vollenweideri*) demonstrate dir
 - **Penetration Depth**: 6 μm for 3-μm wavelength radiation
 - **Response Threshold**: 0.5-2.0 mW/cm²
 
-**Mechanistic Insights**: The electron-dense filaments within sensory pegs enhance infrared absorption, suggesting specialized structures for electromagnetic detection. The shield structure has minimal impact on IR reception, indicating that the detection mechanism operates through direct electromagnetic coupling rather than thermal conduction.
+**Mechanistic Insights**: The electron‑dense filaments within sensory pegs enhance infrared absorption, suggesting specialized structures for electromagnetic detection. The shield structure has minimal impact on IR reception, indicating that the detection mechanism operates through direct electromagnetic coupling rather than thermal conduction. Our analysis scripts plot penetration depth versus wavelength using only `src/` utilities.
 
 \Cref{fig:experimental_setup} for the experimental setup.
 \begin{figure}[h]
@@ -92,7 +95,7 @@ Highly efficient infrared spectroscopy (ATR-FTIR) has been used to identify aphi
 - **Grasshopper CHCs**: Transmission peak at 2850 cm$^{-1}$ (3.5 μm)
 - **Ant CHCs**: Multiple peaks in 2.9-3.1 μm range
 
-**Species discrimination**: Reported accuracies (≈95%) depend on dataset size and cross-validation protocol; reproducible analysis should report N, folds, and confidence intervals. Our pipeline provides peak and region features via `analyze_chc_spectra` for such classifiers.
+**Species discrimination**: Reported accuracies (\approx 95%) depend on dataset size and cross-validation protocol; reproducible analysis should report N, folds, and confidence intervals. Our pipeline provides peak and region features via `analyze_chc_spectra` for such classifiers.
 
 ### Intra-individual Variation
 
@@ -118,7 +121,10 @@ The log-periodic arrangement of sensilla arrays provides concentration tuning ca
 
 **Mathematical Model**: The response of a log-periodic sensilla array follows the relationship:
 
-$$R(C) = R_0 \sum_{n=0}^{N-1} \frac{C^n}{C_0^n} e^{-\frac{(C - C_n)^2}{2\sigma_n^2}}$$
+\begin{equation}
+R(C) = R_0 \sum_{n=0}^{N-1} \frac{C^n}{C_0^n} e^{-\frac{(C - C_n)^2}{2\sigma_n^2}}
+\label{eq:log_periodic_response_empirical}
+\end{equation}
 
 where $C$ is the concentration, $C_n = C_0 \tau^n$ defines the log-periodic spacing, and $\sigma_n$ determines the width of each response peak.
 

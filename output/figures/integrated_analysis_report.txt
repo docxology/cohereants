@@ -1,12 +1,12 @@
 === INTEGRATED ANALYSIS SUMMARY ===
 
 SYSTEM PERFORMANCE METRICS:
-  Information Processing Score: -6.56e+01
+  Information Processing Score: -5.89e+01
   Material Performance Score: 4.49e+01
   Overall System Efficiency: 0.00e+00
   Total Information Content: -74.60 bits
   Receptor Specificity: 0.605
-  Neural Encoding Efficiency: 1.4535 bits/energy
+  Neural Encoding Efficiency: 1.3051 bits/energy
   Information Capacity: 7.92e+12 bits/s
 
 === COMPREHENSIVE FERMI ESTIMATION ANALYSIS ===
@@ -23,9 +23,9 @@ RECEPTOR BINDING SPECIFICITY:
   Signal-to-noise ratio: -0.71
 
 NEURAL ENCODING EFFICIENCY:
-  Channel capacity: 1.69 bits
-  Information rate: 169.43 bits
-  Encoding efficiency: 1.4535 bits/energy
+  Channel capacity: 1.34 bits
+  Information rate: 133.62 bits
+  Encoding efficiency: 1.3051 bits/energy
 
 ENVIRONMENTAL INFORMATION:
   Total environmental bits: 17.61 bits
@@ -34,8 +34,8 @@ ENVIRONMENTAL INFORMATION:
   Pressure: 3.32 bits
 
 SYSTEM SUMMARY:
-  Total system information: 113.10 bits
-  Information density: 0.113 bits/kJ
+  Total system information: 77.28 bits
+  Information density: 0.077 bits/kJ
 
 === COMPREHENSIVE META-MATERIAL ANALYSIS ===
 

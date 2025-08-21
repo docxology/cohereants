@@ -1,0 +1,1 @@
+Sensilla dimensions and implied quarter/half-wavelength resonances via src.sensilla.analyze_sensilla_dimensions.

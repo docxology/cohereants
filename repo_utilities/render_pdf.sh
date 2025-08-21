@@ -35,7 +35,7 @@ AUTHOR_NAME="${AUTHOR_NAME:-Tucker C. Chambers, Daniel A. Friedman}"
 AUTHOR_ORCID="${AUTHOR_ORCID:-0000-0001-6232-9096}"
 AUTHOR_EMAIL="${AUTHOR_EMAIL:-daniel@activeinference.institute}"
 DOI="${DOI:-}"
-PROJECT_TITLE="${PROJECT_TITLE:-cohereants}"
+PROJECT_TITLE="${PROJECT_TITLE:-CohereAnts: Empirical and Theoretical Aspects of the Vibrational Model of Insect Olfaction}"
 
 if [ -n "$DOI" ]; then
     AUTHOR_TEX="$AUTHOR_NAME\\\\ Email: $AUTHOR_EMAIL\\\\ DOI: $DOI"
@@ -256,11 +256,25 @@ run_repo_utilities() {
   log_info "✅ Repository utilities completed"
 }
 
-# =============================================================================
-# IDE-FRIENDLY PDF GENERATION
-# =============================================================================
+ # =============================================================================
+ # EXTRA FORMATS (DISABLED)
+ # =============================================================================
 
 create_ide_friendly_pdf() {
+  return 0
+}
+
+create_web_optimized_pdf() {
+  return 0
+}
+
+create_html_version() {
+  return 0
+}
+
+# Legacy function bodies kept below for reference (disabled)
+
+legacy_create_ide_friendly_pdf() {
   local combined_md="$OUTPUT_DIR/project_combined.md"
   local ide_pdf="$PDF_DIR/project_combined_ide_friendly.pdf"
   
@@ -271,7 +285,7 @@ create_ide_friendly_pdf() {
   local ide_preamble="$LATEX_TEMP_DIR/preamble_ide.tex"
   if [ -f "$preamble_tex" ]; then
     # remove documentclass, begin/end document, maketitle and titlepage blocks
-    sed -e '/\\documentclass/Id' -e '/\\begin{document}/Id' -e '/\\end{document}/Id' -e '/\\maketitle/Id' -e '/\\begin{titlepage}/,/\\end{titlepage}/Id' "$preamble_tex" > "$ide_preamble" || cp "$preamble_tex" "$ide_preamble"
+    sed -e '/\\documentclass/Id' -e '/\\begin{document}/Id' -e '/\\end{document}/Id' -e '/\\maketitle/Id' -e '/\\begin{titlepage}/,/\\end{titlepage}/Id' -e '/\\usepackage\[[^]]*\]{microtype}/Id' -e '/\\usepackage{microtype}/Id' "$preamble_tex" > "$ide_preamble" || cp "$preamble_tex" "$ide_preamble"
   else
     touch "$ide_preamble"
   fi
@@ -355,7 +369,7 @@ create_ide_friendly_pdf() {
   fi
 }
 
-create_web_optimized_pdf() {
+legacy_create_web_optimized_pdf() {
   local combined_md="$OUTPUT_DIR/project_combined.md"
   local web_pdf="$PDF_DIR/project_combined_web.pdf"
   
@@ -398,7 +412,7 @@ create_web_optimized_pdf() {
   fi
 }
 
-create_html_version() {
+legacy_create_html_version() {
   local combined_md="$OUTPUT_DIR/project_combined.md"
   local html_out="$OUTPUT_DIR/project_combined.html"
   
@@ -566,7 +580,8 @@ EOF
       sed -i "s|src=\"figures/|src=\"$figures_dir/|g" "$html_out"
       
       # Convert LaTeX \includegraphics commands to HTML img tags
-      sed -i "s|\\includegraphics\[width=0\.9\\textwidth\]{\.\./output/figures/experimental_setup\.png}|<img src=\"$figures_dir/experimental_setup.png\" alt=\"Experimental Setup\" style=\"max-width: 100%; height: auto;\">|g" "$html_out"
+      # Remove any legacy references to experimental_setup.png in HTML output
+      sed -i "/experimental_setup\.png/d" "$html_out"
       sed -i "s|\\includegraphics\[width=0\.8\\textwidth\]{\.\./output/figures/example_figure\.png}|<img src=\"$figures_dir/example_figure.png\" alt=\"Example Figure\" style=\"max-width: 100%; height: auto;\">|g" "$html_out"
       
       # Remove LaTeX labels that don't work in HTML
@@ -746,7 +761,7 @@ build_combined() {
             caption=$(sed -n '1,3p' "$capfile" | tr -d '\n' | sed 's/"/\\"/g')
             cat >> "$combined_md" << EOF
 \\begin{figure}[h]
-\\centering
+\\raggedright
 \\includegraphics[width=0.8\\textwidth]{../output/figures/${figstem}.png}
 \\caption{${caption}}
 \\label{fig:${figstem}}
@@ -778,6 +793,9 @@ EOF
   local cover_tex="$LATEX_TEMP_DIR/cover.tex"
   cat > "$cover_tex" << EOF
 \thispagestyle{empty}
+\title{$PROJECT_TITLE}
+\author{$AUTHOR_TEX}
+\date{\today}
 \maketitle
 EOF
 
@@ -974,29 +992,7 @@ main() {
     log_error "❌ Combined document failed"
   fi
   
-  # Step 5.5: Create additional PDF versions for better IDE compatibility
-  log_info "Step 5.5: Creating additional PDF versions for IDE compatibility..."
-  
-  # Create IDE-friendly version
-  if create_ide_friendly_pdf; then
-    log_info "✅ IDE-friendly PDF created successfully"
-  else
-    log_warn "⚠️  IDE-friendly PDF creation failed (continuing)"
-  fi
-  
-  # Create web-optimized version
-  if create_web_optimized_pdf; then
-    log_info "✅ Web-optimized PDF created successfully"
-  else
-    log_warn "⚠️  Web-optimized PDF creation failed (continuing)"
-  fi
-
-  # Create HTML version for IDE viewing
-  if create_html_version; then
-    log_info "✅ HTML version created successfully"
-  else
-    log_warn "⚠️  HTML version creation failed (continuing)"
-  fi
+  # Step 5.5: Skipped — single robust PDF build only
   
   # Final validation - ensure all expected PDFs exist
   log_info "Step 6: Validating all generated PDFs..."
@@ -1007,16 +1003,7 @@ main() {
   done
   expected_pdfs+=("$PDF_DIR/project_combined.pdf")
   
-  # Add additional PDF versions to expected list
-  if [ -f "$PDF_DIR/project_combined_ide_friendly.pdf" ]; then
-    expected_pdfs+=("$PDF_DIR/project_combined_ide_friendly.pdf")
-  fi
-  if [ -f "$PDF_DIR/project_combined_web.pdf" ]; then
-    expected_pdfs+=("$PDF_DIR/project_combined_web.pdf")
-  fi
-  if [ -f "$OUTPUT_DIR/project_combined.html" ]; then
-    expected_pdfs+=("$OUTPUT_DIR/project_combined.html")
-  fi
+  # No additional formats expected
   
   local missing_pdfs=()
   for pdf in "${expected_pdfs[@]}"; do
@@ -1050,24 +1037,7 @@ main() {
     log_info "🎯 ALL modules built successfully!"
     log_info "📚 Complete manuscript available: $PDF_DIR/project_combined.pdf"
     
-    # Provide guidance on PDF versions
-    if [ -f "$PDF_DIR/project_combined_ide_friendly.pdf" ]; then
-      log_info "💻 IDE-friendly version: $PDF_DIR/project_combined_ide_friendly.pdf"
-      log_info "   (Use this version for better rendering in IDEs and text editors)"
-    fi
-    
-    if [ -f "$PDF_DIR/project_combined_web.pdf" ]; then
-      log_info "🌐 Web-optimized version: $PDF_DIR/project_combined_web.pdf"
-      log_info "   (Use this version for web viewing and mobile devices)"
-    fi
-
-    if [ -f "$OUTPUT_DIR/project_combined.html" ]; then
-      log_info "🖥️  HTML version: $OUTPUT_DIR/project_combined.html"
-      log_info "   (Use this version for IDE viewing and web browsers)"
-    fi
-    
-    log_info "📖 Standard version: $PDF_DIR/project_combined.pdf"
-    log_info "   (Use this version for printing and professional viewing)"
+    log_info "📖 Manuscript PDF: $PDF_DIR/project_combined.pdf"
   fi
 }
 

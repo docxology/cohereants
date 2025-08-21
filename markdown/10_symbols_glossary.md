@@ -116,9 +116,12 @@ The Earth's atmosphere has specific wavelength ranges where infrared radiation c
 - **8-14 μm (Long-wave infrared)**: 90% transmission efficiency, optimal for long-range communication
 - **17-25 μm (Far-infrared)**: 70% transmission efficiency, useful for thermal detection
 
-**Transmission function**: Modeled by `src/core.py::calculate_atmospheric_transmission()` (see Eq. \eqref{eq:atmospheric_transmission}):
+**Transmission function**: Modeled by `src/core.py::calculate_atmospheric_transmission()` (see Eq. \eqref{eq:atmospheric_transmission}; unit tests in `tests/test_core.py`):
 
-$$T(\lambda) = \exp\left[-\sum_i \alpha_i(\lambda) L_i\right]$$
+\begin{equation}
+T(\lambda) = \exp\left[-\sum_i \alpha_i(\lambda) L_i\right]
+\label{eq:transmission_function_gloss}
+\end{equation}
 
 where $\alpha_i(\lambda)$ is the absorption coefficient and $L_i$ is the path length through atmospheric component $i$.
 
@@ -129,11 +132,14 @@ Insect sensilla have dimensions that correspond closely to the wavelengths of in
 - **Sensilla Basiconica**: 2-8 μm length, optimal for 1-10 μm wavelengths
 - **Sensilla Coeloconica**: 5-15 μm length, optimal for 3-20 μm wavelengths
 
-**Wavelength matching**: Analyzed by `src/sensilla.py::analyze_sensilla_dimensions()`; see resonant frequency Eq. \eqref{eq:resonant_freq} and tests `tests/test_sensilla.py`.
+**Wavelength matching**: Analyzed by `src/sensilla.py::analyze_sensilla_dimensions()`; see resonant frequency Eq. \eqref{eq:resonant_freq} and tests `tests/test_sensilla.py`. Publication figures are generated via `scripts/generate_research_figures.py`.
 
 **Resonant Frequency**: The fundamental resonant frequency of a sensillum is:
 
-$$f_{res} = \frac{c}{2\pi} \sqrt{\left(\frac{\alpha_{mn}}{a}\right)^2 + \left(\frac{p\pi}{L}\right)^2}$$
+\begin{equation}
+f_{res} = \frac{c}{2\pi} \sqrt{\left(\frac{\alpha_{mn}}{a}\right)^2 + \left(\frac{p\pi}{L}\right)^2}
+\label{eq:resonant_freq_gloss}
+\end{equation}
 
 where $c$ is the speed of light, $\alpha_{mn}$ is the Bessel function root, and $a$ and $L$ are the radius and length.
 
@@ -146,20 +152,26 @@ Different sensory modalities exhibit characteristic response times that reflect 
 - **Traditional Olfaction (Molecular)**: 7-12 ms response time
 - **Mammalian ORNs**: 10-50 ms response time
 
-**Response time analysis**: Compared using `src/core.py::calculate_response_time_improvement()`; see `tests/test_core.py::TestResponseTimeImprovement`.
+**Response time analysis**: Compared using `src/core.py::calculate_response_time_improvement()`; see `tests/test_core.py::TestResponseTimeImprovement`. See `output/figures/response_time_comparison.png` and cf. \eqref{eq:response_time}.
 
 ### Signal Processing and Information Theory
 The vibrational theory incorporates advanced signal processing concepts:
 
 - **Channel Capacity**: The maximum information rate that can be transmitted through the infrared detection channel:
 
-$$C = B \log_2(1 + SNR)$$
+\begin{equation}
+C = B \log_2(1 + SNR)
+\label{eq:channel_capacity_gloss}
+\end{equation}
 
 where $B$ is the bandwidth and $SNR$ is the signal-to-noise ratio.
 
 - **Detection Threshold**: The minimum detectable power is:
 
-$$P_{min} = k_B T \Delta f \cdot SNR_{min}$$
+\begin{equation}
+P_{min} = k_B T \Delta f \cdot SNR_{min}
+\label{eq:min_power_gloss}
+\end{equation}
 
 where $k_B$ is Boltzmann's constant, $T$ is temperature, $\Delta f$ is bandwidth, and $SNR_{min}$ is the minimum required signal-to-noise ratio.
 
@@ -221,7 +233,7 @@ All mathematical concepts and equations presented in this manuscript are impleme
 - **`BehavioralAnalyzer`**: Specialized analysis for behavioral response data
 
 ### Data Validation and Testing
-- **`validate_numeric_inputs()`**: Ensures all numeric inputs are valid and finite
+- **`validate_numeric_inputs()`**: Ensures all numeric inputs are valid and finite (exercised in multiple unit tests)
 - **`SensillaData`**: Container class for sensilla measurements with validation
 - **`SpectralData`**: Container class for spectral data with analysis methods
 - **`BehavioralData`**: Container class for behavioral data with statistical analysis

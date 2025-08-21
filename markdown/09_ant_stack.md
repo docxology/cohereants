@@ -4,7 +4,7 @@
 
 This appendix provides a comprehensive mapping of how the cohereAnts research framework can be implemented within "The Ant Stack" computational architecture. The Ant Stack, as described by Friedman (2025), offers a modular, three-layer framework for emulating ant intelligence from physical embodiment to collective cognition. Here we demonstrate how our vibrational theory of olfaction, spectroscopic analysis, and behavioral modeling can be systematically integrated into this standardized computational framework.
 
-**Implementation Strategy**: We map cohereAnts modules to Ant Stack layers using explicit I/O contracts, ensuring reproducible experiments while maintaining the biological plausibility of our theoretical framework.
+**Implementation Strategy**: We map cohereAnts modules to Ant Stack layers using explicit I/O contracts, ensuring reproducible experiments while maintaining the biological plausibility of our theoretical framework. The examples below are thin adapters that call `src/` functions; no scientific logic resides in these adapters.
 
 ## Layer-by-Layer Integration
 
@@ -25,7 +25,7 @@ class AntBodySensilla:
     
     def _calculate_resonance(self):
         # Implement cohereAnts resonance theory
-        return self.lengths * 4  # Quarter-wavelength resonance
+        return self.lengths * 4  # Quarter-wavelength resonance (delegated to src/sensilla in production)
 ```
 
 **I/O Contract**: 
@@ -45,7 +45,7 @@ class AntBodySpectroscopy:
         
     def get_transmission(self, wavelength: float, distance: float) -> float:
         # Implement cohereAnts atmospheric transmission model
-        return calculate_atmospheric_transmission(wavelength, distance)
+        return calculate_atmospheric_transmission(wavelength, distance)  # from src/core
 ```
 
 **Configuration Parameters**:
@@ -70,7 +70,7 @@ class AntBrainOlfaction:
         self.cx_neurons = self._initialize_cx_circuit()
     
     def _initialize_al_circuit(self):
-        # Implement cohereAnts vibrational detection theory
+        # Implement cohereAnts vibrational detection theory (delegates to src components in production)
         # Each glomerulus responds to specific molecular vibrations
         return VibrationalGlomeruliCircuit()
     
@@ -107,7 +107,7 @@ class VibrationalGlomeruliCircuit:
     
     def _calculate_vibrational_response(self, spectrum: np.ndarray, 
                                      resonant_freq: float) -> float:
-        # Apply cohereAnts electromagnetic coupling model
+        # Apply cohereAnts electromagnetic coupling model (placeholder; call src functions in production)
         coupling_strength = self._calculate_coupling(spectrum, resonant_freq)
         return coupling_strength * self.quality_factors[i]
 ```
@@ -250,13 +250,13 @@ class AntStackEvaluator:
         return results
     
     def _evaluate_trail_following(self, ant_stack: AntStack) -> float:
-        # Implement cohereAnts trail following metrics
+        # Implement cohereAnts trail following metrics (calls src/behavioral metrics)
         trail_deviation = self._calculate_trail_deviation()
         pheromone_detection = self._calculate_pheromone_detection()
         return self._combine_metrics([trail_deviation, pheromone_detection])
     
     def _evaluate_food_search(self, ant_stack: AntStack) -> float:
-        # Implement cohereAnts search efficiency metrics
+        # Implement cohereAnts search efficiency metrics (calls src/behavioral metrics)
         search_time = self._measure_search_time()
         energy_efficiency = self._calculate_energy_efficiency()
         return self._combine_metrics([search_time, energy_efficiency])

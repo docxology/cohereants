@@ -1,1 +1,0 @@
-Experimental pipeline schematic used to illustrate controlled IR stimulus delivery and processing steps. Not an experimental photo; schematic generated programmatically.

@@ -68,6 +68,7 @@
 \usepackage{fancyvrb}
 \usepackage{setspace}
 \usepackage{ragged2e}
+\usepackage{etoolbox}
 
 % Page geometry - more accessible margins
 \geometry{margin=1in, top=1in, bottom=1in}
@@ -105,43 +106,9 @@
 \setlength{\parindent}{0.5in}
 \setlength{\parskip}{0em}
 
-% Override any centering for academic documents
-\makeatletter
-\renewcommand{\maketitle}{%
-  \begin{titlepage}%
-    \let\footnotesize\small
-    \let\footnoterule\relax
-    \let\footnote\thanks
-    \begin{center}%
-      {\LARGE \@title \par}%
-      \vskip 1.5em%
-      {\large
-        \lineskip .5em%
-        \begin{tabular}[t]{c}%
-          \@author
-        \end{tabular}\par}%
-      \vskip 1em%
-      {\large \@date}%
-    \end{center}%
-    \par
-    \@thanks
-  \end{titlepage}%
-  \setcounter{footnote}{0}%
-  \global\let\thanks\relax
-  \global\let\maketitle\relax
-  \global\let\@thanks\@empty
-  \global\let\@author\@empty
-  \global\let\@title\@empty
-  \global\let\@date\@empty
-  \global\let\title\relax
-  \global\let\author\relax
-  \global\let\date\relax
-  \global\let\and\relax
-}
-\makeatother
-
-% Use full justification for body text (left and right justified)
-\justifying
+% Left-justify the body text globally
+\RaggedRight
+\setlength{\RaggedRightParindent}{0.5in}
 
 % Ensure body text is fully justified and consistent
 \setlength{\parindent}{0.5in}
@@ -152,10 +119,13 @@
 \counterwithout{table}{section}
 \counterwithout{equation}{section}
 
-% Figure and table caption formatting
+% Figure and table caption formatting (left-justified)
 \usepackage[font=small,labelfont=bf,textfont=it]{caption}
+\captionsetup{justification=raggedright,singlelinecheck=false}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
+% Left-align content inside all figure environments
+\AtBeginEnvironment{figure}{\raggedright}
 
 % Hyperlinks and smart cross-references
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
@@ -254,10 +224,10 @@ different domains:
   mechanisms.
 \item
   \textbf{Behavioral Evidence}: Observed behaviors such as
-  self-orienting of sensilla hairs toward odor sources and the evolution
+  self‑orienting of sensilla hairs toward odor sources and the evolution
   of specialized infrared sensors in beetle species support the
   hypothesis of infrared detection capabilities. Experimental studies
-  demonstrate detection thresholds of 0.5-2.0 mW/cm² for infrared
+  demonstrate detection thresholds of 0.5--2.0 mW/cm² for infrared
   radiation.
 \item
   \textbf{Spectroscopic Evidence}: The emission spectra of insect
@@ -295,7 +265,8 @@ integrates multiple physical principles:
 \textbf{Mathematical Foundation}: The complete mathematical framework is
 presented in Section \cref{sec:mathematical_appendix}, with all
 equations implemented in tested computational models that provide
-quantitative predictions for experimental validation.
+quantitative predictions for experimental validation. Symbols and
+cross‑links are indexed in \cref{sec:symbols_glossary}.
 
 \subsubsection{Computational
 Implementation}\label{computational-implementation}
@@ -451,7 +422,7 @@ Understanding insect infrared detection could inspire new technologies:
   \textbf{Medical Diagnostics}: Breath analysis for disease detection
 \end{itemize}
 
-\textbf{Performance Advantages}: Insect-inspired sensors could provide
+\textbf{Performance Advantages}: Insect‑inspired sensors could provide
 higher sensitivity, lower power consumption, better selectivity, and
 environmental robustness compared to current technologies.
 
@@ -460,7 +431,8 @@ Directions}\label{future-research-directions}
 
 \subsubsection{Experimental Validation}\label{experimental-validation}
 
-The mathematical framework provides specific, testable predictions:
+The mathematical framework provides specific, testable predictions and
+minimal falsifiers:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -480,6 +452,10 @@ The mathematical framework provides specific, testable predictions:
 \item
   \textbf{Environmental Studies}: Analysis of atmospheric transmission
   effects on detection range and sensitivity
+\item
+  \textbf{Minimal Falsifiers}: No frequency‑specific IR responses under
+  thermal controls; geometry--wavelength mismatch across taxa; CHC peaks
+  outside modeled windows under controls
 \end{enumerate}
 
 \subsubsection{Computational
@@ -580,7 +556,7 @@ principles for biomimetic systems
 \subsubsection{Scientific Significance}\label{scientific-significance}
 
 This research demonstrates the value of integrating multiple analytical
-approaches:
+approaches under a strict TDD pipeline:
 
 \begin{itemize}
 \tightlist
@@ -591,7 +567,7 @@ approaches:
   and validation
 \item
   \textbf{Computational Implementation}: Tested code ensuring
-  reproducibility
+  reproducibility (100\% coverage enforced)
 \item
   \textbf{Cross-Domain Synthesis}: Integration of multiple scientific
   disciplines

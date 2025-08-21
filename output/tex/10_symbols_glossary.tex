@@ -78,6 +78,7 @@
 \usepackage{fancyvrb}
 \usepackage{setspace}
 \usepackage{ragged2e}
+\usepackage{etoolbox}
 
 % Page geometry - more accessible margins
 \geometry{margin=1in, top=1in, bottom=1in}
@@ -115,43 +116,9 @@
 \setlength{\parindent}{0.5in}
 \setlength{\parskip}{0em}
 
-% Override any centering for academic documents
-\makeatletter
-\renewcommand{\maketitle}{%
-  \begin{titlepage}%
-    \let\footnotesize\small
-    \let\footnoterule\relax
-    \let\footnote\thanks
-    \begin{center}%
-      {\LARGE \@title \par}%
-      \vskip 1.5em%
-      {\large
-        \lineskip .5em%
-        \begin{tabular}[t]{c}%
-          \@author
-        \end{tabular}\par}%
-      \vskip 1em%
-      {\large \@date}%
-    \end{center}%
-    \par
-    \@thanks
-  \end{titlepage}%
-  \setcounter{footnote}{0}%
-  \global\let\thanks\relax
-  \global\let\maketitle\relax
-  \global\let\@thanks\@empty
-  \global\let\@author\@empty
-  \global\let\@title\@empty
-  \global\let\@date\@empty
-  \global\let\title\relax
-  \global\let\author\relax
-  \global\let\date\relax
-  \global\let\and\relax
-}
-\makeatother
-
-% Use full justification for body text (left and right justified)
-\justifying
+% Left-justify the body text globally
+\RaggedRight
+\setlength{\RaggedRightParindent}{0.5in}
 
 % Ensure body text is fully justified and consistent
 \setlength{\parindent}{0.5in}
@@ -162,10 +129,13 @@
 \counterwithout{table}{section}
 \counterwithout{equation}{section}
 
-% Figure and table caption formatting
+% Figure and table caption formatting (left-justified)
 \usepackage[font=small,labelfont=bf,textfont=it]{caption}
+\captionsetup{justification=raggedright,singlelinecheck=false}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
+% Left-align content inside all figure environments
+\AtBeginEnvironment{figure}{\raggedright}
 
 % Hyperlinks and smart cross-references
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
@@ -535,9 +505,13 @@ radiation can travel relatively freely, enabling long-range detection:
 
 \textbf{Transmission function}: Modeled by
 \passthrough{\lstinline!src/core.py::calculate\_atmospheric\_transmission()!}
-(see Eq. \eqref{eq:atmospheric_transmission}):
+(see Eq. \eqref{eq:atmospheric_transmission}; unit tests in
+\passthrough{\lstinline!tests/test\_core.py!}):
 
-\[T(\lambda) = \exp\left[-\sum_i \alpha_i(\lambda) L_i\right]\]
+\begin{equation}
+T(\lambda) = \exp\left[-\sum_i \alpha_i(\lambda) L_i\right]
+\label{eq:transmission_function_gloss}
+\end{equation}
 
 where \(\alpha_i(\lambda)\) is the absorption coefficient and \(L_i\) is
 the path length through atmospheric component \(i\).
@@ -564,12 +538,17 @@ wavelengths of infrared radiation they detect:
 \textbf{Wavelength matching}: Analyzed by
 \passthrough{\lstinline!src/sensilla.py::analyze\_sensilla\_dimensions()!};
 see resonant frequency Eq. \eqref{eq:resonant_freq} and tests
-\passthrough{\lstinline!tests/test\_sensilla.py!}.
+\passthrough{\lstinline!tests/test\_sensilla.py!}. Publication figures
+are generated via
+\passthrough{\lstinline!scripts/generate\_research\_figures.py!}.
 
 \textbf{Resonant Frequency}: The fundamental resonant frequency of a
 sensillum is:
 
-\[f_{res} = \frac{c}{2\pi} \sqrt{\left(\frac{\alpha_{mn}}{a}\right)^2 + \left(\frac{p\pi}{L}\right)^2}\]
+\begin{equation}
+f_{res} = \frac{c}{2\pi} \sqrt{\left(\frac{\alpha_{mn}}{a}\right)^2 + \left(\frac{p\pi}{L}\right)^2}
+\label{eq:resonant_freq_gloss}
+\end{equation}
 
 where \(c\) is the speed of light, \(\alpha_{mn}\) is the Bessel
 function root, and \(a\) and \(L\) are the radius and length.
@@ -598,6 +577,9 @@ reflect their underlying mechanisms:
 \passthrough{\lstinline!src/core.py::calculate\_response\_time\_improvement()!};
 see
 \passthrough{\lstinline!tests/test\_core.py::TestResponseTimeImprovement!}.
+See
+\passthrough{\lstinline!output/figures/response\_time\_comparison.png!}
+and cf.~\eqref{eq:response_time}.
 
 \subsubsection{Signal Processing and Information
 Theory}\label{signal-processing-and-information-theory}
@@ -611,7 +593,10 @@ The vibrational theory incorporates advanced signal processing concepts:
   transmitted through the infrared detection channel:
 \end{itemize}
 
-\[C = B \log_2(1 + SNR)\]
+\begin{equation}
+C = B \log_2(1 + SNR)
+\label{eq:channel_capacity_gloss}
+\end{equation}
 
 where \(B\) is the bandwidth and \(SNR\) is the signal-to-noise ratio.
 
@@ -621,7 +606,10 @@ where \(B\) is the bandwidth and \(SNR\) is the signal-to-noise ratio.
   \textbf{Detection Threshold}: The minimum detectable power is:
 \end{itemize}
 
-\[P_{min} = k_B T \Delta f \cdot SNR_{min}\]
+\begin{equation}
+P_{min} = k_B T \Delta f \cdot SNR_{min}
+\label{eq:min_power_gloss}
+\end{equation}
 
 where \(k_B\) is Boltzmann's constant, \(T\) is temperature,
 \(\Delta f\) is bandwidth, and \(SNR_{min}\) is the minimum required
@@ -807,7 +795,8 @@ Testing}\label{data-validation-and-testing}
 \tightlist
 \item
   \textbf{\passthrough{\lstinline!validate\_numeric\_inputs()!}}:
-  Ensures all numeric inputs are valid and finite
+  Ensures all numeric inputs are valid and finite (exercised in multiple
+  unit tests)
 \item
   \textbf{\passthrough{\lstinline!SensillaData!}}: Container class for
   sensilla measurements with validation

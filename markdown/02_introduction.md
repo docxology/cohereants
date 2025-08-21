@@ -8,19 +8,21 @@ The classical stereochemical theory of olfaction posits that molecular recogniti
 
 **Receptor Diversity and Specificity**: Insects possess hundreds of distinct OR types, yet can discriminate among billions of perceptible odors. This remarkable capability is achieved through combinatorial activation patterns, where individual odors activate multiple receptors with varying affinities, creating high-dimensional neural representations despite individual receptor broad-tuning.
 
+**Key limitation**: Diffusion and binding kinetics alone struggle to explain sub‑10 ms response latencies and long‑range detection given environmental constraints. This motivates evaluation of complementary mechanisms that operate upstream of, or in parallel with, binding.
+
 ## Limitations of Stereochemical Theory
 
 ### Isotope Discrimination Evidence
 
 The stereochemical theory faces challenges from isotope discrimination studies. Molecules with identical shapes and chemical structures but different isotopic compositions can elicit distinct olfactory responses, suggesting that geometry alone may not fully explain odor discrimination.
 
-**Quantitative Evidence**: Studies on *Drosophila melanogaster* show that deuterated homologues of known odorants produce unique behavioral responses despite maintaining identical molecular shapes. This finding is quantitatively supported by vibrational spectroscopy, where deuteration shifts infrared emission spectra by 2-3 μm while preserving molecular geometry.
+**Quantitative Evidence**: Studies on *Drosophila melanogaster* show that deuterated homologues of known odorants produce unique behavioral responses despite maintaining identical molecular shapes. This finding is quantitatively supported by vibrational spectroscopy, where deuteration shifts infrared emission spectra by 2–3 μm while preserving molecular geometry; see conversions verified by `src/core.py::calculate_wavelength_from_wavenumber` and `tests/test_core.py::TestWavelengthConversions`.
 
 ### Response Time Inconsistencies
 
 Traditional molecular binding models cannot account for the extremely rapid response times observed in insect olfaction. Insect ORNs demonstrate response latencies of 1-5 ms, comparable to photoreceptor (0.1 ms) and auditory receptor (0.16 ms) response times.
 
-**Mechanistic implications**: These rapid responses are difficult to reconcile with simple diffusion+binding models under typical environmental conditions and motivate evaluation of alternative mechanisms (e.g., vibrational/electromagnetic contributions) that could act upstream of or in parallel with binding.
+**Mechanistic implications**: These rapid responses are difficult to reconcile with simple diffusion+binding models under typical environmental conditions and motivate evaluation of alternative mechanisms (e.g., vibrational/electromagnetic contributions) that could act upstream of or in parallel with binding. We quantify these gaps with `src/core.py::calculate_response_time_improvement` (see `tests/test_core.py::TestResponseTimeImprovement`) and visualize in `output/figures/response_time_comparison.png`.
 
 ## The Vibrational Theory Alternative
 
@@ -30,7 +32,7 @@ The vibrational theory of olfaction proposes that insects detect the unique elec
 
 A compelling aspect of the vibrational theory is the correspondence between atmospheric transmission characteristics and semiochemical emission spectra. Earth's atmosphere exhibits specific transmission windows in the mid- and long-infrared ranges (2-5 μm, 8-14 μm, 17-25 μm) that precisely overlap with the emission spectra of insect semiochemicals.
 
-**Testable prediction P1**: Under controlled humidity/temperature, modeled transmission windows (2–5 μm, 8–14 μm, 17–25 μm) should align with CHC emission peaks measured by ATR‑FTIR; see `src/core.calculate_atmospheric_transmission()` with coverage in `tests/test_core.py`.
+**Testable prediction P1**: Under controlled humidity/temperature, modeled transmission windows (2–5 μm, 8–14 μm, 17–25 μm) should align with CHC emission peaks measured by ATR‑FTIR; see `src/core.calculate_atmospheric_transmission()` with coverage in `tests/test_core.py`. A runnable example is produced by `scripts/generate_research_figures.py` (fixed seed 42), emitting `output/figures/atmospheric_transmission.png`.
 
 ### Sensilla as Electromagnetic Antennas (Hypothesis)
 
@@ -47,6 +49,8 @@ This paper examines the vibrational theory through multiple analytical domains:
 3. **Behavioral Studies**: Examination of insect responses to infrared stimuli and environmental conditions
 4. **Spectroscopic Validation**: Measurement and analysis of semiochemical emission spectra
 5. **Computational Modeling**: Implementation of theoretical frameworks in tested computational models, cross-linked to unit tests
+
+Each objective maps to a tested function or class in `src/` and a corresponding figure or data artifact listed in the Symbols/Glossary I/O map.
 
 ### Explicit Hypotheses and Falsifiable Predictions
 - H1 (Resonance): Sensilla length/diameter distributions predict quarter/half‑wavelength resonances within 2–30 μm; correlation r ≥ 0.8 across species.
@@ -65,6 +69,8 @@ The vibrational theory integrates multiple physical principles:
 - **Resonant Cavity Theory**: Sensilla as frequency-tuned electromagnetic resonators
 - **Piezoelectric Effects**: Microtubule arrays as signal amplifiers and frequency selectors
 
+These principles are connected to specific numerical routines and validated unit tests; see \cref{sec:mathematical_appendix} for equations and `tests/` mappings.
+
 ## Empirical Validation Strategy
 
 All theoretical predictions are implemented in tested computational models that generate quantitative predictions for experimental validation. The mathematical framework presented in Section \ref{sec:mathematical_appendix} provides specific equations that can be tested through:
@@ -74,4 +80,4 @@ All theoretical predictions are implemented in tested computational models that 
 - **Neural Recording**: Measurement of ORN responses to electromagnetic stimulation
 - **Environmental Studies**: Analysis of atmospheric transmission effects on detection range
 
-This integrated approach ensures that theoretical predictions are grounded in empirical reality and provides a framework for future experimental validation of the vibrational theory.
+This integrated approach ensures that theoretical predictions are grounded in empirical reality and provides a framework for future experimental validation of the vibrational theory. Minimal falsifiers are enumerated in Discussion; figures are regenerated deterministically through the pipeline.

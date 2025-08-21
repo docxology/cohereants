@@ -12,7 +12,7 @@ The vibrational theory is supported by multiple lines of evidence across differe
 
 2. **Neurological Evidence**: The extremely rapid response times of insect olfactory receptor neurons (1-5 ms) are more consistent with electromagnetic detection than with molecular binding and diffusion processes. The `calculate_response_time_improvement()` function shows 2.3-7.0x improvement compared to traditional olfaction mechanisms.
 
-3. **Behavioral Evidence**: Observed behaviors such as self-orienting of sensilla hairs toward odor sources and the evolution of specialized infrared sensors in beetle species support the hypothesis of infrared detection capabilities. Experimental studies demonstrate detection thresholds of 0.5-2.0 mW/cm² for infrared radiation.
+3. **Behavioral Evidence**: Observed behaviors such as self‑orienting of sensilla hairs toward odor sources and the evolution of specialized infrared sensors in beetle species support the hypothesis of infrared detection capabilities. Experimental studies demonstrate detection thresholds of 0.5–2.0 mW/cm² for infrared radiation.
 
 4. **Spectroscopic Evidence**: The emission spectra of insect semiochemicals fall precisely within atmospheric transmission windows (2-5 μm: 80%, 8-14 μm: 90%, 17-25 μm: 70%), enabling long-range detection at distances of 10-100 meters. The `analyze_chc_spectra()` function identifies characteristic peaks with ±0.1 μm sensitivity.
 
@@ -27,7 +27,7 @@ The vibrational theory of olfaction provides a unified framework that integrates
 - **Resonant Cavity Theory**: Sensilla as frequency-tuned electromagnetic resonators
 - **Piezoelectric Effects**: Microtubule arrays as signal amplifiers and frequency selectors
 
-**Mathematical Foundation**: The complete mathematical framework is presented in Section \cref{sec:mathematical_appendix}, with all equations implemented in tested computational models that provide quantitative predictions for experimental validation.
+**Mathematical Foundation**: The complete mathematical framework is presented in Section \cref{sec:mathematical_appendix}, with all equations implemented in tested computational models that provide quantitative predictions for experimental validation. Symbols and cross‑links are indexed in \cref{sec:symbols_glossary}.
 
 ### Computational Implementation
 
@@ -93,19 +93,20 @@ Understanding insect infrared detection could inspire new technologies:
 - **Security Applications**: Non-contact explosive and drug detection
 - **Medical Diagnostics**: Breath analysis for disease detection
 
-**Performance Advantages**: Insect-inspired sensors could provide higher sensitivity, lower power consumption, better selectivity, and environmental robustness compared to current technologies.
+**Performance Advantages**: Insect‑inspired sensors could provide higher sensitivity, lower power consumption, better selectivity, and environmental robustness compared to current technologies.
 
 ## Future Research Directions
 
 ### Experimental Validation
 
-The mathematical framework provides specific, testable predictions:
+The mathematical framework provides specific, testable predictions and minimal falsifiers:
 
 1. **Sensilla Response Measurements**: Direct testing of infrared sensitivity across different frequencies (2-30 μm)
 2. **Behavioral Assays**: Quantification of insect responses to infrared stimuli in the absence of molecular cues
 3. **Neural Recording**: Measurement of ORN responses to electromagnetic stimulation with sub-millisecond resolution
 4. **Comparative Studies**: Examination of infrared detection capabilities across different insect taxa
 5. **Environmental Studies**: Analysis of atmospheric transmission effects on detection range and sensitivity
+6. **Minimal Falsifiers**: No frequency‑specific IR responses under thermal controls; geometry–wavelength mismatch across taxa; CHC peaks outside modeled windows under controls
 
 ### Computational Enhancements
 
@@ -159,11 +160,11 @@ The vibrational theory of olfaction represents a potential shift in our understa
 
 ### Scientific Significance
 
-This research demonstrates the value of integrating multiple analytical approaches:
+This research demonstrates the value of integrating multiple analytical approaches under a strict TDD pipeline:
 
 - **Empirical Evidence**: Comprehensive review of experimental data
 - **Theoretical Modeling**: Mathematical framework for prediction and validation
-- **Computational Implementation**: Tested code ensuring reproducibility
+- **Computational Implementation**: Tested code ensuring reproducibility (100% coverage enforced)
 - **Cross-Domain Synthesis**: Integration of multiple scientific disciplines
 
 ### Future Potential

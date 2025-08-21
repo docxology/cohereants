@@ -5,6 +5,7 @@
 This appendix provides the mathematical foundations for the vibrational theory of olfaction in insects. We present rigorous formulations of the electromagnetic detection mechanisms, waveguide theory, and spectroscopic analysis that underpin our theoretical framework. All equations presented here are implemented in tested source code that generates the visualizations and analyses embedded throughout this manuscript.
 
 **Computational Implementation**: The complete mathematical framework is implemented in Python modules with 100% test coverage, ensuring accuracy and reproducibility of all theoretical predictions.
+All equations below are linked to concrete implementations in `src/` and validated by tests listed at the end of each subsection where applicable.
 
 ## Electromagnetic Wave Theory
 
@@ -70,7 +71,7 @@ Q = \frac{f_{res}}{\Delta f} = \frac{\omega_0}{2\alpha} \label{eq:quality_factor
 where $\Delta f$ is the bandwidth and $\alpha$ is the attenuation constant.
 
 ### Worked Example (Resonant Frequency)
-Assume a cylindrical sensillum with radius $a=1.5\,\mu m$, length $L=12\,\mu m$, relative permittivity $\epsilon_r=2.8$, and axial mode $p=1$ using the first Bessel root $\alpha_{11}\approx1.841$. With $c=c_0/\sqrt{\epsilon_r}$, Eq. \eqref{eq:resonant_freq} gives a fundamental frequency corresponding to a free-space wavelength in the mid‑IR range. This matches the quarter/half‑wavelength heuristic implemented in `src/sensilla.py::analyze_sensilla_dimensions` (see `tests/test_sensilla.py`).
+Assume a cylindrical sensillum with radius $a=1.5\,\mu m$, length $L=12\,\mu m$, relative permittivity $\epsilon_r=2.8$, and axial mode $p=1$ using the first Bessel root $\alpha_{11}\approx1.841$. With $c=c_0/\sqrt{\epsilon_r}$, Eq. \eqref{eq:resonant_freq} gives a fundamental frequency corresponding to a free‑space wavelength in the mid‑IR range. This matches the quarter/half‑wavelength heuristic implemented in `src/sensilla.py::analyze_sensilla_dimensions` (see `tests/test_sensilla.py`) and is visualized by `scripts/generate_research_figures.py`.
 
 ## Vibrational Spectroscopy
 

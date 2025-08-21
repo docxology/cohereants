@@ -68,6 +68,7 @@
 \usepackage{fancyvrb}
 \usepackage{setspace}
 \usepackage{ragged2e}
+\usepackage{etoolbox}
 
 % Page geometry - more accessible margins
 \geometry{margin=1in, top=1in, bottom=1in}
@@ -105,43 +106,9 @@
 \setlength{\parindent}{0.5in}
 \setlength{\parskip}{0em}
 
-% Override any centering for academic documents
-\makeatletter
-\renewcommand{\maketitle}{%
-  \begin{titlepage}%
-    \let\footnotesize\small
-    \let\footnoterule\relax
-    \let\footnote\thanks
-    \begin{center}%
-      {\LARGE \@title \par}%
-      \vskip 1.5em%
-      {\large
-        \lineskip .5em%
-        \begin{tabular}[t]{c}%
-          \@author
-        \end{tabular}\par}%
-      \vskip 1em%
-      {\large \@date}%
-    \end{center}%
-    \par
-    \@thanks
-  \end{titlepage}%
-  \setcounter{footnote}{0}%
-  \global\let\thanks\relax
-  \global\let\maketitle\relax
-  \global\let\@thanks\@empty
-  \global\let\@author\@empty
-  \global\let\@title\@empty
-  \global\let\@date\@empty
-  \global\let\title\relax
-  \global\let\author\relax
-  \global\let\date\relax
-  \global\let\and\relax
-}
-\makeatother
-
-% Use full justification for body text (left and right justified)
-\justifying
+% Left-justify the body text globally
+\RaggedRight
+\setlength{\RaggedRightParindent}{0.5in}
 
 % Ensure body text is fully justified and consistent
 \setlength{\parindent}{0.5in}
@@ -152,10 +119,13 @@
 \counterwithout{table}{section}
 \counterwithout{equation}{section}
 
-% Figure and table caption formatting
+% Figure and table caption formatting (left-justified)
 \usepackage[font=small,labelfont=bf,textfont=it]{caption}
+\captionsetup{justification=raggedright,singlelinecheck=false}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
+% Left-align content inside all figure environments
+\AtBeginEnvironment{figure}{\raggedright}
 
 % Hyperlinks and smart cross-references
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
@@ -230,22 +200,28 @@ response times that challenge traditional molecular binding models. The
 function quantifies these improvements by comparing insect ORN response
 times with traditional olfaction mechanisms.
 
-\textbf{Quantitative response times} (representative literature ranges):
-- \textbf{Insect ORNs}: 1-5 ms response latency - \textbf{Traditional
-Olfaction}: 7-12 ms response latency - \textbf{Improvement Factor}:
-2.3-7.0x faster response
+\textbf{Quantitative response times} (representative literature ranges;
+reproduced in code): - \textbf{Insect ORNs}: 1-5 ms response latency -
+\textbf{Traditional Olfaction}: 7-12 ms response latency -
+\textbf{Improvement Factor}: 2.3-7.0x faster response
 
 \textbf{Response time components}: We model latencies as the sum of
 detection, transduction, and propagation.
 \passthrough{\lstinline!src/core.py::calculate\_response\_time\_improvement!}
 (see
 \passthrough{\lstinline!tests/test\_core.py::TestResponseTimeImprovement!})
-compares modeled latencies with literature baselines:
+compares modeled latencies with literature baselines and emits derived
+summaries consumed by the figure scripts:
 
-\[\tau_{response} = \tau_{detection} + \tau_{transduction} + \tau_{propagation}\]
+\begin{equation}
+\tau_{response} = \tau_{detection} + \tau_{transduction} + \tau_{propagation}
+\label{eq:response_time_components}
+\end{equation}
 
 where vibrational/electromagnetic contributions may reduce or bypass
-diffusion-limited components.
+diffusion-limited components. The corresponding figure is generated
+deterministically by
+\passthrough{\lstinline!scripts/generate\_research\_figures.py!}.
 
 \Cref{fig:response_time_comparison} for response time comparisons.
 
@@ -293,9 +269,10 @@ selectivity - \textbf{Gain Pattern}: Maximum sensitivity in the forward
 direction
 
 \textbf{Behavioral validation}: Reported localization accuracy suggests
-directional detection that may be consistent with antenna-like gain
+directional detection that may be consistent with antenna‑like gain
 patterns; controlled IR‑only assays are required to disambiguate from
-volatile plume structure.
+volatile plume structure. We provide minimal falsifiers in the
+Discussion.
 
 \subsubsection{Specialized Infrared
 Sensors}\label{specialized-infrared-sensors}
@@ -328,12 +305,13 @@ emitter (0.4-11.2 μm) - \textbf{Response Measurement}: Cold-sensitive
 neuron activity - \textbf{Penetration Depth}: 6 μm for 3-μm wavelength
 radiation - \textbf{Response Threshold}: 0.5-2.0 mW/cm²
 
-\textbf{Mechanistic Insights}: The electron-dense filaments within
+\textbf{Mechanistic Insights}: The electron‑dense filaments within
 sensory pegs enhance infrared absorption, suggesting specialized
 structures for electromagnetic detection. The shield structure has
 minimal impact on IR reception, indicating that the detection mechanism
 operates through direct electromagnetic coupling rather than thermal
-conduction.
+conduction. Our analysis scripts plot penetration depth versus
+wavelength using only \passthrough{\lstinline!src/!} utilities.
 
 \Cref{fig:experimental_setup} for the experimental setup.
 
@@ -360,11 +338,11 @@ these spectra to identify characteristic vibrational modes.
 Transmission peak at 2850 cm\(^{-1}\) (3.5 μm) - \textbf{Ant CHCs}:
 Multiple peaks in 2.9-3.1 μm range
 
-\textbf{Species discrimination}: Reported accuracies (≈95\%) depend on
-dataset size and cross-validation protocol; reproducible analysis should
-report N, folds, and confidence intervals. Our pipeline provides peak
-and region features via \passthrough{\lstinline!analyze\_chc\_spectra!}
-for such classifiers.
+\textbf{Species discrimination}: Reported accuracies (\approx 95\%)
+depend on dataset size and cross-validation protocol; reproducible
+analysis should report N, folds, and confidence intervals. Our pipeline
+provides peak and region features via
+\passthrough{\lstinline!analyze\_chc\_spectra!} for such classifiers.
 
 \subsubsection{Intra-individual
 Variation}\label{intra-individual-variation}
@@ -403,7 +381,10 @@ concentration ranges
 \textbf{Mathematical Model}: The response of a log-periodic sensilla
 array follows the relationship:
 
-\[R(C) = R_0 \sum_{n=0}^{N-1} \frac{C^n}{C_0^n} e^{-\frac{(C - C_n)^2}{2\sigma_n^2}}\]
+\begin{equation}
+R(C) = R_0 \sum_{n=0}^{N-1} \frac{C^n}{C_0^n} e^{-\frac{(C - C_n)^2}{2\sigma_n^2}}
+\label{eq:log_periodic_response_empirical}
+\end{equation}
 
 where \(C\) is the concentration, \(C_n = C_0 \tau^n\) defines the
 log-periodic spacing, and \(\sigma_n\) determines the width of each

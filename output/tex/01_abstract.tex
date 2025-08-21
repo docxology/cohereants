@@ -68,6 +68,7 @@
 \usepackage{fancyvrb}
 \usepackage{setspace}
 \usepackage{ragged2e}
+\usepackage{etoolbox}
 
 % Page geometry - more accessible margins
 \geometry{margin=1in, top=1in, bottom=1in}
@@ -105,43 +106,9 @@
 \setlength{\parindent}{0.5in}
 \setlength{\parskip}{0em}
 
-% Override any centering for academic documents
-\makeatletter
-\renewcommand{\maketitle}{%
-  \begin{titlepage}%
-    \let\footnotesize\small
-    \let\footnoterule\relax
-    \let\footnote\thanks
-    \begin{center}%
-      {\LARGE \@title \par}%
-      \vskip 1.5em%
-      {\large
-        \lineskip .5em%
-        \begin{tabular}[t]{c}%
-          \@author
-        \end{tabular}\par}%
-      \vskip 1em%
-      {\large \@date}%
-    \end{center}%
-    \par
-    \@thanks
-  \end{titlepage}%
-  \setcounter{footnote}{0}%
-  \global\let\thanks\relax
-  \global\let\maketitle\relax
-  \global\let\@thanks\@empty
-  \global\let\@author\@empty
-  \global\let\@title\@empty
-  \global\let\@date\@empty
-  \global\let\title\relax
-  \global\let\author\relax
-  \global\let\date\relax
-  \global\let\and\relax
-}
-\makeatother
-
-% Use full justification for body text (left and right justified)
-\justifying
+% Left-justify the body text globally
+\RaggedRight
+\setlength{\RaggedRightParindent}{0.5in}
 
 % Ensure body text is fully justified and consistent
 \setlength{\parindent}{0.5in}
@@ -152,10 +119,13 @@
 \counterwithout{table}{section}
 \counterwithout{equation}{section}
 
-% Figure and table caption formatting
+% Figure and table caption formatting (left-justified)
 \usepackage[font=small,labelfont=bf,textfont=it]{caption}
+\captionsetup{justification=raggedright,singlelinecheck=false}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
+% Left-align content inside all figure environments
+\AtBeginEnvironment{figure}{\raggedright}
 
 % Hyperlinks and smart cross-references
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
@@ -226,16 +196,25 @@ semiochemicals alongside or in addition to molecular binding mechanisms.
 Using morphological measurements, spectroscopic analyses, neural latency
 comparisons, and tested computational models implemented in
 \passthrough{\lstinline!src/!}, we assess the plausibility and testable
-predictions of this hypothesis.
+predictions of this hypothesis. Our thesis is that insects achieve
+rapid, long‑range, and frequency‑specific chemosensation by leveraging
+infrared transmission windows and resonant biological structures, and
+that this mechanism yields falsifiable, quantitative predictions
+reproduced by our open tests and figures.
 
 \textbf{Key results}: (i) Sensilla geometry aligns with predicted
 resonant wavelengths derived from dielectric waveguide models; (ii)
-published olfactory receptor neuron latencies (≈1--5 ms) are consistent
-with rapid, non-diffusion-limited detection; (iii) cuticular hydrocarbon
-(CHC) spectral peaks fall within modeled atmospheric transmission
-windows (2--5 μm, 8--14 μm, 17--25 μm) using
+published olfactory receptor neuron latencies (\approx 1--5 ms) are
+consistent with rapid, non-diffusion-limited detection; (iii) cuticular
+hydrocarbon (CHC) spectral peaks fall within modeled atmospheric
+transmission windows (2--5 μm, 8--14 μm, 17--25 μm) using
 \passthrough{\lstinline!src/core.calculate\_atmospheric\_transmission!}
-(validated in \passthrough{\lstinline!tests/test\_core.py!}).
+(validated in \passthrough{\lstinline!tests/test\_core.py!}). Real
+analysis examples are provided via figure scripts in
+\passthrough{\lstinline!scripts/!} that import only
+\passthrough{\lstinline!src/!} logic, e.g., atmospheric windows, CHC
+spectra, and response time comparisons. See
+\Cref{fig:response_time_comparison,fig:atmospheric_transmission,fig:chc_spectra_example}.
 
 \textbf{Framework}: We integrate resonant cavity and waveguide theory
 with CHC spectroscopy (\passthrough{\lstinline!src/spectroscopy.py!})
@@ -244,16 +223,23 @@ Implementations are covered by targeted unit tests (e.g.,
 \passthrough{\lstinline!tests/test\_core.py::TestAtmosphericTransmission!},
 \passthrough{\lstinline!tests/test\_sensilla.py::TestSensillaAnalysis!},
 \passthrough{\lstinline!tests/test\_spectroscopy\_analysis.py::TestAnalyzeChcSpectra!}).
+Each claim is paired with a runnable example (fixed seed 42) and a
+generated figure path reported to
+\passthrough{\lstinline!output/figures/!}.
 
 \textbf{Scope and implications}: Findings provide falsifiable
 predictions for wavelength tuning, behavioral IR-only responses, and
 neural responses to IR stimulation. If validated, these mechanisms have
-implications for sensory biology and biomimetic sensing.
+implications for sensory biology and biomimetic sensing, and they
+delineate minimal falsification tests enumerated in Discussion.
 
 \textbf{Reproducibility}: Analyses are deterministic (fixed seeds) and
-reproducible via the repository's unified pipeline; see the
-reproducibility subsection in Section \cref{sec:methodology} and the
-functions mapped to tests in \cref{sec:mathematical_appendix} and the
+reproducible via the unified pipeline: run tests for 100\% coverage,
+regenerate figures with
+\passthrough{\lstinline!scripts/generate\_research\_figures.py!}, and
+compile the manuscript through
+\passthrough{\lstinline!repo\_utilities/render\_pdf.sh!}. Method
+cross‑links are listed in \cref{sec:mathematical_appendix} and the
 Symbols/Glossary.
 
 \end{document}
