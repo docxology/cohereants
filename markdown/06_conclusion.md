@@ -27,7 +27,7 @@ The vibrational theory of olfaction provides a unified framework that integrates
 - **Resonant Cavity Theory**: Sensilla as frequency-tuned electromagnetic resonators
 - **Piezoelectric Effects**: Microtubule arrays as signal amplifiers and frequency selectors
 
-**Mathematical Foundation**: The complete mathematical framework is presented in Section \ref{sec:mathematical_appendix}, with all equations implemented in tested computational models that provide quantitative predictions for experimental validation.
+**Mathematical Foundation**: The complete mathematical framework is presented in Section \cref{sec:mathematical_appendix}, with all equations implemented in tested computational models that provide quantitative predictions for experimental validation.
 
 ### Computational Implementation
 
@@ -149,7 +149,7 @@ Understanding these threats could inform conservation efforts:
 
 ### Paradigm Shift
 
-The vibrational theory of olfaction represents a fundamental shift in our understanding of insect perception and behavior. This theory challenges traditional views of insect cognition and suggests that insects possess sensory capabilities that rival or exceed vertebrate systems in specific domains.
+The vibrational theory of olfaction represents a potential shift in our understanding of insect perception and behavior. If validated, it would broaden current models of olfaction and sensory integration.
 
 **Theoretical Impact**: The theory provides:
 - **Unified Framework**: Integration of multiple physical principles

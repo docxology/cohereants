@@ -67,6 +67,7 @@
 \usepackage{listings}
 \usepackage{fancyvrb}
 \usepackage{setspace}
+\usepackage{ragged2e}
 
 % Page geometry - more accessible margins
 \geometry{margin=1in, top=1in, bottom=1in}
@@ -104,9 +105,6 @@
 \setlength{\parindent}{0.5in}
 \setlength{\parskip}{0em}
 
-% Ensure left-aligned text (not centered)
-\raggedright
-
 % Override any centering for academic documents
 \makeatletter
 \renewcommand{\maketitle}{%
@@ -142,8 +140,10 @@
 }
 \makeatother
 
-% Ensure body text is left-aligned
-\raggedright
+% Use full justification for body text (left and right justified)
+\justifying
+
+% Ensure body text is fully justified and consistent
 \setlength{\parindent}{0.5in}
 
 % Comprehensive numbering for figures, tables, and equations
@@ -156,6 +156,14 @@
 \usepackage[font=small,labelfont=bf,textfont=it]{caption}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
+
+% Hyperlinks and smart cross-references
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink,capitalise]{cleveref}
+% Configure cleveref names
+\crefname{figure}{Figure}{Figures}
+\crefname{table}{Table}{Tables}
+\crefname{equation}{Equation}{Equations}
 
 % Equation numbering and formatting
 \usepackage{amsthm}
@@ -242,11 +250,11 @@ Theory}\label{limitations-of-stereochemical-theory}
 \subsubsection{Isotope Discrimination
 Evidence}\label{isotope-discrimination-evidence}
 
-The stereochemical theory faces significant challenges from isotope
-discrimination studies. Molecules with identical shapes and chemical
-structures but different isotopic compositions elicit distinct olfactory
-responses, demonstrating that molecular geometry alone cannot explain
-odor discrimination.
+The stereochemical theory faces challenges from isotope discrimination
+studies. Molecules with identical shapes and chemical structures but
+different isotopic compositions can elicit distinct olfactory responses,
+suggesting that geometry alone may not fully explain odor
+discrimination.
 
 \textbf{Quantitative Evidence}: Studies on \emph{Drosophila
 melanogaster} show that deuterated homologues of known odorants produce
@@ -263,11 +271,11 @@ rapid response times observed in insect olfaction. Insect ORNs
 demonstrate response latencies of 1-5 ms, comparable to photoreceptor
 (0.1 ms) and auditory receptor (0.16 ms) response times.
 
-\textbf{Mechanistic Implications}: These rapid responses suggest
-detection mechanisms that bypass the slower processes of molecular
-diffusion, pore penetration, and receptor binding. The observed response
-times are more consistent with electromagnetic wave detection than with
-molecular binding kinetics.
+\textbf{Mechanistic implications}: These rapid responses are difficult
+to reconcile with simple diffusion+binding models under typical
+environmental conditions and motivate evaluation of alternative
+mechanisms (e.g., vibrational/electromagnetic contributions) that could
+act upstream of or in parallel with binding.
 
 \subsection{The Vibrational Theory
 Alternative}\label{the-vibrational-theory-alternative}
@@ -277,8 +285,8 @@ unique electromagnetic radiation emitted by free-floating odor molecules
 rather than relying solely on geometric or chemical information at
 receptor binding surfaces.
 
-\subsubsection{Atmospheric Transmission
-Windows}\label{atmospheric-transmission-windows}
+\subsubsection{Atmospheric Transmission Windows and Testable
+Predictions}\label{atmospheric-transmission-windows-and-testable-predictions}
 
 A compelling aspect of the vibrational theory is the correspondence
 between atmospheric transmission characteristics and semiochemical
@@ -287,25 +295,25 @@ windows in the mid- and long-infrared ranges (2-5 μm, 8-14 μm, 17-25 μm)
 that precisely overlap with the emission spectra of insect
 semiochemicals.
 
-\textbf{Environmental Optimization}: These transmission windows enable
-long-range infrared detection, providing insects with access to
-environmental information that would be unavailable through molecular
-diffusion alone. The atmospheric transmission function is quantitatively
-modeled in Section \ref{sec:mathematical_appendix}.
+\textbf{Testable prediction P1}: Under controlled humidity/temperature,
+modeled transmission windows (2--5 μm, 8--14 μm, 17--25 μm) should align
+with CHC emission peaks measured by ATR‑FTIR; see
+\passthrough{\lstinline!src/core.calculate\_atmospheric\_transmission()!}
+with coverage in \passthrough{\lstinline!tests/test\_core.py!}.
 
-\subsubsection{Sensilla as Electromagnetic
-Antennas}\label{sensilla-as-electromagnetic-antennas}
+\subsubsection{Sensilla as Electromagnetic Antennas
+(Hypothesis)}\label{sensilla-as-electromagnetic-antennas-hypothesis}
 
 Insect antennae and sensilla exhibit morphological adaptations that
 suggest optimization for electromagnetic detection. Sensilla dimensions
 (6-160 μm for trichodea, 2-8 μm for basiconica) correspond closely to
 the wavelengths of infrared radiation emitted by semiochemicals.
 
-\textbf{Structural Evidence}: The porous architecture of sensilla,
-traditionally interpreted as molecular transport conduits, may serve
-dual functions as electromagnetic waveguides and molecular filters. This
-interpretation is supported by dielectric waveguide theory and resonant
-cavity modeling.
+\textbf{Structural hypothesis}: The porous architecture of sensilla,
+traditionally interpreted as molecular transport conduits, may also
+provide electromagnetic coupling consistent with dielectric waveguide
+theory. We evaluate this using resonant models quantifying
+HE\(_{11}\)-like modes (details in \cref{sec:mathematical_appendix}).
 
 \subsection{Research Objectives and
 Approach}\label{research-objectives-and-approach}
@@ -330,8 +338,33 @@ domains:
   semiochemical emission spectra
 \item
   \textbf{Computational Modeling}: Implementation of theoretical
-  frameworks in tested computational models
+  frameworks in tested computational models, cross-linked to unit tests
 \end{enumerate}
+
+\subsubsection{Explicit Hypotheses and Falsifiable
+Predictions}\label{explicit-hypotheses-and-falsifiable-predictions}
+
+\begin{itemize}
+\tightlist
+\item
+  H1 (Resonance): Sensilla length/diameter distributions predict
+  quarter/half‑wavelength resonances within 2--30 μm; correlation r ≥
+  0.8 across species.
+\item
+  H2 (Transmission): Measured CHC peaks fall within modeled atmospheric
+  windows under standard ambient conditions.
+\item
+  H3 (Latency): IR‑only stimuli elicit ORN responses with sub‑10 ms
+  latency distinct from pure thermal confounds.
+\item
+  H4 (Behavior): Frequency‑specific IR stimulation induces
+  orientation/tracking without corresponding volatile molecules.
+\end{itemize}
+
+Each hypothesis is supported by a concrete analysis in
+\passthrough{\lstinline!src/!} with tests in
+\passthrough{\lstinline!tests/!} (see method cross‑links in
+\cref{sec:methodology}).
 
 \subsection{Theoretical Framework
 Integration}\label{theoretical-framework-integration}

@@ -6,6 +6,11 @@ os.environ.setdefault("MPLBACKEND", "Agg")
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 SRC = os.path.join(ROOT, "src")
+
+# Ensure project root is importable so that `import src.*` works
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
+# Also make bare-module imports (e.g., `import core`) work when needed
 if SRC not in sys.path:
     sys.path.insert(0, SRC)
 

@@ -12,7 +12,7 @@ The classical stereochemical theory of olfaction posits that molecular recogniti
 
 ### Isotope Discrimination Evidence
 
-The stereochemical theory faces significant challenges from isotope discrimination studies. Molecules with identical shapes and chemical structures but different isotopic compositions elicit distinct olfactory responses, demonstrating that molecular geometry alone cannot explain odor discrimination.
+The stereochemical theory faces challenges from isotope discrimination studies. Molecules with identical shapes and chemical structures but different isotopic compositions can elicit distinct olfactory responses, suggesting that geometry alone may not fully explain odor discrimination.
 
 **Quantitative Evidence**: Studies on *Drosophila melanogaster* show that deuterated homologues of known odorants produce unique behavioral responses despite maintaining identical molecular shapes. This finding is quantitatively supported by vibrational spectroscopy, where deuteration shifts infrared emission spectra by 2-3 μm while preserving molecular geometry.
 
@@ -20,23 +20,23 @@ The stereochemical theory faces significant challenges from isotope discriminati
 
 Traditional molecular binding models cannot account for the extremely rapid response times observed in insect olfaction. Insect ORNs demonstrate response latencies of 1-5 ms, comparable to photoreceptor (0.1 ms) and auditory receptor (0.16 ms) response times.
 
-**Mechanistic Implications**: These rapid responses suggest detection mechanisms that bypass the slower processes of molecular diffusion, pore penetration, and receptor binding. The observed response times are more consistent with electromagnetic wave detection than with molecular binding kinetics.
+**Mechanistic implications**: These rapid responses are difficult to reconcile with simple diffusion+binding models under typical environmental conditions and motivate evaluation of alternative mechanisms (e.g., vibrational/electromagnetic contributions) that could act upstream of or in parallel with binding.
 
 ## The Vibrational Theory Alternative
 
 The vibrational theory of olfaction proposes that insects detect the unique electromagnetic radiation emitted by free-floating odor molecules rather than relying solely on geometric or chemical information at receptor binding surfaces.
 
-### Atmospheric Transmission Windows
+### Atmospheric Transmission Windows and Testable Predictions
 
 A compelling aspect of the vibrational theory is the correspondence between atmospheric transmission characteristics and semiochemical emission spectra. Earth's atmosphere exhibits specific transmission windows in the mid- and long-infrared ranges (2-5 μm, 8-14 μm, 17-25 μm) that precisely overlap with the emission spectra of insect semiochemicals.
 
-**Environmental Optimization**: These transmission windows enable long-range infrared detection, providing insects with access to environmental information that would be unavailable through molecular diffusion alone. The atmospheric transmission function is quantitatively modeled in Section \ref{sec:mathematical_appendix}.
+**Testable prediction P1**: Under controlled humidity/temperature, modeled transmission windows (2–5 μm, 8–14 μm, 17–25 μm) should align with CHC emission peaks measured by ATR‑FTIR; see `src/core.calculate_atmospheric_transmission()` with coverage in `tests/test_core.py`.
 
-### Sensilla as Electromagnetic Antennas
+### Sensilla as Electromagnetic Antennas (Hypothesis)
 
 Insect antennae and sensilla exhibit morphological adaptations that suggest optimization for electromagnetic detection. Sensilla dimensions (6-160 μm for trichodea, 2-8 μm for basiconica) correspond closely to the wavelengths of infrared radiation emitted by semiochemicals.
 
-**Structural Evidence**: The porous architecture of sensilla, traditionally interpreted as molecular transport conduits, may serve dual functions as electromagnetic waveguides and molecular filters. This interpretation is supported by dielectric waveguide theory and resonant cavity modeling.
+**Structural hypothesis**: The porous architecture of sensilla, traditionally interpreted as molecular transport conduits, may also provide electromagnetic coupling consistent with dielectric waveguide theory. We evaluate this using resonant models quantifying HE$_{11}$-like modes (details in \cref{sec:mathematical_appendix}).
 
 ## Research Objectives and Approach
 
@@ -46,7 +46,15 @@ This paper examines the vibrational theory through multiple analytical domains:
 2. **Neurological Investigation**: Analysis of response time data and neural encoding mechanisms
 3. **Behavioral Studies**: Examination of insect responses to infrared stimuli and environmental conditions
 4. **Spectroscopic Validation**: Measurement and analysis of semiochemical emission spectra
-5. **Computational Modeling**: Implementation of theoretical frameworks in tested computational models
+5. **Computational Modeling**: Implementation of theoretical frameworks in tested computational models, cross-linked to unit tests
+
+### Explicit Hypotheses and Falsifiable Predictions
+- H1 (Resonance): Sensilla length/diameter distributions predict quarter/half‑wavelength resonances within 2–30 μm; correlation r ≥ 0.8 across species.
+- H2 (Transmission): Measured CHC peaks fall within modeled atmospheric windows under standard ambient conditions.
+- H3 (Latency): IR‑only stimuli elicit ORN responses with sub‑10 ms latency distinct from pure thermal confounds.
+- H4 (Behavior): Frequency‑specific IR stimulation induces orientation/tracking without corresponding volatile molecules.
+
+Each hypothesis is supported by a concrete analysis in `src/` with tests in `tests/` (see method cross‑links in \cref{sec:methodology}).
 
 ## Theoretical Framework Integration
 

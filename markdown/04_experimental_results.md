@@ -6,17 +6,18 @@
 
 Insect olfactory receptor neurons (ORNs) demonstrate remarkably rapid response times that challenge traditional molecular binding models. The `calculate_response_time_improvement()` function quantifies these improvements by comparing insect ORN response times with traditional olfaction mechanisms.
 
-**Quantitative Response Times**:
+**Quantitative response times** (representative literature ranges):
 - **Insect ORNs**: 1-5 ms response latency
 - **Traditional Olfaction**: 7-12 ms response latency
 - **Improvement Factor**: 2.3-7.0x faster response
 
-**Response Time Components**: The vibrational theory suggests that rapid responses result from direct electromagnetic detection rather than molecular diffusion processes. The `calculate_response_time_improvement()` function models these effects using the relationship:
+**Response time components**: We model latencies as the sum of detection, transduction, and propagation. `src/core.py::calculate_response_time_improvement` (see `tests/test_core.py::TestResponseTimeImprovement`) compares modeled latencies with literature baselines:
 
 $$\tau_{response} = \tau_{detection} + \tau_{transduction} + \tau_{propagation}$$
 
-where electromagnetic detection eliminates the molecular diffusion component ($\tau_{diffusion}$) that dominates traditional olfaction.
+where vibrational/electromagnetic contributions may reduce or bypass diffusion-limited components.
 
+\Cref{fig:response_time_comparison} for response time comparisons.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
@@ -46,7 +47,7 @@ If sensilla function as directional electromagnetic antennas, this would explain
 - **Front-to-Back Ratio**: 10-20 dB directional selectivity
 - **Gain Pattern**: Maximum sensitivity in the forward direction
 
-**Behavioral Validation**: Experimental studies demonstrate that insects can localize odor sources with remarkable accuracy, suggesting directional detection capabilities that exceed those possible through molecular diffusion alone.
+**Behavioral validation**: Reported localization accuracy suggests directional detection that may be consistent with antenna-like gain patterns; controlled IR‑only assays are required to disambiguate from volatile plume structure.
 
 ### Specialized Infrared Sensors
 
@@ -72,6 +73,7 @@ Experimental studies on leaf-cutting ants (*Atta vollenweideri*) demonstrate dir
 
 **Mechanistic Insights**: The electron-dense filaments within sensory pegs enhance infrared absorption, suggesting specialized structures for electromagnetic detection. The shield structure has minimal impact on IR reception, indicating that the detection mechanism operates through direct electromagnetic coupling rather than thermal conduction.
 
+\Cref{fig:experimental_setup} for the experimental setup.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
@@ -90,7 +92,7 @@ Highly efficient infrared spectroscopy (ATR-FTIR) has been used to identify aphi
 - **Grasshopper CHCs**: Transmission peak at 2850 cm$^{-1}$ (3.5 μm)
 - **Ant CHCs**: Multiple peaks in 2.9-3.1 μm range
 
-**Species Discrimination**: Spectral analysis enables species identification with 95% accuracy, demonstrating that CHC profiles provide unique vibrational signatures that can be detected through infrared spectroscopy.
+**Species discrimination**: Reported accuracies (≈95%) depend on dataset size and cross-validation protocol; reproducible analysis should report N, folds, and confidence intervals. Our pipeline provides peak and region features via `analyze_chc_spectra` for such classifiers.
 
 ### Intra-individual Variation
 

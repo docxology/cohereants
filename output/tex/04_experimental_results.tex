@@ -67,6 +67,7 @@
 \usepackage{listings}
 \usepackage{fancyvrb}
 \usepackage{setspace}
+\usepackage{ragged2e}
 
 % Page geometry - more accessible margins
 \geometry{margin=1in, top=1in, bottom=1in}
@@ -104,9 +105,6 @@
 \setlength{\parindent}{0.5in}
 \setlength{\parskip}{0em}
 
-% Ensure left-aligned text (not centered)
-\raggedright
-
 % Override any centering for academic documents
 \makeatletter
 \renewcommand{\maketitle}{%
@@ -142,8 +140,10 @@
 }
 \makeatother
 
-% Ensure body text is left-aligned
-\raggedright
+% Use full justification for body text (left and right justified)
+\justifying
+
+% Ensure body text is fully justified and consistent
 \setlength{\parindent}{0.5in}
 
 % Comprehensive numbering for figures, tables, and equations
@@ -156,6 +156,14 @@
 \usepackage[font=small,labelfont=bf,textfont=it]{caption}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
+
+% Hyperlinks and smart cross-references
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink,capitalise]{cleveref}
+% Configure cleveref names
+\crefname{figure}{Figure}{Figures}
+\crefname{table}{Table}{Tables}
+\crefname{equation}{Equation}{Equations}
 
 % Equation numbering and formatting
 \usepackage{amsthm}
@@ -222,20 +230,24 @@ response times that challenge traditional molecular binding models. The
 function quantifies these improvements by comparing insect ORN response
 times with traditional olfaction mechanisms.
 
-\textbf{Quantitative Response Times}: - \textbf{Insect ORNs}: 1-5 ms
-response latency - \textbf{Traditional Olfaction}: 7-12 ms response
-latency - \textbf{Improvement Factor}: 2.3-7.0x faster response
+\textbf{Quantitative response times} (representative literature ranges):
+- \textbf{Insect ORNs}: 1-5 ms response latency - \textbf{Traditional
+Olfaction}: 7-12 ms response latency - \textbf{Improvement Factor}:
+2.3-7.0x faster response
 
-\textbf{Response Time Components}: The vibrational theory suggests that
-rapid responses result from direct electromagnetic detection rather than
-molecular diffusion processes. The
-\passthrough{\lstinline!calculate\_response\_time\_improvement()!}
-function models these effects using the relationship:
+\textbf{Response time components}: We model latencies as the sum of
+detection, transduction, and propagation.
+\passthrough{\lstinline!src/core.py::calculate\_response\_time\_improvement!}
+(see
+\passthrough{\lstinline!tests/test\_core.py::TestResponseTimeImprovement!})
+compares modeled latencies with literature baselines:
 
 \[\tau_{response} = \tau_{detection} + \tau_{transduction} + \tau_{propagation}\]
 
-where electromagnetic detection eliminates the molecular diffusion
-component (\(\tau_{diffusion}\)) that dominates traditional olfaction.
+where vibrational/electromagnetic contributions may reduce or bypass
+diffusion-limited components.
+
+\Cref{fig:response_time_comparison} for response time comparisons.
 
 \begin{figure}[h]
 \centering
@@ -280,10 +292,10 @@ beamwidth - \textbf{Front-to-Back Ratio}: 10-20 dB directional
 selectivity - \textbf{Gain Pattern}: Maximum sensitivity in the forward
 direction
 
-\textbf{Behavioral Validation}: Experimental studies demonstrate that
-insects can localize odor sources with remarkable accuracy, suggesting
-directional detection capabilities that exceed those possible through
-molecular diffusion alone.
+\textbf{Behavioral validation}: Reported localization accuracy suggests
+directional detection that may be consistent with antenna-like gain
+patterns; controlled IR‑only assays are required to disambiguate from
+volatile plume structure.
 
 \subsubsection{Specialized Infrared
 Sensors}\label{specialized-infrared-sensors}
@@ -323,6 +335,8 @@ minimal impact on IR reception, indicating that the detection mechanism
 operates through direct electromagnetic coupling rather than thermal
 conduction.
 
+\Cref{fig:experimental_setup} for the experimental setup.
+
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
@@ -346,10 +360,11 @@ these spectra to identify characteristic vibrational modes.
 Transmission peak at 2850 cm\(^{-1}\) (3.5 μm) - \textbf{Ant CHCs}:
 Multiple peaks in 2.9-3.1 μm range
 
-\textbf{Species Discrimination}: Spectral analysis enables species
-identification with 95\% accuracy, demonstrating that CHC profiles
-provide unique vibrational signatures that can be detected through
-infrared spectroscopy.
+\textbf{Species discrimination}: Reported accuracies (≈95\%) depend on
+dataset size and cross-validation protocol; reproducible analysis should
+report N, folds, and confidence intervals. Our pipeline provides peak
+and region features via \passthrough{\lstinline!analyze\_chc\_spectra!}
+for such classifiers.
 
 \subsubsection{Intra-individual
 Variation}\label{intra-individual-variation}

@@ -232,6 +232,17 @@ The frameworks are explicitly designed to connect theoretical predictions with e
 - Environmental effects on performance
 - Optimal array configurations
 
+## Summary Table (Selected Studies)
+
+| Domain | Study (year) | Species/Context | Main finding | Notes |
+|---|---|---|---|---|
+| Spectroscopy | Turin et al. | Drosophila | Isotope discrimination consistent with vibrational sensitivity | Behavioral conditioning |
+| Morphology | Callahan | Multiple taxa | Sensilla dimensions consistent with IR-scale resonances | Morphological survey |
+| Quantum | Schulten et al. | Modeling | Mixed shape+vibration contributions | Quantum tunneling plausibility |
+| Environment | Diesendorf | Atmosphere | IR windows (2–5, 8–14, 17–25 μm) | Transmission modeling |
+
+Where possible, we reference primary data and provide computational reproductions using `src/` modules (see method mapping in \cref{sec:methodology}).
+
 ## Conclusion
 
 The empirical evidence presented in this section provides strong support for the vibrational theory of olfaction and infrared sensing in insects. The comprehensive analytical frameworks implemented in the `src` directory provide quantitative, information-theoretic analysis that enables cross-domain synthesis and predictive capability assessment.

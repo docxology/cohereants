@@ -100,7 +100,7 @@ The vibrational theory does not necessarily contradict existing theories of olfa
 - **Adaptability**: System can adjust to changing environmental conditions
 - **Efficiency**: Optimal use of available energy and computational resources
 
-**Mathematical Framework**: The mathematical framework for this multimodal approach is developed in Section \ref{sec:mathematical_appendix}, where equations \ref{eq:integrated_response} and \ref{eq:adaptive_threshold} describe how multiple detection mechanisms can be integrated for optimal performance.
+**Mathematical Framework**: The mathematical framework for this multimodal approach is developed in Section \cref{sec:mathematical_appendix}, where equations \cref{eq:integrated_response,eq:adaptive_threshold} describe how multiple detection mechanisms can be integrated for optimal performance.
 
 ### Quantum Mechanical Coupling
 
@@ -113,6 +113,13 @@ The vibrational theory integrates with quantum mechanical models of olfaction th
 - **Coherent States**: Quantum superposition of different molecular states
 
 **Experimental Validation**: These quantum effects are implemented in the `MetaMaterialAnalyzer` class, which provides methods for analyzing quantum coupling and plasmonic resonance effects.
+
+### Limitations and Alternative Explanations
+- Thermal mechanisms: IR stimulation may induce thermal transients; controls require matched thermal loads without spectral content and precise micro-thermometry at sensilla.
+- Mixed modalities: Molecular binding and vibrational contributions may be jointly necessary; disentangling requires receptor-level perturbations and wavelength-specific stimulation.
+- Environmental confounds: Humidity and temperature alter both transmission and receptor sensitivity; experiments should include environmental covariates and calibration.
+
+Minimal falsification tests: (i) No frequency‑specific responses under IR‑only stimulation with thermal controls; (ii) lack of correlation between sensilla dimensions and predicted resonant wavelengths across taxa; (iii) CHC peaks systematically outside modeled windows under controlled conditions.
 
 ## Future Research Directions
 

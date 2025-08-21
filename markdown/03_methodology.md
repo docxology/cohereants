@@ -6,7 +6,7 @@ The vibrational theory of olfaction proposes that insects detect the unique elec
 
 ### Atmospheric Transmission and Detection Range
 
-The Earth's atmosphere exhibits specific transmission windows in the infrared range that enable long-range detection of semiochemical emissions. These transmission characteristics are quantitatively modeled using the `calculate_atmospheric_transmission()` function, which implements empirical atmospheric transmission data.
+The Earth's atmosphere exhibits specific transmission windows in the infrared range that enable long-range detection of semiochemical emissions. These transmission characteristics are modeled using `src/core.py::calculate_atmospheric_transmission(wavelengths, distance=None) -> Union[float, np.ndarray]`, validated by `tests/test_core.py::TestAtmosphericTransmission` and `tests/test_core_physics.py::TestAtmosphericTransmission`.
 
 **Transmission Windows**: Three primary atmospheric windows exist in the infrared range:
 - **Mid-infrared (2-5 μm)**: 80% transmission efficiency
@@ -15,6 +15,7 @@ The Earth's atmosphere exhibits specific transmission windows in the infrared ra
 
 These windows correspond precisely to the emission spectra of insect semiochemicals, enabling detection at distances of 10-100 meters under optimal conditions.
 
+\Cref{fig:atmospheric_transmission} for the atmospheric transmission windows.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{../output/figures/atmospheric_transmission.png}
@@ -26,7 +27,7 @@ These windows correspond precisely to the emission spectra of insect semiochemic
 
 The vibrational theory is supported by molecular spectroscopy studies demonstrating that isotopic substitution affects olfactory perception without altering molecular geometry. This evidence suggests that vibrational modes, rather than shape complementarity, drive odor discrimination.
 
-**Quantitative Evidence**: Deuteration studies show that replacing hydrogen with deuterium shifts infrared emission spectra by 2-3 μm while preserving molecular shape. The `analyze_chc_spectra()` function quantifies these spectral shifts and their correlation with behavioral responses.
+**Quantitative evidence**: Deuteration studies show that replacing hydrogen with deuterium shifts infrared bands while preserving molecular shape. The function `src/spectroscopy.py::analyze_chc_spectra(wavenumbers, intensities, species)` quantifies peaks and regions; tests in `tests/test_spectroscopy_analysis.py::TestAnalyzeChcSpectra` verify outputs.
 
 **Förster Resonance Energy Transfer (FRET)**: Environmental factors such as humidity can modulate semiochemical emission spectra through FRET processes. The efficiency of energy transfer between water molecules and pheromones follows the relationship:
 
@@ -45,8 +46,9 @@ All adult insects possess antennae with micron-sized sensory hairs called sensil
 - **Sensilla Basiconica**: 2-8 μm length, 1-3 μm diameter  
 - **Sensilla Coeloconica**: 5-15 μm length, 3-6 μm diameter
 
-**Wavelength Matching**: The `analyze_sensilla_dimensions()` function calculates optimal wavelength matching between sensilla geometry and incident radiation. This analysis reveals that sensilla dimensions correspond to specific infrared frequencies with correlation coefficients exceeding 0.85.
+**Wavelength matching**: `src/sensilla.py::analyze_sensilla_dimensions(lengths, diameters)` computes quarter/half‑wavelength predictions and aspect ratios. Tests in `tests/test_sensilla.py::TestSensillaAnalysis` and `tests/test_insect_analysis.py::TestSensillaAnalysis` validate calculations.
 
+\Cref{fig:sensilla_wavelength_matching} for the sensilla-wavelength correlation.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
@@ -63,6 +65,7 @@ Insect semiochemicals exhibit characteristic infrared emission spectra that fall
 - **Cabbage looper sex pheromones**: 17 μm and 26 μm
 - **Aphid CHCs**: 2.85-3.5 μm range
 
+\Cref{fig:chc_spectra_example} for an example CHC spectrum.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
@@ -76,7 +79,7 @@ Insect semiochemicals exhibit characteristic infrared emission spectra that fall
 
 The dielectric waveguide model of insect sensilla was first proposed by Dr. Philip S. Callahan in the 1960s and 1970s. This model explains how sensilla can act as electromagnetic resonators and amplifiers for infrared radiation.
 
-**Waveguide Properties**: Sensilla exhibit properties consistent with dielectric waveguides:
+**Waveguide properties (assumed ranges for modeling)**: Sensilla exhibit properties consistent with dielectric waveguides:
 - **Dielectric Constant**: Cuticular material has $\epsilon_r \approx 2.5-3.0$
 - **Loss Tangent**: $\tan \delta \approx 0.01-0.05$ at infrared frequencies
 - **Quality Factor**: $Q \approx 100-1000$ for resonant modes
@@ -98,7 +101,7 @@ Sensilla ultrastructure supports the waveguide interpretation through several ke
 
 Traditional interpretations view sensilla pores as molecular transport conduits. However, the vibrational theory suggests an additional electromagnetic function: pore arrays can effectively reduce the dielectric constant of sensilla walls, enhancing gain and frequency selectivity.
 
-**Gain Enhancement**: Theoretical analysis shows that perforated walls can increase gain by 3-10 dB compared to solid walls. This enhancement is achieved by reducing the effective dielectric constant through air-filled perforations.
+**Gain enhancement (model prediction)**: Perforated walls may increase gain by 3–10 dB versus solid walls by reducing effective dielectric constant. Empirical validation requires targeted micro-EM measurements.
 
 ## Microtubule Arrays and Piezoelectric Properties
 
@@ -145,11 +148,18 @@ All theoretical predictions are implemented in tested computational models that 
 
 ### Validation and Testing
 
-The computational framework is validated through comprehensive testing:
+The computational framework is validated through comprehensive testing; representative mappings:
 
-- **Unit Tests**: Individual function testing with 100% coverage
-- **Integration Tests**: End-to-end analysis pipeline validation
-- **Physical Validation**: Comparison with known physical constants and relationships
-- **Empirical Comparison**: Validation against published experimental data
+- `calculate_atmospheric_transmission` → `tests/test_core.py::TestAtmosphericTransmission`
+- `analyze_sensilla_dimensions` → `tests/test_sensilla.py::TestSensillaAnalysis`
+- `analyze_chc_spectra` → `tests/test_spectroscopy_analysis.py::TestAnalyzeChcSpectra`
+- Wavelength/wavenumber conversions → `tests/test_core.py::TestWavelengthConversions`
 
-This rigorous validation ensures that theoretical predictions are grounded in physical reality and provides a reliable foundation for experimental design and hypothesis testing.
+This validation ensures that theoretical predictions are numerically consistent and provides a foundation for experimental design.
+
+### Reproducibility Checklist
+- Environment: pinned in `uv.lock`/`pyproject.toml`
+- Seeds: set via `src/config.set_random_seed(42)`; tests call deterministic paths
+- Regenerate figures: `uv run python scripts/generate_research_figures.py`
+- Run all tests + coverage: `uv run pytest tests/ --cov=src --cov-report=term-missing`
+- Full manuscript build: `bash ./repo_utilities/render_pdf.sh`

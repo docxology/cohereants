@@ -12,6 +12,7 @@ This appendix provides the mathematical foundations for the vibrational theory o
 
 The fundamental equations governing electromagnetic wave propagation in insect sensilla can be expressed as:
 
+\Cref{eq:maxwell1,eq:maxwell2,eq:maxwell3,eq:maxwell4}.
 \begin{align}
 \nabla \cdot \mathbf{D} &= \rho_f \label{eq:maxwell1} \\
 \nabla \cdot \mathbf{B} &= 0 \label{eq:maxwell2} \\
@@ -27,12 +28,14 @@ where $\mathbf{D} = \epsilon_0 \mathbf{E} + \mathbf{P}$ is the electric displace
 
 For cylindrical sensilla acting as dielectric waveguides, the electromagnetic field components can be expressed in cylindrical coordinates $(r, \phi, z)$ as:
 
+\Cref{eq:waveguide_field}.
 \begin{equation}
 \mathbf{E}(r, \phi, z) = \mathbf{E}_0(r, \phi) e^{i(\beta z - \omega t)} \label{eq:waveguide_field}
 \end{equation}
 
 where $\beta$ is the propagation constant and $\omega$ is the angular frequency. The transverse field components satisfy the Helmholtz equation:
 
+\Cref{eq:helmholtz}.
 \begin{equation}
 \nabla_t^2 \mathbf{E}_t + (k^2 - \beta^2)\mathbf{E}_t = 0 \label{eq:helmholtz}
 \end{equation}
@@ -45,6 +48,7 @@ with $k = \omega \sqrt{\mu \epsilon}$ being the wavenumber in the medium.
 
 The resonant frequency of a sensillum can be approximated using the cavity resonator model:
 
+\Cref{eq:resonant_freq}.
 \begin{equation}
 f_{res} = \frac{c}{2\pi} \sqrt{\left(\frac{\alpha_{mn}}{a}\right)^2 + \left(\frac{p\pi}{L}\right)^2} \label{eq:resonant_freq}
 \end{equation}
@@ -58,11 +62,15 @@ where:
 
 **Quality Factor**: The quality factor $Q$ of the resonator is given by:
 
+\Cref{eq:quality_factor}.
 \begin{equation}
 Q = \frac{f_{res}}{\Delta f} = \frac{\omega_0}{2\alpha} \label{eq:quality_factor}
 \end{equation}
 
 where $\Delta f$ is the bandwidth and $\alpha$ is the attenuation constant.
+
+### Worked Example (Resonant Frequency)
+Assume a cylindrical sensillum with radius $a=1.5\,\mu m$, length $L=12\,\mu m$, relative permittivity $\epsilon_r=2.8$, and axial mode $p=1$ using the first Bessel root $\alpha_{11}\approx1.841$. With $c=c_0/\sqrt{\epsilon_r}$, Eq. \eqref{eq:resonant_freq} gives a fundamental frequency corresponding to a free-space wavelength in the mid‑IR range. This matches the quarter/half‑wavelength heuristic implemented in `src/sensilla.py::analyze_sensilla_dimensions` (see `tests/test_sensilla.py`).
 
 ## Vibrational Spectroscopy
 
@@ -70,6 +78,7 @@ where $\Delta f$ is the bandwidth and $\alpha$ is the attenuation constant.
 
 The energy levels of molecular vibrations are quantized according to:
 
+\Cref{eq:vibrational_energy}.
 \begin{equation}
 E_v = \hbar \omega_e \left(v + \frac{1}{2}\right) - \hbar \omega_e x_e \left(v + \frac{1}{2}\right)^2 \label{eq:vibrational_energy}
 \end{equation}
@@ -82,6 +91,7 @@ where:
 
 **Isotope Effects**: For deuterated compounds, the frequency shift is approximately:
 
+\Cref{eq:isotope_shift}.
 \begin{equation}
 \frac{\omega_D}{\omega_H} = \sqrt{\frac{\mu_H}{\mu_D}} \approx 0.707 \label{eq:isotope_shift}
 \end{equation}
@@ -92,6 +102,7 @@ where $\mu_H$ and $\mu_D$ are the reduced masses of hydrogen and deuterium compo
 
 The absorption cross-section for infrared radiation by a molecule is given by:
 
+\Cref{eq:absorption_cross_section}.
 \begin{equation}
 \sigma(\omega) = \frac{4\pi^2 \omega}{3\hbar c} \sum_{v',v''} |\langle v'|\mu|v''\rangle|^2 \delta(\omega - \omega_{v'v''}) \label{eq:absorption_cross_section}
 \end{equation}
@@ -104,13 +115,14 @@ where $\mu$ is the transition dipole moment and $\omega_{v'v''}$ is the frequenc
 
 The atmospheric transmission at infrared wavelengths can be modeled as:
 
+\Cref{eq:atmospheric_transmission}.
 \begin{equation}
 T(\lambda) = \exp\left[-\sum_i \alpha_i(\lambda) L_i\right] \label{eq:atmospheric_transmission}
 \end{equation}
 
 where $\alpha_i(\lambda)$ is the absorption coefficient of the $i$th atmospheric component and $L_i$ is the path length through that component.
 
-**Transmission Windows**: The three primary atmospheric windows have transmission efficiencies:
+**Transmission windows (model)**: The three primary atmospheric windows used in our baseline model have transmission efficiencies:
 - **2-5 μm**: $T(\lambda) \approx 0.8$ (mid-infrared)
 - **8-14 μm**: $T(\lambda) \approx 0.9$ (long-wave infrared)  
 - **17-25 μm**: $T(\lambda) \approx 0.7$ (far-infrared)
@@ -121,6 +133,7 @@ where $\alpha_i(\lambda)$ is the absorption coefficient of the $i$th atmospheric
 
 The effective aperture of a sensillum can be calculated using:
 
+\Cref{eq:effective_aperture}.
 \begin{equation}
 A_{eff} = \frac{\lambda^2}{4\pi} G(\theta, \phi) \label{eq:effective_aperture}
 \end{equation}
@@ -129,6 +142,7 @@ where $G(\theta, \phi)$ is the gain pattern of the sensillum in the direction $(
 
 **Gain Pattern**: For a cylindrical sensillum, the gain pattern can be approximated as:
 
+\Cref{eq:gain_pattern}.
 \begin{equation}
 G(\theta, \phi) = G_0 \cos^2(\theta) \label{eq:gain_pattern}
 \end{equation}
@@ -139,6 +153,7 @@ where $G_0$ is the maximum gain and $\theta$ is the angle from the axis.
 
 The power received by a sensillum from a distant source is:
 
+\Cref{eq:power_received}.
 \begin{equation}
 P_{rec} = S A_{eff} = \frac{P_{trans} G_{trans} A_{eff}}{4\pi R^2} \label{eq:power_received}
 \end{equation}
@@ -151,6 +166,7 @@ where:
 
 **Detection Range**: The maximum detection range $R_{max}$ is determined by the minimum detectable power:
 
+\Cref{eq:detection_range}.
 \begin{equation}
 R_{max} = \sqrt{\frac{P_{trans} G_{trans} A_{eff}}{4\pi P_{min}}} \label{eq:detection_range}
 \end{equation}
@@ -159,6 +175,7 @@ R_{max} = \sqrt{\frac{P_{trans} G_{trans} A_{eff}}{4\pi P_{min}}} \label{eq:dete
 
 The signal-to-noise ratio (SNR) for infrared detection is:
 
+\Cref{eq:snr}.
 \begin{equation}
 SNR = \frac{P_{signal}}{P_{noise}} = \frac{P_{rec}}{k_B T \Delta f} \label{eq:snr}
 \end{equation}
@@ -170,11 +187,12 @@ where:
 
 **Minimum Detectable Power**: The minimum detectable power is:
 
+\Cref{eq:min_power}.
 \begin{equation}
 P_{min} = k_B T \Delta f \cdot SNR_{min} \label{eq:min_power}
 \end{equation}
 
-where $SNR_{min}$ is the minimum required signal-to-noise ratio (typically 10-20 dB).
+where $SNR_{min}$ is the minimum required signal-to-noise ratio (typically 10–20 dB). A simple numerical estimate with $T=300\,K$ and $\Delta f=100\,Hz$ yields $P_{min}\approx4.1\times10^{-19}\,\text{W}\cdot SNR_{min}$.
 
 ## Piezoelectric Response of Microtubules
 
@@ -182,6 +200,7 @@ where $SNR_{min}$ is the minimum required signal-to-noise ratio (typically 10-20
 
 The piezoelectric response of microtubules can be described by:
 
+\Cref{eq:piezoelectric}.
 \begin{equation}
 \mathbf{P} = d_{ijk} \sigma_{jk} \label{eq:piezoelectric}
 \end{equation}
@@ -197,6 +216,7 @@ where:
 
 The fundamental resonant frequency of a microtubule is:
 
+\Cref{eq:microtubule_resonance}.
 \begin{equation}
 f_0 = \frac{1}{2L} \sqrt{\frac{EI}{\rho A}} \label{eq:microtubule_resonance}
 \end{equation}
@@ -214,6 +234,7 @@ where:
 
 The piezoelectric coupling coefficient $k$ is:
 
+\Cref{eq:piezoelectric_coupling}.
 \begin{equation}
 k^2 = \frac{d_{33}^2 E}{\epsilon_0 \epsilon_r} \label{eq:piezoelectric_coupling}
 \end{equation}
@@ -226,6 +247,7 @@ where $\epsilon_r$ is the relative permittivity of the microtubule material.
 
 The response of a log-periodic sensilla array can be modeled as:
 
+\Cref{eq:log_periodic_response}.
 \begin{equation}
 R(C) = R_0 \sum_{n=0}^{N-1} \frac{C^n}{C_0^n} e^{-\frac{(C - C_n)^2}{2\sigma_n^2}} \label{eq:log_periodic_response}
 \end{equation}
@@ -238,6 +260,7 @@ where:
 
 **Array Optimization**: The optimal log-periodic ratio is:
 
+\Cref{eq:optimal_ratio}.
 \begin{equation}
 \tau_{opt} = \exp\left(\frac{\pi}{\sqrt{1 - \left(\frac{\alpha}{k}\right)^2}}\right) \label{eq:optimal_ratio}
 \end{equation}
@@ -248,6 +271,7 @@ where $\alpha$ is the attenuation constant and $k$ is the wavenumber.
 
 The concentration tuning function for individual sensilla is:
 
+\Cref{eq:concentration_tuning}.
 \begin{equation}
 T(C) = \frac{C^n}{K_d^n + C^n} \label{eq:concentration_tuning}
 \end{equation}
@@ -258,6 +282,7 @@ where:
 
 **Dynamic Range**: The dynamic range of concentration detection is:
 
+\Cref{eq:dynamic_range}.
 \begin{equation}
 DR = 20 \log_{10}\left(\frac{C_{max}}{C_{min}}\right) \text{ dB} \label{eq:dynamic_range}
 \end{equation}
@@ -270,6 +295,7 @@ where $C_{max}$ and $C_{min}$ are the maximum and minimum detectable concentrati
 
 The probability of electron tunneling through a potential barrier is:
 
+\Cref{eq:tunneling_probability}.
 \begin{equation}
 P_{tunnel} = \exp\left[-\frac{2d}{\hbar} \sqrt{2m(V_0 - E)}\right] \label{eq:tunneling_probability}
 \end{equation}
@@ -282,6 +308,7 @@ where:
 
 **Tunneling Current**: The tunneling current density is:
 
+\Cref{eq:tunneling_current}.
 \begin{equation}
 J = \frac{e^2}{h} \frac{V}{d} P_{tunnel} \label{eq:tunneling_current}
 \end{equation}
@@ -292,6 +319,7 @@ where $e$ is the electron charge and $h$ is Planck's constant.
 
 The efficiency of FRET between donor and acceptor molecules is:
 
+\Cref{eq:fret_efficiency}.
 \begin{equation}
 E_{FRET} = \frac{1}{1 + \left(\frac{r}{R_0}\right)^6} \label{eq:fret_efficiency}
 \end{equation}
@@ -302,6 +330,7 @@ where:
 
 **FRET Rate**: The FRET rate constant is:
 
+\Cref{eq:fret_rate}.
 \begin{equation}
 k_{FRET} = \frac{1}{\tau_D} \frac{R_0^6}{r^6} \label{eq:fret_rate}
 \end{equation}
@@ -314,6 +343,7 @@ where $\tau_D$ is the donor lifetime.
 
 The response time of olfactory receptor neurons can be modeled as:
 
+\Cref{eq:response_time}.
 \begin{equation}
 \tau_{response} = \tau_{detection} + \tau_{transduction} + \tau_{propagation} \label{eq:response_time}
 \end{equation}
@@ -329,6 +359,7 @@ where each component represents the time for detection, signal transduction, and
 
 The frequency response of a sensillum is:
 
+\Cref{eq:frequency_response}.
 \begin{equation}
 H(f) = \frac{1}{1 + i2\pi f \tau} \label{eq:frequency_response}
 \end{equation}
@@ -337,12 +368,14 @@ where $\tau$ is the characteristic time constant of the system.
 
 **Bandwidth**: The 3-dB bandwidth is:
 
+\Cref{eq:bandwidth}.
 \begin{equation}
 f_{3dB} = \frac{1}{2\pi \tau} \label{eq:bandwidth}
 \end{equation}
 
 **Phase Response**: The phase response is:
 
+\Cref{eq:phase_response}.
 \begin{equation}
 \phi(f) = -\tan^{-1}(2\pi f \tau) \label{eq:phase_response}
 \end{equation}
@@ -353,6 +386,7 @@ f_{3dB} = \frac{1}{2\pi \tau} \label{eq:bandwidth}
 
 The probability of a behavioral response given a stimulus intensity $I$ is:
 
+\Cref{eq:response_probability}.
 \begin{equation}
 P(response|I) = \frac{1}{1 + e^{-\beta(I - I_{50})}} \label{eq:response_probability}
 \end{equation}
@@ -363,6 +397,7 @@ where:
 
 **Sensitivity Index**: The sensitivity index $d'$ is:
 
+\Cref{eq:sensitivity_index}.
 \begin{equation}
 d' = \frac{\mu_{signal} - \mu_{noise}}{\sqrt{\frac{\sigma_{signal}^2 + \sigma_{noise}^2}{2}}} \label{eq:sensitivity_index}
 \end{equation}
@@ -373,16 +408,19 @@ where $\mu$ and $\sigma^2$ represent the mean and variance of signal and noise d
 
 The discriminability index $d'$ in signal detection theory is:
 
+\Cref{eq:discriminability}.
 \begin{equation}
 d' = \frac{\mu_{signal} - \mu_{noise}}{\sqrt{\frac{\sigma_{signal}^2 + \sigma_{noise}^2}{2}}} \label{eq:discriminability}
 \end{equation}
 
 **ROC Analysis**: The receiver operating characteristic (ROC) curve is:
 
+\Cref{eq:false_alarm}.
 \begin{equation}
 P_{FA} = \int_{\lambda}^{\infty} p(x|noise) dx \label{eq:false_alarm}
 \end{equation}
 
+\Cref{eq:detection_probability}.
 \begin{equation}
 P_D = \int_{\lambda}^{\infty} p(x|signal) dx \label{eq:detection_probability}
 \end{equation}
@@ -395,6 +433,7 @@ where $\lambda$ is the decision threshold.
 
 The temperature dependence of sensilla response can be modeled using the Arrhenius equation:
 
+\Cref{eq:arrhenius}.
 \begin{equation}
 k(T) = A e^{-\frac{E_a}{k_B T}} \label{eq:arrhenius}
 \end{equation}
@@ -406,6 +445,7 @@ where:
 
 **Temperature Coefficient**: The temperature coefficient is:
 
+\Cref{eq:temperature_coefficient}.
 \begin{equation}
 \alpha_T = \frac{1}{k} \frac{dk}{dT} = \frac{E_a}{k_B T^2} \label{eq:temperature_coefficient}
 \end{equation}
@@ -414,6 +454,7 @@ where:
 
 The effect of humidity on sensilla function is:
 
+\Cref{eq:humidity_response}.
 \begin{equation}
 R(H) = R_0 \left[1 + \alpha(H - H_0) + \beta(H - H_0)^2\right] \label{eq:humidity_response}
 \end{equation}
@@ -425,6 +466,7 @@ where:
 
 **Humidity Sensitivity**: The humidity sensitivity is:
 
+\Cref{eq:humidity_sensitivity}.
 \begin{equation}
 S_H = \frac{dR}{dH} = R_0 [\alpha + 2\beta(H - H_0)] \label{eq:humidity_sensitivity}
 \end{equation}
@@ -446,11 +488,18 @@ where:
 
 **Optimal Weights**: The optimal weights minimize the mean squared error:
 
+\Cref{eq:optimal_weights}.
 \begin{equation}
 \mathbf{w}_{opt} = (\mathbf{R}^T \mathbf{R})^{-1} \mathbf{R}^T \mathbf{y} \label{eq:optimal_weights}
 \end{equation}
 
 where $\mathbf{R}$ is the response matrix and $\mathbf{y}$ is the target response.
+
+## Implementation Cross-Links (Selected)
+- `src/core.py::calculate_atmospheric_transmission` → tests: `tests/test_core.py::TestAtmosphericTransmission`
+- `src/sensilla.py::analyze_sensilla_dimensions` → tests: `tests/test_sensilla.py::TestSensillaAnalysis`
+- `src/spectroscopy.py::analyze_chc_spectra` → tests: `tests/test_spectroscopy_analysis.py::TestAnalyzeChcSpectra`
+- Conversions `calculate_wavelength_from_wavenumber`/`calculate_wavenumber_from_wavelength` → tests: `tests/test_core.py::TestWavelengthConversions`
 
 ### Adaptive Threshold Mechanism
 
@@ -467,6 +516,7 @@ where:
 
 **Adaptation Dynamics**: The adaptation rate is:
 
+\Cref{eq:adaptation_rate}.
 \begin{equation}
 \frac{d\theta}{dt} = \alpha R(t) - \frac{\theta - \theta_0}{\tau_{adapt}} \label{eq:adaptation_rate}
 \end{equation}
@@ -477,6 +527,7 @@ where:
 
 The response function can be approximated using neural networks:
 
+\Cref{eq:neural_network}.
 \begin{equation}
 R(C, \mathbf{x}) = f\left(\sum_{j=1}^{M} w_j \sigma\left(\sum_{i=1}^{N} w_{ij} x_i + b_j\right) + b\right) \label{eq:neural_network}
 \end{equation}
@@ -485,6 +536,7 @@ where $\sigma$ is the activation function and $\mathbf{x}$ represents environmen
 
 **Training Objective**: The training objective is to minimize:
 
+\Cref{eq:training_objective}.
 \begin{equation}
 \mathcal{L} = \sum_{i=1}^{N} \left(R_i - R_{target}\right)^2 + \lambda \sum_{j=1}^{M} w_j^2 \label{eq:training_objective}
 \end{equation}
@@ -495,6 +547,7 @@ where $\lambda$ is the regularization parameter.
 
 The optimal spacing for a sensilla array can be determined by minimizing:
 
+\Cref{eq:optimization_loss}.
 \begin{equation}
 \mathcal{L} = \sum_{i=1}^{N} \left(R_i - R_{target}\right)^2 + \lambda \sum_{i=1}^{N-1} (d_{i+1} - d_i)^2 \label{eq:optimization_loss}
 \end{equation}
@@ -506,6 +559,7 @@ where:
 
 **Optimal Spacing**: The optimal spacing follows a log-periodic pattern:
 
+\Cref{eq:optimal_spacing}.
 \begin{equation}
 d_{i+1} = d_i \tau \label{eq:optimal_spacing}
 \end{equation}

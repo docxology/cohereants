@@ -116,7 +116,7 @@ The Earth's atmosphere has specific wavelength ranges where infrared radiation c
 - **8-14 μm (Long-wave infrared)**: 90% transmission efficiency, optimal for long-range communication
 - **17-25 μm (Far-infrared)**: 70% transmission efficiency, useful for thermal detection
 
-**Transmission Function**: The atmospheric transmission is modeled by the `calculate_atmospheric_transmission()` function:
+**Transmission function**: Modeled by `src/core.py::calculate_atmospheric_transmission()` (see Eq. \eqref{eq:atmospheric_transmission}):
 
 $$T(\lambda) = \exp\left[-\sum_i \alpha_i(\lambda) L_i\right]$$
 
@@ -129,7 +129,7 @@ Insect sensilla have dimensions that correspond closely to the wavelengths of in
 - **Sensilla Basiconica**: 2-8 μm length, optimal for 1-10 μm wavelengths
 - **Sensilla Coeloconica**: 5-15 μm length, optimal for 3-20 μm wavelengths
 
-**Wavelength Matching**: The relationship between sensilla dimensions and optimal detection wavelengths is analyzed by the `analyze_sensilla_dimensions()` function, revealing correlation coefficients exceeding 0.85.
+**Wavelength matching**: Analyzed by `src/sensilla.py::analyze_sensilla_dimensions()`; see resonant frequency Eq. \eqref{eq:resonant_freq} and tests `tests/test_sensilla.py`.
 
 **Resonant Frequency**: The fundamental resonant frequency of a sensillum is:
 
@@ -146,7 +146,7 @@ Different sensory modalities exhibit characteristic response times that reflect 
 - **Traditional Olfaction (Molecular)**: 7-12 ms response time
 - **Mammalian ORNs**: 10-50 ms response time
 
-**Response Time Analysis**: These response times are compared using the `calculate_response_time_improvement()` function, which shows 2.3-7.0x improvement for infrared detection compared to traditional molecular binding.
+**Response time analysis**: Compared using `src/core.py::calculate_response_time_improvement()`; see `tests/test_core.py::TestResponseTimeImprovement`.
 
 ### Signal Processing and Information Theory
 The vibrational theory incorporates advanced signal processing concepts:
@@ -246,13 +246,19 @@ The complete computational framework is documented with:
 - **API Documentation**: Complete function signatures and parameter descriptions
 - **Example Scripts**: Demonstrations of complete analysis pipelines
 
-For complete mathematical formulations and source code implementation, see Section \ref{sec:mathematical_appendix}.
+For complete mathematical formulations and source code implementation, see Section \cref{sec:mathematical_appendix}. Cross-links to implementations and unit tests are included therein.
 
 <!-- BEGIN: AUTO-API-GLOSSARY -->
 | Module | Name | Kind | Summary |
 |---|---|---|---|
 | `__init__` | `get_package_info` | function | Get comprehensive package information |
 | `__init__` | `run_demo_analysis` | function | Run a demonstration analysis using all available frameworks |
+| `ant_stack.antbody` | `AntBodySensilla` | class | Sensilla configuration using cohereAnts morphology analysis |
+| `ant_stack.antbody` | `AntBodySpectroscopy` | class | Atmospheric transmission access aligned with core calculations |
+| `ant_stack.antbrain` | `AntBrainOlfaction` | class | High-level olfactory pipeline stub with AL→MB→CX placeholders |
+| `ant_stack.antbrain` | `VibrationalGlomeruliCircuit` | class | Bank of resonant channels tuned across 2–25 μm |
+| `ant_stack.antmind` | `AntMindOlfaction` | class | Active-inference-like placeholder for olfactory policy selection |
+| `ant_stack.antmind` | `AntMindStigmergy` | class | Grid-based pheromone field with diffusion and decay |
 | `behavioral` | `BehavioralAnalyzer` | class | Main analyzer for behavioral response data |
 | `behavioral` | `BehavioralData` | class | Container for behavioral response data with validation |
 | `behavioral` | `StatisticalAnalyzer` | class | Statistical analysis for behavioral data |

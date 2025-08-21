@@ -67,6 +67,7 @@
 \usepackage{listings}
 \usepackage{fancyvrb}
 \usepackage{setspace}
+\usepackage{ragged2e}
 
 % Page geometry - more accessible margins
 \geometry{margin=1in, top=1in, bottom=1in}
@@ -104,9 +105,6 @@
 \setlength{\parindent}{0.5in}
 \setlength{\parskip}{0em}
 
-% Ensure left-aligned text (not centered)
-\raggedright
-
 % Override any centering for academic documents
 \makeatletter
 \renewcommand{\maketitle}{%
@@ -142,8 +140,10 @@
 }
 \makeatother
 
-% Ensure body text is left-aligned
-\raggedright
+% Use full justification for body text (left and right justified)
+\justifying
+
+% Ensure body text is fully justified and consistent
 \setlength{\parindent}{0.5in}
 
 % Comprehensive numbering for figures, tables, and equations
@@ -156,6 +156,14 @@
 \usepackage[font=small,labelfont=bf,textfont=it]{caption}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
+
+% Hyperlinks and smart cross-references
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage[nameinlink,capitalise]{cleveref}
+% Configure cleveref names
+\crefname{figure}{Figure}{Figures}
+\crefname{table}{Table}{Tables}
+\crefname{equation}{Equation}{Equations}
 
 % Equation numbering and formatting
 \usepackage{amsthm}
@@ -212,47 +220,40 @@ Daniel A. Friedman \\
 \setstretch{1.0}
 \section{Abstract}\label{sec:abstract}
 
-The vibrational theory of olfaction proposes that insects detect
-infrared electromagnetic radiation emitted by semiochemicals rather than
-relying solely on molecular binding mechanisms. This paper presents a
-comprehensive analysis of empirical evidence supporting this theory
-through morphological, neurological, behavioral, and spectroscopic data
-from insect studies.
+We evaluate the vibrational theory of olfaction, which posits that
+insects can detect infrared electromagnetic radiation emitted by
+semiochemicals alongside or in addition to molecular binding mechanisms.
+Using morphological measurements, spectroscopic analyses, neural latency
+comparisons, and tested computational models implemented in
+\passthrough{\lstinline!src/!}, we assess the plausibility and testable
+predictions of this hypothesis.
 
-\textbf{Key Findings}: Insect antennae and sensilla exhibit
-morphological adaptations optimized for electromagnetic detection, with
-dimensions corresponding to infrared wavelengths (2-30 μm) emitted by
-semiochemicals. Olfactory receptor neurons demonstrate rapid response
-times (1-5 ms) consistent with electromagnetic detection rather than
-molecular diffusion processes. Behavioral evidence includes
-self-orienting of sensilla hairs toward odor sources and specialized
-infrared sensors in beetle species. Spectroscopic analysis reveals that
-cuticular hydrocarbon emission spectra fall precisely within atmospheric
-transmission windows, enabling long-range detection.
+\textbf{Key results}: (i) Sensilla geometry aligns with predicted
+resonant wavelengths derived from dielectric waveguide models; (ii)
+published olfactory receptor neuron latencies (≈1--5 ms) are consistent
+with rapid, non-diffusion-limited detection; (iii) cuticular hydrocarbon
+(CHC) spectral peaks fall within modeled atmospheric transmission
+windows (2--5 μm, 8--14 μm, 17--25 μm) using
+\passthrough{\lstinline!src/core.calculate\_atmospheric\_transmission!}
+(validated in \passthrough{\lstinline!tests/test\_core.py!}).
 
-\textbf{Theoretical Framework}: The vibrational theory integrates
-dielectric waveguide models of insect sensilla with quantum mechanical
-electron tunneling in olfactory receptors. Computational models
-demonstrate how sensilla act as resonant cavities tuned to specific
-infrared frequencies, with microtubule arrays providing piezoelectric
-amplification of electromagnetic signals.
+\textbf{Framework}: We integrate resonant cavity and waveguide theory
+with CHC spectroscopy (\passthrough{\lstinline!src/spectroscopy.py!})
+and sensilla morphology (\passthrough{\lstinline!src/sensilla.py!}).
+Implementations are covered by targeted unit tests (e.g.,
+\passthrough{\lstinline!tests/test\_core.py::TestAtmosphericTransmission!},
+\passthrough{\lstinline!tests/test\_sensilla.py::TestSensillaAnalysis!},
+\passthrough{\lstinline!tests/test\_spectroscopy\_analysis.py::TestAnalyzeChcSpectra!}).
 
-\textbf{Empirical Validation}: The theory is supported by isotope
-discrimination studies in \emph{Drosophila melanogaster}, quantum
-mechanical modeling of electron tunneling, and morphological analysis of
-sensilla dimensions. Experimental evidence shows that thermo-sensitive
-sensilla coeloconica respond to infrared radiation with penetration
-depths of 6 μm into cuticle.
+\textbf{Scope and implications}: Findings provide falsifiable
+predictions for wavelength tuning, behavioral IR-only responses, and
+neural responses to IR stimulation. If validated, these mechanisms have
+implications for sensory biology and biomimetic sensing.
 
-\textbf{Implications}: This research suggests that insects employ
-sophisticated infrared detection systems that rival vertebrate sensory
-capabilities. Understanding the vibrational basis of insect olfaction
-has implications for evolutionary biology, biomimetic technology
-development, and agricultural pest control strategies.
-
-\textbf{Methodology}: All theoretical predictions are implemented in
-tested computational models that generate the visualizations and
-analyses presented throughout this manuscript, providing empirical
-grounding for the vibrational theory framework.
+\textbf{Reproducibility}: Analyses are deterministic (fixed seeds) and
+reproducible via the repository's unified pipeline; see the
+reproducibility subsection in Section \cref{sec:methodology} and the
+functions mapped to tests in \cref{sec:mathematical_appendix} and the
+Symbols/Glossary.
 
 \end{document}

@@ -2,17 +2,15 @@
 
 # Abstract {#sec:abstract}
 
-The vibrational theory of olfaction proposes that insects detect infrared electromagnetic radiation emitted by semiochemicals rather than relying solely on molecular binding mechanisms. This paper presents a comprehensive analysis of empirical evidence supporting this theory through morphological, neurological, behavioral, and spectroscopic data from insect studies.
+We evaluate the vibrational theory of olfaction, which posits that insects can detect infrared electromagnetic radiation emitted by semiochemicals alongside or in addition to molecular binding mechanisms. Using morphological measurements, spectroscopic analyses, neural latency comparisons, and tested computational models implemented in `src/`, we assess the plausibility and testable predictions of this hypothesis.
 
-**Key Findings**: Insect antennae and sensilla exhibit morphological adaptations optimized for electromagnetic detection, with dimensions corresponding to infrared wavelengths (2-30 μm) emitted by semiochemicals. Olfactory receptor neurons demonstrate rapid response times (1-5 ms) consistent with electromagnetic detection rather than molecular diffusion processes. Behavioral evidence includes self-orienting of sensilla hairs toward odor sources and specialized infrared sensors in beetle species. Spectroscopic analysis reveals that cuticular hydrocarbon emission spectra fall precisely within atmospheric transmission windows, enabling long-range detection.
+**Key results**: (i) Sensilla geometry aligns with predicted resonant wavelengths derived from dielectric waveguide models; (ii) published olfactory receptor neuron latencies (≈1–5 ms) are consistent with rapid, non-diffusion-limited detection; (iii) cuticular hydrocarbon (CHC) spectral peaks fall within modeled atmospheric transmission windows (2–5 μm, 8–14 μm, 17–25 μm) using `src/core.calculate_atmospheric_transmission` (validated in `tests/test_core.py`).
 
-**Theoretical Framework**: The vibrational theory integrates dielectric waveguide models of insect sensilla with quantum mechanical electron tunneling in olfactory receptors. Computational models demonstrate how sensilla act as resonant cavities tuned to specific infrared frequencies, with microtubule arrays providing piezoelectric amplification of electromagnetic signals.
+**Framework**: We integrate resonant cavity and waveguide theory with CHC spectroscopy (`src/spectroscopy.py`) and sensilla morphology (`src/sensilla.py`). Implementations are covered by targeted unit tests (e.g., `tests/test_core.py::TestAtmosphericTransmission`, `tests/test_sensilla.py::TestSensillaAnalysis`, `tests/test_spectroscopy_analysis.py::TestAnalyzeChcSpectra`).
 
-**Empirical Validation**: The theory is supported by isotope discrimination studies in *Drosophila melanogaster*, quantum mechanical modeling of electron tunneling, and morphological analysis of sensilla dimensions. Experimental evidence shows that thermo-sensitive sensilla coeloconica respond to infrared radiation with penetration depths of 6 μm into cuticle.
+**Scope and implications**: Findings provide falsifiable predictions for wavelength tuning, behavioral IR-only responses, and neural responses to IR stimulation. If validated, these mechanisms have implications for sensory biology and biomimetic sensing.
 
-**Implications**: This research suggests that insects employ sophisticated infrared detection systems that rival vertebrate sensory capabilities. Understanding the vibrational basis of insect olfaction has implications for evolutionary biology, biomimetic technology development, and agricultural pest control strategies.
-
-**Methodology**: All theoretical predictions are implemented in tested computational models that generate the visualizations and analyses presented throughout this manuscript, providing empirical grounding for the vibrational theory framework.
+**Reproducibility**: Analyses are deterministic (fixed seeds) and reproducible via the repository’s unified pipeline; see the reproducibility subsection in Section \cref{sec:methodology} and the functions mapped to tests in \cref{sec:mathematical_appendix} and the Symbols/Glossary.
 
 
 \newpage
@@ -45,7 +43,7 @@ The classical stereochemical theory of olfaction posits that molecular recogniti
 
 ### Isotope Discrimination Evidence
 
-The stereochemical theory faces significant challenges from isotope discrimination studies. Molecules with identical shapes and chemical structures but different isotopic compositions elicit distinct olfactory responses, demonstrating that molecular geometry alone cannot explain odor discrimination.
+The stereochemical theory faces challenges from isotope discrimination studies. Molecules with identical shapes and chemical structures but different isotopic compositions can elicit distinct olfactory responses, suggesting that geometry alone may not fully explain odor discrimination.
 
 **Quantitative Evidence**: Studies on *Drosophila melanogaster* show that deuterated homologues of known odorants produce unique behavioral responses despite maintaining identical molecular shapes. This finding is quantitatively supported by vibrational spectroscopy, where deuteration shifts infrared emission spectra by 2-3 μm while preserving molecular geometry.
 
@@ -53,23 +51,23 @@ The stereochemical theory faces significant challenges from isotope discriminati
 
 Traditional molecular binding models cannot account for the extremely rapid response times observed in insect olfaction. Insect ORNs demonstrate response latencies of 1-5 ms, comparable to photoreceptor (0.1 ms) and auditory receptor (0.16 ms) response times.
 
-**Mechanistic Implications**: These rapid responses suggest detection mechanisms that bypass the slower processes of molecular diffusion, pore penetration, and receptor binding. The observed response times are more consistent with electromagnetic wave detection than with molecular binding kinetics.
+**Mechanistic implications**: These rapid responses are difficult to reconcile with simple diffusion+binding models under typical environmental conditions and motivate evaluation of alternative mechanisms (e.g., vibrational/electromagnetic contributions) that could act upstream of or in parallel with binding.
 
 ## The Vibrational Theory Alternative
 
 The vibrational theory of olfaction proposes that insects detect the unique electromagnetic radiation emitted by free-floating odor molecules rather than relying solely on geometric or chemical information at receptor binding surfaces.
 
-### Atmospheric Transmission Windows
+### Atmospheric Transmission Windows and Testable Predictions
 
 A compelling aspect of the vibrational theory is the correspondence between atmospheric transmission characteristics and semiochemical emission spectra. Earth's atmosphere exhibits specific transmission windows in the mid- and long-infrared ranges (2-5 μm, 8-14 μm, 17-25 μm) that precisely overlap with the emission spectra of insect semiochemicals.
 
-**Environmental Optimization**: These transmission windows enable long-range infrared detection, providing insects with access to environmental information that would be unavailable through molecular diffusion alone. The atmospheric transmission function is quantitatively modeled in Section \ref{sec:mathematical_appendix}.
+**Testable prediction P1**: Under controlled humidity/temperature, modeled transmission windows (2–5 μm, 8–14 μm, 17–25 μm) should align with CHC emission peaks measured by ATR‑FTIR; see `src/core.calculate_atmospheric_transmission()` with coverage in `tests/test_core.py`.
 
-### Sensilla as Electromagnetic Antennas
+### Sensilla as Electromagnetic Antennas (Hypothesis)
 
 Insect antennae and sensilla exhibit morphological adaptations that suggest optimization for electromagnetic detection. Sensilla dimensions (6-160 μm for trichodea, 2-8 μm for basiconica) correspond closely to the wavelengths of infrared radiation emitted by semiochemicals.
 
-**Structural Evidence**: The porous architecture of sensilla, traditionally interpreted as molecular transport conduits, may serve dual functions as electromagnetic waveguides and molecular filters. This interpretation is supported by dielectric waveguide theory and resonant cavity modeling.
+**Structural hypothesis**: The porous architecture of sensilla, traditionally interpreted as molecular transport conduits, may also provide electromagnetic coupling consistent with dielectric waveguide theory. We evaluate this using resonant models quantifying HE$_{11}$-like modes (details in \cref{sec:mathematical_appendix}).
 
 ## Research Objectives and Approach
 
@@ -79,7 +77,15 @@ This paper examines the vibrational theory through multiple analytical domains:
 2. **Neurological Investigation**: Analysis of response time data and neural encoding mechanisms
 3. **Behavioral Studies**: Examination of insect responses to infrared stimuli and environmental conditions
 4. **Spectroscopic Validation**: Measurement and analysis of semiochemical emission spectra
-5. **Computational Modeling**: Implementation of theoretical frameworks in tested computational models
+5. **Computational Modeling**: Implementation of theoretical frameworks in tested computational models, cross-linked to unit tests
+
+### Explicit Hypotheses and Falsifiable Predictions
+- H1 (Resonance): Sensilla length/diameter distributions predict quarter/half‑wavelength resonances within 2–30 μm; correlation r ≥ 0.8 across species.
+- H2 (Transmission): Measured CHC peaks fall within modeled atmospheric windows under standard ambient conditions.
+- H3 (Latency): IR‑only stimuli elicit ORN responses with sub‑10 ms latency distinct from pure thermal confounds.
+- H4 (Behavior): Frequency‑specific IR stimulation induces orientation/tracking without corresponding volatile molecules.
+
+Each hypothesis is supported by a concrete analysis in `src/` with tests in `tests/` (see method cross‑links in \cref{sec:methodology}).
 
 ## Theoretical Framework Integration
 
@@ -122,7 +128,7 @@ The vibrational theory of olfaction proposes that insects detect the unique elec
 
 ### Atmospheric Transmission and Detection Range
 
-The Earth's atmosphere exhibits specific transmission windows in the infrared range that enable long-range detection of semiochemical emissions. These transmission characteristics are quantitatively modeled using the `calculate_atmospheric_transmission()` function, which implements empirical atmospheric transmission data.
+The Earth's atmosphere exhibits specific transmission windows in the infrared range that enable long-range detection of semiochemical emissions. These transmission characteristics are modeled using `src/core.py::calculate_atmospheric_transmission(wavelengths, distance=None) -> Union[float, np.ndarray]`, validated by `tests/test_core.py::TestAtmosphericTransmission` and `tests/test_core_physics.py::TestAtmosphericTransmission`.
 
 **Transmission Windows**: Three primary atmospheric windows exist in the infrared range:
 - **Mid-infrared (2-5 μm)**: 80% transmission efficiency
@@ -131,6 +137,7 @@ The Earth's atmosphere exhibits specific transmission windows in the infrared ra
 
 These windows correspond precisely to the emission spectra of insect semiochemicals, enabling detection at distances of 10-100 meters under optimal conditions.
 
+\Cref{fig:atmospheric_transmission} for the atmospheric transmission windows.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{../output/figures/atmospheric_transmission.png}
@@ -142,7 +149,7 @@ These windows correspond precisely to the emission spectra of insect semiochemic
 
 The vibrational theory is supported by molecular spectroscopy studies demonstrating that isotopic substitution affects olfactory perception without altering molecular geometry. This evidence suggests that vibrational modes, rather than shape complementarity, drive odor discrimination.
 
-**Quantitative Evidence**: Deuteration studies show that replacing hydrogen with deuterium shifts infrared emission spectra by 2-3 μm while preserving molecular shape. The `analyze_chc_spectra()` function quantifies these spectral shifts and their correlation with behavioral responses.
+**Quantitative evidence**: Deuteration studies show that replacing hydrogen with deuterium shifts infrared bands while preserving molecular shape. The function `src/spectroscopy.py::analyze_chc_spectra(wavenumbers, intensities, species)` quantifies peaks and regions; tests in `tests/test_spectroscopy_analysis.py::TestAnalyzeChcSpectra` verify outputs.
 
 **Förster Resonance Energy Transfer (FRET)**: Environmental factors such as humidity can modulate semiochemical emission spectra through FRET processes. The efficiency of energy transfer between water molecules and pheromones follows the relationship:
 
@@ -161,8 +168,9 @@ All adult insects possess antennae with micron-sized sensory hairs called sensil
 - **Sensilla Basiconica**: 2-8 μm length, 1-3 μm diameter  
 - **Sensilla Coeloconica**: 5-15 μm length, 3-6 μm diameter
 
-**Wavelength Matching**: The `analyze_sensilla_dimensions()` function calculates optimal wavelength matching between sensilla geometry and incident radiation. This analysis reveals that sensilla dimensions correspond to specific infrared frequencies with correlation coefficients exceeding 0.85.
+**Wavelength matching**: `src/sensilla.py::analyze_sensilla_dimensions(lengths, diameters)` computes quarter/half‑wavelength predictions and aspect ratios. Tests in `tests/test_sensilla.py::TestSensillaAnalysis` and `tests/test_insect_analysis.py::TestSensillaAnalysis` validate calculations.
 
+\Cref{fig:sensilla_wavelength_matching} for the sensilla-wavelength correlation.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{../output/figures/sensilla_wavelength_matching.png}
@@ -179,6 +187,7 @@ Insect semiochemicals exhibit characteristic infrared emission spectra that fall
 - **Cabbage looper sex pheromones**: 17 μm and 26 μm
 - **Aphid CHCs**: 2.85-3.5 μm range
 
+\Cref{fig:chc_spectra_example} for an example CHC spectrum.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{../output/figures/chc_spectra_example.png}
@@ -192,7 +201,7 @@ Insect semiochemicals exhibit characteristic infrared emission spectra that fall
 
 The dielectric waveguide model of insect sensilla was first proposed by Dr. Philip S. Callahan in the 1960s and 1970s. This model explains how sensilla can act as electromagnetic resonators and amplifiers for infrared radiation.
 
-**Waveguide Properties**: Sensilla exhibit properties consistent with dielectric waveguides:
+**Waveguide properties (assumed ranges for modeling)**: Sensilla exhibit properties consistent with dielectric waveguides:
 - **Dielectric Constant**: Cuticular material has $\epsilon_r \approx 2.5-3.0$
 - **Loss Tangent**: $\tan \delta \approx 0.01-0.05$ at infrared frequencies
 - **Quality Factor**: $Q \approx 100-1000$ for resonant modes
@@ -214,7 +223,7 @@ Sensilla ultrastructure supports the waveguide interpretation through several ke
 
 Traditional interpretations view sensilla pores as molecular transport conduits. However, the vibrational theory suggests an additional electromagnetic function: pore arrays can effectively reduce the dielectric constant of sensilla walls, enhancing gain and frequency selectivity.
 
-**Gain Enhancement**: Theoretical analysis shows that perforated walls can increase gain by 3-10 dB compared to solid walls. This enhancement is achieved by reducing the effective dielectric constant through air-filled perforations.
+**Gain enhancement (model prediction)**: Perforated walls may increase gain by 3–10 dB versus solid walls by reducing effective dielectric constant. Empirical validation requires targeted micro-EM measurements.
 
 ## Microtubule Arrays and Piezoelectric Properties
 
@@ -261,14 +270,21 @@ All theoretical predictions are implemented in tested computational models that 
 
 ### Validation and Testing
 
-The computational framework is validated through comprehensive testing:
+The computational framework is validated through comprehensive testing; representative mappings:
 
-- **Unit Tests**: Individual function testing with 100% coverage
-- **Integration Tests**: End-to-end analysis pipeline validation
-- **Physical Validation**: Comparison with known physical constants and relationships
-- **Empirical Comparison**: Validation against published experimental data
+- `calculate_atmospheric_transmission` → `tests/test_core.py::TestAtmosphericTransmission`
+- `analyze_sensilla_dimensions` → `tests/test_sensilla.py::TestSensillaAnalysis`
+- `analyze_chc_spectra` → `tests/test_spectroscopy_analysis.py::TestAnalyzeChcSpectra`
+- Wavelength/wavenumber conversions → `tests/test_core.py::TestWavelengthConversions`
 
-This rigorous validation ensures that theoretical predictions are grounded in physical reality and provides a reliable foundation for experimental design and hypothesis testing.
+This validation ensures that theoretical predictions are numerically consistent and provides a foundation for experimental design.
+
+### Reproducibility Checklist
+- Environment: pinned in `uv.lock`/`pyproject.toml`
+- Seeds: set via `src/config.set_random_seed(42)`; tests call deterministic paths
+- Regenerate figures: `uv run python scripts/generate_research_figures.py`
+- Run all tests + coverage: `uv run pytest tests/ --cov=src --cov-report=term-missing`
+- Full manuscript build: `bash ./repo_utilities/render_pdf.sh`
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
@@ -291,17 +307,18 @@ This rigorous validation ensures that theoretical predictions are grounded in ph
 
 Insect olfactory receptor neurons (ORNs) demonstrate remarkably rapid response times that challenge traditional molecular binding models. The `calculate_response_time_improvement()` function quantifies these improvements by comparing insect ORN response times with traditional olfaction mechanisms.
 
-**Quantitative Response Times**:
+**Quantitative response times** (representative literature ranges):
 - **Insect ORNs**: 1-5 ms response latency
 - **Traditional Olfaction**: 7-12 ms response latency
 - **Improvement Factor**: 2.3-7.0x faster response
 
-**Response Time Components**: The vibrational theory suggests that rapid responses result from direct electromagnetic detection rather than molecular diffusion processes. The `calculate_response_time_improvement()` function models these effects using the relationship:
+**Response time components**: We model latencies as the sum of detection, transduction, and propagation. `src/core.py::calculate_response_time_improvement` (see `tests/test_core.py::TestResponseTimeImprovement`) compares modeled latencies with literature baselines:
 
 $$\tau_{response} = \tau_{detection} + \tau_{transduction} + \tau_{propagation}$$
 
-where electromagnetic detection eliminates the molecular diffusion component ($\tau_{diffusion}$) that dominates traditional olfaction.
+where vibrational/electromagnetic contributions may reduce or bypass diffusion-limited components.
 
+\Cref{fig:response_time_comparison} for response time comparisons.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{../output/figures/response_time_comparison.png}
@@ -331,7 +348,7 @@ If sensilla function as directional electromagnetic antennas, this would explain
 - **Front-to-Back Ratio**: 10-20 dB directional selectivity
 - **Gain Pattern**: Maximum sensitivity in the forward direction
 
-**Behavioral Validation**: Experimental studies demonstrate that insects can localize odor sources with remarkable accuracy, suggesting directional detection capabilities that exceed those possible through molecular diffusion alone.
+**Behavioral validation**: Reported localization accuracy suggests directional detection that may be consistent with antenna-like gain patterns; controlled IR‑only assays are required to disambiguate from volatile plume structure.
 
 ### Specialized Infrared Sensors
 
@@ -357,6 +374,7 @@ Experimental studies on leaf-cutting ants (*Atta vollenweideri*) demonstrate dir
 
 **Mechanistic Insights**: The electron-dense filaments within sensory pegs enhance infrared absorption, suggesting specialized structures for electromagnetic detection. The shield structure has minimal impact on IR reception, indicating that the detection mechanism operates through direct electromagnetic coupling rather than thermal conduction.
 
+\Cref{fig:experimental_setup} for the experimental setup.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{../output/figures/experimental_setup.png}
@@ -375,7 +393,7 @@ Highly efficient infrared spectroscopy (ATR-FTIR) has been used to identify aphi
 - **Grasshopper CHCs**: Transmission peak at 2850 cm$^{-1}$ (3.5 μm)
 - **Ant CHCs**: Multiple peaks in 2.9-3.1 μm range
 
-**Species Discrimination**: Spectral analysis enables species identification with 95% accuracy, demonstrating that CHC profiles provide unique vibrational signatures that can be detected through infrared spectroscopy.
+**Species discrimination**: Reported accuracies (≈95%) depend on dataset size and cross-validation protocol; reproducible analysis should report N, folds, and confidence intervals. Our pipeline provides peak and region features via `analyze_chc_spectra` for such classifiers.
 
 ### Intra-individual Variation
 
@@ -572,7 +590,7 @@ The vibrational theory does not necessarily contradict existing theories of olfa
 - **Adaptability**: System can adjust to changing environmental conditions
 - **Efficiency**: Optimal use of available energy and computational resources
 
-**Mathematical Framework**: The mathematical framework for this multimodal approach is developed in Section \ref{sec:mathematical_appendix}, where equations \ref{eq:integrated_response} and \ref{eq:adaptive_threshold} describe how multiple detection mechanisms can be integrated for optimal performance.
+**Mathematical Framework**: The mathematical framework for this multimodal approach is developed in Section \cref{sec:mathematical_appendix}, where equations \cref{eq:integrated_response,eq:adaptive_threshold} describe how multiple detection mechanisms can be integrated for optimal performance.
 
 ### Quantum Mechanical Coupling
 
@@ -585,6 +603,13 @@ The vibrational theory integrates with quantum mechanical models of olfaction th
 - **Coherent States**: Quantum superposition of different molecular states
 
 **Experimental Validation**: These quantum effects are implemented in the `MetaMaterialAnalyzer` class, which provides methods for analyzing quantum coupling and plasmonic resonance effects.
+
+### Limitations and Alternative Explanations
+- Thermal mechanisms: IR stimulation may induce thermal transients; controls require matched thermal loads without spectral content and precise micro-thermometry at sensilla.
+- Mixed modalities: Molecular binding and vibrational contributions may be jointly necessary; disentangling requires receptor-level perturbations and wavelength-specific stimulation.
+- Environmental confounds: Humidity and temperature alter both transmission and receptor sensitivity; experiments should include environmental covariates and calibration.
+
+Minimal falsification tests: (i) No frequency‑specific responses under IR‑only stimulation with thermal controls; (ii) lack of correlation between sensilla dimensions and predicted resonant wavelengths across taxa; (iii) CHC peaks systematically outside modeled windows under controlled conditions.
 
 ## Future Research Directions
 
@@ -688,7 +713,7 @@ The vibrational theory of olfaction provides a unified framework that integrates
 - **Resonant Cavity Theory**: Sensilla as frequency-tuned electromagnetic resonators
 - **Piezoelectric Effects**: Microtubule arrays as signal amplifiers and frequency selectors
 
-**Mathematical Foundation**: The complete mathematical framework is presented in Section \ref{sec:mathematical_appendix}, with all equations implemented in tested computational models that provide quantitative predictions for experimental validation.
+**Mathematical Foundation**: The complete mathematical framework is presented in Section \cref{sec:mathematical_appendix}, with all equations implemented in tested computational models that provide quantitative predictions for experimental validation.
 
 ### Computational Implementation
 
@@ -810,7 +835,7 @@ Understanding these threats could inform conservation efforts:
 
 ### Paradigm Shift
 
-The vibrational theory of olfaction represents a fundamental shift in our understanding of insect perception and behavior. This theory challenges traditional views of insect cognition and suggests that insects possess sensory capabilities that rival or exceed vertebrate systems in specific domains.
+The vibrational theory of olfaction represents a potential shift in our understanding of insect perception and behavior. If validated, it would broaden current models of olfaction and sensory integration.
 
 **Theoretical Impact**: The theory provides:
 - **Unified Framework**: Integration of multiple physical principles
@@ -867,6 +892,7 @@ This appendix provides the mathematical foundations for the vibrational theory o
 
 The fundamental equations governing electromagnetic wave propagation in insect sensilla can be expressed as:
 
+\Cref{eq:maxwell1,eq:maxwell2,eq:maxwell3,eq:maxwell4}.
 \begin{align}
 \nabla \cdot \mathbf{D} &= \rho_f \label{eq:maxwell1} \\
 \nabla \cdot \mathbf{B} &= 0 \label{eq:maxwell2} \\
@@ -882,12 +908,14 @@ where $\mathbf{D} = \epsilon_0 \mathbf{E} + \mathbf{P}$ is the electric displace
 
 For cylindrical sensilla acting as dielectric waveguides, the electromagnetic field components can be expressed in cylindrical coordinates $(r, \phi, z)$ as:
 
+\Cref{eq:waveguide_field}.
 \begin{equation}
 \mathbf{E}(r, \phi, z) = \mathbf{E}_0(r, \phi) e^{i(\beta z - \omega t)} \label{eq:waveguide_field}
 \end{equation}
 
 where $\beta$ is the propagation constant and $\omega$ is the angular frequency. The transverse field components satisfy the Helmholtz equation:
 
+\Cref{eq:helmholtz}.
 \begin{equation}
 \nabla_t^2 \mathbf{E}_t + (k^2 - \beta^2)\mathbf{E}_t = 0 \label{eq:helmholtz}
 \end{equation}
@@ -900,6 +928,7 @@ with $k = \omega \sqrt{\mu \epsilon}$ being the wavenumber in the medium.
 
 The resonant frequency of a sensillum can be approximated using the cavity resonator model:
 
+\Cref{eq:resonant_freq}.
 \begin{equation}
 f_{res} = \frac{c}{2\pi} \sqrt{\left(\frac{\alpha_{mn}}{a}\right)^2 + \left(\frac{p\pi}{L}\right)^2} \label{eq:resonant_freq}
 \end{equation}
@@ -913,11 +942,15 @@ where:
 
 **Quality Factor**: The quality factor $Q$ of the resonator is given by:
 
+\Cref{eq:quality_factor}.
 \begin{equation}
 Q = \frac{f_{res}}{\Delta f} = \frac{\omega_0}{2\alpha} \label{eq:quality_factor}
 \end{equation}
 
 where $\Delta f$ is the bandwidth and $\alpha$ is the attenuation constant.
+
+### Worked Example (Resonant Frequency)
+Assume a cylindrical sensillum with radius $a=1.5\,\mu m$, length $L=12\,\mu m$, relative permittivity $\epsilon_r=2.8$, and axial mode $p=1$ using the first Bessel root $\alpha_{11}\approx1.841$. With $c=c_0/\sqrt{\epsilon_r}$, Eq. \eqref{eq:resonant_freq} gives a fundamental frequency corresponding to a free-space wavelength in the mid‑IR range. This matches the quarter/half‑wavelength heuristic implemented in `src/sensilla.py::analyze_sensilla_dimensions` (see `tests/test_sensilla.py`).
 
 ## Vibrational Spectroscopy
 
@@ -925,6 +958,7 @@ where $\Delta f$ is the bandwidth and $\alpha$ is the attenuation constant.
 
 The energy levels of molecular vibrations are quantized according to:
 
+\Cref{eq:vibrational_energy}.
 \begin{equation}
 E_v = \hbar \omega_e \left(v + \frac{1}{2}\right) - \hbar \omega_e x_e \left(v + \frac{1}{2}\right)^2 \label{eq:vibrational_energy}
 \end{equation}
@@ -937,6 +971,7 @@ where:
 
 **Isotope Effects**: For deuterated compounds, the frequency shift is approximately:
 
+\Cref{eq:isotope_shift}.
 \begin{equation}
 \frac{\omega_D}{\omega_H} = \sqrt{\frac{\mu_H}{\mu_D}} \approx 0.707 \label{eq:isotope_shift}
 \end{equation}
@@ -947,6 +982,7 @@ where $\mu_H$ and $\mu_D$ are the reduced masses of hydrogen and deuterium compo
 
 The absorption cross-section for infrared radiation by a molecule is given by:
 
+\Cref{eq:absorption_cross_section}.
 \begin{equation}
 \sigma(\omega) = \frac{4\pi^2 \omega}{3\hbar c} \sum_{v',v''} |\langle v'|\mu|v''\rangle|^2 \delta(\omega - \omega_{v'v''}) \label{eq:absorption_cross_section}
 \end{equation}
@@ -959,13 +995,14 @@ where $\mu$ is the transition dipole moment and $\omega_{v'v''}$ is the frequenc
 
 The atmospheric transmission at infrared wavelengths can be modeled as:
 
+\Cref{eq:atmospheric_transmission}.
 \begin{equation}
 T(\lambda) = \exp\left[-\sum_i \alpha_i(\lambda) L_i\right] \label{eq:atmospheric_transmission}
 \end{equation}
 
 where $\alpha_i(\lambda)$ is the absorption coefficient of the $i$th atmospheric component and $L_i$ is the path length through that component.
 
-**Transmission Windows**: The three primary atmospheric windows have transmission efficiencies:
+**Transmission windows (model)**: The three primary atmospheric windows used in our baseline model have transmission efficiencies:
 - **2-5 μm**: $T(\lambda) \approx 0.8$ (mid-infrared)
 - **8-14 μm**: $T(\lambda) \approx 0.9$ (long-wave infrared)  
 - **17-25 μm**: $T(\lambda) \approx 0.7$ (far-infrared)
@@ -976,6 +1013,7 @@ where $\alpha_i(\lambda)$ is the absorption coefficient of the $i$th atmospheric
 
 The effective aperture of a sensillum can be calculated using:
 
+\Cref{eq:effective_aperture}.
 \begin{equation}
 A_{eff} = \frac{\lambda^2}{4\pi} G(\theta, \phi) \label{eq:effective_aperture}
 \end{equation}
@@ -984,6 +1022,7 @@ where $G(\theta, \phi)$ is the gain pattern of the sensillum in the direction $(
 
 **Gain Pattern**: For a cylindrical sensillum, the gain pattern can be approximated as:
 
+\Cref{eq:gain_pattern}.
 \begin{equation}
 G(\theta, \phi) = G_0 \cos^2(\theta) \label{eq:gain_pattern}
 \end{equation}
@@ -994,6 +1033,7 @@ where $G_0$ is the maximum gain and $\theta$ is the angle from the axis.
 
 The power received by a sensillum from a distant source is:
 
+\Cref{eq:power_received}.
 \begin{equation}
 P_{rec} = S A_{eff} = \frac{P_{trans} G_{trans} A_{eff}}{4\pi R^2} \label{eq:power_received}
 \end{equation}
@@ -1006,6 +1046,7 @@ where:
 
 **Detection Range**: The maximum detection range $R_{max}$ is determined by the minimum detectable power:
 
+\Cref{eq:detection_range}.
 \begin{equation}
 R_{max} = \sqrt{\frac{P_{trans} G_{trans} A_{eff}}{4\pi P_{min}}} \label{eq:detection_range}
 \end{equation}
@@ -1014,6 +1055,7 @@ R_{max} = \sqrt{\frac{P_{trans} G_{trans} A_{eff}}{4\pi P_{min}}} \label{eq:dete
 
 The signal-to-noise ratio (SNR) for infrared detection is:
 
+\Cref{eq:snr}.
 \begin{equation}
 SNR = \frac{P_{signal}}{P_{noise}} = \frac{P_{rec}}{k_B T \Delta f} \label{eq:snr}
 \end{equation}
@@ -1025,11 +1067,12 @@ where:
 
 **Minimum Detectable Power**: The minimum detectable power is:
 
+\Cref{eq:min_power}.
 \begin{equation}
 P_{min} = k_B T \Delta f \cdot SNR_{min} \label{eq:min_power}
 \end{equation}
 
-where $SNR_{min}$ is the minimum required signal-to-noise ratio (typically 10-20 dB).
+where $SNR_{min}$ is the minimum required signal-to-noise ratio (typically 10–20 dB). A simple numerical estimate with $T=300\,K$ and $\Delta f=100\,Hz$ yields $P_{min}\approx4.1\times10^{-19}\,\text{W}\cdot SNR_{min}$.
 
 ## Piezoelectric Response of Microtubules
 
@@ -1037,6 +1080,7 @@ where $SNR_{min}$ is the minimum required signal-to-noise ratio (typically 10-20
 
 The piezoelectric response of microtubules can be described by:
 
+\Cref{eq:piezoelectric}.
 \begin{equation}
 \mathbf{P} = d_{ijk} \sigma_{jk} \label{eq:piezoelectric}
 \end{equation}
@@ -1052,6 +1096,7 @@ where:
 
 The fundamental resonant frequency of a microtubule is:
 
+\Cref{eq:microtubule_resonance}.
 \begin{equation}
 f_0 = \frac{1}{2L} \sqrt{\frac{EI}{\rho A}} \label{eq:microtubule_resonance}
 \end{equation}
@@ -1069,6 +1114,7 @@ where:
 
 The piezoelectric coupling coefficient $k$ is:
 
+\Cref{eq:piezoelectric_coupling}.
 \begin{equation}
 k^2 = \frac{d_{33}^2 E}{\epsilon_0 \epsilon_r} \label{eq:piezoelectric_coupling}
 \end{equation}
@@ -1081,6 +1127,7 @@ where $\epsilon_r$ is the relative permittivity of the microtubule material.
 
 The response of a log-periodic sensilla array can be modeled as:
 
+\Cref{eq:log_periodic_response}.
 \begin{equation}
 R(C) = R_0 \sum_{n=0}^{N-1} \frac{C^n}{C_0^n} e^{-\frac{(C - C_n)^2}{2\sigma_n^2}} \label{eq:log_periodic_response}
 \end{equation}
@@ -1093,6 +1140,7 @@ where:
 
 **Array Optimization**: The optimal log-periodic ratio is:
 
+\Cref{eq:optimal_ratio}.
 \begin{equation}
 \tau_{opt} = \exp\left(\frac{\pi}{\sqrt{1 - \left(\frac{\alpha}{k}\right)^2}}\right) \label{eq:optimal_ratio}
 \end{equation}
@@ -1103,6 +1151,7 @@ where $\alpha$ is the attenuation constant and $k$ is the wavenumber.
 
 The concentration tuning function for individual sensilla is:
 
+\Cref{eq:concentration_tuning}.
 \begin{equation}
 T(C) = \frac{C^n}{K_d^n + C^n} \label{eq:concentration_tuning}
 \end{equation}
@@ -1113,6 +1162,7 @@ where:
 
 **Dynamic Range**: The dynamic range of concentration detection is:
 
+\Cref{eq:dynamic_range}.
 \begin{equation}
 DR = 20 \log_{10}\left(\frac{C_{max}}{C_{min}}\right) \text{ dB} \label{eq:dynamic_range}
 \end{equation}
@@ -1125,6 +1175,7 @@ where $C_{max}$ and $C_{min}$ are the maximum and minimum detectable concentrati
 
 The probability of electron tunneling through a potential barrier is:
 
+\Cref{eq:tunneling_probability}.
 \begin{equation}
 P_{tunnel} = \exp\left[-\frac{2d}{\hbar} \sqrt{2m(V_0 - E)}\right] \label{eq:tunneling_probability}
 \end{equation}
@@ -1137,6 +1188,7 @@ where:
 
 **Tunneling Current**: The tunneling current density is:
 
+\Cref{eq:tunneling_current}.
 \begin{equation}
 J = \frac{e^2}{h} \frac{V}{d} P_{tunnel} \label{eq:tunneling_current}
 \end{equation}
@@ -1147,6 +1199,7 @@ where $e$ is the electron charge and $h$ is Planck's constant.
 
 The efficiency of FRET between donor and acceptor molecules is:
 
+\Cref{eq:fret_efficiency}.
 \begin{equation}
 E_{FRET} = \frac{1}{1 + \left(\frac{r}{R_0}\right)^6} \label{eq:fret_efficiency}
 \end{equation}
@@ -1157,6 +1210,7 @@ where:
 
 **FRET Rate**: The FRET rate constant is:
 
+\Cref{eq:fret_rate}.
 \begin{equation}
 k_{FRET} = \frac{1}{\tau_D} \frac{R_0^6}{r^6} \label{eq:fret_rate}
 \end{equation}
@@ -1169,6 +1223,7 @@ where $\tau_D$ is the donor lifetime.
 
 The response time of olfactory receptor neurons can be modeled as:
 
+\Cref{eq:response_time}.
 \begin{equation}
 \tau_{response} = \tau_{detection} + \tau_{transduction} + \tau_{propagation} \label{eq:response_time}
 \end{equation}
@@ -1184,6 +1239,7 @@ where each component represents the time for detection, signal transduction, and
 
 The frequency response of a sensillum is:
 
+\Cref{eq:frequency_response}.
 \begin{equation}
 H(f) = \frac{1}{1 + i2\pi f \tau} \label{eq:frequency_response}
 \end{equation}
@@ -1192,12 +1248,14 @@ where $\tau$ is the characteristic time constant of the system.
 
 **Bandwidth**: The 3-dB bandwidth is:
 
+\Cref{eq:bandwidth}.
 \begin{equation}
 f_{3dB} = \frac{1}{2\pi \tau} \label{eq:bandwidth}
 \end{equation}
 
 **Phase Response**: The phase response is:
 
+\Cref{eq:phase_response}.
 \begin{equation}
 \phi(f) = -\tan^{-1}(2\pi f \tau) \label{eq:phase_response}
 \end{equation}
@@ -1208,6 +1266,7 @@ f_{3dB} = \frac{1}{2\pi \tau} \label{eq:bandwidth}
 
 The probability of a behavioral response given a stimulus intensity $I$ is:
 
+\Cref{eq:response_probability}.
 \begin{equation}
 P(response|I) = \frac{1}{1 + e^{-\beta(I - I_{50})}} \label{eq:response_probability}
 \end{equation}
@@ -1218,6 +1277,7 @@ where:
 
 **Sensitivity Index**: The sensitivity index $d'$ is:
 
+\Cref{eq:sensitivity_index}.
 \begin{equation}
 d' = \frac{\mu_{signal} - \mu_{noise}}{\sqrt{\frac{\sigma_{signal}^2 + \sigma_{noise}^2}{2}}} \label{eq:sensitivity_index}
 \end{equation}
@@ -1228,16 +1288,19 @@ where $\mu$ and $\sigma^2$ represent the mean and variance of signal and noise d
 
 The discriminability index $d'$ in signal detection theory is:
 
+\Cref{eq:discriminability}.
 \begin{equation}
 d' = \frac{\mu_{signal} - \mu_{noise}}{\sqrt{\frac{\sigma_{signal}^2 + \sigma_{noise}^2}{2}}} \label{eq:discriminability}
 \end{equation}
 
 **ROC Analysis**: The receiver operating characteristic (ROC) curve is:
 
+\Cref{eq:false_alarm}.
 \begin{equation}
 P_{FA} = \int_{\lambda}^{\infty} p(x|noise) dx \label{eq:false_alarm}
 \end{equation}
 
+\Cref{eq:detection_probability}.
 \begin{equation}
 P_D = \int_{\lambda}^{\infty} p(x|signal) dx \label{eq:detection_probability}
 \end{equation}
@@ -1250,6 +1313,7 @@ where $\lambda$ is the decision threshold.
 
 The temperature dependence of sensilla response can be modeled using the Arrhenius equation:
 
+\Cref{eq:arrhenius}.
 \begin{equation}
 k(T) = A e^{-\frac{E_a}{k_B T}} \label{eq:arrhenius}
 \end{equation}
@@ -1261,6 +1325,7 @@ where:
 
 **Temperature Coefficient**: The temperature coefficient is:
 
+\Cref{eq:temperature_coefficient}.
 \begin{equation}
 \alpha_T = \frac{1}{k} \frac{dk}{dT} = \frac{E_a}{k_B T^2} \label{eq:temperature_coefficient}
 \end{equation}
@@ -1269,6 +1334,7 @@ where:
 
 The effect of humidity on sensilla function is:
 
+\Cref{eq:humidity_response}.
 \begin{equation}
 R(H) = R_0 \left[1 + \alpha(H - H_0) + \beta(H - H_0)^2\right] \label{eq:humidity_response}
 \end{equation}
@@ -1280,6 +1346,7 @@ where:
 
 **Humidity Sensitivity**: The humidity sensitivity is:
 
+\Cref{eq:humidity_sensitivity}.
 \begin{equation}
 S_H = \frac{dR}{dH} = R_0 [\alpha + 2\beta(H - H_0)] \label{eq:humidity_sensitivity}
 \end{equation}
@@ -1301,11 +1368,18 @@ where:
 
 **Optimal Weights**: The optimal weights minimize the mean squared error:
 
+\Cref{eq:optimal_weights}.
 \begin{equation}
 \mathbf{w}_{opt} = (\mathbf{R}^T \mathbf{R})^{-1} \mathbf{R}^T \mathbf{y} \label{eq:optimal_weights}
 \end{equation}
 
 where $\mathbf{R}$ is the response matrix and $\mathbf{y}$ is the target response.
+
+## Implementation Cross-Links (Selected)
+- `src/core.py::calculate_atmospheric_transmission` → tests: `tests/test_core.py::TestAtmosphericTransmission`
+- `src/sensilla.py::analyze_sensilla_dimensions` → tests: `tests/test_sensilla.py::TestSensillaAnalysis`
+- `src/spectroscopy.py::analyze_chc_spectra` → tests: `tests/test_spectroscopy_analysis.py::TestAnalyzeChcSpectra`
+- Conversions `calculate_wavelength_from_wavenumber`/`calculate_wavenumber_from_wavelength` → tests: `tests/test_core.py::TestWavelengthConversions`
 
 ### Adaptive Threshold Mechanism
 
@@ -1322,6 +1396,7 @@ where:
 
 **Adaptation Dynamics**: The adaptation rate is:
 
+\Cref{eq:adaptation_rate}.
 \begin{equation}
 \frac{d\theta}{dt} = \alpha R(t) - \frac{\theta - \theta_0}{\tau_{adapt}} \label{eq:adaptation_rate}
 \end{equation}
@@ -1332,6 +1407,7 @@ where:
 
 The response function can be approximated using neural networks:
 
+\Cref{eq:neural_network}.
 \begin{equation}
 R(C, \mathbf{x}) = f\left(\sum_{j=1}^{M} w_j \sigma\left(\sum_{i=1}^{N} w_{ij} x_i + b_j\right) + b\right) \label{eq:neural_network}
 \end{equation}
@@ -1340,6 +1416,7 @@ where $\sigma$ is the activation function and $\mathbf{x}$ represents environmen
 
 **Training Objective**: The training objective is to minimize:
 
+\Cref{eq:training_objective}.
 \begin{equation}
 \mathcal{L} = \sum_{i=1}^{N} \left(R_i - R_{target}\right)^2 + \lambda \sum_{j=1}^{M} w_j^2 \label{eq:training_objective}
 \end{equation}
@@ -1350,6 +1427,7 @@ where $\lambda$ is the regularization parameter.
 
 The optimal spacing for a sensilla array can be determined by minimizing:
 
+\Cref{eq:optimization_loss}.
 \begin{equation}
 \mathcal{L} = \sum_{i=1}^{N} \left(R_i - R_{target}\right)^2 + \lambda \sum_{i=1}^{N-1} (d_{i+1} - d_i)^2 \label{eq:optimization_loss}
 \end{equation}
@@ -1361,6 +1439,7 @@ where:
 
 **Optimal Spacing**: The optimal spacing follows a log-periodic pattern:
 
+\Cref{eq:optimal_spacing}.
 \begin{equation}
 d_{i+1} = d_i \tau \label{eq:optimal_spacing}
 \end{equation}
@@ -1633,6 +1712,17 @@ The frameworks are explicitly designed to connect theoretical predictions with e
 - Detection range and sensitivity
 - Environmental effects on performance
 - Optimal array configurations
+
+## Summary Table (Selected Studies)
+
+| Domain | Study (year) | Species/Context | Main finding | Notes |
+|---|---|---|---|---|
+| Spectroscopy | Turin et al. | Drosophila | Isotope discrimination consistent with vibrational sensitivity | Behavioral conditioning |
+| Morphology | Callahan | Multiple taxa | Sensilla dimensions consistent with IR-scale resonances | Morphological survey |
+| Quantum | Schulten et al. | Modeling | Mixed shape+vibration contributions | Quantum tunneling plausibility |
+| Environment | Diesendorf | Atmosphere | IR windows (2–5, 8–14, 17–25 μm) | Transmission modeling |
+
+Where possible, we reference primary data and provide computational reproductions using `src/` modules (see method mapping in \cref{sec:methodology}).
 
 ## Conclusion
 
@@ -2187,7 +2277,7 @@ The Earth's atmosphere has specific wavelength ranges where infrared radiation c
 - **8-14 μm (Long-wave infrared)**: 90% transmission efficiency, optimal for long-range communication
 - **17-25 μm (Far-infrared)**: 70% transmission efficiency, useful for thermal detection
 
-**Transmission Function**: The atmospheric transmission is modeled by the `calculate_atmospheric_transmission()` function:
+**Transmission function**: Modeled by `src/core.py::calculate_atmospheric_transmission()` (see Eq. \eqref{eq:atmospheric_transmission}):
 
 $$T(\lambda) = \exp\left[-\sum_i \alpha_i(\lambda) L_i\right]$$
 
@@ -2200,7 +2290,7 @@ Insect sensilla have dimensions that correspond closely to the wavelengths of in
 - **Sensilla Basiconica**: 2-8 μm length, optimal for 1-10 μm wavelengths
 - **Sensilla Coeloconica**: 5-15 μm length, optimal for 3-20 μm wavelengths
 
-**Wavelength Matching**: The relationship between sensilla dimensions and optimal detection wavelengths is analyzed by the `analyze_sensilla_dimensions()` function, revealing correlation coefficients exceeding 0.85.
+**Wavelength matching**: Analyzed by `src/sensilla.py::analyze_sensilla_dimensions()`; see resonant frequency Eq. \eqref{eq:resonant_freq} and tests `tests/test_sensilla.py`.
 
 **Resonant Frequency**: The fundamental resonant frequency of a sensillum is:
 
@@ -2217,7 +2307,7 @@ Different sensory modalities exhibit characteristic response times that reflect 
 - **Traditional Olfaction (Molecular)**: 7-12 ms response time
 - **Mammalian ORNs**: 10-50 ms response time
 
-**Response Time Analysis**: These response times are compared using the `calculate_response_time_improvement()` function, which shows 2.3-7.0x improvement for infrared detection compared to traditional molecular binding.
+**Response time analysis**: Compared using `src/core.py::calculate_response_time_improvement()`; see `tests/test_core.py::TestResponseTimeImprovement`.
 
 ### Signal Processing and Information Theory
 The vibrational theory incorporates advanced signal processing concepts:
@@ -2317,13 +2407,19 @@ The complete computational framework is documented with:
 - **API Documentation**: Complete function signatures and parameter descriptions
 - **Example Scripts**: Demonstrations of complete analysis pipelines
 
-For complete mathematical formulations and source code implementation, see Section \ref{sec:mathematical_appendix}.
+For complete mathematical formulations and source code implementation, see Section \cref{sec:mathematical_appendix}. Cross-links to implementations and unit tests are included therein.
 
 <!-- BEGIN: AUTO-API-GLOSSARY -->
 | Module | Name | Kind | Summary |
 |---|---|---|---|
 | `__init__` | `get_package_info` | function | Get comprehensive package information |
 | `__init__` | `run_demo_analysis` | function | Run a demonstration analysis using all available frameworks |
+| `ant_stack.antbody` | `AntBodySensilla` | class | Sensilla configuration using cohereAnts morphology analysis |
+| `ant_stack.antbody` | `AntBodySpectroscopy` | class | Atmospheric transmission access aligned with core calculations |
+| `ant_stack.antbrain` | `AntBrainOlfaction` | class | High-level olfactory pipeline stub with AL→MB→CX placeholders |
+| `ant_stack.antbrain` | `VibrationalGlomeruliCircuit` | class | Bank of resonant channels tuned across 2–25 μm |
+| `ant_stack.antmind` | `AntMindOlfaction` | class | Active-inference-like placeholder for olfactory policy selection |
+| `ant_stack.antmind` | `AntMindStigmergy` | class | Grid-based pheromone field with diffusion and decay |
 | `behavioral` | `BehavioralAnalyzer` | class | Main analyzer for behavioral response data |
 | `behavioral` | `BehavioralData` | class | Container for behavioral response data with validation |
 | `behavioral` | `StatisticalAnalyzer` | class | Statistical analysis for behavioral data |
