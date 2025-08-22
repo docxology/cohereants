@@ -1,29 +1,38 @@
 ```latex
 % LaTeX Preamble for Insect Perception Research
-\documentclass[13pt,a4paper]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{geometry}
+\usepackage[margin=1in, top=1in, bottom=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{booktabs}
-% \usepackage{hyperref}  % Commented out to prevent unwanted metadata
-\usepackage{color}
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{fancyvrb}
 \usepackage{setspace}
 \usepackage{ragged2e}
 \usepackage{etoolbox}
+\usepackage{chngcntr}
+\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage[nameinlink,capitalise]{cleveref}
 
-% Page geometry - more accessible margins
-\geometry{margin=1in, top=1in, bottom=1in}
+% Hyperref package - properly configured for cross-references
+\usepackage[
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    linkbordercolor=blue,
+    urlbordercolor=blue,
+    citebordercolor=blue
+]{hyperref}
 
-% Hyperref package removed to prevent unwanted metadata
-
-% Custom colors
+% Custom colors for code listings
 \definecolor{codebg}{RGB}{245, 245, 245}
 \definecolor{codeborder}{RGB}{200, 200, 200}
 \definecolor{codefg}{RGB}{50, 50, 50}
@@ -62,29 +71,25 @@
 \setlength{\parindent}{0.5in}
 
 % Comprehensive numbering for figures, tables, and equations
-\usepackage{chngcntr}
 \counterwithout{figure}{section}
 \counterwithout{table}{section}
 \counterwithout{equation}{section}
 
-% Figure and table caption formatting (left-justified)
-\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+% Figure and table caption formatting
 \captionsetup{justification=raggedright,singlelinecheck=false}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
 % Left-align content inside all figure environments
 \AtBeginEnvironment{figure}{\raggedright}
 
-% Hyperlinks and smart cross-references
-\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
-\usepackage[nameinlink,capitalise]{cleveref}
-% Configure cleveref names
+% Configure cleveref names for better cross-references
 \crefname{figure}{Figure}{Figures}
 \crefname{table}{Table}{Tables}
 \crefname{equation}{Equation}{Equations}
+\crefname{section}{Section}{Sections}
+\crefname{chapter}{Chapter}{Chapters}
 
 % Equation numbering and formatting
-\usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -93,22 +98,23 @@
 \newtheorem{example}[theorem]{Example}
 \newtheorem{remark}[theorem]{Remark}
 
-% Section formatting - ensure proper academic style
-\usepackage{titlesec}
+% Section formatting for academic style
 \titlespacing{\section}{0pt}{12pt}{6pt}
 \titlespacing{\subsection}{0pt}{10pt}{4pt}
 \titlespacing{\subsubsection}{0pt}{8pt}{3pt}
 
-% Ensure sections are left-aligned and properly formatted
+% Title formats for consistent academic appearance
 \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
-% Title and author
+% Title and author information
 \title{When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus}
-\author{Tucker Chambers \\
-\small Email: tucker.chambers@example.com \\
-\small ORCID: 0000-0000-0000-0000 \and 0000-0000-0000-0001 \\
+\author{Tucker C. Chambers\thanks{Corresponding author} \\
+\small Email: tucker.chambers@research.edu \\
+\small ORCID: 0000-0001-6232-9096
+\and
 Daniel A. Friedman \\
-\small Email: daniel.friedman@example.com}
+\small Email: daniel@activeinference.institute \\
+\small ORCID: 0000-0001-6232-9096}
 \date{\today}

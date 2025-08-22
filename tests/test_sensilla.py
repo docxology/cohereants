@@ -288,14 +288,156 @@ class TestIntegration:
         assert frequencies[1] > frequencies[2]  # 100 μm > 150 μm
 
 
+class TestCalculateWavelengthMatching:
+    """Test wavelength matching calculations from sensilla analysis."""
+
+    def test_quarter_wave_matching(self):
+        """Test quarter-wave matching calculations."""
+        from src.sensilla import calculate_wavelength_matching
+        wavelengths = np.linspace(2.0, 25.0, 10)
+        sensilla_length = 100.0
+
+        matching = calculate_wavelength_matching(wavelengths, sensilla_length)
+        assert matching.shape == (10,)
+        assert np.all(np.isfinite(matching))
+
+    def test_half_wave_matching(self):
+        """Test half-wave matching calculations."""
+        from src.sensilla import calculate_wavelength_matching
+        wavelengths = np.linspace(2.0, 25.0, 10)
+        sensilla_length = 50.0
+
+        matching = calculate_wavelength_matching(wavelengths, sensilla_length)
+        assert matching.shape == (10,)
+        assert np.all(np.isfinite(matching))
+
+    def test_full_wave_matching(self):
+        """Test full-wave matching calculations."""
+        from src.sensilla import calculate_wavelength_matching
+        wavelengths = np.linspace(2.0, 25.0, 10)
+        sensilla_length = 25.0
+
+        matching = calculate_wavelength_matching(wavelengths, sensilla_length)
+        assert matching.shape == (10,)
+        assert np.all(np.isfinite(matching))
+
+    def test_perfect_matching(self):
+        """Test perfect wavelength matching."""
+        from src.sensilla import calculate_wavelength_matching
+        wavelengths = np.array([10.0, 20.0, 30.0])
+        sensilla_length = 20.0  # Half wavelength match with 10.0
+
+        matching = calculate_wavelength_matching(wavelengths, sensilla_length)
+
+        # Find the index of the best match
+        best_match_idx = np.argmax(matching)
+        assert abs(wavelengths[best_match_idx] - 10.0) < 1.0  # Should match quarter wavelength
+
+    def test_no_matching(self):
+        """Test with wavelengths that don't match sensilla."""
+        from src.sensilla import calculate_wavelength_matching
+        wavelengths = np.array([1.0, 50.0, 100.0])
+        sensilla_length = 10.0
+
+        matching = calculate_wavelength_matching(wavelengths, sensilla_length)
+        # Should have some matching values, just not optimal
+        assert matching.shape == (3,)
+        assert np.all(np.isfinite(matching))
+
+    def test_single_values(self):
+        """Test wavelength matching with single values."""
+        from src.sensilla import calculate_wavelength_matching
+        wavelength = 10.0
+        sensilla_length = 20.0
+
+        matching = calculate_wavelength_matching(sensilla_length, wavelength)
+        assert isinstance(matching, (int, float))
+        assert np.isfinite(matching)
+
+    def test_multiple_wavelengths_single_sensilla(self):
+        """Test multiple wavelengths with single sensilla."""
+        from src.sensilla import calculate_wavelength_matching
+        wavelengths = np.linspace(2.0, 25.0, 50)
+        sensilla_length = 15.0
+
+        matching = calculate_wavelength_matching(wavelengths, sensilla_length)
+        assert matching.shape == (50,)
+        assert np.all(np.isfinite(matching))
+
+    def test_multiple_sensilla_single_wavelength(self):
+        """Test single wavelength with multiple sensilla."""
+        from src.sensilla import calculate_wavelength_matching
+        wavelength = 10.0
+        sensilla_lengths = np.array([5.0, 10.0, 20.0, 40.0])
+
+        matching = calculate_wavelength_matching(sensilla_lengths, wavelength)
+        assert matching.shape == (4,)
+        assert np.all(np.isfinite(matching))
+
+    def test_empty_arrays(self):
+        """Test wavelength matching with empty arrays."""
+        from src.sensilla import calculate_wavelength_matching
+        empty_wavelengths = np.array([])
+        empty_lengths = np.array([])
+
+        matching = calculate_wavelength_matching(empty_lengths, empty_wavelengths)
+        assert len(matching) == 0
+
+        matching = calculate_wavelength_matching(empty_lengths, 10.0)
+        assert len(matching) == 0
+
+    def test_extreme_aspect_ratios(self):
+        """Test wavelength matching with extreme aspect ratios."""
+        from src.sensilla import calculate_wavelength_matching
+        wavelengths = np.linspace(2.0, 25.0, 20)
+
+        # Very long sensilla
+        matching = calculate_wavelength_matching(wavelengths, 1000.0)
+        assert matching.shape == (20,)
+        assert np.all(np.isfinite(matching))
+
+        # Very short sensilla
+        matching = calculate_wavelength_matching(wavelengths, 0.1)
+        assert matching.shape == (20,)
+        assert np.all(np.isfinite(matching))
+
+    def test_very_small_dimensions(self):
+        """Test wavelength matching with very small dimensions."""
+        from src.sensilla import calculate_wavelength_matching
+        wavelengths = np.linspace(2.0, 25.0, 10)
+        sensilla_length = 1e-6  # Very small
+
+        matching = calculate_wavelength_matching(wavelengths, sensilla_length)
+        assert matching.shape == (10,)
+        # Should still produce finite results
+        assert np.all(np.isfinite(matching))
+
+    def test_wavelength_matching_extreme_ratios(self):
+        """Test wavelength matching with extreme wavelength ratios."""
+        from src.sensilla import calculate_wavelength_matching
+
+        # Very long wavelengths
+        long_wavelengths = np.array([100.0, 200.0, 500.0])
+        sensilla_length = 10.0
+        matching = calculate_wavelength_matching(long_wavelengths, sensilla_length)
+        assert matching.shape == (3,)
+        assert np.all(np.isfinite(matching))
+
+        # Very short wavelengths
+        short_wavelengths = np.array([0.5, 1.0, 1.5])
+        matching = calculate_wavelength_matching(short_wavelengths, sensilla_length)
+        assert matching.shape == (3,)
+        assert np.all(np.isfinite(matching))
+
+
 class TestSensillaMissingCoverage:
     """Test the specific missing lines to achieve 100% coverage."""
-    
+
     def test_edge_case_imports_and_fallbacks(self):
         """Test import fallbacks and edge cases."""
         # Test that modules can handle import errors gracefully
         modules_to_test = ['src.behavioral', 'src.spectroscopy', 'src.integrated_analysis']
-        
+
         for module_name in modules_to_test:
             try:
                 # Try to import the module

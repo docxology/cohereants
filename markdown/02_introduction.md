@@ -1,15 +1,43 @@
-Olfaction—the detection and identification of airborne molecules—is a conserved sensory modality across animals. Insects display exceptional chemosensory performance (rapid latencies, fine discrimination, and long-range detection) that is not fully explained by diffusion‑plus‑binding models.
+Olfaction—the detection and identification of airborne molecules—is a fundamental sensory modality essential for survival, reproduction, and social behavior across the animal kingdom. Among terrestrial organisms, insects exhibit exceptional chemosensory capabilities characterized by rapid detection latencies (1–5 ms), fine odor discrimination, and long-range detection that challenge conventional models of molecular diffusion and receptor binding. These remarkable capabilities suggest the existence of mechanisms beyond traditional olfactory theories.
 
-## Current Understanding of Insect Olfaction
+## Current Understanding and Critical Gaps
 
-The dominant stereochemical view assigns recognition to shape complementarity at olfactory receptors (ORs). Receptor diversity and combinatorial coding explain much of odor discrimination, but two empirical tensions remain: very short ORN latencies (1–5 ms) and long-range detection despite atmospheric attenuation. These gaps motivate testing of complementary mechanisms that could operate upstream or in parallel with receptor binding.
+The prevailing stereochemical theory posits that olfactory recognition occurs through shape complementarity between diffused odor molecules and olfactory receptors (ORs) on insect antennae. This framework, supported by extensive molecular biology, explains much of the combinatorial coding underlying odor discrimination. However, two fundamental empirical tensions persist:
 
-**Central question:** Do infrared (IR) vibrational signatures of semiochemicals contribute measurably to insect olfaction, improving latency, range, or specificity under physiologically plausible constraints?
+### Temporal Constraints
+Insect olfactory receptor neurons (ORNs) exhibit remarkably short response latencies (1–5 ms) that are difficult to reconcile with traditional diffusion-plus-binding models, which typically require 7–12 ms for molecular transport and receptor activation. This discrepancy suggests either highly optimized molecular mechanisms or alternative detection pathways operating on faster timescales.
 
-**Specific hypotheses:**
-- **H1 (Geometry):** Sensilla lengths/diameters correlate with predicted IR resonances (target r ≥ 0.8).
-- **H2 (Spectral):** CHC emission peaks align with atmospheric transmission windows (2–5, 8–14, 17–25 μm).
-- **H3 (Temporal):** IR‑mediated detection can produce sub‑10 ms ORN latencies distinct from thermal effects.
-- **H4 (Behavioral):** Frequency‑specific IR stimulation elicits orientation without volatile cues.
+### Range and Sensitivity Paradox
+Insects can detect pheromones and other semiochemicals over distances of 10–100 meters, despite atmospheric attenuation and molecular dilution. While turbulent plume structures can enhance range, the extreme sensitivity and rapid acquisition of signal directionality suggest mechanisms beyond passive molecular diffusion.
 
-We evaluate these hypotheses using deterministic, unit‑tested computational models linked to empirical datasets; falsifiable tests and control protocols are specified in the Discussion. The main text is organized into seven case studies, which are explored in detail in Appendices: sensory array directionality (\cref{sec:app_sensilla_array}), environmental channel (\cref{sec:app_environmental_channel}), detection limits (\cref{sec:app_detection_limits}), neural encoding (\cref{sec:app_neural_encoding}), spectral unmixing (\cref{sec:app_spectral_unmixing}), plasmonic geometry (\cref{sec:app_plasmonic_geometry}), and active inference (\cref{sec:app_active_inference}). The mathematical appendix (\cref{sec:mathematical_appendix}) provides detailed derivations and proofs for the computational models. The empirical entomological evidence is summarized in the \cref{sec:empirical_studies}.
+## Recent Evidence for Alternative Mechanisms
+Recent studies have revealed specialized infrared-sensitive organs in multiple beetle lineages, providing direct evidence for electromagnetic detection capabilities in insects, and suggesting that other tissues may also be sensitive to infrared. These findings, combined with spectroscopic evidence of vibrational coupling and quantum effects in receptor systems, motivate a systematic evaluation of complementary detection mechanisms that may work alongside traditional olfactory pathways.
+
+**Central Research Question:** Can infrared (IR) vibrational signatures of semiochemicals serve as an electromagnetic detection pathway that enhances insect olfaction, providing faster response times, extended range, and complementary sensory information?
+
+**Scope and Approach:** We focus on mid-infrared detection (2-25 μm) as this range encompasses molecular vibrational modes of biologically relevant compounds while overlapping atmospheric transmission windows. Our framework integrates computational electromagnetism with empirical validation, testing whether IR detection operates alongside (not replacing) traditional molecular binding pathways. We emphasize falsifiable predictions and controlled experimental protocols to distinguish electromagnetic from thermal effects.
+
+**Specific Hypotheses:**
+- **H1 (Morphological):** Antennal sensilla dimensions correlate with predicted IR resonant wavelengths (target r ≥ 0.8) across diverse insect taxa.
+- **H2 (Spectral):** Cuticular hydrocarbon (CHC) vibrational spectra align with atmospheric transmission windows (2–5, 8–14, 17–25 μm).
+- **H3 (Temporal):** IR-mediated detection can achieve sub-10 ms ORN latencies distinguishable from thermal stimulation.
+- **H4 (Behavioral):** Frequency-specific IR stimulation elicits directed orientation behaviors in the absence of volatile chemical cues.
+
+## Approach and Organization
+
+We evaluate these hypotheses using an integrated framework combining comparative morphology, infrared spectroscopy, neural timing analysis, and deterministic computational electromagnetism. All models are unit-tested and reproducible with fixed random seeds (42).
+
+The manuscript is organized as follows:
+- **Main Text:** Presents integrated findings with cross-references to detailed case studies
+- **Appendices:** Seven specialized analyses exploring specific aspects:
+  - Sensory array directionality and beam patterns (\Cref{sec:app_sensilla_array})
+  - Environmental channel modeling (\Cref{sec:app_environmental_channel})
+  - Detection limits and operating points (\Cref{sec:app_detection_limits})
+  - Neural encoding efficiency (\Cref{sec:app_neural_encoding})
+  - Spectral unmixing and classification (\Cref{sec:app_spectral_unmixing})
+  - Plasmonic nano-geometry optimization (\Cref{sec:app_plasmonic_geometry})
+  - Active inference behavioral modeling (\Cref{sec:app_active_inference})
+- **Mathematical Appendix:** Detailed derivations and computational implementations (\Cref{sec:mathematical_appendix})
+- **Empirical Studies:** Comprehensive review of supporting evidence (\Cref{sec:empirical_studies})
+
+This structure enables both comprehensive evaluation and focused exploration of specific mechanisms.

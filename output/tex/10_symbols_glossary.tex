@@ -62,30 +62,39 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{3}
 % LaTeX Preamble for Insect Perception Research
-\documentclass[13pt,a4paper]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{geometry}
+\usepackage[margin=1in, top=1in, bottom=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{booktabs}
-% \usepackage{hyperref}  % Commented out to prevent unwanted metadata
-\usepackage{color}
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{fancyvrb}
 \usepackage{setspace}
 \usepackage{ragged2e}
 \usepackage{etoolbox}
+\usepackage{chngcntr}
+\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage[nameinlink,capitalise]{cleveref}
 
-% Page geometry - more accessible margins
-\geometry{margin=1in, top=1in, bottom=1in}
+% Hyperref package - properly configured for cross-references
+\usepackage[
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    linkbordercolor=blue,
+    urlbordercolor=blue,
+    citebordercolor=blue
+]{hyperref}
 
-% Hyperref package removed to prevent unwanted metadata
-
-% Custom colors
+% Custom colors for code listings
 \definecolor{codebg}{RGB}{245, 245, 245}
 \definecolor{codeborder}{RGB}{200, 200, 200}
 \definecolor{codefg}{RGB}{50, 50, 50}
@@ -124,29 +133,25 @@
 \setlength{\parindent}{0.5in}
 
 % Comprehensive numbering for figures, tables, and equations
-\usepackage{chngcntr}
 \counterwithout{figure}{section}
 \counterwithout{table}{section}
 \counterwithout{equation}{section}
 
-% Figure and table caption formatting (left-justified)
-\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+% Figure and table caption formatting
 \captionsetup{justification=raggedright,singlelinecheck=false}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
 % Left-align content inside all figure environments
 \AtBeginEnvironment{figure}{\raggedright}
 
-% Hyperlinks and smart cross-references
-\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
-\usepackage[nameinlink,capitalise]{cleveref}
-% Configure cleveref names
+% Configure cleveref names for better cross-references
 \crefname{figure}{Figure}{Figures}
 \crefname{table}{Table}{Tables}
 \crefname{equation}{Equation}{Equations}
+\crefname{section}{Section}{Sections}
+\crefname{chapter}{Chapter}{Chapters}
 
 % Equation numbering and formatting
-\usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -155,24 +160,25 @@
 \newtheorem{example}[theorem]{Example}
 \newtheorem{remark}[theorem]{Remark}
 
-% Section formatting - ensure proper academic style
-\usepackage{titlesec}
+% Section formatting for academic style
 \titlespacing{\section}{0pt}{12pt}{6pt}
 \titlespacing{\subsection}{0pt}{10pt}{4pt}
 \titlespacing{\subsubsection}{0pt}{8pt}{3pt}
 
-% Ensure sections are left-aligned and properly formatted
+% Title formats for consistent academic appearance
 \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
-% Title and author
+% Title and author information
 \title{When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus}
-\author{Tucker Chambers \\
-\small Email: tucker.chambers@example.com \\
-\small ORCID: 0000-0000-0000-0000 \and 0000-0000-0000-0001 \\
+\author{Tucker C. Chambers\thanks{Corresponding author} \\
+\small Email: tucker.chambers@research.edu \\
+\small ORCID: 0000-0001-6232-9096
+\and
 Daniel A. Friedman \\
-\small Email: daniel.friedman@example.com}
+\small Email: daniel@activeinference.institute \\
+\small ORCID: 0000-0001-6232-9096}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -224,6 +230,10 @@ Chemosensation}\label{olfaction-and-chemosensation}
   \textbf{Cuticular Hydrocarbons (CHCs)}: Long-chain hydrocarbons found
   on the surface of insects that serve as recognition cues and
   waterproofing agents
+\item
+  \textbf{Sensilla}: Microscopic sensory hairs or pegs on insect
+  antennae and other body parts that serve as the primary sensory units
+  for olfaction and other senses
 \end{itemize}
 
 \subsubsection{Insect Anatomy and
@@ -270,16 +280,20 @@ Detection}\label{electromagnetic-theory-and-infrared-detection}
 \tightlist
 \item
   \textbf{Infrared (IR)}: Electromagnetic radiation with wavelengths
-  longer than visible light (0.7-1000 μm)
+  longer than visible light (0.7-1000 μm), invisible to human eyes but
+  detectable by specialized sensors
 \item
   \textbf{Mid-infrared (MIR)}: IR radiation in the 2-25 μm range,
-  corresponding to molecular vibrational modes
+  corresponding to molecular vibrational modes and fundamental for
+  chemical sensing applications
 \item
   \textbf{Far-infrared (FIR)}: IR radiation in the 25-1000 μm range,
-  corresponding to rotational and low-frequency vibrational modes
+  corresponding to rotational and low-frequency vibrational modes, also
+  known as thermal infrared
 \item
   \textbf{Near-infrared (NIR)}: IR radiation in the 0.7-2 μm range, just
-  beyond visible light
+  beyond visible light, commonly used in spectroscopy and optical
+  communications
 \item
   \textbf{Dielectric}: A material that can be polarized by an electric
   field and supports electromagnetic wave propagation
@@ -301,16 +315,21 @@ Properties}\label{spectroscopy-and-molecular-properties}
 \tightlist
 \item
   \textbf{Vibrational Theory}: The hypothesis that olfaction works by
-  detecting molecular vibrations rather than molecular shape
+  detecting molecular vibrations in the infrared spectrum rather than
+  molecular shape, providing a mechanism for odor recognition at the
+  quantum mechanical level
 \item
   \textbf{Emission Spectrum}: The range of wavelengths of
-  electromagnetic radiation emitted by a substance when excited
+  electromagnetic radiation emitted by a substance when excited,
+  characteristic of the energy level transitions in the material
 \item
   \textbf{Absorption Spectrum}: The range of wavelengths absorbed by a
-  substance, complementary to emission spectra
+  substance, complementary to emission spectra and determined by the
+  molecular structure and bonding
 \item
   \textbf{Transmission Window}: A range of wavelengths where the
-  atmosphere is relatively transparent to electromagnetic radiation
+  atmosphere is relatively transparent to electromagnetic radiation,
+  allowing for long-range signal propagation
 \item
   \textbf{Deuteration}: The replacement of hydrogen atoms with deuterium
   (heavy hydrogen) in molecules, affecting vibrational frequencies
@@ -327,30 +346,28 @@ Properties}\label{spectroscopy-and-molecular-properties}
 
 \subsection{Mathematical Notation}\label{mathematical-notation}
 
-\subsubsection{Wavelength and Frequency}\label{wavelength-and-frequency}
+\subsubsection{Wavelength and frequency}\label{wavelength-and-frequency}
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{λ (lambda)}: Wavelength of electromagnetic radiation,
-  typically measured in micrometers (μm) or nanometers (nm)
+  \textbf{λ (lambda)}: Wavelength, typically in micrometers (μm) or
+  nanometers (nm).
 \item
-  \textbf{ν (nu)}: Frequency of electromagnetic radiation in Hz, related
-  to wavelength by \(c = \lambda\nu\)
+  \textbf{ν (nu)}: Frequency in Hz, related to wavelength by
+  \(c = \lambda\nu\).
 \item
-  \textbf{\(\tilde{\nu}\) (tilde nu)}: Wavenumber in cm\(^{-1}\),
-  related to wavelength by \(\tilde{\nu} = 10^4/\lambda\) (μm)
+  \textbf{\(\tilde{\nu}\) (wavenumber)}: Reciprocal wavelength in
+  cm\(^{-1}\), \(\tilde{\nu} = 10^4/\lambda\) (for λ in μm).
 \item
-  \textbf{c}: Speed of light in vacuum (2.998 × 10\^{}8 m/s)
+  \textbf{c}: Speed of light in vacuum (2.998 × 10\^{}8 m/s).
 \item
-  \textbf{μm}: Micrometer (10\^{}-6 meters), typical unit for infrared
-  wavelengths
+  \textbf{μm}: Micrometer (10\^{}-6 m); standard unit for infrared
+  wavelengths.
 \item
-  \textbf{nm}: Nanometer (10\^{}-9 meters), typical unit for visible and
-  ultraviolet wavelengths
+  \textbf{nm}: Nanometer (10\^{}-9 m).
 \item
-  \textbf{cm\^{}-1}: Wavenumber (reciprocal wavelength), commonly used
-  in infrared spectroscopy
+  \textbf{cm\^{}-1}: Wavenumber unit used in IR spectroscopy.
 \end{itemize}
 
 \subsubsection{Physical Constants and
@@ -929,7 +946,7 @@ behavioral response data with validation \\
 analysis for behavioral data \\
 \passthrough{\lstinline!behavioral!} &
 \passthrough{\lstinline!analyze\_behavioral\_response!} & function &
-Analyze behavioral response data comparing treatment to control \\
+Analyze behavioral response data \\
 \passthrough{\lstinline!behavioral!} &
 \passthrough{\lstinline!calculate\_power\_analysis!} & function &
 Calculate statistical power for the comparison \\

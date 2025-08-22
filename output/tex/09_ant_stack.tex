@@ -52,30 +52,39 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{3}
 % LaTeX Preamble for Insect Perception Research
-\documentclass[13pt,a4paper]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{geometry}
+\usepackage[margin=1in, top=1in, bottom=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{booktabs}
-% \usepackage{hyperref}  % Commented out to prevent unwanted metadata
-\usepackage{color}
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{fancyvrb}
 \usepackage{setspace}
 \usepackage{ragged2e}
 \usepackage{etoolbox}
+\usepackage{chngcntr}
+\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage[nameinlink,capitalise]{cleveref}
 
-% Page geometry - more accessible margins
-\geometry{margin=1in, top=1in, bottom=1in}
+% Hyperref package - properly configured for cross-references
+\usepackage[
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    linkbordercolor=blue,
+    urlbordercolor=blue,
+    citebordercolor=blue
+]{hyperref}
 
-% Hyperref package removed to prevent unwanted metadata
-
-% Custom colors
+% Custom colors for code listings
 \definecolor{codebg}{RGB}{245, 245, 245}
 \definecolor{codeborder}{RGB}{200, 200, 200}
 \definecolor{codefg}{RGB}{50, 50, 50}
@@ -114,29 +123,25 @@
 \setlength{\parindent}{0.5in}
 
 % Comprehensive numbering for figures, tables, and equations
-\usepackage{chngcntr}
 \counterwithout{figure}{section}
 \counterwithout{table}{section}
 \counterwithout{equation}{section}
 
-% Figure and table caption formatting (left-justified)
-\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+% Figure and table caption formatting
 \captionsetup{justification=raggedright,singlelinecheck=false}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
 % Left-align content inside all figure environments
 \AtBeginEnvironment{figure}{\raggedright}
 
-% Hyperlinks and smart cross-references
-\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
-\usepackage[nameinlink,capitalise]{cleveref}
-% Configure cleveref names
+% Configure cleveref names for better cross-references
 \crefname{figure}{Figure}{Figures}
 \crefname{table}{Table}{Tables}
 \crefname{equation}{Equation}{Equations}
+\crefname{section}{Section}{Sections}
+\crefname{chapter}{Chapter}{Chapters}
 
 % Equation numbering and formatting
-\usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -145,24 +150,25 @@
 \newtheorem{example}[theorem]{Example}
 \newtheorem{remark}[theorem]{Remark}
 
-% Section formatting - ensure proper academic style
-\usepackage{titlesec}
+% Section formatting for academic style
 \titlespacing{\section}{0pt}{12pt}{6pt}
 \titlespacing{\subsection}{0pt}{10pt}{4pt}
 \titlespacing{\subsubsection}{0pt}{8pt}{3pt}
 
-% Ensure sections are left-aligned and properly formatted
+% Title formats for consistent academic appearance
 \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
-% Title and author
+% Title and author information
 \title{When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus}
-\author{Tucker Chambers \\
-\small Email: tucker.chambers@example.com \\
-\small ORCID: 0000-0000-0000-0000 \and 0000-0000-0000-0001 \\
+\author{Tucker C. Chambers\thanks{Corresponding author} \\
+\small Email: tucker.chambers@research.edu \\
+\small ORCID: 0000-0001-6232-9096
+\and
 Daniel A. Friedman \\
-\small Email: daniel.friedman@example.com}
+\small Email: daniel@activeinference.institute \\
+\small ORCID: 0000-0001-6232-9096}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -193,29 +199,22 @@ Appendix}\label{sec:ant_stack_appendix}
 
 \subsection{Introduction}\label{introduction}
 
-This appendix provides a comprehensive mapping of how the cohereAnts
-research framework can be implemented within ``The Ant Stack''
-computational architecture. The Ant Stack, as described by Friedman
-(2025), offers a modular, three-layer framework for emulating ant
-intelligence from physical embodiment to collective cognition. Here we
-demonstrate how our vibrational theory of olfaction, spectroscopic
-analysis, and behavioral modeling can be systematically integrated into
-this standardized computational framework.
+This appendix demonstrates the practical implementation of the
+vibrational theory of olfaction within the Ant Stack cognitive
+architecture framework. The Ant Stack provides a structured three-layer
+approach (AntBody, AntBrain, AntMind) for modeling insect intelligence,
+and we map our computational modules to this architecture using thin
+adapter patterns.
 
-\textbf{Implementation Strategy}: We map cohereAnts modules to Ant Stack
-layers via explicit I/O contracts. Adapters are thin and delegate all
-scientific logic to \passthrough{\lstinline!src/!} functions to preserve
-the Thin Orchestrator pattern. See appendices for array directionality
-(\cref{sec:app_sensilla_array}), environmental channel
-(\cref{sec:app_environmental_channel}), detection limits
-(\cref{sec:app_detection_limits}), neural encoding
-(\cref{sec:app_neural_encoding}), spectral unmixing
-(\cref{sec:app_spectral_unmixing}), plasmonic geometry
-(\cref{sec:app_plasmonic_geometry}), and active inference
-(\cref{sec:app_active_inference}).
+The implementation emphasizes: - \textbf{Scientific accuracy}: Direct
+integration with validated \passthrough{\lstinline!src/!} computational
+utilities - \textbf{Behavioral realism}: Incorporating empirical
+constraints from the literature - \textbf{Reproducibility}: Fixed random
+seeds and deterministic algorithms - \textbf{Extensibility}: Modular
+design enabling species-specific customization
 
-\subsection{Layer-by-Layer
-Integration}\label{layer-by-layer-integration}
+This mapping serves as both a validation of our theoretical framework
+and a practical tool for behavioral simulation and hypothesis testing.
 
 \subsubsection{AntBody Layer: Physical Simulation and
 Sensing}\label{antbody-layer-physical-simulation-and-sensing}
@@ -223,21 +222,23 @@ Sensing}\label{antbody-layer-physical-simulation-and-sensing}
 \paragraph{Sensilla Morphology
 Integration}\label{sensilla-morphology-integration}
 
-The cohereAnts sensilla analysis module maps directly to AntBody's
-morphological modeling:
-
 \begin{lstlisting}[language=Python]
-# AntBody sensilla configuration
+# AntBody sensilla configuration (adapter pattern)
 class AntBodySensilla:
     def __init__(self, species_preset: str):
-        # Load species-specific sensilla parameters
+        # Load species-specific sensilla parameters via cohereAnts presets
         self.lengths = load_sensilla_lengths(species_preset)
         self.diameters = load_sensilla_diameters(species_preset)
-        self.optimal_wavelengths = self._calculate_resonance()
-    
-    def _calculate_resonance(self):
-        # Delegate to cohereAnts resonance utilities in production
-        return self.lengths * 4  # Quarter-wavelength resonance (delegated)
+        # Delegate resonance calculation to tested src utilities
+        from src.sensilla import calculate_wavelength_matching
+        self.optimal_wavelengths = calculate_wavelength_matching(self.lengths, self.diameters)
+
+    def export_io(self) -> dict:
+        return {
+            'lengths_um': self.lengths,
+            'diameters_um': self.diameters,
+            'optimal_wavelengths_um': self.optimal_wavelengths,
+        }
 \end{lstlisting}
 
 \textbf{I/O Contract}: - \textbf{Observations}: Sensilla dimensions

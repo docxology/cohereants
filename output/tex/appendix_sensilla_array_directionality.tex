@@ -52,30 +52,39 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{3}
 % LaTeX Preamble for Insect Perception Research
-\documentclass[13pt,a4paper]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{geometry}
+\usepackage[margin=1in, top=1in, bottom=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{booktabs}
-% \usepackage{hyperref}  % Commented out to prevent unwanted metadata
-\usepackage{color}
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{fancyvrb}
 \usepackage{setspace}
 \usepackage{ragged2e}
 \usepackage{etoolbox}
+\usepackage{chngcntr}
+\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage[nameinlink,capitalise]{cleveref}
 
-% Page geometry - more accessible margins
-\geometry{margin=1in, top=1in, bottom=1in}
+% Hyperref package - properly configured for cross-references
+\usepackage[
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    linkbordercolor=blue,
+    urlbordercolor=blue,
+    citebordercolor=blue
+]{hyperref}
 
-% Hyperref package removed to prevent unwanted metadata
-
-% Custom colors
+% Custom colors for code listings
 \definecolor{codebg}{RGB}{245, 245, 245}
 \definecolor{codeborder}{RGB}{200, 200, 200}
 \definecolor{codefg}{RGB}{50, 50, 50}
@@ -114,29 +123,25 @@
 \setlength{\parindent}{0.5in}
 
 % Comprehensive numbering for figures, tables, and equations
-\usepackage{chngcntr}
 \counterwithout{figure}{section}
 \counterwithout{table}{section}
 \counterwithout{equation}{section}
 
-% Figure and table caption formatting (left-justified)
-\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+% Figure and table caption formatting
 \captionsetup{justification=raggedright,singlelinecheck=false}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
 % Left-align content inside all figure environments
 \AtBeginEnvironment{figure}{\raggedright}
 
-% Hyperlinks and smart cross-references
-\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
-\usepackage[nameinlink,capitalise]{cleveref}
-% Configure cleveref names
+% Configure cleveref names for better cross-references
 \crefname{figure}{Figure}{Figures}
 \crefname{table}{Table}{Tables}
 \crefname{equation}{Equation}{Equations}
+\crefname{section}{Section}{Sections}
+\crefname{chapter}{Chapter}{Chapters}
 
 % Equation numbering and formatting
-\usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -145,24 +150,25 @@
 \newtheorem{example}[theorem]{Example}
 \newtheorem{remark}[theorem]{Remark}
 
-% Section formatting - ensure proper academic style
-\usepackage{titlesec}
+% Section formatting for academic style
 \titlespacing{\section}{0pt}{12pt}{6pt}
 \titlespacing{\subsection}{0pt}{10pt}{4pt}
 \titlespacing{\subsubsection}{0pt}{8pt}{3pt}
 
-% Ensure sections are left-aligned and properly formatted
+% Title formats for consistent academic appearance
 \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
-% Title and author
+% Title and author information
 \title{When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus}
-\author{Tucker Chambers \\
-\small Email: tucker.chambers@example.com \\
-\small ORCID: 0000-0000-0000-0000 \and 0000-0000-0000-0001 \\
+\author{Tucker C. Chambers\thanks{Corresponding author} \\
+\small Email: tucker.chambers@research.edu \\
+\small ORCID: 0000-0001-6232-9096
+\and
 Daniel A. Friedman \\
-\small Email: daniel.friedman@example.com}
+\small Email: daniel@activeinference.institute \\
+\small ORCID: 0000-0001-6232-9096}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -193,10 +199,10 @@ Patterns}\label{sec:app_sensilla_array}
 
 \subsection{Objective}\label{objective}
 
-Comprehensive electromagnetic antenna modeling for sensilla arrays
-including circular array design, element pattern modeling, mutual
-coupling effects, 2D radiation patterns, morphology analysis, and
-frequency response characterization for directional olfactory detection.
+Electromagnetic antenna modeling for sensilla arrays:
+circular/log‑periodic designs, element patterns, mutual coupling, 2D
+radiation patterns, morphology analysis, and frequency‑response
+characterization for directional olfactory detection.
 
 \subsection{Methods (src)}\label{methods-src}
 
@@ -208,35 +214,27 @@ frequency response characterization for directional olfactory detection.
   \begin{itemize}
   \tightlist
   \item
-    \passthrough{\lstinline!design\_circular\_array(n\_elements, radius\_m, wavelength\_m)!}
-    - Circular array geometry
+    \passthrough{\lstinline!design\_circular\_array(n\_elements: int, radius\_m: float, wavelength\_m: float) -> np.ndarray!}
   \item
-    \passthrough{\lstinline!sensilla\_element\_pattern(sensilla\_type, frequency\_hz, dimensions)!}
-    - Individual element patterns
+    \passthrough{\lstinline!sensilla\_element\_pattern(sensilla\_type: str, frequency\_hz: float, dimensions: dict) -> np.ndarray!}
   \item
-    \passthrough{\lstinline!mutual\_coupling\_matrix(positions, wavelength\_m)!}
-    - Inter-element coupling
+    \passthrough{\lstinline!mutual\_coupling\_matrix(positions: np.ndarray, wavelength\_m: float) -> np.ndarray!}
   \item
-    \passthrough{\lstinline!array\_pattern\_2d(positions, element\_patterns, frequency, coupling)!}
-    - 2D radiation patterns
+    \passthrough{\lstinline!array\_pattern\_2d(positions: np.ndarray, element\_patterns: np.ndarray, frequency: float, coupling: np.ndarray) -> np.ndarray!}
   \item
-    \passthrough{\lstinline!analyze\_sensilla\_morphology(dimensions, frequency\_range)!}
-    - Morphology analysis
+    \passthrough{\lstinline!analyze\_sensilla\_morphology(dimensions: np.ndarray, frequency\_range: np.ndarray) -> dict!}
   \item
-    \passthrough{\lstinline!frequency\_response\_analysis(array\_config, freq\_range)!}
-    - Bandwidth and Q-factor
+    \passthrough{\lstinline!frequency\_response\_analysis(array\_config: dict, freq\_range: np.ndarray) -> dict!}
   \item
-    \passthrough{\lstinline!compute\_beam\_pattern(wavelengths, positions, gains)!}
-    - Basic beam pattern
+    \passthrough{\lstinline!compute\_beam\_pattern(wavelengths: np.ndarray, positions: np.ndarray, gains: np.ndarray) -> np.ndarray!}
   \item
-    \passthrough{\lstinline!array\_gain(pattern)!} - Gain calculation
+    \passthrough{\lstinline!array\_gain(pattern: np.ndarray) -> float!}
   \item
-    \passthrough{\lstinline!design\_log\_periodic\_array(min\_len, max\_len, tau, count)!}
-    - Log-periodic design
+    \passthrough{\lstinline!design\_log\_periodic\_array(min\_len: float, max\_len: float, tau: float, count: int) -> np.ndarray!}
   \end{itemize}
 \end{itemize}
 
-\subsection{Script and Outputs}\label{script-and-outputs}
+\subsection{Script and outputs}\label{script-and-outputs}
 
 \begin{itemize}
 \tightlist
@@ -250,7 +248,7 @@ frequency response characterization for directional olfactory detection.
   Figure:
   \passthrough{\lstinline!output/figures/sensilla\_array\_comprehensive\_analysis.png!}
 \item
-  Caption:
+  Caption metadata:
   \passthrough{\lstinline!output/figures/sensilla\_array\_comprehensive\_analysis.caption.txt!}
 \end{itemize}
 
@@ -259,11 +257,11 @@ frequency response characterization for directional olfactory detection.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.9\textwidth]{../output/figures/sensilla_array_comprehensive_analysis.png}
-\caption{Comprehensive sensilla array analysis: Circular, linear, and log-periodic array configurations with 2D radiation patterns, individual element patterns (dipole, monopole, patch), mutual coupling effects, morphological analysis relating sensilla dimensions to resonant wavelengths, and frequency response characterization. Includes beam steering capabilities, array gain optimization, and directional sensitivity patterns for enhanced spatial resolution in olfactory detection.}
+\caption{Deterministic sensilla array analysis produced by `scripts/generate_sensilla_array_directionality.py` (seed=42): circular, linear, and log‑periodic array configurations; 2D radiation patterns; element patterns (dipole, monopole, patch); mutual coupling effects; morphology‑to‑resonance comparisons; and frequency‑response characterization.}
 \label{fig:app_sensilla_beam}
 \end{figure}
 
-\subsection{Equation References}\label{equation-references}
+\subsection{Equation references}\label{equation-references}
 
 \begin{itemize}
 \tightlist
@@ -282,14 +280,14 @@ frequency response characterization for directional olfactory detection.
   Run:
   \passthrough{\lstinline!python3 scripts/generate\_sensilla\_array\_directionality.py!}
 \item
-  Artifacts saved to \passthrough{\lstinline!output/data/!} and
-  \passthrough{\lstinline!output/figures/!}.
+  Artifacts: \passthrough{\lstinline!output/data/!} and
+  \passthrough{\lstinline!output/figures/!}
 \item
-  Deterministic seed set via
-  \passthrough{\lstinline!src/config.set\_random\_seed(42)!}.
+  Deterministic seed:
+  \passthrough{\lstinline!src/config.set\_random\_seed(42)!}
 \end{enumerate}
 
-\subsection{Cross-References}\label{cross-references}
+\subsection{Cross‑references}\label{crossreferences}
 
 \begin{itemize}
 \tightlist
@@ -298,7 +296,7 @@ frequency response characterization for directional olfactory detection.
 \item
   Symbols: \cref{sec:symbols_glossary}
 \item
-  Mathematical forms: \cref{sec:mathematical_appendix}
+  Math: \cref{sec:mathematical_appendix}
 \end{itemize}
 
 \end{document}

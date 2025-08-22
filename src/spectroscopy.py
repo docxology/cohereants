@@ -8,7 +8,9 @@ cuticular hydrocarbons and related compounds.
 import numpy as np
 from typing import Dict, List, Optional, Tuple, Union
 from scipy.signal import find_peaks
-from .core import calculate_wavelength_from_wavenumber, validate_numeric_inputs
+from .core import (calculate_wavelength_from_wavenumber,
+                   calculate_wavenumber_from_wavelength,
+                   validate_numeric_inputs)
 import matplotlib.pyplot as plt
 
 
@@ -39,19 +41,22 @@ class SpectralData:
         """Validate spectral data inputs."""
         if len(self.wavenumbers) != len(self.intensities):
             raise ValueError("Wavenumbers and intensities must have the same length")
-        
+
         if len(self.wavenumbers) == 0:
             raise ValueError("Spectral data cannot be empty")
-        
+
         if np.any(self.wavenumbers <= 0):
             raise ValueError("All wavenumbers must be positive")
-        
+
         if np.any(self.intensities < 0):
             raise ValueError("All intensities must be non-negative")
-        
-        # Check for reasonable wavenumber range (typical IR range)
-        if np.any(self.wavenumbers < 400) or np.any(self.wavenumbers > 4000):
-            raise ValueError("Wavenumbers should be in typical IR range (400-4000 cm^-1)")
+
+        # Check for reasonable wavenumber range (expanded IR range to handle wavelength conversions)
+        # 2 μm wavelength = 5000 cm⁻¹, 25 μm wavelength = 400 cm⁻¹
+        # Allow some tolerance beyond typical IR range for edge cases
+        if np.any(self.wavenumbers < 300) or np.any(self.wavenumbers > 6000):
+            raise ValueError("Wavenumbers should be in reasonable IR range (300-6000 cm^-1). "
+                           f"Found range: {np.min(self.wavenumbers):.1f} - {np.max(self.wavenumbers):.1f} cm^-1")
     
     @property
     def num_points(self) -> int:
@@ -255,30 +260,67 @@ class CHCAnalyzer:
         }
 
 
-def analyze_chc_spectra(wavenumbers: Union[np.ndarray, List[float]], 
+def analyze_chc_spectra(wavenumbers_or_wavelengths: Union[np.ndarray, List[float]],
                         intensities: Union[np.ndarray, List[float]],
-                        species: str = "Unknown") -> Dict:
+                        species: str = "Unknown",
+                        input_type: str = "auto") -> Dict:
     """
     Analyze cuticular hydrocarbon (CHC) infrared spectra.
-    
+
     Args:
-        wavenumbers: Array or list of wavenumbers in cm^-1
+        wavenumbers_or_wavelengths: Array or list of wavenumbers (cm^-1) or wavelengths (μm)
         intensities: Array or list of intensity values
         species: Species name for identification
-        
+        input_type: 'wavenumbers', 'wavelengths', or 'auto' to detect automatically
+
     Returns:
         Dictionary containing spectral analysis results
-        
+
     Raises:
         ValueError: If inputs are invalid
     """
+    # Convert inputs to numpy arrays
+    values = np.asarray(wavenumbers_or_wavelengths)
+    intensities = np.asarray(intensities)
+
+    # Auto-detect input type based on typical ranges
+    if input_type == "auto":
+        # More robust detection: wavelengths are typically 1-100 μm, wavenumbers are 100-5000 cm⁻¹
+        value_range = np.ptp(values)  # Peak-to-peak range
+        mean_value = np.mean(values)
+
+        if mean_value < 100 and value_range < 50:  # Likely wavelengths in μm
+            input_type = "wavelengths"
+        elif mean_value > 500 and value_range > 100:  # Likely wavenumbers in cm⁻¹
+            input_type = "wavenumbers"
+        else:
+            # Ambiguous case - check individual values
+            wavelength_like = np.sum((values >= 1) & (values <= 100))
+            wavenumber_like = np.sum((values >= 400) & (values <= 5000))
+
+            if wavelength_like > wavenumber_like:
+                input_type = "wavelengths"
+            else:
+                input_type = "wavenumbers"
+
+    # Convert wavelengths to wavenumbers if needed
+    if input_type == "wavelengths":
+        wavenumbers = calculate_wavenumber_from_wavelength(values)
+    else:
+        wavenumbers = values
+
     # Create spectral data object
     spectral_data = SpectralData(wavenumbers, intensities, species)
     
     # Create analyzer and perform analysis
     analyzer = CHCAnalyzer()
     results = analyzer.analyze_spectrum(spectral_data)
-    
+
+    # Add compound identification if there are peaks
+    if len(results['peak_wavenumbers']) > 0:
+        compound_identification = identify_chc_compounds(results['peak_wavenumbers'].tolist())
+        results['compound_identification'] = compound_identification
+
     return results
 
 
@@ -322,19 +364,20 @@ def identify_chc_compounds(peak_wavenumbers: List[float],
     return identified_compounds
 
 
-def calculate_spectral_overlap(spectrum1: np.ndarray, 
+def calculate_spectral_overlap(spectrum1: np.ndarray,
                               spectrum2: np.ndarray,
-                              wavelengths: np.ndarray) -> Dict[str, float]:
+                              wavelengths: Optional[np.ndarray] = None) -> Union[float, Dict[str, float]]:
     """
     Calculate spectral overlap between two spectra.
-    
+
     Args:
         spectrum1: First spectrum (absorbance or transmittance)
         spectrum2: Second spectrum (absorbance or transmittance)
-        wavelengths: Wavelength array corresponding to spectra
-        
+        wavelengths: Optional wavelength array corresponding to spectra
+
     Returns:
-        Dictionary with overlap analysis results
+        If wavelengths is None: float (overlap ratio)
+        If wavelengths is provided: Dictionary with overlap analysis results
     """
     # Normalize spectra to 0-1 range
     spectrum1_range = np.max(spectrum1) - np.min(spectrum1)
@@ -349,18 +392,24 @@ def calculate_spectral_overlap(spectrum1: np.ndarray,
         spectrum2_norm = (spectrum2 - np.min(spectrum2)) / spectrum2_range
     else:
         spectrum2_norm = np.ones_like(spectrum2) * 0.5  # Constant spectrum
-    
+
     # Calculate correlation coefficient
     correlation = np.corrcoef(spectrum1_norm, spectrum2_norm)[0, 1]
-    
-    # Calculate overlap integral
+
+    # Calculate spectral similarity index
+    similarity_index = 1 - np.mean(np.abs(spectrum1_norm - spectrum2_norm))
+
+    # If wavelengths not provided, return just the overlap ratio (for backward compatibility)
+    if wavelengths is None:
+        # Simple overlap calculation without integration
+        overlap_ratio = 1 - np.mean(np.abs(spectrum1_norm - spectrum2_norm))
+        return float(overlap_ratio)
+
+    # Calculate overlap integral with wavelengths
     overlap_integral = np.trapezoid(np.minimum(spectrum1_norm, spectrum2_norm), wavelengths)
     total_area = np.trapezoid(np.maximum(spectrum1_norm, spectrum2_norm), wavelengths)
     overlap_ratio = overlap_integral / total_area if total_area > 0 else 0
-    
-    # Calculate spectral similarity index
-    similarity_index = 1 - np.mean(np.abs(spectrum1_norm - spectrum2_norm))
-    
+
     return {
         'correlation_coefficient': float(correlation),
         'overlap_ratio': float(overlap_ratio),

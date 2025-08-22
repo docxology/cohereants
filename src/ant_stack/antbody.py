@@ -69,4 +69,10 @@ class AntBodySpectroscopy:
         """
         return float(calculate_atmospheric_transmission(float(wavelength), distance))
 
+    def calculate_transmission(self, wavelength: float, distance: Optional[float] = None) -> float:
+        """
+        Alias for get_transmission for backward compatibility.
+        """
+        return self.get_transmission(wavelength, distance)
+
 

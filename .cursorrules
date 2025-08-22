@@ -1,4 +1,4 @@
-# 🧬 COHEREANTS PROJECT RULES - Test-Driven Development Template
+# 🧬 COHEREANTS PROJECT RULES - Insect Olfaction Research
 
 ## 🎯 CORE PRINCIPLES
 
@@ -8,6 +8,7 @@
 - **Real numerical examples only** - No mocks, actual data analysis required
 - **Deterministic RNG seeds** - Fixed seeds (42) for reproducible results
 - **Branch and statement coverage** - 100% of all conditional branches must be tested
+- **COMMITMENT TO EXCELLENCE** - We always do what's hard and right, never taking shortcuts that compromise quality, integrity, or long-term maintainability
 
 ### 2. THIN ORCHESTRATOR PATTERN - ENFORCED
 - **`src/` contains ALL business logic** - Mathematical implementations, algorithms, core functionality
@@ -266,6 +267,7 @@ uv run python repo_utilities/validate_markdown.py         # Validate docs
 8. **Config Management**: Use config system for all parameters
 9. **Reproducible**: Fixed seeds, version pinning, deterministic outputs
 10. **Professional**: High-quality documentation and error messages
+11. **DO WHAT'S HARD AND RIGHT**: Always prioritize correctness, maintainability, and quality over expediency - this is our core commitment
 
 ### 22. QUALITY METRICS
 - **Test Coverage**: 100% (enforced)
@@ -273,6 +275,7 @@ uv run python repo_utilities/validate_markdown.py         # Validate docs
 - **Documentation**: Complete docstrings with examples (enforced)
 - **Performance**: Vectorized, optimized implementations (required)
 - **Maintainability**: Modular, well-documented code (required)
+- **Integrity**: Always doing what's hard and right (core principle)
 
 ---
 

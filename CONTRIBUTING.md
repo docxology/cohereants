@@ -1,29 +1,31 @@
-# 🤝 Contributing to Research Project Template
+# 🤝 Contributing to cohereants - Insect Olfaction Research
 
-Thank you for your interest in improving this template! This document provides guidelines for contributing to make the template better for everyone.
+Thank you for your interest in contributing to the cohereants project! This research investigates the vibrational theory of olfaction in insects and explores how insects may detect infrared radiation from semiochemicals. Your contributions help advance our understanding of insect sensory systems and perception.
 
 ## 🎯 **How to Contribute**
 
-### 🚀 **Using the Template**
-The best way to contribute is to **use this template** for your own research projects and provide feedback on what works well and what could be improved.
+### 🚀 **Using the Research Framework**
+The best way to contribute is to **use this framework** for your own entomological research and provide feedback on the insect sensory models, spectral analysis methods, and research workflows.
 
-### 🐛 **Reporting Issues**
-- **Bug reports** help us fix problems
-- **Feature requests** help us understand what's needed
-- **Documentation improvements** help other users
+### 🐛 **Reporting Research Issues**
+- **Model validation issues** help us improve insect sensory algorithms
+- **Spectral analysis bugs** help us fix infrared detection calculations
+- **Documentation improvements** for entomological research methods
+- **Feature requests** for new insect species or sensory models
 
-### 🔧 **Code Contributions**
-- **Bug fixes** for any issues you encounter
-- **New features** that would benefit all users
-- **Improvements** to existing functionality
-- **Tests** to ensure code quality
+### 🔧 **Entomological Research Contributions**
+- **Insect sensory model improvements** - enhance existing algorithms for sensilla morphology or infrared detection
+- **New insect species models** - add support for additional insect taxa with different sensory adaptations
+- **Spectral analysis enhancements** - improve infrared spectroscopy calculations and atmospheric transmission models
+- **Behavioral analysis modules** - add new methods for analyzing insect behavioral responses
+- **Research validation tests** - ensure 100% test coverage for all entomological algorithms
 
-## 🏗️ **Development Setup**
+## 🏗️ **Entomological Research Development Setup**
 
 ### 1. **Fork and Clone**
 ```bash
-git clone https://github.com/YOUR_USERNAME/template.git
-cd template
+git clone https://github.com/YOUR_USERNAME/cohereants.git
+cd cohereants
 ```
 
 ### 2. **Install Dependencies**
@@ -45,33 +47,37 @@ pytest
 pytest --cov=src --cov-report=html
 ```
 
-## 📋 **Contribution Guidelines**
+## 📋 **Entomological Research Contribution Guidelines**
 
-### 🧪 **Testing Requirements**
-- **100% test coverage** is required for all `src/` code
-- **All tests must pass** before any changes are accepted
-- **Add tests** for new functionality
-- **Update tests** when fixing bugs
+### 🧪 **Research Testing Requirements**
+- **100% test coverage** is required for all insect sensory models in `src/`
+- **All entomological tests must pass** before research contributions are accepted
+- **Add scientific validation tests** for new sensory algorithms
+- **Update tests** when fixing spectral analysis or morphological calculation bugs
+- **Include real entomological data** in tests, not mocks
 
-### 📝 **Code Style**
-- **Follow PEP 8** for Python code
-- **Use meaningful names** for variables and functions
-- **Add docstrings** for all public functions
-- **Keep functions focused** and single-purpose
+### 📝 **Entomological Research Code Style**
+- **Follow PEP 8** for Python code with scientific computing conventions
+- **Use descriptive entomological names** (e.g., `sensilla_diameter`, `ir_wavelength`, `atmospheric_transmission`)
+- **Add comprehensive docstrings** for all entomological functions with units and biological context
+- **Keep functions focused** on specific sensory calculations or morphological analyses
+- **Include scientific references** in docstrings for theoretical foundations
 
-### 📚 **Documentation**
-- **Update README.md** if adding new features
-- **Add docstrings** to new functions
-- **Update relevant guides** in the markdown directory
-- **Include examples** for new functionality
+### 📚 **Entomological Research Documentation**
+- **Update README.md** if adding new insect species or sensory models
+- **Add comprehensive docstrings** to new entomological functions with biological context
+- **Update research methodology** in the markdown directory when adding new analysis methods
+- **Include entomological examples** with real insect species data
+- **Document scientific assumptions** and theoretical foundations in comments
 
-### 🔄 **Commit Messages**
-Use clear, descriptive commit messages:
+### 🔄 **Entomological Research Commit Messages**
+Use clear, descriptive commit messages that reference the scientific context:
 ```
-feat: add automated figure generation
-fix: resolve PDF rendering issue with special characters
-docs: update installation instructions for Windows
-test: add coverage for new statistical functions
+feat: add Apis mellifera sensilla morphology model
+fix: correct infrared wavelength calculation for Drosophila antenna
+docs: update vibrational theory references in methodology
+test: add spectral analysis validation for Bombyx mori
+refactor: optimize atmospheric transmission algorithm
 ```
 
 ## 🚀 **Making Changes**

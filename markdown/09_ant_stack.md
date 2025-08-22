@@ -2,30 +2,37 @@
 
 ## Introduction
 
-This appendix provides a comprehensive mapping of how the cohereAnts research framework can be implemented within "The Ant Stack" computational architecture. The Ant Stack, as described by Friedman (2025), offers a modular, three-layer framework for emulating ant intelligence from physical embodiment to collective cognition. Here we demonstrate how our vibrational theory of olfaction, spectroscopic analysis, and behavioral modeling can be systematically integrated into this standardized computational framework.
+This appendix demonstrates the practical implementation of the vibrational theory of olfaction within the Ant Stack cognitive architecture framework. The Ant Stack provides a structured three-layer approach (AntBody, AntBrain, AntMind) for modeling insect intelligence, and we map our computational modules to this architecture using thin adapter patterns.
 
-**Implementation Strategy**: We map cohereAnts modules to Ant Stack layers via explicit I/O contracts. Adapters are thin and delegate all scientific logic to `src/` functions to preserve the Thin Orchestrator pattern. See appendices for array directionality (\cref{sec:app_sensilla_array}), environmental channel (\cref{sec:app_environmental_channel}), detection limits (\cref{sec:app_detection_limits}), neural encoding (\cref{sec:app_neural_encoding}), spectral unmixing (\cref{sec:app_spectral_unmixing}), plasmonic geometry (\cref{sec:app_plasmonic_geometry}), and active inference (\cref{sec:app_active_inference}).
+The implementation emphasizes:
+- **Scientific accuracy**: Direct integration with validated `src/` computational utilities
+- **Behavioral realism**: Incorporating empirical constraints from the literature
+- **Reproducibility**: Fixed random seeds and deterministic algorithms
+- **Extensibility**: Modular design enabling species-specific customization
 
-## Layer-by-Layer Integration
+This mapping serves as both a validation of our theoretical framework and a practical tool for behavioral simulation and hypothesis testing.
 
 ### AntBody Layer: Physical Simulation and Sensing
 
 #### Sensilla Morphology Integration
 
-The cohereAnts sensilla analysis module maps directly to AntBody's morphological modeling:
-
 ```python
-# AntBody sensilla configuration
+# AntBody sensilla configuration (adapter pattern)
 class AntBodySensilla:
     def __init__(self, species_preset: str):
-        # Load species-specific sensilla parameters
+        # Load species-specific sensilla parameters via cohereAnts presets
         self.lengths = load_sensilla_lengths(species_preset)
         self.diameters = load_sensilla_diameters(species_preset)
-        self.optimal_wavelengths = self._calculate_resonance()
-    
-    def _calculate_resonance(self):
-        # Delegate to cohereAnts resonance utilities in production
-        return self.lengths * 4  # Quarter-wavelength resonance (delegated)
+        # Delegate resonance calculation to tested src utilities
+        from src.sensilla import calculate_wavelength_matching
+        self.optimal_wavelengths = calculate_wavelength_matching(self.lengths, self.diameters)
+
+    def export_io(self) -> dict:
+        return {
+            'lengths_um': self.lengths,
+            'diameters_um': self.diameters,
+            'optimal_wavelengths_um': self.optimal_wavelengths,
+        }
 ```
 
 **I/O Contract**: 

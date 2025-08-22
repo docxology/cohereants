@@ -88,8 +88,8 @@ class TestPlotStyler:
 
         # Test 1x1 grid
         fig, axes = styler.create_figure_grid(1, 1)
-        # For 1x1 grid, axes is returned as a 1D array with shape (1,)
-        assert len(axes) == 1
+        # For 1x1 grid, axes is returned as a single Axes object, not an array
+        assert hasattr(axes, 'plot')  # Should be a matplotlib Axes object
         plt.close(fig)
 
         # Test 2x2 grid

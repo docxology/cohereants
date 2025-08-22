@@ -82,6 +82,53 @@ class SensillaData:
     def optimal_wavelengths_half(self) -> np.ndarray:
         """Calculate optimal wavelengths for 1/2 wavelength resonance."""
         return self.lengths * 2
+
+    @property
+    def surface_areas(self) -> np.ndarray:
+        """Calculate surface areas of cylindrical sensilla."""
+        # Surface area of a cylinder: 2πr² + 2πrL
+        # Where r = diameter/2, L = length
+        radius = self.diameters / 2
+        lateral_area = 2 * np.pi * radius * self.lengths  # 2πrL
+        end_areas = 2 * np.pi * radius**2  # 2πr² (both ends)
+        return lateral_area + end_areas
+
+    @property
+    def volumes(self) -> np.ndarray:
+        """Calculate volumes of cylindrical sensilla."""
+        # Volume of a cylinder: πr²L
+        # Where r = diameter/2, L = length
+        radius = self.diameters / 2
+        return np.pi * radius**2 * self.lengths
+
+    @property
+    def resonance_frequencies(self) -> np.ndarray:
+        """Calculate fundamental resonance frequencies for sensilla."""
+        # Using the formula for a cantilever beam: f = (1/(2πL²)) * sqrt(EI/ρA)
+        # Simplified assuming typical material properties for sensilla
+        # E (Young's modulus) ≈ 1 GPa for biological materials
+        # ρ (density) ≈ 1000 kg/m³
+        # I (moment of inertia) = πr⁴/4 for circular cross-section
+        # A (cross-sectional area) = πr²
+
+        # Convert from μm to m for calculations
+        lengths_m = self.lengths * 1e-6
+        diameters_m = self.diameters * 1e-6
+        radius_m = diameters_m / 2
+
+        # Material properties (typical for biological materials)
+        E = 1e9  # Young's modulus (Pa)
+        density = 1000  # Density (kg/m³)
+
+        # Cross-sectional properties
+        I = np.pi * radius_m**4 / 4  # Moment of inertia
+        A = np.pi * radius_m**2  # Cross-sectional area
+
+        # Fundamental frequency for cantilever beam
+        # f = (1/(2πL²)) * sqrt(EI/(ρA))
+        frequencies = (1 / (2 * np.pi * lengths_m**2)) * np.sqrt(E * I / (density * A))
+
+        return frequencies
     
     def get_statistics(self) -> Dict[str, float]:
         """Calculate statistical summary of the data."""
@@ -89,13 +136,25 @@ class SensillaData:
             'mean_length': float(np.mean(self.lengths)),
             'mean_diameter': float(np.mean(self.diameters)),
             'mean_aspect_ratio': float(np.mean(self.aspect_ratios)),
+            'mean_surface_area': float(np.mean(self.surface_areas)),
+            'mean_volume': float(np.mean(self.volumes)),
+            'mean_resonance_frequency': float(np.mean(self.resonance_frequencies)),
             'std_length': float(np.std(self.lengths)),
             'std_diameter': float(np.std(self.diameters)),
             'std_aspect_ratio': float(np.std(self.aspect_ratios)),
+            'std_surface_area': float(np.std(self.surface_areas)),
+            'std_volume': float(np.std(self.volumes)),
+            'std_resonance_frequency': float(np.std(self.resonance_frequencies)),
             'min_length': float(np.min(self.lengths)),
             'max_length': float(np.max(self.lengths)),
             'min_diameter': float(np.min(self.diameters)),
-            'max_diameter': float(np.max(self.diameters))
+            'max_diameter': float(np.max(self.diameters)),
+            'min_surface_area': float(np.min(self.surface_areas)),
+            'max_surface_area': float(np.max(self.surface_areas)),
+            'min_volume': float(np.min(self.volumes)),
+            'max_volume': float(np.max(self.volumes)),
+            'min_resonance_frequency': float(np.min(self.resonance_frequencies)),
+            'max_resonance_frequency': float(np.max(self.resonance_frequencies))
         }
 
 
@@ -124,9 +183,15 @@ def analyze_sensilla_dimensions(lengths: List[float],
             'optimal_wavelengths_quarter': data.optimal_wavelengths_quarter,
             'optimal_wavelengths_half': data.optimal_wavelengths_half,
             'aspect_ratios': data.aspect_ratios,
+            'surface_areas': data.surface_areas,
+            'volumes': data.volumes,
+            'resonance_frequencies': data.resonance_frequencies,
             'mean_length': 0.0,
             'mean_diameter': 0.0,
-            'mean_aspect_ratio': 0.0
+            'mean_aspect_ratio': 0.0,
+            'mean_surface_area': 0.0,
+            'mean_volume': 0.0,
+            'mean_resonance_frequency': 0.0
         }
     
     return {
@@ -135,6 +200,9 @@ def analyze_sensilla_dimensions(lengths: List[float],
         'optimal_wavelengths_quarter': data.optimal_wavelengths_quarter,
         'optimal_wavelengths_half': data.optimal_wavelengths_half,
         'aspect_ratios': data.aspect_ratios,
+        'surface_areas': data.surface_areas,
+        'volumes': data.volumes,
+        'resonance_frequencies': data.resonance_frequencies,
         **data.get_statistics()
     }
 
@@ -158,10 +226,14 @@ def generate_sensilla_visualization(lengths: List[float],
     Raises:
         ValueError: If inputs are invalid
     """
-    if not lengths or not diameters:
+    # Convert to numpy arrays for consistent handling
+    lengths = np.asarray(lengths)
+    diameters = np.asarray(diameters)
+
+    if lengths.size == 0 or diameters.size == 0:
         # Handle empty data with a single informative plot
         fig, ax = plt.subplots(1, 1, figsize=(8, 6))
-        ax.text(0.5, 0.5, 'No data to visualize', 
+        ax.text(0.5, 0.5, 'No data to visualize',
                 ha='center', va='center', transform=ax.transAxes,
                 fontsize=14, color='gray')
         ax.set_title('Sensilla Visualization - No Data', fontsize=16)
@@ -252,54 +324,82 @@ def calculate_sensilla_resonance_frequency(length: float,
     return frequency
 
 
-def calculate_wavelength_matching(sensilla_lengths: np.ndarray, 
-                                incident_wavelengths: np.ndarray,
-                                resonance_type: str = 'quarter') -> Dict[str, np.ndarray]:
+def calculate_wavelength_matching(sensilla_lengths: Union[float, np.ndarray],
+                                incident_wavelengths: Union[float, np.ndarray],
+                                resonance_type: str = 'quarter') -> Union[float, np.ndarray]:
     """
     Calculate wavelength matching between sensilla dimensions and incident radiation.
-    
+
     Args:
-        sensilla_lengths: Array of sensilla lengths in μm
-        incident_wavelengths: Array of incident wavelengths in μm
+        sensilla_lengths: Sensilla length(s) in μm (scalar or array)
+        incident_wavelengths: Incident wavelength(s) in μm (scalar or array)
         resonance_type: Type of resonance ('quarter' or 'half')
-        
+
     Returns:
-        Dictionary with matching analysis results
+        Matching efficiency values (scalar if both inputs are scalar, array otherwise)
     """
+    # Track original input types for return value handling
+    sensilla_was_scalar = np.isscalar(sensilla_lengths)
+    wavelength_was_scalar = np.isscalar(incident_wavelengths)
+
+    # Ensure both inputs are arrays for consistent handling
+    sensilla_lengths = np.atleast_1d(np.asarray(sensilla_lengths))
+    incident_wavelengths = np.atleast_1d(np.asarray(incident_wavelengths))
+
     if resonance_type == 'quarter':
         optimal_wavelengths = sensilla_lengths * 4
     elif resonance_type == 'half':
         optimal_wavelengths = sensilla_lengths * 2
     else:
         raise ValueError("resonance_type must be 'quarter' or 'half'")
-    
+
     # Calculate matching efficiency for each sensilla-wavelength combination
     matching_matrix = np.zeros((len(sensilla_lengths), len(incident_wavelengths)))
-    
+
     for i, opt_wavelength in enumerate(optimal_wavelengths):
         for j, inc_wavelength in enumerate(incident_wavelengths):
             # Calculate matching efficiency based on wavelength difference
             wavelength_diff = abs(opt_wavelength - inc_wavelength)
             relative_diff = wavelength_diff / opt_wavelength
-            
+
             # Gaussian matching function
             matching_efficiency = np.exp(-(relative_diff / 0.1)**2)
             matching_matrix[i, j] = matching_efficiency
     
+    # Handle empty arrays case
+    if matching_matrix.size == 0:
+        # Return appropriate empty results based on input types
+        if sensilla_was_scalar and wavelength_was_scalar:
+            return 0.0
+        else:
+            return np.array([])
+
     # Find best matches for each sensilla
     best_matches = np.argmax(matching_matrix, axis=1)
     best_match_efficiencies = np.max(matching_matrix, axis=1)
-    
+
     # Calculate overall matching statistics
     mean_matching_efficiency = np.mean(matching_matrix)
     std_matching_efficiency = np.std(matching_matrix)
-    
-    return {
-        'matching_matrix': matching_matrix,
-        'optimal_wavelengths': optimal_wavelengths,
-        'best_matches': best_matches,
-        'best_match_efficiencies': best_match_efficiencies,
-        'mean_matching_efficiency': mean_matching_efficiency,
-        'std_matching_efficiency': std_matching_efficiency,
+
+    # Handle return values based on input types
+    if sensilla_was_scalar and wavelength_was_scalar:
+        # Both inputs were scalars, return scalar result
+        return float(best_match_efficiencies[0])
+    elif sensilla_was_scalar and not wavelength_was_scalar:
+        # Single sensilla, multiple wavelengths - return array
+        return best_match_efficiencies
+    elif not sensilla_was_scalar and wavelength_was_scalar:
+        # Multiple sensilla, single wavelength - return array
+        return best_match_efficiencies
+    else:
+        # Both arrays - return full dictionary
+        return {
+            'matching_matrix': matching_matrix,
+            'optimal_wavelengths': optimal_wavelengths,
+            'best_matches': best_matches,
+            'best_match_efficiencies': best_match_efficiencies,
+            'mean_matching_efficiency': mean_matching_efficiency,
+            'std_matching_efficiency': std_matching_efficiency,
         'resonance_type': resonance_type
     }

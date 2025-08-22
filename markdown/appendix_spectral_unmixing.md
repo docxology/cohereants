@@ -1,41 +1,61 @@
 # Appendix E: Spectral Unmixing and Classification {#sec:app_spectral_unmixing}
 
 ## Objective
-Comprehensive spectral analysis including advanced unmixing algorithms, feature extraction, and multi-algorithm classification for CHC identification and chemical analysis.
+
+Comprehensive spectral analysis: realistic CHC data generation, feature extraction, unmixing (NMF, VCA, ICA), and multi‑algorithm classification with deterministic evaluation.
 
 ## Methods (src)
-- `src/case_studies/spectral_unmixing.py`
-  - `generate_realistic_chc_spectra(n_compounds, n_wavelengths)` - Synthetic CHC spectral data
-  - `nmf_unmix(spectra, n_components, seed=42)` - Non-negative matrix factorization
-  - `vertex_component_analysis(spectra, n_endmembers)` - VCA endmember extraction
-  - `independent_component_analysis_spectra(spectra, n_components)` - ICA blind separation
-  - `spectral_feature_extraction(spectra, method)` - Multi-method feature extraction
-  - `advanced_classification_suite(features, labels)` - Multi-algorithm classification
-  - `performance_metrics_comprehensive(y_true, y_pred, y_prob)` - Detailed evaluation metrics
-  - `lda_baseline(features, labels, seed=42)` - Linear discriminant baseline
 
-## Script and Outputs
+- `src/case_studies/spectral_unmixing.py`
+  - `generate_realistic_chc_spectra(n_compounds: int, n_wavelengths: int, seed: int=42) -> dict` — synthetic CHC spectra with ground truth
+  - `nmf_unmix(spectra: np.ndarray, n_components: int, seed: int=42) -> (W, H)` — deterministic NMF
+  - `vertex_component_analysis(spectra: np.ndarray, n_endmembers: int) -> np.ndarray` — VCA endmember extraction
+  - `independent_component_analysis_spectra(spectra: np.ndarray, n_components: int) -> np.ndarray` — ICA separation
+  - `spectral_feature_extraction(spectra: np.ndarray, wavelengths: np.ndarray, method: str='peaks') -> dict` — peaks, derivatives, PCA, statistical features
+  - `advanced_classification_suite(features: np.ndarray, labels: np.ndarray) -> dict` — multi‑algorithm benchmark
+  - `performance_metrics_comprehensive(y_true: np.ndarray, y_pred: np.ndarray, y_prob: Optional[np.ndarray]=None) -> dict`
+  - `lda_baseline(features: np.ndarray, labels: np.ndarray, seed: int=42) -> dict` — closed‑form LDA baseline
+
+## Script and outputs
+
 - Script: `scripts/generate_spectral_unmixing.py`
 - Data: `output/data/spectral_unmixing_comprehensive.npz`
 - Figure: `output/figures/spectral_unmixing_comprehensive_analysis.png`
 
 ## Figure
+
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.9\textwidth]{../output/figures/spectral_unmixing_comprehensive_analysis.png}
-\caption{Comprehensive spectral analysis: Synthetic CHC spectra with realistic chemical diversity, advanced unmixing using NMF, VCA, and ICA algorithms, multi-method feature extraction (peaks, derivatives, PCA, statistical), and multi-algorithm classification performance comparison. Includes detailed performance metrics, confusion matrices, and algorithmic benchmarking for chemical identification applications.}
+\caption{Comprehensive spectral analysis generated deterministically: synthetic CHC spectra, NMF/VCA/ICA unmixing, multi‑method feature extraction, and classification benchmarks.}
 \label{fig:app_spectral_unmixing}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{../output/figures/spectral_unmixing_comprehensive_analysis.png}
+\caption{Spectral unmixing and classification results produced by `scripts/generate_spectral_unmixing.py` using `src/case_studies/spectral_unmixing.py`. Panels show mixed spectra, recovered components (NMF/VCA), reconstruction errors, and classification performance.}
+\label{fig:app_spectral_unmixing_full}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
+\caption{Integrated classification benchmark from `scripts/generate_integrated_analysis.py` summarizing classification performance across spectral and neural feature sets.}
+\label{fig:integrated_classification}
 \end{figure}
 
 ## Equation References
 - Spectral overlap: see \eqref{eq:channel_capacity} analogs for information metrics; overlap in main text.
 
 ## Reproducibility
+
 - Run: `python3 scripts/generate_spectral_unmixing.py`
 - Artifacts saved to `output/data/` and `output/figures/`.
-- Fixed RNG seed (42) used for NMF initialization and fold splits.
+- Fixed RNG seed (42) used for deterministic NMF initialization and cross‑validation splits.
 
-## Cross-References
+## Cross‑references
+
 - Methods: \cref{sec:methodology}
 - Symbols: \cref{sec:symbols_glossary}
 - Math appendix: \cref{sec:mathematical_appendix}

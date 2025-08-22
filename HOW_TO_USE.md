@@ -1,131 +1,133 @@
-# 🚀 HOW TO USE: Research Project Template
+# 🧬 HOW TO USE: cohereants - Insect Olfaction Research
 
-> **Complete Usage Guide** - From basic usage to advanced test-driven development
+> **Complete Research Guide** - From basic analysis to advanced entomological modeling
 
-This comprehensive guide shows you how to use the Research Project Template at different levels of complexity. Whether you're just getting started or building advanced research workflows, this guide has you covered.
+This comprehensive guide shows you how to use the cohereants project for investigating the vibrational theory of insect olfaction. Whether you're exploring insect sensory systems or developing advanced spectral analysis models, this guide has you covered.
 
 ## 📚 **Quick Navigation**
 
-- **[🚀 Quick Start](#-quick-start)** - Get up and running in minutes
-- **[📝 Basic Usage](#-basic-usage)** - Simple document creation without coding
-- **[🔧 Intermediate Usage](#-intermediate-usage)** - Add figures and basic automation
-- **[🧪 Advanced Usage](#-advanced-usage)** - Test-driven development and complex workflows
-- **[🏗️ Expert Usage](#️-expert-usage)** - Custom architectures and advanced features
-- **[🆘 Troubleshooting](#-troubleshooting)** - Common issues and solutions
+- **[🚀 Quick Start](#-quick-start)** - Get analyzing insect olfaction data in minutes
+- **[📝 Basic Analysis](#-basic-analysis)** - Simple spectral analysis without advanced coding
+- **[🔧 Intermediate Analysis](#-intermediate-analysis)** - Add morphological modeling and atmospheric effects
+- **[🧪 Advanced Research](#-advanced-research)** - Test-driven development of sensory models
+- **[🏗️ Expert Research](#️-expert-research)** - Custom entomological architectures and advanced features
+- **[🆘 Troubleshooting](#-troubleshooting)** - Common research issues and solutions
 
 ## 🚀 **Quick Start**
 
-### **For Everyone: Use This Template**
+### **For Everyone: Start Analyzing Insect Sensory Systems**
 
-1. **Click "Use this template"** on the [GitHub repository](https://github.com/docxology/template)
-2. **Clone your new repository**
-3. **Install dependencies**: `uv sync`
-4. **Generate your first document**: `./repo_utilities/render_pdf.sh`
+1. **Clone the repository**: `git clone https://github.com/your-repo/cohereants.git`
+2. **Install dependencies**: `uv sync`
+3. **Generate your first analysis**: `./repo_utilities/render_pdf.sh`
 
-That's it! You now have a complete research project structure.
+That's it! You now have a complete insect olfaction research system.
 
 ### **What You Get Immediately**
 
-- ✅ **Complete project structure** with clear organization
-- ✅ **Professional PDF generation** from markdown
-- ✅ **Cross-referencing system** for equations and figures
-- ✅ **Automated testing** framework
-- ✅ **Build pipeline** that validates everything
+- ✅ **Complete entomological research structure** with insect sensory system organization
+- ✅ **Professional scientific manuscript generation** from research findings
+- ✅ **Cross-referencing system** for spectral equations and morphological figures
+- ✅ **Automated testing** of insect sensory models
+- ✅ **Research pipeline** that validates all computational analyses
 
-## 📝 **Basic Usage**
+## 📝 **Basic Analysis**
 
-### **Level 1: Just Write Documents**
+### **Level 1: Explore Insect Sensory Systems**
 
-If you want to focus purely on writing without any programming:
+If you want to focus on exploring insect olfaction research without extensive programming:
 
-#### **1. Edit Markdown Files**
-Navigate to `markdown/` and edit the existing files:
-- `01_introduction.md` - Your project introduction
-- `02_methodology.md` - Your methods and approach
-- `03_experimental_results.md` - Your results and findings
-- `04_discussion.md` - Your analysis and discussion
-- `05_conclusion.md` - Your conclusions
+#### **1. Edit Research Manuscript**
+Navigate to `markdown/` and edit the existing research sections:
+- `01_abstract.md` - Research overview and key findings on insect olfaction
+- `02_introduction.md` - Background on vibrational theory and current limitations
+- `03_methodology.md` - Vibrational theory framework and infrared detection
+- `04_experimental_results.md` - Computational analysis of insect sensory systems
+- `05_discussion.md` - Implications for entomology and neuroscience
 
-#### **2. Add Your Content**
-Replace the template content with your research:
+#### **2. Add Your Entomological Research**
+Replace the template content with your insect olfaction research:
 
 ```markdown
 # Introduction {#sec:introduction}
 
-Your research introduction goes here. This template automatically handles:
+The vibrational theory of olfaction proposes that insects detect the unique electromagnetic signatures of semiochemicals rather than their geometric or chemical properties. This manuscript automatically handles:
 
-- **Professional formatting** with LaTeX
-- **Cross-referencing** between sections
-- **Equation numbering** and references
-- **Figure integration** and captions
-- **Table of contents** generation
+- **Scientific formatting** with LaTeX for entomological publications
+- **Cross-referencing** between spectral analyses and morphological data
+- **Equation numbering** for infrared detection models
+- **Figure integration** for sensilla morphology and spectroscopy data
+- **Table of contents** generation for research manuscripts
 ```
 
-#### **3. Generate PDFs**
+#### **3. Generate Research Manuscript**
 ```bash
-# Clean any previous outputs
+# Clean any previous research outputs
 ./repo_utilities/clean_output.sh
 
-# Generate everything
+# Generate complete insect olfaction analysis
 ./repo_utilities/render_pdf.sh
 ```
 
-**Result**: Professional PDFs with proper academic formatting, automatically numbered sections, and cross-references.
+**Result**: Professional scientific manuscript with proper entomological formatting, automatically numbered sections, and cross-referenced spectral analyses.
 
-### **Level 2: Add Equations and References**
+### **Level 2: Add Spectral Equations and Insect References**
 
-#### **Adding Mathematical Equations**
+#### **Adding Infrared Detection Equations**
 ```markdown
-\begin{equation}\label{eq:objective}
-f(x) = \sum_{i=1}^{n} w_i \phi_i(x)
+\begin{equation}\label{eq:optimal_wavelength}
+\lambda_{opt} = 2d \cdot n_{sensilla}
 \end{equation}
 
-The objective function \eqref{eq:objective} represents our optimization problem.
+The optimal detection wavelength \eqref{eq:optimal_wavelength} for insect sensilla is calculated from sensilla dimensions and refractive index.
 ```
 
-#### **Cross-Referencing Sections**
+#### **Cross-Referencing Research Sections**
 ```markdown
 # Methodology {#sec:methodology}
 
-As described in Section \ref{sec:introduction}, our approach...
+As described in Section \ref{sec:introduction}, the vibrational theory proposes...
 
 # Results {#sec:results}
 
-Following the methodology in Section \ref{sec:methodology}, we found...
+Following the infrared detection model in Section \ref{sec:methodology}, we calculated...
 ```
 
-#### **Adding Figures**
+#### **Adding Insect Sensory Figures**
 ```markdown
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.8\textwidth]{../output/figures/your_figure.png}
-\caption{Your figure caption}
-\label{fig:your_figure}
+\includegraphics[width=0.8\textwidth]{../output/figures/sensilla_morphology.png}
+\caption{Sensilla dimensions and optimal infrared detection wavelengths for Apis mellifera}
+\label{fig:sensilla_morphology}
 \end{figure}
 
-Figure \ref{fig:your_figure} shows the results of our analysis.
+Figure \ref{fig:sensilla_morphology} shows the relationship between sensilla morphology and infrared detection capabilities.
 ```
 
-### **Level 3: Basic Customization**
+### **Level 3: Basic Entomological Customization**
 
-#### **Project Metadata**
-Edit `.project_config` to customize your project:
+#### **Research Project Metadata**
+Edit `.project_config` to customize your insect olfaction research:
 ```bash
-PROJECT_NAME="your-research-project"
-PROJECT_DESCRIPTION="Your project description"
-AUTHOR_NAME="Your Name"
-AUTHOR_EMAIL="your.email@university.edu"
+PROJECT_NAME="cohereants"
+PROJECT_DESCRIPTION="Investigation of vibrational theory of insect olfaction and infrared detection"
+AUTHOR_NAME="Tucker Chambers, Daniel A. Friedman"
+AUTHOR_EMAIL="daniel@activeinference.institute"
 ```
 
-#### **Custom Styling**
-Modify `markdown/00_preamble.md` for custom LaTeX styling:
+#### **Scientific Styling for Entomology**
+Modify `markdown/00_preamble.md` for entomological research formatting:
 ```latex
-% Custom colors
-\definecolor{myblue}{RGB}{0,114,178}
-\definecolor{mygreen}{RGB}{0,158,115}
+% Colors for spectral analysis
+\definecolor{infrared}{RGB}{200,50,50}
+\definecolor{visible}{RGB}{50,100,200}
+\definecolor{uv}{RGB}{150,50,200}
 
-% Custom commands
-\newcommand{\highlight}[1]{\textcolor{myblue}{#1}}
+% Custom commands for entomological research
+\newcommand{\sensilla}[1]{\textit{#1}}
+\newcommand{\wavelength}[1]{\lambda = #1}
+\newcommand{\irwindow}[1]{\text{IR window: } #1}
 ```
 
 ## 🔧 **Intermediate Usage**

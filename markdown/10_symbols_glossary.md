@@ -8,6 +8,7 @@
 - **Semiochemicals**: Chemical substances that carry information between organisms, including pheromones, allomones, and kairomones
 - **Pheromones**: Semiochemicals that affect the behavior of other members of the same species, such as sex pheromones and trail pheromones
 - **Cuticular Hydrocarbons (CHCs)**: Long-chain hydrocarbons found on the surface of insects that serve as recognition cues and waterproofing agents
+- **Sensilla**: Microscopic sensory hairs or pegs on insect antennae and other body parts that serve as the primary sensory units for olfaction and other senses
 
 ### Insect Anatomy and Physiology
 - **Antennae**: Paired sensory appendages on the head of insects that contain olfactory and other sensory receptors
@@ -21,20 +22,20 @@
  - **Glomerulus (plural: glomeruli)**: Spheroidal neuropil compartment in the AL where ORN axons synapse with projection neurons and local interneurons; often tuned to receptor families or vibrational features
 
 ### Electromagnetic Theory and Infrared Detection
-- **Infrared (IR)**: Electromagnetic radiation with wavelengths longer than visible light (0.7-1000 μm)
-- **Mid-infrared (MIR)**: IR radiation in the 2-25 μm range, corresponding to molecular vibrational modes
-- **Far-infrared (FIR)**: IR radiation in the 25-1000 μm range, corresponding to rotational and low-frequency vibrational modes
-- **Near-infrared (NIR)**: IR radiation in the 0.7-2 μm range, just beyond visible light
+- **Infrared (IR)**: Electromagnetic radiation with wavelengths longer than visible light (0.7-1000 μm), invisible to human eyes but detectable by specialized sensors
+- **Mid-infrared (MIR)**: IR radiation in the 2-25 μm range, corresponding to molecular vibrational modes and fundamental for chemical sensing applications
+- **Far-infrared (FIR)**: IR radiation in the 25-1000 μm range, corresponding to rotational and low-frequency vibrational modes, also known as thermal infrared
+- **Near-infrared (NIR)**: IR radiation in the 0.7-2 μm range, just beyond visible light, commonly used in spectroscopy and optical communications
 - **Dielectric**: A material that can be polarized by an electric field and supports electromagnetic wave propagation
 - **Waveguide**: A structure that guides electromagnetic waves along a specific path with minimal loss
 - **Resonator**: A device or structure that oscillates at specific frequencies, amplifying signals at resonant frequencies
 - **Quality Factor (Q)**: A measure of resonator performance, defined as the ratio of stored energy to energy lost per cycle
 
 ### Spectroscopy and Molecular Properties
-- **Vibrational Theory**: The hypothesis that olfaction works by detecting molecular vibrations rather than molecular shape
-- **Emission Spectrum**: The range of wavelengths of electromagnetic radiation emitted by a substance when excited
-- **Absorption Spectrum**: The range of wavelengths absorbed by a substance, complementary to emission spectra
-- **Transmission Window**: A range of wavelengths where the atmosphere is relatively transparent to electromagnetic radiation
+- **Vibrational Theory**: The hypothesis that olfaction works by detecting molecular vibrations in the infrared spectrum rather than molecular shape, providing a mechanism for odor recognition at the quantum mechanical level
+- **Emission Spectrum**: The range of wavelengths of electromagnetic radiation emitted by a substance when excited, characteristic of the energy level transitions in the material
+- **Absorption Spectrum**: The range of wavelengths absorbed by a substance, complementary to emission spectra and determined by the molecular structure and bonding
+- **Transmission Window**: A range of wavelengths where the atmosphere is relatively transparent to electromagnetic radiation, allowing for long-range signal propagation
 - **Deuteration**: The replacement of hydrogen atoms with deuterium (heavy hydrogen) in molecules, affecting vibrational frequencies
 - **Enantiomers**: Mirror-image forms of the same molecule that may have different olfactory properties
 - **FRET**: Förster Resonance Energy Transfer; energy transfer between molecules through dipole-dipole interactions
@@ -42,14 +43,14 @@
 
 ## Mathematical Notation
 
-### Wavelength and Frequency
-- **λ (lambda)**: Wavelength of electromagnetic radiation, typically measured in micrometers (μm) or nanometers (nm)
-- **ν (nu)**: Frequency of electromagnetic radiation in Hz, related to wavelength by $c = \lambda\nu$
-- **$\tilde{\nu}$ (tilde nu)**: Wavenumber in cm$^{-1}$, related to wavelength by $\tilde{\nu} = 10^4/\lambda$ (μm)
-- **c**: Speed of light in vacuum (2.998 × 10^8 m/s)
-- **μm**: Micrometer (10^-6 meters), typical unit for infrared wavelengths
-- **nm**: Nanometer (10^-9 meters), typical unit for visible and ultraviolet wavelengths
-- **cm^-1**: Wavenumber (reciprocal wavelength), commonly used in infrared spectroscopy
+### Wavelength and frequency
+- **λ (lambda)**: Wavelength, typically in micrometers (μm) or nanometers (nm).
+- **ν (nu)**: Frequency in Hz, related to wavelength by $c = \lambda\nu$.
+- **$\tilde{\nu}$ (wavenumber)**: Reciprocal wavelength in cm$^{-1}$, $\tilde{\nu} = 10^4/\lambda$ (for λ in μm).
+- **c**: Speed of light in vacuum (2.998 × 10^8 m/s).
+- **μm**: Micrometer (10^-6 m); standard unit for infrared wavelengths.
+- **nm**: Nanometer (10^-9 m).
+- **cm^-1**: Wavenumber unit used in IR spectroscopy.
 
 ### Physical Constants and Units
 - **h**: Planck's constant (6.626 × 10^-34 J·s)
@@ -276,7 +277,7 @@ For complete mathematical formulations and source code implementation, see Secti
 | `behavioral` | `BehavioralAnalyzer` | class | Main analyzer for behavioral response data |
 | `behavioral` | `BehavioralData` | class | Container for behavioral response data with validation |
 | `behavioral` | `StatisticalAnalyzer` | class | Statistical analysis for behavioral data |
-| `behavioral` | `analyze_behavioral_response` | function | Analyze behavioral response data comparing treatment to control |
+| `behavioral` | `analyze_behavioral_response` | function | Analyze behavioral response data |
 | `behavioral` | `calculate_power_analysis` | function | Calculate statistical power for the comparison |
 | `behavioral` | `calculate_response_statistics` | function | Calculate comprehensive statistics for behavioral response data |
 | `behavioral` | `generate_behavioral_plots` | function | Generate behavioral response plots |

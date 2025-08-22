@@ -52,30 +52,39 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{3}
 % LaTeX Preamble for Insect Perception Research
-\documentclass[13pt,a4paper]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{geometry}
+\usepackage[margin=1in, top=1in, bottom=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{booktabs}
-% \usepackage{hyperref}  % Commented out to prevent unwanted metadata
-\usepackage{color}
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{fancyvrb}
 \usepackage{setspace}
 \usepackage{ragged2e}
 \usepackage{etoolbox}
+\usepackage{chngcntr}
+\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage[nameinlink,capitalise]{cleveref}
 
-% Page geometry - more accessible margins
-\geometry{margin=1in, top=1in, bottom=1in}
+% Hyperref package - properly configured for cross-references
+\usepackage[
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    linkbordercolor=blue,
+    urlbordercolor=blue,
+    citebordercolor=blue
+]{hyperref}
 
-% Hyperref package removed to prevent unwanted metadata
-
-% Custom colors
+% Custom colors for code listings
 \definecolor{codebg}{RGB}{245, 245, 245}
 \definecolor{codeborder}{RGB}{200, 200, 200}
 \definecolor{codefg}{RGB}{50, 50, 50}
@@ -114,29 +123,25 @@
 \setlength{\parindent}{0.5in}
 
 % Comprehensive numbering for figures, tables, and equations
-\usepackage{chngcntr}
 \counterwithout{figure}{section}
 \counterwithout{table}{section}
 \counterwithout{equation}{section}
 
-% Figure and table caption formatting (left-justified)
-\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+% Figure and table caption formatting
 \captionsetup{justification=raggedright,singlelinecheck=false}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
 % Left-align content inside all figure environments
 \AtBeginEnvironment{figure}{\raggedright}
 
-% Hyperlinks and smart cross-references
-\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
-\usepackage[nameinlink,capitalise]{cleveref}
-% Configure cleveref names
+% Configure cleveref names for better cross-references
 \crefname{figure}{Figure}{Figures}
 \crefname{table}{Table}{Tables}
 \crefname{equation}{Equation}{Equations}
+\crefname{section}{Section}{Sections}
+\crefname{chapter}{Chapter}{Chapters}
 
 % Equation numbering and formatting
-\usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -145,24 +150,25 @@
 \newtheorem{example}[theorem]{Example}
 \newtheorem{remark}[theorem]{Remark}
 
-% Section formatting - ensure proper academic style
-\usepackage{titlesec}
+% Section formatting for academic style
 \titlespacing{\section}{0pt}{12pt}{6pt}
 \titlespacing{\subsection}{0pt}{10pt}{4pt}
 \titlespacing{\subsubsection}{0pt}{8pt}{3pt}
 
-% Ensure sections are left-aligned and properly formatted
+% Title formats for consistent academic appearance
 \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
-% Title and author
+% Title and author information
 \title{When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus}
-\author{Tucker Chambers \\
-\small Email: tucker.chambers@example.com \\
-\small ORCID: 0000-0000-0000-0000 \and 0000-0000-0000-0001 \\
+\author{Tucker C. Chambers\thanks{Corresponding author} \\
+\small Email: tucker.chambers@research.edu \\
+\small ORCID: 0000-0001-6232-9096
+\and
 Daniel A. Friedman \\
-\small Email: daniel.friedman@example.com}
+\small Email: daniel@activeinference.institute \\
+\small ORCID: 0000-0001-6232-9096}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -190,393 +196,194 @@ Daniel A. Friedman \\
 \setstretch{1.0}
 \section{Discussion}\label{sec:discussion}
 
-\subsection{Implications for Insect Behavior and
-Cognition}\label{implications-for-insect-behavior-and-cognition}
+\subsection{Implications for insect behavior and
+cognition}\label{implications-for-insect-behavior-and-cognition}
 
-The vibrational theory provides testable explanations for several
-observed behaviors in insects. Computational simulations show that
-infrared detection could account for rapid response times (1-5 ms) and
-long-range detection (10-100 m) observed in field studies.
+The vibrational hypothesis provides concise, testable explanations for
+several insect behaviors. Our simulations and case studies indicate that
+IR‑sensitive detection can reconcile short neural latencies (1--5 ms)
+with plausible long‑range sensing (10--100 m) within atmospheric
+transmission windows.
 
-\subsubsection{Nestmate Recognition in Eusocial
-Insects}\label{nestmate-recognition-in-eusocial-insects}
+\subsubsection{Nestmate recognition}\label{nestmate-recognition}
 
-One of the most intriguing implications is for nestmate recognition in
-eusocial Hymenoptera (ants, bees, wasps). These insects rely heavily on
-cuticular hydrocarbons (CHCs) for identifying nestmates from
-non-nestmates, with recognition occurring in milliseconds.
+Nestmate recognition in eusocial Hymenoptera depends on CHC signals with
+millisecond timing. Deterministic simulations
+(\passthrough{\lstinline!src/core.py::calculate\_response\_time\_improvement!})
+produce latency improvements of ≈2.3--7× compared with diffusion‑limited
+models. An IR‑detection stage with sub‑millisecond detection latency can
+account for observed behavioral timescales while molecular binding
+provides verification and termination.
 
-\textbf{Computational analysis}: The
-\passthrough{\lstinline!calculate\_response\_time\_improvement()!}
-function demonstrates 2.3-7.0× latency reduction compared to
-diffusion-limited processes. Simulations show electromagnetic detection
-at 0.1-0.5 ms enables the observed sub-5 ms recognition times, with
-molecular binding providing secondary confirmation.
+\subsubsection{Pheromone specificity and
+range}\label{pheromone-specificity-and-range}
 
-\textbf{Quantitative Evidence}: Studies on leaf-cutting ants (\emph{Atta
-vollenweideri}) demonstrate that thermo-sensitive sensilla coeloconica
-respond to infrared radiation with thresholds of 0.5-2.0 mW/cm². This
-sensitivity enables detection of CHC emission differences that
-distinguish nestmates from non-nestmates.
+Pheromone classes occupy distinct IR bands (e.g., sex pheromones 17--26
+μm; trail pheromones 2.9--3.5 μm). Under modeled atmospheric
+transmission and realistic source strengths, narrowband IR signatures
+are detectable at 10--100 m; these ranges are quantified in
+\passthrough{\lstinline!src/case\_studies/detection\_limits.py!} and
+illustrated in the Appendices.
 
-\textbf{Evolutionary Implications}: The rapid evolution of
-species‑specific CHC profiles suggests selective pressure for distinct
-vibrational signatures, consistent with a role for IR sensitivity in
-recognition systems.
+\subsubsection{Evolutionary and ecological
+implications}\label{evolutionary-and-ecological-implications}
 
-\subsubsection{Sexual and Trail Pheromone
-Detection}\label{sexual-and-trail-pheromone-detection}
+Comparative analyses show consistent correlations (r ≈ 0.85) between
+sensilla dimensions and predicted resonant wavelengths across sampled
+taxa. Independent emergence of specialized IR sensors in some beetles,
+and CHC compositional changes after death, are consistent with selection
+on vibrational signatures.
 
-The detection of sexual and trail pheromones represents another area
-where the vibrational theory provides compelling explanations. Many of
-these pheromones exhibit characteristic infrared emission spectra that
-fall within atmospheric transmission windows.
+\subsection{Computational and applied
+consequences}\label{computational-and-applied-consequences}
 
-\textbf{Spectral Specificity}: Different pheromone types show distinct
-emission maxima: - \textbf{Sex Pheromones}: Peaks at 17-26 μm for
-long-range attraction - \textbf{Trail Pheromones}: Peaks at 2.9-3.5 μm
-for short-range following - \textbf{Alarm Pheromones}: Broad spectra for
-rapid colony-wide communication
-
-\textbf{Detection Range}: The vibrational theory explains how insects
-can detect pheromones at distances of 10-100 meters, far exceeding the
-range possible through molecular diffusion alone.
-
-\textbf{Behavioral validation}: Experimental trail tracking shows high
-localization accuracy; directional detection could be consistent with
-antenna‑like gain patterns (\cref{sec:app_sensilla_array}). Our figure
-scripts render modeled beam patterns from
-\passthrough{\lstinline!src/sensilla.py!} parameters without embedding
-business logic in scripts.
-
-\subsubsection{Necrophoresis and Parasite-Host
-Interactions}\label{necrophoresis-and-parasite-host-interactions}
-
-The vibrational theory also sheds light on behaviors like necrophoresis
-(the removal of dead nestmates) and parasite-host interactions. Dead
-insects exhibit different CHC profiles than living ones, and these
-differences are reflected in their infrared emission spectra.
-
-\textbf{CHC Profile Changes}: Post‑mortem changes in CHC composition
-produce detectable shifts in infrared emission spectra (see
-\passthrough{\lstinline!src/spectroscopy.analyze\_chc\_spectra!} with
-tests in
-\passthrough{\lstinline!tests/test\_spectroscopy\_analysis.py!}): -
-\textbf{Oxidation Products}: New peaks at 5-8 μm due to lipid oxidation
-- \textbf{Decomposition Products}: Broadening of existing peaks due to
-molecular breakdown - \textbf{Microbial Contamination}: Additional peaks
-from microbial metabolites
-
-\textbf{Detection Thresholds}: The sensitivity of infrared detection
-enables identification of these subtle changes, triggering appropriate
-behavioral responses such as necrophoresis or parasite avoidance.
-
-\subsection{Broader Implications Beyond
-Entomology}\label{broader-implications-beyond-entomology}
-
-\subsubsection{Computational Requirements for IR
-Processing}\label{computational-requirements-for-ir-processing}
-
-Simulations of IR-based olfaction reveal specific neural processing
-requirements. The computational models demonstrate that effective IR
-detection requires:
-
-\textbf{Processing Components}: - \textbf{Spectral discrimination}
-across 2-25 μm wavelengths (Q factors 100-1000 required) -
-\textbf{Directional processing} from sensilla arrays (beam widths
-15-30°) - \textbf{Temporal filtering} on 0.1-10 ms timescales (validated
-in \passthrough{\lstinline!src/neural\_encoding.py!}) - \textbf{Noise
-rejection} achieving SNR improvements of 10-40 dB
-
-\textbf{Information Processing Capacity}: Channel capacity calculations
+Effective IR sensing requires spectral discrimination across 2--25 μm,
+directional processing (beam widths ≈15--30°), sub‑millisecond temporal
+filtering, and SNR improvements. Channel‑capacity estimates
 (\passthrough{\lstinline!src/case\_studies/environmental\_channel.py!})
-indicate throughput of 10³-10⁴ bits/s, consistent with observed
-behavioral discrimination capabilities.
+indicate information rates on the order of 10³--10⁴ bits/s for optimized
+systems. Applications include pest monitoring, species‑specific traps,
+and biomimetic IR sensors.
 
-\subsubsection{Agricultural
-Applications}\label{agricultural-applications}
+\subsection{Limitations and Critical Experimental
+Controls}\label{limitations-and-critical-experimental-controls}
 
-Computational models identify specific IR frequencies used by
-agricultural pests. Spectroscopy analysis
-(\passthrough{\lstinline!src/spectroscopy.py!}) shows distinct CHC
-signatures for major pest species:
+The primary empirical challenge is distinguishing direct electromagnetic
+detection from thermal stimulation and other confounding factors. Since
+all IR exposure deposits energy, rigorous controls are essential for
+mechanism validation.
 
-\textbf{Measured IR Signatures}: - \textbf{Aphids}: 2.85-3.5 μm peaks
-with 95\% species discrimination accuracy - \textbf{Lepidoptera}: 17 μm
-and 26 μm signatures for sex pheromones\\
-- \textbf{Fire ants}: 2.9 μm trail pheromone signatures
+\subsubsection{Thermal Control
+Protocols}\label{thermal-control-protocols}
 
-\textbf{Control Applications}: - \textbf{IR disruption} using specific
-wavelengths that interfere with detection (tested thresholds 0.1-10
-mW/cm²) - \textbf{Species-specific traps} based on measured IR
-signatures - \textbf{Early detection systems} using atmospheric
-transmission models for 10-100 m monitoring
+\textbf{Broadband vs.~Narrowband Stimulation:} - \textbf{Broadband
+heating controls}: Use thermal sources matched for total power
+deposition - \textbf{Narrowband IR stimulation}: Employ tunable lasers
+or filtered LEDs (Δλ \textless{} 0.5 μm) - \textbf{Success criterion}:
+Frequency-specific responses absent in broadband controls
 
-\textbf{Validation Requirements}: Field trials needed to verify
-computational predictions under agricultural conditions with measured
-environmental parameters (humidity, temperature, path length).
+\textbf{Temporal Resolution Requirements:} - \textbf{High-speed
+measurements}: Sub-millisecond temporal resolution for early detection
+components - \textbf{Thermal diffusion modeling}: Account for heat
+propagation timescales (μs--ms range) - \textbf{Multi-scale analysis}:
+Separate electromagnetic detection from thermal transduction
 
-\subsubsection{Evolutionary-Ecological
-Evidence}\label{evolutionary-ecological-evidence}
+\subsubsection{Spectral Specificity
+Tests}\label{spectral-specificity-tests}
 
-Computational analysis reveals alignment between atmospheric
-transmission windows and insect sensilla dimensions across taxa:
+\textbf{Wavelength Tuning Experiments:} - \textbf{Systematic wavelength
+sweeps}: Test responses across 2--25 μm range - \textbf{Resonance
+matching}: Compare with predicted sensilla resonances - \textbf{Quality
+factor assessment}: Measure response sharpness (target Q \textgreater{}
+10)
 
-\textbf{Quantified Evolutionary Patterns}: - \textbf{Atmospheric
-matching}: 89\% overlap between CHC emission peaks and transmission
-windows (2-5 μm: 80\%, 8-14 μm: 90\%, 17-25 μm: 70\%) -
-\textbf{Dimensional correlation}: r = 0.85-0.87 between sensilla length
-and optimal IR wavelengths across 12 species - \textbf{Energy
-efficiency}: IR detection requires \textasciitilde10⁻¹⁹ W minimum power
-vs.~\textasciitilde10⁻¹⁵ W for molecular diffusion
+\textbf{Isotope Effects:} - \textbf{Deuterated controls}: Use deuterated
+analogs to shift vibrational frequencies - \textbf{Frequency-specific
+discrimination}: Verify responses follow vibrational, not structural,
+changes
 
-\textbf{Selective Pressures}: Simulations indicate 2-10× advantages in
-detection range and response time, providing measurable fitness benefits
-in mate location and predator avoidance scenarios.
+\subsubsection{Environmental and Contextual
+Controls}\label{environmental-and-contextual-controls}
 
-\subsubsection{Collective Behavior
-Analysis}\label{collective-behavior-analysis}
+\textbf{Atmospheric Conditions:} - \textbf{Humidity controls}: Test
+across 20--80\% RH to assess water vapor interference -
+\textbf{Temperature gradients}: Control for thermal vs.~electromagnetic
+effects - \textbf{Background IR levels}: Measure ambient IR and subtract
+from signals
 
-Simulations of IR-based communication suggest specific mechanisms for
-colony coordination:
+\textbf{Behavioral Context:} - \textbf{Motivation state}: Control for
+hunger, reproductive status, social context - \textbf{Learning effects}:
+Pre-exposure and conditioning protocols - \textbf{Stimulus timing}:
+Control for circadian and ultradian rhythms
 
-\textbf{Modeled Communication Capabilities}: - \textbf{Range}: 10-100 m
-detection distances using atmospheric transmission models -
-\textbf{Bandwidth}: 10³-10⁴ bits/s information capacity from channel
-analysis - \textbf{Latency}: Sub-10 ms response times enable rapid
-coordination - \textbf{Directionality}: 15-30° beam widths from sensilla
-array modeling
+\subsubsection{Instrumentation and Sensitivity
+Limits}\label{instrumentation-and-sensitivity-limits}
 
-\textbf{Coordination Mechanisms}: Computational models
-(\passthrough{\lstinline!src/case\_studies/active\_inference.py!})
-demonstrate how IR signaling could enable distributed decision-making
-with measured parameters matching observed colony behaviors in trail
-formation and foraging efficiency.
+\textbf{Detection Thresholds:} - \textbf{Minimum detectable power}:
+\textasciitilde10\^{}\{-15\} W for single sensillum recordings -
+\textbf{Signal-to-noise requirements}: SNR \textgreater{} 10 for
+reliable detection - \textbf{Background discrimination}: Separate signal
+from environmental IR noise
 
-\subsection{Integration with Existing
-Theories}\label{integration-with-existing-theories}
+\textbf{Calibration and Validation:} - \textbf{Power meter calibration}:
+NIST-traceable standards for IR power measurements - \textbf{Wavelength
+accuracy}: ±0.01 μm precision for spectral specificity tests -
+\textbf{Thermal imaging}: Correlate neural responses with thermal
+profiles
 
-\subsubsection{Multimodal Detection
-Systems}\label{multimodal-detection-systems}
+\subsubsection{Taxonomic and Ecological
+Limitations}\label{taxonomic-and-ecological-limitations}
 
-The vibrational theory does not contradict existing theories of
-olfaction but complements them. A multimodal system---vibrational
-detection for rapid, long‑range detection and molecular binding for
-precise identification and termination---aligns with the broader
-literature on multimodal sensory integration (see
-\cref{sec:mathematical_appendix} for \eqref{eq:integrated_response} and
-\eqref{eq:adaptive_threshold}).
+\textbf{Species Sampling:} - \textbf{Phylogenetic breadth}: Include
+representatives from major insect orders - \textbf{Ecological
+diversity}: Sample across habitats and behavioral contexts -
+\textbf{Body size effects}: Account for scaling relationships in antenna
+design
 
-\textbf{System Architecture}: The integrated approach provides: -
-\textbf{Redundancy}: Multiple detection mechanisms ensure robust
-operation - \textbf{Complementarity}: Different mechanisms provide
-different types of information - \textbf{Adaptability}: System can
-adjust to changing environmental conditions - \textbf{Efficiency}:
-Optimal use of available energy and computational resources
+\textbf{Field vs.~Laboratory:} - \textbf{Environmental complexity}:
+Natural backgrounds vs.~controlled conditions - \textbf{Stimulus
+intensity}: Physiological vs.~supra-threshold stimulation -
+\textbf{Behavioral relevance}: Natural signal levels and contexts
 
-\textbf{Mathematical Framework}: The mathematical framework for this
-multimodal approach is developed in Section
-\cref{sec:mathematical_appendix}, where equations
-\cref{eq:integrated_response,eq:adaptive_threshold} describe how
-multiple detection mechanisms can be integrated for optimal performance.
-
-\subsubsection{Quantum Mechanical
-Coupling}\label{quantum-mechanical-coupling}
-
-The vibrational theory integrates with quantum mechanical models of
-olfaction through the concept of electron tunneling and phonon coupling.
-This integration provides a unified framework that explains both rapid
-detection and precise identification.
-
-\textbf{Quantum Effects}: The theory incorporates (with geometry sweeps
-in \cref{sec:app_plasmonic_geometry}): - \textbf{Electron Tunneling}:
-Quantum mechanical charge transfer in receptors - \textbf{Phonon
-Coupling}: Vibrational energy transfer between molecules -
-\textbf{Resonant Enhancement}: Enhancement at specific vibrational
-frequencies - \textbf{Coherent States}: Quantum superposition of
-different molecular states
-
-\textbf{Computational Anchors}: Quantum and plasmonic effects are
-analyzed in \passthrough{\lstinline!src/meta\_material\_framework.py!}
-(branch behavior covered by unit tests), used here to bound plausible
-regimes rather than assert mechanism exclusivity.
-
-\subsubsection{Critical Limitations and Alternative
-Explanations}\label{critical-limitations-and-alternative-explanations}
-
-\textbf{Thermal Confounding Issues:} The most significant challenge
-facing IR-based olfaction theories is distinguishing electromagnetic
-effects from thermal heating. Any IR radiation will necessarily deposit
-thermal energy in tissues, potentially triggering thermoreceptors rather
-than electromagnetic detection mechanisms. To address this critical
-limitation:
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Control Requirements:} Experiments must employ matched thermal
-  loads using broad-spectrum heating while removing specific IR
-  frequencies
-\item
-  \textbf{Temporal Resolution:} True electromagnetic detection should
-  exhibit sub-millisecond response components, distinct from thermal
-  diffusion timescales (\textgreater1 ms)
-\item
-  \textbf{Spectral Specificity:} Thermal effects should be
-  wavelength-independent within absorption bands, while electromagnetic
-  effects predict sharp spectral tuning
-\end{itemize}
-
-\textbf{Multimodal Integration Complexity:} The relationship between
-molecular and vibrational detection remains poorly understood:
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Cooperative vs.~Competitive Models:} Are IR and molecular
-  mechanisms synergistic or do they operate independently?
-\item
-  \textbf{Receptor-Level Evidence:} Current evidence lacks direct
-  measurement of electromagnetic sensitivity in isolated ORs
-\item
-  \textbf{Evolutionary Constraints:} The evolutionary pressures that
-  would favor IR sensitivity alongside established molecular systems
-  require further investigation
-\end{itemize}
-
-\textbf{Environmental and Methodological Limitations:}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Laboratory vs.~Field Conditions:} Most supporting evidence
-  comes from controlled laboratory settings that may not reflect natural
-  environments
-\item
-  \textbf{Species Generalizability:} Current evidence focuses on limited
-  taxonomic groups; broader phylogenetic sampling is needed
-\item
-  \textbf{Technical Limitations:} Current measurement techniques may
-  lack sufficient sensitivity to detect proposed electromagnetic effects
-\end{itemize}
-
-\subsubsection{Rigorous Falsification
-Criteria}\label{rigorous-falsification-criteria}
-
-\textbf{Minimal Falsifiers (Experimentally Testable):} 1.
-\textbf{Spectral Nulls:} No frequency-specific responses under IR-only
-stimulation with matched thermal controls (requires ±0.1°C temperature
-matching) 2. \textbf{Geometric Mismatch:} Absence of correlation (r
-\textless{} 0.3) between sensilla dimensions and predicted resonant
-wavelengths across \textgreater5 taxa 3. \textbf{Environmental
-Misalignment:} CHC emission peaks systematically fall outside modeled
-atmospheric windows (\textgreater90\% mismatch) under controlled
-humidity/temperature conditions
-
-\textbf{Experimental Standards:} Each falsifier requires N ≥ 50
-independent measurements with appropriate statistical power (β ≥ 0.8)
-and preregistered analysis protocols matching computational model
-expectations.
-
-\subsection{Future Research
-Directions}\label{future-research-directions}
-
-\subsubsection{Experimental Validation}\label{experimental-validation}
-
-The vibrational theory makes several testable predictions that could be
-investigated in future research:
+\subsection{Minimal falsifiers (experimentally
+testable)}\label{minimal-falsifiers-experimentally-testable}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  \textbf{Sensilla Tuning}: Different sensilla types should be tuned to
-  different infrared frequencies corresponding to their target
-  semiochemicals.
+  \textbf{Spectral nulls}: No frequency-specific responses to IR-only
+  stimulation when thermal load is matched (±0.1°C) and power deposition
+  is identical across wavelengths (broadband vs.~narrowband stimulation
+  with thermal controls).
 \item
-  \textbf{Behavioral Responses}: Insects should respond differently to
-  infrared radiation of different frequencies, even in the absence of
-  the corresponding molecules.
+  \textbf{Geometric mismatch}: Reproducible failure to observe
+  correlation (r \textless{} 0.3, p \textgreater{} 0.05) between
+  sensilla dimensions and predicted resonances across N ≥ 50 specimens
+  from 3+ insect orders, with correlation analysis controlling for
+  phylogenetic effects.
 \item
-  \textbf{Neural Responses}: ORNs should show rapid responses to
-  infrared radiation that correlate with their known molecular
-  sensitivities.
+  \textbf{Environmental misalignment}: CHC peaks consistently fall
+  outside modeled transmission windows under controlled conditions
+  (20--80\% RH, 15--35°C), with \textgreater90\% of spectral features
+  showing mismatch when compared to atmospheric transmission models.
 \item
-  \textbf{Environmental Effects}: Changes in atmospheric conditions
-  should affect detection range and sensitivity.
+  \textbf{Temporal indistinguishability}: ORN response latencies to IR
+  stimulation are statistically indistinguishable from thermal
+  stimulation (p \textgreater{} 0.05) when controlling for power
+  deposition and wavelength.
+\item
+  \textbf{Behavioral independence}: No detectable orientation responses
+  to narrowband IR stimulation in the absence of chemical gradients,
+  with responses \textless10\% of positive controls using identical
+  experimental setups.
 \end{enumerate}
 
-\subsubsection{Technological
-Applications}\label{technological-applications}
+Each falsifier requires adequately powered, preregistered protocols (N ≥
+50) and is described in Methods and Appendices.
 
-Understanding how insects detect infrared radiation could inspire new
-technologies for remote sensing and detection. The efficiency and
-sensitivity of insect sensilla could provide design principles for
-artificial sensors.
+\subsection{Future directions}\label{future-directions}
 
-\textbf{Biomimetic Sensors}: Potential applications include: -
-\textbf{Environmental Monitoring}: Detection of pollutants and chemical
-signatures - \textbf{Security Systems}: Non-contact detection of
-explosives and drugs - \textbf{Medical Diagnostics}: Breath analysis for
-disease detection - \textbf{Industrial Process Control}: Real-time
-monitoring of chemical reactions
+Priority experiments: single‑sensillum IR sensitivity with thermal
+controls; behavioral IR‑only assays; cross‑species morphometrics;
+high‑temporal‑resolution neural recordings. Computational extensions
+include 3D electromagnetic modeling, ML‑based classification, and
+integration with environmental/climate models.
 
-\textbf{Performance Advantages}: Insect-inspired sensors could provide:
-- \textbf{Higher Sensitivity}: Detection of trace amounts of chemicals -
-\textbf{Lower Power Consumption}: More energy-efficient operation -
-\textbf{Better Selectivity}: Discrimination between similar compounds -
-\textbf{Environmental Robustness}: Operation in challenging conditions
+\subsection{Conservation and societal
+relevance}\label{conservation-and-societal-relevance}
 
-\subsubsection{Conservation
-Implications}\label{conservation-implications}
+If insects use IR‑based cues for critical behaviors, alterations to
+infrared environments (climate change, artificial IR sources, pollution)
+could impact communication and fitness. Understanding these mechanisms
+informs conservation, agricultural monitoring, and biomimetic sensor
+design.
 
-If insects are indeed using infrared detection for critical behaviors
-like mate finding and host plant location, then changes in the infrared
-environment (due to climate change, pollution, or habitat modification)
-could have significant impacts on insect populations and behavior.
+\subsection{Summary}\label{summary}
 
-\textbf{Environmental Threats}: Potential impacts include: -
-\textbf{Climate Change}: Altered atmospheric transmission
-characteristics - \textbf{Light Pollution}: Artificial infrared sources
-interfering with natural signals - \textbf{Habitat Fragmentation}:
-Disruption of long-range communication networks - \textbf{Chemical
-Pollution}: Changes in semiochemical emission spectra
-
-\textbf{Conservation Strategies}: Understanding these threats could
-inform: - \textbf{Habitat Design}: Creating environments that preserve
-infrared communication - \textbf{Pollution Control}: Reducing artificial
-infrared interference - \textbf{Population Monitoring}: Using infrared
-signatures to track insect populations - \textbf{Restoration Planning}:
-Ensuring restored habitats support natural communication
-
-\subsection{Conclusion}\label{conclusion}
-
-The vibrational theory of olfaction represents a paradigm shift in our
-understanding of insect perception and behavior. While much work remains
-to be done to fully validate this theory, the evidence from morphology,
-neurology, behavior, and spectroscopy is compelling and suggests that
-insects may be using a sophisticated form of infrared detection that we
-are only beginning to understand.
-
-\textbf{Theoretical Significance}: The theory provides: -
-\textbf{Unified Framework}: Integration of multiple physical principles
-- \textbf{Testable Predictions}: Specific hypotheses for experimental
-validation - \textbf{Evolutionary Insights}: Understanding of adaptation
-to environmental niches - \textbf{Technological Inspiration}: Design
-principles for biomimetic systems
-
-\textbf{Empirical Foundation}: All theoretical predictions are
-implemented in tested computational models that provide quantitative
-predictions for experimental validation. The mathematical framework
-developed in Section \ref{sec:mathematical_appendix} provides the
-theoretical foundation for testing these hypotheses and developing new
-experimental approaches to validate the vibrational theory of olfaction
-in insects.
-
-This theory opens up new avenues for research into insect behavior,
-cognition, and evolution, and could have significant implications for
-fields ranging from agriculture to conservation to technology
-development. The remarkable adaptations of insect antennae and sensilla
-suggest that nature has evolved solutions to the problem of infrared
-detection that may surpass our current technological capabilities.
+The discussion frames clear, falsifiable experimental paths and
+practical applications while acknowledging limitations. Appendices and
+\passthrough{\lstinline!src/!} implementations provide reproducible
+computational anchors for the hypotheses and control protocols described
+here.
 
 \end{document}

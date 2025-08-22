@@ -1,53 +1,53 @@
-# ❓ Frequently Asked Questions
+# ❓ Frequently Asked Questions - cohereants
 
-## 🚀 **Getting Started**
+## 🧬 **Getting Started with Insect Olfaction Research**
 
-### **Q: What is this template for?**
-**A:** This is a comprehensive template for research projects that provides a standardized structure with test-driven development, automated PDF generation, and professional documentation workflows. It's perfect for academic papers, scientific documentation, technical reports, and any project requiring professional output.
+### **Q: What is the cohereants project about?**
+**A:** cohereants is a research project investigating the vibrational theory of olfaction in insects. We explore how insects may detect infrared radiation from semiochemicals rather than relying solely on molecular binding mechanisms, with computational models of insect sensory systems and spectral analysis.
 
-### **Q: How do I use this template?**
-**A:** Click the "Use this template" button on GitHub to create a new repository with this structure, then clone it and customize it for your project. The template includes everything you need to get started immediately.
+### **Q: How do I use this research framework?**
+**A:** Clone the repository and customize it for your entomological research. The framework includes specialized modules for insect sensory system modeling, infrared spectroscopy analysis, atmospheric transmission calculations, and professional scientific manuscript generation.
 
-### **Q: What programming languages does this support?**
-**A:** The template is primarily designed for Python projects, but the documentation and PDF generation features work with any content. The core architecture focuses on Python with comprehensive testing and build automation.
+### **Q: What computational methods does this support?**
+**A:** The framework is designed for Python-based computational entomology research, with specialized modules for spectral analysis, morphological modeling, and behavioral data analysis. All research code maintains 100% test coverage for scientific reproducibility.
 
-## 🏗️ **Project Structure**
+## 🏗️ **Entomological Research Structure**
 
 ### **Q: Why is the project structured this way?**
-**A:** The structure follows the "thin orchestrator pattern" which separates business logic (`src/`) from orchestration (`scripts/`). This ensures maintainable, testable code while keeping scripts lightweight and focused on their specific tasks.
+**A:** The structure follows the "thin orchestrator pattern" specialized for entomological research, separating insect sensory models (`src/`) from research orchestration (`scripts/`). This ensures scientifically accurate, testable models while keeping analysis scripts focused on specific entomological investigations.
 
 ### **Q: What's the difference between `src/` and `scripts/`?**
-**A:** 
-- **`src/`** contains all business logic, algorithms, and mathematical implementations with 100% test coverage
-- **`scripts/`** are lightweight wrappers that import and use `src/` methods to generate figures, data, and outputs
+**A:**
+- **`src/`** contains all insect sensory algorithms, spectral analysis models, and morphological calculations with 100% test coverage
+- **`scripts/`** are lightweight analysis wrappers that import and use entomological models, never implement sensory algorithms
 
 ### **Q: Do I need to keep the 100% test coverage requirement?**
-**A:** While not strictly required, maintaining 100% test coverage ensures code quality and reliability. The build pipeline enforces this to maintain professional standards.
+**A:** Absolutely! For scientific research, maintaining 100% test coverage ensures the validity and reproducibility of your entomological models. The build pipeline enforces this to maintain scientific standards and prevent errors in sensory system calculations.
 
-## 📚 **Documentation & PDF Generation**
+## 📚 **Scientific Manuscript & Analysis Generation**
 
-### **Q: How does the PDF generation work?**
-**A:** The template uses Pandoc to convert markdown files to LaTeX, then XeLaTeX to generate PDFs. The `render_pdf.sh` script orchestrates the entire process, including figure generation and cross-referencing.
+### **Q: How does the scientific manuscript generation work?**
+**A:** The framework uses Pandoc to convert entomological research markdown to LaTeX, then XeLaTeX to generate scientific manuscripts. The `render_pdf.sh` script orchestrates spectral analysis, morphological modeling, and cross-referencing for insect sensory research.
 
-### **Q: Can I customize the PDF output format?**
-**A:** Yes! The LaTeX templates and Pandoc configurations can be customized. You can modify styles, add custom formatting, or even generate other formats like HTML or Word documents.
+### **Q: Can I customize the manuscript output format?**
+**A:** Yes! The LaTeX templates and Pandoc configurations can be customized for entomological publications. You can modify scientific formatting, add entomology-specific notation, or generate formats suitable for journals like Journal of Insect Physiology or Entomologia Experimentalis et Applicata.
 
-### **Q: How do I add cross-references between documents?**
-**A:** The template includes a cross-referencing system that automatically generates links between markdown files. See `MARKDOWN_TEMPLATE_GUIDE.md` for detailed instructions.
+### **Q: How do I add cross-references between research sections?**
+**A:** The framework includes a scientific cross-referencing system for insect sensory research. You can reference spectral analyses, morphological data, and behavioral experiments between manuscript sections using LaTeX labels and the `\ref{}` command.
 
-### **Q: What if I don't need PDF generation?**
-**A:** You can remove the PDF-related utilities and focus on the core project structure. The template is modular, so you can use only the parts you need.
+### **Q: What if I don't need manuscript generation?**
+**A:** You can use just the computational entomology modules in `src/` for spectral analysis and morphological modeling without the manuscript generation features. The framework is modular and supports pure computational research workflows.
 
-## 🧪 **Testing & Development**
+## 🧪 **Entomological Research Testing & Development**
 
-### **Q: Why is test coverage so important?**
-**A:** Test coverage ensures that your core business logic works correctly and remains reliable as you make changes. It's especially important for research projects where accuracy is critical.
+### **Q: Why is test coverage so important for insect olfaction research?**
+**A:** Test coverage ensures that your insect sensory models and spectral analysis algorithms work correctly and remain scientifically valid as you develop new research findings. In entomological research, accuracy is critical for drawing valid conclusions about insect perception and behavior.
 
-### **Q: How do I add new tests?**
-**A:** Create test files in the `tests/` directory that follow the naming convention `test_*.py`. Use pytest fixtures and ensure your tests cover all code paths in your `src/` modules.
+### **Q: How do I add new tests for entomological models?**
+**A:** Create test files in the `tests/` directory following the naming convention `test_*.py`. Use real entomological datasets and ensure your tests cover all code paths in your insect sensory modules. Include tests for edge cases like different sensilla dimensions or atmospheric conditions.
 
-### **Q: Can I use different testing frameworks?**
-**A:** While pytest is the default, you can adapt the template to use other testing frameworks. Just update the build scripts and CI configuration accordingly.
+### **Q: Can I use different testing frameworks for research validation?**
+**A:** While pytest is the default for maintaining research reproducibility, you can adapt the framework to use other testing tools. However, maintaining the 100% coverage requirement is essential for scientific validity, so any changes must preserve this standard.
 
 ## 🔧 **Customization & Extension**
 

@@ -250,21 +250,30 @@ class PlotStyler:
 
         fig, axes = plt.subplots(rows, cols, figsize=figsize, **kwargs)
 
-        # Ensure axes is always an array
+        # Handle single subplot case to return single axis, not array
         if rows == 1 and cols == 1:
-            axes = np.array([axes])
-        elif rows == 1 or cols == 1:
-            axes = axes if isinstance(axes, np.ndarray) else np.array([axes])
+            axes_single = axes  # Keep as single axis object
+        else:
+            # Ensure axes is always an array for multiple subplots
+            axes_single = axes if isinstance(axes, np.ndarray) else np.array([axes])
 
         # Flatten for easier iteration
-        axes_flat = axes.flatten()
+        if isinstance(axes, np.ndarray):
+            axes_flat = axes.flatten()
+        else:
+            axes_flat = np.array([axes])
 
         # Apply consistent formatting to all subplots
         for i, ax in enumerate(axes_flat):
             ax.grid(True, alpha=0.3)
 
         plt.tight_layout()
-        return fig, axes
+
+        # Return appropriate format based on grid dimensions
+        if rows == 1 and cols == 1:
+            return fig, axes_single
+        else:
+            return fig, axes_single
 
 
 class AdvancedVisualizer:

@@ -166,13 +166,86 @@ class IntegratedAnalyzer:
             'information_capacity_bits_per_sec': info_capacity
         }
     
+    def comprehensive_report(self, analysis_results: Dict) -> str:
+        """
+        Alias for generate_comprehensive_report for backward compatibility.
+        """
+        return self.generate_comprehensive_report(analysis_results)
+
+    def generate_visualization(self, analysis_results: Optional[Dict] = None) -> plt.Figure:
+        """
+        Generate comprehensive integrated analysis visualization.
+
+        Args:
+            analysis_results: Optional analysis results to visualize
+
+        Returns:
+            Matplotlib figure with integrated visualization
+        """
+        fig, axes = plt.subplots(2, 2, figsize=(15, 12))
+        fig.suptitle('Integrated Olfactory System Analysis', fontsize=16, fontweight='bold')
+
+        if analysis_results:
+            # Plot 1: Molecular information content
+            if 'fermi_analysis' in analysis_results and 'molecular' in analysis_results['fermi_analysis']:
+                molecular_data = analysis_results['fermi_analysis']['molecular']
+                labels = ['Translational', 'Rotational', 'Vibrational']
+                values = [molecular_data.get('translational_bits', 0),
+                         molecular_data.get('rotational_bits', 0),
+                         molecular_data.get('vibrational_bits', 0)]
+
+                axes[0, 0].bar(labels, values, color=['blue', 'green', 'red'])
+                axes[0, 0].set_title('Molecular Information Content')
+                axes[0, 0].set_ylabel('Bits')
+                axes[0, 0].tick_params(axis='x', rotation=45)
+
+            # Plot 2: Neural efficiency
+            if 'fermi_analysis' in analysis_results and 'neural' in analysis_results['fermi_analysis']:
+                neural_data = analysis_results['fermi_analysis']['neural']
+                metrics = ['Encoding Efficiency', 'Channel Capacity', 'Information Rate']
+                values = [neural_data.get('encoding_efficiency_bits_per_energy', 0),
+                         neural_data.get('channel_capacity_bits', 0),
+                         neural_data.get('information_rate_bits', 0)]
+
+                axes[0, 1].bar(metrics, values, color=['purple', 'orange', 'brown'])
+                axes[0, 1].set_title('Neural Encoding Performance')
+                axes[0, 1].set_ylabel('Value')
+                axes[0, 1].tick_params(axis='x', rotation=45)
+
+            # Plot 3: Metamaterial properties
+            if 'metamaterial_analysis' in analysis_results and 'dielectric' in analysis_results['metamaterial_analysis']:
+                dielectric_data = analysis_results['metamaterial_analysis']['dielectric']
+                refractive_indices = dielectric_data.get('refractive_index', [])
+
+                if refractive_indices:
+                    axes[1, 0].hist(refractive_indices, bins=10, alpha=0.7, color='skyblue', edgecolor='black')
+                    axes[1, 0].set_title('Dielectric Refractive Index Distribution')
+                    axes[1, 0].set_xlabel('Refractive Index')
+                    axes[1, 0].set_ylabel('Frequency')
+                    axes[1, 0].grid(True, alpha=0.3)
+
+            # Plot 4: Information capacity
+            if 'metamaterial_analysis' in analysis_results and 'information_capacity' in analysis_results['metamaterial_analysis']:
+                info_data = analysis_results['metamaterial_analysis']['information_capacity']
+                capacity = info_data.get('channel_capacity_bits_per_sec', 0)
+                efficiency = info_data.get('spectral_efficiency', 0)
+
+                axes[1, 1].bar(['Channel Capacity', 'Spectral Efficiency'],
+                              [capacity, efficiency * 100], color=['red', 'green'])
+                axes[1, 1].set_title('Information Capacity Performance')
+                axes[1, 1].set_ylabel('Value')
+                axes[1, 1].tick_params(axis='x', rotation=45)
+
+        plt.tight_layout()
+        return fig
+
     def generate_comprehensive_report(self, analysis_results: Dict) -> str:
         """
         Generate comprehensive integrated analysis report.
-        
+
         Args:
             analysis_results: Output from analyze_olfactory_system
-            
+
         Returns:
             Formatted report string
         """

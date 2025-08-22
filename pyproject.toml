@@ -1,17 +1,16 @@
-# Research Project Template Configuration
-# 
-# This is a comprehensive template for research projects with test-driven development,
-# automated PDF generation, and professional documentation structure.
+# cohereants - Insect Olfaction Research Project
+#
+# Research project investigating the vibrational theory of olfaction in insects,
+# exploring how insects may detect infrared radiation from semiochemicals rather
+# than relying solely on molecular binding mechanisms.
 #
 # For documentation and usage, see:
-# - HOW_TO_USE.md - Complete usage guide from basic to advanced
-# - README.md - Project overview and quick start
-# - ARCHITECTURE.md - System design overview  
-# - WORKFLOW.md - Development workflow guide
-# - THIN_ORCHESTRATOR_SUMMARY.md - Architecture implementation
-# - EXAMPLES_SHOWCASE.md - Real-world usage examples
+# - README.md - Project overview and research details
+# - ARCHITECTURE.md - System design and implementation
+# - WORKFLOW.md - Development and research workflow
+# - HOW_TO_USE.md - Complete usage guide
 #
-# Repository: https://github.com/docxology/template
+# Repository: https://github.com/your-repo/cohereants
 
 [project]
 name = "cohereants"
@@ -22,19 +21,20 @@ authors = [
 ]
 readme = "README.md"
 requires-python = ">=3.10"
-keywords = ["research", "template", "academic", "scientific", "documentation", "pdf-generation", "test-driven-development"]
+keywords = ["entomology", "insect-olfaction", "infrared-detection", "vibrational-theory", "semiochemicals", "sensilla", "antennae", "electromagnetic-sensing", "neuroscience", "behavioral-ecology"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Science/Research",
-    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
     "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
-    "Topic :: Scientific/Engineering",
-    "Topic :: Software Development :: Documentation",
-    "Topic :: Text Processing :: Markup",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Chemistry",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Topic :: Scientific/Engineering :: Visualization",
 ]
 dependencies = [
     "numpy>=1.21.0",

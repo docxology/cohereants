@@ -52,30 +52,39 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{3}
 % LaTeX Preamble for Insect Perception Research
-\documentclass[13pt,a4paper]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{geometry}
+\usepackage[margin=1in, top=1in, bottom=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{booktabs}
-% \usepackage{hyperref}  % Commented out to prevent unwanted metadata
-\usepackage{color}
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{fancyvrb}
 \usepackage{setspace}
 \usepackage{ragged2e}
 \usepackage{etoolbox}
+\usepackage{chngcntr}
+\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage[nameinlink,capitalise]{cleveref}
 
-% Page geometry - more accessible margins
-\geometry{margin=1in, top=1in, bottom=1in}
+% Hyperref package - properly configured for cross-references
+\usepackage[
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    linkbordercolor=blue,
+    urlbordercolor=blue,
+    citebordercolor=blue
+]{hyperref}
 
-% Hyperref package removed to prevent unwanted metadata
-
-% Custom colors
+% Custom colors for code listings
 \definecolor{codebg}{RGB}{245, 245, 245}
 \definecolor{codeborder}{RGB}{200, 200, 200}
 \definecolor{codefg}{RGB}{50, 50, 50}
@@ -114,29 +123,25 @@
 \setlength{\parindent}{0.5in}
 
 % Comprehensive numbering for figures, tables, and equations
-\usepackage{chngcntr}
 \counterwithout{figure}{section}
 \counterwithout{table}{section}
 \counterwithout{equation}{section}
 
-% Figure and table caption formatting (left-justified)
-\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+% Figure and table caption formatting
 \captionsetup{justification=raggedright,singlelinecheck=false}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
 % Left-align content inside all figure environments
 \AtBeginEnvironment{figure}{\raggedright}
 
-% Hyperlinks and smart cross-references
-\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
-\usepackage[nameinlink,capitalise]{cleveref}
-% Configure cleveref names
+% Configure cleveref names for better cross-references
 \crefname{figure}{Figure}{Figures}
 \crefname{table}{Table}{Tables}
 \crefname{equation}{Equation}{Equations}
+\crefname{section}{Section}{Sections}
+\crefname{chapter}{Chapter}{Chapters}
 
 % Equation numbering and formatting
-\usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -145,24 +150,25 @@
 \newtheorem{example}[theorem]{Example}
 \newtheorem{remark}[theorem]{Remark}
 
-% Section formatting - ensure proper academic style
-\usepackage{titlesec}
+% Section formatting for academic style
 \titlespacing{\section}{0pt}{12pt}{6pt}
 \titlespacing{\subsection}{0pt}{10pt}{4pt}
 \titlespacing{\subsubsection}{0pt}{8pt}{3pt}
 
-% Ensure sections are left-aligned and properly formatted
+% Title formats for consistent academic appearance
 \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
-% Title and author
+% Title and author information
 \title{When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus}
-\author{Tucker Chambers \\
-\small Email: tucker.chambers@example.com \\
-\small ORCID: 0000-0000-0000-0000 \and 0000-0000-0000-0001 \\
+\author{Tucker C. Chambers\thanks{Corresponding author} \\
+\small Email: tucker.chambers@research.edu \\
+\small ORCID: 0000-0001-6232-9096
+\and
 Daniel A. Friedman \\
-\small Email: daniel.friedman@example.com}
+\small Email: daniel@activeinference.institute \\
+\small ORCID: 0000-0001-6232-9096}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -193,9 +199,9 @@ Classification}\label{sec:app_spectral_unmixing}
 
 \subsection{Objective}\label{objective}
 
-Comprehensive spectral analysis including advanced unmixing algorithms,
-feature extraction, and multi-algorithm classification for CHC
-identification and chemical analysis.
+Comprehensive spectral analysis: realistic CHC data generation, feature
+extraction, unmixing (NMF, VCA, ICA), and multi‑algorithm classification
+with deterministic evaluation.
 
 \subsection{Methods (src)}\label{methods-src}
 
@@ -207,33 +213,32 @@ identification and chemical analysis.
   \begin{itemize}
   \tightlist
   \item
-    \passthrough{\lstinline!generate\_realistic\_chc\_spectra(n\_compounds, n\_wavelengths)!}
-    - Synthetic CHC spectral data
+    \passthrough{\lstinline!generate\_realistic\_chc\_spectra(n\_compounds: int, n\_wavelengths: int, seed: int=42) -> dict!}
+    --- synthetic CHC spectra with ground truth
   \item
-    \passthrough{\lstinline!nmf\_unmix(spectra, n\_components, seed=42)!}
-    - Non-negative matrix factorization
+    \passthrough{\lstinline!nmf\_unmix(spectra: np.ndarray, n\_components: int, seed: int=42) -> (W, H)!}
+    --- deterministic NMF
   \item
-    \passthrough{\lstinline!vertex\_component\_analysis(spectra, n\_endmembers)!}
-    - VCA endmember extraction
+    \passthrough{\lstinline!vertex\_component\_analysis(spectra: np.ndarray, n\_endmembers: int) -> np.ndarray!}
+    --- VCA endmember extraction
   \item
-    \passthrough{\lstinline!independent\_component\_analysis\_spectra(spectra, n\_components)!}
-    - ICA blind separation
+    \passthrough{\lstinline!independent\_component\_analysis\_spectra(spectra: np.ndarray, n\_components: int) -> np.ndarray!}
+    --- ICA separation
   \item
-    \passthrough{\lstinline!spectral\_feature\_extraction(spectra, method)!}
-    - Multi-method feature extraction
+    \passthrough{\lstinline!spectral\_feature\_extraction(spectra: np.ndarray, wavelengths: np.ndarray, method: str='peaks') -> dict!}
+    --- peaks, derivatives, PCA, statistical features
   \item
-    \passthrough{\lstinline!advanced\_classification\_suite(features, labels)!}
-    - Multi-algorithm classification
+    \passthrough{\lstinline!advanced\_classification\_suite(features: np.ndarray, labels: np.ndarray) -> dict!}
+    --- multi‑algorithm benchmark
   \item
-    \passthrough{\lstinline!performance\_metrics\_comprehensive(y\_true, y\_pred, y\_prob)!}
-    - Detailed evaluation metrics
+    \passthrough{\lstinline!performance\_metrics\_comprehensive(y\_true: np.ndarray, y\_pred: np.ndarray, y\_prob: Optional[np.ndarray]=None) -> dict!}
   \item
-    \passthrough{\lstinline!lda\_baseline(features, labels, seed=42)!} -
-    Linear discriminant baseline
+    \passthrough{\lstinline!lda\_baseline(features: np.ndarray, labels: np.ndarray, seed: int=42) -> dict!}
+    --- closed‑form LDA baseline
   \end{itemize}
 \end{itemize}
 
-\subsection{Script and Outputs}\label{script-and-outputs}
+\subsection{Script and outputs}\label{script-and-outputs}
 
 \begin{itemize}
 \tightlist
@@ -253,8 +258,22 @@ identification and chemical analysis.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.9\textwidth]{../output/figures/spectral_unmixing_comprehensive_analysis.png}
-\caption{Comprehensive spectral analysis: Synthetic CHC spectra with realistic chemical diversity, advanced unmixing using NMF, VCA, and ICA algorithms, multi-method feature extraction (peaks, derivatives, PCA, statistical), and multi-algorithm classification performance comparison. Includes detailed performance metrics, confusion matrices, and algorithmic benchmarking for chemical identification applications.}
+\caption{Comprehensive spectral analysis generated deterministically: synthetic CHC spectra, NMF/VCA/ICA unmixing, multi‑method feature extraction, and classification benchmarks.}
 \label{fig:app_spectral_unmixing}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{../output/figures/spectral_unmixing_comprehensive_analysis.png}
+\caption{Spectral unmixing and classification results produced by `scripts/generate_spectral_unmixing.py` using `src/case_studies/spectral_unmixing.py`. Panels show mixed spectra, recovered components (NMF/VCA), reconstruction errors, and classification performance.}
+\label{fig:app_spectral_unmixing_full}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
+\caption{Integrated classification benchmark from `scripts/generate_integrated_analysis.py` summarizing classification performance across spectral and neural feature sets.}
+\label{fig:integrated_classification}
 \end{figure}
 
 \subsection{Equation References}\label{equation-references}
@@ -277,10 +296,11 @@ identification and chemical analysis.
   Artifacts saved to \passthrough{\lstinline!output/data/!} and
   \passthrough{\lstinline!output/figures/!}.
 \item
-  Fixed RNG seed (42) used for NMF initialization and fold splits.
+  Fixed RNG seed (42) used for deterministic NMF initialization and
+  cross‑validation splits.
 \end{itemize}
 
-\subsection{Cross-References}\label{cross-references}
+\subsection{Cross‑references}\label{crossreferences}
 
 \begin{itemize}
 \tightlist

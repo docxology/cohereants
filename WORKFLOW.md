@@ -1,39 +1,39 @@
-# Generic Project Development Workflow: The render_pdf.sh Paradigm
+# cohereants Entomological Research Workflow: Insect Sensory System Analysis
 
-This document explains the complete development workflow that ensures source code, tests, and documentation remain in perfect coherence. For related information, see **[`HOW_TO_USE.md`](HOW_TO_USE.md)** for complete usage guidance, **[`ARCHITECTURE.md`](ARCHITECTURE.md)**, **[`THIN_ORCHESTRATOR_SUMMARY.md`](THIN_ORCHESTRATOR_SUMMARY.md)**, and **[`README.md`](README.md)**.
+This document explains the complete research workflow for investigating the vibrational theory of insect olfaction. The workflow ensures entomological models, spectral analyses, and scientific manuscripts remain in perfect scientific coherence. For related information, see **[`README.md`](README.md)** for project overview, **[`ARCHITECTURE.md`](ARCHITECTURE.md)**, and **[`HOW_TO_USE.md`](HOW_TO_USE.md)** for research guidance.
 
-## Overview
+## Research Overview
 
-The generic project template implements a **unified test-driven development paradigm** where:
+The cohereants project implements a **unified test-driven research paradigm** where:
 
-- **Source code** implements mathematical functionality
-- **Tests** validate all functionality with 100% coverage
-- **Scripts** are **thin orchestrators** that import and use `src/` methods
-- **Documentation** references code and displays generated outputs
-- **`render_pdf.sh`** orchestrates the entire pipeline
+- **Entomological models** implement insect sensory system algorithms
+- **Scientific tests** validate all sensory calculations with 100% coverage
+- **Analysis scripts** are **thin orchestrators** that import and use validated models
+- **Research manuscripts** integrate computational results with scientific theory
+- **`render_pdf.sh`** orchestrates the complete research publication pipeline
 
 ## Complete Workflow Diagram
 
 ```mermaid
 graph TB
-    subgraph "Development Components"
-        SRC[Source Code<br/>src/]
-        TESTS[Tests<br/>tests/]
-        SCRIPTS[Scripts<br/>scripts/]
-        MD[Documentation<br/>markdown/]
+    subgraph "Research Components"
+        SRC[Entomological Models<br/>src/]
+        TESTS[Scientific Tests<br/>tests/]
+        SCRIPTS[Analysis Scripts<br/>scripts/]
+        MD[Research Manuscript<br/>markdown/]
+    end
+
+    subgraph "Research Validation & Generation"
+        VALIDATION[Model Validation<br/>100% Coverage]
+        FIGURES[Spectral Analysis<br/>Using src/ models]
+        DATA[Morphological Data<br/>Using src/ models]
+        MARKDOWN_VAL[Scientific Validation<br/>Figures & References]
     end
     
-    subgraph "Validation & Generation"
-        VALIDATION[Test Validation<br/>100% Coverage]
-        FIGURES[Figure Generation<br/>Using src/ methods]
-        DATA[Data Generation<br/>Using src/ methods]
-        MARKDOWN_VAL[Markdown Validation<br/>Images & References]
-    end
-    
-    subgraph "Build Pipeline"
-        RENDER[render_pdf.sh<br/>Orchestrator]
-        PDFS[PDF Generation<br/>Individual + Combined]
-        LATEX[LaTeX Export<br/>For further processing]
+    subgraph "Publication Pipeline"
+        RENDER[render_pdf.sh<br/>Research Pipeline]
+        PDFS[Manuscript Generation<br/>Individual + Combined]
+        LATEX[Scientific Export<br/>For publication]
     end
     
     SRC --> VALIDATION

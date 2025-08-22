@@ -52,30 +52,39 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{3}
 % LaTeX Preamble for Insect Perception Research
-\documentclass[13pt,a4paper]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{geometry}
+\usepackage[margin=1in, top=1in, bottom=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{booktabs}
-% \usepackage{hyperref}  % Commented out to prevent unwanted metadata
-\usepackage{color}
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{fancyvrb}
 \usepackage{setspace}
 \usepackage{ragged2e}
 \usepackage{etoolbox}
+\usepackage{chngcntr}
+\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage[nameinlink,capitalise]{cleveref}
 
-% Page geometry - more accessible margins
-\geometry{margin=1in, top=1in, bottom=1in}
+% Hyperref package - properly configured for cross-references
+\usepackage[
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=blue,
+    urlcolor=blue,
+    linkbordercolor=blue,
+    urlbordercolor=blue,
+    citebordercolor=blue
+]{hyperref}
 
-% Hyperref package removed to prevent unwanted metadata
-
-% Custom colors
+% Custom colors for code listings
 \definecolor{codebg}{RGB}{245, 245, 245}
 \definecolor{codeborder}{RGB}{200, 200, 200}
 \definecolor{codefg}{RGB}{50, 50, 50}
@@ -114,29 +123,25 @@
 \setlength{\parindent}{0.5in}
 
 % Comprehensive numbering for figures, tables, and equations
-\usepackage{chngcntr}
 \counterwithout{figure}{section}
 \counterwithout{table}{section}
 \counterwithout{equation}{section}
 
-% Figure and table caption formatting (left-justified)
-\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+% Figure and table caption formatting
 \captionsetup{justification=raggedright,singlelinecheck=false}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
 % Left-align content inside all figure environments
 \AtBeginEnvironment{figure}{\raggedright}
 
-% Hyperlinks and smart cross-references
-\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
-\usepackage[nameinlink,capitalise]{cleveref}
-% Configure cleveref names
+% Configure cleveref names for better cross-references
 \crefname{figure}{Figure}{Figures}
 \crefname{table}{Table}{Tables}
 \crefname{equation}{Equation}{Equations}
+\crefname{section}{Section}{Sections}
+\crefname{chapter}{Chapter}{Chapters}
 
 % Equation numbering and formatting
-\usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -145,24 +150,25 @@
 \newtheorem{example}[theorem]{Example}
 \newtheorem{remark}[theorem]{Remark}
 
-% Section formatting - ensure proper academic style
-\usepackage{titlesec}
+% Section formatting for academic style
 \titlespacing{\section}{0pt}{12pt}{6pt}
 \titlespacing{\subsection}{0pt}{10pt}{4pt}
 \titlespacing{\subsubsection}{0pt}{8pt}{3pt}
 
-% Ensure sections are left-aligned and properly formatted
+% Title formats for consistent academic appearance
 \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
-% Title and author
+% Title and author information
 \title{When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus}
-\author{Tucker Chambers \\
-\small Email: tucker.chambers@example.com \\
-\small ORCID: 0000-0000-0000-0000 \and 0000-0000-0000-0001 \\
+\author{Tucker C. Chambers\thanks{Corresponding author} \\
+\small Email: tucker.chambers@research.edu \\
+\small ORCID: 0000-0001-6232-9096
+\and
 Daniel A. Friedman \\
-\small Email: daniel.friedman@example.com}
+\small Email: daniel@activeinference.institute \\
+\small ORCID: 0000-0001-6232-9096}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -188,264 +194,104 @@ Daniel A. Friedman \\
 \tableofcontents
 }
 \setstretch{1.0}
-\section{Introduction}\label{sec:introduction}
+Olfaction---the detection and identification of airborne molecules---is
+a fundamental sensory modality essential for survival, reproduction, and
+social behavior across the animal kingdom. Among terrestrial organisms,
+insects exhibit exceptional chemosensory capabilities characterized by
+rapid detection latencies (1--5 ms), fine odor discrimination, and
+long-range detection that challenge conventional models of molecular
+diffusion and receptor binding. These remarkable capabilities suggest
+the existence of mechanisms beyond traditional olfactory theories.
 
-Olfaction, the ability to detect and identify airborne molecules,
-represents one of the most fundamental sensory modalities across
-biological systems. This sense exhibits remarkable conservation across
-diverse taxa, with insects demonstrating particularly sophisticated
-chemosensory capabilities that challenge traditional mechanistic
-explanations.
+\subsection{Current Understanding and Critical
+Gaps}\label{current-understanding-and-critical-gaps}
 
-\subsection{Current Understanding of Insect
-Olfaction}\label{current-understanding-of-insect-olfaction}
+The prevailing stereochemical theory posits that olfactory recognition
+occurs through shape complementarity between diffused odor molecules and
+olfactory receptors (ORs) on insect antennae. This framework, supported
+by extensive molecular biology, explains much of the combinatorial
+coding underlying odor discrimination. However, two fundamental
+empirical tensions persist:
 
-The classical stereochemical theory of olfaction posits that molecular
-recognition occurs through shape complementarity between odor molecules
-and olfactory receptors (ORs) on the cellular membranes of olfactory
-receptor neurons (ORNs). This lock-and-key mechanism initiates ionic
-cascades that generate measurable neural responses within milliseconds
-of stimulus detection.
+\subsubsection{Temporal Constraints}\label{temporal-constraints}
 
-\textbf{Receptor Diversity and Specificity}: Insects possess hundreds of
-distinct OR types, yet can discriminate among billions of perceptible
-odors. This remarkable capability is achieved through combinatorial
-activation patterns, where individual odors activate multiple receptors
-with varying affinities, creating high-dimensional neural
-representations despite individual receptor broad-tuning.
+Insect olfactory receptor neurons (ORNs) exhibit remarkably short
+response latencies (1--5 ms) that are difficult to reconcile with
+traditional diffusion-plus-binding models, which typically require 7--12
+ms for molecular transport and receptor activation. This discrepancy
+suggests either highly optimized molecular mechanisms or alternative
+detection pathways operating on faster timescales.
 
-\textbf{Key limitation}: Diffusion and binding kinetics alone struggle
-to explain sub‑10 ms response latencies and long‑range detection given
-environmental constraints. This motivates evaluation of complementary
-mechanisms that operate upstream of, or in parallel with, binding.
+\subsubsection{Range and Sensitivity
+Paradox}\label{range-and-sensitivity-paradox}
+
+Insects can detect pheromones and other semiochemicals over distances of
+10--100 meters, despite atmospheric attenuation and molecular dilution.
+While turbulent plume structures can enhance range, the extreme
+sensitivity and rapid acquisition of signal directionality suggest
+mechanisms beyond passive molecular diffusion.
+
+\subsection{Recent Evidence for Alternative
+Mechanisms}\label{recent-evidence-for-alternative-mechanisms}
+
+Recent studies have revealed specialized infrared-sensitive organs in
+multiple beetle lineages, providing direct evidence for electromagnetic
+detection capabilities in insects, and suggesting that other tissues may
+also be sensitive to infrared. These findings, combined with
+spectroscopic evidence of vibrational coupling and quantum effects in
+receptor systems, motivate a systematic evaluation of complementary
+detection mechanisms that may work alongside traditional olfactory
+pathways.
 
 \textbf{Central Research Question:} Can infrared (IR) vibrational
-signatures of semiochemicals contribute measurably to insect
-olfaction---improving latency, range, and specificity---within
-physiologically plausible, falsifiable constraints?
+signatures of semiochemicals serve as an electromagnetic detection
+pathway that enhances insect olfaction, providing faster response times,
+extended range, and complementary sensory information?
 
-\textbf{Specific Hypotheses:} - \textbf{H1 (Geometric):} Sensilla
-dimensions correlate with optimal IR wavelengths (r ≥ 0.8) - \textbf{H2
-(Spectral):} CHC emission peaks align with atmospheric transmission
-windows\\
-- \textbf{H3 (Temporal):} IR detection enables sub-10 ms response
-latencies - \textbf{H4 (Behavioral):} IR-only stimuli trigger
-orientation without volatile cues
+\textbf{Scope and Approach:} We focus on mid-infrared detection (2-25
+μm) as this range encompasses molecular vibrational modes of
+biologically relevant compounds while overlapping atmospheric
+transmission windows. Our framework integrates computational
+electromagnetism with empirical validation, testing whether IR detection
+operates alongside (not replacing) traditional molecular binding
+pathways. We emphasize falsifiable predictions and controlled
+experimental protocols to distinguish electromagnetic from thermal
+effects.
 
-This systematic approach enables rigorous testing of the vibrational
-theory's core predictions while maintaining clear falsification
-criteria.
+\textbf{Specific Hypotheses:} - \textbf{H1 (Morphological):} Antennal
+sensilla dimensions correlate with predicted IR resonant wavelengths
+(target r ≥ 0.8) across diverse insect taxa. - \textbf{H2 (Spectral):}
+Cuticular hydrocarbon (CHC) vibrational spectra align with atmospheric
+transmission windows (2--5, 8--14, 17--25 μm). - \textbf{H3 (Temporal):}
+IR-mediated detection can achieve sub-10 ms ORN latencies
+distinguishable from thermal stimulation. - \textbf{H4 (Behavioral):}
+Frequency-specific IR stimulation elicits directed orientation behaviors
+in the absence of volatile chemical cues.
 
-\subsection{Limitations of Stereochemical
-Theory}\label{limitations-of-stereochemical-theory}
+\subsection{Approach and Organization}\label{approach-and-organization}
 
-\subsubsection{Isotope Discrimination
-Evidence}\label{isotope-discrimination-evidence}
+We evaluate these hypotheses using an integrated framework combining
+comparative morphology, infrared spectroscopy, neural timing analysis,
+and deterministic computational electromagnetism. All models are
+unit-tested and reproducible with fixed random seeds (42).
 
-The stereochemical theory faces challenges from isotope discrimination
-studies. Molecules with identical shapes and chemical structures but
-different isotopic compositions can elicit distinct olfactory responses,
-suggesting that geometry alone may not fully explain odor
-discrimination.
+The manuscript is organized as follows: - \textbf{Main Text:} Presents
+integrated findings with cross-references to detailed case studies -
+\textbf{Appendices:} Seven specialized analyses exploring specific
+aspects: - Sensory array directionality and beam patterns
+(\Cref{sec:app_sensilla_array}) - Environmental channel modeling
+(\Cref{sec:app_environmental_channel}) - Detection limits and operating
+points (\Cref{sec:app_detection_limits}) - Neural encoding efficiency
+(\Cref{sec:app_neural_encoding}) - Spectral unmixing and classification
+(\Cref{sec:app_spectral_unmixing}) - Plasmonic nano-geometry
+optimization (\Cref{sec:app_plasmonic_geometry}) - Active inference
+behavioral modeling (\Cref{sec:app_active_inference}) -
+\textbf{Mathematical Appendix:} Detailed derivations and computational
+implementations (\Cref{sec:mathematical_appendix}) - \textbf{Empirical
+Studies:} Comprehensive review of supporting evidence
+(\Cref{sec:empirical_studies})
 
-\textbf{Quantitative Evidence}: Studies on \emph{Drosophila
-melanogaster} show that deuterated homologues of known odorants produce
-unique behavioral responses despite maintaining identical molecular
-shapes. This is consistent with vibrational spectroscopy: deuteration
-shifts CH stretch bands from \textasciitilde2850--3000 cm\(^{-1}\) to
-\textasciitilde2100--2200 cm\(^{-1}\) (ratio \approx 0.707). Conversions
-are verified by
-\passthrough{\lstinline!src/core.py::calculate\_wavelength\_from\_wavenumber!}
-and
-\passthrough{\lstinline!tests/test\_core.py::TestWavelengthConversions!}.
-
-\subsubsection{Response Time
-Inconsistencies}\label{response-time-inconsistencies}
-
-Traditional molecular binding models cannot account for the extremely
-rapid response times observed in insect olfaction. Insect ORNs
-demonstrate response latencies of 1-5 ms, comparable to photoreceptor
-(0.1 ms) and auditory receptor (0.16 ms) response times.
-
-\textbf{Mechanistic implications}: These rapid responses are difficult
-to reconcile with diffusion+binding models under typical conditions and
-motivate evaluation of complementary vibrational/electromagnetic
-contributions acting upstream or in parallel. We quantify gaps with
-\passthrough{\lstinline!src/core.py::calculate\_response\_time\_improvement!}
-(see
-\passthrough{\lstinline!tests/test\_core.py::TestResponseTimeImprovement!})
-and visualize in
-\passthrough{\lstinline!output/figures/response\_time\_comparison.png!}.
-
-\subsection{The Vibrational Theory
-Alternative}\label{the-vibrational-theory-alternative}
-
-The vibrational theory of olfaction proposes that insects detect the
-unique electromagnetic radiation emitted by free-floating odor molecules
-rather than relying solely on geometric or chemical information at
-receptor binding surfaces.
-
-\subsubsection{Atmospheric Transmission Windows and Testable
-Predictions}\label{atmospheric-transmission-windows-and-testable-predictions}
-
-A compelling aspect of the vibrational theory is the correspondence
-between atmospheric transmission characteristics and semiochemical
-emission spectra. Earth's atmosphere exhibits specific transmission
-windows in the mid- and long-infrared ranges (2-5 μm, 8-14 μm, 17-25 μm)
-that precisely overlap with the emission spectra of insect
-semiochemicals.
-
-\textbf{Testable prediction P1}: Under controlled humidity/temperature,
-modeled transmission windows (2--5 μm, 8--14 μm, 17--25 μm) should align
-with CHC emission peaks measured by ATR‑FTIR; see
-\passthrough{\lstinline!src/core.calculate\_atmospheric\_transmission()!}
-with coverage in \passthrough{\lstinline!tests/test\_core.py!}. A
-runnable example is produced by
-\passthrough{\lstinline!scripts/generate\_research\_figures.py!} (fixed
-seed 42), emitting
-\passthrough{\lstinline!output/figures/atmospheric\_transmission.png!}.
-
-\subsubsection{Sensilla as Electromagnetic Antennas
-(Hypothesis)}\label{sensilla-as-electromagnetic-antennas-hypothesis}
-
-Insect antennae and sensilla exhibit morphological adaptations that
-suggest optimization for electromagnetic detection. Sensilla dimensions
-(6-160 μm for trichodea, 2-8 μm for basiconica) correspond closely to
-the wavelengths of infrared radiation emitted by semiochemicals.
-
-\textbf{Structural hypothesis}: The porous architecture of sensilla,
-traditionally interpreted as molecular transport conduits, may also
-provide electromagnetic coupling consistent with dielectric waveguide
-theory. We evaluate this using resonant models (HE\(_{11}\)-like modes)
-and compare predicted quarter/half‑wavelengths to measured dimensions
-(\cref{sec:mathematical_appendix}).
-
-\subsection{Research Objectives and
-Approach}\label{research-objectives-and-approach}
-
-This paper examines the vibrational theory through multiple analytical
-domains:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  \textbf{Morphological Analysis}: Quantitative assessment of sensilla
-  dimensions and their correspondence to infrared wavelengths
-\item
-  \textbf{Neurological Investigation}: Analysis of response time data
-  and neural encoding mechanisms
-\item
-  \textbf{Behavioral Studies}: Examination of insect responses to
-  infrared stimuli and environmental conditions
-\item
-  \textbf{Spectroscopic Validation}: Measurement and analysis of
-  semiochemical emission spectra
-\item
-  \textbf{Computational Modeling}: Implementation of theoretical
-  frameworks in tested computational models, cross-linked to unit tests
-\end{enumerate}
-
-Each objective maps to a tested function or class in
-\passthrough{\lstinline!src/!} and a corresponding figure/data artifact.
-Detailed case studies are organized in the appendices: array
-directionality (\cref{sec:app_sensilla_array}), environmental channel
-(\cref{sec:app_environmental_channel}), detection limits
-(\cref{sec:app_detection_limits}), neural encoding
-(\cref{sec:app_neural_encoding}), spectral unmixing
-(\cref{sec:app_spectral_unmixing}), plasmonic geometry
-(\cref{sec:app_plasmonic_geometry}), active inference
-(\cref{sec:app_active_inference}).
-
-\subsubsection{Explicit Hypotheses and Falsifiable
-Predictions}\label{explicit-hypotheses-and-falsifiable-predictions}
-
-\begin{itemize}
-\tightlist
-\item
-  H1 (Resonance): Sensilla length/diameter distributions predict
-  quarter/half‑wavelength resonances within 2--30 μm; correlation r ≥
-  0.8 across species.
-\item
-  H2 (Transmission): Measured CHC peaks fall within modeled atmospheric
-  windows under standard ambient conditions.
-\item
-  H3 (Latency): IR‑only stimuli elicit ORN responses with sub‑10 ms
-  latency distinct from pure thermal confounds.
-\item
-  H4 (Behavior): Frequency‑specific IR stimulation induces
-  orientation/tracking without corresponding volatile molecules.
-\end{itemize}
-
-Each hypothesis is supported by a concrete analysis in
-\passthrough{\lstinline!src/!} with tests in
-\passthrough{\lstinline!tests/!} (see method cross‑links in
-\cref{sec:methodology}).
-
-\subsection{Theoretical Framework
-Integration}\label{theoretical-framework-integration}
-
-The vibrational theory unifies four complementary physical mechanisms
-operating across different spatial and temporal scales:
-
-\subsubsection{Physical Mechanisms Across
-Scales}\label{physical-mechanisms-across-scales}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Electromagnetic propagation} in sensilla dielectric media
-  (10⁻⁶ m scale, Maxwell's equations)
-\item
-  \textbf{Quantum tunneling} and phonon coupling in ORs (10⁻⁹ m scale,
-  tested barrier heights 0.5-2.0 eV)\\
-\item
-  \textbf{Resonant cavity} effects in sensilla geometry (10⁻⁵ m scale, Q
-  factors 100-1000)
-\item
-  \textbf{Piezoelectric coupling} through microtubule arrays (10⁻⁸ m
-  scale, measured coefficients)
-\end{itemize}
-
-\subsubsection{Computational
-Implementation}\label{computational-implementation}
-
-Each mechanism is implemented in tested functions
-(\passthrough{\lstinline!src/!}) with unit test coverage
-(\passthrough{\lstinline!tests/!}). Mathematical formulations appear in
-\cref{sec:mathematical_appendix} with code cross-references. All
-theoretical predictions can be reproduced through the computational
-pipeline with deterministic outputs (seed 42).
-
-\subsection{Empirical Validation
-Strategy}\label{empirical-validation-strategy}
-
-All theoretical predictions are implemented in tested computational
-models that generate quantitative predictions for experimental
-validation. The mathematical framework presented in Section
-\ref{sec:mathematical_appendix} provides specific equations that can be
-tested through:
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Sensilla Response Measurements}: Direct testing of infrared
-  sensitivity across different frequencies
-\item
-  \textbf{Behavioral Assays}: Quantification of insect responses to
-  infrared stimuli
-\item
-  \textbf{Neural Recording}: Measurement of ORN responses to
-  electromagnetic stimulation
-\item
-  \textbf{Environmental Studies}: Analysis of atmospheric transmission
-  effects on detection range
-\end{itemize}
-
-This integrated approach ensures that theoretical predictions are
-grounded in empirical reality and provides a framework for future
-experimental validation of the vibrational theory. Minimal falsifiers
-are enumerated in Discussion; figures are regenerated deterministically
-through the pipeline.
+This structure enables both comprehensive evaluation and focused
+exploration of specific mechanisms.
 
 \end{document}
