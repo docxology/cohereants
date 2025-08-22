@@ -305,6 +305,25 @@ class AdvancedVisualizer:
         Returns:
             Matplotlib figure
         """
+        # Basic validation
+        if wavenumbers is None or intensities is None:
+            raise ValueError("wavenumbers and intensities must be provided")
+        if not isinstance(wavenumbers, np.ndarray):
+            wavenumbers = np.asarray(wavenumbers)
+        if not isinstance(intensities, np.ndarray):
+            intensities = np.asarray(intensities)
+        if wavenumbers.ndim != 1 or intensities.ndim != 1:
+            raise ValueError("wavenumbers and intensities must be 1D arrays")
+        if wavenumbers.size != intensities.size:
+            raise ValueError("wavenumbers and intensities must have the same length")
+        if wavenumbers.size == 0:
+            # Return an informative empty figure
+            fig, ax = plt.subplots(figsize=(8, 4))
+            ax.text(0.5, 0.5, 'Empty spectrum', ha='center', va='center', transform=ax.transAxes,
+                    fontsize=12, color='gray')
+            ax.axis('off')
+            return fig
+
         fig, (ax1, ax2) = self.styler.create_figure_grid(2, 1, figsize=(12, 10))
 
         # Main spectrum plot
@@ -349,6 +368,31 @@ class AdvancedVisualizer:
 
         plt.tight_layout()
         return fig
+
+    @staticmethod
+    def annotate_top_peaks(ax: plt.Axes, wavenumbers: np.ndarray, intensities: np.ndarray,
+                           num_peaks: int = 5) -> None:
+        """
+        Annotate the top-N peaks by intensity on an axes.
+
+        Args:
+            ax: Target matplotlib Axes
+            wavenumbers: 1D array of wavenumbers (cm⁻¹)
+            intensities: 1D array of intensities
+            num_peaks: Number of peaks to annotate
+        """
+        if wavenumbers.ndim != 1 or intensities.ndim != 1 or wavenumbers.size != intensities.size:
+            return
+        if wavenumbers.size == 0:
+            return
+        try:
+            idx = np.argsort(intensities)[-num_peaks:][::-1]
+            for i in idx:
+                ax.annotate(f'{wavenumbers[i]:.1f}', xy=(wavenumbers[i], intensities[i]),
+                            xytext=(0, 6), textcoords='offset points', ha='center', fontsize=8)
+        except Exception:
+            # Best-effort: do not raise in visualization helper
+            pass
 
     def plot_correlation_matrix(self, data: Dict[str, np.ndarray],
                               variables: List[str],

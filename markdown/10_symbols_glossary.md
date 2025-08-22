@@ -17,6 +17,8 @@
 - **Sensilla Coeloconica**: Pit-like sensilla that may detect temperature, humidity, and infrared radiation
 - **ORN**: Olfactory Receptor Neuron; nerve cells that respond to chemical stimuli and transmit signals to the brain
 - **OR**: Olfactory Receptor; membrane proteins that bind to odor molecules and initiate signal transduction
+ - **Antennal Lobe (AL)**: First olfactory processing center in the insect brain containing glomeruli that aggregate ORN inputs by receptor type
+ - **Glomerulus (plural: glomeruli)**: Spheroidal neuropil compartment in the AL where ORN axons synapse with projection neurons and local interneurons; often tuned to receptor families or vibrational features
 
 ### Electromagnetic Theory and Infrared Detection
 - **Infrared (IR)**: Electromagnetic radiation with wavelengths longer than visible light (0.7-1000 μm)
@@ -279,19 +281,56 @@ For complete mathematical formulations and source code implementation, see Secti
 | `behavioral` | `calculate_response_statistics` | function | Calculate comprehensive statistics for behavioral response data |
 | `behavioral` | `generate_behavioral_plots` | function | Generate behavioral response plots |
 | `case_studies.active_inference` | `olfactory_active_inference_step` | function | Minimal deterministic update step for a 2D position under a gradient cue |
+| `case_studies.detection_limits` | `detection_performance_vs_snr` | function | Analyze detection performance vs signal-to-noise ratio |
+| `case_studies.detection_limits` | `detection_range_analysis` | function | Analyze detection range for IR olfactory communication |
 | `case_studies.detection_limits` | `min_detectable_power` | function | Minimum detectable signal power using thermal noise floor and SNR threshold |
+| `case_studies.detection_limits` | `noise_floor_analysis` | function | Analyze noise floor components vs frequency |
 | `case_studies.detection_limits` | `operating_point` | function | Bundle operating point parameters deterministically |
+| `case_studies.detection_limits` | `operating_regions_analysis` | function | Analyze operating regions in power-temperature space |
+| `case_studies.detection_limits` | `optimize_detection_parameters` | function | Optimize detection system parameters for given constraints and objectives |
+| `case_studies.detection_limits` | `roc_analysis` | function | Receiver Operating Characteristic (ROC) analysis for signal detection |
+| `case_studies.detection_limits` | `sensitivity_analysis` | function | Sensitivity analysis of detection performance to parameter variations |
 | `case_studies.detection_limits` | `snr_curve` | function | SNR vs |
+| `case_studies.environmental_channel` | `atmospheric_transmission_comprehensive` | function | Comprehensive atmospheric transmission model with multiple physical effects |
 | `case_studies.environmental_channel` | `atmospheric_transmission_detailed` | function | Compute a simple parametric atmospheric transmission curve |
-| `case_studies.environmental_channel` | `channel_capacity_vs_env` | function | Map Shannon capacity across humidity×temperature grid |
+| `case_studies.environmental_channel` | `channel_capacity_analysis` | function | Analyze communication channel capacity under atmospheric conditions |
+| `case_studies.environmental_channel` | `channel_capacity_vs_env` | function | Map Shannon capacity across humidity×temperature grid (legacy function) |
+| `case_studies.environmental_channel` | `environmental_sensitivity_analysis` | function | Analyze sensitivity of transmission to environmental parameters |
+| `case_studies.environmental_channel` | `molecular_absorption_cross_section` | function | Calculate molecular absorption cross-sections for atmospheric constituents |
+| `case_studies.environmental_channel` | `optimize_wavelength_for_range` | function | Find optimal wavelengths for target communication range and capacity |
+| `case_studies.environmental_channel` | `rayleigh_scattering_coefficient` | function | Calculate Rayleigh scattering coefficient for dry air |
+| `case_studies.neural_encoding` | `adaptation_dynamics_analysis` | function | Analyze adaptation dynamics in neural responses |
+| `case_studies.neural_encoding` | `analyze_spike_train_statistics` | function | Compute comprehensive spike train statistics |
+| `case_studies.neural_encoding` | `generate_spike_trains` | function | Generate realistic spike trains for ORN responses to odor stimuli |
 | `case_studies.neural_encoding` | `information_rate_time_series` | function | Estimate information metrics using a Gaussian channel approximation |
+| `case_studies.neural_encoding` | `mutual_information_analysis` | function | Compute mutual information between neural responses and stimuli |
+| `case_studies.neural_encoding` | `odor_discrimination_analysis` | function | Analyze odor discrimination performance across different time windows |
+| `case_studies.neural_encoding` | `population_coding_analysis` | function | Analyze population coding efficiency across multiple ORNs |
 | `case_studies.neural_encoding` | `rate_coding_metrics` | function | Compute simple separability metrics (means/stds) deterministically |
-| `case_studies.plasmonic_geometry` | `sweep_plasmonic_quality` | function | Sweep Q factor with a simple inverse-loss proxy across radii |
+| `case_studies.neural_encoding` | `temporal_coding_analysis` | function | Analyze temporal coding precision and response latency |
+| `case_studies.plasmonic_geometry` | `coupled_dipoles_near_field` | function | Calculate near-field enhancement for coupled plasmonic nanoparticles |
+| `case_studies.plasmonic_geometry` | `drude_model_permittivity` | function | Calculate frequency-dependent permittivity using Drude model |
+| `case_studies.plasmonic_geometry` | `field_distribution_near_particle` | function | Calculate near-field distribution around a spherical nanoparticle |
+| `case_studies.plasmonic_geometry` | `mie_scattering_sphere` | function | Calculate Mie scattering properties for spherical nanoparticles |
+| `case_studies.plasmonic_geometry` | `optimize_plasmonic_geometry` | function | Optimize nanoparticle geometry for maximum enhancement at target wavelength |
+| `case_studies.plasmonic_geometry` | `sweep_plasmonic_quality` | function | Comprehensive sweep of plasmonic quality factors across size and wavelength |
+| `case_studies.sensilla_array_directionality` | `analyze_sensilla_morphology` | function | Analyze sensilla dimensions for resonant wavelength matching |
 | `case_studies.sensilla_array_directionality` | `array_gain` | function | Compute a scalar array gain proxy as peak-to-mean power ratio |
+| `case_studies.sensilla_array_directionality` | `array_pattern_2d` | function | Compute 2D radiation pattern for sensilla array across frequency range |
 | `case_studies.sensilla_array_directionality` | `compute_beam_pattern` | function | Compute a simplified 1D beam pattern over wavelengths |
+| `case_studies.sensilla_array_directionality` | `design_circular_array` | function | Design a circular antenna array representing sensilla on insect antennae |
 | `case_studies.sensilla_array_directionality` | `design_log_periodic_array` | function | Design a 1D log-periodic array of element positions |
+| `case_studies.sensilla_array_directionality` | `frequency_response_analysis` | function | Analyze frequency response characteristics of sensilla array |
+| `case_studies.sensilla_array_directionality` | `mutual_coupling_matrix` | function | Compute mutual coupling matrix between antenna elements |
+| `case_studies.sensilla_array_directionality` | `sensilla_element_pattern` | function | Individual sensillum radiation pattern as function of observation angle |
+| `case_studies.spectral_unmixing` | `advanced_classification_suite` | function | Comprehensive classification analysis using multiple algorithms |
+| `case_studies.spectral_unmixing` | `generate_realistic_chc_spectra` | function | Generate realistic CHC spectral data with known ground truth components |
+| `case_studies.spectral_unmixing` | `independent_component_analysis_spectra` | function | Independent Component Analysis (ICA) for blind source separation of spectra |
 | `case_studies.spectral_unmixing` | `lda_baseline` | function | Closed-form two-class LDA with equal covariance; returns accuracy on train |
 | `case_studies.spectral_unmixing` | `nmf_unmix` | function | Deterministic, simple NMF via multiplicative updates |
+| `case_studies.spectral_unmixing` | `performance_metrics_comprehensive` | function | Compute comprehensive performance metrics for classification |
+| `case_studies.spectral_unmixing` | `spectral_feature_extraction` | function | Extract discriminative features from spectral data |
+| `case_studies.spectral_unmixing` | `vertex_component_analysis` | function | Vertex Component Analysis (VCA) for endmember extraction |
 | `config` | `ConfigManager` | class | Centralized configuration manager for insect analysis |
 | `config` | `enable_verbose_logging` | function | Enable verbose logging for debugging |
 | `config` | `get_config` | function | Get the global configuration manager instance |

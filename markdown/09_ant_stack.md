@@ -4,7 +4,7 @@
 
 This appendix provides a comprehensive mapping of how the cohereAnts research framework can be implemented within "The Ant Stack" computational architecture. The Ant Stack, as described by Friedman (2025), offers a modular, three-layer framework for emulating ant intelligence from physical embodiment to collective cognition. Here we demonstrate how our vibrational theory of olfaction, spectroscopic analysis, and behavioral modeling can be systematically integrated into this standardized computational framework.
 
-**Implementation Strategy**: We map cohereAnts modules to Ant Stack layers using explicit I/O contracts, ensuring reproducible experiments while maintaining the biological plausibility of our theoretical framework. The examples below are thin adapters that call `src/` functions; no scientific logic resides in these adapters. See also the dedicated appendices for array directionality (\cref{sec:app_sensilla_array}), environmental channel (\cref{sec:app_environmental_channel}), detection limits (\cref{sec:app_detection_limits}), neural encoding (\cref{sec:app_neural_encoding}), spectral unmixing (\cref{sec:app_spectral_unmixing}), plasmonic geometry (\cref{sec:app_plasmonic_geometry}), and active inference (\cref{sec:app_active_inference}).
+**Implementation Strategy**: We map cohereAnts modules to Ant Stack layers via explicit I/O contracts. Adapters are thin and delegate all scientific logic to `src/` functions to preserve the Thin Orchestrator pattern. See appendices for array directionality (\cref{sec:app_sensilla_array}), environmental channel (\cref{sec:app_environmental_channel}), detection limits (\cref{sec:app_detection_limits}), neural encoding (\cref{sec:app_neural_encoding}), spectral unmixing (\cref{sec:app_spectral_unmixing}), plasmonic geometry (\cref{sec:app_plasmonic_geometry}), and active inference (\cref{sec:app_active_inference}).
 
 ## Layer-by-Layer Integration
 
@@ -24,8 +24,8 @@ class AntBodySensilla:
         self.optimal_wavelengths = self._calculate_resonance()
     
     def _calculate_resonance(self):
-        # Implement cohereAnts resonance theory
-        return self.lengths * 4  # Quarter-wavelength resonance (delegated to src/sensilla in production)
+        # Delegate to cohereAnts resonance utilities in production
+        return self.lengths * 4  # Quarter-wavelength resonance (delegated)
 ```
 
 **I/O Contract**: 
@@ -44,8 +44,8 @@ class AntBodySpectroscopy:
         self.spectral_resolution = 0.01  # μm
         
     def get_transmission(self, wavelength: float, distance: float) -> float:
-        # Implement cohereAnts atmospheric transmission model
-        return calculate_atmospheric_transmission(wavelength, distance)  # from src/core
+        # Delegate to cohereAnts atmospheric transmission model in src/core
+        return calculate_atmospheric_transmission(wavelength, distance)
 ```
 
 **Configuration Parameters**:
@@ -70,7 +70,7 @@ class AntBrainOlfaction:
         self.cx_neurons = self._initialize_cx_circuit()
     
     def _initialize_al_circuit(self):
-        # Implement cohereAnts vibrational detection theory (delegates to src components in production)
+        # Delegate vibrational detection to src components in production
         # Each glomerulus responds to specific molecular vibrations
         return VibrationalGlomeruliCircuit()
     
@@ -107,7 +107,7 @@ class VibrationalGlomeruliCircuit:
     
     def _calculate_vibrational_response(self, spectrum: np.ndarray, 
                                      resonant_freq: float) -> float:
-        # Apply cohereAnts electromagnetic coupling model (placeholder; call src functions in production)
+        # Placeholder: call src electromagnetic coupling utilities in production
         coupling_strength = self._calculate_coupling(spectrum, resonant_freq)
         return coupling_strength * self.quality_factors[i]
 ```

@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import os
 import sys
+import time
 import matplotlib.pyplot as plt
 import numpy as np
 from typing import Tuple, List, Dict
@@ -233,48 +234,138 @@ def generate_composite_multipanel(figure_dir: str) -> str:
     return out_path
 
 
+def validate_outputs(figure_dir: str, data_dir: str) -> tuple[bool, list[str]]:
+    """Validate that all expected outputs were generated correctly."""
+    missing = []
+    
+    expected_figures = [
+        "atmospheric_transmission.png",
+        "sensilla_wavelength_matching.png", 
+        "chc_spectra_example.png",
+        "response_time_comparison.png",
+        "composite_cross_domain_overview.png"
+    ]
+    
+    expected_data = [
+        "atmospheric_transmission.npz",
+        "sensilla_data.npz"
+    ]
+    
+    expected_captions = [
+        "atmospheric_transmission.caption.txt",
+        "sensilla_wavelength_matching.caption.txt",
+        "chc_spectra_example.caption.txt", 
+        "response_time_comparison.caption.txt",
+        "composite_cross_domain_overview.caption.txt"
+    ]
+    
+    # Check figures
+    for fig in expected_figures:
+        path = os.path.join(figure_dir, fig)
+        if not os.path.exists(path):
+            missing.append(f"Figure: {fig}")
+        elif os.path.getsize(path) == 0:
+            missing.append(f"Empty figure: {fig}")
+    
+    # Check data files  
+    for data in expected_data:
+        path = os.path.join(data_dir, data)
+        if not os.path.exists(path):
+            missing.append(f"Data: {data}")
+        elif os.path.getsize(path) == 0:
+            missing.append(f"Empty data: {data}")
+            
+    # Check captions
+    for caption in expected_captions:
+        path = os.path.join(figure_dir, caption)
+        if not os.path.exists(path):
+            missing.append(f"Caption: {caption}")
+        elif os.path.getsize(path) == 0:
+            missing.append(f"Empty caption: {caption}")
+    
+    return len(missing) == 0, missing
+
+
 def main() -> None:
-    """Generate all research figures using src/ modules."""
-    os.environ.setdefault("MPLBACKEND", "Agg")
-    _ensure_src_on_path()
-    # Use centralized configuration and deterministic seeding
+    """Generate all research figures using src/ modules with enhanced reporting."""
+    start_time = time.time()
+    
     try:
-        from src.config import set_random_seed
-        from src.visualization import set_plot_style
-        set_random_seed(42)
-        set_plot_style('science')
-    except Exception:
-        # If config is unavailable, ensure deterministic numpy behavior locally
-        np.random.seed(42)
-    
-    output_dir, data_dir, figure_dir = _setup_directories()
-    
-    print("Generating research figures using src/ modules...")
-    
-    # Generate all core research figures using src/ methods where available
-    figures: List[str] = []
-    # Core figures
-    figures.append(generate_atmospheric_transmission_plot(figure_dir, data_dir))
-    figures.append(generate_sensilla_wavelength_matching(figure_dir, data_dir))
-    figures.append(generate_chc_spectra_example(figure_dir, data_dir))
-    figures.append(generate_response_time_comparison(figure_dir, data_dir))
-    figures.append(generate_composite_multipanel(figure_dir))
-    
-    # Filter out any empty results
-    figures = [f for f in figures if f]
-    
-    print(f"\n✅ Generated {len(figures)} research figures:")
-    for fig in figures:
-        print(f"   - {os.path.basename(fig)}")
-    
-    print(f"\n📁 All outputs saved to: {output_dir}")
-    print(f"   Figures: {figure_dir}")
-    print(f"   Data: {data_dir}")
-    
-    print(f"\n🔗 Integration with src/ modules demonstrated:")
-    print(f"   - Core physics (src.core), sensilla analysis (src.sensilla), spectroscopy (src.spectroscopy)")
-    print(f"   - Centralized config and styling (src.config, src.visualization)")
-    print(f"   - Proper error handling for missing imports")
+        print("🚀 Starting research figure generation...")
+        os.environ.setdefault("MPLBACKEND", "Agg")
+        _ensure_src_on_path()
+        
+        # Use centralized configuration and deterministic seeding
+        print("🔧 Configuring analysis environment...")
+        try:
+            from src.config import set_random_seed
+            from src.visualization import set_plot_style
+            set_random_seed(42)
+            set_plot_style('science')
+            print("   ✅ Applied centralized configuration")
+        except Exception as e:
+            # If config is unavailable, ensure deterministic numpy behavior locally
+            np.random.seed(42)
+            print(f"   ⚠️  Using fallback configuration: {e}")
+        
+        output_dir, data_dir, figure_dir = _setup_directories()
+        
+        print("\n📊 Generating research figures using src/ modules...")
+        
+        # Generate all core research figures using src/ methods where available
+        figures: List[str] = []
+        
+        # Core figures with progress tracking
+        print("   🌍 Generating atmospheric transmission plot...")
+        figures.append(generate_atmospheric_transmission_plot(figure_dir, data_dir))
+        
+        print("   📡 Generating sensilla wavelength matching...")
+        figures.append(generate_sensilla_wavelength_matching(figure_dir, data_dir))
+        
+        print("   🧪 Generating CHC spectra example...")
+        figures.append(generate_chc_spectra_example(figure_dir, data_dir))
+        
+        print("   ⚡ Generating response time comparison...")
+        figures.append(generate_response_time_comparison(figure_dir, data_dir))
+        
+        print("   📈 Generating composite multipanel overview...")
+        figures.append(generate_composite_multipanel(figure_dir))
+        
+        # Filter out any empty results
+        figures = [f for f in figures if f]
+        
+        # Validate outputs
+        print("\n🔍 Validating generated outputs...")
+        is_valid, missing = validate_outputs(figure_dir, data_dir)
+        
+        end_time = time.time()
+        total_duration = end_time - start_time
+        
+        print(f"\n✅ Generated {len(figures)} research figures in {total_duration:.2f}s:")
+        for fig in figures:
+            print(f"   📄 {os.path.basename(fig)}")
+        
+        if not is_valid:
+            print(f"\n⚠️  Warning: {len(missing)} missing outputs:")
+            for item in missing:
+                print(f"   ❌ {item}")
+        else:
+            print("\n✅ All expected outputs generated successfully!")
+        
+        print(f"\n📁 All outputs saved to: {output_dir}")
+        print(f"   📈 Figures: {figure_dir}")
+        print(f"   💾 Data: {data_dir}")
+        
+        print(f"\n🔗 Integration with src/ modules demonstrated:")
+        print(f"   - Core physics (src.core), sensilla analysis (src.sensilla)")
+        print(f"   - Centralized config and styling (src.config, src.visualization)")
+        print(f"   - Proper error handling for missing imports")
+        
+    except Exception as e:
+        print(f"❌ Error during figure generation: {e}")
+        import traceback
+        traceback.print_exc()
+        raise
 
 
 if __name__ == "__main__":

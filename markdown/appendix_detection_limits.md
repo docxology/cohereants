@@ -1,24 +1,29 @@
 # Appendix C: Detection Limits and Operating Points {#sec:app_detection_limits}
 
 ## Objective
-Quantify minimum detectable power, SNR curves, and operating points for IR olfactory channels.
+Comprehensive detection theory analysis including ROC curves, sensitivity analysis, operating regions, and noise floor characterization for IR olfactory detection systems.
 
-## Planned Methods (src)
-- `src/detection_limits.py`
-  - `min_detectable_power(temperature_k, bandwidth_hz, snr_min_db)`
-  - `snr_curve(signal_power_w, noise_temp_k, bandwidth_hz)`
-  - `operating_point(capacity_bits_s, snr_db)`
+## Methods (src)
+- `src/case_studies/detection_limits.py`
+  - `min_detectable_power(temperature_k, bandwidth_hz, snr_min_db)` - Thermal noise limited detection
+  - `roc_analysis(signal_power, noise_power)` - ROC curves and optimal thresholds
+  - `detection_performance_vs_snr(snr_range_db, pfa_target)` - Performance curves and MDS
+  - `sensitivity_analysis(power_range, temp_range, param_variations)` - Parameter sensitivity
+  - `operating_regions_analysis(power_range, temp_range)` - SNR contours in operating space
+  - `noise_floor_analysis(freq_range, temperature_k)` - Multi-component noise analysis
+  - `detection_range_analysis(tx_power, antenna_gain, frequency, sensitivity)` - Range calculations
+  - `optimize_detection_parameters(constraints, objectives)` - System optimization
 
-## Planned Script and Outputs
+## Script and Outputs
 - Script: `scripts/generate_detection_limits.py`
-- Data: `output/data/detection_limits.npz`
-- Figure: `output/figures/detection_limits_operating_points.png`
+- Data: `output/data/detection_limits_comprehensive.npz`
+- Figure: `output/figures/detection_limits_comprehensive_analysis.png`
 
 ## Figure
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{../output/figures/detection_limits_operating_points.png}
-\caption{Minimum detectable power contours and operating regions vs bandwidth and temperature; SNR and capacity overlays.}
+\includegraphics[width=0.9\textwidth]{../output/figures/detection_limits_comprehensive_analysis.png}
+\caption{Comprehensive detection analysis: ROC curves with AUC metrics, detection performance vs SNR showing minimum detectable signal (MDS), operating regions in power-temperature space, noise floor components, detection range analysis, and parameter optimization. Includes processing gain effects, optimal threshold selection, and performance trade-offs for IR olfactory detection systems.}
 \label{fig:app_detection_limits}
 \end{figure}
 
@@ -29,6 +34,7 @@ Quantify minimum detectable power, SNR curves, and operating points for IR olfac
 ## Reproducibility
 - Run: `python3 scripts/generate_detection_limits.py`
 - Artifacts saved to `output/data/` and `output/figures/`.
+- Deterministic operating points via `src/config.set_random_seed(42)`.
 
 ## Cross-References
 - Methods: \cref{sec:methodology}

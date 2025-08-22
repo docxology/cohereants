@@ -193,27 +193,47 @@ Classification}\label{sec:app_spectral_unmixing}
 
 \subsection{Objective}\label{objective}
 
-Unmix composite spectra and evaluate small, deterministic classification
-baselines on CHC features.
+Comprehensive spectral analysis including advanced unmixing algorithms,
+feature extraction, and multi-algorithm classification for CHC
+identification and chemical analysis.
 
-\subsection{Planned Methods (src)}\label{planned-methods-src}
+\subsection{Methods (src)}\label{methods-src}
 
 \begin{itemize}
 \tightlist
 \item
-  \passthrough{\lstinline!src/spectral\_unmixing.py!}
+  \passthrough{\lstinline!src/case\_studies/spectral\_unmixing.py!}
 
   \begin{itemize}
   \tightlist
   \item
-    \passthrough{\lstinline!nmf\_unmix(spectra, n\_components, seed=42)!}
+    \passthrough{\lstinline!generate\_realistic\_chc\_spectra(n\_compounds, n\_wavelengths)!}
+    - Synthetic CHC spectral data
   \item
-    \passthrough{\lstinline!lda\_baseline(features, labels, seed=42)!}
+    \passthrough{\lstinline!nmf\_unmix(spectra, n\_components, seed=42)!}
+    - Non-negative matrix factorization
+  \item
+    \passthrough{\lstinline!vertex\_component\_analysis(spectra, n\_endmembers)!}
+    - VCA endmember extraction
+  \item
+    \passthrough{\lstinline!independent\_component\_analysis\_spectra(spectra, n\_components)!}
+    - ICA blind separation
+  \item
+    \passthrough{\lstinline!spectral\_feature\_extraction(spectra, method)!}
+    - Multi-method feature extraction
+  \item
+    \passthrough{\lstinline!advanced\_classification\_suite(features, labels)!}
+    - Multi-algorithm classification
+  \item
+    \passthrough{\lstinline!performance\_metrics\_comprehensive(y\_true, y\_pred, y\_prob)!}
+    - Detailed evaluation metrics
+  \item
+    \passthrough{\lstinline!lda\_baseline(features, labels, seed=42)!} -
+    Linear discriminant baseline
   \end{itemize}
 \end{itemize}
 
-\subsection{Planned Script and
-Outputs}\label{planned-script-and-outputs}
+\subsection{Script and Outputs}\label{script-and-outputs}
 
 \begin{itemize}
 \tightlist
@@ -221,18 +241,19 @@ Outputs}\label{planned-script-and-outputs}
   Script:
   \passthrough{\lstinline!scripts/generate\_spectral\_unmixing.py!}
 \item
-  Data: \passthrough{\lstinline!output/data/spectral\_unmixing.npz!}
+  Data:
+  \passthrough{\lstinline!output/data/spectral\_unmixing\_comprehensive.npz!}
 \item
   Figure:
-  \passthrough{\lstinline!output/figures/spectral\_unmixing\_components.png!}
+  \passthrough{\lstinline!output/figures/spectral\_unmixing\_comprehensive\_analysis.png!}
 \end{itemize}
 
 \subsection{Figure}\label{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{../output/figures/spectral_unmixing_components.png}
-\caption{Unmixed component spectra and reconstruction error across seeds; baseline classification accuracy on deterministic folds.}
+\includegraphics[width=0.9\textwidth]{../output/figures/spectral_unmixing_comprehensive_analysis.png}
+\caption{Comprehensive spectral analysis: Synthetic CHC spectra with realistic chemical diversity, advanced unmixing using NMF, VCA, and ICA algorithms, multi-method feature extraction (peaks, derivatives, PCA, statistical), and multi-algorithm classification performance comparison. Includes detailed performance metrics, confusion matrices, and algorithmic benchmarking for chemical identification applications.}
 \label{fig:app_spectral_unmixing}
 \end{figure}
 
@@ -255,6 +276,8 @@ Outputs}\label{planned-script-and-outputs}
 \item
   Artifacts saved to \passthrough{\lstinline!output/data/!} and
   \passthrough{\lstinline!output/figures/!}.
+\item
+  Fixed RNG seed (42) used for NMF initialization and fold splits.
 \end{itemize}
 
 \subsection{Cross-References}\label{cross-references}

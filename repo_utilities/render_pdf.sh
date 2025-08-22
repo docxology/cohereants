@@ -187,17 +187,27 @@ run_project_scripts() {
   export MPLBACKEND=Agg
   log_info "Using runner: $runner"
   
-  # Prefer running orchestrators first, then other scripts if any
+  # Prefer running orchestrator (if present) and a small whitelist; avoid duplicate runs
   local scripts=()
-  if [ -f "$scripts_dir/run_all_case_studies.py" ]; then
-    scripts+=("$scripts_dir/run_all_case_studies.py")
+  local orchestrator="$scripts_dir/run_all_case_studies.py"
+  local whitelist=("$scripts_dir/generate_integrated_analysis.py" "$scripts_dir/generate_research_figures.py")
+  if [ -f "$orchestrator" ]; then
+    scripts+=("$orchestrator")
+    # Append whitelisted scripts if present
+    for w in "${whitelist[@]}"; do
+      if [ -f "$w" ]; then
+        scripts+=("$w")
+      fi
+    done
+  else
+    # If no orchestrator, fallback to all non-internal scripts
+    while IFS= read -r -d '' script; do
+      base="$(basename "$script")"
+      if [[ "$script" == *.py && "$base" != _utils.py ]]; then
+        scripts+=("$script")
+      fi
+    done < <(find "$scripts_dir" -maxdepth 1 -name "*.py" -print0)
   fi
-  # Add other top-level scripts (excluding orchestrator duplicates)
-  while IFS= read -r -d '' script; do
-    if [[ "$script" == *.py && "$(basename "$script")" != "run_all_case_studies.py" ]]; then
-      scripts+=("$script")
-    fi
-  done < <(find "$scripts_dir" -maxdepth 1 -name "*.py" -print0)
   
   if [ ${#scripts[@]} -eq 0 ]; then
     log_info "No Python scripts found in scripts directory"
@@ -750,31 +760,8 @@ build_combined() {
         printf '\n\\newpage\n\n' >> "$combined_md"
       fi
       cat "$MARKDOWN_DIR/${other_modules[$i]}" >> "$combined_md"
-      # If a caption file exists for a figure in the module's output, append a LaTeX figure block
-      # The convention: for a figure named foo.png, a caption file foo.caption.txt may exist in output/figures
-      # We append a small markdown block with raw LaTeX to include the figure and caption in the combined document.
-      module_basename="${other_modules[$i]%.md}"
-      # Search output figures for captions that match module basename or known figure names
-      if [ -d "$FIGURE_DIR" ]; then
-        while IFS= read -r -d '' capfile; do
-          fname=$(basename "$capfile")
-          figstem="${fname%.caption.txt}"
-          # Append raw LaTeX figure only if the image exists
-          if [ -f "$FIGURE_DIR/${figstem}.png" ]; then
-            # Read and sanitize caption (first 3 lines) for safe inclusion
-            caption=$(sed -n '1,3p' "$capfile" | tr -d '\n' | sed 's/"/\\"/g')
-            cat >> "$combined_md" << EOF
-\\begin{figure}[h]
-\\raggedright
-\\includegraphics[width=0.8\\textwidth]{../output/figures/${figstem}.png}
-\\caption{${caption}}
-\\label{fig:${figstem}}
-\\end{figure}
-
-EOF
-          fi
-        done < <(find "$FIGURE_DIR" -maxdepth 1 -name "*.caption.txt" -print0 || true)
-      fi
+      # Figure inclusion is controlled by explicit references within the markdown modules.
+      # Auto-inserting captioned figures here is disabled to avoid duplication and ordering issues.
       # Add extra spacing after each section for better separation
       if [ $i -lt $((${#other_modules[@]} - 1)) ]; then
         printf '\n\n' >> "$combined_md"
@@ -972,7 +959,42 @@ main() {
     exit 1
   fi
   
-  log_info "Found ${#modules[@]} markdown modules: ${modules[*]}"
+  # Reorder appendices explicitly to enforce A–G order
+  desired_appendices=(
+    "appendix_sensilla_array_directionality.md"   # A
+    "appendix_environmental_channel.md"          # B
+    "appendix_detection_limits.md"               # C
+    "appendix_neural_encoding.md"                # D
+    "appendix_spectral_unmixing.md"              # E
+    "appendix_plasmonic_geometry.md"             # F
+    "appendix_active_inference.md"               # G
+  )
+
+  # Build a set for quick membership checks
+  declare -A is_desired
+  for app in "${desired_appendices[@]}"; do
+    is_desired["$app"]=1
+  done
+
+  ordered_modules=()
+  # Keep non-appendix modules in their discovered order
+  for m in "${modules[@]}"; do
+    if [[ -z "${is_desired[$m]:-}" ]]; then
+      ordered_modules+=("$m")
+    fi
+  done
+  # Append appendices in the explicit desired order, if present
+  for app in "${desired_appendices[@]}"; do
+    for m in "${modules[@]}"; do
+      if [[ "$m" == "$app" ]]; then
+        ordered_modules+=("$m")
+      fi
+    done
+  done
+
+  modules=("${ordered_modules[@]}")
+
+  log_info "Found ${#modules[@]} markdown modules (ordered): ${modules[*]}"
   log_info "Building ALL individual module PDFs..."
   local failed_modules=()
   

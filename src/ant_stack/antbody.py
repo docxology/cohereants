@@ -37,6 +37,18 @@ class AntBodySensilla:
             "mean_aspect_ratio": float(np.mean(self.aspect_ratios)) if self.aspect_ratios.size else 0.0,
         }
 
+    def get_resonant_wavelengths(self) -> Dict[str, np.ndarray]:
+        """
+        Access quarter-/half-wavelength predictions derived from analysis.
+
+        Returns:
+            Dictionary with numpy arrays for 'quarter' and 'half' resonance wavelengths (μm).
+        """
+        return {
+            'quarter': self.optimal_wavelengths_quarter.copy(),
+            'half': self.optimal_wavelengths_half.copy(),
+        }
+
 
 class AntBodySpectroscopy:
     """

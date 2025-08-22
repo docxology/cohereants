@@ -50,6 +50,18 @@ class VibrationalGlomeruliCircuit:
             responses[i] = float(np.trapz(coupling * intensities, wavelengths))
         return responses
 
+    def get_channel_centers(self) -> np.ndarray:
+        """
+        Return the center wavelengths (μm) for each resonant channel.
+        """
+        return self.frequency_tuning.copy()
+
+    def get_effective_bandwidths(self) -> np.ndarray:
+        """
+        Return approximate bandwidths per channel from Q heuristic.
+        """
+        return np.maximum(0.2, self.frequency_tuning / self.q_factor)
+
 
 class AntBrainOlfaction:
     """
@@ -68,5 +80,18 @@ class AntBrainOlfaction:
         # Placeholders for MB and CX layers
         self.mb: Optional[object] = object()
         self.cx: Optional[object] = object()
+
+    def summarize_channels(self) -> dict:
+        """
+        Provide a summary of AL channel centers and bandwidths for diagnostics.
+        """
+        centers = self.al.get_channel_centers()
+        widths = self.al.get_effective_bandwidths()
+        return {
+            'num_channels': int(self.al.num_channels),
+            'centers_um_min': float(centers.min()),
+            'centers_um_max': float(centers.max()),
+            'median_bandwidth_um': float(np.median(widths))
+        }
 
 

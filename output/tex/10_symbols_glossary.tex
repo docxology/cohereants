@@ -252,6 +252,15 @@ Physiology}\label{insect-anatomy-and-physiology}
 \item
   \textbf{OR}: Olfactory Receptor; membrane proteins that bind to odor
   molecules and initiate signal transduction
+\item
+  \textbf{Antennal Lobe (AL)}: First olfactory processing center in the
+  insect brain containing glomeruli that aggregate ORN inputs by
+  receptor type
+\item
+  \textbf{Glomerulus (plural: glomeruli)}: Spheroidal neuropil
+  compartment in the AL where ORN axons synapse with projection neurons
+  and local interneurons; often tuned to receptor families or
+  vibrational features
 \end{itemize}
 
 \subsubsection{Electromagnetic Theory and Infrared
@@ -935,43 +944,163 @@ Generate behavioral response plots \\
 & Minimal deterministic update step for a 2D position under a gradient
 cue \\
 \passthrough{\lstinline!case\_studies.detection\_limits!} &
+\passthrough{\lstinline!detection\_performance\_vs\_snr!} & function &
+Analyze detection performance vs signal-to-noise ratio \\
+\passthrough{\lstinline!case\_studies.detection\_limits!} &
+\passthrough{\lstinline!detection\_range\_analysis!} & function &
+Analyze detection range for IR olfactory communication \\
+\passthrough{\lstinline!case\_studies.detection\_limits!} &
 \passthrough{\lstinline!min\_detectable\_power!} & function & Minimum
 detectable signal power using thermal noise floor and SNR threshold \\
+\passthrough{\lstinline!case\_studies.detection\_limits!} &
+\passthrough{\lstinline!noise\_floor\_analysis!} & function & Analyze
+noise floor components vs frequency \\
 \passthrough{\lstinline!case\_studies.detection\_limits!} &
 \passthrough{\lstinline!operating\_point!} & function & Bundle operating
 point parameters deterministically \\
 \passthrough{\lstinline!case\_studies.detection\_limits!} &
+\passthrough{\lstinline!operating\_regions\_analysis!} & function &
+Analyze operating regions in power-temperature space \\
+\passthrough{\lstinline!case\_studies.detection\_limits!} &
+\passthrough{\lstinline!optimize\_detection\_parameters!} & function &
+Optimize detection system parameters for given constraints and
+objectives \\
+\passthrough{\lstinline!case\_studies.detection\_limits!} &
+\passthrough{\lstinline!roc\_analysis!} & function & Receiver Operating
+Characteristic (ROC) analysis for signal detection \\
+\passthrough{\lstinline!case\_studies.detection\_limits!} &
+\passthrough{\lstinline!sensitivity\_analysis!} & function & Sensitivity
+analysis of detection performance to parameter variations \\
+\passthrough{\lstinline!case\_studies.detection\_limits!} &
 \passthrough{\lstinline!snr\_curve!} & function & SNR vs \\
+\passthrough{\lstinline!case\_studies.environmental\_channel!} &
+\passthrough{\lstinline!atmospheric\_transmission\_comprehensive!} &
+function & Comprehensive atmospheric transmission model with multiple
+physical effects \\
 \passthrough{\lstinline!case\_studies.environmental\_channel!} &
 \passthrough{\lstinline!atmospheric\_transmission\_detailed!} & function
 & Compute a simple parametric atmospheric transmission curve \\
 \passthrough{\lstinline!case\_studies.environmental\_channel!} &
+\passthrough{\lstinline!channel\_capacity\_analysis!} & function &
+Analyze communication channel capacity under atmospheric conditions \\
+\passthrough{\lstinline!case\_studies.environmental\_channel!} &
 \passthrough{\lstinline!channel\_capacity\_vs\_env!} & function & Map
-Shannon capacity across humidity×temperature grid \\
+Shannon capacity across humidity×temperature grid (legacy function) \\
+\passthrough{\lstinline!case\_studies.environmental\_channel!} &
+\passthrough{\lstinline!environmental\_sensitivity\_analysis!} &
+function & Analyze sensitivity of transmission to environmental
+parameters \\
+\passthrough{\lstinline!case\_studies.environmental\_channel!} &
+\passthrough{\lstinline!molecular\_absorption\_cross\_section!} &
+function & Calculate molecular absorption cross-sections for atmospheric
+constituents \\
+\passthrough{\lstinline!case\_studies.environmental\_channel!} &
+\passthrough{\lstinline!optimize\_wavelength\_for\_range!} & function &
+Find optimal wavelengths for target communication range and capacity \\
+\passthrough{\lstinline!case\_studies.environmental\_channel!} &
+\passthrough{\lstinline!rayleigh\_scattering\_coefficient!} & function &
+Calculate Rayleigh scattering coefficient for dry air \\
+\passthrough{\lstinline!case\_studies.neural\_encoding!} &
+\passthrough{\lstinline!adaptation\_dynamics\_analysis!} & function &
+Analyze adaptation dynamics in neural responses \\
+\passthrough{\lstinline!case\_studies.neural\_encoding!} &
+\passthrough{\lstinline!analyze\_spike\_train\_statistics!} & function &
+Compute comprehensive spike train statistics \\
+\passthrough{\lstinline!case\_studies.neural\_encoding!} &
+\passthrough{\lstinline!generate\_spike\_trains!} & function & Generate
+realistic spike trains for ORN responses to odor stimuli \\
 \passthrough{\lstinline!case\_studies.neural\_encoding!} &
 \passthrough{\lstinline!information\_rate\_time\_series!} & function &
 Estimate information metrics using a Gaussian channel approximation \\
 \passthrough{\lstinline!case\_studies.neural\_encoding!} &
+\passthrough{\lstinline!mutual\_information\_analysis!} & function &
+Compute mutual information between neural responses and stimuli \\
+\passthrough{\lstinline!case\_studies.neural\_encoding!} &
+\passthrough{\lstinline!odor\_discrimination\_analysis!} & function &
+Analyze odor discrimination performance across different time windows \\
+\passthrough{\lstinline!case\_studies.neural\_encoding!} &
+\passthrough{\lstinline!population\_coding\_analysis!} & function &
+Analyze population coding efficiency across multiple ORNs \\
+\passthrough{\lstinline!case\_studies.neural\_encoding!} &
 \passthrough{\lstinline!rate\_coding\_metrics!} & function & Compute
 simple separability metrics (means/stds) deterministically \\
+\passthrough{\lstinline!case\_studies.neural\_encoding!} &
+\passthrough{\lstinline!temporal\_coding\_analysis!} & function &
+Analyze temporal coding precision and response latency \\
 \passthrough{\lstinline!case\_studies.plasmonic\_geometry!} &
-\passthrough{\lstinline!sweep\_plasmonic\_quality!} & function & Sweep Q
-factor with a simple inverse-loss proxy across radii \\
+\passthrough{\lstinline!coupled\_dipoles\_near\_field!} & function &
+Calculate near-field enhancement for coupled plasmonic nanoparticles \\
+\passthrough{\lstinline!case\_studies.plasmonic\_geometry!} &
+\passthrough{\lstinline!drude\_model\_permittivity!} & function &
+Calculate frequency-dependent permittivity using Drude model \\
+\passthrough{\lstinline!case\_studies.plasmonic\_geometry!} &
+\passthrough{\lstinline!field\_distribution\_near\_particle!} & function
+& Calculate near-field distribution around a spherical nanoparticle \\
+\passthrough{\lstinline!case\_studies.plasmonic\_geometry!} &
+\passthrough{\lstinline!mie\_scattering\_sphere!} & function & Calculate
+Mie scattering properties for spherical nanoparticles \\
+\passthrough{\lstinline!case\_studies.plasmonic\_geometry!} &
+\passthrough{\lstinline!optimize\_plasmonic\_geometry!} & function &
+Optimize nanoparticle geometry for maximum enhancement at target
+wavelength \\
+\passthrough{\lstinline!case\_studies.plasmonic\_geometry!} &
+\passthrough{\lstinline!sweep\_plasmonic\_quality!} & function &
+Comprehensive sweep of plasmonic quality factors across size and
+wavelength \\
+\passthrough{\lstinline!case\_studies.sensilla\_array\_directionality!}
+& \passthrough{\lstinline!analyze\_sensilla\_morphology!} & function &
+Analyze sensilla dimensions for resonant wavelength matching \\
 \passthrough{\lstinline!case\_studies.sensilla\_array\_directionality!}
 & \passthrough{\lstinline!array\_gain!} & function & Compute a scalar
 array gain proxy as peak-to-mean power ratio \\
 \passthrough{\lstinline!case\_studies.sensilla\_array\_directionality!}
+& \passthrough{\lstinline!array\_pattern\_2d!} & function & Compute 2D
+radiation pattern for sensilla array across frequency range \\
+\passthrough{\lstinline!case\_studies.sensilla\_array\_directionality!}
 & \passthrough{\lstinline!compute\_beam\_pattern!} & function & Compute
 a simplified 1D beam pattern over wavelengths \\
 \passthrough{\lstinline!case\_studies.sensilla\_array\_directionality!}
+& \passthrough{\lstinline!design\_circular\_array!} & function & Design
+a circular antenna array representing sensilla on insect antennae \\
+\passthrough{\lstinline!case\_studies.sensilla\_array\_directionality!}
 & \passthrough{\lstinline!design\_log\_periodic\_array!} & function &
 Design a 1D log-periodic array of element positions \\
+\passthrough{\lstinline!case\_studies.sensilla\_array\_directionality!}
+& \passthrough{\lstinline!frequency\_response\_analysis!} & function &
+Analyze frequency response characteristics of sensilla array \\
+\passthrough{\lstinline!case\_studies.sensilla\_array\_directionality!}
+& \passthrough{\lstinline!mutual\_coupling\_matrix!} & function &
+Compute mutual coupling matrix between antenna elements \\
+\passthrough{\lstinline!case\_studies.sensilla\_array\_directionality!}
+& \passthrough{\lstinline!sensilla\_element\_pattern!} & function &
+Individual sensillum radiation pattern as function of observation
+angle \\
+\passthrough{\lstinline!case\_studies.spectral\_unmixing!} &
+\passthrough{\lstinline!advanced\_classification\_suite!} & function &
+Comprehensive classification analysis using multiple algorithms \\
+\passthrough{\lstinline!case\_studies.spectral\_unmixing!} &
+\passthrough{\lstinline!generate\_realistic\_chc\_spectra!} & function &
+Generate realistic CHC spectral data with known ground truth
+components \\
+\passthrough{\lstinline!case\_studies.spectral\_unmixing!} &
+\passthrough{\lstinline!independent\_component\_analysis\_spectra!} &
+function & Independent Component Analysis (ICA) for blind source
+separation of spectra \\
 \passthrough{\lstinline!case\_studies.spectral\_unmixing!} &
 \passthrough{\lstinline!lda\_baseline!} & function & Closed-form
 two-class LDA with equal covariance; returns accuracy on train \\
 \passthrough{\lstinline!case\_studies.spectral\_unmixing!} &
 \passthrough{\lstinline!nmf\_unmix!} & function & Deterministic, simple
 NMF via multiplicative updates \\
+\passthrough{\lstinline!case\_studies.spectral\_unmixing!} &
+\passthrough{\lstinline!performance\_metrics\_comprehensive!} & function
+& Compute comprehensive performance metrics for classification \\
+\passthrough{\lstinline!case\_studies.spectral\_unmixing!} &
+\passthrough{\lstinline!spectral\_feature\_extraction!} & function &
+Extract discriminative features from spectral data \\
+\passthrough{\lstinline!case\_studies.spectral\_unmixing!} &
+\passthrough{\lstinline!vertex\_component\_analysis!} & function &
+Vertex Component Analysis (VCA) for endmember extraction \\
 \passthrough{\lstinline!config!} &
 \passthrough{\lstinline!ConfigManager!} & class & Centralized
 configuration manager for insect analysis \\

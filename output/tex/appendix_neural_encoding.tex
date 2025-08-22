@@ -193,27 +193,50 @@ Time-Series}\label{sec:app_neural_encoding}
 
 \subsection{Objective}\label{objective}
 
-Estimate information rate and rate-coding metrics from deterministic
-time-series and labels.
+Comprehensive neural encoding analysis including spike train generation,
+temporal dynamics, population coding, mutual information, and adaptation
+mechanisms for olfactory receptor neurons.
 
-\subsection{Planned Methods (src)}\label{planned-methods-src}
+\subsection{Methods (src)}\label{methods-src}
 
 \begin{itemize}
 \tightlist
 \item
-  \passthrough{\lstinline!src/neural\_encoding.py!}
+  \passthrough{\lstinline!src/case\_studies/neural\_encoding.py!}
 
   \begin{itemize}
   \tightlist
   \item
-    \passthrough{\lstinline!information\_rate\_time\_series(responses, dt\_s, noise\_std)!}
+    \passthrough{\lstinline!generate\_spike\_trains(stimuli, dt, baseline\_rate, max\_rate, dynamics)!}
+    - Realistic spike generation
   \item
-    \passthrough{\lstinline!rate\_coding\_metrics(responses, labels)!}
+    \passthrough{\lstinline!analyze\_spike\_train\_statistics(spike\_data)!}
+    - ISI, CV, Fano factor analysis
+  \item
+    \passthrough{\lstinline!temporal\_coding\_analysis(spike\_data, stimulus\_times)!}
+    - Latency and precision metrics
+  \item
+    \passthrough{\lstinline!population\_coding\_analysis(population\_responses, labels)!}
+    - PCA, LDA, correlations
+  \item
+    \passthrough{\lstinline!mutual\_information\_analysis(responses, stimuli)!}
+    - Information theory metrics
+  \item
+    \passthrough{\lstinline!odor\_discrimination\_analysis(responses, odor\_ids, time\_windows)!}
+    - Discrimination performance
+  \item
+    \passthrough{\lstinline!adaptation\_dynamics\_analysis(spike\_data, stimulus\_duration)!}
+    - Adaptation characterization
+  \item
+    \passthrough{\lstinline!information\_rate\_time\_series(responses, dt\_s, noise\_std)!}
+    - Channel capacity estimation
+  \item
+    \passthrough{\lstinline!rate\_coding\_metrics(responses, labels)!} -
+    Basic discriminability metrics
   \end{itemize}
 \end{itemize}
 
-\subsection{Planned Script and
-Outputs}\label{planned-script-and-outputs}
+\subsection{Script and Outputs}\label{script-and-outputs}
 
 \begin{itemize}
 \tightlist
@@ -221,18 +244,19 @@ Outputs}\label{planned-script-and-outputs}
   Script:
   \passthrough{\lstinline!scripts/generate\_neural\_encoding\_analysis.py!}
 \item
-  Data: \passthrough{\lstinline!output/data/neural\_encoding.npz!}
+  Data:
+  \passthrough{\lstinline!output/data/neural\_encoding\_comprehensive.npz!}
 \item
   Figure:
-  \passthrough{\lstinline!output/figures/neural\_encoding\_information\_rate.png!}
+  \passthrough{\lstinline!output/figures/neural\_encoding\_comprehensive\_analysis.png!}
 \end{itemize}
 
 \subsection{Figure}\label{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{../output/figures/neural_encoding_information_rate.png}
-\caption{Estimated information rate and classification metrics for IR-evoked response surrogates under controlled noise levels.}
+\includegraphics[width=0.9\textwidth]{../output/figures/neural_encoding_comprehensive_analysis.png}
+\caption{Comprehensive neural encoding analysis: Multi-neuron spike train generation with diverse response dynamics (exponential, adaptive, phasic-tonic), population coding with PCA dimensionality reduction, temporal precision analysis, inter-spike interval statistics, mutual information quantification, and adaptation dynamics characterization. Includes cross-correlation analysis, discrimination performance across time windows, and information-theoretic metrics for olfactory neural processing.}
 \label{fig:app_neural_encoding}
 \end{figure}
 
@@ -256,6 +280,10 @@ Outputs}\label{planned-script-and-outputs}
 \item
   Artifacts saved to \passthrough{\lstinline!output/data/!} and
   \passthrough{\lstinline!output/figures/!}.
+\item
+  Deterministic seeds:
+  \passthrough{\lstinline!src/config.set\_random\_seed(42)!} for
+  surrogate time‑series.
 \end{itemize}
 
 \subsection{Cross-References}\label{cross-references}

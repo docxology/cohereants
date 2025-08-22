@@ -1,0 +1,1 @@
+Comprehensive environmental channel analysis showing atmospheric transmission and channel capacity under clear and humid conditions. Analysis demonstrates nan% transmission loss due to humidity with peak capacity of 0.0 Mbps under clear conditions and 0.0 Mbps under humid conditions in the optimal 8-14 μm atmospheric window.

@@ -193,29 +193,47 @@ Points}\label{sec:app_detection_limits}
 
 \subsection{Objective}\label{objective}
 
-Quantify minimum detectable power, SNR curves, and operating points for
-IR olfactory channels.
+Comprehensive detection theory analysis including ROC curves,
+sensitivity analysis, operating regions, and noise floor
+characterization for IR olfactory detection systems.
 
-\subsection{Planned Methods (src)}\label{planned-methods-src}
+\subsection{Methods (src)}\label{methods-src}
 
 \begin{itemize}
 \tightlist
 \item
-  \passthrough{\lstinline!src/detection\_limits.py!}
+  \passthrough{\lstinline!src/case\_studies/detection\_limits.py!}
 
   \begin{itemize}
   \tightlist
   \item
     \passthrough{\lstinline!min\_detectable\_power(temperature\_k, bandwidth\_hz, snr\_min\_db)!}
+    - Thermal noise limited detection
   \item
-    \passthrough{\lstinline!snr\_curve(signal\_power\_w, noise\_temp\_k, bandwidth\_hz)!}
+    \passthrough{\lstinline!roc\_analysis(signal\_power, noise\_power)!}
+    - ROC curves and optimal thresholds
   \item
-    \passthrough{\lstinline!operating\_point(capacity\_bits\_s, snr\_db)!}
+    \passthrough{\lstinline!detection\_performance\_vs\_snr(snr\_range\_db, pfa\_target)!}
+    - Performance curves and MDS
+  \item
+    \passthrough{\lstinline!sensitivity\_analysis(power\_range, temp\_range, param\_variations)!}
+    - Parameter sensitivity
+  \item
+    \passthrough{\lstinline!operating\_regions\_analysis(power\_range, temp\_range)!}
+    - SNR contours in operating space
+  \item
+    \passthrough{\lstinline!noise\_floor\_analysis(freq\_range, temperature\_k)!}
+    - Multi-component noise analysis
+  \item
+    \passthrough{\lstinline!detection\_range\_analysis(tx\_power, antenna\_gain, frequency, sensitivity)!}
+    - Range calculations
+  \item
+    \passthrough{\lstinline!optimize\_detection\_parameters(constraints, objectives)!}
+    - System optimization
   \end{itemize}
 \end{itemize}
 
-\subsection{Planned Script and
-Outputs}\label{planned-script-and-outputs}
+\subsection{Script and Outputs}\label{script-and-outputs}
 
 \begin{itemize}
 \tightlist
@@ -223,18 +241,19 @@ Outputs}\label{planned-script-and-outputs}
   Script:
   \passthrough{\lstinline!scripts/generate\_detection\_limits.py!}
 \item
-  Data: \passthrough{\lstinline!output/data/detection\_limits.npz!}
+  Data:
+  \passthrough{\lstinline!output/data/detection\_limits\_comprehensive.npz!}
 \item
   Figure:
-  \passthrough{\lstinline!output/figures/detection\_limits\_operating\_points.png!}
+  \passthrough{\lstinline!output/figures/detection\_limits\_comprehensive\_analysis.png!}
 \end{itemize}
 
 \subsection{Figure}\label{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{../output/figures/detection_limits_operating_points.png}
-\caption{Minimum detectable power contours and operating regions vs bandwidth and temperature; SNR and capacity overlays.}
+\includegraphics[width=0.9\textwidth]{../output/figures/detection_limits_comprehensive_analysis.png}
+\caption{Comprehensive detection analysis: ROC curves with AUC metrics, detection performance vs SNR showing minimum detectable signal (MDS), operating regions in power-temperature space, noise floor components, detection range analysis, and parameter optimization. Includes processing gain effects, optimal threshold selection, and performance trade-offs for IR olfactory detection systems.}
 \label{fig:app_detection_limits}
 \end{figure}
 
@@ -258,6 +277,9 @@ Outputs}\label{planned-script-and-outputs}
 \item
   Artifacts saved to \passthrough{\lstinline!output/data/!} and
   \passthrough{\lstinline!output/figures/!}.
+\item
+  Deterministic operating points via
+  \passthrough{\lstinline!src/config.set\_random\_seed(42)!}.
 \end{itemize}
 
 \subsection{Cross-References}\label{cross-references}

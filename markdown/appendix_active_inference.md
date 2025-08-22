@@ -26,6 +26,7 @@ Demonstrate a deterministic active-inference step for olfactory search under IR 
 ## Reproducibility
 - Run: `python3 scripts/generate_active_inference_demo.py`
 - Artifacts saved to `output/data/` and `output/figures/`.
+- Seed set to 42 via `src/config.set_random_seed(42)` for deterministic policy traces.
 
 ## Cross-References
 - Methods: \cref{sec:methodology}

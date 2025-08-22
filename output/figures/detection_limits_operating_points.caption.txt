@@ -1,1 +1,0 @@
-Minimum detectable power vs bandwidth from Johnson–Nyquist noise and SNR threshold.

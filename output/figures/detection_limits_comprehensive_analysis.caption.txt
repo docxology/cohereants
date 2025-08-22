@@ -1,0 +1,1 @@
+Comprehensive detection limits analysis: ROC curves showing AUC up to 0.819, detection performance with 15.0 dB MDS, operating regions across power-temperature space, noise floor analysis, and detection range up to 0.0 km. Analysis includes processing gain benefits, optimal threshold selection, and comprehensive performance trade-offs for IR olfactory detection systems.

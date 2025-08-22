@@ -193,28 +193,48 @@ Modeling}\label{sec:app_environmental_channel}
 
 \subsection{Objective}\label{objective}
 
-Model atmospheric transmission beyond plateau windows with
-humidity/temperature/path effects; map channel capacity versus
-environment.
+Comprehensive atmospheric channel modeling including molecular
+absorption, Rayleigh scattering, aerosol effects, channel capacity
+analysis, wavelength optimization, and environmental parameter
+sensitivity for IR communication systems.
 
-\subsection{Planned Methods (src)}\label{planned-methods-src}
+\subsection{Methods (src)}\label{methods-src}
 
 \begin{itemize}
 \tightlist
 \item
-  \passthrough{\lstinline!src/environmental\_channel.py!}
+  \passthrough{\lstinline!src/case\_studies/environmental\_channel.py!}
 
   \begin{itemize}
   \tightlist
   \item
-    \passthrough{\lstinline!atmospheric\_transmission\_detailed(wavelengths, humidity, temperature\_k, path\_m)!}
+    \passthrough{\lstinline!molecular\_absorption\_cross\_section(wavelengths, molecule\_type)!}
+    - H2O, CO2, CH4 absorption
+  \item
+    \passthrough{\lstinline!rayleigh\_scattering\_coefficient(wavelengths, air\_density)!}
+    - Molecular scattering
+  \item
+    \passthrough{\lstinline!atmospheric\_transmission\_comprehensive(wavelengths, conditions)!}
+    - Multi-component transmission
+  \item
+    \passthrough{\lstinline!channel\_capacity\_analysis(wavelengths, environmental\_conditions)!}
+    - Shannon capacity mapping
+  \item
+    \passthrough{\lstinline!optimize\_wavelength\_for\_range(target\_range, capacity\_requirements)!}
+    - Wavelength selection
+  \item
+    \passthrough{\lstinline!environmental\_sensitivity\_analysis(parameter\_variations)!}
+    - Parameter sensitivity
+  \item
+    \passthrough{\lstinline!atmospheric\_transmission\_detailed(wavelengths, humidity, temperature, path)!}
+    - Basic transmission
   \item
     \passthrough{\lstinline!channel\_capacity\_vs\_env(material\_props, env\_grid)!}
+    - Environmental capacity mapping
   \end{itemize}
 \end{itemize}
 
-\subsection{Planned Script and
-Outputs}\label{planned-script-and-outputs}
+\subsection{Script and Outputs}\label{script-and-outputs}
 
 \begin{itemize}
 \tightlist
@@ -222,18 +242,19 @@ Outputs}\label{planned-script-and-outputs}
   Script:
   \passthrough{\lstinline!scripts/generate\_environmental\_channel\_analysis.py!}
 \item
-  Data: \passthrough{\lstinline!output/data/environmental\_channel.npz!}
+  Data:
+  \passthrough{\lstinline!output/data/environmental\_channel\_comprehensive.npz!}
 \item
   Figure:
-  \passthrough{\lstinline!output/figures/environmental\_channel\_capacity.png!}
+  \passthrough{\lstinline!output/figures/environmental\_channel\_comprehensive\_analysis.png!}
 \end{itemize}
 
 \subsection{Figure}\label{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{../output/figures/environmental_channel_capacity.png}
-\caption{Channel capacity as a function of humidity and temperature across IR wavelengths using detailed transmission modeling.}
+\includegraphics[width=0.9\textwidth]{../output/figures/environmental_channel_comprehensive_analysis.png}
+\caption{Comprehensive environmental channel analysis: Molecular absorption cross-sections for H2O, CO2, and CH4, atmospheric transmission including Rayleigh scattering and aerosol effects, Shannon channel capacity mapping across environmental conditions, wavelength optimization for target ranges, and environmental parameter sensitivity analysis. Includes atmospheric windows identification and optimal operating conditions for IR communication.}
 \label{fig:app_env_channel}
 \end{figure}
 
@@ -257,6 +278,9 @@ Outputs}\label{planned-script-and-outputs}
 \item
   Artifacts saved to \passthrough{\lstinline!output/data/!} and
   \passthrough{\lstinline!output/figures/!}.
+\item
+  Set seed: \passthrough{\lstinline!src/config.set\_random\_seed(42)!}
+  to ensure deterministic grids.
 \end{itemize}
 
 \subsection{Cross-References}\label{cross-references}

@@ -193,30 +193,50 @@ Patterns}\label{sec:app_sensilla_array}
 
 \subsection{Objective}\label{objective}
 
-Quantify array directionality, beam patterns, and array gain for
-sensilla arrangements (log‑periodic and uniform), relating morphology to
-directional detection.
+Comprehensive electromagnetic antenna modeling for sensilla arrays
+including circular array design, element pattern modeling, mutual
+coupling effects, 2D radiation patterns, morphology analysis, and
+frequency response characterization for directional olfactory detection.
 
-\subsection{Planned Methods (src)}\label{planned-methods-src}
+\subsection{Methods (src)}\label{methods-src}
 
 \begin{itemize}
 \tightlist
 \item
-  \passthrough{\lstinline!src/antenna\_arrays.py!}
+  \passthrough{\lstinline!src/case\_studies/sensilla\_array\_directionality.py!}
 
   \begin{itemize}
   \tightlist
   \item
+    \passthrough{\lstinline!design\_circular\_array(n\_elements, radius\_m, wavelength\_m)!}
+    - Circular array geometry
+  \item
+    \passthrough{\lstinline!sensilla\_element\_pattern(sensilla\_type, frequency\_hz, dimensions)!}
+    - Individual element patterns
+  \item
+    \passthrough{\lstinline!mutual\_coupling\_matrix(positions, wavelength\_m)!}
+    - Inter-element coupling
+  \item
+    \passthrough{\lstinline!array\_pattern\_2d(positions, element\_patterns, frequency, coupling)!}
+    - 2D radiation patterns
+  \item
+    \passthrough{\lstinline!analyze\_sensilla\_morphology(dimensions, frequency\_range)!}
+    - Morphology analysis
+  \item
+    \passthrough{\lstinline!frequency\_response\_analysis(array\_config, freq\_range)!}
+    - Bandwidth and Q-factor
+  \item
     \passthrough{\lstinline!compute\_beam\_pattern(wavelengths, positions, gains)!}
+    - Basic beam pattern
   \item
-    \passthrough{\lstinline!array\_gain(pattern)!}
+    \passthrough{\lstinline!array\_gain(pattern)!} - Gain calculation
   \item
-    \passthrough{\lstinline!design\_log\_periodic\_array(min\_len\_um, max\_len\_um, tau, count)!}
+    \passthrough{\lstinline!design\_log\_periodic\_array(min\_len, max\_len, tau, count)!}
+    - Log-periodic design
   \end{itemize}
 \end{itemize}
 
-\subsection{Planned Script and
-Outputs}\label{planned-script-and-outputs}
+\subsection{Script and Outputs}\label{script-and-outputs}
 
 \begin{itemize}
 \tightlist
@@ -224,21 +244,22 @@ Outputs}\label{planned-script-and-outputs}
   Script:
   \passthrough{\lstinline!scripts/generate\_sensilla\_array\_directionality.py!}
 \item
-  Data: \passthrough{\lstinline!output/data/sensilla\_array.npz!}
+  Data:
+  \passthrough{\lstinline!output/data/sensilla\_array\_comprehensive.npz!}
 \item
   Figure:
-  \passthrough{\lstinline!output/figures/sensilla\_array\_beam\_patterns.png!}
+  \passthrough{\lstinline!output/figures/sensilla\_array\_comprehensive\_analysis.png!}
 \item
   Caption:
-  \passthrough{\lstinline!output/figures/sensilla\_array\_beam\_patterns.caption.txt!}
+  \passthrough{\lstinline!output/figures/sensilla\_array\_comprehensive\_analysis.caption.txt!}
 \end{itemize}
 
 \subsection{Figure}\label{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{../output/figures/sensilla_array_beam_patterns.png}
-\caption{Beam patterns for sensilla arrays across infrared wavelengths; log‑periodic vs uniform arrays, showing half‑power beamwidth and side‑lobe structure.}
+\includegraphics[width=0.9\textwidth]{../output/figures/sensilla_array_comprehensive_analysis.png}
+\caption{Comprehensive sensilla array analysis: Circular, linear, and log-periodic array configurations with 2D radiation patterns, individual element patterns (dipole, monopole, patch), mutual coupling effects, morphological analysis relating sensilla dimensions to resonant wavelengths, and frequency response characterization. Includes beam steering capabilities, array gain optimization, and directional sensitivity patterns for enhanced spatial resolution in olfactory detection.}
 \label{fig:app_sensilla_beam}
 \end{figure}
 
@@ -263,6 +284,9 @@ Outputs}\label{planned-script-and-outputs}
 \item
   Artifacts saved to \passthrough{\lstinline!output/data/!} and
   \passthrough{\lstinline!output/figures/!}.
+\item
+  Deterministic seed set via
+  \passthrough{\lstinline!src/config.set\_random\_seed(42)!}.
 \end{enumerate}
 
 \subsection{Cross-References}\label{cross-references}

@@ -219,6 +219,23 @@ to explain sub‑10 ms response latencies and long‑range detection given
 environmental constraints. This motivates evaluation of complementary
 mechanisms that operate upstream of, or in parallel with, binding.
 
+\textbf{Central Research Question:} Can infrared (IR) vibrational
+signatures of semiochemicals contribute measurably to insect
+olfaction---improving latency, range, and specificity---within
+physiologically plausible, falsifiable constraints?
+
+\textbf{Specific Hypotheses:} - \textbf{H1 (Geometric):} Sensilla
+dimensions correlate with optimal IR wavelengths (r ≥ 0.8) - \textbf{H2
+(Spectral):} CHC emission peaks align with atmospheric transmission
+windows\\
+- \textbf{H3 (Temporal):} IR detection enables sub-10 ms response
+latencies - \textbf{H4 (Behavioral):} IR-only stimuli trigger
+orientation without volatile cues
+
+This systematic approach enables rigorous testing of the vibrational
+theory's core predictions while maintaining clear falsification
+criteria.
+
 \subsection{Limitations of Stereochemical
 Theory}\label{limitations-of-stereochemical-theory}
 
@@ -234,9 +251,10 @@ discrimination.
 \textbf{Quantitative Evidence}: Studies on \emph{Drosophila
 melanogaster} show that deuterated homologues of known odorants produce
 unique behavioral responses despite maintaining identical molecular
-shapes. This finding is quantitatively supported by vibrational
-spectroscopy, where deuteration shifts infrared emission spectra by 2--3
-μm while preserving molecular geometry; see conversions verified by
+shapes. This is consistent with vibrational spectroscopy: deuteration
+shifts CH stretch bands from \textasciitilde2850--3000 cm\(^{-1}\) to
+\textasciitilde2100--2200 cm\(^{-1}\) (ratio \approx 0.707). Conversions
+are verified by
 \passthrough{\lstinline!src/core.py::calculate\_wavelength\_from\_wavenumber!}
 and
 \passthrough{\lstinline!tests/test\_core.py::TestWavelengthConversions!}.
@@ -250,10 +268,9 @@ demonstrate response latencies of 1-5 ms, comparable to photoreceptor
 (0.1 ms) and auditory receptor (0.16 ms) response times.
 
 \textbf{Mechanistic implications}: These rapid responses are difficult
-to reconcile with simple diffusion+binding models under typical
-environmental conditions and motivate evaluation of alternative
-mechanisms (e.g., vibrational/electromagnetic contributions) that could
-act upstream of or in parallel with binding. We quantify these gaps with
+to reconcile with diffusion+binding models under typical conditions and
+motivate evaluation of complementary vibrational/electromagnetic
+contributions acting upstream or in parallel. We quantify gaps with
 \passthrough{\lstinline!src/core.py::calculate\_response\_time\_improvement!}
 (see
 \passthrough{\lstinline!tests/test\_core.py::TestResponseTimeImprovement!})
@@ -299,8 +316,9 @@ the wavelengths of infrared radiation emitted by semiochemicals.
 \textbf{Structural hypothesis}: The porous architecture of sensilla,
 traditionally interpreted as molecular transport conduits, may also
 provide electromagnetic coupling consistent with dielectric waveguide
-theory. We evaluate this using resonant models quantifying
-HE\(_{11}\)-like modes (details in \cref{sec:mathematical_appendix}).
+theory. We evaluate this using resonant models (HE\(_{11}\)-like modes)
+and compare predicted quarter/half‑wavelengths to measured dimensions
+(\cref{sec:mathematical_appendix}).
 
 \subsection{Research Objectives and
 Approach}\label{research-objectives-and-approach}
@@ -367,27 +385,37 @@ Each hypothesis is supported by a concrete analysis in
 \subsection{Theoretical Framework
 Integration}\label{theoretical-framework-integration}
 
-The vibrational theory integrates multiple physical principles:
+The vibrational theory unifies four complementary physical mechanisms
+operating across different spatial and temporal scales:
+
+\subsubsection{Physical Mechanisms Across
+Scales}\label{physical-mechanisms-across-scales}
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Electromagnetic Wave Theory}: Maxwell's equations and
-  waveguide propagation in dielectric media
+  \textbf{Electromagnetic propagation} in sensilla dielectric media
+  (10⁻⁶ m scale, Maxwell's equations)
 \item
-  \textbf{Quantum Mechanics}: Electron tunneling and phonon coupling in
-  olfactory receptors
+  \textbf{Quantum tunneling} and phonon coupling in ORs (10⁻⁹ m scale,
+  tested barrier heights 0.5-2.0 eV)\\
 \item
-  \textbf{Resonant Cavity Theory}: Sensilla as frequency-tuned
-  electromagnetic resonators
+  \textbf{Resonant cavity} effects in sensilla geometry (10⁻⁵ m scale, Q
+  factors 100-1000)
 \item
-  \textbf{Piezoelectric Effects}: Microtubule arrays as signal
-  amplifiers and frequency selectors
+  \textbf{Piezoelectric coupling} through microtubule arrays (10⁻⁸ m
+  scale, measured coefficients)
 \end{itemize}
 
-These principles are connected to specific numerical routines and
-validated unit tests; see \cref{sec:mathematical_appendix} for equations
-and \passthrough{\lstinline!tests/!} mappings.
+\subsubsection{Computational
+Implementation}\label{computational-implementation}
+
+Each mechanism is implemented in tested functions
+(\passthrough{\lstinline!src/!}) with unit test coverage
+(\passthrough{\lstinline!tests/!}). Mathematical formulations appear in
+\cref{sec:mathematical_appendix} with code cross-references. All
+theoretical predictions can be reproduced through the computational
+pipeline with deterministic outputs (seed 42).
 
 \subsection{Empirical Validation
 Strategy}\label{empirical-validation-strategy}
