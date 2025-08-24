@@ -51,124 +51,49 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{3}
-% LaTeX Preamble for Insect Perception Research
-\documentclass[12pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[margin=1in, top=1in, bottom=1in]{geometry}
-\usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{booktabs}
-\usepackage{xcolor}
-\usepackage{listings}
-\usepackage{fancyvrb}
-\usepackage{setspace}
-\usepackage{ragged2e}
-\usepackage{etoolbox}
+% Minimal LaTeX preamble fragment for Pandoc-built documents
+% Avoid \documentclass or loading hyperref/cleveref here (they are managed by the build pipeline)
+% Provide safe unicode declarations and small custom macros only
+\DeclareUnicodeCharacter{03BC}{\(\mu\)}
+\DeclareUnicodeCharacter{03BB}{\(\lambda\)}
+\DeclareUnicodeCharacter{03BD}{\(\nu\)}
+\DeclareUnicodeCharacter{03C0}{\(\pi\)}
+\DeclareUnicodeCharacter{03B5}{\(\epsilon\)}
+\DeclareUnicodeCharacter{03B4}{\(\delta\)}
+
+% Counter behaviour
 \usepackage{chngcntr}
-\usepackage[font=small,labelfont=bf,textfont=it]{caption}
-\usepackage{titlesec}
-\usepackage{amsthm}
-\usepackage[nameinlink,capitalise]{cleveref}
-
-% Hyperref package - properly configured for cross-references
-\usepackage[
-    colorlinks=true,
-    linkcolor=blue,
-    citecolor=blue,
-    urlcolor=blue,
-    linkbordercolor=blue,
-    urlbordercolor=blue,
-    citebordercolor=blue
-]{hyperref}
-
-% Custom colors for code listings
-\definecolor{codebg}{RGB}{245, 245, 245}
-\definecolor{codeborder}{RGB}{200, 200, 200}
-\definecolor{codefg}{RGB}{50, 50, 50}
-
-% Code listing setup
-\lstset{
-    backgroundcolor=\color{codebg},
-    basicstyle=\normalsize\ttfamily\color{codefg},
-    breakatwhitespace=false,
-    breaklines=true,
-    captionpos=b,
-    frame=single,
-    framerule=0.5pt,
-    framesep=5pt,
-    rulecolor=\color{codeborder},
-    numbers=left,
-    numbersep=5pt,
-    numberstyle=\small\color{codefg}
-}
-
-% Font and spacing for accessibility
-% Using standard LaTeX fonts for better compatibility
-\renewcommand{\familydefault}{\rmdefault}
-\renewcommand{\sfdefault}{\rmdefault}
-
-% Single spacing for academic format
-\setstretch{1.0}
-\setlength{\parindent}{0.5in}
-\setlength{\parskip}{0em}
-
-% Left-justify the body text globally
-\RaggedRight
-\setlength{\RaggedRightParindent}{0.5in}
-
-% Ensure body text is fully justified and consistent
-\setlength{\parindent}{0.5in}
-
-% Comprehensive numbering for figures, tables, and equations
 \counterwithout{figure}{section}
 \counterwithout{table}{section}
 \counterwithout{equation}{section}
 
-% Figure and table caption formatting
+% Caption formatting
+\usepackage[font=small,labelfont=bf,textfont=it]{caption}
 \captionsetup{justification=raggedright,singlelinecheck=false}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
-% Left-align content inside all figure environments
 \AtBeginEnvironment{figure}{\raggedright}
 
-% Configure cleveref names for better cross-references
-\crefname{figure}{Figure}{Figures}
-\crefname{table}{Table}{Tables}
-\crefname{equation}{Equation}{Equations}
-\crefname{section}{Section}{Sections}
-\crefname{chapter}{Chapter}{Chapters}
-
-% Equation numbering and formatting
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{remark}[theorem]{Remark}
-
-% Section formatting for academic style
+% Titlesec formatting
+\usepackage{titlesec}
 \titlespacing{\section}{0pt}{12pt}{6pt}
 \titlespacing{\subsection}{0pt}{10pt}{4pt}
 \titlespacing{\subsubsection}{0pt}{8pt}{3pt}
-
-% Title formats for consistent academic appearance
 \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
-% Title and author information
-\title{When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus}
-\author{Tucker C. Chambers\thanks{Corresponding author} \\
-\small Email: tucker.chambers@research.edu \\
-\small ORCID: 0000-0001-6232-9096
-\and
-Daniel A. Friedman \\
-\small Email: daniel@activeinference.institute \\
-\small ORCID: 0000-0001-6232-9096}
+% Small visual tweaks
+\usepackage{xcolor}
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeborder}{RGB}{200,200,200}
+\definecolor{codefg}{RGB}{50,50,50}
+
+% Setup listings safely (don't override global styles)
+\usepackage{listings}
+\lstset{backgroundcolor=\color{codebg},basicstyle=\normalsize\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
+
+% Keep title metadata to be inserted by build system
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -213,7 +138,12 @@ terms:
 \end{equation}
 
 Typical reference ranges used in the meta‑analysis: - Insect ORNs: 1--5
-ms - Diffusion‑limited models: 7--12 ms
+ms (minimum \textasciitilde3 ms; latency jitter \textasciitilde0.19 ms
+reported in Drosophila;
+\href{https://elifesciences.org/articles/27670}{Gorur-Shandilya et
+al.~2017},
+\href{https://pmc.ncbi.nlm.nih.gov/articles/PMC6147046/}{Egea-Weiss et
+al.~2018}) - Diffusion‑limited models: 7--12 ms
 
 Model outputs and the literature meta‑analysis indicate improvement
 factors of ≈2.3--7× under plausible IR‑detection scenarios. Figures are
@@ -221,6 +151,13 @@ generated deterministically by
 \passthrough{\lstinline!scripts/generate\_research\_figures.py!}.
 
 See \Cref{fig:response_time_comparison} for the comparison.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/response_time_comparison.png}
+\caption{Comparison of modeled IR-mediated detection latencies versus diffusion-limited models. Generated deterministically by `scripts/generate_research_figures.py` using only tested `src/` utilities.}
+\label{fig:response_time_comparison}
+\end{figure}
 
 \subsubsection{Multimodal Detection
 Mechanisms}\label{multimodal-detection-mechanisms}
@@ -264,7 +201,7 @@ antenna-like gain patterns having 15-30° half-power beamwidths. However,
 these studies used chemical gradients, so controlled IR-only assays are
 required to disambiguate electromagnetic detection from volatile plume
 structure. See array directionality case study in
-\cref{sec:app_sensilla_array}. We provide minimal falsifiers in the
+\Cref{sec:app_sensilla_array}. We provide minimal falsifiers in the
 Discussion.
 
 \subsubsection{Specialized Infrared
@@ -276,19 +213,20 @@ sensors provide direct evidence for the evolutionary development of
 infrared detection capabilities in insects.
 
 \textbf{Sensor Characteristics} (plasmonic/geometry links in
-\cref{sec:app_plasmonic_geometry}): - \textbf{Species}:
+\Cref{sec:app_plasmonic_geometry}): - \textbf{Species}:
 \emph{Melanophila acuminata} and \emph{Acanthocnemus nigricans} -
 \textbf{Evolutionary Origin}: Hair-like mechanoreceptors -
 \textbf{Detection Range}: 3-5 μm infrared wavelengths - \textbf{Response
-Threshold}: 0.1-1.0 mW/cm²
+Threshold}: 0.1-1.0 mW/cm² - \textbf{Organ Structure}: Approximately 100
+individual sensilla per IR detection organ
 
 \textbf{Evolutionary Implications}: The independent evolution of
 infrared sensors in multiple beetle lineages suggests strong selective
-pressure for infrared detection capabilities. However, the functional
-significance of these sensors remains unclear, as they may serve thermal
-detection rather than specific IR-based chemoreception. This highlights
-the need for behavioral assays to determine whether these sensors enable
-IR-based chemical communication or merely thermal navigation.
+pressure for infrared detection capabilities. Biomimetic studies confirm
+the sensor design principles, validating natural evolution of
+specialized IR detection organs. The functional significance includes
+both thermal navigation and potential IR-based chemical communication,
+as evidenced by forest fire plume detection capabilities.
 
 \subsubsection{Thermo-sensitive Sensilla
 Response}\label{thermo-sensitive-sensilla-response}
@@ -311,11 +249,11 @@ operates through direct electromagnetic coupling rather than thermal
 conduction. Our analysis scripts plot penetration depth versus
 wavelength using only \passthrough{\lstinline!src/!} utilities.
 
-\Cref{fig:experimental_setup} for the experimental setup.
+See \Cref{fig:experimental_setup} for the experimental setup.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.8\textwidth]{../output/figures/composite_cross_domain_overview.png}
+\includegraphics[width=0.8\textwidth]{figures/composite_cross_domain_overview.png}
 \caption{Experimental setup for testing infrared detection capabilities in insect sensilla. The configuration allows for controlled delivery of infrared radiation while monitoring neural responses through single-sensillum electrophysiology. The setup includes thermal controls and wavelength-specific stimulation to distinguish electromagnetic from thermal effects. Generated using tested visualization algorithms with experimental parameter validation.}
 \label{fig:experimental_setup}
 \end{figure}

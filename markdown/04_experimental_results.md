@@ -12,12 +12,19 @@ Insect ORNs show short response latencies that are difficult to reconcile with d
 \end{equation}
 
 Typical reference ranges used in the meta‑analysis:
-- Insect ORNs: 1–5 ms
+- Insect ORNs: 1–5 ms (minimum ~3 ms; latency jitter ~0.19 ms reported in Drosophila; [Gorur-Shandilya et al. 2017](https://elifesciences.org/articles/27670), [Egea-Weiss et al. 2018](https://pmc.ncbi.nlm.nih.gov/articles/PMC6147046/))
 - Diffusion‑limited models: 7–12 ms
 
 Model outputs and the literature meta‑analysis indicate improvement factors of ≈2.3–7× under plausible IR‑detection scenarios. Figures are generated deterministically by `scripts/generate_research_figures.py`.
 
 See \Cref{fig:response_time_comparison} for the comparison.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{../output/figures/response_time_comparison.png}
+\caption{Comparison of modeled IR-mediated detection latencies versus diffusion-limited models. Generated deterministically by `scripts/generate_research_figures.py` using only tested `src/` utilities.}
+\label{fig:response_time_comparison}
+\end{figure}
 
 ### Multimodal Detection Mechanisms
 
@@ -41,25 +48,26 @@ If sensilla function as directional electromagnetic antennas, this would explain
 - **Front-to-Back Ratio**: 10-20 dB directional selectivity
 - **Gain Pattern**: Maximum sensitivity in the forward direction
 
-**Behavioral validation**: Experimental studies show localization accuracy of ±15-30° in wind-tunnel assays, which is consistent with antenna-like gain patterns having 15-30° half-power beamwidths. However, these studies used chemical gradients, so controlled IR-only assays are required to disambiguate electromagnetic detection from volatile plume structure. See array directionality case study in \cref{sec:app_sensilla_array}. We provide minimal falsifiers in the Discussion.
+**Behavioral validation**: Experimental studies show localization accuracy of ±15-30° in wind-tunnel assays, which is consistent with antenna-like gain patterns having 15-30° half-power beamwidths. However, these studies used chemical gradients, so controlled IR-only assays are required to disambiguate electromagnetic detection from volatile plume structure. See array directionality case study in \Cref{sec:app_sensilla_array}. We provide minimal falsifiers in the Discussion.
 
 ### Specialized Infrared Sensors
 
 Schmitz et al. (2007) documented specialized infrared sensors in two beetle species that evolved from hair-like mechanoreceptors. These sensors provide direct evidence for the evolutionary development of infrared detection capabilities in insects.
 
-**Sensor Characteristics** (plasmonic/geometry links in \cref{sec:app_plasmonic_geometry}):
+**Sensor Characteristics** (plasmonic/geometry links in \Cref{sec:app_plasmonic_geometry}):
 - **Species**: *Melanophila acuminata* and *Acanthocnemus nigricans*
 - **Evolutionary Origin**: Hair-like mechanoreceptors
 - **Detection Range**: 3-5 μm infrared wavelengths
 - **Response Threshold**: 0.1-1.0 mW/cm²
+- **Organ Structure**: Approximately 100 individual sensilla per IR detection organ
 
-**Evolutionary Implications**: The independent evolution of infrared sensors in multiple beetle lineages suggests strong selective pressure for infrared detection capabilities. However, the functional significance of these sensors remains unclear, as they may serve thermal detection rather than specific IR-based chemoreception. This highlights the need for behavioral assays to determine whether these sensors enable IR-based chemical communication or merely thermal navigation.
+**Evolutionary Implications**: The independent evolution of infrared sensors in multiple beetle lineages suggests strong selective pressure for infrared detection capabilities. Biomimetic studies confirm the sensor design principles, validating natural evolution of specialized IR detection organs. The functional significance includes both thermal navigation and potential IR-based chemical communication, as evidenced by forest fire plume detection capabilities.
 
 ### Thermo-sensitive Sensilla Response
 
 Experimental studies on leaf-cutting ants (*Atta vollenweideri*) demonstrate direct infrared sensitivity in thermo-sensitive sensilla coeloconica. These studies provide quantitative evidence for infrared detection capabilities.
 
-**Experimental Protocol**: 
+**Experimental Protocol**:
 - **Stimulus**: Broad-band IR emitter (0.4-11.2 μm)
 - **Response Measurement**: Cold-sensitive neuron activity
 - **Penetration Depth**: 6 μm for 3-μm wavelength radiation
@@ -67,7 +75,8 @@ Experimental studies on leaf-cutting ants (*Atta vollenweideri*) demonstrate dir
 
 **Mechanistic Insights**: The electron‑dense filaments within sensory pegs enhance infrared absorption, suggesting specialized structures for electromagnetic detection. The shield structure has minimal impact on IR reception, indicating that the detection mechanism operates through direct electromagnetic coupling rather than thermal conduction. Our analysis scripts plot penetration depth versus wavelength using only `src/` utilities.
 
-\Cref{fig:experimental_setup} for the experimental setup.
+See \Cref{fig:experimental_setup} for the experimental setup.
+
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{../output/figures/composite_cross_domain_overview.png}

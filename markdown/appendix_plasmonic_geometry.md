@@ -37,7 +37,7 @@ Comprehensive plasmonic nanostructure analysis: frequency-dependent permittivity
 
 ## Equation references
 
-- Resonance/wavelength: see main text and the Mathematical Appendix (\cref{sec:mathematical_appendix}).
+-- Resonance/wavelength: see main text and the Mathematical Appendix \Cref{sec:mathematical_appendix}.
 
 ## Reproducibility
 
@@ -47,6 +47,6 @@ Comprehensive plasmonic nanostructure analysis: frequency-dependent permittivity
 
 ## Cross‑references
 
-- Methods: \cref{sec:methodology}
-- Symbols: \cref{sec:symbols_glossary}
-- Math appendix: \cref{sec:mathematical_appendix}
+- Methods: \Cref{sec:methodology}
+- Symbols: \Cref{sec:symbols_glossary}
+- Math appendix: \Cref{sec:mathematical_appendix}

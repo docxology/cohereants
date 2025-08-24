@@ -2,7 +2,7 @@
 
 ## Objective
 
-Comprehensive atmospheric channel modeling: molecular absorption, Rayleigh scattering, aerosol effects, channel capacity mapping, wavelength optimization, and environmental sensitivity for IR communication.
+Comprehensive atmospheric channel modeling validated against peer-reviewed atmospheric physics: molecular absorption (H₂O, CO₂, CH₄, O₃), Rayleigh scattering, aerosol effects, channel capacity mapping with 8-14 μm window emphasis, wavelength optimization for 10-100 m ranges, and environmental sensitivity analysis for IR communication in insect olfactory systems.
 
 ## Methods (src)
 
@@ -48,7 +48,7 @@ Comprehensive atmospheric channel modeling: molecular absorption, Rayleigh scatt
 ## Equation references
 
 - Atmospheric transmission: see \eqref{eq:atmospheric_transmission}
-- Channel capacity: see \eqref{eq:channel_capacity}
+- Channel capacity: see \eqref{eq:channel_capacity_gloss}
 
 ## Reproducibility
 
@@ -56,8 +56,12 @@ Comprehensive atmospheric channel modeling: molecular absorption, Rayleigh scatt
 - Artifacts saved to `output/data/` and `output/figures/`.
 - Deterministic grids via `src/config.set_random_seed(42)`.
 
+## Context Note on Biological Ranges
+
+Some insects exhibit sensitivity to thermal IR in natural behaviors (e.g., Aedes aegypti up to ~0.7 m; [Chandel et al. 2024](https://www.nature.com/articles/s41586-024-07848-5)). These thermal constraints complement our electromagnetic window analysis and motivate species‑ and wavelength‑specific range predictions.
+
 ## Cross‑references
 
-- Methods: \cref{sec:methodology}
-- Symbols: \cref{sec:symbols_glossary}
-- Math appendix: \cref{sec:mathematical_appendix}
+- Methods: \Cref{sec:methodology}
+- Symbols: \Cref{sec:symbols_glossary}
+- Math appendix: \Cref{sec:mathematical_appendix}

@@ -26,7 +26,7 @@ Demonstrate a deterministic active-inference step for olfactory search under IR 
 
 ## Equation References
 
-- Response/latency and information metrics: see \cref{sec:mathematical_appendix}.
+- Response/latency and information metrics: see \Cref{sec:mathematical_appendix}.
 
 ## Reproducibility
 
@@ -37,9 +37,9 @@ Demonstrate a deterministic active-inference step for olfactory search under IR 
 
 ## Cross-References
 
-- Methods: \cref{sec:methodology}
-- Symbols: \cref{sec:symbols_glossary}
-- Math appendix: \cref{sec:mathematical_appendix}
+- Methods: \Cref{sec:methodology}
+- Symbols: \Cref{sec:symbols_glossary}
+- Math appendix: \Cref{sec:mathematical_appendix}
 
 \begin{figure}[h]
 \centering

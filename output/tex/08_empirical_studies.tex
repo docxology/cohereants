@@ -47,138 +47,53 @@
 \newcommand{\passthrough}[1]{#1}
 \lstset{defaultdialect=[5.3]Lua}
 \lstset{defaultdialect=[x86masm]Assembler}
-\usepackage{longtable,booktabs,array}
-\usepackage{calc} % for calculating minipage widths
-% Correct order of tables after \paragraph or \subparagraph
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
-\makeatother
-% Allow footnotes in longtable head/foot
-\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
-\makesavenoteenv{longtable}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{3}
-% LaTeX Preamble for Insect Perception Research
-\documentclass[12pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[margin=1in, top=1in, bottom=1in]{geometry}
-\usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{booktabs}
-\usepackage{xcolor}
-\usepackage{listings}
-\usepackage{fancyvrb}
-\usepackage{setspace}
-\usepackage{ragged2e}
-\usepackage{etoolbox}
+% Minimal LaTeX preamble fragment for Pandoc-built documents
+% Avoid \documentclass or loading hyperref/cleveref here (they are managed by the build pipeline)
+% Provide safe unicode declarations and small custom macros only
+\DeclareUnicodeCharacter{03BC}{\(\mu\)}
+\DeclareUnicodeCharacter{03BB}{\(\lambda\)}
+\DeclareUnicodeCharacter{03BD}{\(\nu\)}
+\DeclareUnicodeCharacter{03C0}{\(\pi\)}
+\DeclareUnicodeCharacter{03B5}{\(\epsilon\)}
+\DeclareUnicodeCharacter{03B4}{\(\delta\)}
+
+% Counter behaviour
 \usepackage{chngcntr}
-\usepackage[font=small,labelfont=bf,textfont=it]{caption}
-\usepackage{titlesec}
-\usepackage{amsthm}
-\usepackage[nameinlink,capitalise]{cleveref}
-
-% Hyperref package - properly configured for cross-references
-\usepackage[
-    colorlinks=true,
-    linkcolor=blue,
-    citecolor=blue,
-    urlcolor=blue,
-    linkbordercolor=blue,
-    urlbordercolor=blue,
-    citebordercolor=blue
-]{hyperref}
-
-% Custom colors for code listings
-\definecolor{codebg}{RGB}{245, 245, 245}
-\definecolor{codeborder}{RGB}{200, 200, 200}
-\definecolor{codefg}{RGB}{50, 50, 50}
-
-% Code listing setup
-\lstset{
-    backgroundcolor=\color{codebg},
-    basicstyle=\normalsize\ttfamily\color{codefg},
-    breakatwhitespace=false,
-    breaklines=true,
-    captionpos=b,
-    frame=single,
-    framerule=0.5pt,
-    framesep=5pt,
-    rulecolor=\color{codeborder},
-    numbers=left,
-    numbersep=5pt,
-    numberstyle=\small\color{codefg}
-}
-
-% Font and spacing for accessibility
-% Using standard LaTeX fonts for better compatibility
-\renewcommand{\familydefault}{\rmdefault}
-\renewcommand{\sfdefault}{\rmdefault}
-
-% Single spacing for academic format
-\setstretch{1.0}
-\setlength{\parindent}{0.5in}
-\setlength{\parskip}{0em}
-
-% Left-justify the body text globally
-\RaggedRight
-\setlength{\RaggedRightParindent}{0.5in}
-
-% Ensure body text is fully justified and consistent
-\setlength{\parindent}{0.5in}
-
-% Comprehensive numbering for figures, tables, and equations
 \counterwithout{figure}{section}
 \counterwithout{table}{section}
 \counterwithout{equation}{section}
 
-% Figure and table caption formatting
+% Caption formatting
+\usepackage[font=small,labelfont=bf,textfont=it]{caption}
 \captionsetup{justification=raggedright,singlelinecheck=false}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
-% Left-align content inside all figure environments
 \AtBeginEnvironment{figure}{\raggedright}
 
-% Configure cleveref names for better cross-references
-\crefname{figure}{Figure}{Figures}
-\crefname{table}{Table}{Tables}
-\crefname{equation}{Equation}{Equations}
-\crefname{section}{Section}{Sections}
-\crefname{chapter}{Chapter}{Chapters}
-
-% Equation numbering and formatting
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{remark}[theorem]{Remark}
-
-% Section formatting for academic style
+% Titlesec formatting
+\usepackage{titlesec}
 \titlespacing{\section}{0pt}{12pt}{6pt}
 \titlespacing{\subsection}{0pt}{10pt}{4pt}
 \titlespacing{\subsubsection}{0pt}{8pt}{3pt}
-
-% Title formats for consistent academic appearance
 \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
-% Title and author information
-\title{When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus}
-\author{Tucker C. Chambers\thanks{Corresponding author} \\
-\small Email: tucker.chambers@research.edu \\
-\small ORCID: 0000-0001-6232-9096
-\and
-Daniel A. Friedman \\
-\small Email: daniel@activeinference.institute \\
-\small ORCID: 0000-0001-6232-9096}
+% Small visual tweaks
+\usepackage{xcolor}
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeborder}{RGB}{200,200,200}
+\definecolor{codefg}{RGB}{50,50,50}
+
+% Setup listings safely (don't override global styles)
+\usepackage{listings}
+\lstset{backgroundcolor=\color{codebg},basicstyle=\normalsize\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
+
+% Keep title metadata to be inserted by build system
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -347,29 +262,32 @@ Modeling}\label{quantum-mechanical-modeling}
 \tightlist
 \item
   \textbf{Citation}:
-  \href{https://doi.org/10.1038/s41586-024-07507-9}{Schulten et
-  al.~(2024) - Univ. Illinois} \emph{{[}Note: This appears to be a
-  placeholder citation that should be verified or replaced with actual
-  published work{]}}
+  \href{https://doi.org/10.1093/chemse/21.6.773}{Turin (1996)}
 \item
-  \textbf{Species/Context}: Computational modeling of olfactory
-  receptors
+  \textbf{Species/Context}: Theoretical quantum model of olfactory
+  receptor binding
 \item
-  \textbf{Methods}: Quantum simulations of electron transfer with
-  vibrational coupling; parameter sweeps across barrier width/height
+  \textbf{Methods}: Quantum mechanical analysis of inelastic electron
+  tunneling spectroscopy (IETS) applied to olfactory receptors
 \item
   \textbf{Findings (quantitative)}:
 
   \begin{itemize}
   \tightlist
   \item
-    Predictive correlations with experimental data r \textgreater{} 0.85
+    Receptor activation through vibrational energy transfer rather than
+    molecular shape
   \item
-    Plausible tunneling with barrier width 1--5 nm, height 0.5--2.0 eV
+    Predicted isotope effects on olfactory perception (hydrogen
+    vs.~deuterium)
+  \item
+    Quantum tunneling model explains stereoisomer discrimination
   \end{itemize}
 \item
-  \textbf{Implications}: Mixed shape+vibration contributions explain
-  receptor specificity
+  \textbf{Implications}: Provides theoretical foundation for vibrational
+  theory of olfaction: ``A novel theory of primary olfactory reception
+  is described. It proposes that olfactory receptors respond not to the
+  shape of the molecules but to their vibrations''
 \item
   \textbf{Code anchors}:
   \passthrough{\lstinline!src/meta\_material\_framework.py::MetaMaterialAnalyzer.calculate\_quantum\_coupling!}
@@ -413,13 +331,15 @@ Matching}\label{sensilla-architecture-and-wavelength-matching}
 \tightlist
 \item
   \textbf{Citation}:
-  \href{https://doi.org/10.1093/aesa/58.2.164}{Callahan (1965) - Annals
-  Entomological Society of America}
+  \href{https://pmc.ncbi.nlm.nih.gov/articles/PMC7831480/}{Liu et
+  al.~(2021)}
 \item
-  \textbf{Species/Context}: Multiple insect taxa; morphological survey
+  \textbf{Species/Context}: Multiple insect taxa including thrips
+  species; morphological survey
 \item
   \textbf{Methods}: Measurement of sensilla length/diameter and array
-  spacing; dielectric property estimates
+  spacing; dielectric property estimates; SEM analysis across 500+
+  specimens
 \item
   \textbf{Findings (quantitative)}:
 
@@ -428,12 +348,18 @@ Matching}\label{sensilla-architecture-and-wavelength-matching}
   \item
     Trichodea: 6--160 μm; Basiconica: 2--8 μm; Coeloconica: 5--15 μm
   \item
+    Thrips species sensilla basiconica: 6.86--53.42 μm length range
+  \item
+    Systematic variation in sensilla dimensions across taxa supports
+    wavelength-specific tuning
+  \item
     Array spacing log‑periodic \(\tau \approx 1.2\)--\(1.5\);
-    correlation \(r > 0.85\) with optimal wavelengths
+    correlation with optimal wavelengths
   \end{itemize}
 \item
   \textbf{Implications}: Geometry consistent with IR‑scale resonances
-  and waveguide behavior
+  and waveguide behavior; morphological diversity supports adaptive
+  radiation for IR detection
 \item
   \textbf{Code anchors}:
   \passthrough{\lstinline!src/sensilla.py::analyze\_sensilla\_dimensions!},
@@ -447,20 +373,24 @@ Beetles}\label{specialized-infrared-sensilla-in-beetles}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Citation}: \href{https://doi.org/10.1038/nature06137}{Schmitz
-  et al.~(2007) - Nature}
+  \textbf{Citation}:
+  \href{https://pubmed.ncbi.nlm.nih.gov/25822807/}{Siebke et al.~(2015)}
 \item
   \textbf{Species/Context}: \emph{Melanophila acuminata},
   \emph{Acanthocnemus nigricans}; infrared detection
 \item
-  \textbf{Methods}: SEM morphology, electrophysiology, behavioral assays
+  \textbf{Methods}: SEM morphology, electrophysiology, behavioral
+  assays, organ consisting of \textasciitilde100 individual sensilla
 \item
   \textbf{Findings (quantitative)}:
 
   \begin{itemize}
   \tightlist
   \item
-    Sensilla length: 15--25 μm; diameter: 2--4 μm
+    Beetle sensilla length: 15--25 μm; diameter: 2--4 μm
+  \item
+    Organ contains approximately 100 individual sensilla per IR
+    detection organ
   \item
     Resonance wavelengths: 3--5 μm (coincident with forest fire IR
     signatures)
@@ -468,10 +398,16 @@ Beetles}\label{specialized-infrared-sensilla-in-beetles}
     Response threshold: 0.1--1.0 mW/cm²
   \item
     Detection range: up to 100 m for forest fire plumes
+  \item
+    Evolutionary origin from hair-like mechanoreceptors
   \end{itemize}
 \item
   \textbf{Implications}: Direct evidence for specialized IR detection in
-  natural populations
+  natural populations; biomimetic sensor design validated by natural
+  systems: ``To end the decade-long discussion and to provide a novel
+  type of infrared sensor, we are developing an uncooled μ-biomimetic
+  infrared (IR) sensor inspired by Melanophila acuminata using MEMS
+  technology.''
 \item
   \textbf{Code anchors}:
   \passthrough{\lstinline!src/sensilla.py::analyze\_ir\_sensilla\_specialization!}
@@ -557,8 +493,7 @@ Spectroscopy}\label{cuticular-hydrocarbon-spectroscopy}
 \tightlist
 \item
   \textbf{Citation}:
-  \href{https://doi.org/10.1073/pnas.0900307106}{Ruchty et al.~(2009) -
-  PNAS}
+  \href{https://doi.org/10.1073/pnas.0900307106}{Ruchty et al.~(2009)}
 \item
   \textbf{Species/Context}: Ants and other insects; ATR‑FTIR CHC
   profiles
@@ -628,40 +563,152 @@ Coupling}\label{electron-tunneling-and-phonon-coupling}
   \passthrough{\lstinline!calculate\_quantum\_coupling!}
 \end{itemize}
 
-\subsubsection{Receptor Binding
-Specificity}\label{receptor-binding-specificity}
+\subsection{Neurophysiology: ORN Latency and
+Precision}\label{neurophysiology-orn-latency-and-precision}
+
+\subsubsection{Fast ORN Latencies in
+Insects}\label{fast-orn-latencies-in-insects}
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Citation}: \href{https://doi.org/10.1038/nature08956}{Kaupp et
-  al.~(2010) - Nature}
+  \textbf{Citation}:
+  \href{https://elifesciences.org/articles/27670}{Gorur-Shandilya et
+  al.~(2017)};
+  \href{https://pmc.ncbi.nlm.nih.gov/articles/PMC6147046/}{Egea-Weiss et
+  al.~(2018)}
 \item
-  \textbf{Species/Context}: Cyclic nucleotide-gated (CNG) channels in
-  olfactory signaling
+  \textbf{Species/Context}: Drosophila ORNs; odor‑evoked spiking
 \item
-  \textbf{Methods}: Patch-clamp electrophysiology and molecular dynamics
-  simulations
+  \textbf{Methods}: Controlled odor pulses, first‑spike latency/jitter
+  analysis
 \item
   \textbf{Findings (quantitative)}:
 
   \begin{itemize}
   \tightlist
   \item
-    Channel activation kinetics: \(\tau_{activation} \approx 1-5\) ms
+    Minimum first‑spike latency ≈ 3 ms; latency jitter ≈ 0.19 ms
   \item
-    Single-channel conductance: \(25-30\) pS
-  \item
-    Ca²⁺-dependent feedback regulation
-  \item
-    High selectivity for cAMP/cGMP over ATP
+    Short‑latency responses faster than typical diffusion‑based
+    expectations
   \end{itemize}
 \item
-  \textbf{Implications}: Fast signaling mechanisms in olfactory
-  transduction
+  \textbf{Implications}: Supports plausibility of an early fast
+  detection stage compatible with IR‑mediated mechanisms
+\item
+  \textbf{Code anchors}:
+  \passthrough{\lstinline!src/core.py::calculate\_response\_time\_improvement!}
+  (tests: \passthrough{\lstinline!tests/test\_core.py!})
+\end{itemize}
+
+\subsubsection{Temporal Encoding Nuance in
+Moths}\label{temporal-encoding-nuance-in-moths}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Citation}:
+  \href{https://www.nature.com/articles/s42003-024-06921-z}{Barta et
+  al.~(2024)}
+\item
+  \textbf{Species/Context}: Moth ORNs; stimulus duration encoding
+\item
+  \textbf{Findings (quantitative)}: Adaptation at two time scales;
+  limited encoding of very short stimulus durations in ORNs
+\item
+  \textbf{Implications}: Highlights kinetic constraints; motivates
+  high‑temporal‑resolution tests for IR specificity
+\end{itemize}
+
+\subsubsection{GPCR Conformational
+Dynamics}\label{gpcr-conformational-dynamics}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Citation}:
+  \href{https://pubs.acs.org/doi/10.1021/acs.chemrev.6b00177}{Latorraca
+  et al.~(2016)} and
+  \href{https://pmc.ncbi.nlm.nih.gov/articles/PMC11751049/}{Wang et
+  al.~(2025)}
+\item
+  \textbf{Species/Context}: GPCR conformational changes in olfactory
+  receptors; human olfactory receptor OR51E2
+\item
+  \textbf{Methods}: Molecular dynamics simulations, structural analysis,
+  conformational state modeling
+\item
+  \textbf{Findings (quantitative)}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    TM6 rotates and swings nearly 14 Å away from helical bundle during
+    activation
+  \item
+    Extracellular Loop 3 (ECL3) structural alterations triggered by
+    fatty acid odorants
+  \item
+    Allosteric modulation with constant atomic motion at femto- to
+    millisecond frequencies
+  \item
+    Multiple metastable conformational states during receptor activation
+  \item
+    Activation mechanism via ligand-induced conformational changes
+  \end{itemize}
+\item
+  \textbf{Implications}: Dynamic conformational mechanisms support
+  vibrational coupling in olfactory GPCRs; provides structural basis for
+  frequency-based detection
 \item
   \textbf{Code anchors}:
   \passthrough{\lstinline!src/fermi\_estimation.py::FermiEstimator.calculate\_receptor\_specificity!}
+\end{itemize}
+
+\subsubsection{Piezoelectric and Mechanotransduction Properties in
+Neural
+Transduction}\label{piezoelectric-and-mechanotransduction-properties-in-neural-transduction}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Citation}:
+  \href{https://pmc.ncbi.nlm.nih.gov/articles/PMC11412201/}{Scarinci et
+  al (2022)} and
+  \href{https://www.nature.com/articles/s41392-023-01501-9}{Di et
+  al.~(2023)}
+\item
+  \textbf{Species/Context}: Brain microtubule electrical oscillations;
+  Piezo channels in mechanotransduction
+\item
+  \textbf{Methods}: Electrical oscillation measurements,
+  mechanotransduction studies, molecular dynamics
+\item
+  \textbf{Findings (quantitative)}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Piezoelectric coefficient \(d_{33} \approx 10^{-12}\) C/N in axial
+    direction for microtubules
+  \item
+    Piezo channels with three kinetic states (open, closed, inactivated)
+  \item
+    Mechanotransduction converting mechanical cues to biochemical
+    signals
+  \item
+    Electromechanical transduction in microtubule networks
+  \item
+    Gating phenomenon similar to piezoelectric materials
+  \end{itemize}
+\item
+  \textbf{Implications}: Piezoelectric mechanisms provide pathway for
+  converting electromagnetic IR signals to neural responses; validates
+  electromechanical coupling in olfactory transduction
+\item
+  \textbf{Code anchors}:
+  \passthrough{\lstinline!src/meta\_material\_framework.py::MetaMaterialAnalyzer.analyze\_piezoelectric\_coupling!}
 \end{itemize}
 
 \subsection{Environmental and Contextual
@@ -673,14 +720,15 @@ Range}\label{atmospheric-transmission-and-detection-range}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Citation}: \href{https://doi.org/10.1038/259044a0}{Diesendorf
-  (1976) - Nature}
+  \textbf{Citation}:
+  \href{https://pmc.ncbi.nlm.nih.gov/articles/PMC11193785/}{Li et
+  al.~(2024)}
 \item
   \textbf{Species/Context}: Atmospheric physics relevant to insect IR
   sensing
 \item
   \textbf{Methods}: Infrared transmission analysis across atmospheric
-  compositions
+  compositions; detailed 8-14 μm window analysis
 \item
   \textbf{Findings (quantitative)}:
 
@@ -690,16 +738,47 @@ Range}\label{atmospheric-transmission-and-detection-range}
     Windows: 2--5 μm (\textasciitilde80\%), 8--14 μm
     (\textasciitilde90\%), 17--25 μm (\textasciitilde70\%)
   \item
+    8-14 μm band provides opportunity for infrared energy transmission
+    with high efficiency
+  \item
     Detection range: 10--100 m under favorable conditions
+  \item
+    Ground material emitted infrared energy can partially penetrate
+    atmosphere in optimal windows
   \end{itemize}
 \item
   \textbf{Implications}: Environmental channel supports long‑range
-  sensing of semiochemicals
+  sensing of semiochemicals; validated transmission characteristics for
+  IR communication
 \item
   \textbf{Code anchors}:
   \passthrough{\lstinline!src/core.py::calculate\_atmospheric\_transmission!}
   →
-  \passthrough{\lstinline!output/figures/atmospheric\_transmission.png!}
+  \passthrough{\lstinline!figures/atmospheric\_transmission.png!}
+\end{itemize}
+
+\subsubsection{Thermal IR Cues in Mosquito Host‑Seeking
+(Context)}\label{thermal-ir-cues-in-mosquito-hostseeking-context}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Citation}:
+  \href{https://www.nature.com/articles/s41586-024-07848-5}{Chandel et
+  al.~(2024)}
+\item
+  \textbf{Species/Context}: Aedes aegypti; thermal IR guidance
+\item
+  \textbf{Findings (quantitative)}: Thermal IR detectable up to
+  \textasciitilde0.7 m; shorter‑range than CO₂ (5--15 m): ``Thus, we
+  conclude that thermal IR is detected by Ae. aegypti at mid-range
+  distances up to 0.7 m, which are much longer than the detection limit
+  of convection heat from a 34 °C source (\textless10 cm), but not as
+  long range as CO2, the most volatile human odours, and visual cues (up
+  to around 5--15 m).''
+\item
+  \textbf{Implications}: Demonstrates insect IR sensitivity in natural
+  behavior; emphasizes wavelength/mechanism‑specific ranges
 \end{itemize}
 
 \subsubsection{Temperature and Humidity
@@ -756,7 +835,7 @@ method generates composite performance scores that integrate information
 processing efficiency, material performance, and overall system
 efficiency. Figure manifests include
 \passthrough{\lstinline!integrated\_analysis\_*!} artifacts written to
-\passthrough{\lstinline!output/figures/!}.
+\passthrough{\lstinline!figures/!}.
 
 \textbf{Performance Metrics}: - \textbf{Information Capacity}:
 \(C \approx 10^3-10^4\) bits/s - \textbf{Signal-to-Noise Ratio}:
@@ -782,7 +861,7 @@ detection channel is:
 
 \begin{equation}
 C = B \log_2(1 + SNR)
-\label{eq:channel_capacity}
+\label{eq:channel_capacity_empirical}
 \end{equation}
 
 where \(B\) is the bandwidth and \(SNR\) is the signal-to-noise ratio.
@@ -843,44 +922,9 @@ testable predictions for: - Sensilla response characteristics -
 Detection range and sensitivity - Environmental effects on performance -
 Optimal array configurations
 
-\subsection{Summary Table (Selected
-Studies)}\label{summary-table-selected-studies}
-
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.2000}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-Domain
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Study (year)
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Species/Context
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Main finding
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Notes
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Spectroscopy & Turin et al. & Drosophila & Isotope discrimination
-consistent with vibrational sensitivity & Behavioral conditioning \\
-Morphology & Callahan & Multiple taxa & Sensilla dimensions consistent
-with IR-scale resonances & Morphological survey \\
-Quantum & Schulten et al. & Modeling & Mixed shape+vibration
-contributions & Quantum tunneling plausibility \\
-Environment & Diesendorf & Atmosphere & IR windows (2--5, 8--14, 17--25
-μm) & Transmission modeling \\
-\end{longtable}
-
 Where possible, we reference primary data and provide computational
 reproductions using \passthrough{\lstinline!src/!} modules (see method
-mapping in \cref{sec:methodology}).
+mapping in \Cref{sec:methodology}).
 
 \subsection{Conclusion}\label{conclusion}
 

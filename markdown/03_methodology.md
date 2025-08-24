@@ -32,13 +32,13 @@ Earth's atmosphere exhibits well-defined IR transmission windows that determine 
 - **8–14 μm (long-wave IR)**: ~0.9 transmission, atmospheric window
 - **17–25 μm (far-IR)**: ~0.7 transmission, increasing molecular absorption
 
-These windows overlap measured cuticular hydrocarbon (CHC) vibrational bands and inform detection-range estimates of 10–100 m using the atmospheric transmission model (\eqref{eq:atmospheric_transmission}). Detailed modeling and sensitivity analyses are presented in the environmental channel case study (\cref{sec:app_environmental_channel}).
+These windows overlap measured cuticular hydrocarbon (CHC) vibrational bands and inform detection-range estimates of 10–100 m using the atmospheric transmission model \eqref{eq:atmospheric_transmission}. Detailed modeling and sensitivity analyses are presented in the environmental channel case study \Cref{sec:app_environmental_channel}.
 
 ## Insect Antenna Morphology and Electromagnetic Design
 
 ### Sensilla as Dielectric Antennas
 
-Insect antennae host micron-scale sensilla whose geometric dimensions frequently correspond to IR wavelengths relevant for electromagnetic resonance. We analyze this correspondence through:
+Insect antennae host micron-scale sensilla whose geometric dimensions frequently correspond to IR wavelengths relevant for electromagnetic resonance (typical ranges: trichodea 6–160 μm, basiconica 2–8 μm, coeloconica 5–15 μm; cf. [Liu et al. 2021 (sensilla survey)](https://pmc.ncbi.nlm.nih.gov/articles/PMC7831480/)). We analyze this correspondence through:
 
 - **Morphometric surveys** across diverse insect taxa (>500 specimens)
 - **Resonance frequency calculations** using cavity resonator theory

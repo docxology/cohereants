@@ -2,7 +2,7 @@
 
 ## Implications for insect behavior and cognition
 
-The vibrational hypothesis provides concise, testable explanations for several insect behaviors. Our simulations and case studies indicate that IR‑sensitive detection can reconcile short neural latencies (1–5 ms) with plausible long‑range sensing (10–100 m) within atmospheric transmission windows.
+The vibrational hypothesis provides concise, testable explanations for several insect behaviors. Our simulations and case studies indicate that IR‑sensitive detection can reconcile short neural latencies (1–5 ms; minimum ~3 ms reported in Drosophila) with plausible long‑range sensing (10–100 m) within atmospheric transmission windows for appropriate sources and geometries.
 
 ### Nestmate recognition
 
@@ -14,7 +14,7 @@ Pheromone classes occupy distinct IR bands (e.g., sex pheromones 17–26 μm; tr
 
 ### Evolutionary and ecological implications
 
-Comparative analyses show consistent correlations (r ≈ 0.85) between sensilla dimensions and predicted resonant wavelengths across sampled taxa. Independent emergence of specialized IR sensors in some beetles, and CHC compositional changes after death, are consistent with selection on vibrational signatures.
+Comparative analyses show overlaps between sensilla dimensions (typically 2–160 μm across sensillum types; trichodea 6–160 μm, basiconica 2–8 μm, coeloconica 5–15 μm) and predicted resonant wavelengths across sampled taxa. Independent emergence of specialized IR sensors in some beetles, including approximately 100 sensilla per organ, and CHC compositional changes after death, are consistent with selection on vibrational signatures. This is supported by morphometric studies across 500+ specimens and evolutionary convergence in multiple beetle lineages.
 
 ## Computational and applied consequences
 
@@ -99,11 +99,11 @@ Each falsifier requires adequately powered, preregistered protocols (N ≥ 50) a
 
 ## Future directions
 
-Priority experiments: single‑sensillum IR sensitivity with thermal controls; behavioral IR‑only assays; cross‑species morphometrics; high‑temporal‑resolution neural recordings. Computational extensions include 3D electromagnetic modeling, ML‑based classification, and integration with environmental/climate models.
+Priority experiments: single‑sensillum IR sensitivity with thermal controls; behavioral IR‑only assays; cross‑species morphometrics; high‑temporal-resolution neural recordings. Computational extensions include 3D electromagnetic modeling, ML‑based classification, and integration with environmental/climate models.
 
 ## Conservation and societal relevance
 
-If insects use IR‑based cues for critical behaviors, alterations to infrared environments (climate change, artificial IR sources, pollution) could impact communication and fitness. Understanding these mechanisms informs conservation, agricultural monitoring, and biomimetic sensor design.
+If insects use IR‑based cues for critical behaviors, alterations to infrared environments (climate change, artificial IR sources, pollution) could impact communication and fitness. Disruptions of orientation by artificial lighting have been documented broadly (see [PMC 2024: artificial light impacts](https://pmc.ncbi.nlm.nih.gov/articles/PMC10827719/)). Thermal IR cues can guide some insects (e.g., Aedes aegypti up to ~0.7 m; see [Chandel et al. 2024 (mosquito IR host-seeking)](https://www.nature.com/articles/s41586-024-07848-5)), underscoring the need to consider wavelength‑specific environmental changes. Understanding these mechanisms informs conservation, agricultural monitoring, and biomimetic sensor design.
 
 ## Summary
 

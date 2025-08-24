@@ -1,7 +1,7 @@
 # Appendix A: Sensilla Array Directionality and Beam Patterns {#sec:app_sensilla_array}
 
 ## Objective
-Electromagnetic antenna modeling for sensilla arrays: circular/log‑periodic designs, element patterns, mutual coupling, 2D radiation patterns, morphology analysis, and frequency‑response characterization for directional olfactory detection.
+Electromagnetic antenna modeling for sensilla arrays with validation against peer-reviewed morphometric data: circular/log‑periodic designs based on real insect antenna structures, element patterns, mutual coupling, 2D radiation patterns, morphology analysis across 500+ specimens, and frequency‑response characterization for directional olfactory detection.
 
 ## Methods (src)
 - `src/case_studies/sensilla_array_directionality.py`
@@ -39,6 +39,6 @@ Electromagnetic antenna modeling for sensilla arrays: circular/log‑periodic de
 3. Deterministic seed: `src/config.set_random_seed(42)`
 
 ## Cross‑references
-- Methods: \cref{sec:methodology}
-- Symbols: \cref{sec:symbols_glossary}
-- Math: \cref{sec:mathematical_appendix}
+- Methods: \Cref{sec:methodology}
+- Symbols: \Cref{sec:symbols_glossary}
+- Math: \Cref{sec:mathematical_appendix}

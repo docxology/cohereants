@@ -2,7 +2,7 @@
 
 ## Objective
 
-Comprehensive detection‑theory analysis: ROC curves, sensitivity analysis, operating regions, and noise‑floor characterization for IR olfactory detection systems.
+Comprehensive detection‑theory analysis with validation against electrophysiological studies: ROC curves for 1-5 ms latency detection, sensitivity analysis for sub-10 ms ORN responses, operating regions in power-temperature space, and noise‑floor characterization distinguishing electromagnetic from thermal effects for IR olfactory detection systems.
 
 ## Methods (src)
 
@@ -40,8 +40,8 @@ Comprehensive detection‑theory analysis: ROC curves, sensitivity analysis, ope
 
 ## Equation references
 
-- Minimum power: see \eqref{eq:min_power}
-- Capacity: see \eqref{eq:channel_capacity}
+- Minimum power: see \eqref{eq:min_power_gloss}
+- Capacity: see \eqref{eq:channel_capacity_gloss}
 
 ## Reproducibility
 
@@ -51,6 +51,6 @@ Comprehensive detection‑theory analysis: ROC curves, sensitivity analysis, ope
 
 ## Cross‑references
 
-- Methods: \cref{sec:methodology}
-- Symbols: \cref{sec:symbols_glossary}
-- Math appendix: \cref{sec:mathematical_appendix}
+- Methods: \Cref{sec:methodology}
+- Symbols: \Cref{sec:symbols_glossary}
+- Math appendix: \Cref{sec:mathematical_appendix}

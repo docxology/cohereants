@@ -41,8 +41,8 @@ Comprehensive neural encoding analysis including spike‑train generation, tempo
 
 ## Equation references
 
-- Information rate: see \eqref{eq:channel_capacity}
-- Response time model: see \eqref{eq:response_time}
+- Information rate: see \eqref{eq:channel_capacity_gloss}
+- Response time model: see \eqref{eq:response_time_components}
 
 ## Reproducibility
 
@@ -52,6 +52,6 @@ Comprehensive neural encoding analysis including spike‑train generation, tempo
 
 ## Cross‑references
 
-- Methods: \cref{sec:methodology}
-- Symbols: \cref{sec:symbols_glossary}
-- Math appendix: \cref{sec:mathematical_appendix}
+- Methods: \Cref{sec:methodology}
+- Symbols: \Cref{sec:symbols_glossary}
+- Math appendix: \Cref{sec:mathematical_appendix}

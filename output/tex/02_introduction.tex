@@ -51,124 +51,49 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{3}
-% LaTeX Preamble for Insect Perception Research
-\documentclass[12pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[margin=1in, top=1in, bottom=1in]{geometry}
-\usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{booktabs}
-\usepackage{xcolor}
-\usepackage{listings}
-\usepackage{fancyvrb}
-\usepackage{setspace}
-\usepackage{ragged2e}
-\usepackage{etoolbox}
+% Minimal LaTeX preamble fragment for Pandoc-built documents
+% Avoid \documentclass or loading hyperref/cleveref here (they are managed by the build pipeline)
+% Provide safe unicode declarations and small custom macros only
+\DeclareUnicodeCharacter{03BC}{\(\mu\)}
+\DeclareUnicodeCharacter{03BB}{\(\lambda\)}
+\DeclareUnicodeCharacter{03BD}{\(\nu\)}
+\DeclareUnicodeCharacter{03C0}{\(\pi\)}
+\DeclareUnicodeCharacter{03B5}{\(\epsilon\)}
+\DeclareUnicodeCharacter{03B4}{\(\delta\)}
+
+% Counter behaviour
 \usepackage{chngcntr}
-\usepackage[font=small,labelfont=bf,textfont=it]{caption}
-\usepackage{titlesec}
-\usepackage{amsthm}
-\usepackage[nameinlink,capitalise]{cleveref}
-
-% Hyperref package - properly configured for cross-references
-\usepackage[
-    colorlinks=true,
-    linkcolor=blue,
-    citecolor=blue,
-    urlcolor=blue,
-    linkbordercolor=blue,
-    urlbordercolor=blue,
-    citebordercolor=blue
-]{hyperref}
-
-% Custom colors for code listings
-\definecolor{codebg}{RGB}{245, 245, 245}
-\definecolor{codeborder}{RGB}{200, 200, 200}
-\definecolor{codefg}{RGB}{50, 50, 50}
-
-% Code listing setup
-\lstset{
-    backgroundcolor=\color{codebg},
-    basicstyle=\normalsize\ttfamily\color{codefg},
-    breakatwhitespace=false,
-    breaklines=true,
-    captionpos=b,
-    frame=single,
-    framerule=0.5pt,
-    framesep=5pt,
-    rulecolor=\color{codeborder},
-    numbers=left,
-    numbersep=5pt,
-    numberstyle=\small\color{codefg}
-}
-
-% Font and spacing for accessibility
-% Using standard LaTeX fonts for better compatibility
-\renewcommand{\familydefault}{\rmdefault}
-\renewcommand{\sfdefault}{\rmdefault}
-
-% Single spacing for academic format
-\setstretch{1.0}
-\setlength{\parindent}{0.5in}
-\setlength{\parskip}{0em}
-
-% Left-justify the body text globally
-\RaggedRight
-\setlength{\RaggedRightParindent}{0.5in}
-
-% Ensure body text is fully justified and consistent
-\setlength{\parindent}{0.5in}
-
-% Comprehensive numbering for figures, tables, and equations
 \counterwithout{figure}{section}
 \counterwithout{table}{section}
 \counterwithout{equation}{section}
 
-% Figure and table caption formatting
+% Caption formatting
+\usepackage[font=small,labelfont=bf,textfont=it]{caption}
 \captionsetup{justification=raggedright,singlelinecheck=false}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
-% Left-align content inside all figure environments
 \AtBeginEnvironment{figure}{\raggedright}
 
-% Configure cleveref names for better cross-references
-\crefname{figure}{Figure}{Figures}
-\crefname{table}{Table}{Tables}
-\crefname{equation}{Equation}{Equations}
-\crefname{section}{Section}{Sections}
-\crefname{chapter}{Chapter}{Chapters}
-
-% Equation numbering and formatting
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{remark}[theorem]{Remark}
-
-% Section formatting for academic style
+% Titlesec formatting
+\usepackage{titlesec}
 \titlespacing{\section}{0pt}{12pt}{6pt}
 \titlespacing{\subsection}{0pt}{10pt}{4pt}
 \titlespacing{\subsubsection}{0pt}{8pt}{3pt}
-
-% Title formats for consistent academic appearance
 \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
-% Title and author information
-\title{When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus}
-\author{Tucker C. Chambers\thanks{Corresponding author} \\
-\small Email: tucker.chambers@research.edu \\
-\small ORCID: 0000-0001-6232-9096
-\and
-Daniel A. Friedman \\
-\small Email: daniel@activeinference.institute \\
-\small ORCID: 0000-0001-6232-9096}
+% Small visual tweaks
+\usepackage{xcolor}
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeborder}{RGB}{200,200,200}
+\definecolor{codefg}{RGB}{50,50,50}
+
+% Setup listings safely (don't override global styles)
+\usepackage{listings}
+\lstset{backgroundcolor=\color{codebg},basicstyle=\normalsize\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
+
+% Keep title metadata to be inserted by build system
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -218,9 +143,15 @@ empirical tensions persist:
 Insect olfactory receptor neurons (ORNs) exhibit remarkably short
 response latencies (1--5 ms) that are difficult to reconcile with
 traditional diffusion-plus-binding models, which typically require 7--12
-ms for molecular transport and receptor activation. This discrepancy
-suggests either highly optimized molecular mechanisms or alternative
-detection pathways operating on faster timescales.
+ms for molecular transport and receptor activation. Empirically, minimum
+first‑spike latencies of \textasciitilde3 ms with \textasciitilde0.19 ms
+jitter have been reported in Drosophila (e.g.,
+\href{https://elifesciences.org/articles/27670}{Gorur-Shandilya et
+al.~2017};
+\href{https://pmc.ncbi.nlm.nih.gov/articles/PMC6147046/}{Egea-Weiss et
+al.~2018}). This discrepancy suggests either highly optimized molecular
+mechanisms or alternative detection pathways operating on faster
+timescales.
 
 \subsubsection{Range and Sensitivity
 Paradox}\label{range-and-sensitivity-paradox}
@@ -259,14 +190,19 @@ experimental protocols to distinguish electromagnetic from thermal
 effects.
 
 \textbf{Specific Hypotheses:} - \textbf{H1 (Morphological):} Antennal
-sensilla dimensions correlate with predicted IR resonant wavelengths
-(target r ≥ 0.8) across diverse insect taxa. - \textbf{H2 (Spectral):}
-Cuticular hydrocarbon (CHC) vibrational spectra align with atmospheric
-transmission windows (2--5, 8--14, 17--25 μm). - \textbf{H3 (Temporal):}
-IR-mediated detection can achieve sub-10 ms ORN latencies
-distinguishable from thermal stimulation. - \textbf{H4 (Behavioral):}
-Frequency-specific IR stimulation elicits directed orientation behaviors
-in the absence of volatile chemical cues.
+sensilla dimensions (2--160 μm across sensillum types; trichodea 6--160
+μm, basiconica 2--8 μm, coeloconica 5--15 μm) correlate with predicted
+IR resonant wavelengths across diverse insect taxa (e.g.,
+\href{https://pmc.ncbi.nlm.nih.gov/articles/PMC7831480/}{Liu et al.~2021
+(sensilla survey)}). - \textbf{H2 (Spectral):} Cuticular hydrocarbon
+(CHC) vibrational spectra align with atmospheric transmission windows
+(2--5, 8--14, 17--25 μm), with high transmission efficiency in the 8--14
+μm band. - \textbf{H3 (Temporal):} IR‑mediated detection can achieve
+1--5 ms ORN latencies (minimum \textasciitilde3 ms reported), faster
+than diffusion‑based mechanisms. - \textbf{H4 (Behavioral):}
+Frequency‑specific IR stimulation elicits directed orientation behaviors
+in the absence of volatile chemical cues, as demonstrated in specialized
+beetle species.
 
 \subsection{Approach and Organization}\label{approach-and-organization}
 
@@ -279,17 +215,16 @@ The manuscript is organized as follows: - \textbf{Main Text:} Presents
 integrated findings with cross-references to detailed case studies -
 \textbf{Appendices:} Seven specialized analyses exploring specific
 aspects: - Sensory array directionality and beam patterns
-(\Cref{sec:app_sensilla_array}) - Environmental channel modeling
-(\Cref{sec:app_environmental_channel}) - Detection limits and operating
-points (\Cref{sec:app_detection_limits}) - Neural encoding efficiency
-(\Cref{sec:app_neural_encoding}) - Spectral unmixing and classification
-(\Cref{sec:app_spectral_unmixing}) - Plasmonic nano-geometry
-optimization (\Cref{sec:app_plasmonic_geometry}) - Active inference
-behavioral modeling (\Cref{sec:app_active_inference}) -
-\textbf{Mathematical Appendix:} Detailed derivations and computational
-implementations (\Cref{sec:mathematical_appendix}) - \textbf{Empirical
-Studies:} Comprehensive review of supporting evidence
-(\Cref{sec:empirical_studies})
+\Cref{sec:app_sensilla_array} - Environmental channel modeling
+\Cref{sec:app_environmental_channel} - Detection limits and operating
+points \Cref{sec:app_detection_limits} - Neural encoding efficiency
+\Cref{sec:app_neural_encoding} - Spectral unmixing and classification
+\Cref{sec:app_spectral_unmixing} - Plasmonic nano-geometry optimization
+\Cref{sec:app_plasmonic_geometry} - Active inference behavioral modeling
+\Cref{sec:app_active_inference} - \textbf{Mathematical Appendix:}
+Detailed derivations and computational implementations
+\Cref{sec:mathematical_appendix} - \textbf{Empirical Studies:}
+Comprehensive review of supporting evidence \Cref{sec:empirical_studies}
 
 This structure enables both comprehensive evaluation and focused
 exploration of specific mechanisms.

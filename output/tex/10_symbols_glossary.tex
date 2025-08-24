@@ -61,124 +61,49 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{3}
-% LaTeX Preamble for Insect Perception Research
-\documentclass[12pt,a4paper]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[margin=1in, top=1in, bottom=1in]{geometry}
-\usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage{booktabs}
-\usepackage{xcolor}
-\usepackage{listings}
-\usepackage{fancyvrb}
-\usepackage{setspace}
-\usepackage{ragged2e}
-\usepackage{etoolbox}
+% Minimal LaTeX preamble fragment for Pandoc-built documents
+% Avoid \documentclass or loading hyperref/cleveref here (they are managed by the build pipeline)
+% Provide safe unicode declarations and small custom macros only
+\DeclareUnicodeCharacter{03BC}{\(\mu\)}
+\DeclareUnicodeCharacter{03BB}{\(\lambda\)}
+\DeclareUnicodeCharacter{03BD}{\(\nu\)}
+\DeclareUnicodeCharacter{03C0}{\(\pi\)}
+\DeclareUnicodeCharacter{03B5}{\(\epsilon\)}
+\DeclareUnicodeCharacter{03B4}{\(\delta\)}
+
+% Counter behaviour
 \usepackage{chngcntr}
-\usepackage[font=small,labelfont=bf,textfont=it]{caption}
-\usepackage{titlesec}
-\usepackage{amsthm}
-\usepackage[nameinlink,capitalise]{cleveref}
-
-% Hyperref package - properly configured for cross-references
-\usepackage[
-    colorlinks=true,
-    linkcolor=blue,
-    citecolor=blue,
-    urlcolor=blue,
-    linkbordercolor=blue,
-    urlbordercolor=blue,
-    citebordercolor=blue
-]{hyperref}
-
-% Custom colors for code listings
-\definecolor{codebg}{RGB}{245, 245, 245}
-\definecolor{codeborder}{RGB}{200, 200, 200}
-\definecolor{codefg}{RGB}{50, 50, 50}
-
-% Code listing setup
-\lstset{
-    backgroundcolor=\color{codebg},
-    basicstyle=\normalsize\ttfamily\color{codefg},
-    breakatwhitespace=false,
-    breaklines=true,
-    captionpos=b,
-    frame=single,
-    framerule=0.5pt,
-    framesep=5pt,
-    rulecolor=\color{codeborder},
-    numbers=left,
-    numbersep=5pt,
-    numberstyle=\small\color{codefg}
-}
-
-% Font and spacing for accessibility
-% Using standard LaTeX fonts for better compatibility
-\renewcommand{\familydefault}{\rmdefault}
-\renewcommand{\sfdefault}{\rmdefault}
-
-% Single spacing for academic format
-\setstretch{1.0}
-\setlength{\parindent}{0.5in}
-\setlength{\parskip}{0em}
-
-% Left-justify the body text globally
-\RaggedRight
-\setlength{\RaggedRightParindent}{0.5in}
-
-% Ensure body text is fully justified and consistent
-\setlength{\parindent}{0.5in}
-
-% Comprehensive numbering for figures, tables, and equations
 \counterwithout{figure}{section}
 \counterwithout{table}{section}
 \counterwithout{equation}{section}
 
-% Figure and table caption formatting
+% Caption formatting
+\usepackage[font=small,labelfont=bf,textfont=it]{caption}
 \captionsetup{justification=raggedright,singlelinecheck=false}
 \captionsetup[figure]{position=bottom,skip=10pt}
 \captionsetup[table]{position=top,skip=10pt}
-% Left-align content inside all figure environments
 \AtBeginEnvironment{figure}{\raggedright}
 
-% Configure cleveref names for better cross-references
-\crefname{figure}{Figure}{Figures}
-\crefname{table}{Table}{Tables}
-\crefname{equation}{Equation}{Equations}
-\crefname{section}{Section}{Sections}
-\crefname{chapter}{Chapter}{Chapters}
-
-% Equation numbering and formatting
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-\newtheorem{remark}[theorem]{Remark}
-
-% Section formatting for academic style
+% Titlesec formatting
+\usepackage{titlesec}
 \titlespacing{\section}{0pt}{12pt}{6pt}
 \titlespacing{\subsection}{0pt}{10pt}{4pt}
 \titlespacing{\subsubsection}{0pt}{8pt}{3pt}
-
-% Title formats for consistent academic appearance
 \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
-% Title and author information
-\title{When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus}
-\author{Tucker C. Chambers\thanks{Corresponding author} \\
-\small Email: tucker.chambers@research.edu \\
-\small ORCID: 0000-0001-6232-9096
-\and
-Daniel A. Friedman \\
-\small Email: daniel@activeinference.institute \\
-\small ORCID: 0000-0001-6232-9096}
+% Small visual tweaks
+\usepackage{xcolor}
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codeborder}{RGB}{200,200,200}
+\definecolor{codefg}{RGB}{50,50,50}
+
+% Setup listings safely (don't override global styles)
+\usepackage{listings}
+\lstset{backgroundcolor=\color{codebg},basicstyle=\normalsize\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
+
+% Keep title metadata to be inserted by build system
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -514,24 +439,28 @@ Relationships}\label{key-concepts-and-relationships}
 Windows}\label{atmospheric-transmission-windows}
 
 The Earth's atmosphere has specific wavelength ranges where infrared
-radiation can travel relatively freely, enabling long-range detection:
+radiation can travel relatively freely, enabling long-range detection of
+insect semiochemicals:
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{2-5 μm (Mid-infrared)}: 80\% transmission efficiency, optimal
-  for hydrocarbon detection
+  \textbf{2-5 μm (Mid-infrared)}: \textasciitilde80\% transmission
+  efficiency, optimal for hydrocarbon detection
 \item
-  \textbf{8-14 μm (Long-wave infrared)}: 90\% transmission efficiency,
-  optimal for long-range communication
+  \textbf{8-14 μm (Long-wave infrared)}: \textasciitilde90\%
+  transmission efficiency, optimal for long-range communication; ground
+  materials can emit infrared energy that partially penetrates this
+  window
 \item
-  \textbf{17-25 μm (Far-infrared)}: 70\% transmission efficiency, useful
-  for thermal detection
+  \textbf{17-25 μm (Far-infrared)}: \textasciitilde70\% transmission
+  efficiency, useful for thermal detection
 \end{itemize}
 
 \textbf{Transmission function}: Modeled by
 \passthrough{\lstinline!src/core.py::calculate\_atmospheric\_transmission()!}
-(see Eq. \eqref{eq:atmospheric_transmission}; unit tests in
+with validation against peer-reviewed atmospheric physics studies (see
+\eqref{eq:atmospheric_transmission}; unit tests in
 \passthrough{\lstinline!tests/test\_core.py!}):
 
 \begin{equation}
@@ -546,7 +475,8 @@ the path length through atmospheric component \(i\).
 Matching}\label{sensilla-dimensions-and-wavelength-matching}
 
 Insect sensilla have dimensions that correspond closely to the
-wavelengths of infrared radiation they detect:
+wavelengths of infrared radiation they detect, as confirmed by
+comparative morphometric studies:
 
 \begin{itemize}
 \tightlist
@@ -555,15 +485,20 @@ wavelengths of infrared radiation they detect:
   wavelengths
 \item
   \textbf{Sensilla Basiconica}: 2-8 μm length, optimal for 1-10 μm
-  wavelengths
+  wavelengths; specific dimensions of 6.86--53.42 μm observed in thrips
+  species
 \item
   \textbf{Sensilla Coeloconica}: 5-15 μm length, optimal for 3-20 μm
   wavelengths
+\item
+  \textbf{Specialized IR organs}: Approximately 100 sensilla per organ
+  in beetle species
 \end{itemize}
 
 \textbf{Wavelength matching}: Analyzed by
-\passthrough{\lstinline!src/sensilla.py::analyze\_sensilla\_dimensions()!};
-see resonant frequency Eq. \eqref{eq:resonant_freq} and tests
+\passthrough{\lstinline!src/sensilla.py::analyze\_sensilla\_dimensions()!}
+with validation against peer-reviewed morphometric data; see resonant
+frequency \eqref{eq:resonant_freq_gloss} and tests
 \passthrough{\lstinline!tests/test\_sensilla.py!}. Publication figures
 are generated via
 \passthrough{\lstinline!scripts/generate\_research\_figures.py!}.
@@ -604,8 +539,8 @@ reflect their underlying mechanisms:
 see
 \passthrough{\lstinline!tests/test\_core.py::TestResponseTimeImprovement!}.
 See
-\passthrough{\lstinline!output/figures/response\_time\_comparison.png!}
-and cf.~\eqref{eq:response_time}.
+\passthrough{\lstinline!figures/response\_time\_comparison.png!}
+and cf.~\eqref{eq:response_time_components}.
 
 \subsubsection{Signal Processing and Information
 Theory}\label{signal-processing-and-information-theory}
@@ -866,8 +801,10 @@ For detailed discussions of the concepts presented here, see:
 Documentation}\label{computational-framework-documentation}
 
 The complete computational framework is documented with (appendix case
-studies:
-\cref{sec:app_sensilla_array,sec:app_environmental_channel,sec:app_detection_limits,sec:app_neural_encoding,sec:app_spectral_unmixing,sec:app_plasmonic_geometry,sec:app_active_inference}):
+studies: \Cref{sec:app_sensilla_array},
+\Cref{sec:app_environmental_channel}, \Cref{sec:app_detection_limits},
+\Cref{sec:app_neural_encoding}, \Cref{sec:app_spectral_unmixing},
+\Cref{sec:app_plasmonic_geometry}, and \Cref{sec:app_active_inference}):
 
 \begin{itemize}
 \tightlist
@@ -889,7 +826,7 @@ studies:
 \end{itemize}
 
 For complete mathematical formulations and source code implementation,
-see Section \cref{sec:mathematical_appendix}. Cross-links to
+see Section \Cref{sec:mathematical_appendix}. Cross-links to
 implementations and unit tests are included therein.
 
 \begin{longtable}[]{@{}

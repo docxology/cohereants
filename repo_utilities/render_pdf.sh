@@ -136,6 +136,57 @@ setup_directories() {
   log_info "Output directories ready"
 }
 
+# Prepare markdown files by copying local images into the output figures directory
+# and rewriting image links to point to the normalized `figures/` path.
+embed_images_prepare_markdown() {
+  log_info "Preparing markdown with embedded images..."
+
+  TMP_MD_DIR="$LATEX_TEMP_DIR/markdown_prep"
+  rm -rf "$TMP_MD_DIR"
+  mkdir -p "$TMP_MD_DIR" "$FIGURE_DIR"
+
+  for md in "$MARKDOWN_DIR"/*.md; do
+    out="$TMP_MD_DIR/$(basename "$md")"
+    cp "$md" "$out"
+
+    # Find local image links and copy referenced files into $OUTPUT_DIR/figures
+    # Then rewrite the markdown to reference figures/<basename>
+    if command -v rg >/dev/null 2>&1; then
+      while IFS= read -r img; do
+        path=$(printf "%s" "$img" | sed -E 's/.*!\[[^]]*\]\(([^)]+)\).*/\1/')
+        if [[ -z "$path" ]]; then
+          continue
+        fi
+        # skip remote URLs
+        if [[ "$path" =~ ^https?:// ]]; then
+          continue
+        fi
+        # Resolve source path relative to MARKDOWN_DIR when not absolute
+        if [[ "$path" = /* ]]; then
+          src="$path"
+        else
+          src="$MARKDOWN_DIR/$path"
+        fi
+        bn=$(basename "$path")
+        dst="figures/$bn"
+        mkdir -p "$OUTPUT_DIR/$(dirname "$dst")"
+        if cp -f "$src" "$OUTPUT_DIR/$dst" 2>/dev/null; then
+          log_info "Copied image: $src -> $OUTPUT_DIR/$dst"
+          # rewrite the path in the copied markdown file
+          sed -i "s|($path)|($dst)|g" "$out" || true
+        else
+          log_warn "Could not copy image: $src (checked from $md)"
+        fi
+      done < <(rg -o '!\[[^]]*\]\((?!https?://)([^)]+)\)' "$md" || true)
+    else
+      log_warn "rg (ripgrep) not found; skipping image embedding"
+    fi
+  done
+
+  EXPORT_MARKDOWN_DIR="$TMP_MD_DIR"
+  log_info "Prepared markdown files in $TMP_MD_DIR"
+}
+
 # =============================================================================
 # TEST COVERAGE VALIDATION
 # =============================================================================
@@ -687,6 +738,17 @@ build_one() {
     return 1
   fi
 
+  # Fix includegraphics paths produced by pandoc when resource paths include $OUTPUT_DIR
+  # Pandoc may emit paths like ../output/figures/... which become ../output/output/figures when compiled
+  # from $OUTPUT_DIR; normalize to ../figures/ which points to $OUTPUT_DIR/figures from output/tex
+  if command -v sed >/dev/null 2>&1; then
+    # Normalize various forms to a single relative path "figures/" so pdflatex (run from $OUTPUT_DIR) finds them
+    sed -i 's|\.\./output/figures/|figures/|g' "$tex_out" || true
+    sed -i 's|\.\./figures/|figures/|g' "$tex_out" || true
+    sed -i 's|output/figures/|figures/|g' "$tex_out" || true
+    sed -i 's|\.\/figures/|figures/|g' "$tex_out" || true
+  fi
+
   # Compile TeX to PDF with Xelatex - ensure complete compilation
   log_info "Compiling PDF: $base.pdf"
   (
@@ -845,6 +907,100 @@ EOF
     log_info "Generated combined TeX: $TEX_DIR/project_combined.tex"
     
     # Post-processing completed
+    # Ensure cleveref is loaded after hyperref in the generated TeX to make \Cref clickable
+    # Insert a small snippet that explicitly loads cleveref after hyperref if not already present
+    if ! rg "\\\usepackage\[nameinlink,capitalise\]{cleveref}" "$TEX_DIR/project_combined.tex" >/dev/null 2>&1; then
+      # Find the hyperref block and append cleveref immediately after it
+      awk 'BEGIN{p=0} /\\\usepackage\{hyperref\}/{print; print "\\usepackage[nameinlink,capitalise]{cleveref}"; p=1; next} {print}' "$TEX_DIR/project_combined.tex" > "$TEX_DIR/project_combined.tex.tmp" || true
+      mv "$TEX_DIR/project_combined.tex.tmp" "$TEX_DIR/project_combined.tex"
+      log_info "Inserted cleveref after hyperref in combined TeX"
+    else
+      log_info "cleveref already present in combined TeX"
+    fi
+
+    # Normalize includegraphics paths to point to figures/<basename> and add \graphicspath
+    if command -v sed >/dev/null 2>&1; then
+      sed -i 's|\.\./output/figures/|figures/|g' "$TEX_DIR/project_combined.tex" || true
+      sed -i 's|\.\./figures/|figures/|g' "$TEX_DIR/project_combined.tex" || true
+      sed -i 's|output/figures/|figures/|g' "$TEX_DIR/project_combined.tex" || true
+      sed -i 's|\./figures/|figures/|g' "$TEX_DIR/project_combined.tex" || true
+
+      # Ensure \graphicspath{{./figures/}} is present after \usepackage{graphicx}
+      if ! rg "\\\graphicspath\{\{\.\/figures\/\}\}" "$TEX_DIR/project_combined.tex" >/dev/null 2>&1; then
+        awk 'BEGIN{p=0} /\\usepackage\{graphicx\}/{print; print "\\graphicspath{{./figures/}}"; p=1; next} {print}' "$TEX_DIR/project_combined.tex" > "$TEX_DIR/project_combined.tex.tmp" || true
+        mv "$TEX_DIR/project_combined.tex.tmp" "$TEX_DIR/project_combined.tex"
+        log_info "Inserted \\graphicspath{{./figures/}} into combined TeX"
+      fi
+      # Fix filenames that contain stray whitespace and map to actual files in output/figures
+      if command -v python3 >/dev/null 2>&1; then
+        python3 - <<'PY'
+from pathlib import Path
+import re
+tex=Path("$TEX_DIR/project_combined.tex")
+figdir=Path("$OUTPUT_DIR/figures")
+if not tex.exists():
+    raise SystemExit(0)
+files=[f.name for f in figdir.iterdir() if f.is_file()]
+def norm(s):
+    return re.sub(r'[^0-9a-z]', '', s.lower())
+norm_map={norm(f):f for f in files}
+txt=tex.read_text(encoding='utf8')
+# collapse whitespace inside includegraphics arguments to underscores
+txt=re.sub(r'(\\includegraphics(?:\[[^]]*\])?\{)\s*([^}]+?)\s*\}', lambda m: m.group(1)+re.sub(r'\s+','_',m.group(2))+"}", txt)
+
+pattern=re.compile(r'(\\includegraphics(?:\[[^]]*\])?\{)([^}]+)\}')
+def repl(m):
+    prefix=m.group(1)
+    arg=m.group(2)
+    base=arg.split('/')[-1]
+    key=norm(base)
+    if key in norm_map:
+        new='figures/'+norm_map[key]
+        return prefix+new+'}'
+    safe=re.sub(r'\s+','_', base)
+    safe=re.sub(r'[^0-9A-Za-z._-]','', safe)
+    return prefix+'figures/'+safe+'}'
+
+new_txt=pattern.sub(repl, txt)
+tex.write_text(new_txt, encoding='utf8')
+PY
+      fi
+
+      # Further harden: map any includegraphics argument to an existing file in output/figures
+      # by normalizing names (lowercase, remove non-alphanumeric) and substituting the actual filename.
+      if command -v python3 >/dev/null 2>&1; then
+        python3 - <<'PY'
+import re
+from pathlib import Path
+tex=Path("$TEX_DIR/project_combined.tex")
+figdir=Path("$OUTPUT_DIR/figures")
+if not tex.exists():
+    raise SystemExit(0)
+files=[f.name for f in figdir.iterdir() if f.is_file()]
+def norm(s):
+    return re.sub(r'[^0-9a-z]', '', s.lower())
+norm_map={norm(f):f for f in files}
+txt=tex.read_text(encoding='utf8')
+pattern=re.compile(r'(\\\\includegraphics(?:\[[^]]*\])?\{)([^}]+)\}')
+def repl(m):
+    prefix=m.group(1)
+    arg=m.group(2)
+    base=arg.split('/')[-1]
+    key=norm(base)
+    if key in norm_map:
+        new='figures/'+norm_map[key]
+        return prefix+new+'}'
+    # fallback: collapse whitespace and remove odd characters
+    safe=re.sub(r'\s+','_', base)
+    safe=re.sub(r'[^0-9A-Za-z._-]','', safe)
+    return prefix+'figures/'+safe+'}'
+
+new_txt=pattern.sub(repl, txt)
+tex.write_text(new_txt, encoding='utf8')
+PY
+      fi
+    fi
+
     log_info "LaTeX generation completed"
   else
     log_error "Failed to generate combined TeX"

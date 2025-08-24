@@ -46,7 +46,7 @@ Comprehensive spectral analysis: realistic CHC data generation, feature extracti
 \end{figure}
 
 ## Equation References
-- Spectral overlap: see \eqref{eq:channel_capacity} analogs for information metrics; overlap in main text.
+- Spectral overlap: see \eqref{eq:channel_capacity_gloss} analogs for information metrics; overlap in main text.
 
 ## Reproducibility
 
@@ -56,6 +56,6 @@ Comprehensive spectral analysis: realistic CHC data generation, feature extracti
 
 ## Cross‑references
 
-- Methods: \cref{sec:methodology}
-- Symbols: \cref{sec:symbols_glossary}
-- Math appendix: \cref{sec:mathematical_appendix}
+- Methods: \Cref{sec:methodology}
+- Symbols: \Cref{sec:symbols_glossary}
+- Math appendix: \Cref{sec:mathematical_appendix}
