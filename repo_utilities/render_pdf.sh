@@ -749,6 +749,58 @@ build_one() {
     sed -i 's|\.\/figures/|figures/|g' "$tex_out" || true
   fi
 
+  # Post-process TeX to ensure figures are wrapped in LaTeX figure environments
+  # and captions/labels are inserted from corresponding caption files in $OUTPUT_DIR/figures
+  if command -v python3 >/dev/null 2>&1; then
+    python3 - <<'PY'
+from pathlib import Path
+import re
+
+tex=Path("$tex_out")
+figdir=Path("$OUTPUT_DIR/figures")
+if tex.exists():
+    txt=tex.read_text(encoding='utf8')
+
+    # First, update existing figure placement specifiers to be more flexible
+    txt = re.sub(r'\\begin\{figure\}\[h\]', r'\\begin{figure}[htbp]', txt)
+
+    # Pattern to find \includegraphics commands
+    pattern=re.compile(r'(\\includegraphics(?:\[[^]]*\])?\{([^}]+)\})')
+
+    def already_in_figure(pos):
+        start=max(0,pos-200)
+        return '\\begin{figure}' in txt[start:pos]
+
+    def make_label(filename):
+        base=Path(filename).stem
+        lab=re.sub(r'[^0-9a-zA-Z_]+','_', base).lower()
+        return 'fig:'+lab
+
+    def caption_for(filename):
+        base=Path(filename).name
+        capfile=figdir/(base.rsplit('.',1)[0]+'.caption.txt')
+        if capfile.exists():
+            return capfile.read_text(encoding='utf8').strip()
+        return ''
+
+    def repl(m):
+        full=m.group(1)
+        arg=m.group(2)
+        if already_in_figure(m.start()):
+            return full
+        cap=caption_for(arg)
+        if cap:
+            label=make_label(arg)
+            cap_escaped=cap.replace('\\','\\\\')
+            return '\\begin{figure}[htbp]\n\\centering\n'+full+'\\caption{'+cap_escaped+'}\\label{'+label+'}\\end{figure}'
+        else:
+            return '\\begin{figure}[htbp]\n\\centering\n'+full+'\\end{figure}'
+
+    new_txt=pattern.sub(repl, txt)
+    tex.write_text(new_txt, encoding='utf8')
+PY
+  fi
+
   # Compile TeX to PDF with Xelatex - ensure complete compilation
   log_info "Compiling PDF: $base.pdf"
   (
@@ -936,6 +988,7 @@ EOF
         python3 - <<'PY'
 from pathlib import Path
 import re
+
 tex=Path("$TEX_DIR/project_combined.tex")
 figdir=Path("$OUTPUT_DIR/figures")
 if not tex.exists():
@@ -960,6 +1013,58 @@ def repl(m):
     safe=re.sub(r'\s+','_', base)
     safe=re.sub(r'[^0-9A-Za-z._-]','', safe)
     return prefix+'figures/'+safe+'}'
+
+new_txt=pattern.sub(repl, txt)
+tex.write_text(new_txt, encoding='utf8')
+PY
+      fi
+      
+      # Insert figure wrapping and captions into combined TeX using caption files
+      if command -v python3 >/dev/null 2>&1; then
+        python3 - <<'PY'
+from pathlib import Path
+import re
+
+tex=Path("$TEX_DIR/project_combined.tex")
+figdir=Path("$OUTPUT_DIR/figures")
+if not tex.exists():
+    raise SystemExit(0)
+txt=tex.read_text(encoding='utf8')
+
+# First, update existing figure placement specifiers to be more flexible
+txt = re.sub(r'\\begin\{figure\}\[h\]', r'\\begin{figure}[htbp]', txt)
+
+# Pattern to find includegraphics commands
+pattern=re.compile(r'(\\includegraphics(?:\[[^]]*\])?\{([^}]+)\})')
+
+def already_in_figure(pos):
+    start=max(0,pos-200)
+    return '\\begin{figure}' in txt[start:pos]
+
+def make_label(filename):
+    base=Path(filename).stem
+    lab=re.sub(r'[^0-9a-zA-Z_]+','_', base).lower()
+    return 'fig:'+lab
+
+def caption_for(filename):
+    base=Path(filename).name
+    capfile=figdir/(base.rsplit('.',1)[0]+'.caption.txt')
+    if capfile.exists():
+        return capfile.read_text(encoding='utf8').strip()
+    return ''
+
+def repl(m):
+    full=m.group(1)
+    arg=m.group(2)
+    if already_in_figure(m.start()):
+        return full
+    cap=caption_for(arg)
+    if cap:
+        label=make_label(arg)
+        cap_escaped=cap.replace('\\','\\\\')
+        return '\\begin{figure}[htbp]\n\\centering\n'+full+'\\caption{'+cap_escaped+'}\\label{'+label+'}\\end{figure}'
+    else:
+        return '\\begin{figure}[htbp]\n\\centering\n'+full+'\\end{figure}'
 
 new_txt=pattern.sub(repl, txt)
 tex.write_text(new_txt, encoding='utf8')
