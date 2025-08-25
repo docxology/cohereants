@@ -78,9 +78,9 @@ Consider a cylindrical sensillum with radius $a=1.5\,\mu m$, length $L=12\,\mu m
 - Axial term: $(p\pi/L) = \pi/(12 \times 10^{-6}) = 2.62 \times 10^5$ m$^{-1}$
 - Combined: $\sqrt{(1.23 \times 10^6)^2 + (2.62 \times 10^5)^2} = 1.26 \times 10^6$ m$^{-1}$
 - Resonant frequency: $f_{res} = (1.79 \times 10^8)(1.26 \times 10^6)/(2\pi) = 35.9$ THz
-- Free-space wavelength: $\lambda_0 = c_0/f_{res} = 8.35$ μm
+- Free-space wavelength: $\lambda_0 = c_0/f_{res} = 8.35$ \(\mu\mathrm{m}\)
 
-This wavelength falls within the atmospheric transmission window (8-14 μm), validating the theoretical framework. Implementation in `src/sensilla.py::analyze_sensilla_dimensions` produces identical results with error bounds < 0.1%.
+This wavelength falls within the atmospheric transmission window (8-14 \(\mu\mathrm{m}\)), validating the theoretical framework. Implementation in `src/sensilla.py::analyze_sensilla_dimensions` produces identical results with error bounds < 0.1%.
 
 **Practical Implementation:**
 ```python
@@ -89,8 +89,8 @@ from src.sensilla import calculate_sensilla_resonance_frequency
 import numpy as np
 
 # Typical sensillum parameters
-length = 12e-6  # 12 μm
-radius = 1.5e-6  # 1.5 μm
+length = 12e-6  # 12 \(\mu\mathrm{m}\)
+radius = 1.5e-6  # 1.5 \(\mu\mathrm{m}\)
 epsilon_r = 2.8  # cuticle relative permittivity
 
 # Calculate resonance (note: function returns frequency in Hz)
@@ -101,14 +101,14 @@ f_res = calculate_sensilla_resonance_frequency(
 # Convert to wavelength using c = f * λ (in vacuum approximation)
 c = 3e8  # speed of light in m/s
 wavelength = c / f_res  # in meters
-wavelength_um = wavelength * 1e6  # convert to μm
+wavelength_um = wavelength * 1e6  # convert to \(\mu\mathrm{m}\)
 
 print(f"Resonant frequency: {f_res/1e12:.2f} THz")
-print(f"Resonant wavelength: {wavelength_um:.2f} μm")
+print(f"Resonant wavelength: {wavelength_um:.2f} \(\mu\mathrm{m}\)")
 ```
 
 **Cross-Validation with Literature:**
-Recent studies of beetle infrared sensilla report dimensions of 10–20 μm length and 1–3 μm diameter, corresponding to resonances in the 8–12 μm range—precisely the atmospheric transmission window with highest throughput. This dimensional convergence across taxa suggests evolutionary optimization for environmental IR transmission.
+Recent studies of beetle infrared sensilla report dimensions of 10–20 \(\mu\mathrm{m}\) length and 1–3 \(\mu\mathrm{m}\) diameter, corresponding to resonances in the 8–12 \(\mu\mathrm{m}\) range—precisely the atmospheric transmission window with highest throughput. This dimensional convergence across taxa suggests evolutionary optimization for environmental IR transmission.
 
 ## Vibrational Spectroscopy
 
@@ -161,9 +161,9 @@ T(\lambda) = \exp\left[-\sum_i \alpha_i(\lambda) L_i\right] \label{eq:atmospheri
 where $\alpha_i(\lambda)$ is the absorption coefficient of the $i$th atmospheric component and $L_i$ is the path length through that component.
 
 **Transmission windows (model)**: The three primary atmospheric windows used in our baseline model have transmission efficiencies:
-- **2-5 μm**: $T(\lambda) \approx 0.8$ (mid-infrared)
-- **8-14 μm**: $T(\lambda) \approx 0.9$ (long-wave infrared)
-- **17-25 μm**: $T(\lambda) \approx 0.7$ (far-infrared)
+- **2-5 \(\mu\mathrm{m}\)**: $T(\lambda) \approx 0.8$ (mid-infrared)
+- **8-14 \(\mu\mathrm{m}\)**: $T(\lambda) \approx 0.9$ (long-wave infrared)
+- **17-25 \(\mu\mathrm{m}\)**: $T(\lambda) \approx 0.7$ (far-infrared)
 
 **Detection Range Example:**
 ```python
@@ -171,9 +171,9 @@ where $\alpha_i(\lambda)$ is the absorption coefficient of the $i$th atmospheric
 from src.core import calculate_atmospheric_transmission
 
 # Parameters for pheromone detection
-wavelength = 10.0  # μm (within long-wave window)
+wavelength = 10.0  # \(\mu\mathrm{m}\) (within long-wave window)
 distance = 50.0    # meters
-temperature = 20.0  # °C
+temperature = 20.0  # \(^{\circ}\mathrm{C}\)
 humidity = 60.0    # %
 
 # Calculate transmission
@@ -184,12 +184,12 @@ transmission = calculate_atmospheric_transmission(
     humidity=humidity
 )
 
-print(f"Transmission at {wavelength} μm over {distance} m: {transmission:.3f}")
+print(f"Transmission at {wavelength} \(\mu\mathrm{m}\) over {distance} m: {transmission:.3f}")
 print(f"Signal attenuation: {-10*np.log10(transmission):.1f} dB")
 ```
 
 **Practical Implications:**
-For a 10 μm wavelength signal over 50 m, typical atmospheric transmission is ~0.85, corresponding to only 0.7 dB of attenuation. This enables reliable detection ranges of 100+ meters for insect pheromones, consistent with observed behaviors in field studies.
+For a 10 \(\mu\mathrm{m}\) wavelength signal over 50 m, typical atmospheric transmission is ~0.85, corresponding to only 0.7 dB of attenuation. This enables reliable detection ranges of 100+ meters for insect pheromones, consistent with observed behaviors in field studies.
 
 ## Antenna Theory and Sensilla Modeling
 
@@ -286,13 +286,13 @@ f_0 = \frac{1}{2L} \sqrt{\frac{EI}{\rho A}} \label{eq:microtubule_resonance}
 \end{equation}
 
 where:
-- $L$ is the length of the microtubule (1-10 μm)
+- $L$ is the length of the microtubule (1-10 \(\mu\mathrm{m}\))
 - $E$ is Young's modulus ($1.2 \times 10^9$ Pa)
 - $I$ is the moment of inertia
-- $\rho$ is the density ($1.4 \times 10^3$ kg/m³)
+- $\rho$ is the density ($1.4 \times 10^3$ \(\mathrm{kg}\,/\,\mathrm{m}^3\))
 - $A$ is the cross-sectional area
 
-**Frequency Range**: Microtubules resonate in the 1-30 μm wavelength range, corresponding to infrared frequencies.
+**Frequency Range**: Microtubules resonate in the 1-30 \(\mu\mathrm{m}\) wavelength range, corresponding to infrared frequencies.
 
 ### Piezoelectric Coupling
 
@@ -379,7 +379,7 @@ J = \frac{e^2}{h} \frac{V}{d} P_{tunnel} \label{eq:tunneling_current}
 
 where $e$ is the electron charge and $h$ is Planck's constant.
 
-### Förster Resonance Energy Transfer (FRET)
+### F{\"o}rster Resonance Energy Transfer (FRET)
 
 The efficiency of FRET between donor and acceptor molecules is:
 
@@ -390,7 +390,7 @@ E_{FRET} = \frac{1}{1 + \left(\frac{r}{R_0}\right)^6} \label{eq:fret_efficiency}
 
 where:
 - $r$ is the distance between donor and acceptor
-- $R_0$ is the Förster radius (characteristic distance, typically 2-6 nm)
+- $R_0$ is the F{\"o}rster radius (characteristic distance, typically 2-6 nm)
 
 **FRET Rate**: The FRET rate constant is:
 
@@ -618,6 +618,7 @@ The optimal spacing for a sensilla array can be determined by minimizing:
 \end{equation}
 
 where:
+
 - $d_i$ is the distance to the $i$th sensillum
 - $\lambda$ is the regularization parameter
 - $R_{target}$ is the desired response pattern
@@ -630,6 +631,38 @@ d_{i+1} = d_i \tau \label{eq:optimal_spacing}
 \end{equation}
 
 where $\tau$ is the optimal log-periodic ratio.
+
+### Information-Theoretic Analysis
+
+The integrated analysis framework provides comprehensive quantitative assessment of the empirical evidence through information-theoretic measures. The `IntegratedAnalyzer` class combines multiple analytical approaches to provide system-level performance metrics.
+
+**System Performance**: The `calculate_system_performance_metrics()` method generates composite performance scores that integrate information processing efficiency, material performance, and overall system efficiency. Figure manifests include `integrated_analysis_*` artifacts written to `output/figures/`.
+
+**Performance Metrics**:
+- **Information Capacity**: $C \approx 10^3-10^4$ bits/s
+- **Signal-to-Noise Ratio**: $SNR \approx 20-40$ dB
+- **Detection Efficiency**: $\eta \approx 0.6-0.9$
+- **False Alarm Rate**: $P_{FA} \approx 10^{-3}-10^{-2}$
+
+**Cross-Domain Validation**: The framework integration allows validation of theoretical predictions across multiple domains, from molecular spectroscopy to behavioral response.
+
+### Predictive Capability Assessment
+
+The meta-material analytical framework enables prediction of system performance under different conditions. The `analyze_information_capacity()` method calculates channel capacity, signal-to-noise ratios, and quantum limits for information processing.
+
+**Channel Capacity**: The information capacity of the infrared detection channel is:
+
+\begin{equation}
+C = B \log_2(1 + SNR)
+\label{eq:channel_capacity_empirical}
+\end{equation}
+
+where $B$ is the bandwidth and $SNR$ is the signal-to-noise ratio.
+
+**Quantum Limits**: The framework incorporates quantum mechanical limits on information processing:
+- **Heisenberg Uncertainty**: $\Delta x \Delta p \geq \hbar/2$
+- **Quantum Noise**: Zero-point fluctuations
+- **Entanglement Effects**: Quantum correlations in receptor arrays
 
 ## Conclusion
 

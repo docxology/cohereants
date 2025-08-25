@@ -18,11 +18,12 @@ Recent studies have revealed specialized infrared-sensitive organs in multiple b
 
 **Central Research Question:** Can infrared (IR) vibrational signatures of semiochemicals serve as an electromagnetic detection pathway that enhances insect olfaction, providing faster response times, extended range, and complementary sensory information?
 
-**Scope and Approach:** We focus on mid-infrared detection (2-25 μm) as this range encompasses molecular vibrational modes of biologically relevant compounds while overlapping atmospheric transmission windows. Our framework integrates computational electromagnetism with empirical validation, testing whether IR detection operates alongside (not replacing) traditional molecular binding pathways. We emphasize falsifiable predictions and controlled experimental protocols to distinguish electromagnetic from thermal effects.
+**Scope and Approach:** We focus on mid-infrared detection (2-25 \(\mu\mathrm{m}\)) as this range encompasses molecular vibrational modes of biologically relevant compounds while overlapping atmospheric transmission windows. Our framework integrates computational electromagnetism with empirical validation, testing whether IR detection operates alongside (not replacing) traditional molecular binding pathways. We emphasize falsifiable predictions and controlled experimental protocols to distinguish electromagnetic from thermal effects.
 
 **Specific Hypotheses:**
-- **H1 (Morphological):** Antennal sensilla dimensions (2–160 μm across sensillum types; trichodea 6–160 μm, basiconica 2–8 μm, coeloconica 5–15 μm) correlate with predicted IR resonant wavelengths across diverse insect taxa (e.g., [Liu et al. 2021 (sensilla survey)](https://pmc.ncbi.nlm.nih.gov/articles/PMC7831480/)).
-- **H2 (Spectral):** Cuticular hydrocarbon (CHC) vibrational spectra align with atmospheric transmission windows (2–5, 8–14, 17–25 μm), with high transmission efficiency in the 8–14 μm band.
+
+- **H1 (Morphological):** Antennal sensilla dimensions (2–160 \(\mu\mathrm{m}\) across sensillum types; trichodea 6–160 \(\mu\mathrm{m}\), basiconica 2–8 \(\mu\mathrm{m}\), coeloconica 5–15 \(\mu\mathrm{m}\)) correlate with predicted IR resonant wavelengths across diverse insect taxa (e.g., [Liu et al. 2021 (sensilla survey)](https://pmc.ncbi.nlm.nih.gov/articles/PMC7831480/)).
+- **H2 (Spectral):** Cuticular hydrocarbon (CHC) vibrational spectra align with atmospheric transmission windows (2–5, 8–14, 17–25 \(\mu\mathrm{m}\)), with high transmission efficiency in the 8–14 \(\mu\mathrm{m}\) band.
 - **H3 (Temporal):** IR‑mediated detection can achieve 1–5 ms ORN latencies (minimum ~3 ms reported), faster than diffusion‑based mechanisms.
 - **H4 (Behavioral):** Frequency‑specific IR stimulation elicits directed orientation behaviors in the absence of volatile chemical cues, as demonstrated in specialized beetle species.
 
@@ -31,8 +32,10 @@ Recent studies have revealed specialized infrared-sensitive organs in multiple b
 We evaluate these hypotheses using an integrated framework combining comparative morphology, infrared spectroscopy, neural timing analysis, and deterministic computational electromagnetism. All models are unit-tested and reproducible with fixed random seeds (42).
 
 The manuscript is organized as follows:
+
 - **Main Text:** Presents integrated findings with cross-references to detailed case studies
 - **Appendices:** Seven specialized analyses exploring specific aspects:
+
   - Sensory array directionality and beam patterns \Cref{sec:app_sensilla_array}
   - Environmental channel modeling \Cref{sec:app_environmental_channel}
   - Detection limits and operating points \Cref{sec:app_detection_limits}

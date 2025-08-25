@@ -13,8 +13,8 @@
 ### Insect Anatomy and Physiology
 - **Antennae**: Paired sensory appendages on the head of insects that contain olfactory and other sensory receptors
 - **Sensilla**: Microscopic sensory hairs or pegs on insect antennae and other body parts that serve as the primary sensory units
-- **Sensilla Trichodea**: Hair-like sensilla that are often involved in olfaction, typically 6-160 μm in length
-- **Sensilla Basiconica**: Peg-like sensilla with porous surfaces, typically 2-8 μm in length
+- **Sensilla Trichodea**: Hair-like sensilla that are often involved in olfaction, typically 6-160 \(\mu\mathrm{m}\) in length
+- **Sensilla Basiconica**: Peg-like sensilla with porous surfaces, typically 2-8 \(\mu\mathrm{m}\) in length
 - **Sensilla Coeloconica**: Pit-like sensilla that may detect temperature, humidity, and infrared radiation
 - **ORN**: Olfactory Receptor Neuron; nerve cells that respond to chemical stimuli and transmit signals to the brain
 - **OR**: Olfactory Receptor; membrane proteins that bind to odor molecules and initiate signal transduction
@@ -22,10 +22,10 @@
  - **Glomerulus (plural: glomeruli)**: Spheroidal neuropil compartment in the AL where ORN axons synapse with projection neurons and local interneurons; often tuned to receptor families or vibrational features
 
 ### Electromagnetic Theory and Infrared Detection
-- **Infrared (IR)**: Electromagnetic radiation with wavelengths longer than visible light (0.7-1000 μm), invisible to human eyes but detectable by specialized sensors
-- **Mid-infrared (MIR)**: IR radiation in the 2-25 μm range, corresponding to molecular vibrational modes and fundamental for chemical sensing applications
-- **Far-infrared (FIR)**: IR radiation in the 25-1000 μm range, corresponding to rotational and low-frequency vibrational modes, also known as thermal infrared
-- **Near-infrared (NIR)**: IR radiation in the 0.7-2 μm range, just beyond visible light, commonly used in spectroscopy and optical communications
+- **Infrared (IR)**: Electromagnetic radiation with wavelengths longer than visible light (0.7-1000 \(\mu\mathrm{m}\)), invisible to human eyes but detectable by specialized sensors
+- **Mid-infrared (MIR)**: IR radiation in the 2-25 \(\mu\mathrm{m}\) range, corresponding to molecular vibrational modes and fundamental for chemical sensing applications
+- **Far-infrared (FIR)**: IR radiation in the 25-1000 \(\mu\mathrm{m}\) range, corresponding to rotational and low-frequency vibrational modes, also known as thermal infrared
+- **Near-infrared (NIR)**: IR radiation in the 0.7-2 \(\mu\mathrm{m}\) range, just beyond visible light, commonly used in spectroscopy and optical communications
 - **Dielectric**: A material that can be polarized by an electric field and supports electromagnetic wave propagation
 - **Waveguide**: A structure that guides electromagnetic waves along a specific path with minimal loss
 - **Resonator**: A device or structure that oscillates at specific frequencies, amplifying signals at resonant frequencies
@@ -38,28 +38,28 @@
 - **Transmission Window**: A range of wavelengths where the atmosphere is relatively transparent to electromagnetic radiation, allowing for long-range signal propagation
 - **Deuteration**: The replacement of hydrogen atoms with deuterium (heavy hydrogen) in molecules, affecting vibrational frequencies
 - **Enantiomers**: Mirror-image forms of the same molecule that may have different olfactory properties
-- **FRET**: Förster Resonance Energy Transfer; energy transfer between molecules through dipole-dipole interactions
+- **FRET**: F{\"o}rster Resonance Energy Transfer; energy transfer between molecules through dipole-dipole interactions
 - **Wavenumber**: The reciprocal of wavelength, typically expressed in cm$^{-1}$, related to energy by $E = hc\tilde{\nu}$
 
 ## Mathematical Notation
 
 ### Wavelength and frequency
-- **λ (lambda)**: Wavelength, typically in micrometers (μm) or nanometers (nm).
+- **λ (lambda)**: Wavelength, typically in micrometers (\(\mu\mathrm{m}\)) or nanometers (nm).
 - **ν (nu)**: Frequency in Hz, related to wavelength by $c = \lambda\nu$.
-- **$\tilde{\nu}$ (wavenumber)**: Reciprocal wavelength in cm$^{-1}$, $\tilde{\nu} = 10^4/\lambda$ (for λ in μm).
-- **c**: Speed of light in vacuum (2.998 × 10^8 m/s).
-- **μm**: Micrometer (10^-6 m); standard unit for infrared wavelengths.
+- **$\tilde{\nu}$ (wavenumber)**: Reciprocal wavelength in cm$^{-1}$, $\tilde{\nu} = 10^4/\lambda$ (for λ in \(\mu\mathrm{m}\)).
+- **c**: Speed of light in vacuum (2.998 \(\times\) 10\^{}8 m/s).
+- **\(\mu\mathrm{m}\)**: Micrometer (10^-6 m); standard unit for infrared wavelengths.
 - **nm**: Nanometer (10^-9 m).
 - **cm^-1**: Wavenumber unit used in IR spectroscopy.
 
 ### Physical Constants and Units
-- **h**: Planck's constant (6.626 × 10^-34 J·s)
-- **$\hbar$**: Reduced Planck constant (h/2π = 1.055 × 10^-34 J·s)
-- **k_B**: Boltzmann constant (1.381 × 10^-23 J/K)
+- **h**: Planck's constant (6.626 \(\times\) 10\^{}-34 Jot s)
+- **$\hbar$**: Reduced Planck constant (h/2π = 1.055 \(\times\) 10^-34 Jot s)
+- **k_B**: Boltzmann constant (1.381 \(\times\) 10^-23 J/K)
 - **T**: Temperature in Kelvin (K)
-- **ε_0**: Permittivity of free space (8.854 × 10^-12 F/m)
-- **μ_0**: Permeability of free space (4π × 10^-7 H/m)
-- **e**: Elementary charge (1.602 × 10^-19 C)
+- **ε_0**: Permittivity of free space (8.854 \(\times\) 10^-12 F/m)
+- **μ_0**: Permeability of free space (4\(\pi\) \(\times\) 10\^{}-7 H/m)
+- **e**: Elementary charge (1.602 \(\times\) 10^-19 C)
 
 ### Electromagnetic Theory
 - **E**: Electric field vector (V/m)
@@ -73,10 +73,10 @@
 - **tan δ**: Loss tangent, measure of dielectric loss (dimensionless)
 
 ### Insect Measurements and Response Times
-- **μm**: Micrometer; typical size range for insect sensilla (1-200 μm)
+- **\(\mu\mathrm{m}\)**: Micrometer; typical size range for insect sensilla (1-200 \(\mu\mathrm{m}\))
 - **nm**: Nanometer; scale of molecular interactions and receptor dimensions
 - **ms**: Millisecond; typical response time of insect ORNs (1-5 ms)
-- **μs**: Microsecond; time scale for electromagnetic detection
+- **\(\mu\mathrm{s}\)**: Microsecond; time scale for electromagnetic detection
 - **ns**: Nanosecond; time scale for quantum processes
 
 ## Abbreviations and Acronyms
@@ -87,7 +87,7 @@
 - **CHCs**: Cuticular Hydrocarbons
 - **GPCR**: G-Protein Coupled Receptor
 - **MTs**: Microtubules
-- **FRET**: Förster Resonance Energy Transfer
+- **FRET**: F{\"o}rster Resonance Energy Transfer
 - **SNR**: Signal-to-Noise Ratio
 - **Q**: Quality Factor
 - **ROC**: Receiver Operating Characteristic
@@ -115,9 +115,9 @@
 ### Atmospheric Transmission Windows
 The Earth's atmosphere has specific wavelength ranges where infrared radiation can travel relatively freely, enabling long-range detection of insect semiochemicals:
 
-- **2-5 μm (Mid-infrared)**: ~80% transmission efficiency, optimal for hydrocarbon detection
-- **8-14 μm (Long-wave infrared)**: ~90% transmission efficiency, optimal for long-range communication; ground materials can emit infrared energy that partially penetrates this window
-- **17-25 μm (Far-infrared)**: ~70% transmission efficiency, useful for thermal detection
+- **2-5 \(\mu\mathrm{m}\) (Mid-infrared)**: ~80% transmission efficiency, optimal for hydrocarbon detection
+- **8-14 \(\mu\mathrm{m}\) (Long-wave infrared)**: ~90% transmission efficiency, optimal for long-range communication; ground materials can emit infrared energy that partially penetrates this window
+- **17-25 \(\mu\mathrm{m}\) (Far-infrared)**: ~70% transmission efficiency, useful for thermal detection
 
 **Transmission function**: Modeled by `src/core.py::calculate_atmospheric_transmission()` with validation against peer-reviewed atmospheric physics studies (see \eqref{eq:atmospheric_transmission}; unit tests in `tests/test_core.py`):
 
@@ -131,9 +131,9 @@ where $\alpha_i(\lambda)$ is the absorption coefficient and $L_i$ is the path le
 ### Sensilla Dimensions and Wavelength Matching
 Insect sensilla have dimensions that correspond closely to the wavelengths of infrared radiation they detect, as confirmed by comparative morphometric studies:
 
-- **Sensilla Trichodea**: 6-160 μm length, optimal for 2-30 μm wavelengths
-- **Sensilla Basiconica**: 2-8 μm length, optimal for 1-10 μm wavelengths; specific dimensions of 6.86–53.42 μm observed in thrips species
-- **Sensilla Coeloconica**: 5-15 μm length, optimal for 3-20 μm wavelengths
+- **Sensilla Trichodea**: 6-160 \(\mu\mathrm{m}\) length, optimal for 2-30 \(\mu\mathrm{m}\) wavelengths
+- **Sensilla Basiconica**: 2-8 \(\mu\mathrm{m}\) length, optimal for 1-10 \(\mu\mathrm{m}\) wavelengths; specific dimensions of 6.86–53.42 \(\mu\mathrm{m}\) observed in thrips species
+- **Sensilla Coeloconica**: 5-15 \(\mu\mathrm{m}\) length, optimal for 3-20 \(\mu\mathrm{m}\) wavelengths
 - **Specialized IR organs**: Approximately 100 sensilla per organ in beetle species
 
 **Wavelength matching**: Analyzed by `src/sensilla.py::analyze_sensilla_dimensions()` with validation against peer-reviewed morphometric data; see resonant frequency \eqref{eq:resonant_freq_gloss} and tests `tests/test_sensilla.py`. Publication figures are generated via `scripts/generate_research_figures.py`.
@@ -371,8 +371,9 @@ For complete mathematical formulations and source code implementation, see Secti
 | `spectroscopy` | `identify_chc_compounds` | function | Identify potential CHC compounds based on peak positions |
 | `visualization` | `AdvancedVisualizer` | class | Advanced visualization tools for insect analysis data |
 | `visualization` | `PlotStyler` | class | Advanced plot styling and theming system |
+| `visualization` | `create_accessible_figure` | function | Create an accessible figure with enhanced features for better understanding |
 | `visualization` | `create_publication_figure` | function | Create a publication-ready figure with optimal styling |
-| `visualization` | `create_subplots` | function | Create subplots with consistent styling |
+| `visualization` | `create_subplots` | function | Create subplots with enhanced accessibility and consistent styling |
 | `visualization` | `get_colorblind_palette` | function | Get a colorblind-friendly color palette |
 | `visualization` | `set_plot_style` | function | Set the global plot style |
 <!-- END: AUTO-API-GLOSSARY -->

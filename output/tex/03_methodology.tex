@@ -61,6 +61,19 @@
 \DeclareUnicodeCharacter{03B5}{\(\epsilon\)}
 \DeclareUnicodeCharacter{03B4}{\(\delta\)}
 
+% Map common Unicode subscripts and degree symbol to LaTeX-friendly macros
+\DeclareUnicodeCharacter{2080}{\textsubscript{0}}
+\DeclareUnicodeCharacter{2081}{\textsubscript{1}}
+\DeclareUnicodeCharacter{2082}{\textsubscript{2}}
+\DeclareUnicodeCharacter{2083}{\textsubscript{3}}
+\DeclareUnicodeCharacter{2084}{\textsubscript{4}}
+\DeclareUnicodeCharacter{2085}{\textsubscript{5}}
+\DeclareUnicodeCharacter{2086}{\textsubscript{6}}
+\DeclareUnicodeCharacter{2087}{\textsubscript{7}}
+\DeclareUnicodeCharacter{2088}{\textsubscript{8}}
+\DeclareUnicodeCharacter{2089}{\textsubscript{9}}
+\DeclareUnicodeCharacter{00B0}{\textdegree}
+
 % Counter behaviour
 \usepackage{chngcntr}
 \counterwithout{figure}{section}
@@ -83,6 +96,10 @@
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
+% Ensure each top-level section starts on a new page
+\let\oldsection\section
+\renewcommand{\section}{\clearpage\oldsection}
+
 % Graphics support for figures
 \usepackage{graphicx}
 
@@ -94,7 +111,7 @@
 
 % Setup listings safely (don't override global styles)
 \usepackage{listings}
-\lstset{backgroundcolor=\color{codebg},basicstyle=\normalsize\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
+\lstset{backgroundcolor=\color{codebg},basicstyle=\small\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
 
 % Keep title metadata to be inserted by build system
 \ifLuaTeX
@@ -165,7 +182,8 @@ We implement comprehensive atmospheric modeling including:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Molecular absorption} (H₂O, CO₂, CH₄, O₃)
+  \textbf{Molecular absorption} (H\textsubscript{2}O,
+  CO\textsubscript{2}, CH\textsubscript{4}, O\textsubscript{3})
 \item
   \textbf{Rayleigh scattering} from air molecules
 \item
@@ -177,11 +195,12 @@ We implement comprehensive atmospheric modeling including:
 \end{itemize}
 
 \textbf{Principal transmission windows} (baseline model with
-environmental dependencies): - \textbf{2--5 μm (mid-IR)}:
+environmental dependencies): - \textbf{2--5 \(\mu\mathrm{m}\) (mid-IR)}:
 \textasciitilde0.8 transmission, minimal water vapor absorption -
-\textbf{8--14 μm (long-wave IR)}: \textasciitilde0.9 transmission,
-atmospheric window - \textbf{17--25 μm (far-IR)}: \textasciitilde0.7
-transmission, increasing molecular absorption
+\textbf{8--14 \(\mu\mathrm{m}\) (long-wave IR)}: \textasciitilde0.9
+transmission, atmospheric window - \textbf{17--25 \(\mu\mathrm{m}\)
+(far-IR)}: \textasciitilde0.7 transmission, increasing molecular
+absorption
 
 These windows overlap measured cuticular hydrocarbon (CHC) vibrational
 bands and inform detection-range estimates of 10--100 m using the
@@ -197,8 +216,8 @@ Antennas}\label{sensilla-as-dielectric-antennas}
 
 Insect antennae host micron-scale sensilla whose geometric dimensions
 frequently correspond to IR wavelengths relevant for electromagnetic
-resonance (typical ranges: trichodea 6--160 μm, basiconica 2--8 μm,
-coeloconica 5--15 μm;
+resonance (typical ranges: trichodea 6--160 \(\mu\mathrm{m}\),
+basiconica 2--8 \(\mu\mathrm{m}\), coeloconica 5--15 \(\mu\mathrm{m}\);
 cf.~\href{https://pmc.ncbi.nlm.nih.gov/articles/PMC7831480/}{Liu et
 al.~2021 (sensilla survey)}). We analyze this correspondence through:
 
@@ -236,9 +255,11 @@ spectroscopic pipeline includes:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Robust wavenumber↔wavelength conversions} with unit testing
+  \textbf{Robust wavenumber\(\leftrightarrow\)wavelength conversions}
+  with unit testing
 \item
-  \textbf{Peak detection algorithms} with ±0.1 μm localization accuracy
+  \textbf{Peak detection algorithms} with \(\pm 0.1\,\mu\mathrm{m}\)
+  localization accuracy
 \item
   \textbf{Isotope effect modeling} for validation against experimental
   data
@@ -251,30 +272,50 @@ Validation}\label{computational-implementation-and-validation}
 
 \subsubsection{Mathematical Framework}\label{mathematical-framework}
 
-The computational framework integrates multiple physical domains: -
-\textbf{Maxwell's equations} for electromagnetic field propagation in
-dielectric media - \textbf{Waveguide theory} for sensilla as cylindrical
-dielectric waveguides - \textbf{Resonant cavity formulas} for antenna
-impedance matching - \textbf{Piezoelectric coupling models} for
-electromechanical transduction - \textbf{Information theory} for channel
-capacity and detection limits
+The computational framework integrates multiple physical domains:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Maxwell's equations} for electromagnetic field propagation in
+  dielectric media
+\item
+  \textbf{Waveguide theory} for sensilla as cylindrical dielectric
+  waveguides
+\item
+  \textbf{Resonant cavity formulas} for antenna impedance matching
+\item
+  \textbf{Piezoelectric coupling models} for electromechanical
+  transduction
+\item
+  \textbf{Information theory} for channel capacity and detection limits
+\end{itemize}
 
 All theoretical expressions are implemented in
 \passthrough{\lstinline!src/!} modules with comprehensive unit testing
-that exercises: - Scalar vs.~array input handling with consistent
-broadcasting - Numerical stability across parameter ranges (validated
-against analytical limits) - Edge conditions and boundary cases (empty
-arrays, extreme values) - Cross-platform reproducibility with fixed
-random seeds
+that exercises:
+
+\begin{itemize}
+\tightlist
+\item
+  Scalar vs.~array input handling with consistent broadcasting
+\item
+  Numerical stability across parameter ranges (validated against
+  analytical limits)
+\item
+  Edge conditions and boundary cases (empty arrays, extreme values)
+\item
+  Cross-platform reproducibility with fixed random seeds
+\end{itemize}
 
 \textbf{Implementation Scope and Limitations:} - Models assume linear,
 isotropic dielectric materials with frequency-dependent permittivity -
 Quasi-static approximations apply for sensilla dimensions
 \textless\textless{} wavelength - Single-mode waveguide propagation in
 cylindrical geometries - Temperature-independent properties within
-biological ranges (15-35°C) - Negligible radiative losses compared to
-dielectric absorption - Piezoelectric coupling based on microtubule
-networks rather than individual proteins
+biological ranges (15-35\(^{\circ}\mathrm{C}\)) - Negligible radiative
+losses compared to dielectric absorption - Piezoelectric coupling based
+on microtubule networks rather than individual proteins
 
 \subsubsection{Testing and Validation
 Strategy}\label{testing-and-validation-strategy}
@@ -321,8 +362,8 @@ testing:
   \begin{itemize}
   \tightlist
   \item
-    Isolated sensilla under controlled IR illumination (2--25 μm
-    wavelength range)
+    Isolated sensilla under controlled IR illumination (2--25
+    \(\mu\mathrm{m}\) wavelength range)
   \item
     Thermal-matched controls to distinguish electromagnetic from thermal
     effects

@@ -21,16 +21,16 @@ All mechanisms are modeled deterministically with validated numerical implementa
 
 Earth's atmosphere exhibits well-defined IR transmission windows that determine signal propagation characteristics and detection range limits. We implement comprehensive atmospheric modeling including:
 
-- **Molecular absorption** (H₂O, CO₂, CH₄, O₃)
+- **Molecular absorption** (H\textsubscript{2}O, CO\textsubscript{2}, CH\textsubscript{4}, O\textsubscript{3})
 - **Rayleigh scattering** from air molecules
 - **Aerosol extinction** from particulates
 - **Temperature/humidity dependence**
 - **Path-length effects** for long-range propagation
 
 **Principal transmission windows** (baseline model with environmental dependencies):
-- **2–5 μm (mid-IR)**: ~0.8 transmission, minimal water vapor absorption
-- **8–14 μm (long-wave IR)**: ~0.9 transmission, atmospheric window
-- **17–25 μm (far-IR)**: ~0.7 transmission, increasing molecular absorption
+- **2–5 \(\mu\mathrm{m}\) (mid-IR)**: ~0.8 transmission, minimal water vapor absorption
+- **8–14 \(\mu\mathrm{m}\) (long-wave IR)**: ~0.9 transmission, atmospheric window
+- **17–25 \(\mu\mathrm{m}\) (far-IR)**: ~0.7 transmission, increasing molecular absorption
 
 These windows overlap measured cuticular hydrocarbon (CHC) vibrational bands and inform detection-range estimates of 10–100 m using the atmospheric transmission model \eqref{eq:atmospheric_transmission}. Detailed modeling and sensitivity analyses are presented in the environmental channel case study \Cref{sec:app_environmental_channel}.
 
@@ -38,7 +38,7 @@ These windows overlap measured cuticular hydrocarbon (CHC) vibrational bands and
 
 ### Sensilla as Dielectric Antennas
 
-Insect antennae host micron-scale sensilla whose geometric dimensions frequently correspond to IR wavelengths relevant for electromagnetic resonance (typical ranges: trichodea 6–160 μm, basiconica 2–8 μm, coeloconica 5–15 μm; cf. [Liu et al. 2021 (sensilla survey)](https://pmc.ncbi.nlm.nih.gov/articles/PMC7831480/)). We analyze this correspondence through:
+Insect antennae host micron-scale sensilla whose geometric dimensions frequently correspond to IR wavelengths relevant for electromagnetic resonance (typical ranges: trichodea 6–160 \(\mu\mathrm{m}\), basiconica 2–8 \(\mu\mathrm{m}\), coeloconica 5–15 \(\mu\mathrm{m}\); cf. [Liu et al. 2021 (sensilla survey)](https://pmc.ncbi.nlm.nih.gov/articles/PMC7831480/)). We analyze this correspondence through:
 
 - **Morphometric surveys** across diverse insect taxa (>500 specimens)
 - **Resonance frequency calculations** using cavity resonator theory
@@ -54,8 +54,8 @@ Key functions in `src/sensilla.py`:
 
 Empirical evidence from isotope discrimination studies (e.g., deuteration experiments) demonstrates that vibrational frequencies, rather than molecular geometry, determine olfactory perception. Our spectroscopic pipeline includes:
 
-- **Robust wavenumber↔wavelength conversions** with unit testing
-- **Peak detection algorithms** with ±0.1 μm localization accuracy
+- **Robust wavenumber\(\leftrightarrow\)wavelength conversions** with unit testing
+- **Peak detection algorithms** with \(\pm 0.1\,\mu\mathrm{m}\) localization accuracy
 - **Isotope effect modeling** for validation against experimental data
 - **Spectral unmixing** for complex CHC mixtures
 
@@ -64,6 +64,7 @@ Empirical evidence from isotope discrimination studies (e.g., deuteration experi
 ### Mathematical Framework
 
 The computational framework integrates multiple physical domains:
+
 - **Maxwell's equations** for electromagnetic field propagation in dielectric media
 - **Waveguide theory** for sensilla as cylindrical dielectric waveguides
 - **Resonant cavity formulas** for antenna impedance matching
@@ -71,6 +72,7 @@ The computational framework integrates multiple physical domains:
 - **Information theory** for channel capacity and detection limits
 
 All theoretical expressions are implemented in `src/` modules with comprehensive unit testing that exercises:
+
 - Scalar vs. array input handling with consistent broadcasting
 - Numerical stability across parameter ranges (validated against analytical limits)
 - Edge conditions and boundary cases (empty arrays, extreme values)
@@ -80,7 +82,7 @@ All theoretical expressions are implemented in `src/` modules with comprehensive
 - Models assume linear, isotropic dielectric materials with frequency-dependent permittivity
 - Quasi-static approximations apply for sensilla dimensions << wavelength
 - Single-mode waveguide propagation in cylindrical geometries
-- Temperature-independent properties within biological ranges (15-35°C)
+- Temperature-independent properties within biological ranges (15-35\(^{\circ}\mathrm{C}\))
 - Negligible radiative losses compared to dielectric absorption
 - Piezoelectric coupling based on microtubule networks rather than individual proteins
 
@@ -105,7 +107,7 @@ All tests use fixed random seeds (42) and validate numerical stability, broadcas
 Three complementary experimental approaches are specified for hypothesis testing:
 
 1. **Single-Sensillum Electrophysiology:**
-   - Isolated sensilla under controlled IR illumination (2–25 μm wavelength range)
+   - Isolated sensilla under controlled IR illumination (2–25 \(\mu\mathrm{m}\) wavelength range)
    - Thermal-matched controls to distinguish electromagnetic from thermal effects
    - Success criterion: frequency-specific responses with quality factor Q > 10
    - Measurement: neural spike trains, impedance spectroscopy

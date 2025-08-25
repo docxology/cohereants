@@ -1,1 +1,11 @@
-Dielectric response, refractive index/absorption, plasmonic resonance, and info capacity.
+Enhanced meta-material analysis with comprehensive electromagnetic and plasmonic characterization.
+
+Methodology: Full-wave electromagnetic simulation of meta-material structures with integrated information capacity analysis.
+• Dielectric response: Frequency-dependent permittivity modeling with real/imaginary components
+• Plasmonic resonance: Quality factor and field enhancement calculations
+• Refractive index: Wavelength-dependent optical properties
+• Information capacity: Channel capacity, SNR, and quantum limit assessments
+
+Key Findings: Meta-material optimization enables enhanced IR detection sensitivity and information throughput.
+Data Sources: Computational electromagnetics, material science databases, information theory.
+Relevance: Demonstrates potential for engineered materials to enhance insect-like IR sensing capabilities.

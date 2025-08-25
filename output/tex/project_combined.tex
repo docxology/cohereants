@@ -71,6 +71,19 @@
 \DeclareUnicodeCharacter{03B5}{\(\epsilon\)}
 \DeclareUnicodeCharacter{03B4}{\(\delta\)}
 
+% Map common Unicode subscripts and degree symbol to LaTeX-friendly macros
+\DeclareUnicodeCharacter{2080}{\textsubscript{0}}
+\DeclareUnicodeCharacter{2081}{\textsubscript{1}}
+\DeclareUnicodeCharacter{2082}{\textsubscript{2}}
+\DeclareUnicodeCharacter{2083}{\textsubscript{3}}
+\DeclareUnicodeCharacter{2084}{\textsubscript{4}}
+\DeclareUnicodeCharacter{2085}{\textsubscript{5}}
+\DeclareUnicodeCharacter{2086}{\textsubscript{6}}
+\DeclareUnicodeCharacter{2087}{\textsubscript{7}}
+\DeclareUnicodeCharacter{2088}{\textsubscript{8}}
+\DeclareUnicodeCharacter{2089}{\textsubscript{9}}
+\DeclareUnicodeCharacter{00B0}{\textdegree}
+
 % Counter behaviour
 \usepackage{chngcntr}
 \counterwithout{figure}{section}
@@ -93,6 +106,10 @@
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
+% Ensure each top-level section starts on a new page
+\let\oldsection\section
+\renewcommand{\section}{\clearpage\oldsection}
+
 % Graphics support for figures
 \usepackage{graphicx}
 \graphicspath{{./figures/}}
@@ -105,7 +122,7 @@
 
 % Setup listings safely (don't override global styles)
 \usepackage{listings}
-\lstset{backgroundcolor=\color{codebg},basicstyle=\normalsize\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
+\lstset{backgroundcolor=\color{codebg},basicstyle=\small\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
 
 % Keep title metadata to be inserted by build system
 \ifLuaTeX
@@ -141,8 +158,6 @@
 \tableofcontents
 }
 \setstretch{1.0}
-\newpage
-
 \section{Abstract}\label{sec:abstract}
 
 \textbf{Objective:} To review the plausibility of insect detection of
@@ -154,26 +169,28 @@ electromagnetism.
 
 \textbf{Methods:} We integrate: (i) morphometric analysis of antennal
 sensilla across 500+ specimens from diverse taxa, (ii) ATR-FTIR
-spectroscopy of cuticular hydrocarbons with sub-micron resolution (±0.1
-μm), (iii) meta-analysis of olfactory receptor neuron response
-latencies, and (iv) deterministic electromagnetic models validated
-against antenna theory. All analyses use fixed random seeds (42) for
-reproducibility, and all code to generate results and this manuscript is
-available in the
+spectroscopy of cuticular hydrocarbons with sub-micron resolution
+(\(\pm 0.1\,\mu\mathrm{m}\)), (iii) meta-analysis of olfactory receptor
+neuron response latencies, and (iv) deterministic electromagnetic models
+validated against antenna theory. All analyses use fixed random seeds
+(42) for reproducibility, and all code to generate results and this
+manuscript is available in the
 \href{https://github.com/docxology/insect-infrared}{open source repo}.
 We also provide a mathematical appendix with detailed derivations and
 computational implementations.
 
-\textbf{Results:} Antenna sensilla dimensions (typically 2--160 μm
-across sensillum types; e.g., trichodea 6--160 μm, basiconica 2--8 μm,
-coeloconica 5--15 μm) show correlation with predicted IR resonances
-across diverse insect taxa. Modeled electromagnetic detection achieves
-1--5 ms latencies (minimum \textasciitilde3 ms reported), faster than
+\textbf{Results:} Antenna sensilla dimensions (typically 2--160
+\(\mu\mathrm{m}\) across sensillum types; e.g., trichodea 6--160
+\(\mu\mathrm{m}\), basiconica 2--8 \(\mu\mathrm{m}\), coeloconica 5--15
+\(\mu\mathrm{m}\)) show correlation with predicted IR resonances across
+diverse insect taxa. Modeled electromagnetic detection achieves 1--5 ms
+latencies (minimum \textasciitilde3 ms reported), faster than
 diffusion-based molecular binding. CHC vibrational spectra overlap
-Earth's atmospheric transmission windows (2--5, 8--14, 17--25 μm),
-facilitating detection ranges of possibly tens of meters. Integrated
-case studies validate predictions and error bounds across all tested
-scenarios, supported by peer-reviewed evidence from multiple domains.
+Earth's atmospheric transmission windows (2--5, 8--14, 17--25
+\(\mu\mathrm{m}\)), facilitating detection ranges of possibly tens of
+meters. Integrated case studies validate predictions and error bounds
+across all tested scenarios, supported by peer-reviewed evidence from
+multiple domains.
 
 \textbf{Conclusions:} Our framework generates three key, falsifiable
 predictions related to the insect olfactory system: (1)
@@ -201,10 +218,6 @@ Appendices (\Cref{sec:app_sensilla_array},
 \Cref{sec:app_neural_encoding}, \Cref{sec:app_spectral_unmixing},
 \Cref{sec:app_plasmonic_geometry}, \Cref{sec:app_active_inference}) and
 mathematical derivations \Cref{sec:mathematical_appendix}.
-
-\newpage
-
-\newpage
 
 Olfaction---the detection and identification of airborne molecules---is
 a fundamental sensory modality essential for survival, reproduction, and
@@ -267,8 +280,8 @@ pathway that enhances insect olfaction, providing faster response times,
 extended range, and complementary sensory information?
 
 \textbf{Scope and Approach:} We focus on mid-infrared detection (2-25
-μm) as this range encompasses molecular vibrational modes of
-biologically relevant compounds while overlapping atmospheric
+\(\mu\mathrm{m}\)) as this range encompasses molecular vibrational modes
+of biologically relevant compounds while overlapping atmospheric
 transmission windows. Our framework integrates computational
 electromagnetism with empirical validation, testing whether IR detection
 operates alongside (not replacing) traditional molecular binding
@@ -276,20 +289,32 @@ pathways. We emphasize falsifiable predictions and controlled
 experimental protocols to distinguish electromagnetic from thermal
 effects.
 
-\textbf{Specific Hypotheses:} - \textbf{H1 (Morphological):} Antennal
-sensilla dimensions (2--160 μm across sensillum types; trichodea 6--160
-μm, basiconica 2--8 μm, coeloconica 5--15 μm) correlate with predicted
-IR resonant wavelengths across diverse insect taxa (e.g.,
-\href{https://pmc.ncbi.nlm.nih.gov/articles/PMC7831480/}{Liu et al.~2021
-(sensilla survey)}). - \textbf{H2 (Spectral):} Cuticular hydrocarbon
-(CHC) vibrational spectra align with atmospheric transmission windows
-(2--5, 8--14, 17--25 μm), with high transmission efficiency in the 8--14
-μm band. - \textbf{H3 (Temporal):} IR‑mediated detection can achieve
-1--5 ms ORN latencies (minimum \textasciitilde3 ms reported), faster
-than diffusion‑based mechanisms. - \textbf{H4 (Behavioral):}
-Frequency‑specific IR stimulation elicits directed orientation behaviors
-in the absence of volatile chemical cues, as demonstrated in specialized
-beetle species.
+\textbf{Specific Hypotheses:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{H1 (Morphological):} Antennal sensilla dimensions (2--160
+  \(\mu\mathrm{m}\) across sensillum types; trichodea 6--160
+  \(\mu\mathrm{m}\), basiconica 2--8 \(\mu\mathrm{m}\), coeloconica
+  5--15 \(\mu\mathrm{m}\)) correlate with predicted IR resonant
+  wavelengths across diverse insect taxa (e.g.,
+  \href{https://pmc.ncbi.nlm.nih.gov/articles/PMC7831480/}{Liu et
+  al.~2021 (sensilla survey)}).
+\item
+  \textbf{H2 (Spectral):} Cuticular hydrocarbon (CHC) vibrational
+  spectra align with atmospheric transmission windows (2--5, 8--14,
+  17--25 \(\mu\mathrm{m}\)), with high transmission efficiency in the
+  8--14 \(\mu\mathrm{m}\) band.
+\item
+  \textbf{H3 (Temporal):} IR‑mediated detection can achieve 1--5 ms ORN
+  latencies (minimum \textasciitilde3 ms reported), faster than
+  diffusion‑based mechanisms.
+\item
+  \textbf{H4 (Behavioral):} Frequency‑specific IR stimulation elicits
+  directed orientation behaviors in the absence of volatile chemical
+  cues, as demonstrated in specialized beetle species.
+\end{itemize}
 
 \subsection{Approach and Organization}\label{approach-and-organization}
 
@@ -298,27 +323,47 @@ comparative morphology, infrared spectroscopy, neural timing analysis,
 and deterministic computational electromagnetism. All models are
 unit-tested and reproducible with fixed random seeds (42).
 
-The manuscript is organized as follows: - \textbf{Main Text:} Presents
-integrated findings with cross-references to detailed case studies -
-\textbf{Appendices:} Seven specialized analyses exploring specific
-aspects: - Sensory array directionality and beam patterns
-\Cref{sec:app_sensilla_array} - Environmental channel modeling
-\Cref{sec:app_environmental_channel} - Detection limits and operating
-points \Cref{sec:app_detection_limits} - Neural encoding efficiency
-\Cref{sec:app_neural_encoding} - Spectral unmixing and classification
-\Cref{sec:app_spectral_unmixing} - Plasmonic nano-geometry optimization
-\Cref{sec:app_plasmonic_geometry} - Active inference behavioral modeling
-\Cref{sec:app_active_inference} - \textbf{Mathematical Appendix:}
-Detailed derivations and computational implementations
-\Cref{sec:mathematical_appendix} - \textbf{Empirical Studies:}
-Comprehensive review of supporting evidence \Cref{sec:empirical_studies}
+The manuscript is organized as follows:
+
+\begin{itemize}
+\item
+  \textbf{Main Text:} Presents integrated findings with cross-references
+  to detailed case studies
+\item
+  \textbf{Appendices:} Seven specialized analyses exploring specific
+  aspects:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Sensory array directionality and beam patterns
+    \Cref{sec:app_sensilla_array}
+  \item
+    Environmental channel modeling \Cref{sec:app_environmental_channel}
+  \item
+    Detection limits and operating points
+    \Cref{sec:app_detection_limits}
+  \item
+    Neural encoding efficiency \Cref{sec:app_neural_encoding}
+  \item
+    Spectral unmixing and classification
+    \Cref{sec:app_spectral_unmixing}
+  \item
+    Plasmonic nano-geometry optimization
+    \Cref{sec:app_plasmonic_geometry}
+  \item
+    Active inference behavioral modeling \Cref{sec:app_active_inference}
+  \end{itemize}
+\item
+  \textbf{Mathematical Appendix:} Detailed derivations and computational
+  implementations \Cref{sec:mathematical_appendix}
+\item
+  \textbf{Empirical Studies:} Comprehensive review of supporting
+  evidence \Cref{sec:empirical_studies}
+\end{itemize}
 
 This structure enables both comprehensive evaluation and focused
 exploration of specific mechanisms.
-
-\newpage
-
-\newpage
 
 \section{Methodology}\label{sec:methodology}
 
@@ -363,7 +408,8 @@ We implement comprehensive atmospheric modeling including:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Molecular absorption} (H₂O, CO₂, CH₄, O₃)
+  \textbf{Molecular absorption} (H\textsubscript{2}O,
+  CO\textsubscript{2}, CH\textsubscript{4}, O\textsubscript{3})
 \item
   \textbf{Rayleigh scattering} from air molecules
 \item
@@ -375,11 +421,12 @@ We implement comprehensive atmospheric modeling including:
 \end{itemize}
 
 \textbf{Principal transmission windows} (baseline model with
-environmental dependencies): - \textbf{2--5 μm (mid-IR)}:
+environmental dependencies): - \textbf{2--5 \(\mu\mathrm{m}\) (mid-IR)}:
 \textasciitilde0.8 transmission, minimal water vapor absorption -
-\textbf{8--14 μm (long-wave IR)}: \textasciitilde0.9 transmission,
-atmospheric window - \textbf{17--25 μm (far-IR)}: \textasciitilde0.7
-transmission, increasing molecular absorption
+\textbf{8--14 \(\mu\mathrm{m}\) (long-wave IR)}: \textasciitilde0.9
+transmission, atmospheric window - \textbf{17--25 \(\mu\mathrm{m}\)
+(far-IR)}: \textasciitilde0.7 transmission, increasing molecular
+absorption
 
 These windows overlap measured cuticular hydrocarbon (CHC) vibrational
 bands and inform detection-range estimates of 10--100 m using the
@@ -395,8 +442,8 @@ Antennas}\label{sensilla-as-dielectric-antennas}
 
 Insect antennae host micron-scale sensilla whose geometric dimensions
 frequently correspond to IR wavelengths relevant for electromagnetic
-resonance (typical ranges: trichodea 6--160 μm, basiconica 2--8 μm,
-coeloconica 5--15 μm;
+resonance (typical ranges: trichodea 6--160 \(\mu\mathrm{m}\),
+basiconica 2--8 \(\mu\mathrm{m}\), coeloconica 5--15 \(\mu\mathrm{m}\);
 cf.~\href{https://pmc.ncbi.nlm.nih.gov/articles/PMC7831480/}{Liu et
 al.~2021 (sensilla survey)}). We analyze this correspondence through:
 
@@ -434,9 +481,11 @@ spectroscopic pipeline includes:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Robust wavenumber↔wavelength conversions} with unit testing
+  \textbf{Robust wavenumber\(\leftrightarrow\)wavelength conversions}
+  with unit testing
 \item
-  \textbf{Peak detection algorithms} with ±0.1 μm localization accuracy
+  \textbf{Peak detection algorithms} with \(\pm 0.1\,\mu\mathrm{m}\)
+  localization accuracy
 \item
   \textbf{Isotope effect modeling} for validation against experimental
   data
@@ -449,30 +498,50 @@ Validation}\label{computational-implementation-and-validation}
 
 \subsubsection{Mathematical Framework}\label{mathematical-framework}
 
-The computational framework integrates multiple physical domains: -
-\textbf{Maxwell's equations} for electromagnetic field propagation in
-dielectric media - \textbf{Waveguide theory} for sensilla as cylindrical
-dielectric waveguides - \textbf{Resonant cavity formulas} for antenna
-impedance matching - \textbf{Piezoelectric coupling models} for
-electromechanical transduction - \textbf{Information theory} for channel
-capacity and detection limits
+The computational framework integrates multiple physical domains:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Maxwell's equations} for electromagnetic field propagation in
+  dielectric media
+\item
+  \textbf{Waveguide theory} for sensilla as cylindrical dielectric
+  waveguides
+\item
+  \textbf{Resonant cavity formulas} for antenna impedance matching
+\item
+  \textbf{Piezoelectric coupling models} for electromechanical
+  transduction
+\item
+  \textbf{Information theory} for channel capacity and detection limits
+\end{itemize}
 
 All theoretical expressions are implemented in
 \passthrough{\lstinline!src/!} modules with comprehensive unit testing
-that exercises: - Scalar vs.~array input handling with consistent
-broadcasting - Numerical stability across parameter ranges (validated
-against analytical limits) - Edge conditions and boundary cases (empty
-arrays, extreme values) - Cross-platform reproducibility with fixed
-random seeds
+that exercises:
+
+\begin{itemize}
+\tightlist
+\item
+  Scalar vs.~array input handling with consistent broadcasting
+\item
+  Numerical stability across parameter ranges (validated against
+  analytical limits)
+\item
+  Edge conditions and boundary cases (empty arrays, extreme values)
+\item
+  Cross-platform reproducibility with fixed random seeds
+\end{itemize}
 
 \textbf{Implementation Scope and Limitations:} - Models assume linear,
 isotropic dielectric materials with frequency-dependent permittivity -
 Quasi-static approximations apply for sensilla dimensions
 \textless\textless{} wavelength - Single-mode waveguide propagation in
 cylindrical geometries - Temperature-independent properties within
-biological ranges (15-35°C) - Negligible radiative losses compared to
-dielectric absorption - Piezoelectric coupling based on microtubule
-networks rather than individual proteins
+biological ranges (15-35\(^{\circ}\mathrm{C}\)) - Negligible radiative
+losses compared to dielectric absorption - Piezoelectric coupling based
+on microtubule networks rather than individual proteins
 
 \subsubsection{Testing and Validation
 Strategy}\label{testing-and-validation-strategy}
@@ -519,8 +588,8 @@ testing:
   \begin{itemize}
   \tightlist
   \item
-    Isolated sensilla under controlled IR illumination (2--25 μm
-    wavelength range)
+    Isolated sensilla under controlled IR illumination (2--25
+    \(\mu\mathrm{m}\) wavelength range)
   \item
     Thermal-matched controls to distinguish electromagnetic from thermal
     effects
@@ -632,10 +701,6 @@ Dependencies}\label{environment-and-dependencies}
   with informative error messages
 \end{itemize}
 
-\newpage
-
-\newpage
-
 \section{Experimental Results}\label{sec:experimental_results}
 
 \subsection{Neurological Evidence}\label{neurological-evidence}
@@ -663,8 +728,8 @@ al.~2017},
 al.~2018}) - Diffusion‑limited models: 7--12 ms
 
 Model outputs and the literature meta‑analysis indicate improvement
-factors of ≈2.3--7× under plausible IR‑detection scenarios. Figures are
-generated deterministically by
+factors of \(\approx 2.3\text{--}7\times\) under plausible IR‑detection
+scenarios. Figures are generated deterministically by
 \passthrough{\lstinline!scripts/generate\_research\_figures.py!}.
 
 See \Cref{fig:response_time_comparison} for the comparison.
@@ -707,19 +772,19 @@ toward odor sources. This orientation optimizes electromagnetic coupling
 and signal detection.
 
 \textbf{Directional Properties}: Sensilla exhibit properties consistent
-with directional antennas: - \textbf{Beam Width}: 15-30° half-power
-beamwidth - \textbf{Front-to-Back Ratio}: 10-20 dB directional
-selectivity - \textbf{Gain Pattern}: Maximum sensitivity in the forward
-direction
+with directional antennas: - \textbf{Beam Width}: 15-30\(^{\circ}\)
+half-power beamwidth - \textbf{Front-to-Back Ratio}: 10-20 dB
+directional selectivity - \textbf{Gain Pattern}: Maximum sensitivity in
+the forward direction
 
 \textbf{Behavioral validation}: Experimental studies show localization
-accuracy of ±15-30° in wind-tunnel assays, which is consistent with
-antenna-like gain patterns having 15-30° half-power beamwidths. However,
-these studies used chemical gradients, so controlled IR-only assays are
-required to disambiguate electromagnetic detection from volatile plume
-structure. See array directionality case study in
-\Cref{sec:app_sensilla_array}. We provide minimal falsifiers in the
-Discussion.
+accuracy of \(\pm 15\text{--}30^{\circ}\) in wind-tunnel assays, which
+is consistent with antenna-like gain patterns having 15-30\(^{\circ}\)
+half-power beamwidths. However, these studies used chemical gradients,
+so controlled IR-only assays are required to disambiguate
+electromagnetic detection from volatile plume structure. See array
+directionality case study in \Cref{sec:app_sensilla_array}. We provide
+minimal falsifiers in the Discussion.
 
 \subsubsection{Specialized Infrared
 Sensors}\label{specialized-infrared-sensors}
@@ -730,12 +795,24 @@ sensors provide direct evidence for the evolutionary development of
 infrared detection capabilities in insects.
 
 \textbf{Sensor Characteristics} (plasmonic/geometry links in
-\Cref{sec:app_plasmonic_geometry}): - \textbf{Species}:
-\emph{Melanophila acuminata} and \emph{Acanthocnemus nigricans} -
-\textbf{Evolutionary Origin}: Hair-like mechanoreceptors -
-\textbf{Detection Range}: 3-5 μm infrared wavelengths - \textbf{Response
-Threshold}: 0.1-1.0 mW/cm² - \textbf{Organ Structure}: Approximately 100
-individual sensilla per IR detection organ
+\Cref{sec:app_plasmonic_geometry}):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Species}: \emph{Melanophila acuminata} and \emph{Acanthocnemus
+  nigricans}
+\item
+  \textbf{Evolutionary Origin}: Hair-like mechanoreceptors
+\item
+  \textbf{Detection Range}: 3-5 \(\mu\mathrm{m}\) infrared wavelengths
+\item
+  \textbf{Response Threshold}:
+  \(0.1\text{--}1.0\,\mathrm{mW}\,/\,\mathrm{cm}^2\)
+\item
+  \textbf{Organ Structure}: Approximately 100 individual sensilla per IR
+  detection organ
+\end{itemize}
 
 \textbf{Evolutionary Implications}: The independent evolution of
 infrared sensors in multiple beetle lineages suggests strong selective
@@ -754,9 +831,11 @@ coeloconica. These studies provide quantitative evidence for infrared
 detection capabilities.
 
 \textbf{Experimental Protocol}: - \textbf{Stimulus}: Broad-band IR
-emitter (0.4-11.2 μm) - \textbf{Response Measurement}: Cold-sensitive
-neuron activity - \textbf{Penetration Depth}: 6 μm for 3-μm wavelength
-radiation - \textbf{Response Threshold}: 0.5-2.0 mW/cm²
+emitter (0.4-11.2 \(\mu\mathrm{m}\)) - \textbf{Response Measurement}:
+Cold-sensitive neuron activity - \textbf{Penetration Depth}: 6
+\(\mu\mathrm{m}\) for 3-\(\mu\mathrm{m}\) wavelength radiation -
+\textbf{Response Threshold}:
+\(0.5\text{--}2.0\,\mathrm{mW}\,/\,\mathrm{cm}^2\)
 
 \textbf{Mechanistic Insights}: The electron‑dense filaments within
 sensory pegs enhance infrared absorption, suggesting specialized
@@ -787,9 +866,9 @@ The \passthrough{\lstinline!analyze\_chc\_spectra()!} function processes
 these spectra to identify characteristic vibrational modes.
 
 \textbf{Spectral Characteristics}: - \textbf{Aphid CHCs}: Peak at
-2.85-3.5 μm (2850-3500 cm\(^{-1}\)) - \textbf{Grasshopper CHCs}:
-Transmission peak at 2850 cm\(^{-1}\) (3.5 μm) - \textbf{Ant CHCs}:
-Multiple peaks in 2.9-3.1 μm range
+2.85-3.5 \(\mu\mathrm{m}\) (2850-3500 cm\(^{-1}\)) - \textbf{Grasshopper
+CHCs}: Transmission peak at 2850 cm\(^{-1}\) (3.5 \(\mu\mathrm{m}\)) -
+\textbf{Ant CHCs}: Multiple peaks in 2.9-3.1 \(\mu\mathrm{m}\) range
 
 \textbf{Species discrimination}: Reported accuracies (\approx 95\%) were
 achieved with N=120 samples across 8 aphid species using 5-fold
@@ -887,10 +966,19 @@ optical resonance properties similar to photosynthetic pigment proteins.
 This structural similarity suggests that OR alpha-helices may be
 responsive to electromagnetic radiation in the infrared range.
 
-\textbf{Resonant Properties}: - \textbf{Helix Dimensions}: 3.6 amino
-acids per turn, 5.4 Å pitch - \textbf{Resonant Wavelengths}: 2-10 μm
-corresponding to infrared range - \textbf{Coupling Mechanisms}:
-Dipole-dipole interactions and charge transfer
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Resonant Properties}:
+\item
+  \textbf{Helix Dimensions}: 3.6 amino acids per turn, 5.4 \AA{} pitch
+\item
+  \textbf{Resonant Wavelengths}: 2-10 \(\mu\mathrm{m}\) corresponding to
+  infrared range
+\item
+  \textbf{Coupling Mechanisms}: Dipole-dipole interactions and charge
+  transfer
+\end{itemize}
 
 \subsection{Airflow Studies and Sensilla
 Function}\label{airflow-studies-and-sensilla-function}
@@ -934,10 +1022,6 @@ This evidence supports the hypothesis that insect antennae function
 primarily as electromagnetic detection systems, with molecular binding
 serving secondary validation and signal termination functions.
 
-\newpage
-
-\newpage
-
 \section{Discussion}\label{sec:discussion}
 
 \subsection{Implications for insect behavior and
@@ -955,18 +1039,20 @@ for appropriate sources and geometries.
 Nestmate recognition in eusocial Hymenoptera depends on CHC signals with
 millisecond timing. Deterministic simulations
 (\passthrough{\lstinline!src/core.py::calculate\_response\_time\_improvement!})
-produce latency improvements of ≈2.3--7× compared with diffusion‑limited
-models. An IR‑detection stage with sub‑millisecond detection latency can
-account for observed behavioral timescales while molecular binding
-provides verification and termination.
+produce latency improvements of \(\approx 2.3\text{--}7\times\) compared
+with diffusion‑limited models. An IR‑detection stage with
+sub‑millisecond detection latency can account for observed behavioral
+timescales while molecular binding provides verification and
+termination.
 
 \subsubsection{Pheromone specificity and
 range}\label{pheromone-specificity-and-range}
 
 Pheromone classes occupy distinct IR bands (e.g., sex pheromones 17--26
-μm; trail pheromones 2.9--3.5 μm). Under modeled atmospheric
-transmission and realistic source strengths, narrowband IR signatures
-are detectable at 10--100 m; these ranges are quantified in
+\(\mu\mathrm{m}\); trail pheromones 2.9--3.5 \(\mu\mathrm{m}\)). Under
+modeled atmospheric transmission and realistic source strengths,
+narrowband IR signatures are detectable at 10--100 m; these ranges are
+quantified in
 \passthrough{\lstinline!src/case\_studies/detection\_limits.py!} and
 illustrated in the Appendices.
 
@@ -974,25 +1060,26 @@ illustrated in the Appendices.
 implications}\label{evolutionary-and-ecological-implications}
 
 Comparative analyses show overlaps between sensilla dimensions
-(typically 2--160 μm across sensillum types; trichodea 6--160 μm,
-basiconica 2--8 μm, coeloconica 5--15 μm) and predicted resonant
-wavelengths across sampled taxa. Independent emergence of specialized IR
-sensors in some beetles, including approximately 100 sensilla per organ,
-and CHC compositional changes after death, are consistent with selection
-on vibrational signatures. This is supported by morphometric studies
-across 500+ specimens and evolutionary convergence in multiple beetle
-lineages.
+(typically 2--160 \(\mu\mathrm{m}\) across sensillum types; trichodea
+6--160 \(\mu\mathrm{m}\), basiconica 2--8 \(\mu\mathrm{m}\), coeloconica
+5--15 \(\mu\mathrm{m}\)) and predicted resonant wavelengths across
+sampled taxa. Independent emergence of specialized IR sensors in some
+beetles, including approximately 100 sensilla per organ, and CHC
+compositional changes after death, are consistent with selection on
+vibrational signatures. This is supported by morphometric studies across
+500+ specimens and evolutionary convergence in multiple beetle lineages.
 
 \subsection{Computational and applied
 consequences}\label{computational-and-applied-consequences}
 
-Effective IR sensing requires spectral discrimination across 2--25 μm,
-directional processing (beam widths ≈15--30°), sub‑millisecond temporal
-filtering, and SNR improvements. Channel‑capacity estimates
+Effective IR sensing requires spectral discrimination across 2--25
+\(\mu\mathrm{m}\), directional processing (beam widths
+(\approx)15--30\(^{\circ}\)), sub‑millisecond temporal filtering, and
+SNR improvements. Channel‑capacity estimates
 (\passthrough{\lstinline!src/case\_studies/environmental\_channel.py!})
-indicate information rates on the order of 10³--10⁴ bits/s for optimized
-systems. Applications include pest monitoring, species‑specific traps,
-and biomimetic IR sensors.
+indicate information rates on the order of \(10^3\)--\(10^4\) bits/s for
+optimized systems. Applications include pest monitoring,
+species‑specific traps, and biomimetic IR sensors.
 
 \subsection{Limitations and Critical Experimental
 Controls}\label{limitations-and-critical-experimental-controls}
@@ -1008,23 +1095,25 @@ Protocols}\label{thermal-control-protocols}
 \textbf{Broadband vs.~Narrowband Stimulation:} - \textbf{Broadband
 heating controls}: Use thermal sources matched for total power
 deposition - \textbf{Narrowband IR stimulation}: Employ tunable lasers
-or filtered LEDs (Δλ \textless{} 0.5 μm) - \textbf{Success criterion}:
-Frequency-specific responses absent in broadband controls
+or filtered LEDs (Δλ \textless{} 0.5 \(\mu\mathrm{m}\)) -
+\textbf{Success criterion}: Frequency-specific responses absent in
+broadband controls
 
 \textbf{Temporal Resolution Requirements:} - \textbf{High-speed
 measurements}: Sub-millisecond temporal resolution for early detection
 components - \textbf{Thermal diffusion modeling}: Account for heat
-propagation timescales (μs--ms range) - \textbf{Multi-scale analysis}:
-Separate electromagnetic detection from thermal transduction
+propagation timescales (\(\mu\mathrm{s}\)--ms range) -
+\textbf{Multi-scale analysis}: Separate electromagnetic detection from
+thermal transduction
 
 \subsubsection{Spectral Specificity
 Tests}\label{spectral-specificity-tests}
 
 \textbf{Wavelength Tuning Experiments:} - \textbf{Systematic wavelength
-sweeps}: Test responses across 2--25 μm range - \textbf{Resonance
-matching}: Compare with predicted sensilla resonances - \textbf{Quality
-factor assessment}: Measure response sharpness (target Q \textgreater{}
-10)
+sweeps}: Test responses across 2--25 \(\mu\mathrm{m}\) range -
+\textbf{Resonance matching}: Compare with predicted sensilla resonances
+- \textbf{Quality factor assessment}: Measure response sharpness (target
+Q \textgreater{} 10)
 
 \textbf{Isotope Effects:} - \textbf{Deuterated controls}: Use deuterated
 analogs to shift vibrational frequencies - \textbf{Frequency-specific
@@ -1056,9 +1145,9 @@ from environmental IR noise
 
 \textbf{Calibration and Validation:} - \textbf{Power meter calibration}:
 NIST-traceable standards for IR power measurements - \textbf{Wavelength
-accuracy}: ±0.01 μm precision for spectral specificity tests -
-\textbf{Thermal imaging}: Correlate neural responses with thermal
-profiles
+accuracy}: \(\pm 0.01\,\mu\mathrm{m}\) precision for spectral
+specificity tests - \textbf{Thermal imaging}: Correlate neural responses
+with thermal profiles
 
 \subsubsection{Taxonomic and Ecological
 Limitations}\label{taxonomic-and-ecological-limitations}
@@ -1081,9 +1170,10 @@ testable)}\label{minimal-falsifiers-experimentally-testable}
 \def\labelenumi{\arabic{enumi}.}
 \item
   \textbf{Spectral nulls}: No frequency-specific responses to IR-only
-  stimulation when thermal load is matched (±0.1°C) and power deposition
-  is identical across wavelengths (broadband vs.~narrowband stimulation
-  with thermal controls).
+  stimulation when thermal load is matched
+  (\(\pm 0.1\,^{\circ}\mathrm{C}\)) and power deposition is identical
+  across wavelengths (broadband vs.~narrowband stimulation with thermal
+  controls).
 \item
   \textbf{Geometric mismatch}: Reproducible failure to observe
   correlation (r \textless{} 0.3, p \textgreater{} 0.05) between
@@ -1093,8 +1183,9 @@ testable)}\label{minimal-falsifiers-experimentally-testable}
 \item
   \textbf{Environmental misalignment}: CHC peaks consistently fall
   outside modeled transmission windows under controlled conditions
-  (20--80\% RH, 15--35°C), with \textgreater90\% of spectral features
-  showing mismatch when compared to atmospheric transmission models.
+  (20--80\% RH, 15--35\(^{\circ}\mathrm{C}\)), with \textgreater90\% of
+  spectral features showing mismatch when compared to atmospheric
+  transmission models.
 \item
   \textbf{Temporal indistinguishability}: ORN response latencies to IR
   stimulation are statistically indistinguishable from thermal
@@ -1142,10 +1233,6 @@ practical applications while acknowledging limitations. Appendices and
 computational anchors for the hypotheses and control protocols described
 here.
 
-\newpage
-
-\newpage
-
 \section{Conclusion}\label{sec:conclusion}
 
 \subsection{Summary of findings}\label{summary-of-findings}
@@ -1168,9 +1255,10 @@ traceability from equations to figures and tests.
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Morphology: Sensilla dimensions (typically 2--160 μm across sensillum
-  types) frequently align with predicted resonant wavelengths (example
-  correlations r ≈ 0.85 across sampled taxa); computations reproduced by
+  Morphology: Sensilla dimensions (typically 2--160 \(\mu\mathrm{m}\)
+  across sensillum types) frequently align with predicted resonant
+  wavelengths (example correlations r \(\approx 0.85\) across sampled
+  taxa); computations reproduced by
   \passthrough{\lstinline!src/sensilla.py::analyze\_sensilla\_dimensions!}.
 \item
   Neural timing: Meta‑analysis and modeling show ORN latencies (1--5 ms;
@@ -1183,8 +1271,8 @@ traceability from equations to figures and tests.
   the literature.
 \item
   Spectroscopy: Automated CHC peak detection identifies bands within
-  atmospheric windows with ±0.1 μm resolution (implemented in
-  \passthrough{\lstinline!src/spectroscopy.py!}).
+  atmospheric windows with (\pm)0.1 \(\mu\mathrm{m}\) resolution
+  (implemented in \passthrough{\lstinline!src/spectroscopy.py!}).
 \end{enumerate}
 
 \subsection{Future Research Directions and
@@ -1193,62 +1281,135 @@ Applications}\label{future-research-directions-and-applications}
 \subsubsection{Immediate Experimental
 Priorities}\label{immediate-experimental-priorities}
 
-\textbf{High-Impact Validation Studies:} - \textbf{Single-sensillum
-electrophysiology} with quantum cascade laser stimulation (2--25 μm) -
-\textbf{Behavioral IR-only orientation assays} using narrowband LEDs
-with thermal controls - \textbf{Cross-taxa morphometric surveys} with
-SEM and resonance correlation analysis -
-\textbf{High-temporal-resolution neural recordings} (sub-ms) to resolve
-detection components
+\textbf{High-Impact Validation Studies:}
 
-\textbf{Advanced Instrumentation Development:} - \textbf{Tunable IR
-sources} with sub-micron wavelength precision - \textbf{Thermal imaging
-integration} with neural recordings - \textbf{Multi-scale sensing
-platforms} combining electromagnetic and molecular detection
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Single-sensillum electrophysiology} with quantum cascade laser
+  stimulation (2--25 \(\mu\mathrm{m}\))
+\item
+  \textbf{Behavioral IR-only orientation assays} using narrowband LEDs
+  with thermal controls
+\item
+  \textbf{Cross-taxa morphometric surveys} with SEM and resonance
+  correlation analysis
+\item
+  \textbf{High-temporal-resolution neural recordings} (sub-ms) to
+  resolve detection components
+\end{itemize}
+
+\textbf{Advanced Instrumentation Development:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Tunable IR sources} with sub-micron wavelength precision
+\item
+  \textbf{Thermal imaging integration} with neural recordings
+\item
+  \textbf{Multi-scale sensing platforms} combining electromagnetic and
+  molecular detection
+\end{itemize}
 
 \subsubsection{Computational and Theoretical
 Extensions}\label{computational-and-theoretical-extensions}
 
-\textbf{Enhanced Modeling Frameworks:} - \textbf{3D electromagnetic
-simulations} of complete antenna systems - \textbf{Machine learning
-classifiers} for spectral feature recognition - \textbf{Climate model
-integration} for environmental robustness predictions - \textbf{Quantum
-mechanical extensions} incorporating coherence and entanglement effects
+\textbf{Enhanced Modeling Frameworks:}
 
-\textbf{Information Processing Analysis:} - \textbf{Channel capacity
-optimization} under realistic noise conditions - \textbf{Population
-coding strategies} for IR signal processing - \textbf{Neural network
-models} integrating electromagnetic and molecular pathways
+\begin{itemize}
+\tightlist
+\item
+  \textbf{3D electromagnetic simulations} of complete antenna systems
+\item
+  \textbf{Machine learning classifiers} for spectral feature recognition
+\item
+  \textbf{Climate model integration} for environmental robustness
+  predictions
+\item
+  \textbf{Quantum mechanical extensions} incorporating coherence and
+  entanglement effects
+\end{itemize}
+
+\textbf{Information Processing Analysis:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Channel capacity optimization} under realistic noise
+  conditions
+\item
+  \textbf{Population coding strategies} for IR signal processing
+\item
+  \textbf{Neural network models} integrating electromagnetic and
+  molecular pathways
+\end{itemize}
 
 \subsubsection{Technological Translation and
 Applications}\label{technological-translation-and-applications}
 
-\textbf{Biomimetic Sensor Development:} - \textbf{IR detection arrays}
-inspired by insect sensilla geometry - \textbf{Wearable environmental
-monitors} for chemical detection - \textbf{Autonomous navigation
-systems} using vibrational cues - \textbf{Medical diagnostic tools}
-based on molecular vibration sensing
+\textbf{Biomimetic Sensor Development:}
 
-\textbf{Agricultural and Environmental Applications:} -
-\textbf{Precision pest monitoring} using species-specific IR signatures
-- \textbf{Smart trap systems} with adaptive wavelength selection -
-\textbf{Pollination monitoring} through floral scent IR profiling -
-\textbf{Conservation tools} for endangered species detection
+\begin{itemize}
+\tightlist
+\item
+  \textbf{IR detection arrays} inspired by insect sensilla geometry
+\item
+  \textbf{Wearable environmental monitors} for chemical detection
+\item
+  \textbf{Autonomous navigation systems} using vibrational cues
+\item
+  \textbf{Medical diagnostic tools} based on molecular vibration sensing
+\end{itemize}
+
+\textbf{Agricultural and Environmental Applications:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Precision pest monitoring} using species-specific IR
+  signatures
+\item
+  \textbf{Smart trap systems} with adaptive wavelength selection
+\item
+  \textbf{Pollination monitoring} through floral scent IR profiling
+\item
+  \textbf{Conservation tools} for endangered species detection
+\end{itemize}
 
 \subsubsection{Fundamental Scientific
 Implications}\label{fundamental-scientific-implications}
 
-\textbf{Sensory Biology Advancements:} - \textbf{Multi-modal
-integration} models combining electromagnetic and molecular sensing -
-\textbf{Evolutionary convergence} studies across taxa with IR detection
-- \textbf{Quantum effects} in biological signal processing -
-\textbf{Sensory ecology} incorporating infrared communication channels
+\textbf{Sensory Biology Advancements:}
 
-\textbf{Broader Theoretical Implications:} - \textbf{Unified theory} of
-olfaction integrating shape and vibration - \textbf{Electromagnetic
-sensing} in other biological systems - \textbf{Quantum biology}
-extensions to sensory processing - \textbf{Bio-inspired engineering}
-principles for next-generation sensors
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Multi-modal integration} models combining electromagnetic and
+  molecular sensing
+\item
+  \textbf{Evolutionary convergence} studies across taxa with IR
+  detection
+\item
+  \textbf{Quantum effects} in biological signal processing
+\item
+  \textbf{Sensory ecology} incorporating infrared communication channels
+\end{itemize}
+
+\textbf{Broader Theoretical Implications:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unified theory} of olfaction integrating shape and vibration
+\item
+  \textbf{Electromagnetic sensing} in other biological systems
+\item
+  \textbf{Quantum biology} extensions to sensory processing
+\item
+  \textbf{Bio-inspired engineering} principles for next-generation
+  sensors
+\end{itemize}
 
 \subsection{Implementation Roadmap}\label{implementation-roadmap}
 
@@ -1301,19 +1462,25 @@ years)}\label{phase-3-applied-translation-23-years}
 Transfer}\label{reproducibility-and-knowledge-transfer}
 
 The Appendices and \passthrough{\lstinline!src/!} modules provide
-complete computational anchors for all claims, enabling: -
-\textbf{Independent validation} of theoretical predictions -
-\textbf{Experimental protocol reproduction} with detailed specifications
-- \textbf{Technology transfer} to industrial and academic partners -
-\textbf{Educational resources} for training next-generation researchers
+complete computational anchors for all claims, enabling:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Independent validation} of theoretical predictions
+\item
+  \textbf{Experimental protocol reproduction} with detailed
+  specifications
+\item
+  \textbf{Technology transfer} to industrial and academic partners
+\item
+  \textbf{Educational resources} for training next-generation
+  researchers
+\end{itemize}
 
 This integrated framework establishes a foundation for both fundamental
 understanding of insect sensory mechanisms and practical applications in
 biomimetic sensing technology.
-
-\newpage
-
-\newpage
 
 \section{Mathematical Appendix}\label{sec:mathematical_appendix}
 
@@ -1428,53 +1595,47 @@ Combined:
 \(\sqrt{(1.23 \times 10^6)^2 + (2.62 \times 10^5)^2} = 1.26 \times 10^6\)
 m\(^{-1}\) - Resonant frequency:
 \(f_{res} = (1.79 \times 10^8)(1.26 \times 10^6)/(2\pi) = 35.9\) THz -
-Free-space wavelength: \(\lambda_0 = c_0/f_{res} = 8.35\) μm
+Free-space wavelength: \(\lambda_0 = c_0/f_{res} = 8.35\)
+\(\mu\mathrm{m}\)
 
 This wavelength falls within the atmospheric transmission window (8-14
-μm), validating the theoretical framework. Implementation in
+\(\mu\mathrm{m}\)), validating the theoretical framework. Implementation
+in
 \passthrough{\lstinline!src/sensilla.py::analyze\_sensilla\_dimensions!}
 produces identical results with error bounds \textless{} 0.1\%.
 
 \textbf{Practical Implementation:}
 
 \begin{lstlisting}[language=Python]
-\newpage
-
 # Example: Calculate resonance for typical sensillum dimensions
 from src.sensilla import calculate_sensilla_resonance_frequency
 import numpy as np
 
-\newpage
-
 # Typical sensillum parameters
-length = 12e-6  # 12 μm
-radius = 1.5e-6  # 1.5 μm
+length = 12e-6  # 12 \(\mu\mathrm{m}\)
+radius = 1.5e-6  # 1.5 \(\mu\mathrm{m}\)
 epsilon_r = 2.8  # cuticle relative permittivity
-
-\newpage
 
 # Calculate resonance (note: function returns frequency in Hz)
 f_res = calculate_sensilla_resonance_frequency(
     length=length, radius=radius, epsilon_r=epsilon_r
 )
 
-\newpage
-
 # Convert to wavelength using c = f * λ (in vacuum approximation)
 c = 3e8  # speed of light in m/s
 wavelength = c / f_res  # in meters
-wavelength_um = wavelength * 1e6  # convert to μm
+wavelength_um = wavelength * 1e6  # convert to \(\mu\mathrm{m}\)
 
 print(f"Resonant frequency: {f_res/1e12:.2f} THz")
-print(f"Resonant wavelength: {wavelength_um:.2f} μm")
+print(f"Resonant wavelength: {wavelength_um:.2f} \(\mu\mathrm{m}\)")
 \end{lstlisting}
 
 \textbf{Cross-Validation with Literature:} Recent studies of beetle
-infrared sensilla report dimensions of 10--20 μm length and 1--3 μm
-diameter, corresponding to resonances in the 8--12 μm range---precisely
-the atmospheric transmission window with highest throughput. This
-dimensional convergence across taxa suggests evolutionary optimization
-for environmental IR transmission.
+infrared sensilla report dimensions of 10--20 \(\mu\mathrm{m}\) length
+and 1--3 \(\mu\mathrm{m}\) diameter, corresponding to resonances in the
+8--12 \(\mu\mathrm{m}\) range---precisely the atmospheric transmission
+window with highest throughput. This dimensional convergence across taxa
+suggests evolutionary optimization for environmental IR transmission.
 
 \subsection{Vibrational Spectroscopy}\label{vibrational-spectroscopy}
 
@@ -1533,27 +1694,22 @@ component.
 
 \textbf{Transmission windows (model)}: The three primary atmospheric
 windows used in our baseline model have transmission efficiencies: -
-\textbf{2-5 μm}: \(T(\lambda) \approx 0.8\) (mid-infrared) -
-\textbf{8-14 μm}: \(T(\lambda) \approx 0.9\) (long-wave infrared) -
-\textbf{17-25 μm}: \(T(\lambda) \approx 0.7\) (far-infrared)
+\textbf{2-5 \(\mu\mathrm{m}\)}: \(T(\lambda) \approx 0.8\)
+(mid-infrared) - \textbf{8-14 \(\mu\mathrm{m}\)}:
+\(T(\lambda) \approx 0.9\) (long-wave infrared) - \textbf{17-25
+\(\mu\mathrm{m}\)}: \(T(\lambda) \approx 0.7\) (far-infrared)
 
 \textbf{Detection Range Example:}
 
 \begin{lstlisting}[language=Python]
-\newpage
-
 # Calculate detection range for a typical pheromone scenario
 from src.core import calculate_atmospheric_transmission
 
-\newpage
-
 # Parameters for pheromone detection
-wavelength = 10.0  # μm (within long-wave window)
+wavelength = 10.0  # \(\mu\mathrm{m}\) (within long-wave window)
 distance = 50.0    # meters
-temperature = 20.0  # °C
+temperature = 20.0  # \(^{\circ}\mathrm{C}\)
 humidity = 60.0    # %
-
-\newpage
 
 # Calculate transmission
 transmission = calculate_atmospheric_transmission(
@@ -1563,15 +1719,15 @@ transmission = calculate_atmospheric_transmission(
     humidity=humidity
 )
 
-print(f"Transmission at {wavelength} μm over {distance} m: {transmission:.3f}")
+print(f"Transmission at {wavelength} \(\mu\mathrm{m}\) over {distance} m: {transmission:.3f}")
 print(f"Signal attenuation: {-10*np.log10(transmission):.1f} dB")
 \end{lstlisting}
 
-\textbf{Practical Implications:} For a 10 μm wavelength signal over 50
-m, typical atmospheric transmission is \textasciitilde0.85,
-corresponding to only 0.7 dB of attenuation. This enables reliable
-detection ranges of 100+ meters for insect pheromones, consistent with
-observed behaviors in field studies.
+\textbf{Practical Implications:} For a 10 \(\mu\mathrm{m}\) wavelength
+signal over 50 m, typical atmospheric transmission is
+\textasciitilde0.85, corresponding to only 0.7 dB of attenuation. This
+enables reliable detection ranges of 100+ meters for insect pheromones,
+consistent with observed behaviors in field studies.
 
 \subsection{Antenna Theory and Sensilla
 Modeling}\label{antenna-theory-and-sensilla-modeling}
@@ -1670,13 +1826,14 @@ The fundamental resonant frequency of a microtubule is:
 f_0 = \frac{1}{2L} \sqrt{\frac{EI}{\rho A}} \label{eq:microtubule_resonance}
 \end{equation}
 
-where: - \(L\) is the length of the microtubule (1-10 μm) - \(E\) is
-Young's modulus (\(1.2 \times 10^9\) Pa) - \(I\) is the moment of
-inertia - \(\rho\) is the density (\(1.4 \times 10^3\) kg/m³) - \(A\) is
-the cross-sectional area
+where: - \(L\) is the length of the microtubule (1-10 \(\mu\mathrm{m}\))
+- \(E\) is Young's modulus (\(1.2 \times 10^9\) Pa) - \(I\) is the
+moment of inertia - \(\rho\) is the density (\(1.4 \times 10^3\)
+\(\mathrm{kg}\,/\,\mathrm{m}^3\)) - \(A\) is the cross-sectional area
 
-\textbf{Frequency Range}: Microtubules resonate in the 1-30 μm
-wavelength range, corresponding to infrared frequencies.
+\textbf{Frequency Range}: Microtubules resonate in the 1-30
+\(\mu\mathrm{m}\) wavelength range, corresponding to infrared
+frequencies.
 
 \subsubsection{Piezoelectric Coupling}\label{piezoelectric-coupling}
 
@@ -1760,8 +1917,8 @@ J = \frac{e^2}{h} \frac{V}{d} P_{tunnel} \label{eq:tunneling_current}
 
 where \(e\) is the electron charge and \(h\) is Planck's constant.
 
-\subsubsection{Förster Resonance Energy Transfer
-(FRET)}\label{fuxf6rster-resonance-energy-transfer-fret}
+\subsubsection{F\{"o\}rster Resonance Energy Transfer
+(FRET)}\label{forster-resonance-energy-transfer-fret}
 
 The efficiency of FRET between donor and acceptor molecules is:
 
@@ -1770,7 +1927,7 @@ E_{FRET} = \frac{1}{1 + \left(\frac{r}{R_0}\right)^6} \label{eq:fret_efficiency}
 \end{equation}
 
 where: - \(r\) is the distance between donor and acceptor - \(R_0\) is
-the Förster radius (characteristic distance, typically 2-6 nm)
+the F\{"o\}rster radius (characteristic distance, typically 2-6 nm)
 
 \textbf{FRET Rate}: The FRET rate constant is:
 
@@ -2013,9 +2170,17 @@ minimizing:
 \mathcal{L} = \sum_{i=1}^{N} \left(R_i - R_{target}\right)^2 + \lambda \sum_{i=1}^{N-1} (d_{i+1} - d_i)^2 \label{eq:optimization_loss}
 \end{equation}
 
-where: - \(d_i\) is the distance to the \(i\)th sensillum - \(\lambda\)
-is the regularization parameter - \(R_{target}\) is the desired response
-pattern
+where:
+
+\begin{itemize}
+\tightlist
+\item
+  \(d_i\) is the distance to the \(i\)th sensillum
+\item
+  \(\lambda\) is the regularization parameter
+\item
+  \(R_{target}\) is the desired response pattern
+\end{itemize}
 
 \textbf{Optimal Spacing}: The optimal spacing follows a log-periodic
 pattern:
@@ -2025,6 +2190,58 @@ d_{i+1} = d_i \tau \label{eq:optimal_spacing}
 \end{equation}
 
 where \(\tau\) is the optimal log-periodic ratio.
+
+\subsubsection{Information-Theoretic
+Analysis}\label{information-theoretic-analysis}
+
+The integrated analysis framework provides comprehensive quantitative
+assessment of the empirical evidence through information-theoretic
+measures. The \passthrough{\lstinline!IntegratedAnalyzer!} class
+combines multiple analytical approaches to provide system-level
+performance metrics.
+
+\textbf{System Performance}: The
+\passthrough{\lstinline!calculate\_system\_performance\_metrics()!}
+method generates composite performance scores that integrate information
+processing efficiency, material performance, and overall system
+efficiency. Figure manifests include
+\passthrough{\lstinline!integrated\_analysis\_*!} artifacts written to
+\passthrough{\lstinline!figures/!}.
+
+\textbf{Performance Metrics}: - \textbf{Information Capacity}:
+\(C \approx 10^3-10^4\) bits/s - \textbf{Signal-to-Noise Ratio}:
+\(SNR \approx 20-40\) dB - \textbf{Detection Efficiency}:
+\(\eta \approx 0.6-0.9\) - \textbf{False Alarm Rate}:
+\(P_{FA} \approx 10^{-3}-10^{-2}\)
+
+\textbf{Cross-Domain Validation}: The framework integration allows
+validation of theoretical predictions across multiple domains, from
+molecular spectroscopy to behavioral response.
+
+\subsubsection{Predictive Capability
+Assessment}\label{predictive-capability-assessment}
+
+The meta-material analytical framework enables prediction of system
+performance under different conditions. The
+\passthrough{\lstinline!analyze\_information\_capacity()!} method
+calculates channel capacity, signal-to-noise ratios, and quantum limits
+for information processing.
+
+\textbf{Channel Capacity}: The information capacity of the infrared
+detection channel is:
+
+\begin{equation}
+C = B \log_2(1 + SNR)
+\label{eq:channel_capacity_empirical}
+\end{equation}
+
+where \(B\) is the bandwidth and \(SNR\) is the signal-to-noise ratio.
+
+\textbf{Quantum Limits}: The framework incorporates quantum mechanical
+limits on information processing: - \textbf{Heisenberg Uncertainty}:
+\(\Delta x \Delta p \geq \hbar/2\) - \textbf{Quantum Noise}: Zero-point
+fluctuations - \textbf{Entanglement Effects}: Quantum correlations in
+receptor arrays
 
 \subsection{Conclusion}\label{conclusion}
 
@@ -2071,10 +2288,6 @@ integration of theory, computation, and empirical validation represents
 a comprehensive approach to understanding the remarkable capabilities of
 insect chemosensation.
 
-\newpage
-
-\newpage
-
 \section{Empirical Studies}\label{sec:empirical_studies}
 
 \subsection{Introduction}\label{introduction-1}
@@ -2107,8 +2320,8 @@ Studies}\label{isotope-discrimination-studies}
 \tightlist
 \item
   \textbf{Citation}:
-  \href{https://www.pnas.org/doi/10.1073/pnas.1012293108}{Turin et
-  al.~(2011) - PNAS}
+  \href{https://www.pnas.org/doi/10.1073/pnas.1012293108}{Franco et
+  al.~(2011)}
 \item
   \textbf{Species/Context}: \emph{Drosophila melanogaster}; behavioral
   conditioning
@@ -2127,7 +2340,7 @@ Studies}\label{isotope-discrimination-studies}
     C--H stretching shift: 2850--3000 cm\(^{-1}\) → 2100--2200
     cm\(^{-1}\)
   \item
-    Frequency ratio: predicted 0.707; observed 0.71 ± 0.02
+    Frequency ratio: predicted 0.707; observed 0.71 \(\pm\) 0.02
   \end{itemize}
 \item
   \textbf{Implications}: Strong evidence for vibrational sensitivity
@@ -2137,78 +2350,6 @@ Studies}\label{isotope-discrimination-studies}
   \passthrough{\lstinline!src/fermi\_estimation.py::calculate\_vibrational\_entropy!};
   \passthrough{\lstinline!src/core.py::calculate\_wavelength\_from\_wavenumber!}
   (tests: \passthrough{\lstinline!tests/test\_core.py!})
-\end{itemize}
-
-\subsubsection{Recent Behavioral Confirmation
-Studies}\label{recent-behavioral-confirmation-studies}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Citation}:
-  \href{https://doi.org/10.1016/j.cub.2011.05.016}{Franco et al.~(2011)
-  - Current Biology}
-\item
-  \textbf{Species/Context}: \emph{Drosophila melanogaster}; cross-modal
-  vibrational learning
-\item
-  \textbf{Methods}: Operant conditioning with vibrational frequency
-  discrimination
-\item
-  \textbf{Findings (quantitative)}:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Learning of vibrational features independent of molecular structure
-  \item
-    Cross-generalization between structurally different molecules with
-    similar vibrations
-  \item
-    Response accuracy: 85--92\% for frequency discrimination tasks
-  \end{itemize}
-\item
-  \textbf{Implications}: Behavioral evidence for frequency-based
-  olfactory processing
-\item
-  \textbf{Code anchors}:
-  \passthrough{\lstinline!src/behavioral.py::analyze\_vibrational\_learning!}
-  (tests: \passthrough{\lstinline!tests/test\_behavioral.py!})
-\end{itemize}
-
-\subsubsection{Human Olfactory Isotope
-Effects}\label{human-olfactory-isotope-effects}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Citation}: \href{https://doi.org/10.1038/nn.4323}{Keller \&
-  Vosshall (2016) - Nature Neuroscience}
-\item
-  \textbf{Species/Context}: \emph{Homo sapiens}; psychophysical
-  discrimination
-\item
-  \textbf{Methods}: Triangle tests with deuterated odorants; 24
-  subjects; p \textless{} 0.05
-\item
-  \textbf{Findings (quantitative)}:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Significant discrimination of deuterated vs.~non-deuterated
-    compounds
-  \item
-    Effect sizes: d' = 0.8--1.2 across tested odorants
-  \item
-    No correlation with intensity or pleasantness ratings
-  \end{itemize}
-\item
-  \textbf{Implications}: Vibrational sensitivity conserved across taxa
-\item
-  \textbf{Code anchors}:
-  \passthrough{\lstinline!src/psychophysics.py::analyze\_isotope\_discrimination!}
-  (tests: \passthrough{\lstinline!tests/test\_psychophysics.py!})
 \end{itemize}
 
 \subsubsection{Quantum Mechanical
@@ -2250,33 +2391,6 @@ Modeling}\label{quantum-mechanical-modeling}
   (unit tests cover branches)
 \end{itemize}
 
-\subsubsection{Cross-Modal Vibrational
-Learning}\label{cross-modal-vibrational-learning}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Citation}:
-  \href{https://doi.org/10.1016/j.cub.2011.05.016}{Franco, Turin,
-  Mershin, Skoulakis - 2011}
-\item
-  \textbf{Species/Context}: \emph{Drosophila} conditioning and
-  generalization
-\item
-  \textbf{Methods}: 10--20 trials/fly; generalization to nitriles; PER
-  probability/latency; ANOVA with post‑hoc tests
-\item
-  \textbf{Findings (quantitative)}: Learned association to vibrational
-  features with cross‑modal generalization
-\item
-  \textbf{Implications}: Behavioral learning over vibrational
-  frequencies, not only chemical identity
-\item
-  \textbf{Code anchors}:
-  \passthrough{\lstinline!src/integrated\_analysis.py::IntegratedAnalyzer!}
-  (combines Fermi + meta‑material analyses)
-\end{itemize}
-
 \subsection{Morphological and Structural
 Evidence}\label{morphological-and-structural-evidence}
 
@@ -2302,9 +2416,11 @@ Matching}\label{sensilla-architecture-and-wavelength-matching}
   \begin{itemize}
   \tightlist
   \item
-    Trichodea: 6--160 μm; Basiconica: 2--8 μm; Coeloconica: 5--15 μm
+    Trichodea: 6--160 \(\mu\mathrm{m}\); Basiconica: 2--8
+    \(\mu\mathrm{m}\); Coeloconica: 5--15 \(\mu\mathrm{m}\)
   \item
-    Thrips species sensilla basiconica: 6.86--53.42 μm length range
+    Thrips species sensilla basiconica: 6.86--53.42 \(\mu\mathrm{m}\)
+    length range
   \item
     Systematic variation in sensilla dimensions across taxa supports
     wavelength-specific tuning
@@ -2343,15 +2459,16 @@ Beetles}\label{specialized-infrared-sensilla-in-beetles}
   \begin{itemize}
   \tightlist
   \item
-    Beetle sensilla length: 15--25 μm; diameter: 2--4 μm
+    Beetle sensilla length: 15--25 \(\mu\mathrm{m}\); diameter: 2--4
+    \(\mu\mathrm{m}\)
   \item
     Organ contains approximately 100 individual sensilla per IR
     detection organ
   \item
-    Resonance wavelengths: 3--5 μm (coincident with forest fire IR
-    signatures)
+    Resonance wavelengths: 3--5 \(\mu\mathrm{m}\) (coincident with
+    forest fire IR signatures)
   \item
-    Response threshold: 0.1--1.0 mW/cm²
+    Response threshold: 0.1--1.0 \(\mathrm{mW}\,/\,\mathrm{cm}^2\)
   \item
     Detection range: up to 100 m for forest fire plumes
   \item
@@ -2377,8 +2494,7 @@ Ants}\label{antennal-ir-detection-in-leafcutter-ants}
 \tightlist
 \item
   \textbf{Citation}:
-  \href{https://doi.org/10.1073/pnas.0900307106}{Ruchty et al.~(2009) -
-  PNAS}
+  \href{https://pubmed.ncbi.nlm.nih.gov/19095080/}{Ruchty et al.~(2009)}
 \item
   \textbf{Species/Context}: \emph{Atta vollenweideri}; thermo-sensitive
   sensilla
@@ -2390,9 +2506,10 @@ Ants}\label{antennal-ir-detection-in-leafcutter-ants}
   \begin{itemize}
   \tightlist
   \item
-    Penetration depth: 6 μm at 3 μm wavelength
+    Penetration depth: 6 \(\mu\mathrm{m}\) at 3 \(\mu\mathrm{m}\)
+    wavelength
   \item
-    Response threshold: 0.5--2.0 mW/cm²
+    Response threshold: 0.5--2.0 \(\mathrm{mW}\,/\,\mathrm{cm}^2\)
   \item
     Shield structure minimally affects IR reception
   \item
@@ -2404,119 +2521,6 @@ Ants}\label{antennal-ir-detection-in-leafcutter-ants}
   \textbf{Code anchors}:
   \passthrough{\lstinline!src/spectroscopy.py::model\_ir\_penetration\_depth!}
   (tests: \passthrough{\lstinline!tests/test\_spectroscopy.py!})
-\end{itemize}
-
-\subsubsection{Cross-Taxa IR Receptor
-Diversity}\label{cross-taxa-ir-receptor-diversity}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Citation}: \href{https://doi.org/10.1093/aesa/59.1.879}{Evans
-  (1966) - Annals Entomological Society of America}
-\item
-  \textbf{Species/Context}: 12 beetle species; comparative morphology
-\item
-  \textbf{Methods}: Histological sections, transmission electron
-  microscopy
-\item
-  \textbf{Findings (quantitative)}:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    IR receptor diversity across Coleoptera
-  \item
-    Sensilla dimensions correlate with habitat preferences
-  \item
-    Evolutionary convergence on 10--15 μm optimal length
-  \item
-    Phylogenetic signal in receptor morphology (p \textless{} 0.01)
-  \end{itemize}
-\item
-  \textbf{Implications}: Adaptive radiation of IR detection across
-  beetle lineages
-\item
-  \textbf{Code anchors}:
-  \passthrough{\lstinline!src/morphology.py::analyze\_cross\_taxon\_ir\_receptors!}
-  (tests: \passthrough{\lstinline!tests/test\_morphology.py!})
-\end{itemize}
-
-\subsubsection{Cuticular Hydrocarbon
-Spectroscopy}\label{cuticular-hydrocarbon-spectroscopy-1}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Citation}:
-  \href{https://doi.org/10.1073/pnas.0900307106}{Ruchty et al.~(2009)}
-\item
-  \textbf{Species/Context}: Ants and other insects; ATR‑FTIR CHC
-  profiles
-\item
-  \textbf{Methods}: Peak detection and overlap analysis on CHC spectra
-\item
-  \textbf{Findings (quantitative)}:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Fire ant: \(\sim 3500\) cm\(^{-1}\) (\(\approx 2.9\) μm); Cabbage
-    looper: 17 μm, 26 μm
-  \item
-    Aphids: 2.85--3.5 μm; Grasshopper: 2850 cm\(^{-1}\) (3.5 μm)
-  \item
-    Discrimination \(\approx 95\%\) in reported datasets
-  \end{itemize}
-\item
-  \textbf{Implications}: Distinct vibrational signatures enable
-  recognition and classification
-\item
-  \textbf{Code anchors}:
-  \passthrough{\lstinline!src/spectroscopy.py::analyze\_chc\_spectra!},
-  \passthrough{\lstinline!calculate\_spectral\_overlap!} (tests:
-  \passthrough{\lstinline!tests/test\_spectroscopy\_analysis.py!})
-\end{itemize}
-
-\subsection{Quantum Mechanical
-Evidence}\label{quantum-mechanical-evidence}
-
-\subsubsection{Electron Tunneling and Phonon
-Coupling}\label{electron-tunneling-and-phonon-coupling}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Citation}:
-  \href{https://doi.org/10.1093/chemse/21.6.773}{Turin (1996) - Chemical
-  Senses}
-\item
-  \textbf{Species/Context}: Theoretical quantum model of olfactory
-  receptor binding
-\item
-  \textbf{Methods}: Quantum mechanical analysis of inelastic electron
-  tunneling spectroscopy (IETS) applied to olfactory receptors
-\item
-  \textbf{Findings (quantitative)}:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Receptor activation through vibrational energy transfer rather than
-    molecular shape
-  \item
-    Predicted isotope effects on olfactory perception (hydrogen
-    vs.~deuterium)
-  \item
-    Quantum tunneling model explains stereoisomer discrimination
-  \end{itemize}
-\item
-  \textbf{Implications}: Provides theoretical foundation for vibrational
-  theory of olfaction
-\item
-  \textbf{Code anchors}:
-  \passthrough{\lstinline!src/meta\_material\_framework.py::MetaMaterialAnalyzer.analyze\_plasmonic\_resonance!},
-  \passthrough{\lstinline!calculate\_quantum\_coupling!}
 \end{itemize}
 
 \subsection{Neurophysiology: ORN Latency and
@@ -2544,7 +2548,8 @@ Insects}\label{fast-orn-latencies-in-insects}
   \begin{itemize}
   \tightlist
   \item
-    Minimum first‑spike latency ≈ 3 ms; latency jitter ≈ 0.19 ms
+    Minimum first‑spike latency \(\approx 3\,\mathrm{ms}\); latency
+    jitter \(\approx 0.19\,\mathrm{ms}\)
   \item
     Short‑latency responses faster than typical diffusion‑based
     expectations
@@ -2600,8 +2605,8 @@ Dynamics}\label{gpcr-conformational-dynamics-1}
   \begin{itemize}
   \tightlist
   \item
-    TM6 rotates and swings nearly 14 Å away from helical bundle during
-    activation
+    TM6 rotates and swings nearly 14 \(\mathring{A}\) away from helical
+    bundle during activation
   \item
     Extracellular Loop 3 (ECL3) structural alterations triggered by
     fatty acid odorants
@@ -2684,18 +2689,19 @@ Range}\label{atmospheric-transmission-and-detection-range}
   sensing
 \item
   \textbf{Methods}: Infrared transmission analysis across atmospheric
-  compositions; detailed 8-14 μm window analysis
+  compositions; detailed 8-14 \(\mu\mathrm{m}\) window analysis
 \item
   \textbf{Findings (quantitative)}:
 
   \begin{itemize}
   \tightlist
   \item
-    Windows: 2--5 μm (\textasciitilde80\%), 8--14 μm
-    (\textasciitilde90\%), 17--25 μm (\textasciitilde70\%)
+    Windows: 2--5 \(\mu\mathrm{m}\) (\textasciitilde80\%), 8--14
+    \(\mu\mathrm{m}\) (\textasciitilde90\%), 17--25 \(\mu\mathrm{m}\)
+    (\textasciitilde70\%)
   \item
-    8-14 μm band provides opportunity for infrared energy transmission
-    with high efficiency
+    8-14 \(\mu\mathrm{m}\) band provides opportunity for infrared energy
+    transmission with high efficiency
   \item
     Detection range: 10--100 m under favorable conditions
   \item
@@ -2726,207 +2732,21 @@ Range}\label{atmospheric-transmission-and-detection-range}
   \textbf{Species/Context}: Aedes aegypti; thermal IR guidance
 \item
   \textbf{Findings (quantitative)}: Thermal IR detectable up to
-  \textasciitilde0.7 m; shorter‑range than CO₂ (5--15 m): ``Thus, we
-  conclude that thermal IR is detected by Ae. aegypti at mid-range
-  distances up to 0.7 m, which are much longer than the detection limit
-  of convection heat from a 34 °C source (\textless10 cm), but not as
-  long range as CO2, the most volatile human odours, and visual cues (up
-  to around 5--15 m).''
+  \textasciitilde0.7 m; shorter‑range than CO\textsubscript{2} (5--15
+  m): ``Thus, we conclude that thermal IR is detected by Ae. aegypti at
+  mid-range distances up to 0.7,m, which are much longer than the
+  detection limit of convection heat from a 34,\(^{\circ}\mathrm{C}\)
+  source (\textless10,cm), but not as long range as CO\textsubscript{2},
+  the most volatile human odours, and visual cues (up to around
+  5--15,m).''
 \item
   \textbf{Implications}: Demonstrates insect IR sensitivity in natural
   behavior; emphasizes wavelength/mechanism‑specific ranges
 \end{itemize}
 
-\subsubsection{Temperature and Humidity
-Effects}\label{temperature-and-humidity-effects}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Citation}:
-  \href{https://doi.org/10.1073/pnas.1423080112}{Montell et al.~(2015) -
-  PNAS}
-\item
-  \textbf{Species/Context}: Environmental modulation of insect olfaction
-\item
-  \textbf{Methods}: Behavioral/physiological assays across temperature
-  and humidity ranges
-\item
-  \textbf{Findings (quantitative)}:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Activation energy \(E_a \approx 0.1\)--\(1.0\) eV; coefficient
-    \(\alpha_T \approx 0.02\)--\(0.05\) K\(^{-1}\)
-  \item
-    Optimal 25--35°C; functional range 15--45°C; humidity 40--60\%
-    optimal
-  \item
-    Hysteresis above 80\% RH; adaptation 10--30 minutes
-  \end{itemize}
-\item
-  \textbf{Implications}: Environment modulates sensitivity; must be
-  modeled in predictions
-\item
-  \textbf{Code anchors}:
-  \passthrough{\lstinline!src/fermi\_estimation.py::FermiEstimator.calculate\_environmental\_information\_content!}
-\end{itemize}
-
-\subsection{Cross-Domain Integration and
-Synthesis}\label{cross-domain-integration-and-synthesis}
-
-\subsubsection{Information-Theoretic
-Analysis}\label{information-theoretic-analysis}
-
-The integrated analysis framework provides comprehensive quantitative
-assessment of the empirical evidence through information-theoretic
-measures. The \passthrough{\lstinline!IntegratedAnalyzer!} class
-combines multiple analytical approaches to provide system-level
-performance metrics.
-
-\textbf{System Performance}: The
-\passthrough{\lstinline!calculate\_system\_performance\_metrics()!}
-method generates composite performance scores that integrate information
-processing efficiency, material performance, and overall system
-efficiency. Figure manifests include
-\passthrough{\lstinline!integrated\_analysis\_*!} artifacts written to
-\passthrough{\lstinline!figures/!}.
-
-\textbf{Performance Metrics}: - \textbf{Information Capacity}:
-\(C \approx 10^3-10^4\) bits/s - \textbf{Signal-to-Noise Ratio}:
-\(SNR \approx 20-40\) dB - \textbf{Detection Efficiency}:
-\(\eta \approx 0.6-0.9\) - \textbf{False Alarm Rate}:
-\(P_{FA} \approx 10^{-3}-10^{-2}\)
-
-\textbf{Cross-Domain Validation}: The framework integration allows
-validation of theoretical predictions across multiple domains, from
-molecular spectroscopy to behavioral response.
-
-\subsubsection{Predictive Capability
-Assessment}\label{predictive-capability-assessment}
-
-The meta-material analytical framework enables prediction of system
-performance under different conditions. The
-\passthrough{\lstinline!analyze\_information\_capacity()!} method
-calculates channel capacity, signal-to-noise ratios, and quantum limits
-for information processing.
-
-\textbf{Channel Capacity}: The information capacity of the infrared
-detection channel is:
-
-\begin{equation}
-C = B \log_2(1 + SNR)
-\label{eq:channel_capacity_empirical}
-\end{equation}
-
-where \(B\) is the bandwidth and \(SNR\) is the signal-to-noise ratio.
-
-\textbf{Quantum Limits}: The framework incorporates quantum mechanical
-limits on information processing: - \textbf{Heisenberg Uncertainty}:
-\(\Delta x \Delta p \geq \hbar/2\) - \textbf{Quantum Noise}: Zero-point
-fluctuations - \textbf{Entanglement Effects}: Quantum correlations in
-receptor arrays
-
-\subsection{Framework Implementation and
-Validation}\label{framework-implementation-and-validation}
-
-\subsubsection{Tested Computational
-Models}\label{tested-computational-models}
-
-All analytical frameworks presented in this section are implemented as
-tested Python modules in the \passthrough{\lstinline!src!} directory.
-The modules include comprehensive unit tests and validation procedures
-to ensure accuracy and reproducibility.
-
-\textbf{Code Availability}: The complete source code, including all
-analysis functions and visualization scripts, is available in the
-repository.
-
-\textbf{Test Coverage}: All modules achieve 100\% test coverage with: -
-\textbf{Unit Tests}: Individual function testing - \textbf{Integration
-Tests}: End-to-end pipeline validation - \textbf{Physical Validation}:
-Comparison with known constants - \textbf{Empirical Comparison}:
-Validation against published data
-
-\textbf{Performance Benchmarks}: The computational framework achieves: -
-\textbf{Execution Speed}: 10-100x faster than equivalent MATLAB
-implementations - \textbf{Memory Efficiency}: 50-80\% reduction in
-memory usage - \textbf{Numerical Accuracy}: Double precision with error
-bounds \textless{} 1\% - \textbf{Scalability}: Linear scaling with
-problem size up to 10⁶ elements
-
-\subsubsection{Empirical Grounding}\label{empirical-grounding}
-
-The frameworks are explicitly designed to connect theoretical
-predictions with empirical evidence. Each analytical method references
-specific experimental studies and provides quantitative measures that
-can be directly compared with experimental results.
-
-\textbf{Validation Pipeline}: The integrated analysis includes
-validation steps that compare theoretical predictions with experimental
-data.
-
-\textbf{Validation Metrics}: - \textbf{Correlation Coefficient}:
-\(r \geq 0.85\) for all predictions - \textbf{Mean Absolute Error}:
-\(MAE \leq 10\%\) of measured values - \textbf{Root Mean Square Error}:
-\(RMSE \leq 15\%\) of measured values - \textbf{Statistical
-Significance}: \(p < 0.001\) for all correlations
-
-\textbf{Experimental Predictions}: The framework generates specific,
-testable predictions for: - Sensilla response characteristics -
-Detection range and sensitivity - Environmental effects on performance -
-Optimal array configurations
-
 Where possible, we reference primary data and provide computational
 reproductions using \passthrough{\lstinline!src/!} modules (see method
 mapping in \Cref{sec:methodology}).
-
-\subsection{Conclusion}\label{conclusion-1}
-
-The empirical evidence presented in this section provides strong support
-for the vibrational theory of olfaction and infrared sensing in insects.
-The comprehensive analytical frameworks implemented in the
-\passthrough{\lstinline!src!} directory provide quantitative,
-information-theoretic analysis that enables cross-domain synthesis and
-predictive capability assessment.
-
-\textbf{Evidence Strength}: The integrated analysis reveals: -
-\textbf{Molecular Spectroscopy}: Strong evidence (correlation
-\(r \geq 0.85\)) - \textbf{Morphological Analysis}: Strong evidence
-(dimensional correlation \(r \geq 0.85\)) - \textbf{Behavioral Studies}:
-Moderate to strong evidence (response accuracy \(\geq 80\%\)) -
-\textbf{Quantum Mechanical}: Theoretical support with experimental
-validation
-
-\textbf{Framework Integration}: The integration of Fermi Estimation with
-meta-material analytical frameworks provides a robust theoretical
-foundation for understanding the complex interactions between molecular
-vibrations, receptor specificity, neural encoding, and environmental
-factors.
-
-\textbf{Predictive Capability}: The frameworks enable quantitative
-comparison between different theoretical approaches and provide
-predictive capabilities that can guide future experimental design. The
-comprehensive analysis demonstrates that vibrational theory provides a
-more complete understanding of olfactory function than traditional
-stereochemical models alone.
-
-\textbf{Future Directions}: The empirical framework provides a
-foundation for: - \textbf{Experimental Design}: Specific protocols for
-testing predictions - \textbf{Technology Development}: Biomimetic sensor
-design principles - \textbf{Conservation Applications}: Environmental
-impact assessment - \textbf{Educational Resources}: Quantitative
-understanding of insect perception
-
-This integrated approach maximizes ``fractal intelligence'' by ensuring
-empirical accuracy, falsifiable evidence, and grounding claims in tested
-computational methods that yield accessible visualizations and
-quantitative predictions.
-
-\newpage
-
-\newpage
 
 \section{Ant Stack Implementation
 Appendix}\label{sec:ant_stack_appendix}
@@ -2957,8 +2777,6 @@ Sensing}\label{antbody-layer-physical-simulation-and-sensing}
 Integration}\label{sensilla-morphology-integration}
 
 \begin{lstlisting}[language=Python]
-\newpage
-
 # AntBody sensilla configuration (adapter pattern)
 class AntBodySensilla:
     def __init__(self, species_preset: str):
@@ -2978,9 +2796,10 @@ class AntBodySensilla:
 \end{lstlisting}
 
 \textbf{I/O Contract}: - \textbf{Observations}: Sensilla dimensions
-(μm), resonance frequencies (THz), quality factors - \textbf{Actions}:
-Antenna positioning, sensilla orientation - \textbf{Physics}: 1 kHz
-update rate, contact dynamics for substrate interaction
+(\(\mu\mathrm{m}\)), resonance frequencies (THz), quality factors -
+\textbf{Actions}: Antenna positioning, sensilla orientation -
+\textbf{Physics}: 1 kHz update rate, contact dynamics for substrate
+interaction
 
 \paragraph{Spectroscopy and Atmospheric
 Transmission}\label{spectroscopy-and-atmospheric-transmission}
@@ -2991,15 +2810,16 @@ Integration of cohereAnts atmospheric transmission models:
 class AntBodySpectroscopy:
     def __init__(self, environment_preset: str):
         self.transmission_curves = load_atmospheric_data(environment_preset)
-        self.spectral_resolution = 0.01  # μm
+        self.spectral_resolution = 0.01  # \(\mu\mathrm{m}\)
         
     def get_transmission(self, wavelength: float, distance: float) -> float:
         # Delegate to cohereAnts atmospheric transmission model in src/core
         return calculate_atmospheric_transmission(wavelength, distance)
 \end{lstlisting}
 
-\textbf{Configuration Parameters}: - Atmospheric windows: 2-5 μm, 8-14
-μm, 17-25 μm - Transmission coefficients: 0.7-0.9 for optimal windows -
+\textbf{Configuration Parameters}: - Atmospheric windows: 2-5
+\(\mu\mathrm{m}\), 8-14 \(\mu\mathrm{m}\), 17-25 \(\mu\mathrm{m}\) -
+Transmission coefficients: 0.7-0.9 for optimal windows -
 Distance-dependent attenuation models
 
 \subsubsection{AntBrain Layer: Neural
@@ -3048,7 +2868,7 @@ Implementation of cohereAnts electromagnetic theory:
 \begin{lstlisting}[language=Python]
 class VibrationalGlomeruliCircuit:
     def __init__(self):
-        self.frequency_tuning = np.linspace(2, 25, 50)  # μm to THz
+        self.frequency_tuning = np.linspace(2, 25, 50)  # \(\mu\mathrm{m}\) to THz
         self.quality_factors = np.ones(50) * 100
         
     def process_spectral_input(self, spectral_data: np.ndarray) -> np.ndarray:
@@ -3131,14 +2951,12 @@ Implementations}\label{species-specific-implementations}
 Configuration}\label{formica-species-configuration}
 
 \begin{lstlisting}[language=Python]
-\newpage
-
 # Formica species preset for Ant Stack
 FORMICA_PRESET = {
     'body': {
-        'sensilla_lengths': [15.2, 18.7, 22.1, 19.8, 16.5],  # μm
-        'sensilla_diameters': [2.1, 2.8, 3.2, 2.9, 2.3],     # μm
-        'optimal_wavelengths': [60.8, 74.8, 88.4, 79.2, 66.0], # μm
+        'sensilla_lengths': [15.2, 18.7, 22.1, 19.8, 16.5],  # \(\mu\mathrm{m}\)
+        'sensilla_diameters': [2.1, 2.8, 3.2, 2.9, 2.3],     # \(\mu\mathrm{m}\)
+        'optimal_wavelengths': [60.8, 74.8, 88.4, 79.2, 66.0], # \(\mu\mathrm{m}\)
         'antenna_length': 2.5,  # mm
         'leg_count': 6,
         'body_mass': 0.015  # g
@@ -3163,14 +2981,12 @@ FORMICA_PRESET = {
 Configuration}\label{camponotus-species-configuration}
 
 \begin{lstlisting}[language=Python]
-\newpage
-
 # Camponotus species preset for Ant Stack
 CAMPONOTUS_PRESET = {
     'body': {
-        'sensilla_lengths': [22.5, 28.1, 31.7, 26.8, 24.3],  # μm
-        'sensilla_diameters': [3.2, 4.1, 4.8, 4.2, 3.6],     # μm
-        'optimal_wavelengths': [90.0, 112.4, 126.8, 107.2, 97.2], # μm
+        'sensilla_lengths': [22.5, 28.1, 31.7, 26.8, 24.3],  # \(\mu\mathrm{m}\)
+        'sensilla_diameters': [3.2, 4.1, 4.8, 4.2, 3.6],     # \(\mu\mathrm{m}\)
+        'optimal_wavelengths': [90.0, 112.4, 126.8, 107.2, 97.2], # \(\mu\mathrm{m}\)
         'antenna_length': 3.8,  # mm
         'leg_count': 6,
         'body_mass': 0.045  # g
@@ -3382,7 +3198,7 @@ Mechanisms}\label{advanced-learning-mechanisms}
   \textbf{Evolutionary Analysis}: Phylogenetic patterns in behavior
 \end{itemize}
 
-\subsection{Conclusion}\label{conclusion-2}
+\subsection{Conclusion}\label{conclusion-1}
 
 The integration of cohereAnts research into the Ant Stack framework
 provides a robust, reproducible platform for studying ant intelligence.
@@ -3409,10 +3225,6 @@ The resulting framework serves as a bridge between theoretical
 entomology and computational neuroscience, enabling reproducible
 research that advances our understanding of both natural ant
 intelligence and artificial intelligence systems.
-
-\newpage
-
-\newpage
 
 \section{Symbols and Glossary}\label{sec:symbols_glossary}
 
@@ -3459,10 +3271,10 @@ Physiology}\label{insect-anatomy-and-physiology}
   antennae and other body parts that serve as the primary sensory units
 \item
   \textbf{Sensilla Trichodea}: Hair-like sensilla that are often
-  involved in olfaction, typically 6-160 μm in length
+  involved in olfaction, typically 6-160 \(\mu\mathrm{m}\) in length
 \item
   \textbf{Sensilla Basiconica}: Peg-like sensilla with porous surfaces,
-  typically 2-8 μm in length
+  typically 2-8 \(\mu\mathrm{m}\) in length
 \item
   \textbf{Sensilla Coeloconica}: Pit-like sensilla that may detect
   temperature, humidity, and infrared radiation
@@ -3490,20 +3302,20 @@ Detection}\label{electromagnetic-theory-and-infrared-detection}
 \tightlist
 \item
   \textbf{Infrared (IR)}: Electromagnetic radiation with wavelengths
-  longer than visible light (0.7-1000 μm), invisible to human eyes but
-  detectable by specialized sensors
+  longer than visible light (0.7-1000 \(\mu\mathrm{m}\)), invisible to
+  human eyes but detectable by specialized sensors
 \item
-  \textbf{Mid-infrared (MIR)}: IR radiation in the 2-25 μm range,
-  corresponding to molecular vibrational modes and fundamental for
-  chemical sensing applications
+  \textbf{Mid-infrared (MIR)}: IR radiation in the 2-25
+  \(\mu\mathrm{m}\) range, corresponding to molecular vibrational modes
+  and fundamental for chemical sensing applications
 \item
-  \textbf{Far-infrared (FIR)}: IR radiation in the 25-1000 μm range,
-  corresponding to rotational and low-frequency vibrational modes, also
-  known as thermal infrared
+  \textbf{Far-infrared (FIR)}: IR radiation in the 25-1000
+  \(\mu\mathrm{m}\) range, corresponding to rotational and low-frequency
+  vibrational modes, also known as thermal infrared
 \item
-  \textbf{Near-infrared (NIR)}: IR radiation in the 0.7-2 μm range, just
-  beyond visible light, commonly used in spectroscopy and optical
-  communications
+  \textbf{Near-infrared (NIR)}: IR radiation in the 0.7-2
+  \(\mu\mathrm{m}\) range, just beyond visible light, commonly used in
+  spectroscopy and optical communications
 \item
   \textbf{Dielectric}: A material that can be polarized by an electric
   field and supports electromagnetic wave propagation
@@ -3547,7 +3359,7 @@ Properties}\label{spectroscopy-and-molecular-properties}
   \textbf{Enantiomers}: Mirror-image forms of the same molecule that may
   have different olfactory properties
 \item
-  \textbf{FRET}: Förster Resonance Energy Transfer; energy transfer
+  \textbf{FRET}: F\{"o\}rster Resonance Energy Transfer; energy transfer
   between molecules through dipole-dipole interactions
 \item
   \textbf{Wavenumber}: The reciprocal of wavelength, typically expressed
@@ -3561,19 +3373,21 @@ Properties}\label{spectroscopy-and-molecular-properties}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{λ (lambda)}: Wavelength, typically in micrometers (μm) or
-  nanometers (nm).
+  \textbf{λ (lambda)}: Wavelength, typically in micrometers
+  (\(\mu\mathrm{m}\)) or nanometers (nm).
 \item
   \textbf{ν (nu)}: Frequency in Hz, related to wavelength by
   \(c = \lambda\nu\).
 \item
   \textbf{\(\tilde{\nu}\) (wavenumber)}: Reciprocal wavelength in
-  cm\(^{-1}\), \(\tilde{\nu} = 10^4/\lambda\) (for λ in μm).
+  cm\(^{-1}\), \(\tilde{\nu} = 10^4/\lambda\) (for λ in
+  \(\mu\mathrm{m}\)).
 \item
-  \textbf{c}: Speed of light in vacuum (2.998 × 10\^{}8 m/s).
+  \textbf{c}: Speed of light in vacuum (2.998 \(\times\) 10\^{}\{\}8
+  m/s).
 \item
-  \textbf{μm}: Micrometer (10\^{}-6 m); standard unit for infrared
-  wavelengths.
+  \textbf{\(\mu\mathrm{m}\)}: Micrometer (10\^{}-6 m); standard unit for
+  infrared wavelengths.
 \item
   \textbf{nm}: Nanometer (10\^{}-9 m).
 \item
@@ -3586,20 +3400,22 @@ Units}\label{physical-constants-and-units}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{h}: Planck's constant (6.626 × 10\^{}-34 J·s)
+  \textbf{h}: Planck's constant (6.626 \(\times\) 10\^{}\{\}-34 Jot s)
 \item
-  \textbf{\(\hbar\)}: Reduced Planck constant (h/2π = 1.055 × 10\^{}-34
-  J·s)
+  \textbf{\(\hbar\)}: Reduced Planck constant (h/2π = 1.055 \(\times\)
+  10\^{}-34 Jot s)
 \item
-  \textbf{k\_B}: Boltzmann constant (1.381 × 10\^{}-23 J/K)
+  \textbf{k\_B}: Boltzmann constant (1.381 \(\times\) 10\^{}-23 J/K)
 \item
   \textbf{T}: Temperature in Kelvin (K)
 \item
-  \textbf{ε\_0}: Permittivity of free space (8.854 × 10\^{}-12 F/m)
+  \textbf{ε\_0}: Permittivity of free space (8.854 \(\times\) 10\^{}-12
+  F/m)
 \item
-  \textbf{μ\_0}: Permeability of free space (4π × 10\^{}-7 H/m)
+  \textbf{μ\_0}: Permeability of free space (4\(\pi\) \(\times\)
+  10\^{}\{\}-7 H/m)
 \item
-  \textbf{e}: Elementary charge (1.602 × 10\^{}-19 C)
+  \textbf{e}: Elementary charge (1.602 \(\times\) 10\^{}-19 C)
 \end{itemize}
 
 \subsubsection{Electromagnetic Theory}\label{electromagnetic-theory}
@@ -3633,8 +3449,8 @@ Times}\label{insect-measurements-and-response-times}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{μm}: Micrometer; typical size range for insect sensilla (1-200
-  μm)
+  \textbf{\(\mu\mathrm{m}\)}: Micrometer; typical size range for insect
+  sensilla (1-200 \(\mu\mathrm{m}\))
 \item
   \textbf{nm}: Nanometer; scale of molecular interactions and receptor
   dimensions
@@ -3642,7 +3458,8 @@ Times}\label{insect-measurements-and-response-times}
   \textbf{ms}: Millisecond; typical response time of insect ORNs (1-5
   ms)
 \item
-  \textbf{μs}: Microsecond; time scale for electromagnetic detection
+  \textbf{\(\mu\mathrm{s}\)}: Microsecond; time scale for
+  electromagnetic detection
 \item
   \textbf{ns}: Nanosecond; time scale for quantum processes
 \end{itemize}
@@ -3665,7 +3482,7 @@ Acronyms}\label{abbreviations-and-acronyms}
 \item
   \textbf{MTs}: Microtubules
 \item
-  \textbf{FRET}: Förster Resonance Energy Transfer
+  \textbf{FRET}: F\{"o\}rster Resonance Energy Transfer
 \item
   \textbf{SNR}: Signal-to-Noise Ratio
 \item
@@ -3730,16 +3547,16 @@ insect semiochemicals:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{2-5 μm (Mid-infrared)}: \textasciitilde80\% transmission
-  efficiency, optimal for hydrocarbon detection
+  \textbf{2-5 \(\mu\mathrm{m}\) (Mid-infrared)}: \textasciitilde80\%
+  transmission efficiency, optimal for hydrocarbon detection
 \item
-  \textbf{8-14 μm (Long-wave infrared)}: \textasciitilde90\%
-  transmission efficiency, optimal for long-range communication; ground
-  materials can emit infrared energy that partially penetrates this
-  window
+  \textbf{8-14 \(\mu\mathrm{m}\) (Long-wave infrared)}:
+  \textasciitilde90\% transmission efficiency, optimal for long-range
+  communication; ground materials can emit infrared energy that
+  partially penetrates this window
 \item
-  \textbf{17-25 μm (Far-infrared)}: \textasciitilde70\% transmission
-  efficiency, useful for thermal detection
+  \textbf{17-25 \(\mu\mathrm{m}\) (Far-infrared)}: \textasciitilde70\%
+  transmission efficiency, useful for thermal detection
 \end{itemize}
 
 \textbf{Transmission function}: Modeled by
@@ -3766,15 +3583,15 @@ comparative morphometric studies:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Sensilla Trichodea}: 6-160 μm length, optimal for 2-30 μm
-  wavelengths
+  \textbf{Sensilla Trichodea}: 6-160 \(\mu\mathrm{m}\) length, optimal
+  for 2-30 \(\mu\mathrm{m}\) wavelengths
 \item
-  \textbf{Sensilla Basiconica}: 2-8 μm length, optimal for 1-10 μm
-  wavelengths; specific dimensions of 6.86--53.42 μm observed in thrips
-  species
+  \textbf{Sensilla Basiconica}: 2-8 \(\mu\mathrm{m}\) length, optimal
+  for 1-10 \(\mu\mathrm{m}\) wavelengths; specific dimensions of
+  6.86--53.42 \(\mu\mathrm{m}\) observed in thrips species
 \item
-  \textbf{Sensilla Coeloconica}: 5-15 μm length, optimal for 3-20 μm
-  wavelengths
+  \textbf{Sensilla Coeloconica}: 5-15 \(\mu\mathrm{m}\) length, optimal
+  for 3-20 \(\mu\mathrm{m}\) wavelengths
 \item
   \textbf{Specialized IR organs}: Approximately 100 sensilla per organ
   in beetle species
@@ -4462,11 +4279,14 @@ visualization tools for insect analysis data \\
 \passthrough{\lstinline!PlotStyler!} & class & Advanced plot styling and
 theming system \\
 \passthrough{\lstinline!visualization!} &
+\passthrough{\lstinline!create\_accessible\_figure!} & function & Create
+an accessible figure with enhanced features for better understanding \\
+\passthrough{\lstinline!visualization!} &
 \passthrough{\lstinline!create\_publication\_figure!} & function &
 Create a publication-ready figure with optimal styling \\
 \passthrough{\lstinline!visualization!} &
 \passthrough{\lstinline!create\_subplots!} & function & Create subplots
-with consistent styling \\
+with enhanced accessibility and consistent styling \\
 \passthrough{\lstinline!visualization!} &
 \passthrough{\lstinline!get\_colorblind\_palette!} & function & Get a
 colorblind-friendly color palette \\
@@ -4474,10 +4294,6 @@ colorblind-friendly color palette \\
 \passthrough{\lstinline!set\_plot\_style!} & function & Set the global
 plot style \\
 \end{longtable}
-
-\newpage
-
-\newpage
 
 \section{Appendix A: Sensilla Array Directionality and Beam
 Patterns}\label{sec:app_sensilla_array}
@@ -4586,21 +4402,18 @@ olfactory detection.
   Math: \Cref{sec:mathematical_appendix}
 \end{itemize}
 
-\newpage
-
-\newpage
-
 \section{Appendix B: Environmental Channel
 Modeling}\label{sec:app_environmental_channel}
 
 \subsection{Objective}\label{objective-1}
 
 Comprehensive atmospheric channel modeling validated against
-peer-reviewed atmospheric physics: molecular absorption (H₂O, CO₂, CH₄,
-O₃), Rayleigh scattering, aerosol effects, channel capacity mapping with
-8-14 μm window emphasis, wavelength optimization for 10-100 m ranges,
-and environmental sensitivity analysis for IR communication in insect
-olfactory systems.
+peer-reviewed atmospheric physics: molecular absorption
+(H\textsubscript{2}O, CO\textsubscript{2}, CH\textsubscript{4},
+O\textsubscript{3}), Rayleigh scattering, aerosol effects, channel
+capacity mapping with 8-14 \(\mu\mathrm{m}\) window emphasis, wavelength
+optimization for 10-100 m ranges, and environmental sensitivity analysis
+for IR communication in insect olfactory systems.
 
 \subsection{Methods (src)}\label{methods-src-1}
 
@@ -4658,15 +4471,8 @@ olfactory systems.
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/environmental_channel_comprehensive_analysis.png}
-\caption{Comprehensive environmental channel outputs produced deterministically by `scripts/generate_environmental_channel_analysis.py` using `src/case_studies/environmental_channel.py`. Panels show molecular absorption cross‑sections (H2O, CO2, CH4), Rayleigh and aerosol contributions, Shannon capacity mapping across humidity×temperature grids, and optimized wavelength choices for target ranges.}
+\caption{Comprehensive environmental channel outputs produced deterministically by `scripts/generate_environmental_channel_analysis.py` using `src/case_studies/environmental_channel.py`. Panels show molecular absorption cross‑sections (H2O, CO2, CH4), Rayleigh and aerosol contributions, Shannon capacity mapping across humidity\(\times\)temperature grids, and optimized wavelength choices for target ranges.}
 \label{fig:app_env_channel}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.9\textwidth]{figures/environmental_channel_comprehensive_analysis.png}
-\caption{Environmental channel analysis generated by `scripts/generate_environmental_channel_analysis.py`. Panels show atmospheric transmission, capacity mapping, SNR, and environmental impacts across clear and humid conditions.}
-\label{fig:app_env_channel_full}
 \end{figure}
 
 \begin{figure}[h]
@@ -4722,10 +4528,6 @@ predictions.
 \item
   Math appendix: \Cref{sec:mathematical_appendix}
 \end{itemize}
-
-\newpage
-
-\newpage
 
 \section{Appendix C: Detection Limits and Operating
 Points}\label{sec:app_detection_limits}
@@ -4798,13 +4600,6 @@ electromagnetic from thermal effects for IR olfactory detection systems.
 \label{fig:app_detection_limits}
 \end{figure}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.9\textwidth]{figures/detection_limits_comprehensive_analysis.png}
-\caption{Detection limits and operating regions generated by `scripts/generate_detection_limits.py` using `src/case_studies/detection_limits.py`. Panels show ROC curves, detection performance vs SNR, operating regions, noise‑floor decomposition, and detection range analyses.}
-\label{fig:app_detection_limits_full}
-\end{figure}
-
 \subsection{Equation references}\label{equation-references-2}
 
 \begin{itemize}
@@ -4841,10 +4636,6 @@ electromagnetic from thermal effects for IR olfactory detection systems.
 \item
   Math appendix: \Cref{sec:mathematical_appendix}
 \end{itemize}
-
-\newpage
-
-\newpage
 
 \section{Appendix D: Neural Encoding Efficiency on
 Time-Series}\label{sec:app_neural_encoding}
@@ -4918,13 +4709,6 @@ mechanisms for olfactory receptor neurons.
 \label{fig:app_neural_encoding_full}
 \end{figure}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.9\textwidth]{figures/integrated_analysis_information_analysis.png}
-\caption{Integrated information analysis (from `scripts/generate_integrated_analysis.py`) showing molecular, receptor, neural and environmental information decomposition. This contextualizes neural encoding metrics in cross-domain information balances.}
-\label{fig:integrated_neural_info}
-\end{figure}
-
 \subsection{Equation references}\label{equation-references-3}
 
 \begin{itemize}
@@ -4962,10 +4746,6 @@ mechanisms for olfactory receptor neurons.
 \item
   Math appendix: \Cref{sec:mathematical_appendix}
 \end{itemize}
-
-\newpage
-
-\newpage
 
 \section{Appendix E: Spectral Unmixing and
 Classification}\label{sec:app_spectral_unmixing}
@@ -5037,26 +4817,12 @@ with deterministic evaluation.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{figures/spectral_unmixing_comprehensive_analysis.png}
-\caption{Spectral unmixing and classification results produced by `scripts/generate_spectral_unmixing.py` using `src/case_studies/spectral_unmixing.py`. Panels show mixed spectra, recovered components (NMF/VCA), reconstruction errors, and classification performance.}
-\label{fig:app_spectral_unmixing_full}
-\end{figure}
-
-\begin{figure}[h]
-\centering
 \includegraphics[width=0.9\textwidth]{figures/integrated_analysis_cross_domain_synthesis.png}
 \caption{Integrated classification benchmark from `scripts/generate_integrated_analysis.py` summarizing classification performance across spectral and neural feature sets.}
 \label{fig:integrated_classification}
 \end{figure}
 
 \subsection{Equation References}\label{equation-references-4}
-
-\begin{itemize}
-\tightlist
-\item
-  Spectral overlap: see \eqref{eq:channel_capacity_gloss} analogs for
-  information metrics; overlap in main text.
-\end{itemize}
 
 \subsection{Reproducibility}\label{reproducibility-5}
 
@@ -5084,10 +4850,6 @@ with deterministic evaluation.
 \item
   Math appendix: \Cref{sec:mathematical_appendix}
 \end{itemize}
-
-\newpage
-
-\newpage
 
 \section{Appendix F: Plasmonic Nano-Geometry
 Sweep}\label{sec:app_plasmonic_geometry}
@@ -5192,10 +4954,6 @@ receptor‑scale enhancement.
   Math appendix: \Cref{sec:mathematical_appendix}
 \end{itemize}
 
-\newpage
-
-\newpage
-
 \section{Appendix G: Active-Inference Behavioral Demo on IR
 Cues}\label{sec:app_active_inference}
 
@@ -5284,12 +5042,5 @@ under IR cues.
 \item
   Math appendix: \Cref{sec:mathematical_appendix}
 \end{itemize}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.9\textwidth]{figures/active_inference_trajectory.png}
-\caption{Deterministic active‑inference trajectory generated by `scripts/generate_active_inference_demo.py` using `src/case_studies/olfactory_active_inference_step`. Figure and caption are reproducible from `output/` artifacts.}
-\label{fig:app_active_inference_demo}
-\end{figure}
 
 \end{document}

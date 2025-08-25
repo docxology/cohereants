@@ -61,6 +61,19 @@
 \DeclareUnicodeCharacter{03B5}{\(\epsilon\)}
 \DeclareUnicodeCharacter{03B4}{\(\delta\)}
 
+% Map common Unicode subscripts and degree symbol to LaTeX-friendly macros
+\DeclareUnicodeCharacter{2080}{\textsubscript{0}}
+\DeclareUnicodeCharacter{2081}{\textsubscript{1}}
+\DeclareUnicodeCharacter{2082}{\textsubscript{2}}
+\DeclareUnicodeCharacter{2083}{\textsubscript{3}}
+\DeclareUnicodeCharacter{2084}{\textsubscript{4}}
+\DeclareUnicodeCharacter{2085}{\textsubscript{5}}
+\DeclareUnicodeCharacter{2086}{\textsubscript{6}}
+\DeclareUnicodeCharacter{2087}{\textsubscript{7}}
+\DeclareUnicodeCharacter{2088}{\textsubscript{8}}
+\DeclareUnicodeCharacter{2089}{\textsubscript{9}}
+\DeclareUnicodeCharacter{00B0}{\textdegree}
+
 % Counter behaviour
 \usepackage{chngcntr}
 \counterwithout{figure}{section}
@@ -83,6 +96,10 @@
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
+% Ensure each top-level section starts on a new page
+\let\oldsection\section
+\renewcommand{\section}{\clearpage\oldsection}
+
 % Graphics support for figures
 \usepackage{graphicx}
 
@@ -94,7 +111,7 @@
 
 % Setup listings safely (don't override global styles)
 \usepackage{listings}
-\lstset{backgroundcolor=\color{codebg},basicstyle=\normalsize\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
+\lstset{backgroundcolor=\color{codebg},basicstyle=\small\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
 
 % Keep title metadata to be inserted by build system
 \ifLuaTeX
@@ -192,13 +209,6 @@ mechanisms for olfactory receptor neurons.
 \includegraphics[width=0.9\textwidth]{figures/neural_encoding_comprehensive_analysis.png}
 \caption{Neural encoding analyses generated deterministically by `scripts/generate_neural_encoding_analysis.py` using `src/case_studies/neural_encoding.py`. Panels include spike trains, temporal precision, population PCA, ISI statistics, and mutual information metrics.}
 \label{fig:app_neural_encoding_full}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.9\textwidth]{figures/integrated_analysis_information_analysis.png}
-\caption{Integrated information analysis (from `scripts/generate_integrated_analysis.py`) showing molecular, receptor, neural and environmental information decomposition. This contextualizes neural encoding metrics in cross-domain information balances.}
-\label{fig:integrated_neural_info}
 \end{figure}
 
 \subsection{Equation references}\label{equation-references}

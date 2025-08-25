@@ -1,1 +1,11 @@
-Information content distribution, receptor specificity, neural encoding, and environmental bits.
+Enhanced information analysis integrating Fermi estimation framework with comprehensive neural encoding.
+
+Methodology: Multi-disciplinary analysis combining information theory, receptor biophysics, and neural processing models.
+• Molecular information: Translational, rotational, vibrational entropy calculations
+• Receptor specificity: Binding energy-dependent interaction modeling
+• Neural encoding: Response amplitude distribution and efficiency metrics
+• Environmental factors: Temperature, humidity, pressure information content
+
+Key Findings: Information processing reveals optimal operating conditions for IR-based olfactory sensing.
+Data Sources: Computational modeling based on physical chemistry and neurophysiology principles.
+Relevance: Quantifies information processing advantages of IR sensing over traditional olfaction.

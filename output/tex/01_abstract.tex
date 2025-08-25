@@ -61,6 +61,19 @@
 \DeclareUnicodeCharacter{03B5}{\(\epsilon\)}
 \DeclareUnicodeCharacter{03B4}{\(\delta\)}
 
+% Map common Unicode subscripts and degree symbol to LaTeX-friendly macros
+\DeclareUnicodeCharacter{2080}{\textsubscript{0}}
+\DeclareUnicodeCharacter{2081}{\textsubscript{1}}
+\DeclareUnicodeCharacter{2082}{\textsubscript{2}}
+\DeclareUnicodeCharacter{2083}{\textsubscript{3}}
+\DeclareUnicodeCharacter{2084}{\textsubscript{4}}
+\DeclareUnicodeCharacter{2085}{\textsubscript{5}}
+\DeclareUnicodeCharacter{2086}{\textsubscript{6}}
+\DeclareUnicodeCharacter{2087}{\textsubscript{7}}
+\DeclareUnicodeCharacter{2088}{\textsubscript{8}}
+\DeclareUnicodeCharacter{2089}{\textsubscript{9}}
+\DeclareUnicodeCharacter{00B0}{\textdegree}
+
 % Counter behaviour
 \usepackage{chngcntr}
 \counterwithout{figure}{section}
@@ -83,6 +96,10 @@
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
+% Ensure each top-level section starts on a new page
+\let\oldsection\section
+\renewcommand{\section}{\clearpage\oldsection}
+
 % Graphics support for figures
 \usepackage{graphicx}
 
@@ -94,7 +111,7 @@
 
 % Setup listings safely (don't override global styles)
 \usepackage{listings}
-\lstset{backgroundcolor=\color{codebg},basicstyle=\normalsize\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
+\lstset{backgroundcolor=\color{codebg},basicstyle=\small\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
 
 % Keep title metadata to be inserted by build system
 \ifLuaTeX
@@ -133,26 +150,28 @@ electromagnetism.
 
 \textbf{Methods:} We integrate: (i) morphometric analysis of antennal
 sensilla across 500+ specimens from diverse taxa, (ii) ATR-FTIR
-spectroscopy of cuticular hydrocarbons with sub-micron resolution (±0.1
-μm), (iii) meta-analysis of olfactory receptor neuron response
-latencies, and (iv) deterministic electromagnetic models validated
-against antenna theory. All analyses use fixed random seeds (42) for
-reproducibility, and all code to generate results and this manuscript is
-available in the
+spectroscopy of cuticular hydrocarbons with sub-micron resolution
+(\(\pm 0.1\,\mu\mathrm{m}\)), (iii) meta-analysis of olfactory receptor
+neuron response latencies, and (iv) deterministic electromagnetic models
+validated against antenna theory. All analyses use fixed random seeds
+(42) for reproducibility, and all code to generate results and this
+manuscript is available in the
 \href{https://github.com/docxology/insect-infrared}{open source repo}.
 We also provide a mathematical appendix with detailed derivations and
 computational implementations.
 
-\textbf{Results:} Antenna sensilla dimensions (typically 2--160 μm
-across sensillum types; e.g., trichodea 6--160 μm, basiconica 2--8 μm,
-coeloconica 5--15 μm) show correlation with predicted IR resonances
-across diverse insect taxa. Modeled electromagnetic detection achieves
-1--5 ms latencies (minimum \textasciitilde3 ms reported), faster than
+\textbf{Results:} Antenna sensilla dimensions (typically 2--160
+\(\mu\mathrm{m}\) across sensillum types; e.g., trichodea 6--160
+\(\mu\mathrm{m}\), basiconica 2--8 \(\mu\mathrm{m}\), coeloconica 5--15
+\(\mu\mathrm{m}\)) show correlation with predicted IR resonances across
+diverse insect taxa. Modeled electromagnetic detection achieves 1--5 ms
+latencies (minimum \textasciitilde3 ms reported), faster than
 diffusion-based molecular binding. CHC vibrational spectra overlap
-Earth's atmospheric transmission windows (2--5, 8--14, 17--25 μm),
-facilitating detection ranges of possibly tens of meters. Integrated
-case studies validate predictions and error bounds across all tested
-scenarios, supported by peer-reviewed evidence from multiple domains.
+Earth's atmospheric transmission windows (2--5, 8--14, 17--25
+\(\mu\mathrm{m}\)), facilitating detection ranges of possibly tens of
+meters. Integrated case studies validate predictions and error bounds
+across all tested scenarios, supported by peer-reviewed evidence from
+multiple domains.
 
 \textbf{Conclusions:} Our framework generates three key, falsifiable
 predictions related to the insect olfactory system: (1)

@@ -32,12 +32,7 @@ Comprehensive neural encoding analysis including spike‑train generation, tempo
 \label{fig:app_neural_encoding_full}
 \end{figure}
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.9\textwidth]{../output/figures/integrated_analysis_information_analysis.png}
-\caption{Integrated information analysis (from `scripts/generate_integrated_analysis.py`) showing molecular, receptor, neural and environmental information decomposition. This contextualizes neural encoding metrics in cross-domain information balances.}
-\label{fig:integrated_neural_info}
-\end{figure}
+<!-- Integrated analysis figure is used elsewhere; removed duplicate to prevent redundancy. -->
 
 ## Equation references
 

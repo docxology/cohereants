@@ -61,6 +61,19 @@
 \DeclareUnicodeCharacter{03B5}{\(\epsilon\)}
 \DeclareUnicodeCharacter{03B4}{\(\delta\)}
 
+% Map common Unicode subscripts and degree symbol to LaTeX-friendly macros
+\DeclareUnicodeCharacter{2080}{\textsubscript{0}}
+\DeclareUnicodeCharacter{2081}{\textsubscript{1}}
+\DeclareUnicodeCharacter{2082}{\textsubscript{2}}
+\DeclareUnicodeCharacter{2083}{\textsubscript{3}}
+\DeclareUnicodeCharacter{2084}{\textsubscript{4}}
+\DeclareUnicodeCharacter{2085}{\textsubscript{5}}
+\DeclareUnicodeCharacter{2086}{\textsubscript{6}}
+\DeclareUnicodeCharacter{2087}{\textsubscript{7}}
+\DeclareUnicodeCharacter{2088}{\textsubscript{8}}
+\DeclareUnicodeCharacter{2089}{\textsubscript{9}}
+\DeclareUnicodeCharacter{00B0}{\textdegree}
+
 % Counter behaviour
 \usepackage{chngcntr}
 \counterwithout{figure}{section}
@@ -83,6 +96,10 @@
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
+% Ensure each top-level section starts on a new page
+\let\oldsection\section
+\renewcommand{\section}{\clearpage\oldsection}
+
 % Graphics support for figures
 \usepackage{graphicx}
 
@@ -94,7 +111,7 @@
 
 % Setup listings safely (don't override global styles)
 \usepackage{listings}
-\lstset{backgroundcolor=\color{codebg},basicstyle=\normalsize\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
+\lstset{backgroundcolor=\color{codebg},basicstyle=\small\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
 
 % Keep title metadata to be inserted by build system
 \ifLuaTeX
@@ -144,9 +161,10 @@ traceability from equations to figures and tests.
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Morphology: Sensilla dimensions (typically 2--160 μm across sensillum
-  types) frequently align with predicted resonant wavelengths (example
-  correlations r ≈ 0.85 across sampled taxa); computations reproduced by
+  Morphology: Sensilla dimensions (typically 2--160 \(\mu\mathrm{m}\)
+  across sensillum types) frequently align with predicted resonant
+  wavelengths (example correlations r \(\approx 0.85\) across sampled
+  taxa); computations reproduced by
   \passthrough{\lstinline!src/sensilla.py::analyze\_sensilla\_dimensions!}.
 \item
   Neural timing: Meta‑analysis and modeling show ORN latencies (1--5 ms;
@@ -159,8 +177,8 @@ traceability from equations to figures and tests.
   the literature.
 \item
   Spectroscopy: Automated CHC peak detection identifies bands within
-  atmospheric windows with ±0.1 μm resolution (implemented in
-  \passthrough{\lstinline!src/spectroscopy.py!}).
+  atmospheric windows with (\pm)0.1 \(\mu\mathrm{m}\) resolution
+  (implemented in \passthrough{\lstinline!src/spectroscopy.py!}).
 \end{enumerate}
 
 \subsection{Future Research Directions and
@@ -169,62 +187,135 @@ Applications}\label{future-research-directions-and-applications}
 \subsubsection{Immediate Experimental
 Priorities}\label{immediate-experimental-priorities}
 
-\textbf{High-Impact Validation Studies:} - \textbf{Single-sensillum
-electrophysiology} with quantum cascade laser stimulation (2--25 μm) -
-\textbf{Behavioral IR-only orientation assays} using narrowband LEDs
-with thermal controls - \textbf{Cross-taxa morphometric surveys} with
-SEM and resonance correlation analysis -
-\textbf{High-temporal-resolution neural recordings} (sub-ms) to resolve
-detection components
+\textbf{High-Impact Validation Studies:}
 
-\textbf{Advanced Instrumentation Development:} - \textbf{Tunable IR
-sources} with sub-micron wavelength precision - \textbf{Thermal imaging
-integration} with neural recordings - \textbf{Multi-scale sensing
-platforms} combining electromagnetic and molecular detection
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Single-sensillum electrophysiology} with quantum cascade laser
+  stimulation (2--25 \(\mu\mathrm{m}\))
+\item
+  \textbf{Behavioral IR-only orientation assays} using narrowband LEDs
+  with thermal controls
+\item
+  \textbf{Cross-taxa morphometric surveys} with SEM and resonance
+  correlation analysis
+\item
+  \textbf{High-temporal-resolution neural recordings} (sub-ms) to
+  resolve detection components
+\end{itemize}
+
+\textbf{Advanced Instrumentation Development:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Tunable IR sources} with sub-micron wavelength precision
+\item
+  \textbf{Thermal imaging integration} with neural recordings
+\item
+  \textbf{Multi-scale sensing platforms} combining electromagnetic and
+  molecular detection
+\end{itemize}
 
 \subsubsection{Computational and Theoretical
 Extensions}\label{computational-and-theoretical-extensions}
 
-\textbf{Enhanced Modeling Frameworks:} - \textbf{3D electromagnetic
-simulations} of complete antenna systems - \textbf{Machine learning
-classifiers} for spectral feature recognition - \textbf{Climate model
-integration} for environmental robustness predictions - \textbf{Quantum
-mechanical extensions} incorporating coherence and entanglement effects
+\textbf{Enhanced Modeling Frameworks:}
 
-\textbf{Information Processing Analysis:} - \textbf{Channel capacity
-optimization} under realistic noise conditions - \textbf{Population
-coding strategies} for IR signal processing - \textbf{Neural network
-models} integrating electromagnetic and molecular pathways
+\begin{itemize}
+\tightlist
+\item
+  \textbf{3D electromagnetic simulations} of complete antenna systems
+\item
+  \textbf{Machine learning classifiers} for spectral feature recognition
+\item
+  \textbf{Climate model integration} for environmental robustness
+  predictions
+\item
+  \textbf{Quantum mechanical extensions} incorporating coherence and
+  entanglement effects
+\end{itemize}
+
+\textbf{Information Processing Analysis:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Channel capacity optimization} under realistic noise
+  conditions
+\item
+  \textbf{Population coding strategies} for IR signal processing
+\item
+  \textbf{Neural network models} integrating electromagnetic and
+  molecular pathways
+\end{itemize}
 
 \subsubsection{Technological Translation and
 Applications}\label{technological-translation-and-applications}
 
-\textbf{Biomimetic Sensor Development:} - \textbf{IR detection arrays}
-inspired by insect sensilla geometry - \textbf{Wearable environmental
-monitors} for chemical detection - \textbf{Autonomous navigation
-systems} using vibrational cues - \textbf{Medical diagnostic tools}
-based on molecular vibration sensing
+\textbf{Biomimetic Sensor Development:}
 
-\textbf{Agricultural and Environmental Applications:} -
-\textbf{Precision pest monitoring} using species-specific IR signatures
-- \textbf{Smart trap systems} with adaptive wavelength selection -
-\textbf{Pollination monitoring} through floral scent IR profiling -
-\textbf{Conservation tools} for endangered species detection
+\begin{itemize}
+\tightlist
+\item
+  \textbf{IR detection arrays} inspired by insect sensilla geometry
+\item
+  \textbf{Wearable environmental monitors} for chemical detection
+\item
+  \textbf{Autonomous navigation systems} using vibrational cues
+\item
+  \textbf{Medical diagnostic tools} based on molecular vibration sensing
+\end{itemize}
+
+\textbf{Agricultural and Environmental Applications:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Precision pest monitoring} using species-specific IR
+  signatures
+\item
+  \textbf{Smart trap systems} with adaptive wavelength selection
+\item
+  \textbf{Pollination monitoring} through floral scent IR profiling
+\item
+  \textbf{Conservation tools} for endangered species detection
+\end{itemize}
 
 \subsubsection{Fundamental Scientific
 Implications}\label{fundamental-scientific-implications}
 
-\textbf{Sensory Biology Advancements:} - \textbf{Multi-modal
-integration} models combining electromagnetic and molecular sensing -
-\textbf{Evolutionary convergence} studies across taxa with IR detection
-- \textbf{Quantum effects} in biological signal processing -
-\textbf{Sensory ecology} incorporating infrared communication channels
+\textbf{Sensory Biology Advancements:}
 
-\textbf{Broader Theoretical Implications:} - \textbf{Unified theory} of
-olfaction integrating shape and vibration - \textbf{Electromagnetic
-sensing} in other biological systems - \textbf{Quantum biology}
-extensions to sensory processing - \textbf{Bio-inspired engineering}
-principles for next-generation sensors
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Multi-modal integration} models combining electromagnetic and
+  molecular sensing
+\item
+  \textbf{Evolutionary convergence} studies across taxa with IR
+  detection
+\item
+  \textbf{Quantum effects} in biological signal processing
+\item
+  \textbf{Sensory ecology} incorporating infrared communication channels
+\end{itemize}
+
+\textbf{Broader Theoretical Implications:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Unified theory} of olfaction integrating shape and vibration
+\item
+  \textbf{Electromagnetic sensing} in other biological systems
+\item
+  \textbf{Quantum biology} extensions to sensory processing
+\item
+  \textbf{Bio-inspired engineering} principles for next-generation
+  sensors
+\end{itemize}
 
 \subsection{Implementation Roadmap}\label{implementation-roadmap}
 
@@ -277,11 +368,21 @@ years)}\label{phase-3-applied-translation-23-years}
 Transfer}\label{reproducibility-and-knowledge-transfer}
 
 The Appendices and \passthrough{\lstinline!src/!} modules provide
-complete computational anchors for all claims, enabling: -
-\textbf{Independent validation} of theoretical predictions -
-\textbf{Experimental protocol reproduction} with detailed specifications
-- \textbf{Technology transfer} to industrial and academic partners -
-\textbf{Educational resources} for training next-generation researchers
+complete computational anchors for all claims, enabling:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Independent validation} of theoretical predictions
+\item
+  \textbf{Experimental protocol reproduction} with detailed
+  specifications
+\item
+  \textbf{Technology transfer} to industrial and academic partners
+\item
+  \textbf{Educational resources} for training next-generation
+  researchers
+\end{itemize}
 
 This integrated framework establishes a foundation for both fundamental
 understanding of insect sensory mechanisms and practical applications in

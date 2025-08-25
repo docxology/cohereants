@@ -61,6 +61,19 @@
 \DeclareUnicodeCharacter{03B5}{\(\epsilon\)}
 \DeclareUnicodeCharacter{03B4}{\(\delta\)}
 
+% Map common Unicode subscripts and degree symbol to LaTeX-friendly macros
+\DeclareUnicodeCharacter{2080}{\textsubscript{0}}
+\DeclareUnicodeCharacter{2081}{\textsubscript{1}}
+\DeclareUnicodeCharacter{2082}{\textsubscript{2}}
+\DeclareUnicodeCharacter{2083}{\textsubscript{3}}
+\DeclareUnicodeCharacter{2084}{\textsubscript{4}}
+\DeclareUnicodeCharacter{2085}{\textsubscript{5}}
+\DeclareUnicodeCharacter{2086}{\textsubscript{6}}
+\DeclareUnicodeCharacter{2087}{\textsubscript{7}}
+\DeclareUnicodeCharacter{2088}{\textsubscript{8}}
+\DeclareUnicodeCharacter{2089}{\textsubscript{9}}
+\DeclareUnicodeCharacter{00B0}{\textdegree}
+
 % Counter behaviour
 \usepackage{chngcntr}
 \counterwithout{figure}{section}
@@ -83,6 +96,10 @@
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
+% Ensure each top-level section starts on a new page
+\let\oldsection\section
+\renewcommand{\section}{\clearpage\oldsection}
+
 % Graphics support for figures
 \usepackage{graphicx}
 
@@ -94,7 +111,7 @@
 
 % Setup listings safely (don't override global styles)
 \usepackage{listings}
-\lstset{backgroundcolor=\color{codebg},basicstyle=\normalsize\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
+\lstset{backgroundcolor=\color{codebg},basicstyle=\small\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
 
 % Keep title metadata to be inserted by build system
 \ifLuaTeX
@@ -183,8 +200,8 @@ pathway that enhances insect olfaction, providing faster response times,
 extended range, and complementary sensory information?
 
 \textbf{Scope and Approach:} We focus on mid-infrared detection (2-25
-μm) as this range encompasses molecular vibrational modes of
-biologically relevant compounds while overlapping atmospheric
+\(\mu\mathrm{m}\)) as this range encompasses molecular vibrational modes
+of biologically relevant compounds while overlapping atmospheric
 transmission windows. Our framework integrates computational
 electromagnetism with empirical validation, testing whether IR detection
 operates alongside (not replacing) traditional molecular binding
@@ -192,20 +209,32 @@ pathways. We emphasize falsifiable predictions and controlled
 experimental protocols to distinguish electromagnetic from thermal
 effects.
 
-\textbf{Specific Hypotheses:} - \textbf{H1 (Morphological):} Antennal
-sensilla dimensions (2--160 μm across sensillum types; trichodea 6--160
-μm, basiconica 2--8 μm, coeloconica 5--15 μm) correlate with predicted
-IR resonant wavelengths across diverse insect taxa (e.g.,
-\href{https://pmc.ncbi.nlm.nih.gov/articles/PMC7831480/}{Liu et al.~2021
-(sensilla survey)}). - \textbf{H2 (Spectral):} Cuticular hydrocarbon
-(CHC) vibrational spectra align with atmospheric transmission windows
-(2--5, 8--14, 17--25 μm), with high transmission efficiency in the 8--14
-μm band. - \textbf{H3 (Temporal):} IR‑mediated detection can achieve
-1--5 ms ORN latencies (minimum \textasciitilde3 ms reported), faster
-than diffusion‑based mechanisms. - \textbf{H4 (Behavioral):}
-Frequency‑specific IR stimulation elicits directed orientation behaviors
-in the absence of volatile chemical cues, as demonstrated in specialized
-beetle species.
+\textbf{Specific Hypotheses:}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{H1 (Morphological):} Antennal sensilla dimensions (2--160
+  \(\mu\mathrm{m}\) across sensillum types; trichodea 6--160
+  \(\mu\mathrm{m}\), basiconica 2--8 \(\mu\mathrm{m}\), coeloconica
+  5--15 \(\mu\mathrm{m}\)) correlate with predicted IR resonant
+  wavelengths across diverse insect taxa (e.g.,
+  \href{https://pmc.ncbi.nlm.nih.gov/articles/PMC7831480/}{Liu et
+  al.~2021 (sensilla survey)}).
+\item
+  \textbf{H2 (Spectral):} Cuticular hydrocarbon (CHC) vibrational
+  spectra align with atmospheric transmission windows (2--5, 8--14,
+  17--25 \(\mu\mathrm{m}\)), with high transmission efficiency in the
+  8--14 \(\mu\mathrm{m}\) band.
+\item
+  \textbf{H3 (Temporal):} IR‑mediated detection can achieve 1--5 ms ORN
+  latencies (minimum \textasciitilde3 ms reported), faster than
+  diffusion‑based mechanisms.
+\item
+  \textbf{H4 (Behavioral):} Frequency‑specific IR stimulation elicits
+  directed orientation behaviors in the absence of volatile chemical
+  cues, as demonstrated in specialized beetle species.
+\end{itemize}
 
 \subsection{Approach and Organization}\label{approach-and-organization}
 
@@ -214,20 +243,44 @@ comparative morphology, infrared spectroscopy, neural timing analysis,
 and deterministic computational electromagnetism. All models are
 unit-tested and reproducible with fixed random seeds (42).
 
-The manuscript is organized as follows: - \textbf{Main Text:} Presents
-integrated findings with cross-references to detailed case studies -
-\textbf{Appendices:} Seven specialized analyses exploring specific
-aspects: - Sensory array directionality and beam patterns
-\Cref{sec:app_sensilla_array} - Environmental channel modeling
-\Cref{sec:app_environmental_channel} - Detection limits and operating
-points \Cref{sec:app_detection_limits} - Neural encoding efficiency
-\Cref{sec:app_neural_encoding} - Spectral unmixing and classification
-\Cref{sec:app_spectral_unmixing} - Plasmonic nano-geometry optimization
-\Cref{sec:app_plasmonic_geometry} - Active inference behavioral modeling
-\Cref{sec:app_active_inference} - \textbf{Mathematical Appendix:}
-Detailed derivations and computational implementations
-\Cref{sec:mathematical_appendix} - \textbf{Empirical Studies:}
-Comprehensive review of supporting evidence \Cref{sec:empirical_studies}
+The manuscript is organized as follows:
+
+\begin{itemize}
+\item
+  \textbf{Main Text:} Presents integrated findings with cross-references
+  to detailed case studies
+\item
+  \textbf{Appendices:} Seven specialized analyses exploring specific
+  aspects:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Sensory array directionality and beam patterns
+    \Cref{sec:app_sensilla_array}
+  \item
+    Environmental channel modeling \Cref{sec:app_environmental_channel}
+  \item
+    Detection limits and operating points
+    \Cref{sec:app_detection_limits}
+  \item
+    Neural encoding efficiency \Cref{sec:app_neural_encoding}
+  \item
+    Spectral unmixing and classification
+    \Cref{sec:app_spectral_unmixing}
+  \item
+    Plasmonic nano-geometry optimization
+    \Cref{sec:app_plasmonic_geometry}
+  \item
+    Active inference behavioral modeling \Cref{sec:app_active_inference}
+  \end{itemize}
+\item
+  \textbf{Mathematical Appendix:} Detailed derivations and computational
+  implementations \Cref{sec:mathematical_appendix}
+\item
+  \textbf{Empirical Studies:} Comprehensive review of supporting
+  evidence \Cref{sec:empirical_studies}
+\end{itemize}
 
 This structure enables both comprehensive evaluation and focused
 exploration of specific mechanisms.

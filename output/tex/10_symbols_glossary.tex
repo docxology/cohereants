@@ -71,6 +71,19 @@
 \DeclareUnicodeCharacter{03B5}{\(\epsilon\)}
 \DeclareUnicodeCharacter{03B4}{\(\delta\)}
 
+% Map common Unicode subscripts and degree symbol to LaTeX-friendly macros
+\DeclareUnicodeCharacter{2080}{\textsubscript{0}}
+\DeclareUnicodeCharacter{2081}{\textsubscript{1}}
+\DeclareUnicodeCharacter{2082}{\textsubscript{2}}
+\DeclareUnicodeCharacter{2083}{\textsubscript{3}}
+\DeclareUnicodeCharacter{2084}{\textsubscript{4}}
+\DeclareUnicodeCharacter{2085}{\textsubscript{5}}
+\DeclareUnicodeCharacter{2086}{\textsubscript{6}}
+\DeclareUnicodeCharacter{2087}{\textsubscript{7}}
+\DeclareUnicodeCharacter{2088}{\textsubscript{8}}
+\DeclareUnicodeCharacter{2089}{\textsubscript{9}}
+\DeclareUnicodeCharacter{00B0}{\textdegree}
+
 % Counter behaviour
 \usepackage{chngcntr}
 \counterwithout{figure}{section}
@@ -93,6 +106,10 @@
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
+% Ensure each top-level section starts on a new page
+\let\oldsection\section
+\renewcommand{\section}{\clearpage\oldsection}
+
 % Graphics support for figures
 \usepackage{graphicx}
 
@@ -104,7 +121,7 @@
 
 % Setup listings safely (don't override global styles)
 \usepackage{listings}
-\lstset{backgroundcolor=\color{codebg},basicstyle=\normalsize\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
+\lstset{backgroundcolor=\color{codebg},basicstyle=\small\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
 
 % Keep title metadata to be inserted by build system
 \ifLuaTeX
@@ -177,10 +194,10 @@ Physiology}\label{insect-anatomy-and-physiology}
   antennae and other body parts that serve as the primary sensory units
 \item
   \textbf{Sensilla Trichodea}: Hair-like sensilla that are often
-  involved in olfaction, typically 6-160 μm in length
+  involved in olfaction, typically 6-160 \(\mu\mathrm{m}\) in length
 \item
   \textbf{Sensilla Basiconica}: Peg-like sensilla with porous surfaces,
-  typically 2-8 μm in length
+  typically 2-8 \(\mu\mathrm{m}\) in length
 \item
   \textbf{Sensilla Coeloconica}: Pit-like sensilla that may detect
   temperature, humidity, and infrared radiation
@@ -208,20 +225,20 @@ Detection}\label{electromagnetic-theory-and-infrared-detection}
 \tightlist
 \item
   \textbf{Infrared (IR)}: Electromagnetic radiation with wavelengths
-  longer than visible light (0.7-1000 μm), invisible to human eyes but
-  detectable by specialized sensors
+  longer than visible light (0.7-1000 \(\mu\mathrm{m}\)), invisible to
+  human eyes but detectable by specialized sensors
 \item
-  \textbf{Mid-infrared (MIR)}: IR radiation in the 2-25 μm range,
-  corresponding to molecular vibrational modes and fundamental for
-  chemical sensing applications
+  \textbf{Mid-infrared (MIR)}: IR radiation in the 2-25
+  \(\mu\mathrm{m}\) range, corresponding to molecular vibrational modes
+  and fundamental for chemical sensing applications
 \item
-  \textbf{Far-infrared (FIR)}: IR radiation in the 25-1000 μm range,
-  corresponding to rotational and low-frequency vibrational modes, also
-  known as thermal infrared
+  \textbf{Far-infrared (FIR)}: IR radiation in the 25-1000
+  \(\mu\mathrm{m}\) range, corresponding to rotational and low-frequency
+  vibrational modes, also known as thermal infrared
 \item
-  \textbf{Near-infrared (NIR)}: IR radiation in the 0.7-2 μm range, just
-  beyond visible light, commonly used in spectroscopy and optical
-  communications
+  \textbf{Near-infrared (NIR)}: IR radiation in the 0.7-2
+  \(\mu\mathrm{m}\) range, just beyond visible light, commonly used in
+  spectroscopy and optical communications
 \item
   \textbf{Dielectric}: A material that can be polarized by an electric
   field and supports electromagnetic wave propagation
@@ -265,7 +282,7 @@ Properties}\label{spectroscopy-and-molecular-properties}
   \textbf{Enantiomers}: Mirror-image forms of the same molecule that may
   have different olfactory properties
 \item
-  \textbf{FRET}: Förster Resonance Energy Transfer; energy transfer
+  \textbf{FRET}: F\{"o\}rster Resonance Energy Transfer; energy transfer
   between molecules through dipole-dipole interactions
 \item
   \textbf{Wavenumber}: The reciprocal of wavelength, typically expressed
@@ -279,19 +296,21 @@ Properties}\label{spectroscopy-and-molecular-properties}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{λ (lambda)}: Wavelength, typically in micrometers (μm) or
-  nanometers (nm).
+  \textbf{λ (lambda)}: Wavelength, typically in micrometers
+  (\(\mu\mathrm{m}\)) or nanometers (nm).
 \item
   \textbf{ν (nu)}: Frequency in Hz, related to wavelength by
   \(c = \lambda\nu\).
 \item
   \textbf{\(\tilde{\nu}\) (wavenumber)}: Reciprocal wavelength in
-  cm\(^{-1}\), \(\tilde{\nu} = 10^4/\lambda\) (for λ in μm).
+  cm\(^{-1}\), \(\tilde{\nu} = 10^4/\lambda\) (for λ in
+  \(\mu\mathrm{m}\)).
 \item
-  \textbf{c}: Speed of light in vacuum (2.998 × 10\^{}8 m/s).
+  \textbf{c}: Speed of light in vacuum (2.998 \(\times\) 10\^{}\{\}8
+  m/s).
 \item
-  \textbf{μm}: Micrometer (10\^{}-6 m); standard unit for infrared
-  wavelengths.
+  \textbf{\(\mu\mathrm{m}\)}: Micrometer (10\^{}-6 m); standard unit for
+  infrared wavelengths.
 \item
   \textbf{nm}: Nanometer (10\^{}-9 m).
 \item
@@ -304,20 +323,22 @@ Units}\label{physical-constants-and-units}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{h}: Planck's constant (6.626 × 10\^{}-34 J·s)
+  \textbf{h}: Planck's constant (6.626 \(\times\) 10\^{}\{\}-34 Jot s)
 \item
-  \textbf{\(\hbar\)}: Reduced Planck constant (h/2π = 1.055 × 10\^{}-34
-  J·s)
+  \textbf{\(\hbar\)}: Reduced Planck constant (h/2π = 1.055 \(\times\)
+  10\^{}-34 Jot s)
 \item
-  \textbf{k\_B}: Boltzmann constant (1.381 × 10\^{}-23 J/K)
+  \textbf{k\_B}: Boltzmann constant (1.381 \(\times\) 10\^{}-23 J/K)
 \item
   \textbf{T}: Temperature in Kelvin (K)
 \item
-  \textbf{ε\_0}: Permittivity of free space (8.854 × 10\^{}-12 F/m)
+  \textbf{ε\_0}: Permittivity of free space (8.854 \(\times\) 10\^{}-12
+  F/m)
 \item
-  \textbf{μ\_0}: Permeability of free space (4π × 10\^{}-7 H/m)
+  \textbf{μ\_0}: Permeability of free space (4\(\pi\) \(\times\)
+  10\^{}\{\}-7 H/m)
 \item
-  \textbf{e}: Elementary charge (1.602 × 10\^{}-19 C)
+  \textbf{e}: Elementary charge (1.602 \(\times\) 10\^{}-19 C)
 \end{itemize}
 
 \subsubsection{Electromagnetic Theory}\label{electromagnetic-theory}
@@ -351,8 +372,8 @@ Times}\label{insect-measurements-and-response-times}
 \begin{itemize}
 \tightlist
 \item
-  \textbf{μm}: Micrometer; typical size range for insect sensilla (1-200
-  μm)
+  \textbf{\(\mu\mathrm{m}\)}: Micrometer; typical size range for insect
+  sensilla (1-200 \(\mu\mathrm{m}\))
 \item
   \textbf{nm}: Nanometer; scale of molecular interactions and receptor
   dimensions
@@ -360,7 +381,8 @@ Times}\label{insect-measurements-and-response-times}
   \textbf{ms}: Millisecond; typical response time of insect ORNs (1-5
   ms)
 \item
-  \textbf{μs}: Microsecond; time scale for electromagnetic detection
+  \textbf{\(\mu\mathrm{s}\)}: Microsecond; time scale for
+  electromagnetic detection
 \item
   \textbf{ns}: Nanosecond; time scale for quantum processes
 \end{itemize}
@@ -383,7 +405,7 @@ Acronyms}\label{abbreviations-and-acronyms}
 \item
   \textbf{MTs}: Microtubules
 \item
-  \textbf{FRET}: Förster Resonance Energy Transfer
+  \textbf{FRET}: F\{"o\}rster Resonance Energy Transfer
 \item
   \textbf{SNR}: Signal-to-Noise Ratio
 \item
@@ -448,16 +470,16 @@ insect semiochemicals:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{2-5 μm (Mid-infrared)}: \textasciitilde80\% transmission
-  efficiency, optimal for hydrocarbon detection
+  \textbf{2-5 \(\mu\mathrm{m}\) (Mid-infrared)}: \textasciitilde80\%
+  transmission efficiency, optimal for hydrocarbon detection
 \item
-  \textbf{8-14 μm (Long-wave infrared)}: \textasciitilde90\%
-  transmission efficiency, optimal for long-range communication; ground
-  materials can emit infrared energy that partially penetrates this
-  window
+  \textbf{8-14 \(\mu\mathrm{m}\) (Long-wave infrared)}:
+  \textasciitilde90\% transmission efficiency, optimal for long-range
+  communication; ground materials can emit infrared energy that
+  partially penetrates this window
 \item
-  \textbf{17-25 μm (Far-infrared)}: \textasciitilde70\% transmission
-  efficiency, useful for thermal detection
+  \textbf{17-25 \(\mu\mathrm{m}\) (Far-infrared)}: \textasciitilde70\%
+  transmission efficiency, useful for thermal detection
 \end{itemize}
 
 \textbf{Transmission function}: Modeled by
@@ -484,15 +506,15 @@ comparative morphometric studies:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Sensilla Trichodea}: 6-160 μm length, optimal for 2-30 μm
-  wavelengths
+  \textbf{Sensilla Trichodea}: 6-160 \(\mu\mathrm{m}\) length, optimal
+  for 2-30 \(\mu\mathrm{m}\) wavelengths
 \item
-  \textbf{Sensilla Basiconica}: 2-8 μm length, optimal for 1-10 μm
-  wavelengths; specific dimensions of 6.86--53.42 μm observed in thrips
-  species
+  \textbf{Sensilla Basiconica}: 2-8 \(\mu\mathrm{m}\) length, optimal
+  for 1-10 \(\mu\mathrm{m}\) wavelengths; specific dimensions of
+  6.86--53.42 \(\mu\mathrm{m}\) observed in thrips species
 \item
-  \textbf{Sensilla Coeloconica}: 5-15 μm length, optimal for 3-20 μm
-  wavelengths
+  \textbf{Sensilla Coeloconica}: 5-15 \(\mu\mathrm{m}\) length, optimal
+  for 3-20 \(\mu\mathrm{m}\) wavelengths
 \item
   \textbf{Specialized IR organs}: Approximately 100 sensilla per organ
   in beetle species
@@ -1180,11 +1202,14 @@ visualization tools for insect analysis data \\
 \passthrough{\lstinline!PlotStyler!} & class & Advanced plot styling and
 theming system \\
 \passthrough{\lstinline!visualization!} &
+\passthrough{\lstinline!create\_accessible\_figure!} & function & Create
+an accessible figure with enhanced features for better understanding \\
+\passthrough{\lstinline!visualization!} &
 \passthrough{\lstinline!create\_publication\_figure!} & function &
 Create a publication-ready figure with optimal styling \\
 \passthrough{\lstinline!visualization!} &
 \passthrough{\lstinline!create\_subplots!} & function & Create subplots
-with consistent styling \\
+with enhanced accessibility and consistent styling \\
 \passthrough{\lstinline!visualization!} &
 \passthrough{\lstinline!get\_colorblind\_palette!} & function & Get a
 colorblind-friendly color palette \\

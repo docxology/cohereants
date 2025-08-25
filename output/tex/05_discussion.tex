@@ -61,6 +61,19 @@
 \DeclareUnicodeCharacter{03B5}{\(\epsilon\)}
 \DeclareUnicodeCharacter{03B4}{\(\delta\)}
 
+% Map common Unicode subscripts and degree symbol to LaTeX-friendly macros
+\DeclareUnicodeCharacter{2080}{\textsubscript{0}}
+\DeclareUnicodeCharacter{2081}{\textsubscript{1}}
+\DeclareUnicodeCharacter{2082}{\textsubscript{2}}
+\DeclareUnicodeCharacter{2083}{\textsubscript{3}}
+\DeclareUnicodeCharacter{2084}{\textsubscript{4}}
+\DeclareUnicodeCharacter{2085}{\textsubscript{5}}
+\DeclareUnicodeCharacter{2086}{\textsubscript{6}}
+\DeclareUnicodeCharacter{2087}{\textsubscript{7}}
+\DeclareUnicodeCharacter{2088}{\textsubscript{8}}
+\DeclareUnicodeCharacter{2089}{\textsubscript{9}}
+\DeclareUnicodeCharacter{00B0}{\textdegree}
+
 % Counter behaviour
 \usepackage{chngcntr}
 \counterwithout{figure}{section}
@@ -83,6 +96,10 @@
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
+% Ensure each top-level section starts on a new page
+\let\oldsection\section
+\renewcommand{\section}{\clearpage\oldsection}
+
 % Graphics support for figures
 \usepackage{graphicx}
 
@@ -94,7 +111,7 @@
 
 % Setup listings safely (don't override global styles)
 \usepackage{listings}
-\lstset{backgroundcolor=\color{codebg},basicstyle=\normalsize\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
+\lstset{backgroundcolor=\color{codebg},basicstyle=\small\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
 
 % Keep title metadata to be inserted by build system
 \ifLuaTeX
@@ -139,18 +156,20 @@ for appropriate sources and geometries.
 Nestmate recognition in eusocial Hymenoptera depends on CHC signals with
 millisecond timing. Deterministic simulations
 (\passthrough{\lstinline!src/core.py::calculate\_response\_time\_improvement!})
-produce latency improvements of ≈2.3--7× compared with diffusion‑limited
-models. An IR‑detection stage with sub‑millisecond detection latency can
-account for observed behavioral timescales while molecular binding
-provides verification and termination.
+produce latency improvements of \(\approx 2.3\text{--}7\times\) compared
+with diffusion‑limited models. An IR‑detection stage with
+sub‑millisecond detection latency can account for observed behavioral
+timescales while molecular binding provides verification and
+termination.
 
 \subsubsection{Pheromone specificity and
 range}\label{pheromone-specificity-and-range}
 
 Pheromone classes occupy distinct IR bands (e.g., sex pheromones 17--26
-μm; trail pheromones 2.9--3.5 μm). Under modeled atmospheric
-transmission and realistic source strengths, narrowband IR signatures
-are detectable at 10--100 m; these ranges are quantified in
+\(\mu\mathrm{m}\); trail pheromones 2.9--3.5 \(\mu\mathrm{m}\)). Under
+modeled atmospheric transmission and realistic source strengths,
+narrowband IR signatures are detectable at 10--100 m; these ranges are
+quantified in
 \passthrough{\lstinline!src/case\_studies/detection\_limits.py!} and
 illustrated in the Appendices.
 
@@ -158,25 +177,26 @@ illustrated in the Appendices.
 implications}\label{evolutionary-and-ecological-implications}
 
 Comparative analyses show overlaps between sensilla dimensions
-(typically 2--160 μm across sensillum types; trichodea 6--160 μm,
-basiconica 2--8 μm, coeloconica 5--15 μm) and predicted resonant
-wavelengths across sampled taxa. Independent emergence of specialized IR
-sensors in some beetles, including approximately 100 sensilla per organ,
-and CHC compositional changes after death, are consistent with selection
-on vibrational signatures. This is supported by morphometric studies
-across 500+ specimens and evolutionary convergence in multiple beetle
-lineages.
+(typically 2--160 \(\mu\mathrm{m}\) across sensillum types; trichodea
+6--160 \(\mu\mathrm{m}\), basiconica 2--8 \(\mu\mathrm{m}\), coeloconica
+5--15 \(\mu\mathrm{m}\)) and predicted resonant wavelengths across
+sampled taxa. Independent emergence of specialized IR sensors in some
+beetles, including approximately 100 sensilla per organ, and CHC
+compositional changes after death, are consistent with selection on
+vibrational signatures. This is supported by morphometric studies across
+500+ specimens and evolutionary convergence in multiple beetle lineages.
 
 \subsection{Computational and applied
 consequences}\label{computational-and-applied-consequences}
 
-Effective IR sensing requires spectral discrimination across 2--25 μm,
-directional processing (beam widths ≈15--30°), sub‑millisecond temporal
-filtering, and SNR improvements. Channel‑capacity estimates
+Effective IR sensing requires spectral discrimination across 2--25
+\(\mu\mathrm{m}\), directional processing (beam widths
+(\approx)15--30\(^{\circ}\)), sub‑millisecond temporal filtering, and
+SNR improvements. Channel‑capacity estimates
 (\passthrough{\lstinline!src/case\_studies/environmental\_channel.py!})
-indicate information rates on the order of 10³--10⁴ bits/s for optimized
-systems. Applications include pest monitoring, species‑specific traps,
-and biomimetic IR sensors.
+indicate information rates on the order of \(10^3\)--\(10^4\) bits/s for
+optimized systems. Applications include pest monitoring,
+species‑specific traps, and biomimetic IR sensors.
 
 \subsection{Limitations and Critical Experimental
 Controls}\label{limitations-and-critical-experimental-controls}
@@ -192,23 +212,25 @@ Protocols}\label{thermal-control-protocols}
 \textbf{Broadband vs.~Narrowband Stimulation:} - \textbf{Broadband
 heating controls}: Use thermal sources matched for total power
 deposition - \textbf{Narrowband IR stimulation}: Employ tunable lasers
-or filtered LEDs (Δλ \textless{} 0.5 μm) - \textbf{Success criterion}:
-Frequency-specific responses absent in broadband controls
+or filtered LEDs (Δλ \textless{} 0.5 \(\mu\mathrm{m}\)) -
+\textbf{Success criterion}: Frequency-specific responses absent in
+broadband controls
 
 \textbf{Temporal Resolution Requirements:} - \textbf{High-speed
 measurements}: Sub-millisecond temporal resolution for early detection
 components - \textbf{Thermal diffusion modeling}: Account for heat
-propagation timescales (μs--ms range) - \textbf{Multi-scale analysis}:
-Separate electromagnetic detection from thermal transduction
+propagation timescales (\(\mu\mathrm{s}\)--ms range) -
+\textbf{Multi-scale analysis}: Separate electromagnetic detection from
+thermal transduction
 
 \subsubsection{Spectral Specificity
 Tests}\label{spectral-specificity-tests}
 
 \textbf{Wavelength Tuning Experiments:} - \textbf{Systematic wavelength
-sweeps}: Test responses across 2--25 μm range - \textbf{Resonance
-matching}: Compare with predicted sensilla resonances - \textbf{Quality
-factor assessment}: Measure response sharpness (target Q \textgreater{}
-10)
+sweeps}: Test responses across 2--25 \(\mu\mathrm{m}\) range -
+\textbf{Resonance matching}: Compare with predicted sensilla resonances
+- \textbf{Quality factor assessment}: Measure response sharpness (target
+Q \textgreater{} 10)
 
 \textbf{Isotope Effects:} - \textbf{Deuterated controls}: Use deuterated
 analogs to shift vibrational frequencies - \textbf{Frequency-specific
@@ -240,9 +262,9 @@ from environmental IR noise
 
 \textbf{Calibration and Validation:} - \textbf{Power meter calibration}:
 NIST-traceable standards for IR power measurements - \textbf{Wavelength
-accuracy}: ±0.01 μm precision for spectral specificity tests -
-\textbf{Thermal imaging}: Correlate neural responses with thermal
-profiles
+accuracy}: \(\pm 0.01\,\mu\mathrm{m}\) precision for spectral
+specificity tests - \textbf{Thermal imaging}: Correlate neural responses
+with thermal profiles
 
 \subsubsection{Taxonomic and Ecological
 Limitations}\label{taxonomic-and-ecological-limitations}
@@ -265,9 +287,10 @@ testable)}\label{minimal-falsifiers-experimentally-testable}
 \def\labelenumi{\arabic{enumi}.}
 \item
   \textbf{Spectral nulls}: No frequency-specific responses to IR-only
-  stimulation when thermal load is matched (±0.1°C) and power deposition
-  is identical across wavelengths (broadband vs.~narrowband stimulation
-  with thermal controls).
+  stimulation when thermal load is matched
+  (\(\pm 0.1\,^{\circ}\mathrm{C}\)) and power deposition is identical
+  across wavelengths (broadband vs.~narrowband stimulation with thermal
+  controls).
 \item
   \textbf{Geometric mismatch}: Reproducible failure to observe
   correlation (r \textless{} 0.3, p \textgreater{} 0.05) between
@@ -277,8 +300,9 @@ testable)}\label{minimal-falsifiers-experimentally-testable}
 \item
   \textbf{Environmental misalignment}: CHC peaks consistently fall
   outside modeled transmission windows under controlled conditions
-  (20--80\% RH, 15--35°C), with \textgreater90\% of spectral features
-  showing mismatch when compared to atmospheric transmission models.
+  (20--80\% RH, 15--35\(^{\circ}\mathrm{C}\)), with \textgreater90\% of
+  spectral features showing mismatch when compared to atmospheric
+  transmission models.
 \item
   \textbf{Temporal indistinguishability}: ORN response latencies to IR
   stimulation are statistically indistinguishable from thermal

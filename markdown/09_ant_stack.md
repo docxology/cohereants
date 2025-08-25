@@ -36,7 +36,7 @@ class AntBodySensilla:
 ```
 
 **I/O Contract**: 
-- **Observations**: Sensilla dimensions (μm), resonance frequencies (THz), quality factors
+- **Observations**: Sensilla dimensions (\(\mu\mathrm{m}\)), resonance frequencies (THz), quality factors
 - **Actions**: Antenna positioning, sensilla orientation
 - **Physics**: 1 kHz update rate, contact dynamics for substrate interaction
 
@@ -48,7 +48,7 @@ Integration of cohereAnts atmospheric transmission models:
 class AntBodySpectroscopy:
     def __init__(self, environment_preset: str):
         self.transmission_curves = load_atmospheric_data(environment_preset)
-        self.spectral_resolution = 0.01  # μm
+        self.spectral_resolution = 0.01  # \(\mu\mathrm{m}\)
         
     def get_transmission(self, wavelength: float, distance: float) -> float:
         # Delegate to cohereAnts atmospheric transmission model in src/core
@@ -56,7 +56,7 @@ class AntBodySpectroscopy:
 ```
 
 **Configuration Parameters**:
-- Atmospheric windows: 2-5 μm, 8-14 μm, 17-25 μm
+- Atmospheric windows: 2-5 \(\mu\mathrm{m}\), 8-14 \(\mu\mathrm{m}\), 17-25 \(\mu\mathrm{m}\)
 - Transmission coefficients: 0.7-0.9 for optimal windows
 - Distance-dependent attenuation models
 
@@ -102,7 +102,7 @@ Implementation of cohereAnts electromagnetic theory:
 ```python
 class VibrationalGlomeruliCircuit:
     def __init__(self):
-        self.frequency_tuning = np.linspace(2, 25, 50)  # μm to THz
+        self.frequency_tuning = np.linspace(2, 25, 50)  # \(\mu\mathrm{m}\) to THz
         self.quality_factors = np.ones(50) * 100
         
     def process_spectral_input(self, spectral_data: np.ndarray) -> np.ndarray:
@@ -183,9 +183,9 @@ class AntMindStigmergy:
 # Formica species preset for Ant Stack
 FORMICA_PRESET = {
     'body': {
-        'sensilla_lengths': [15.2, 18.7, 22.1, 19.8, 16.5],  # μm
-        'sensilla_diameters': [2.1, 2.8, 3.2, 2.9, 2.3],     # μm
-        'optimal_wavelengths': [60.8, 74.8, 88.4, 79.2, 66.0], # μm
+        'sensilla_lengths': [15.2, 18.7, 22.1, 19.8, 16.5],  # \(\mu\mathrm{m}\)
+        'sensilla_diameters': [2.1, 2.8, 3.2, 2.9, 2.3],     # \(\mu\mathrm{m}\)
+        'optimal_wavelengths': [60.8, 74.8, 88.4, 79.2, 66.0], # \(\mu\mathrm{m}\)
         'antenna_length': 2.5,  # mm
         'leg_count': 6,
         'body_mass': 0.015  # g
@@ -212,9 +212,9 @@ FORMICA_PRESET = {
 # Camponotus species preset for Ant Stack
 CAMPONOTUS_PRESET = {
     'body': {
-        'sensilla_lengths': [22.5, 28.1, 31.7, 26.8, 24.3],  # μm
-        'sensilla_diameters': [3.2, 4.1, 4.8, 4.2, 3.6],     # μm
-        'optimal_wavelengths': [90.0, 112.4, 126.8, 107.2, 97.2], # μm
+        'sensilla_lengths': [22.5, 28.1, 31.7, 26.8, 24.3],  # \(\mu\mathrm{m}\)
+        'sensilla_diameters': [3.2, 4.1, 4.8, 4.2, 3.6],     # \(\mu\mathrm{m}\)
+        'optimal_wavelengths': [90.0, 112.4, 126.8, 107.2, 97.2], # \(\mu\mathrm{m}\)
         'antenna_length': 3.8,  # mm
         'leg_count': 6,
         'body_mass': 0.045  # g

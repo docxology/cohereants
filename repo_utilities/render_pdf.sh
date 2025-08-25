@@ -862,17 +862,14 @@ build_combined() {
     
     # Title page will be handled via a standalone LaTeX cover (inserted with -B)
 
-    # Add abstract first (without page break)
+    # Add abstract first
     if [ -n "$abstract_module" ]; then
       cat "$MARKDOWN_DIR/$abstract_module" >> "$combined_md"
-      printf '\n\n\\newpage\n\n' >> "$combined_md"
+      printf '\n\n' >> "$combined_md"
     fi
-    
-    # Add other modules with page breaks
+
+    # Add other modules
     for i in "${!other_modules[@]}"; do
-      if [ $i -gt 0 ]; then
-        printf '\n\\newpage\n\n' >> "$combined_md"
-      fi
       cat "$MARKDOWN_DIR/${other_modules[$i]}" >> "$combined_md"
       # Figure inclusion is controlled by explicit references within the markdown modules.
       # Auto-inserting captioned figures here is disabled to avoid duplication and ordering issues.
@@ -885,11 +882,7 @@ build_combined() {
   
   log_info "Generated combined markdown: $combined_md"
 
-  # Enforce page break before each top-level section in the combined markdown
-  # This uses raw LaTeX (enabled via +raw_tex) and keeps the render clean
-  if command -v sed >/dev/null 2>&1; then
-    sed -i 's/^# /\\newpage\n\n# /' "$combined_md" || true
-  fi
+  # Page breaks are now handled by LaTeX preamble automatically for each section
   
   # Generate TeX file for combined document
   log_info "Generating combined TeX file..."

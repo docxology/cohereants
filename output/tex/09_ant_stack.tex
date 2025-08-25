@@ -61,6 +61,19 @@
 \DeclareUnicodeCharacter{03B5}{\(\epsilon\)}
 \DeclareUnicodeCharacter{03B4}{\(\delta\)}
 
+% Map common Unicode subscripts and degree symbol to LaTeX-friendly macros
+\DeclareUnicodeCharacter{2080}{\textsubscript{0}}
+\DeclareUnicodeCharacter{2081}{\textsubscript{1}}
+\DeclareUnicodeCharacter{2082}{\textsubscript{2}}
+\DeclareUnicodeCharacter{2083}{\textsubscript{3}}
+\DeclareUnicodeCharacter{2084}{\textsubscript{4}}
+\DeclareUnicodeCharacter{2085}{\textsubscript{5}}
+\DeclareUnicodeCharacter{2086}{\textsubscript{6}}
+\DeclareUnicodeCharacter{2087}{\textsubscript{7}}
+\DeclareUnicodeCharacter{2088}{\textsubscript{8}}
+\DeclareUnicodeCharacter{2089}{\textsubscript{9}}
+\DeclareUnicodeCharacter{00B0}{\textdegree}
+
 % Counter behaviour
 \usepackage{chngcntr}
 \counterwithout{figure}{section}
@@ -83,6 +96,10 @@
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
 \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 
+% Ensure each top-level section starts on a new page
+\let\oldsection\section
+\renewcommand{\section}{\clearpage\oldsection}
+
 % Graphics support for figures
 \usepackage{graphicx}
 
@@ -94,7 +111,7 @@
 
 % Setup listings safely (don't override global styles)
 \usepackage{listings}
-\lstset{backgroundcolor=\color{codebg},basicstyle=\normalsize\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
+\lstset{backgroundcolor=\color{codebg},basicstyle=\small\ttfamily\color{codefg},frame=single,framerule=0.5pt,framesep=5pt}
 
 % Keep title metadata to be inserted by build system
 \ifLuaTeX
@@ -170,9 +187,10 @@ class AntBodySensilla:
 \end{lstlisting}
 
 \textbf{I/O Contract}: - \textbf{Observations}: Sensilla dimensions
-(μm), resonance frequencies (THz), quality factors - \textbf{Actions}:
-Antenna positioning, sensilla orientation - \textbf{Physics}: 1 kHz
-update rate, contact dynamics for substrate interaction
+(\(\mu\mathrm{m}\)), resonance frequencies (THz), quality factors -
+\textbf{Actions}: Antenna positioning, sensilla orientation -
+\textbf{Physics}: 1 kHz update rate, contact dynamics for substrate
+interaction
 
 \paragraph{Spectroscopy and Atmospheric
 Transmission}\label{spectroscopy-and-atmospheric-transmission}
@@ -183,15 +201,16 @@ Integration of cohereAnts atmospheric transmission models:
 class AntBodySpectroscopy:
     def __init__(self, environment_preset: str):
         self.transmission_curves = load_atmospheric_data(environment_preset)
-        self.spectral_resolution = 0.01  # μm
+        self.spectral_resolution = 0.01  # \(\mu\mathrm{m}\)
         
     def get_transmission(self, wavelength: float, distance: float) -> float:
         # Delegate to cohereAnts atmospheric transmission model in src/core
         return calculate_atmospheric_transmission(wavelength, distance)
 \end{lstlisting}
 
-\textbf{Configuration Parameters}: - Atmospheric windows: 2-5 μm, 8-14
-μm, 17-25 μm - Transmission coefficients: 0.7-0.9 for optimal windows -
+\textbf{Configuration Parameters}: - Atmospheric windows: 2-5
+\(\mu\mathrm{m}\), 8-14 \(\mu\mathrm{m}\), 17-25 \(\mu\mathrm{m}\) -
+Transmission coefficients: 0.7-0.9 for optimal windows -
 Distance-dependent attenuation models
 
 \subsubsection{AntBrain Layer: Neural
@@ -240,7 +259,7 @@ Implementation of cohereAnts electromagnetic theory:
 \begin{lstlisting}[language=Python]
 class VibrationalGlomeruliCircuit:
     def __init__(self):
-        self.frequency_tuning = np.linspace(2, 25, 50)  # μm to THz
+        self.frequency_tuning = np.linspace(2, 25, 50)  # \(\mu\mathrm{m}\) to THz
         self.quality_factors = np.ones(50) * 100
         
     def process_spectral_input(self, spectral_data: np.ndarray) -> np.ndarray:
@@ -326,9 +345,9 @@ Configuration}\label{formica-species-configuration}
 # Formica species preset for Ant Stack
 FORMICA_PRESET = {
     'body': {
-        'sensilla_lengths': [15.2, 18.7, 22.1, 19.8, 16.5],  # μm
-        'sensilla_diameters': [2.1, 2.8, 3.2, 2.9, 2.3],     # μm
-        'optimal_wavelengths': [60.8, 74.8, 88.4, 79.2, 66.0], # μm
+        'sensilla_lengths': [15.2, 18.7, 22.1, 19.8, 16.5],  # \(\mu\mathrm{m}\)
+        'sensilla_diameters': [2.1, 2.8, 3.2, 2.9, 2.3],     # \(\mu\mathrm{m}\)
+        'optimal_wavelengths': [60.8, 74.8, 88.4, 79.2, 66.0], # \(\mu\mathrm{m}\)
         'antenna_length': 2.5,  # mm
         'leg_count': 6,
         'body_mass': 0.015  # g
@@ -356,9 +375,9 @@ Configuration}\label{camponotus-species-configuration}
 # Camponotus species preset for Ant Stack
 CAMPONOTUS_PRESET = {
     'body': {
-        'sensilla_lengths': [22.5, 28.1, 31.7, 26.8, 24.3],  # μm
-        'sensilla_diameters': [3.2, 4.1, 4.8, 4.2, 3.6],     # μm
-        'optimal_wavelengths': [90.0, 112.4, 126.8, 107.2, 97.2], # μm
+        'sensilla_lengths': [22.5, 28.1, 31.7, 26.8, 24.3],  # \(\mu\mathrm{m}\)
+        'sensilla_diameters': [3.2, 4.1, 4.8, 4.2, 3.6],     # \(\mu\mathrm{m}\)
+        'optimal_wavelengths': [90.0, 112.4, 126.8, 107.2, 97.2], # \(\mu\mathrm{m}\)
         'antenna_length': 3.8,  # mm
         'leg_count': 6,
         'body_mass': 0.045  # g

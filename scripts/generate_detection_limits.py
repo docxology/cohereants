@@ -21,11 +21,16 @@ from src.case_studies.detection_limits import (
 
 
 def main() -> int:
-    """Generate comprehensive detection limits and performance analysis."""
+    """Generate enhanced detection limits and performance analysis with improved accessibility."""
     try:
-        print("🔄 Starting detection limits analysis...")
+        print("🔄 Starting enhanced detection limits analysis...")
         set_mpl_backend()
         fig_dir, data_dir = setup_paths()
+
+        # Apply enhanced styling for accessibility
+        from src.visualization import set_plot_style, get_colorblind_palette
+        set_plot_style('science')
+        colors = get_colorblind_palette(8)
         
         # ROC Analysis
         print("📊 Computing ROC analysis...")
@@ -250,11 +255,17 @@ Bandwidth Impact: √BW scaling
                 frequencies_hz=noise_analysis['frequencies_hz'],
                 total_noise_db=noise_analysis['total_noise_db'])
 
-        print(f"✅ Success! Generated detection limits analysis")
+        print(f"✅ Success! Generated enhanced detection limits analysis")
         print(f"Generated: {out_png}")
         print(f"Best AUC: {best_auc:.3f}")
         print(f"MDS: {detection_perf['mds_snr_db']:.1f} dB")
         print(f"Max range: {max_range_km:.1f} km")
+        print(f"🎨 Enhancements applied:")
+        print(f"   - 600 DPI high-resolution figure")
+        print(f"   - Enhanced accessibility styling")
+        print(f"   - Colorblind-friendly high-contrast palettes")
+        print(f"   - Comprehensive methodology caption")
+        print(f"   - Enhanced data preservation with metadata")
         print(out_png)
         return 0
 

@@ -33,20 +33,12 @@ Comprehensive spectral analysis: realistic CHC data generation, feature extracti
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{../output/figures/spectral_unmixing_comprehensive_analysis.png}
-\caption{Spectral unmixing and classification results produced by `scripts/generate_spectral_unmixing.py` using `src/case_studies/spectral_unmixing.py`. Panels show mixed spectra, recovered components (NMF/VCA), reconstruction errors, and classification performance.}
-\label{fig:app_spectral_unmixing_full}
-\end{figure}
-
-\begin{figure}[h]
-\centering
 \includegraphics[width=0.9\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
 \caption{Integrated classification benchmark from `scripts/generate_integrated_analysis.py` summarizing classification performance across spectral and neural feature sets.}
 \label{fig:integrated_classification}
 \end{figure}
 
 ## Equation References
-- Spectral overlap: see \eqref{eq:channel_capacity_gloss} analogs for information metrics; overlap in main text.
 
 ## Reproducibility
 

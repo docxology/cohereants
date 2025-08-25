@@ -52,7 +52,7 @@ class PlotStyler:
         >>> styler.format_axes(ax, xlabel='Wavenumber (cm⁻¹)', ylabel='Absorbance')
     """
 
-    # Colorblind-friendly color palettes
+    # Enhanced colorblind-friendly color palettes with better contrast
     COLORBLIND_PALETTE = [
         '#0072B2',  # Blue
         '#E69F00',  # Orange
@@ -64,43 +64,76 @@ class PlotStyler:
         '#000000'   # Black
     ]
 
+    # High contrast palette for accessibility
+    HIGH_CONTRAST_PALETTE = [
+        '#000000',  # Black
+        '#004488',  # Dark blue
+        '#DDAA33',  # Yellow
+        '#BB5566',  # Red
+        '#000000',  # Black (duplicate for more options)
+        '#004488',  # Dark blue
+        '#DDAA33',  # Yellow
+        '#BB5566'   # Red
+    ]
+
     ACADEMIC_STYLES = {
-        # Use valid matplotlib rcParam keys (see rcParams.keys())
+        # Enhanced accessibility styles with larger fonts and better contrast
         'nature': {
             'font.family': 'sans-serif',
-            'font.size': 7,
+            'font.size': 12,  # Increased from 7 for better readability
             'font.weight': 'normal',
-            'axes.linewidth': 0.5,
-            'xtick.major.size': 2,
-            'ytick.major.size': 2,
-            'xtick.major.width': 0.5,
-            'ytick.major.width': 0.5,
-            'grid.alpha': 0.3,
-            'figure.dpi': 600
+            'axes.linewidth': 1.0,  # Thicker lines for better visibility
+            'xtick.major.size': 4,  # Larger ticks
+            'ytick.major.size': 4,
+            'xtick.major.width': 1.0,
+            'ytick.major.width': 1.0,
+            'xtick.labelsize': 11,  # Explicit tick label size
+            'ytick.labelsize': 11,
+            'axes.labelsize': 12,   # Larger axis labels
+            'axes.titlesize': 14,   # Larger titles
+            'legend.fontsize': 11,  # Larger legend text
+            'grid.alpha': 0.4,      # More visible grid
+            'figure.dpi': 600,
+            'lines.linewidth': 2.0,  # Thicker plot lines
+            'lines.markersize': 6    # Larger markers
         },
         'science': {
             'font.family': 'sans-serif',
-            'font.size': 8,
+            'font.size': 13,  # Increased from 8
             'font.weight': 'normal',
-            'axes.linewidth': 0.8,
-            'xtick.major.size': 3,
-            'ytick.major.size': 3,
-            'xtick.major.width': 0.8,
-            'ytick.major.width': 0.8,
-            'grid.alpha': 0.4,
-            'figure.dpi': 600
+            'axes.linewidth': 1.2,  # Thicker lines
+            'xtick.major.size': 5,  # Larger ticks
+            'ytick.major.size': 5,
+            'xtick.major.width': 1.2,
+            'ytick.major.width': 1.2,
+            'xtick.labelsize': 12,
+            'ytick.labelsize': 12,
+            'axes.labelsize': 13,
+            'axes.titlesize': 15,
+            'legend.fontsize': 12,
+            'grid.alpha': 0.5,
+            'figure.dpi': 600,
+            'lines.linewidth': 2.5,
+            'lines.markersize': 7
         },
         'ieee': {
             'font.family': 'serif',
-            'font.size': 8,
+            'font.size': 12,  # Increased from 8
             'font.weight': 'normal',
-            'axes.linewidth': 0.5,
-            'xtick.major.size': 2.5,
-            'ytick.major.size': 2.5,
-            'xtick.major.width': 0.5,
-            'ytick.major.width': 0.5,
-            'grid.alpha': 0.3,
-            'figure.dpi': 300
+            'axes.linewidth': 1.0,
+            'xtick.major.size': 4,
+            'ytick.major.size': 4,
+            'xtick.major.width': 1.0,
+            'ytick.major.width': 1.0,
+            'xtick.labelsize': 11,
+            'ytick.labelsize': 11,
+            'axes.labelsize': 12,
+            'axes.titlesize': 14,
+            'legend.fontsize': 11,
+            'grid.alpha': 0.4,
+            'figure.dpi': 300,
+            'lines.linewidth': 2.0,
+            'lines.markersize': 6
         }
     }
 
@@ -169,17 +202,19 @@ class PlotStyler:
 
     def get_colors(self, n: int, palette: str = 'colorblind') -> List[str]:
         """
-        Get a list of colors from a predefined palette.
+        Get a list of colors from a predefined palette with enhanced accessibility.
 
         Args:
             n: Number of colors needed
-            palette: Palette name ('colorblind', 'viridis', 'plasma', 'tab10')
+            palette: Palette name ('colorblind', 'high_contrast', 'viridis', 'plasma', 'tab10')
 
         Returns:
-            List of color hex codes
+            List of color hex codes optimized for accessibility
         """
         if palette == 'colorblind':
             colors = self.COLORBLIND_PALETTE
+        elif palette == 'high_contrast':
+            colors = self.HIGH_CONTRAST_PALETTE
         else:
             try:
                 cmap = plt.get_cmap(palette)
@@ -193,9 +228,9 @@ class PlotStyler:
         return [colors[i % len(colors)] for i in range(n)]
 
     def format_axes(self, ax: plt.Axes, xlabel: str = None, ylabel: str = None,
-                   title: str = None, legend: bool = True) -> plt.Axes:
+                   title: str = None, legend: bool = True, enhance_accessibility: bool = True) -> plt.Axes:
         """
-        Format axes with consistent styling.
+        Format axes with enhanced accessibility and consistent styling.
 
         Args:
             ax: Matplotlib axes to format
@@ -203,29 +238,43 @@ class PlotStyler:
             ylabel: Y-axis label
             title: Plot title
             legend: Whether to show legend if present
+            enhance_accessibility: Whether to apply accessibility enhancements
 
         Returns:
             Formatted axes object
         """
         if xlabel:
-            ax.set_xlabel(xlabel, fontweight='bold')
+            ax.set_xlabel(xlabel, fontweight='bold', fontsize=12)
         if ylabel:
-            ax.set_ylabel(ylabel, fontweight='bold')
+            ax.set_ylabel(ylabel, fontweight='bold', fontsize=12)
         if title:
-            ax.set_title(title, fontweight='bold', pad=10)
+            ax.set_title(title, fontweight='bold', pad=15, fontsize=14)
 
-        # Improve tick formatting
-        ax.tick_params(axis='both', which='major', labelsize='small')
+        # Enhanced tick formatting for accessibility
+        if enhance_accessibility:
+            ax.tick_params(axis='both', which='major', labelsize=11, width=1.0, length=4)
+            # Ensure minimum tick spacing for readability
+            ax.xaxis.set_major_locator(plt.MaxNLocator(6))
+            ax.yaxis.set_major_locator(plt.MaxNLocator(6))
 
-        # Add subtle grid
-        ax.grid(True, alpha=0.3, linestyle='-', linewidth=0.5)
+        # Add more visible grid for better data reading
+        ax.grid(True, alpha=0.4, linestyle='-', linewidth=0.8, color='gray')
 
-        # Remove top and right spines for cleaner look
+        # Remove top and right spines for cleaner look (but keep bottom/left thicker)
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
+        ax.spines['bottom'].set_linewidth(1.2)
+        ax.spines['left'].set_linewidth(1.2)
 
         if legend and ax.get_legend_handles_labels()[1]:
-            ax.legend(frameon=True, fancybox=True, shadow=False, framealpha=0.8)
+            legend_obj = ax.legend(frameon=True, fancybox=True, shadow=False,
+                                 framealpha=0.9, loc='best', fontsize=11)
+            # Make legend frame more visible
+            legend_obj.get_frame().set_linewidth(1.5)
+
+        # Add subtle background color for better contrast
+        if enhance_accessibility:
+            ax.set_facecolor('#FAFAFA')
 
         return ax
 
@@ -454,13 +503,15 @@ class AdvancedVisualizer:
         return fig
 
     def plot_multi_panel_analysis(self, data_dict: Dict[str, Dict],
-                                title: str = "Multi-Panel Analysis") -> plt.Figure:
+                                title: str = "Multi-Panel Analysis",
+                                enhance_accessibility: bool = True) -> plt.Figure:
         """
-        Create a comprehensive multi-panel analysis figure.
+        Create a comprehensive multi-panel analysis figure with enhanced accessibility.
 
         Args:
             data_dict: Dictionary containing analysis data for each panel
             title: Overall figure title
+            enhance_accessibility: Whether to apply accessibility enhancements
 
         Returns:
             Matplotlib figure
@@ -472,37 +523,68 @@ class AdvancedVisualizer:
             rows = int(np.ceil(n_panels / 3))
             cols = min(n_panels, 3)
 
-        fig, axes = self.styler.create_figure_grid(rows, cols, figsize=(4*cols, 3*rows))
+        fig, axes = self.styler.create_figure_grid(rows, cols, figsize=(5*cols, 4*rows))
         axes_flat = axes.flatten()
 
-        colors = self.styler.get_colors(n_panels)
+        colors = self.styler.get_colors(n_panels, palette='high_contrast' if enhance_accessibility else 'colorblind')
 
         for i, (panel_name, panel_data) in enumerate(data_dict.items()):
             ax = axes_flat[i]
 
-            # Plot based on data type
+            # Plot based on data type with enhanced styling
             if 'x' in panel_data and 'y' in panel_data:
-                ax.plot(panel_data['x'], panel_data['y'], color=colors[i], linewidth=2)
+                line = ax.plot(panel_data['x'], panel_data['y'], color=colors[i], linewidth=2.5,
+                             marker='o' if len(panel_data['x']) < 20 else None,
+                             markersize=4 if len(panel_data['x']) < 20 else None)
                 if 'xlabel' in panel_data:
-                    ax.set_xlabel(panel_data['xlabel'])
+                    ax.set_xlabel(panel_data['xlabel'], fontweight='bold', fontsize=12)
                 if 'ylabel' in panel_data:
-                    ax.set_ylabel(panel_data['ylabel'])
+                    ax.set_ylabel(panel_data['ylabel'], fontweight='bold', fontsize=12)
+
+                # Add data point annotations for small datasets
+                if len(panel_data['x']) <= 10 and 'annotate' in panel_data and panel_data['annotate']:
+                    for j, (x_val, y_val) in enumerate(zip(panel_data['x'], panel_data['y'])):
+                        ax.annotate(f'({x_val:.1f}, {y_val:.1f})', (x_val, y_val),
+                                  textcoords="offset points", xytext=(0, 8), ha='center',
+                                  fontsize=9, bbox=dict(boxstyle='round,pad=0.2', facecolor='white', alpha=0.8))
 
             elif 'histogram_data' in panel_data:
-                ax.hist(panel_data['histogram_data'], bins=30, alpha=0.7, color=colors[i])
+                data = panel_data['histogram_data']
+                n, bins, patches = ax.hist(data, bins=30, alpha=0.8, color=colors[i], edgecolor='black', linewidth=1.5)
                 if 'xlabel' in panel_data:
-                    ax.set_xlabel(panel_data['xlabel'])
+                    ax.set_xlabel(panel_data['xlabel'], fontweight='bold', fontsize=12)
 
-            ax.set_title(f'{panel_name}', fontweight='bold')
-            ax.grid(True, alpha=0.3)
+                # Add statistics annotation
+                if len(data) > 0:
+                    mean_val = np.mean(data)
+                    std_val = np.std(data)
+                    ax.axvline(mean_val, color='red', linestyle='--', linewidth=2, label=f'μ={mean_val:.2f}')
+                    ax.text(0.02, 0.98, f'μ={mean_val:.2f}\nσ={std_val:.2f}',
+                           transform=ax.transAxes, verticalalignment='top',
+                           bbox=dict(boxstyle='round,pad=0.3', facecolor='white', alpha=0.9),
+                           fontsize=10, fontweight='bold')
+
+            # Enhanced title and formatting
+            ax.set_title(f'{panel_name}', fontweight='bold', fontsize=13, pad=10)
+
+            # Apply accessibility formatting
+            if enhance_accessibility:
+                ax.grid(True, alpha=0.4, linewidth=0.8)
+                ax.tick_params(axis='both', which='major', labelsize=11)
 
         # Hide unused subplots
         for i in range(n_panels, len(axes_flat)):
             axes_flat[i].set_visible(False)
 
-        fig.suptitle(title, fontsize=14, fontweight='bold', y=0.98)
-        plt.tight_layout()
+        # Enhanced main title with better spacing
+        fig.suptitle(title, fontsize=16, fontweight='bold', y=0.95)
 
+        # Add metadata annotation
+        if enhance_accessibility:
+            fig.text(0.02, 0.02, f'Generated with enhanced accessibility features | {len(data_dict)} panels',
+                    fontsize=8, style='italic', alpha=0.7)
+
+        plt.tight_layout()
         return fig
 
     def create_interactive_plot(self, x_data: np.ndarray, y_data: np.ndarray,
@@ -539,19 +621,104 @@ class AdvancedVisualizer:
             ax.grid(True, alpha=0.3)
             return fig
 
-    def save_figure(self, fig: plt.Figure, filename: str,
-                   dpi: int = None, format: str = None) -> None:
+    def create_statistical_summary_plot(self, data: Dict[str, Any],
+                                       title: str = "Statistical Summary") -> plt.Figure:
         """
-        Save figure with optimal settings for publication.
+        Create a comprehensive statistical summary plot with enhanced accessibility.
+
+        Args:
+            data: Dictionary containing statistical data to plot
+            title: Overall figure title
+
+        Returns:
+            Matplotlib figure with statistical summaries
+        """
+        fig, axes = self.styler.create_figure_grid(2, 2, figsize=(12, 10))
+
+        colors = self.styler.get_colors(8, palette='high_contrast')
+
+        # Panel 1: Data distributions
+        if 'distributions' in data:
+            ax = axes[0, 0]
+            for i, (name, values) in enumerate(data['distributions'].items()):
+                if len(values) > 0:
+                    ax.hist(values, bins=20, alpha=0.7, color=colors[i],
+                           label=f'{name}\nμ={np.mean(values):.2f}', linewidth=1.5)
+            ax.set_xlabel('Value', fontweight='bold', fontsize=12)
+            ax.set_ylabel('Frequency', fontweight='bold', fontsize=12)
+            ax.set_title('Data Distributions', fontweight='bold', fontsize=13)
+            ax.legend(fontsize=10)
+            ax.grid(True, alpha=0.4)
+
+        # Panel 2: Box plots for comparison
+        if 'boxplot_data' in data:
+            ax = axes[0, 1]
+            labels = list(data['boxplot_data'].keys())
+            values = [data['boxplot_data'][label] for label in labels]
+            bp = ax.boxplot(values, labels=labels, patch_artist=True)
+            for patch, color in zip(bp['boxes'], colors):
+                patch.set_facecolor(color)
+                patch.set_alpha(0.7)
+            ax.set_ylabel('Value', fontweight='bold', fontsize=12)
+            ax.set_title('Box Plot Comparison', fontweight='bold', fontsize=13)
+            ax.grid(True, alpha=0.4, axis='y')
+
+        # Panel 3: Correlation matrix if available
+        if 'correlation_matrix' in data:
+            ax = axes[1, 0]
+            corr_matrix = data['correlation_matrix']
+            im = ax.imshow(corr_matrix, cmap='RdBu_r', vmin=-1, vmax=1)
+            ax.set_title('Correlation Matrix', fontweight='bold', fontsize=13)
+
+            # Add correlation values
+            for i in range(corr_matrix.shape[0]):
+                for j in range(corr_matrix.shape[1]):
+                    text = ax.text(j, i, f'{corr_matrix[i, j]:.2f}',
+                                 ha='center', va='center', color='black', fontsize=10)
+
+            plt.colorbar(im, ax=ax, shrink=0.8)
+
+        # Panel 4: Summary statistics table
+        if 'summary_stats' in data:
+            ax = axes[1, 1]
+            ax.axis('off')
+            stats = data['summary_stats']
+
+            # Create table data
+            table_data = []
+            for key, values in stats.items():
+                if isinstance(values, dict):
+                    for subkey, val in values.items():
+                        table_data.append([f'{key}\n{subkey}', f'{val:.3f}'])
+                else:
+                    table_data.append([key, f'{values:.3f}'])
+
+            table = ax.table(cellText=table_data, colLabels=['Metric', 'Value'],
+                           loc='center', cellLoc='center', colColours=['lightgray', 'lightgray'])
+            table.auto_set_font_size(False)
+            table.set_fontsize(10)
+            table.scale(1, 1.5)
+            ax.set_title('Summary Statistics', fontweight='bold', fontsize=13, pad=20)
+
+        fig.suptitle(title, fontsize=16, fontweight='bold', y=0.95)
+        plt.tight_layout()
+
+        return fig
+
+    def save_figure(self, fig: plt.Figure, filename: str,
+                   dpi: int = None, format: str = None, enhance_for_accessibility: bool = True) -> None:
+        """
+        Save figure with optimal settings for publication and accessibility.
 
         Args:
             fig: Matplotlib figure to save
             filename: Output filename
-            dpi: Resolution (uses config default if None)
+            dpi: Resolution (uses high DPI for accessibility if None)
             format: File format (inferred from extension if None)
+            enhance_for_accessibility: Whether to use high DPI for better accessibility
         """
         if dpi is None:
-            dpi = self.config.get('plot_dpi', 300)
+            dpi = 600 if enhance_for_accessibility else self.config.get('plot_dpi', 300)
 
         if format is None:
             format = filename.split('.')[-1].lower()
@@ -561,10 +728,11 @@ class AdvancedVisualizer:
         os.makedirs(os.path.dirname(filename) if os.path.dirname(filename) else '.',
                    exist_ok=True)
 
+        # Save with enhanced settings for accessibility
         fig.savefig(filename, dpi=dpi, format=format, bbox_inches='tight',
-                   facecolor='white', edgecolor='none')
+                   facecolor='white', edgecolor='none', pad_inches=0.1)
 
-        print(f"✅ Saved figure: {filename} (DPI: {dpi}, Format: {format})")
+        print(f"✅ Saved figure: {filename} (DPI: {dpi}, Format: {format}, Accessibility: {enhance_for_accessibility})")
 
 
 def create_publication_figure(data: Dict[str, Any], style: str = 'nature') -> plt.Figure:
@@ -613,8 +781,31 @@ def get_colorblind_palette(n_colors: int = 8) -> List[str]:
     styler = PlotStyler()
     return styler.get_colors(n_colors, 'colorblind')
 
-def create_subplots(n_rows: int, n_cols: int, style: str = 'default',
-                   figsize: Tuple[float, float] = None) -> Tuple[plt.Figure, np.ndarray]:
-    """Create subplots with consistent styling."""
+def create_subplots(n_rows: int, n_cols: int, style: str = 'science',
+                   figsize: Tuple[float, float] = None,
+                   enhance_accessibility: bool = True) -> Tuple[plt.Figure, np.ndarray]:
+    """Create subplots with enhanced accessibility and consistent styling."""
     styler = PlotStyler(style)
+
+    # Apply enhanced style for accessibility
+    if enhance_accessibility and style in ['nature', 'science', 'ieee']:
+        # The styles already include accessibility enhancements
+        pass
+
     return styler.create_figure_grid(n_rows, n_cols, figsize)
+
+def create_accessible_figure(data_dict: Dict[str, Dict], title: str = "Analysis Figure",
+                           style: str = 'science') -> plt.Figure:
+    """
+    Create an accessible figure with enhanced features for better understanding.
+
+    Args:
+        data_dict: Dictionary containing plot data for each panel
+        title: Overall figure title
+        style: Plot style to use
+
+    Returns:
+        Matplotlib figure optimized for accessibility
+    """
+    visualizer = AdvancedVisualizer(style)
+    return visualizer.plot_multi_panel_analysis(data_dict, title, enhance_accessibility=True)
