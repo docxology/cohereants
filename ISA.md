@@ -380,7 +380,7 @@ POST-REMEDIATION GATE: superseded by the 2026-05-26 scholarship/visualization re
 
 - Test gate: `uv run python scripts/01_run_tests.py --project cohereants --project-only` → `614 passed`, coverage `93.2%` (≥90%).
 - Module split: `src/viz/styling.py` extracted from `src/visualization.py`; `src/integrated_figures.py` owns integrated panels; `scripts/generate_integrated_analysis.py` thinned to orchestrator.
-- Figure registry: Stage 04 → `Figure registry: PASS` (`output/figures/figure_registry.json`, 18 labels incl. appendix bundles and `fig:integrated_summary`).
+- Figure registry: Stage 04 → `Figure registry: PASS` (`output/figures/figure_registry.json`, 17 labels incl. appendix bundles and `fig:integrated_summary`).
 - Evidence registry: Stage 04 → `Evidence registry: PASS` (`data/claim_ledger.yaml` incl. `chandel-ir-*`; `output/data/manuscript_variables.json` with `MOSQUITO_IR_*` tokens).
 - Alt-text: 12 manuscript figure blocks carry `<!-- alt: … -->` engineering-boundary descriptions (core + appendices A–G).
 - Pre-render: `uv run python -m infrastructure.validation.cli prerender projects_in_progress/cohereants/manuscript --repo-root .` → no render-blocking issues.
