@@ -422,7 +422,7 @@ Artifact-backed evidence for ISC-53–68 (all `[x]`):
 - ISC-53: `ls` after clean — htmlcov/.coverage*/.pytest_cache/.benchmarks/coverage_project.json/output absent (~43MB removed).
 - ISC-54: `output/cohereants/pdf/cohereants_combined.pdf` mtime 2026-05-29 12:46, 68 pages (pypdf), regenerated this session via `execute_pipeline.py --project cohereants --core-only`.
 - ISC-55: `infrastructure.validation.cli pdf …cohereants_combined.pdf` → "Total issues found: 0".
-- ISC-56: `grep -rIn 'Users/4d'` over public tree incl. PDF `strings`, 18 PNGs, 19 HTML, all JSON → 0 (Forge independently re-confirmed).
+- ISC-56: home-prefix grep over public tree incl. PDF `strings`, 18 PNGs, 19 HTML, all JSON → 0 (Forge independently re-confirmed).
 - ISC-57: `CITATION.cff` — both authors + ORCIDs, `license: Apache-2.0`, `doi: 10.5281/zenodo.20450880`.
 - ISC-58: `.zenodo.json` — both creators, `version: 1.0.0`, related_identifiers → concept DOI + GitHub.
 - ISC-59: `config.yaml` `publication.github_repository: docxology/cohereants`, split `doi`/`version_doi`/`version_record`.

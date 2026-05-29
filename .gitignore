@@ -26,3 +26,4 @@ data/*.npz
 
 # OS / editor cruft
 .DS_Store
+*.egg-info/
