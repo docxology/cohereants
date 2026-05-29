@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-05-29T19:44:37Z",
+  "variables": {
+    "BEAM_WIDTH_HIGH_DEG": "30",
+    "BEAM_WIDTH_LOW_DEG": "15",
+    "BIOMIMETIC_IR_BAND_UM": "2.8--6 \u00b5m",
+    "BIOMIMETIC_THRESHOLD_MW_CM2": "11--17.3",
+    "FIGURE_WIDTH_COMPOSITE": "0.95",
+    "FIGURE_WIDTH_RESPONSE_TIME": "1.0",
+    "FIRE_BLACKBODY_PEAK_UM": "3",
+    "GENERATED_AT_UTC": "2026-05-29T19:44:37Z",
+    "IMPROVEMENT_FACTOR_HIGH": "4",
+    "IMPROVEMENT_FACTOR_LOW": "1.2",
+    "LOCALIZATION_ACCURACY_DEG": "15--30",
+    "MOSQUITO_IR_PEAK_UM": "9.4",
+    "MOSQUITO_IR_RANGE_M": "0.7",
+    "MOSQUITO_IR_SOURCE_TEMP_C": "34",
+    "PROJECT_TITLE": "When do bugs see (infra)red?",
+    "PROTOCOL_MIN_N": "50",
+    "PROTOCOL_POWER_DENSITY_MW_CM2": "0.1--2",
+    "PROTOCOL_QCL_BAND_UM": "2--25 \u00b5m",
+    "PROTOCOL_THERMAL_CONTROL": "matched power deposition",
+    "RANDOM_SEED": "42",
+    "SKIN_BLACKBODY_PEAK_UM": "9.4",
+    "SNR_OPERATING_DB": "10"
+  }
+}

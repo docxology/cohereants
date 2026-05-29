@@ -1,0 +1,223 @@
+{
+  "fig:app_active_inference": {
+    "caption": "Deterministic gradient-following trajectory under a simple active-inference step model. Behavioral demo only; not field data. Generation method: Active-inference control trajectory demo. Registry metadata records the generation method, source artifact, and claim boundary for validation.",
+    "filename": "active_inference_trajectory.png",
+    "label": "fig:app_active_inference",
+    "metadata": {
+      "alt_text": "Deterministic active-inference trajectory on a grid with IR cue beliefs; behavioral demo model output, not field data.",
+      "claim_boundary": "Behavioral demo only; not field data.",
+      "method": "Active-inference control trajectory demo.",
+      "source_artifact": "active_inference_trajectory.png",
+      "validated_by": "Stage 04 output validation and figure registry validation."
+    },
+    "path": "output/figures/active_inference_trajectory.png"
+  },
+  "fig:app_detection_limits": {
+    "caption": "Detection limits analysis: best ROC AUC 0.819, minimum detectable SNR 15.0 dB, maximum range 0.0 km. Generation method: ROC/SNR operating points from src.case_studies.detection_limits. Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Bounds sensor feasibility and model assumptions; does not establish biological IR olfaction. Registry metadata records the generation method, source artifact, and claim boundary for validation.",
+    "filename": "detection_limits_comprehensive_analysis.png",
+    "label": "fig:app_detection_limits",
+    "metadata": {
+      "alt_text": "Detection limits panels with ROC curves, SNR operating regions, and noise floors for IR sensor bounds; model output only.",
+      "claim_boundary": "Bounds sensor feasibility and model assumptions; does not establish biological IR olfaction.",
+      "method": "ROC/SNR operating points from src.case_studies.detection_limits.",
+      "source_artifact": "detection_limits_comprehensive_analysis.png",
+      "validated_by": "Stage 04 output validation and figure registry validation."
+    },
+    "path": "output/figures/detection_limits_comprehensive_analysis.png"
+  },
+  "fig:app_env_channel": {
+    "caption": "Environmental channel analysis: clear-sky capacity 0.00e+00 Mbps and humid capacity 0.00e+00 Mbps. Generation method: Channel-capacity sensitivity from environmental_channel case study. Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Channel-capacity sensitivity demo under modeled clear/humid conditions. Registry metadata records the generation method, source artifact, and claim boundary for validation.",
+    "filename": "environmental_channel_comprehensive_analysis.png",
+    "label": "fig:app_env_channel",
+    "metadata": {
+      "alt_text": "Atmospheric channel model with absorption, scattering, and capacity maps across humidity and temperature; engineering channel bounds.",
+      "claim_boundary": "Channel-capacity sensitivity demo under modeled clear/humid conditions.",
+      "method": "Channel-capacity sensitivity from environmental_channel case study.",
+      "source_artifact": "environmental_channel_comprehensive_analysis.png",
+      "validated_by": "Stage 04 output validation and figure registry validation."
+    },
+    "path": "output/figures/environmental_channel_comprehensive_analysis.png"
+  },
+  "fig:app_neural_encoding_full": {
+    "caption": "Neural encoding analysis: classification accuracy 100.0%, mutual information 2.00 bits, temporal precision 18.4, and mean adaptation index 0.71. Generation method: Information-rate model from neural_encoding case study. Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Model output only; does not establish biological IR olfaction. Registry metadata records the generation method, source artifact, and claim boundary for validation.",
+    "filename": "neural_encoding_comprehensive_analysis.png",
+    "label": "fig:app_neural_encoding_full",
+    "metadata": {
+      "alt_text": "Neural encoding panels with spike trains, population PCA, and information metrics on synthetic ORN time series; model output only.",
+      "claim_boundary": "Model output only; does not establish biological IR olfaction.",
+      "method": "Information-rate model from neural_encoding case study.",
+      "source_artifact": "neural_encoding_comprehensive_analysis.png",
+      "validated_by": "Stage 04 output validation and figure registry validation."
+    },
+    "path": "output/figures/neural_encoding_comprehensive_analysis.png"
+  },
+  "fig:app_plasmonic_sweep": {
+    "caption": "Plasmonic geometry sweep: max gold enhancement 51.81 and field max enhancement 12265648.62. Generation method: Geometry sweep aligned with biomimetic pit-organ precedents. Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Bounds sensor feasibility and model assumptions; does not establish biological IR olfaction. Registry metadata records the generation method, source artifact, and claim boundary for validation.",
+    "filename": "plasmonic_geometry_comprehensive_analysis.png",
+    "label": "fig:app_plasmonic_sweep",
+    "metadata": {
+      "alt_text": "Plasmonic geometry sweep with Drude permittivity, Mie scattering, and near-field enhancement maps for receptor-scale sensor design.",
+      "claim_boundary": "Bounds sensor feasibility and model assumptions; does not establish biological IR olfaction.",
+      "method": "Geometry sweep aligned with biomimetic pit-organ precedents.",
+      "source_artifact": "plasmonic_geometry_comprehensive_analysis.png",
+      "validated_by": "Stage 04 output validation and figure registry validation."
+    },
+    "path": "output/figures/plasmonic_geometry_comprehensive_analysis.png"
+  },
+  "fig:app_sensilla_beam": {
+    "caption": "Sensilla array directionality: log-periodic gain 3.00, morphology correlation 0.563, and 3 dB bandwidth 140.00 THz. Generation method: Array directionality beam patterns from sensilla_array case study. Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Bounds directional gain; not field proof of semiochemical IR olfaction. Registry metadata records the generation method, source artifact, and claim boundary for validation.",
+    "filename": "sensilla_array_comprehensive_analysis.png",
+    "label": "fig:app_sensilla_beam",
+    "metadata": {
+      "alt_text": "Sensilla array beam patterns, coupling, and morphology-to-resonance maps from antenna models; bounds directional gain, not field proof.",
+      "claim_boundary": "Bounds directional gain; not field proof of semiochemical IR olfaction.",
+      "method": "Array directionality beam patterns from sensilla_array case study.",
+      "source_artifact": "sensilla_array_comprehensive_analysis.png",
+      "validated_by": "Stage 04 output validation and figure registry validation."
+    },
+    "path": "output/figures/sensilla_array_comprehensive_analysis.png"
+  },
+  "fig:app_spectral_unmixing": {
+    "caption": "Comprehensive spectral unmixing and classification analysis: Analysis of 100 CHC spectra with 4 components. NMF achieved best reconstruction (MSE: 0.0019) while lda achieved best classification accuracy (0.533). Analysis includes NMF and VCA unmixing with comprehensive feature extraction and multi-algorithm classification validation. Generation method: Spectral unmixing fixture from spectral_unmixing case study. Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Algorithm evaluation; not species identification proof. Registry metadata records the generation method, source artifact, and claim boundary for validation.",
+    "filename": "spectral_unmixing_comprehensive_analysis.png",
+    "label": "fig:app_spectral_unmixing",
+    "metadata": {
+      "alt_text": "Synthetic CHC spectral unmixing and classification benchmarks with NMF/VCA/ICA panels; algorithm evaluation, not species identification proof.",
+      "claim_boundary": "Algorithm evaluation; not species identification proof.",
+      "method": "Spectral unmixing fixture from spectral_unmixing case study.",
+      "source_artifact": "spectral_unmixing_comprehensive_analysis.png",
+      "validated_by": "Stage 04 output validation and figure registry validation."
+    },
+    "path": "output/figures/spectral_unmixing_comprehensive_analysis.png"
+  },
+  "fig:atmospheric_transmission": {
+    "caption": "Atmospheric transmission window analysis for the CohereAnts model.\n\nMethodology: Computed using src.core.calculate_atmospheric_transmission() across 1-30 \u03bcm. The function is a coarse\nwindow-level model, not a line-by-line radiative-transfer calculation.\n\nInterpretation:\n\u2022 2-5 \u03bcm and 8-14 \u03bcm are the principal modeled transmission opportunities.\n\u2022 17-25 \u03bcm is retained as a lower-confidence sensitivity band and should not carry strong range claims.\n\u2022 Window overlap is a necessary physical condition for any IR semiochemical hypothesis, not evidence that insects use\n  these wavelengths for distant chemical communication.\n\nLiterature anchors: HITRAN2020 atmospheric line data; insect IR and thermal-receptor literature cited in the manuscript. Generation method: Coarse window model from src.core.calculate_atmospheric_transmission(). Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Marks atmospheric window opportunity only; not a measured insect communication range. Registry metadata records the generation method, source artifact, and claim boundary for validation.",
+    "filename": "atmospheric_transmission.png",
+    "label": "fig:atmospheric_transmission",
+    "metadata": {
+      "alt_text": "Atmospheric transmission versus wavelength with shaded mid-IR, long-wave, and far-IR windows and a biomimetic 2.8\u20136 \u00b5m band; coarse model scope, not a range proof.",
+      "claim_boundary": "Marks atmospheric window opportunity only; not a measured insect communication range.",
+      "method": "Coarse window model from src.core.calculate_atmospheric_transmission().",
+      "source_artifact": "atmospheric_transmission.png",
+      "validated_by": "Stage 04 output validation and figure registry validation."
+    },
+    "path": "output/figures/atmospheric_transmission.png"
+  },
+  "fig:chc_spectra_example": {
+    "caption": "Cuticular-hydrocarbon (CHC) infrared spectrum fixture analyzed with src.spectroscopy.analyze_chc_spectra().\n\nMethodology: Deterministic synthetic spectrum passed through the production CHC analyzer (3 detected peaks).\nThe output is a reproducible model fixture for manuscript figures, not a measured ant spectrum.\n\nBounded interpretation:\n\u2022 CHC molecules form the primary component of insect cuticles\n\u2022 FTIR/ATR spectra can classify insect cuticular chemistry in empirical studies\n\u2022 The figure supports spectral feature extraction and hypothesis generation\n\u2022 It does not establish that insects directly read these IR absorbance bands as olfactory signals\n\nLiterature anchors: CHC biology from Blomquist and Ginzel 2021; ATR-FTIR classification evidence from Durak et al. 2022. Generation method: Fixture spectrum analyzed with src.spectroscopy.analyze_chc_spectra(). Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Synthetic CHC-band fixture for feature extraction; not a measured ant spectrum. Registry metadata records the generation method, source artifact, and claim boundary for validation.",
+    "filename": "chc_spectra_example.png",
+    "label": "fig:chc_spectra_example",
+    "metadata": {
+      "alt_text": "Synthetic cuticular-hydrocarbon infrared spectrum with C-H stretch and bend regions annotated; fixture for spectral feature extraction, not a measured ant spectrum.",
+      "claim_boundary": "Synthetic CHC-band fixture for feature extraction; not a measured ant spectrum.",
+      "method": "Fixture spectrum analyzed with src.spectroscopy.analyze_chc_spectra().",
+      "source_artifact": "chc_spectra_example.png",
+      "validated_by": "Stage 04 output validation and figure registry validation."
+    },
+    "path": "output/figures/chc_spectra_example.png"
+  },
+  "fig:composite_cross_domain_overview": {
+    "caption": "Cross-domain evidence map for the CohereAnts IR/semiochemical hypothesis.\n\nMethodology: Four panels combine:\n\u2022 Atmospheric transmission modeling (src.core.calculate_atmospheric_transmission)\n\u2022 Representative sensilla wavelength estimates (src.sensilla.analyze_sensilla_dimensions)\n\u2022 CHC fixture spectrum analyzed via analyze_chc_spectra()\n\u2022 An evidence ladder separating direct anchors from open experimental tests\n\nModel summary:\n\u2022 Atmospheric model windows: 2-5 \u03bcm, 8-14 \u03bcm, and lower-confidence 17-25 \u03bcm.\n\u2022 Representative quarter-wave estimate mean: 189.0 \u03bcm.\n\u2022 CHC bands shown: C-H bend near 1465 cm\u207b\u00b9 and C-H stretch near 2800-3000 cm\u207b\u00b9.\n\nInterpretation: The figure is a hypothesis map. It shows physical and biological constraints that make the question\ntestable, while marking direct semiochemical IR olfaction as unproven. Generation method: Evidence ladder panel linking empirical IR organs, model assumptions, and protocols. Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Hypothesis evidence ladder; direct semiochemical IR olfaction remains unproven. Registry metadata records the generation method, source artifact, and claim boundary for validation.",
+    "filename": "composite_cross_domain_overview.png",
+    "label": "fig:composite_cross_domain_overview",
+    "metadata": {
+      "alt_text": "Four-panel evidence map linking atmospheric windows, sensilla geometry, CHC bands, and evidence status; hypothesis ladder, not an experimental setup.",
+      "claim_boundary": "Hypothesis evidence ladder; direct semiochemical IR olfaction remains unproven.",
+      "method": "Evidence ladder panel linking empirical IR organs, model assumptions, and protocols.",
+      "source_artifact": "composite_cross_domain_overview.png",
+      "validated_by": "Stage 04 output validation and figure registry validation."
+    },
+    "path": "output/figures/composite_cross_domain_overview.png"
+  },
+  "fig:empirical_ir_axes": {
+    "caption": "Three-axis schematic of insect IR biology synthesized from \u00a707 empirical studies.\n\nMethodology: Panel layout derived from manuscript fixtures (biomimetic band, threshold range, blackbody peaks) and\nthe comparative taxon table. This is a literature synthesis figure, not new empirical measurement.\n\nInterpretation:\n\u2022 Active photomechanic organs anchor biomimetic sensor bands but do not prove semiochemical IR olfaction.\n\u2022 Passive cuticle and thermosensory pathways shape background IR and host-finding context.\n\u2022 Applied spectroscopy validates discriminative IR structure in insect bodies without demonstrating in vivo IR olfaction. Generation method: Three-axis schematic from src.figures.generate_empirical_ir_axes() and manuscript fixtures. Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Schematic synthesis of published IR biology axes; not new empirical measurement. Registry metadata records the generation method, source artifact, and claim boundary for validation.",
+    "filename": "empirical_ir_axes.png",
+    "label": "fig:empirical_ir_axes",
+    "metadata": {
+      "alt_text": "Three-axis schematic of active photomechanic detection, passive cuticle optics, and applied IR spectroscopy with literature threshold bands; synthesis figure, not new data.",
+      "claim_boundary": "Schematic synthesis of published IR biology axes; not new empirical measurement.",
+      "method": "Three-axis schematic from src.figures.generate_empirical_ir_axes() and manuscript fixtures.",
+      "source_artifact": "empirical_ir_axes.png",
+      "validated_by": "Stage 04 output validation and figure registry validation."
+    },
+    "path": "output/figures/empirical_ir_axes.png"
+  },
+  "fig:integrated_classification": {
+    "caption": "Cross-domain synthesis linking atmospheric, sensor, and information-theory assumptions. Panel D shows unitless model sensitivity demo values, not predictive accuracy on live specimens. Generation method: Cross-domain synthesis panel via src.integrated_figures.create_cross_domain_synthesis_figure(). Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Cross-domain model synthesis panel; not a classification benchmark on live specimens. Registry metadata records the generation method, source artifact, and claim boundary for validation.",
+    "filename": "integrated_analysis_cross_domain_synthesis.png",
+    "label": "fig:integrated_classification",
+    "metadata": {
+      "alt_text": "Cross-domain synthesis of normalized model metrics across information and material domains; sensitivity demo, not predictive accuracy on live insects.",
+      "claim_boundary": "Cross-domain model synthesis panel; not a classification benchmark on live specimens.",
+      "method": "Cross-domain synthesis panel via src.integrated_figures.create_cross_domain_synthesis_figure().",
+      "source_artifact": "integrated_analysis_cross_domain_synthesis.png",
+      "validated_by": "Stage 04 output validation and figure registry validation."
+    },
+    "path": "output/figures/integrated_analysis_cross_domain_synthesis.png"
+  },
+  "fig:integrated_info": {
+    "caption": "Integrated information analysis combining Fermi estimation with neural encoding models. Bounds sensor information throughput; does not establish biological IR olfaction. Generation method: IntegratedAnalyzer Fermi + information panels via src.integrated_figures. Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Bounds sensor feasibility and model assumptions; does not establish biological IR olfaction. Registry metadata records the generation method, source artifact, and claim boundary for validation.",
+    "filename": "integrated_analysis_information_analysis.png",
+    "label": "fig:integrated_info",
+    "metadata": {
+      "alt_text": "Integrated Fermi information decomposition across molecular, receptor, neural, and environmental terms; bounds sensor throughput, not biological proof.",
+      "claim_boundary": "Bounds sensor feasibility and model assumptions; does not establish biological IR olfaction.",
+      "method": "IntegratedAnalyzer Fermi + information panels via src.integrated_figures.",
+      "source_artifact": "integrated_analysis_information_analysis.png",
+      "validated_by": "Stage 04 output validation and figure registry validation."
+    },
+    "path": "output/figures/integrated_analysis_information_analysis.png"
+  },
+  "fig:integrated_metamaterial": {
+    "caption": "Meta-material dielectric and plasmonic response sweep for biomimetic IR sensor design. Model output only. Generation method: IntegratedAnalyzer metamaterial sweep via src.integrated_figures. Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Bounds sensor feasibility and model assumptions; does not establish biological IR olfaction. Registry metadata records the generation method, source artifact, and claim boundary for validation.",
+    "filename": "integrated_analysis_metamaterial_properties.png",
+    "label": "fig:integrated_metamaterial",
+    "metadata": {
+      "alt_text": "Integrated metamaterial dielectric and plasmonic response with information-capacity summaries; engineering model panels only.",
+      "claim_boundary": "Bounds sensor feasibility and model assumptions; does not establish biological IR olfaction.",
+      "method": "IntegratedAnalyzer metamaterial sweep via src.integrated_figures.",
+      "source_artifact": "integrated_analysis_metamaterial_properties.png",
+      "validated_by": "Stage 04 output validation and figure registry validation."
+    },
+    "path": "output/figures/integrated_analysis_metamaterial_properties.png"
+  },
+  "fig:integrated_summary": {
+    "caption": "Composite summary of dielectric response and normalized performance metrics for sensor bounds. Generation method: Composite summary via src.integrated_figures.create_composite_summary_figure(). Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Bounds sensor feasibility and model assumptions; does not establish biological IR olfaction. Registry metadata records the generation method, source artifact, and claim boundary for validation.",
+    "filename": "integrated_analysis_summary.png",
+    "label": "fig:integrated_summary",
+    "metadata": {
+      "alt_text": "Composite summary of dielectric response and normalized integrated performance metrics; engineering bounds panel.",
+      "claim_boundary": "Bounds sensor feasibility and model assumptions; does not establish biological IR olfaction.",
+      "method": "Composite summary via src.integrated_figures.create_composite_summary_figure().",
+      "source_artifact": "integrated_analysis_summary.png",
+      "validated_by": "Stage 04 output validation and figure registry validation."
+    },
+    "path": "output/figures/integrated_analysis_summary.png"
+  },
+  "fig:response_time_comparison": {
+    "caption": "Response-time constraint map for evaluating any proposed infrared olfactory stage.\n\nMethodology: Built via src.viz.figure_helpers.build_response_time_series() using calculate_response_time_improvement()\non slow-comparator, ORN-anchor, and model-target latencies. Hatched bars are model targets, not measurements.\n\nInterpretation:\n\u2022 Insect ORN responses can already occur on a few-millisecond scale.\n\u2022 Visual and auditory benchmarks show faster channels exist but do not prove IR olfaction.\n\u2022 Model improvement factors span 1.2\u20134.0\u00d7 relative to slow-comparator terms.\n\u2022 Any future experiment should report stimulus onset, radiant/chemical control, and latency separately.\n\nLiterature anchors: rapid insect ORN timing from Egea-Weiss et al. 2018 and Gorur-Shandilya et al. 2017; thermal/IR\nbehavioral context from Chandel et al. 2024. Generation method: Timing constraint map from src.viz.figure_helpers.build_response_time_series(). Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Timing constraint map; hatched bars are model targets, not measurements. Registry metadata records the generation method, source artifact, and claim boundary for validation.",
+    "filename": "response_time_comparison.png",
+    "label": "fig:response_time_comparison",
+    "metadata": {
+      "alt_text": "Bar chart comparing visual, auditory, insect ORN, model IR-stage, and slow-comparator response times in milliseconds; engineering timing bounds, not biological proof.",
+      "claim_boundary": "Timing constraint map; hatched bars are model targets, not measurements.",
+      "method": "Timing constraint map from src.viz.figure_helpers.build_response_time_series().",
+      "source_artifact": "response_time_comparison.png",
+      "validated_by": "Stage 04 output validation and figure registry validation."
+    },
+    "path": "output/figures/response_time_comparison.png"
+  },
+  "fig:sensilla_wavelength_matching": {
+    "caption": "Sensilla wavelength-matching analysis using representative morphometric inputs.\n\nMethodology: Computed with src.sensilla.analyze_sensilla_dimensions() on representative coeloconica, basiconica,\nand trichodea length/diameter inputs. Quarter- and half-wave estimates are model probes, not measured insect IR\nreceptor tuning curves.\n\nModel summary:\n\u2022 Input length range: 5.0-150.0 \u03bcm; diameter range: 1.0-6.0 \u03bcm.\n\u2022 Quarter-wave mean: 189.0 \u03bcm; overlap with modeled atmospheric windows: 1/8.\n\u2022 Half-wave mean: 94.5 \u03bcm; overlap with modeled atmospheric windows: 2/8.\n\u2022 The broad spread shows why wavelength matching is a falsifiable constraint rather than a proof of IR olfaction.\n\nLiterature anchors: ant sensilla morphometrics and taxonomy from Liu et al. 2021; thermo-sensitive sensilla from\nRuchty et al. 2009; biomimetic IR-receptor modeling from Siebke et al. 2014. Generation method: Representative sensilla inputs via src.sensilla.analyze_sensilla_dimensions(). Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Quarter- and half-wave estimates are model probes, not measured receptor tuning curves. Registry metadata records the generation method, source artifact, and claim boundary for validation.",
+    "filename": "sensilla_wavelength_matching.png",
+    "label": "fig:sensilla_wavelength_matching",
+    "metadata": {
+      "alt_text": "Representative sensilla dimensions and modeled quarter- and half-wave resonance estimates plotted against atmospheric windows; geometry screening, not receptor tuning proof.",
+      "claim_boundary": "Quarter- and half-wave estimates are model probes, not measured receptor tuning curves.",
+      "method": "Representative sensilla inputs via src.sensilla.analyze_sensilla_dimensions().",
+      "source_artifact": "sensilla_wavelength_matching.png",
+      "validated_by": "Stage 04 output validation and figure registry validation."
+    },
+    "path": "output/figures/sensilla_wavelength_matching.png"
+  }
+}

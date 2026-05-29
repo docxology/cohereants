@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>14_appendix_plasmonic_geometry</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<h1 id="sec:app_plasmonic_geometry">Appendix F: Plasmonic Nano-Geometry
+Sweep</h1>
+<h2 id="objective">Objective</h2>
+<p>Comprehensive plasmonic nanostructure analysis: frequency-dependent
+permittivity (Drude), Mie scattering, coupled‑dipole near‑field
+interactions, geometry optimization, and field‑enhancement mapping for
+receptor‑scale enhancement.</p>
+<h2 id="interpretation">Interpretation</h2>
+<p>Sweeps identify nanoparticle sizes and materials that maximize
+near-field enhancement at MIR wavelengths relevant to biomimetic bands
+2.8–6 µm. Results inform whether receptor-scale structures could, in
+principle, boost weak narrowband signals—not whether insects employ
+plasmonics in sensilla.</p>
+<h2 id="claim-boundary">Claim boundary</h2>
+<p> bounds sensor-design feasibility; it does not establish biological
+IR olfaction.</p>
+<h2 id="methods-src">Methods (src)</h2>
+<ul>
+<li><code>src/case_studies/plasmonic_geometry.py</code>
+<ul>
+<li><code>drude_model_permittivity(frequency_hz, metal_type)</code> —
+material permittivity model</li>
+<li><code>mie_scattering_sphere(radius_m, wavelength_m, eps_particle, eps_medium)</code>
+— Mie solutions</li>
+<li><code>coupled_dipoles_near_field(positions, polarizabilities, wavelength)</code>
+— multi‑particle interactions</li>
+<li><code>optimize_plasmonic_geometry(wavelength_range, constraints)</code>
+— geometry optimization</li>
+<li><code>field_distribution_near_particle(particle_params, grid_points)</code>
+— near‑field maps</li>
+<li><code>sweep_plasmonic_quality(radii_m, metal_eps, medium_eps)</code>
+— parameter sweeps for Q‑factor analysis</li>
+</ul></li>
+</ul>
+<h2 id="script-and-outputs">Script and outputs</h2>
+<ul>
+<li>Script:
+<code>scripts/generate_plasmonic_geometry_sweep.py</code></li>
+<li>Data:
+<code>output/data/plasmonic_geometry_comprehensive.npz</code></li>
+<li>Figure:
+<code>../figures/plasmonic_geometry_comprehensive_analysis.png</code></li>
+</ul>
+<h2 id="figure">Figure</h2>
+<!-- alt: Plasmonic geometry sweep with Drude permittivity, Mie scattering, and near-field enhancement maps for receptor-scale sensor design. -->
+<!-- alt: Integrated metamaterial dielectric and plasmonic response with information-capacity summaries; engineering model panels. -->
+<h2 id="equation-references">Equation references</h2>
+<p>– Resonance/wavelength: see main text and the Mathematical Appendix
+.</p>
+<h2 id="reproducibility">Reproducibility</h2>
+<ul>
+<li>Run:
+<code>python3 scripts/generate_plasmonic_geometry_sweep.py</code></li>
+<li>Artifacts saved to <code>output/data/</code> and
+<code>../figures/</code>.</li>
+<li>Deterministic radii grid and material parameters via
+<code>src/config.set_random_seed(42)</code>.</li>
+</ul>
+<h2 id="crossreferences">Cross‑references</h2>
+<ul>
+<li>Methods: </li>
+<li>Symbols: </li>
+<li>Math appendix: </li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,1 @@
+Sensilla array beam patterns, coupling, and morphology-to-resonance maps from antenna models; bounds directional gain, not field proof.

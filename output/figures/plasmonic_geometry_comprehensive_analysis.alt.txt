@@ -1,0 +1,1 @@
+Plasmonic geometry sweep with Drude permittivity, Mie scattering, and near-field enhancement maps for receptor-scale sensor design.

@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>07_empirical_studies</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<h1 id="sec:empirical_studies">Empirical Studies</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Insect engagement with infrared (IR) radiation spans three functional
+axes that this section keeps separate:</p>
+<ol type="1">
+<li><strong>Active detection</strong> — specialized organs or neural
+channels that transduce radiant IR into behaviorally relevant
+signals.</li>
+<li><strong>Passive interaction</strong> — cuticle and wing optical
+properties that govern absorption, reflection, and emission for
+thermoregulation.</li>
+<li><strong>Applied IR</strong> — NIRS, FTIR, and optical sensors used
+by researchers to profile insects (not insect sensing).</li>
+</ol>
+<p>These axes constrain CohereAnts models and preregistered protocols.
+They do <strong>not</strong> prove that ordinary antennal olfactory
+sensilla detect semiochemical IR vibrational signatures. The central
+vibrational-olfaction hypothesis remains contested <span
+class="citation"
+data-cites="turin1996spectroscopic franco2011molecular block2015implausibility">[@turin1996spectroscopic;
+@franco2011molecular; @block2015implausibility]</span>.</p>
+<h2 id="molecular-spectroscopy-and-olfactory-theory">Molecular
+Spectroscopy and Olfactory Theory</h2>
+<h3 id="vibrational-olfaction-support-and-critique">Vibrational
+Olfaction: Support and Critique</h3>
+<ul>
+<li><strong>Primary support</strong>: Turin proposed an inelastic
+electron-tunneling mechanism for primary olfactory reception <span
+class="citation"
+data-cites="turin1996spectroscopic">[@turin1996spectroscopic]</span>.
+Franco et al. reported Drosophila behavioral discrimination of
+isotopologues and interpreted the results as evidence for a molecular
+vibration-sensing component <span class="citation"
+data-cites="franco2011molecular">[@franco2011molecular]</span>.</li>
+<li><strong>Primary critique</strong>: Block et al. found no
+receptor-level support for the proposed vibrational mechanism in tested
+human and mouse odorant receptors and argued that the theory is
+implausible without stronger receptor evidence <span class="citation"
+data-cites="block2015implausibility">[@block2015implausibility]</span>.</li>
+<li><strong>Implication for CohereAnts</strong>: Vibration sensing
+remains contested. Computational models produce falsifiable predictions;
+they do not settle receptor mechanism.</li>
+<li><strong>Code anchors</strong>:
+<code>src/fermi_estimation.py::calculate_vibrational_entropy</code>;
+<code>src/core.py::calculate_wavelength_from_wavenumber</code>.</li>
+</ul>
+<h3 id="chc-and-cuticle-spectroscopy">CHC and Cuticle Spectroscopy</h3>
+<ul>
+<li><strong>Primary evidence</strong>: Durak et al. used ATR-FTIR to
+distinguish 12 aphid species and reported 98% classification with
+selected peaks, dropping to 90% under jackknife validation <span
+class="citation"
+data-cites="durak2022atrftir">[@durak2022atrftir]</span>.</li>
+<li><strong>Chemical ecology context</strong>: CHCs are central insect
+waterproofing and communication traits, with strong variation across
+taxa and social contexts <span class="citation"
+data-cites="blomquist2021hydrocarbons">[@blomquist2021hydrocarbons]</span>.</li>
+<li><strong>Implication for CohereAnts</strong>: CHC-associated spectra
+can be discriminative; spectroscopic separability does not imply that
+insects directly sense the same bands electromagnetically.</li>
+<li><strong>Code anchors</strong>:
+<code>src/spectroscopy.py::analyze_chc_spectra</code>;
+<code>src/case_studies/spectral_unmixing.py</code>.</li>
+</ul>
+<h2 id="active-ir-detection-in-insects">Active IR Detection in
+Insects</h2>
+<h3 id="pyrophilous-photomechanic-organs">Pyrophilous Photomechanic
+Organs</h3>
+<p>The thoracic pit organ of <em>Melanophila acuminata</em> is the
+best-characterized insect MIR detector. Schmitz and Trenner measured
+broadband sensitivity from 2 to 6 µm with peak response at 2.8–3.5 µm;
+Hammer et al. reported minimum detection thresholds near 14.6–17.3
+mW/cm² at 3.39 µm <span class="citation"
+data-cites="schmitztrenner2003spectral hammer2001sensitivity">[@schmitztrenner2003spectral;
+@hammer2001sensitivity]</span>. Schmitz et al. described photomechanic
+transduction: absorbed IR heats a microfluidic core, deflecting a
+mechanosensitive dendrite in a Golay-cell-like architecture <span
+class="citation"
+data-cites="schmitz2011infrared schmitz2007mechanosensory">[@schmitz2011infrared;
+@schmitz2007mechanosensory]</span>. Evans modeled the organ
+thermopneumatically <span class="citation"
+data-cites="evans2005thermopneumatic">[@evans2005thermopneumatic]</span>;
+Siebke et al. translated it into a biomimetic sensor concept <span
+class="citation"
+data-cites="siebke2014biomimetic">[@siebke2014biomimetic]</span>.</p>
+<p><em>Aradus</em> flat bugs independently evolved convergent
+photomechanic IR sensilla on the prothorax and mesothorax <span
+class="citation"
+data-cites="schmitza2010aradus">[@schmitza2010aradus]</span>.
+<em>Acanthocnemus nigricans</em> uses a distinct microbolometer design:
+a cuticular disc with multipolar thermoreceptors, responding to 11–25
+mW/cm² with 20–40 ms latencies <span class="citation"
+data-cites="schmitz2002acanthocnemus kreiss2007acanthocnemus">[@schmitz2002acanthocnemus;
+@kreiss2007acanthocnemus]</span>.</p>
+<p><em>Merimna atrata</em> carries abdominal IR organs with bimodal
+thermo- and mechanosensory innervation <span class="citation"
+data-cites="schmitz2000merimna schmitz2012merimna">[@schmitz2000merimna;
+@schmitz2012merimna]</span>. Flight-tethering experiments revised the
+functional interpretation from fire attraction to <strong>landing-hazard
+avoidance</strong> on surfaces hotter than ~60 °C. Evans (2010) argued
+that inverse-square physics limits reliable long-range fire detection by
+<em>Melanophila</em> to less than often-claimed distances <span
+class="citation"
+data-cites="evans2010reproductive">[@evans2010reproductive]</span>.</p>
+<ul>
+<li><strong>Implication for CohereAnts</strong>: Pyrophilous organs
+establish that insect MIR detection evolves under fire-associated
+ecology. They are anatomical and transduction precedents for biomimetic
+bands 2.8–6 µm and literature thresholds 11–17.3 mW/cm²—not evidence for
+semiochemical IR olfaction in ordinary sensilla.</li>
+<li><strong>Code anchors</strong>:
+<code>src/case_studies/plasmonic_geometry.py</code>;
+<code>src/case_studies/detection_limits.py</code>.</li>
+</ul>
+<h3 id="hematophagy-and-host-finding">Hematophagy and Host-Finding</h3>
+<p>Chandel et al. showed that <em>Aedes aegypti</em> uses thermal IR
+near skin temperature as a host-seeking cue when combined with CO₂ and
+odor; TRPA1 in antennal neurons is required <span class="citation"
+data-cites="chandel2024thermal">[@chandel2024thermal]</span>. Corfas and
+Vosshall linked AaegTRPA1 to selective thermotaxis toward
+host-temperature targets <span class="citation"
+data-cites="corfas2015trpa1">[@corfas2015trpa1]</span>.</p>
+<p><em>Rhodnius prolixus</em> lacks specialized IR organs but
+discriminates radiant IR from convective heat via combinatorial coding
+of peg-in-pit (PSw) and tapered-hair (THw) warm cells; forced convection
+disrupts the response quotient <span class="citation"
+data-cites="zopf2014infrared zopf2015convection">[@zopf2014infrared;
+@zopf2015convection]</span>. Lazzari reviewed how physics shapes
+hematophagous orientation: radiant IR operates at longer range than
+convective heat within ~10 cm of the host <span class="citation"
+data-cites="lazzari2009orientation">[@lazzari2009orientation]</span>.</p>
+<ul>
+<li><strong>Implication for CohereAnts</strong>: Mosquito and
+kissing-bug studies motivate thermal-IR protocol separation (34 °C
+blackbody, peak ~9.4 µm) and Rhodnius-style controls that distinguish T
+oscillations from IR power.</li>
+<li><strong>Code anchors</strong>:
+<code>src/case_studies/active_inference.py</code>;
+<code>src/case_studies/environmental_channel.py</code>.</li>
+</ul>
+<h3 id="pollination-and-mutualism">Pollination and Mutualism</h3>
+<p>Valencia-Montoya et al. reported that thermogenic cycad cones radiate
+IR in circadian patterns that attract beetle pollinators with
+IR-activated antennal neurons <span class="citation"
+data-cites="valenciamontoya2025infrared">[@valenciamontoya2025infrared]</span>.
+Glover and Webb noted that IR is most detectable at night, constraining
+cycads to nocturnal beetle pollination in contrast to diurnal angiosperm
+visual signals <span class="citation"
+data-cites="glover2025pollination">[@glover2025pollination]</span>.</p>
+<ul>
+<li><strong>Implication for CohereAnts</strong>: Plant-generated thermal
+IR is a mutualism cue precedent. It does not extend semiochemical IR
+olfaction claims to ordinary olfactory sensilla.</li>
+<li><strong>Code anchors</strong>:
+<code>src/case_studies/environmental_channel.py</code>.</li>
+</ul>
+<h3 id="near-ir-photonic-opsins">Near-IR Photonic Opsins</h3>
+<p>Sato et al. characterized dragonfly RhLWA2 (λmax ~580 nm) with
+convergent tuning at opsin position 292 shared with mammalian red
+opsins; engineered variants respond to ~738 nm light <span
+class="citation"
+data-cites="sato2026dragonfly">[@sato2026dragonfly]</span>. Liénard et
+al. documented red-shifted opsin evolution in lycaenid butterflies <span
+class="citation"
+data-cites="lienard2021opsin">[@lienard2021opsin]</span>.</p>
+<ul>
+<li><strong>Implication for CohereAnts</strong>: These are
+<strong>visual</strong> NIR-border cases, distinct from MIR thermogenic
+organs. They inform spectral vocabulary but not the semiochemical IR
+hypothesis directly.</li>
+</ul>
+<h3 id="trpa1-molecular-context">TRPA1 Molecular Context</h3>
+<p>Zhang et al. resolved Drosophila TRPA1 gating architecture, with
+ankyrin-repeat domains acting as heat-sensor modules <span
+class="citation" data-cites="zhang2023trpa1">[@zhang2023trpa1]</span>.
+This molecular context complements mosquito behavioral TRPA1
+requirements <span class="citation"
+data-cites="chandel2024thermal corfas2015trpa1">[@chandel2024thermal;
+@corfas2015trpa1]</span>.</p>
+<h3 id="historical-callahan-fir-hypothesis">Historical Callahan FIR
+Hypothesis</h3>
+<p>Callahan proposed that nocturnal moth antennae function as dielectric
+waveguides detecting far-IR molecular emission lines, including overlap
+with the 7–14 µm atmospheric window <span class="citation"
+data-cites="callahan1965fir callahan1977moth">[@callahan1965fir;
+@callahan1977moth]</span>. The waveguide mechanism remains contested,
+but the proposal motivates sensilla-as-antenna geometric screening in
+CohereAnts without endorsing FIR pheromone reception.</p>
+<ul>
+<li><strong>Implication for CohereAnts</strong>: Callahan supplies
+historical context for dielectric-antenna modeling; Campbell and Ford
+provide a broader biological IR sensing review frame <span
+class="citation"
+data-cites="campbell2001biological">[@campbell2001biological]</span>.</li>
+<li><strong>Code anchors</strong>:
+<code>src/sensilla.py::analyze_sensilla_dimensions</code>;
+<code>src/case_studies/sensilla_array_directionality.py</code>.</li>
+</ul>
+<h2 id="morphology-and-antennal-sensilla">Morphology and Antennal
+Sensilla</h2>
+<ul>
+<li><strong>Primary evidence</strong>: Liu et al. measured antennal
+sensilla in three Thripidae species <span class="citation"
+data-cites="liu2021thripidae">[@liu2021thripidae]</span>.</li>
+<li><strong>Thermosensitive ant sensilla</strong>: Ruchty et
+al. described thermosensitive coeloconic sensilla in <em>Atta
+vollenweideri</em> responding to convective and radiant heat <span
+class="citation"
+data-cites="ruchty2009thermosensitive">[@ruchty2009thermosensitive]</span>.</li>
+<li><strong>Implication for CohereAnts</strong>: Morphometric resonance
+estimates remain predictions pending cross-taxa SEM validation.</li>
+<li><strong>Code anchors</strong>:
+<code>src/sensilla.py::analyze_sensilla_dimensions</code>;
+<code>src/case_studies/sensilla_array_directionality.py</code>.</li>
+</ul>
+<h2 id="passive-cuticle-and-wing-ir-optics">Passive Cuticle and Wing IR
+Optics</h2>
+<p>Krishna et al. and Phan et al. showed that mid-IR wing emissivity
+(7.5–14 µm) correlates with habitat temperature, enhancing radiative
+cooling in warm climates <span class="citation"
+data-cites="krishna2020infrared phan2021emissivity">[@krishna2020infrared;
+@phan2021emissivity]</span>. Sheppard and de Boer found that NIR
+reflectance predicts beetle heating rates more strongly than visible
+reflectance <span class="citation"
+data-cites="sheppard2021heating">[@sheppard2021heating]</span>; Stavenga
+et al. reported similar NIR/visible partitioning in Christmas beetles
+<span class="citation"
+data-cites="stavenga2022beetles">[@stavenga2022beetles]</span>.</p>
+<ul>
+<li><strong>Implication for CohereAnts</strong>: Passive optics shape
+body temperature and background IR; they support environmental-channel
+modeling, not olfactory transduction claims.</li>
+<li><strong>Code anchors</strong>:
+<code>src/case_studies/environmental_channel.py</code>;
+<code>src/core.py::calculate_atmospheric_transmission</code>.</li>
+</ul>
+<h2 id="applied-infrared-spectroscopy-and-monitoring">Applied Infrared
+Spectroscopy and Monitoring</h2>
+<p>Dowell et al. demonstrated NIRS classification of stored-grain
+beetles <span class="citation"
+data-cites="dowell1999nirs">[@dowell1999nirs]</span>. Moraes Barros et
+al. reviewed FTIR applications in forensic entomology <span
+class="citation"
+data-cites="moraesbarros2021forensic">[@moraesbarros2021forensic]</span>.
+Potamitis et al. deployed unsupervised NIR sensor networks for field
+insect monitoring <span class="citation"
+data-cites="potamitis2022monitoring">[@potamitis2022monitoring]</span>.
+These parallel Durak et al.’s CHC spectroscopy <span class="citation"
+data-cites="durak2022atrftir">[@durak2022atrftir]</span> as
+<strong>human-applied</strong> IR tools.</p>
+<ul>
+<li><strong>Implication for CohereAnts</strong>: Applied spectroscopy
+validates species-discriminating IR structure in insect bodies; it does
+not demonstrate in vivo semiochemical IR detection.</li>
+<li><strong>Code anchors</strong>: <code>src/spectroscopy.py</code>;
+<code>src/case_studies/spectral_unmixing.py</code>.</li>
+</ul>
+<h2 id="neurophysiology-and-orn-timing">Neurophysiology and ORN
+Timing</h2>
+<ul>
+<li><strong>Primary evidence</strong>: Egea-Weiss et al. reported
+Drosophila ORN first-spike latencies down to 3 ms <span class="citation"
+data-cites="egeaweiss2018rapid">[@egeaweiss2018rapid]</span>.
+Gorur-Shandilya et al. showed gain control under intermittent odor
+stimuli <span class="citation"
+data-cites="gorurshandilya2017gain">[@gorurshandilya2017gain]</span>.
+Barta et al. showed stimulus-duration encoding early in the moth pathway
+<span class="citation"
+data-cites="barta2024stimulus">[@barta2024stimulus]</span>.</li>
+<li><strong>Implication for CohereAnts</strong>: Any proposed IR stage
+must produce timing distinguishable from established ORN kinetics and
+thermal transduction.</li>
+<li><strong>Code anchors</strong>:
+<code>src/core.py::calculate_response_time_improvement</code>;
+<code>src/case_studies/neural_encoding.py</code>.</li>
+</ul>
+<h2 id="comparative-overview">Comparative Overview</h2>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Taxon</th>
+<th>IR range</th>
+<th>Mechanism</th>
+<th>Primary function</th>
+<th>Key citation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Melanophila acuminata</em></td>
+<td>2–6 µm (peak 2.8–3.5 µm)</td>
+<td>Photomechanic microfluidic sensillum</td>
+<td>Long-range fire detection</td>
+<td><span class="citation"
+data-cites="schmitz2011infrared schmitztrenner2003spectral">[@schmitz2011infrared;
+@schmitztrenner2003spectral]</span></td>
+</tr>
+<tr>
+<td><em>Aradus</em> spp.</td>
+<td>MIR</td>
+<td>Convergent photomechanic sensillum</td>
+<td>Fire-associated navigation</td>
+<td><span class="citation"
+data-cites="schmitza2010aradus">[@schmitza2010aradus]</span></td>
+</tr>
+<tr>
+<td><em>Acanthocnemus nigricans</em></td>
+<td>MIR</td>
+<td>Microbolometer disc organ</td>
+<td>Short-range burn orientation</td>
+<td><span class="citation"
+data-cites="schmitz2002acanthocnemus kreiss2007acanthocnemus">[@schmitz2002acanthocnemus;
+@kreiss2007acanthocnemus]</span></td>
+</tr>
+<tr>
+<td><em>Merimna atrata</em></td>
+<td>MIR</td>
+<td>Dual thermo/mechano abdominal organ</td>
+<td>Landing hazard avoidance</td>
+<td><span class="citation"
+data-cites="schmitz2012merimna">[@schmitz2012merimna]</span></td>
+</tr>
+<tr>
+<td><em>Aedes aegypti</em></td>
+<td>Thermal IR (~skin temp.)</td>
+<td>TRPA1 antennal neurons + opsins</td>
+<td>Host seeking (multimodal)</td>
+<td><span class="citation"
+data-cites="chandel2024thermal corfas2015trpa1">[@chandel2024thermal;
+@corfas2015trpa1]</span></td>
+</tr>
+<tr>
+<td><em>Rhodnius prolixus</em></td>
+<td>Thermal MIR</td>
+<td>PSw/THw combinatorial warm cells</td>
+<td>Host finding; T vs IR discrimination</td>
+<td><span class="citation"
+data-cites="zopf2014infrared">[@zopf2014infrared]</span></td>
+</tr>
+<tr>
+<td>Cycad-pollinating beetles</td>
+<td>Thermogenic cone IR</td>
+<td>TRP-channel antennal neurons</td>
+<td>Pollination</td>
+<td><span class="citation"
+data-cites="valenciamontoya2025infrared">[@valenciamontoya2025infrared]</span></td>
+</tr>
+<tr>
+<td>Dragonfly (<em>Asiagomphus</em>)</td>
+<td>~580 nm (visual NIR border)</td>
+<td>Bistable opsin RhLWA2</td>
+<td>Likely mate/sex recognition</td>
+<td><span class="citation"
+data-cites="sato2026dragonfly">[@sato2026dragonfly]</span></td>
+</tr>
+<tr>
+<td>Butterfly wings</td>
+<td>7.5–14 µm emissivity</td>
+<td>Microstructure-mediated radiative cooling</td>
+<td>Thermoregulation</td>
+<td><span class="citation"
+data-cites="krishna2020infrared">[@krishna2020infrared]</span></td>
+</tr>
+<tr>
+<td>Beetle elytra</td>
+<td>NIR 700–2500 nm</td>
+<td>Cuticular reflectance/absorptance</td>
+<td>Solar heat gain regulation</td>
+<td><span class="citation"
+data-cites="sheppard2021heating">[@sheppard2021heating]</span></td>
+</tr>
+</tbody>
+</table>
+<p>See for a schematic synthesis of the three functional axes and for
+how modeled atmospheric, morphometric, and spectral overlaps constrain
+the semiochemical IR hypothesis.</p>
+<!-- alt: Three-axis schematic of active photomechanic detection, passive cuticle optics, and applied IR spectroscopy with literature threshold bands; synthesis figure, not new data. -->
+<h2 id="evolutionary-synthesis">Evolutionary Synthesis</h2>
+<p>Three evolutionary pressures recur:</p>
+<ol type="1">
+<li><strong>Pyrophily</strong> — fire-associated reproduction drove MIR
+organ diversity (photomechanic, microbolometer, dual
+thermo/mechano).</li>
+<li><strong>Hematophagy</strong> — host-finding co-opted TRPA1 and
+warm-cell combinatorial coding; radiant IR propagates farther than
+convective heat <span class="citation"
+data-cites="lazzari2009orientation chandel2024thermal">[@lazzari2009orientation;
+@chandel2024thermal]</span>.</li>
+<li><strong>Mutualism and mate recognition</strong> — thermogenic plant
+IR (cycads) and visual NIR opsins (dragonflies, butterflies) expand the
+IR relevance landscape without unifying transduction mechanism.</li>
+</ol>
+<p>Mechanistic diversity argues for IR detection as a recurrently
+co-opted modality rather than a single ancestral insect IR module.</p>
+<h2 id="translational-applications">Translational Applications</h2>
+<p>Photomechanic <em>Melanophila</em> sensilla and
+<em>Acanthocnemus</em> microbolometers inform uncooled biomimetic MIR
+sensor design <span class="citation"
+data-cites="schmitz2011infrared siebke2014biomimetic">[@schmitz2011infrared;
+@siebke2014biomimetic]</span>. Mosquito TRPA1 biology suggests
+skin-temperature IR sources may improve trap designs when combined with
+odor and CO₂ <span class="citation"
+data-cites="chandel2024thermal">[@chandel2024thermal]</span>. Potamitis
+et al.’s NIR sensor networks enable high-temporal-resolution monitoring
+relative to trap-based sampling <span class="citation"
+data-cites="potamitis2022monitoring">[@potamitis2022monitoring]</span>.</p>
+<h2 id="environmental-channel-evidence">Environmental Channel
+Evidence</h2>
+<ul>
+<li><strong>Atmospheric spectroscopy</strong>: HITRAN2020 is the
+relevant source class for line-by-line absorption modeling <span
+class="citation"
+data-cites="gordon2022hitran">[@gordon2022hitran]</span>.</li>
+<li><strong>Model boundary</strong>: The core transmission function is
+intentionally coarse; precise range predictions require measured source
+spectra, humidity, path length, and background IR. See and .</li>
+<li><strong>Code anchors</strong>:
+<code>src/core.py::calculate_atmospheric_transmission</code>;
+<code>src/case_studies/environmental_channel.py</code>.</li>
+</ul>
+<h2 id="molecular-receptor-context">Molecular Receptor Context</h2>
+<ul>
+<li><strong>Receptor structure</strong>: OR51E2 structure anchors
+molecular-recognition specificity <span class="citation"
+data-cites="billesbolle2023odorant">[@billesbolle2023odorant]</span>.</li>
+<li><strong>GPCR dynamics</strong>: Conformational dynamics provide
+molecular context without implying vibrational spectroscopy <span
+class="citation"
+data-cites="latorraca2016gpcr">[@latorraca2016gpcr]</span>.</li>
+<li><strong>Mechanotransduction</strong>: Piezo and related systems
+illustrate mechanical-to-biochemical signaling as analogy only <span
+class="citation"
+data-cites="di2023mechanotransduction">[@di2023mechanotransduction]</span>.</li>
+</ul>
+<h2 id="experimental-priorities">Experimental Priorities</h2>
+<ol type="1">
+<li><strong>Single-sensillum IR electrophysiology</strong> with matched
+broadband heating and thermography.</li>
+<li><strong>Behavioral IR-only assays</strong> with volatile-free
+chambers and wavelength sweeps at equal radiant power.</li>
+<li><strong>Cross-taxa morphometrics</strong> with preregistered
+resonance metrics and phylogenetic controls.</li>
+<li><strong>Rhodnius-style T vs IR discrimination controls</strong> in
+any hematophagy-inspired protocol.</li>
+<li><strong>Isotope and spectral controls</strong> separating molecular
+binding, vibrational shifts, and thermal absorption.</li>
+<li><strong>Environmental realism</strong> — humidity, path length,
+turbulence, and background IR paired with positive results.</li>
+<li><strong>Thermogenic plant assays</strong> — whether IR from heated
+structures modulates pollinator orientation under preregistered thermal
+matched controls.</li>
+</ol>
+</body>
+</html>

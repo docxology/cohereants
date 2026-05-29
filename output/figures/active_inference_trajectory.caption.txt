@@ -1,0 +1,1 @@
+Deterministic gradient-following trajectory under a simple active-inference step model. Behavioral demo only; not field data. Generation method: Active-inference control trajectory demo. Registry metadata records the generation method, source artifact, and claim boundary for validation.

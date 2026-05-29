@@ -1,0 +1,9 @@
+Three-axis schematic of insect IR biology synthesized from §07 empirical studies.
+
+Methodology: Panel layout derived from manuscript fixtures (biomimetic band, threshold range, blackbody peaks) and
+the comparative taxon table. This is a literature synthesis figure, not new empirical measurement.
+
+Interpretation:
+• Active photomechanic organs anchor biomimetic sensor bands but do not prove semiochemical IR olfaction.
+• Passive cuticle and thermosensory pathways shape background IR and host-finding context.
+• Applied spectroscopy validates discriminative IR structure in insect bodies without demonstrating in vivo IR olfaction. Generation method: Three-axis schematic from src.figures.generate_empirical_ir_axes() and manuscript fixtures. Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Schematic synthesis of published IR biology axes; not new empirical measurement. Registry metadata records the generation method, source artifact, and claim boundary for validation.

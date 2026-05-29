@@ -1,0 +1,15 @@
+Cross-domain evidence map for the CohereAnts IR/semiochemical hypothesis.
+
+Methodology: Four panels combine:
+• Atmospheric transmission modeling (src.core.calculate_atmospheric_transmission)
+• Representative sensilla wavelength estimates (src.sensilla.analyze_sensilla_dimensions)
+• CHC fixture spectrum analyzed via analyze_chc_spectra()
+• An evidence ladder separating direct anchors from open experimental tests
+
+Model summary:
+• Atmospheric model windows: 2-5 μm, 8-14 μm, and lower-confidence 17-25 μm.
+• Representative quarter-wave estimate mean: 189.0 μm.
+• CHC bands shown: C-H bend near 1465 cm⁻¹ and C-H stretch near 2800-3000 cm⁻¹.
+
+Interpretation: The figure is a hypothesis map. It shows physical and biological constraints that make the question
+testable, while marking direct semiochemical IR olfaction as unproven. Generation method: Evidence ladder panel linking empirical IR organs, model assumptions, and protocols. Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Hypothesis evidence ladder; direct semiochemical IR olfaction remains unproven. Registry metadata records the generation method, source artifact, and claim boundary for validation.

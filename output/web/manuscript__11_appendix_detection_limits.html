@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>11_appendix_detection_limits</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<h1 id="sec:app_detection_limits">Appendix C: Detection Limits and
+Operating Points</h1>
+<h2 id="objective">Objective</h2>
+<p>Comprehensive detection-theory analysis with model operating points
+informed by electrophysiology literature anchors (not direct re-analysis
+of raw spike trains): ROC curves for millisecond-scale latency targets,
+sensitivity analysis for sub-10 ms ORN responses, operating regions in
+power-temperature space, and noise-floor characterization distinguishing
+electromagnetic from thermal effects for IR sensor bounds.</p>
+<h2 id="interpretation">Interpretation</h2>
+<p>Panels map literature-anchored SNR and power thresholds into ROC and
+operating-region plots. They answer whether a proposed IR stage could
+exceed thermal noise under stated assumptions, not whether insects
+operate at those points in nature.</p>
+<h2 id="claim-boundary">Claim boundary</h2>
+<p> bounds sensor feasibility; it does not establish biological IR
+olfaction or measured insect detection ranges.</p>
+<h2 id="methods-src">Methods (src)</h2>
+<ul>
+<li><code>src/case_studies/detection_limits.py</code>
+<ul>
+<li><code>min_detectable_power(temperature_k, bandwidth_hz, snr_min_db)</code>
+— thermal‑noise‑limited detection</li>
+<li><code>roc_analysis(signal_power, noise_power)</code> — ROC curves
+and optimal thresholds</li>
+<li><code>detection_performance_vs_snr(snr_range_db, pfa_target)</code>
+— performance curves and MDS</li>
+<li><code>sensitivity_analysis(power_range, temp_range, param_variations)</code>
+— parameter sensitivity</li>
+<li><code>operating_regions_analysis(power_range, temp_range)</code> —
+SNR contours in operating space</li>
+<li><code>noise_floor_analysis(freq_range, temperature_k)</code> —
+multi‑component noise analysis</li>
+<li><code>detection_range_analysis(tx_power, antenna_gain, frequency, sensitivity)</code>
+— range calculations</li>
+<li><code>optimize_detection_parameters(constraints, objectives)</code>
+— system optimization</li>
+</ul></li>
+</ul>
+<h2 id="script-and-outputs">Script and outputs</h2>
+<ul>
+<li>Script: <code>scripts/generate_detection_limits.py</code></li>
+<li>Data:
+<code>output/data/detection_limits_comprehensive.npz</code></li>
+<li>Figure:
+<code>../figures/detection_limits_comprehensive_analysis.png</code></li>
+</ul>
+<h2 id="figure">Figure</h2>
+<!-- alt: Detection limits panels with ROC curves, SNR operating regions, and noise floors for IR sensor bounds; model output only. -->
+<!-- Removed duplicate figure block to avoid repeated insertion; primary figure `app_detection_limits` remains above. -->
+<h2 id="equation-references">Equation references</h2>
+<ul>
+<li>Minimum power: see <span
+class="math inline">\(\eqref{eq:min_power_gloss}\)</span></li>
+<li>Capacity: see <span
+class="math inline">\(\eqref{eq:channel_capacity_gloss}\)</span></li>
+</ul>
+<h2 id="reproducibility">Reproducibility</h2>
+<ul>
+<li>Run: <code>python3 scripts/generate_detection_limits.py</code></li>
+<li>Artifacts saved to <code>output/data/</code> and
+<code>../figures/</code>.</li>
+<li>Deterministic operating points via
+<code>src/config.set_random_seed(42)</code>.</li>
+</ul>
+<h2 id="crossreferences">Cross‑references</h2>
+<ul>
+<li>Methods: </li>
+<li>Symbols: </li>
+<li>Math appendix: </li>
+</ul>
+</body>
+</html>

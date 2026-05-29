@@ -1,0 +1,13 @@
+Response-time constraint map for evaluating any proposed infrared olfactory stage.
+
+Methodology: Built via src.viz.figure_helpers.build_response_time_series() using calculate_response_time_improvement()
+on slow-comparator, ORN-anchor, and model-target latencies. Hatched bars are model targets, not measurements.
+
+Interpretation:
+• Insect ORN responses can already occur on a few-millisecond scale.
+• Visual and auditory benchmarks show faster channels exist but do not prove IR olfaction.
+• Model improvement factors span 1.2–4.0× relative to slow-comparator terms.
+• Any future experiment should report stimulus onset, radiant/chemical control, and latency separately.
+
+Literature anchors: rapid insect ORN timing from Egea-Weiss et al. 2018 and Gorur-Shandilya et al. 2017; thermal/IR
+behavioral context from Chandel et al. 2024. Generation method: Timing constraint map from src.viz.figure_helpers.build_response_time_series(). Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Timing constraint map; hatched bars are model targets, not measurements. Registry metadata records the generation method, source artifact, and claim boundary for validation.

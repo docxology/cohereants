@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>01_introduction</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<p>Olfaction–the detection and identification of airborne molecules–is a
+fundamental sensory modality essential for survival, reproduction, and
+social behavior across the animal kingdom. Among terrestrial organisms,
+insects exhibit rapid and highly structured chemosensory responses:
+Drosophila ORNs can produce first spikes within a few milliseconds of
+odor arrival, and moth ORNs encode plume timing early in the olfactory
+pathway <span class="citation"
+data-cites="egeaweiss2018rapid barta2024stimulus">[@egeaweiss2018rapid;
+@barta2024stimulus]</span>. Those timing constraints do not prove an
+electromagnetic mechanism, but they make latency, transport, and
+transduction explicit design constraints for any expanded account of
+insect olfaction.</p>
+<h2 id="current-understanding-and-critical-gaps">Current Understanding
+and Critical Gaps</h2>
+<p>The prevailing molecular-recognition framework explains much of
+olfaction through odorant transport, receptor binding, and combinatorial
+neural coding. Recent olfactory receptor structures and GPCR dynamics
+reviews strengthen that molecular account by showing how ligand binding,
+receptor conformation, and downstream signaling can encode odorant
+specificity <span class="citation"
+data-cites="billesbolle2023odorant latorraca2016gpcr">[@billesbolle2023odorant;
+@latorraca2016gpcr]</span>. The present manuscript therefore asks a
+narrower question: whether IR cues could provide an additional,
+experimentally separable signal channel in some insect contexts.</p>
+<h3 id="temporal-constraints">Temporal Constraints</h3>
+<p>Insect ORNs can be faster and more temporally precise than a coarse
+diffusion-only intuition would suggest. Egea-Weiss et al. report
+first-spike latencies down to 3 ms, while Gorur-Shandilya et al. show
+gain control and complementary kinetics under intermittent odor
+stimulation <span class="citation"
+data-cites="egeaweiss2018rapid gorurshandilya2017gain">[@egeaweiss2018rapid;
+@gorurshandilya2017gain]</span>. These observations support a
+conservative framing: fast molecular pathways already exist, and any
+proposed IR stage must beat or complement those pathways under thermally
+controlled conditions.</p>
+<h3 id="range-and-sensitivity-paradox">Range and Sensitivity
+Paradox</h3>
+<p>Long-range pheromone localization is usually dominated by turbulent
+plume structure, wind, and behavior rather than passive molecular
+diffusion. The computational question here is whether
+wavelength-specific IR signals could add directional or timing
+information at biologically realistic powers, not whether
+electromagnetic sensing replaces plume tracking.</p>
+<h2 id="recent-evidence-for-alternative-mechanisms">Recent Evidence for
+Alternative Mechanisms</h2>
+<p>Infrared radiation spans near-IR (NIR, ~0.7–2.5 µm), mid-IR (MIR,
+~2.5–25 µm), and far-IR (FIR, &gt;25 µm) sub-bands with distinct
+biological roles: photonic opsin-based sensing in the visual NIR border,
+thermogenic MIR from fires and warm bodies, and passive cuticle emission
+for thermoregulation <span class="citation"
+data-cites="campbell2001biological krishna2020infrared sato2026dragonfly">[@campbell2001biological;
+@krishna2020infrared; @sato2026dragonfly]</span>. The narrative thread
+running through this manuscript connects four literatures that are often
+treated separately:</p>
+<ol type="1">
+<li><strong>Fast molecular olfaction</strong> — millisecond ORN
+latencies and plume-timing codes set the timing budget any additional
+stage must meet <span class="citation"
+data-cites="egeaweiss2018rapid barta2024stimulus gorurshandilya2017gain">[@egeaweiss2018rapid;
+@barta2024stimulus; @gorurshandilya2017gain]</span>.</li>
+<li><strong>Radiant IR precedents</strong> — pyrophilous photomechanic
+organs, hematophagy IR in mosquitoes and kissing bugs, cycad thermogenic
+pollination, and ant thermosensitive sensilla show that insect tissues
+can transduce or use radiant IR in particular ecologies <span
+class="citation"
+data-cites="schmitz2011infrared zopf2014infrared chandel2024thermal valenciamontoya2025infrared ruchty2009thermosensitive">[@schmitz2011infrared;
+@zopf2014infrared; @chandel2024thermal; @valenciamontoya2025infrared;
+@ruchty2009thermosensitive]</span>.</li>
+<li><strong>Spectroscopic discrimination</strong> — ATR-FTIR and CHC
+chemistry support species-level separation in applied spectroscopy;
+perceptual use of the same bands in vivo remains untested <span
+class="citation"
+data-cites="durak2022atrftir blomquist2021hydrocarbons">[@durak2022atrftir;
+@blomquist2021hydrocarbons]</span>.</li>
+<li><strong>Contested vibrational mechanism</strong> — Turin’s
+spectroscopic theory and Drosophila isotope work motivate vibrational
+hypotheses; receptor-level critiques argue that broad vibrational
+olfaction remains unproven <span class="citation"
+data-cites="turin1996spectroscopic franco2011molecular block2015implausibility">[@turin1996spectroscopic;
+@franco2011molecular; @block2015implausibility]</span>.</li>
+</ol>
+<p> and organize insect IR evidence along three axes—active detection,
+passive cuticle interaction, and applied spectroscopy—without collapsing
+them into proof of semiochemical IR olfaction. CohereAnts sits at the
+junction of those threads: it turns the hypothesis into code and figures
+that can be falsified.</p>
+<p><strong>Central Research Question:</strong> Can infrared (IR)
+vibrational signatures of semiochemicals serve as an electromagnetic
+detection pathway that enhances insect olfaction, providing faster
+response times, extended range, and complementary sensory
+information?</p>
+<p><strong>Scope and Approach:</strong> We focus on mid- and long-wave
+infrared structure (2-25 <span
+class="math inline">\(\mu\mathrm{m}\)</span>) because this range covers
+many molecular vibrational bands and the common 3-5 and 8-14 <span
+class="math inline">\(\mu\mathrm{m}\)</span> atmospheric windows used in
+infrared propagation models <span class="citation"
+data-cites="gordon2022hitran">[@gordon2022hitran]</span>. Our framework
+integrates computational electromagnetism with empirical constraints,
+testing whether IR detection could operate alongside traditional
+molecular binding pathways. We emphasize falsifiable predictions and
+controlled protocols that distinguish wavelength-specific
+electromagnetic effects from ordinary heating.</p>
+<p><strong>Specific Hypotheses:</strong></p>
+<ul>
+<li><strong>H1 (Morphological):</strong> Published sensilla ranges
+include structures with micron-scale dimensions that can be mapped to
+quarter- and half-wavelength resonance estimates; cross-taxa correlation
+remains a prediction, not a completed empirical result <span
+class="citation"
+data-cites="liu2021thripidae">[@liu2021thripidae]</span>.</li>
+<li><strong>H2 (Spectral):</strong> CHC- and cuticle-associated FTIR
+bands provide species-discriminating spectral structure; whether insects
+directly sense those bands electromagnetically remains untested <span
+class="citation"
+data-cites="durak2022atrftir blomquist2021hydrocarbons">[@durak2022atrftir;
+@blomquist2021hydrocarbons]</span>.</li>
+<li><strong>H3 (Temporal):</strong> A proposed IR stage must produce
+neural signatures that are distinguishable from already-fast molecular
+ORN responses and from thermal transduction <span class="citation"
+data-cites="egeaweiss2018rapid gorurshandilya2017gain">[@egeaweiss2018rapid;
+@gorurshandilya2017gain]</span>.</li>
+<li><strong>H4 (Behavioral):</strong> IR-only orientation should occur
+only under controls that remove volatile chemical cues, match total heat
+deposition, and test wavelength specificity; pyrophilous beetle,
+kissing-bug, and mosquito studies motivate assay logic but do not
+establish IR olfaction for semiochemicals <span class="citation"
+data-cites="schmitz2011infrared zopf2014infrared chandel2024thermal">[@schmitz2011infrared;
+@zopf2014infrared; @chandel2024thermal]</span>.</li>
+</ul>
+<h2 id="approach-and-organization">Approach and Organization</h2>
+<p>We evaluate these hypotheses using an integrated framework combining
+comparative morphology, infrared spectroscopy, neural timing analysis,
+and deterministic computational electromagnetism. All models are
+unit-tested and reproducible with fixed random seeds (42).</p>
+<p>The manuscript is organized as follows:</p>
+<ul>
+<li><p><strong>Main Text:</strong> Presents integrated findings with
+cross-references to detailed case studies</p></li>
+<li><p><strong>Appendices:</strong> Seven specialized analyses exploring
+specific aspects:</p>
+<ul>
+<li>Sensory array directionality and beam patterns </li>
+<li>Environmental channel modeling </li>
+<li>Detection limits and operating points </li>
+<li>Neural encoding efficiency </li>
+<li>Spectral unmixing and classification </li>
+<li>Plasmonic nano-geometry optimization </li>
+<li>Active inference behavioral modeling </li>
+</ul></li>
+<li><p><strong>Mathematical Appendix:</strong> Detailed derivations and
+computational implementations </p></li>
+<li><p><strong>Empirical Studies:</strong> Comprehensive review of
+supporting evidence </p></li>
+</ul>
+<p>This structure enables both comprehensive evaluation and focused
+exploration of specific mechanisms.</p>
+</body>
+</html>

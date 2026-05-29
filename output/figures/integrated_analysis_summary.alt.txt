@@ -1,0 +1,1 @@
+Composite summary of dielectric response and normalized integrated performance metrics; engineering bounds panel.

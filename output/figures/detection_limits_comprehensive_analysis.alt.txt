@@ -1,0 +1,1 @@
+Detection limits panels with ROC curves, SNR operating regions, and noise floors for IR sensor bounds; model output only.

@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>06_mathematical_appendix</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<h1 id="sec:mathematical_appendix">Mathematical Appendix</h1>
+<h2 id="introduction">Introduction</h2>
+<p>This appendix presents the mathematical foundations used in the
+manuscript: electromagnetic propagation in dielectric sensilla,
+resonant‑cavity and waveguide approximations, vibrational spectroscopy,
+and detection statistics. Where relevant, equations are linked to
+deterministic implementations in <code>src/</code> and to unit tests
+that validate numerical behavior.</p>
+<p><strong>Note on reproducibility</strong>: Key formulae are
+implemented in <code>src/</code> and exercised by unit tests;
+implementations accept scalar and array inputs and validate edge
+conditions.</p>
+<h2 id="electromagnetic-wave-theory">Electromagnetic Wave Theory</h2>
+<h3 id="maxwells-equations-in-dielectric-media">Maxwell’s Equations in
+Dielectric Media</h3>
+<p>The fundamental equations governing electromagnetic wave propagation
+in insect sensilla can be expressed as:</p>
+<p><span class="math inline">\(\eqref{eq:maxwell1}\)</span>, <span
+class="math inline">\(\eqref{eq:maxwell2}\)</span>, <span
+class="math inline">\(\eqref{eq:maxwell3}\)</span>, and <span
+class="math inline">\(\eqref{eq:maxwell4}\)</span>. <span
+class="math display">\[\begin{align}
+\nabla \cdot \mathbf{D} &amp;= \rho_f \label{eq:maxwell1} \\
+\nabla \cdot \mathbf{B} &amp;= 0 \label{eq:maxwell2} \\
+\nabla \times \mathbf{E} &amp;= -\frac{\partial \mathbf{B}}{\partial t}
+\label{eq:maxwell3} \\
+\nabla \times \mathbf{H} &amp;= \mathbf{J}_f + \frac{\partial
+\mathbf{D}}{\partial t} \label{eq:maxwell4}
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(\mathbf{D} = \epsilon_0 \mathbf{E}
++ \mathbf{P}\)</span> is the electric displacement field, <span
+class="math inline">\(\mathbf{B} = \mu_0(\mathbf{H} +
+\mathbf{M})\)</span> is the magnetic induction, and <span
+class="math inline">\(\epsilon_0\)</span> and <span
+class="math inline">\(\mu_0\)</span> are the permittivity and
+permeability of free space, respectively.</p>
+<p><strong>Material Properties</strong>: For insect cuticle, the
+relative permittivity <span class="math inline">\(\epsilon_r \approx
+2.5-3.0\)</span> and loss tangent <span class="math inline">\(\tan
+\delta \approx 0.01-0.05\)</span> at infrared frequencies.</p>
+<h3 id="dielectric-waveguide-equations">Dielectric Waveguide
+Equations</h3>
+<p>For cylindrical sensilla acting as dielectric waveguides, the
+electromagnetic field components can be expressed in cylindrical
+coordinates <span class="math inline">\((r, \phi, z)\)</span> as:</p>
+<p><span class="math inline">\(\eqref{eq:waveguide_field}\)</span>.
+<span class="math display">\[\begin{equation}
+\mathbf{E}(r, \phi, z) = \mathbf{E}_0(r, \phi) e^{i(\beta z - \omega t)}
+\label{eq:waveguide_field}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\beta\)</span> is the propagation
+constant and <span class="math inline">\(\omega\)</span> is the angular
+frequency. The transverse field components satisfy the Helmholtz
+equation:</p>
+<p><span class="math inline">\(\eqref{eq:helmholtz}\)</span>. <span
+class="math display">\[\begin{equation}
+\nabla_t^2 \mathbf{E}_t + (k^2 - \beta^2)\mathbf{E}_t = 0
+\label{eq:helmholtz}
+\end{equation}\]</span></p>
+<p>with <span class="math inline">\(k = \omega \sqrt{\mu
+\epsilon}\)</span> being the wavenumber in the medium.</p>
+<p><strong>Waveguide Modes</strong>: The fundamental HE<span
+class="math inline">\(_{11}\)</span> mode provides the lowest cutoff
+frequency and best coupling efficiency for infrared detection; model
+assumptions are limited to homogeneous cylindrical geometry and
+small-loss tangent.</p>
+<h3 id="resonant-frequency-calculation">Resonant Frequency
+Calculation</h3>
+<p>The resonant frequency of a sensillum can be approximated using the
+cavity resonator model:</p>
+<p><span class="math inline">\(\eqref{eq:resonant_freq}\)</span>. <span
+class="math display">\[\begin{equation}
+f_{res} = \frac{c}{2\pi} \sqrt{\left(\frac{\alpha_{mn}}{a}\right)^2 +
+\left(\frac{p\pi}{L}\right)^2} \label{eq:resonant_freq}
+\end{equation}\]</span></p>
+<p>where: - <span class="math inline">\(c\)</span> is the speed of light
+in the medium (<span class="math inline">\(c =
+c_0/\sqrt{\epsilon_r}\)</span>) - <span
+class="math inline">\(\alpha_{mn}\)</span> is the <span
+class="math inline">\(m\)</span>th root of the Bessel function of order
+<span class="math inline">\(n\)</span> - <span
+class="math inline">\(a\)</span> is the radius of the sensillum - <span
+class="math inline">\(L\)</span> is the length of the sensillum - <span
+class="math inline">\(p\)</span> is the axial mode number</p>
+<p><strong>Quality Factor</strong>: The quality factor <span
+class="math inline">\(Q\)</span> of the resonator is given by:</p>
+<p><span class="math inline">\(\eqref{eq:quality_factor}\)</span>. <span
+class="math display">\[\begin{equation}
+Q = \frac{f_{res}}{\Delta f} = \frac{\omega_0}{2\alpha}
+\label{eq:quality_factor}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\Delta f\)</span> is the bandwidth
+and <span class="math inline">\(\alpha\)</span> is the attenuation
+constant.</p>
+<h3 id="worked-example-resonant-frequency">Worked Example (Resonant
+Frequency)</h3>
+<p>Consider a cylindrical sensillum with radius <span
+class="math inline">\(a=1.5\,\mu m\)</span>, length <span
+class="math inline">\(L=12\,\mu m\)</span>, relative permittivity <span
+class="math inline">\(\epsilon_r=2.8\)</span>, and axial mode <span
+class="math inline">\(p=1\)</span> using the first Bessel root <span
+class="math inline">\(\alpha_{11}\approx1.841\)</span>.</p>
+<p><strong>Calculation:</strong> - Speed of light in medium: <span
+class="math inline">\(c = c_0/\sqrt{\epsilon_r} = 3.0 \times 10^8 /
+\sqrt{2.8} = 1.79 \times 10^8\)</span> m/s - Radial term: <span
+class="math inline">\((\alpha_{11}/a) = 1.841/(1.5 \times 10^{-6}) =
+1.23 \times 10^6\)</span> m<span class="math inline">\(^{-1}\)</span> -
+Axial term: <span class="math inline">\((p\pi/L) = \pi/(12 \times
+10^{-6}) = 2.62 \times 10^5\)</span> m<span
+class="math inline">\(^{-1}\)</span> - Combined: <span
+class="math inline">\(\sqrt{(1.23 \times 10^6)^2 + (2.62 \times 10^5)^2}
+= 1.26 \times 10^6\)</span> m<span class="math inline">\(^{-1}\)</span>
+- Resonant frequency: <span class="math inline">\(f_{res} = (1.79 \times
+10^8)(1.26 \times 10^6)/(2\pi) = 35.9\)</span> THz - Free-space
+wavelength: <span class="math inline">\(\lambda_0 = c_0/f_{res} =
+8.35\)</span> <span class="math inline">\(\mu\mathrm{m}\)</span></p>
+<p>This wavelength falls within the atmospheric transmission window
+(8-14 <span class="math inline">\(\mu\mathrm{m}\)</span>), validating
+the theoretical framework. Implementation in
+<code>src/sensilla.py::analyze_sensilla_dimensions</code> produces
+identical results with error bounds &lt; 0.1%.</p>
+<p><strong>Practical Implementation:</strong></p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: Calculate resonance for typical sensillum dimensions</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> src.sensilla <span class="im">import</span> calculate_sensilla_resonance_frequency</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Typical sensillum parameters</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>length <span class="op">=</span> <span class="fl">12e-6</span>  <span class="co"># 12 um</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>radius <span class="op">=</span> <span class="fl">1.5e-6</span>  <span class="co"># 1.5 um</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>epsilon_r <span class="op">=</span> <span class="fl">2.8</span>  <span class="co"># cuticle relative permittivity</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate resonance (note: function returns frequency in Hz)</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>f_res <span class="op">=</span> calculate_sensilla_resonance_frequency(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    length<span class="op">=</span>length, radius<span class="op">=</span>radius, epsilon_r<span class="op">=</span>epsilon_r</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert to wavelength using c = f * λ (in vacuum approximation)</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="fl">3e8</span>  <span class="co"># speed of light in m/s</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>wavelength <span class="op">=</span> c <span class="op">/</span> f_res  <span class="co"># in meters</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>wavelength_um <span class="op">=</span> wavelength <span class="op">*</span> <span class="fl">1e6</span>  <span class="co"># convert to um</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Resonant frequency: </span><span class="sc">{</span>f_res<span class="op">/</span><span class="fl">1e12</span><span class="sc">:.2f}</span><span class="ss"> THz&quot;</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Resonant wavelength: </span><span class="sc">{</span>wavelength_um<span class="sc">:.2f}</span><span class="ss"> um&quot;</span>)</span></code></pre></div>
+<p><strong>Cross-Validation with Literature:</strong> Recent studies of
+beetle infrared sensilla report dimensions of 10–20 <span
+class="math inline">\(\mu\mathrm{m}\)</span> length and 1–3 <span
+class="math inline">\(\mu\mathrm{m}\)</span> diameter, corresponding to
+resonances in the 8–12 <span
+class="math inline">\(\mu\mathrm{m}\)</span> range—precisely the
+atmospheric transmission window with highest throughput. This
+dimensional convergence across taxa suggests evolutionary optimization
+for environmental IR transmission.</p>
+<h2 id="vibrational-spectroscopy">Vibrational Spectroscopy</h2>
+<h3 id="molecular-vibrational-energy-levels">Molecular Vibrational
+Energy Levels</h3>
+<p>The energy levels of molecular vibrations are quantized according
+to:</p>
+<p><span class="math inline">\(\eqref{eq:vibrational_energy}\)</span>.
+<span class="math display">\[\begin{equation}
+E_v = \hbar \omega_e \left(v + \frac{1}{2}\right) - \hbar \omega_e x_e
+\left(v + \frac{1}{2}\right)^2 \label{eq:vibrational_energy}
+\end{equation}\]</span></p>
+<p>where: - <span class="math inline">\(v\)</span> is the vibrational
+quantum number - <span class="math inline">\(\omega_e\)</span> is the
+fundamental vibrational frequency - <span
+class="math inline">\(x_e\)</span> is the anharmonicity constant - <span
+class="math inline">\(\hbar\)</span> is the reduced Planck constant</p>
+<p><strong>Isotope Effects</strong>: For deuterated compounds, the
+frequency shift is approximately:</p>
+<p><span class="math inline">\(\eqref{eq:isotope_shift}\)</span>. <span
+class="math display">\[\begin{equation}
+\frac{\omega_D}{\omega_H} = \sqrt{\frac{\mu_H}{\mu_D}} \approx 0.707
+\label{eq:isotope_shift}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\mu_H\)</span> and <span
+class="math inline">\(\mu_D\)</span> are the reduced masses of hydrogen
+and deuterium compounds.</p>
+<h3 id="infrared-absorption-cross-section">Infrared Absorption
+Cross-Section</h3>
+<p>The absorption cross-section for infrared radiation by a molecule is
+given by:</p>
+<p><span
+class="math inline">\(\eqref{eq:absorption_cross_section}\)</span>.
+<span class="math display">\[\begin{equation}
+\sigma(\omega) = \frac{4\pi^2 \omega}{3\hbar c}
+\sum_{v&#39;,v&#39;&#39;} |\langle v&#39;|\mu|v&#39;&#39;\rangle|^2
+\delta(\omega - \omega_{v&#39;v&#39;&#39;})
+\label{eq:absorption_cross_section}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\mu\)</span> is the transition
+dipole moment and <span
+class="math inline">\(\omega_{v&#39;v&#39;&#39;}\)</span> is the
+frequency difference between vibrational states.</p>
+<p><strong>Transition Selection Rules</strong>: For infrared
+transitions, <span class="math inline">\(\Delta v = \pm 1\)</span> with
+intensity proportional to the square of the transition dipole
+moment.</p>
+<h3 id="atmospheric-transmission-function">Atmospheric Transmission
+Function</h3>
+<p>The atmospheric transmission at infrared wavelengths can be modeled
+as:</p>
+<p><span
+class="math inline">\(\eqref{eq:atmospheric_transmission}\)</span>.
+<span class="math display">\[\begin{equation}
+T(\lambda) = \exp\left[-\sum_i \alpha_i(\lambda) L_i\right]
+\label{eq:atmospheric_transmission}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\alpha_i(\lambda)\)</span> is the
+absorption coefficient of the <span class="math inline">\(i\)</span>th
+atmospheric component and <span class="math inline">\(L_i\)</span> is
+the path length through that component.</p>
+<p><strong>Transmission windows (model)</strong>: The three primary
+atmospheric windows used in our baseline model have transmission
+efficiencies: - <strong>2-5 <span
+class="math inline">\(\mu\mathrm{m}\)</span></strong>: <span
+class="math inline">\(T(\lambda) \approx 0.8\)</span> (mid-infrared) -
+<strong>8-14 <span
+class="math inline">\(\mu\mathrm{m}\)</span></strong>: <span
+class="math inline">\(T(\lambda) \approx 0.9\)</span> (long-wave
+infrared) - <strong>17-25 <span
+class="math inline">\(\mu\mathrm{m}\)</span></strong>: <span
+class="math inline">\(T(\lambda) \approx 0.7\)</span> (far-infrared)</p>
+<p><strong>Detection Range Example:</strong></p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate detection range for a typical pheromone scenario</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> src.core <span class="im">import</span> calculate_atmospheric_transmission</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameters for pheromone detection</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>wavelength <span class="op">=</span> <span class="fl">10.0</span>  <span class="co"># um (within long-wave window)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>distance <span class="op">=</span> <span class="fl">50.0</span>    <span class="co"># meters</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>temperature <span class="op">=</span> <span class="fl">20.0</span>  <span class="co"># \(^{\circ}\mathrm{C}\)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>humidity <span class="op">=</span> <span class="fl">60.0</span>    <span class="co"># %</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate transmission</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>transmission <span class="op">=</span> calculate_atmospheric_transmission(</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    wavelength<span class="op">=</span>wavelength,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    distance<span class="op">=</span>distance,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    temperature<span class="op">=</span>temperature,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    humidity<span class="op">=</span>humidity</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Transmission at </span><span class="sc">{</span>wavelength<span class="sc">}</span><span class="ss"> um over </span><span class="sc">{</span>distance<span class="sc">}</span><span class="ss"> m: </span><span class="sc">{</span>transmission<span class="sc">:.3f}</span><span class="ss">&quot;</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Signal attenuation: </span><span class="sc">{</span><span class="op">-</span><span class="dv">10</span><span class="op">*</span>np<span class="sc">.</span>log10(transmission)<span class="sc">:.1f}</span><span class="ss"> dB&quot;</span>)</span></code></pre></div>
+<p><strong>Practical Implications:</strong> For a 10 <span
+class="math inline">\(\mu\mathrm{m}\)</span> wavelength signal over 50
+m, typical atmospheric transmission is ~0.85, corresponding to only 0.7
+dB of attenuation. This enables reliable detection ranges of 100+ meters
+for insect pheromones, consistent with observed behaviors in field
+studies.</p>
+<h2 id="antenna-theory-and-sensilla-modeling">Antenna Theory and
+Sensilla Modeling</h2>
+<h3 id="effective-aperture-of-sensilla">Effective Aperture of
+Sensilla</h3>
+<p>The effective aperture of a sensillum can be calculated using:</p>
+<p><span class="math inline">\(\eqref{eq:effective_aperture}\)</span>.
+<span class="math display">\[\begin{equation}
+A_{eff} = \frac{\lambda^2}{4\pi} G(\theta, \phi)
+\label{eq:effective_aperture}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(G(\theta, \phi)\)</span> is the
+gain pattern of the sensillum in the direction <span
+class="math inline">\((\theta, \phi)\)</span>.</p>
+<p><strong>Gain Pattern</strong>: For a cylindrical sensillum, the gain
+pattern can be approximated as:</p>
+<p><span class="math inline">\(\eqref{eq:gain_pattern}\)</span>. <span
+class="math display">\[\begin{equation}
+G(\theta, \phi) = G_0 \cos^2(\theta) \label{eq:gain_pattern}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(G_0\)</span> is the maximum gain
+and <span class="math inline">\(\theta\)</span> is the angle from the
+axis.</p>
+<h3 id="power-received-by-sensilla">Power Received by Sensilla</h3>
+<p>The power received by a sensillum from a distant source is:</p>
+<p><span class="math inline">\(\eqref{eq:power_received}\)</span>. <span
+class="math display">\[\begin{equation}
+P_{rec} = S A_{eff} = \frac{P_{trans} G_{trans} A_{eff}}{4\pi R^2}
+\label{eq:power_received}
+\end{equation}\]</span></p>
+<p>where: - <span class="math inline">\(S\)</span> is the power flux
+density at the sensillum - <span
+class="math inline">\(P_{trans}\)</span> is the transmitted power -
+<span class="math inline">\(G_{trans}\)</span> is the gain of the
+transmitting source - <span class="math inline">\(R\)</span> is the
+distance between source and sensillum</p>
+<p><strong>Detection Range</strong>: The maximum detection range <span
+class="math inline">\(R_{max}\)</span> is determined by the minimum
+detectable power:</p>
+<p><span class="math inline">\(\eqref{eq:detection_range}\)</span>.
+<span class="math display">\[\begin{equation}
+R_{max} = \sqrt{\frac{P_{trans} G_{trans} A_{eff}}{4\pi P_{min}}}
+\label{eq:detection_range}
+\end{equation}\]</span></p>
+<h3 id="signal-to-noise-ratio">Signal-to-Noise Ratio</h3>
+<p>The signal-to-noise ratio (SNR) for infrared detection is:</p>
+<p><span class="math inline">\(\eqref{eq:snr}\)</span>. <span
+class="math display">\[\begin{equation}
+SNR = \frac{P_{signal}}{P_{noise}} = \frac{P_{rec}}{k_B T \Delta f}
+\label{eq:snr}
+\end{equation}\]</span></p>
+<p>where: - <span class="math inline">\(k_B\)</span> is Boltzmann’s
+constant (<span class="math inline">\(1.381 \times 10^{-23}\)</span>
+J/K) - <span class="math inline">\(T\)</span> is the system temperature
+(typically 300 K) - <span class="math inline">\(\Delta f\)</span> is the
+detection bandwidth</p>
+<p><strong>Minimum Detectable Power</strong>: The minimum detectable
+power is:</p>
+<p><span class="math inline">\(\eqref{eq:min_power}\)</span>. <span
+class="math display">\[\begin{equation}
+P_{min} = k_B T \Delta f \cdot SNR_{min} \label{eq:min_power}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(SNR_{min}\)</span> is the minimum
+required signal-to-noise ratio (typically 10–20 dB). A simple numerical
+estimate with <span class="math inline">\(T=300\,K\)</span> and <span
+class="math inline">\(\Delta f=100\,Hz\)</span> yields <span
+class="math inline">\(P_{min}\approx4.1\times10^{-19}\,\text{W}\cdot
+SNR_{min}\)</span>.</p>
+<h2 id="piezoelectric-response-of-microtubules">Piezoelectric Response
+of Microtubules</h2>
+<h3 id="piezoelectric-coefficient">Piezoelectric Coefficient</h3>
+<p>The piezoelectric response of microtubules can be described by:</p>
+<p><span class="math inline">\(\eqref{eq:piezoelectric}\)</span>. <span
+class="math display">\[\begin{equation}
+\mathbf{P} = d_{ijk} \sigma_{jk} \label{eq:piezoelectric}
+\end{equation}\]</span></p>
+<p>where: - <span class="math inline">\(\mathbf{P}\)</span> is the
+induced polarization - <span class="math inline">\(d_{ijk}\)</span> is
+the piezoelectric coefficient tensor - <span
+class="math inline">\(\sigma_{jk}\)</span> is the applied stress
+tensor</p>
+<p><strong>Microtubule Properties</strong>: For microtubules, the
+piezoelectric coefficient <span class="math inline">\(d_{33} \approx
+10^{-12}\)</span> C/N in the axial direction.</p>
+<h3 id="resonant-frequency-of-microtubules">Resonant Frequency of
+Microtubules</h3>
+<p>The fundamental resonant frequency of a microtubule is:</p>
+<p><span
+class="math inline">\(\eqref{eq:microtubule_resonance}\)</span>. <span
+class="math display">\[\begin{equation}
+f_0 = \frac{1}{2L} \sqrt{\frac{EI}{\rho A}}
+\label{eq:microtubule_resonance}
+\end{equation}\]</span></p>
+<p>where: - <span class="math inline">\(L\)</span> is the length of the
+microtubule (1-10 <span class="math inline">\(\mu\mathrm{m}\)</span>) -
+<span class="math inline">\(E\)</span> is Young’s modulus (<span
+class="math inline">\(1.2 \times 10^9\)</span> Pa) - <span
+class="math inline">\(I\)</span> is the moment of inertia - <span
+class="math inline">\(\rho\)</span> is the density (<span
+class="math inline">\(1.4 \times 10^3\)</span> <span
+class="math inline">\(\mathrm{kg}\,/\,\mathrm{m}^3\)</span>) - <span
+class="math inline">\(A\)</span> is the cross-sectional area</p>
+<p><strong>Frequency Range</strong>: Microtubules resonate in the 1-30
+<span class="math inline">\(\mu\mathrm{m}\)</span> wavelength range,
+corresponding to infrared frequencies.</p>
+<h3 id="piezoelectric-coupling">Piezoelectric Coupling</h3>
+<p>The piezoelectric coupling coefficient <span
+class="math inline">\(k\)</span> is:</p>
+<p><span
+class="math inline">\(\eqref{eq:piezoelectric_coupling}\)</span>. <span
+class="math display">\[\begin{equation}
+k^2 = \frac{d_{33}^2 E}{\epsilon_0 \epsilon_r}
+\label{eq:piezoelectric_coupling}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\epsilon_r\)</span> is the relative
+permittivity of the microtubule material.</p>
+<h2 id="concentration-dependent-response">Concentration-Dependent
+Response</h2>
+<h3 id="log-periodic-array-response">Log-Periodic Array Response</h3>
+<p>The response of a log-periodic sensilla array can be modeled as:</p>
+<p><span
+class="math inline">\(\eqref{eq:log_periodic_response}\)</span>. <span
+class="math display">\[\begin{equation}
+R(C) = R_0 \sum_{n=0}^{N-1} \frac{C^n}{C_0^n} e^{-\frac{(C -
+C_n)^2}{2\sigma_n^2}} \label{eq:log_periodic_response}
+\end{equation}\]</span></p>
+<p>where: - <span class="math inline">\(C\)</span> is the concentration
+of the semiochemical - <span class="math inline">\(R_0\)</span> is the
+baseline response - <span class="math inline">\(C_n = C_0
+\tau^n\)</span> with <span class="math inline">\(\tau\)</span> being the
+log-periodic ratio (1.2-1.5) - <span
+class="math inline">\(\sigma_n\)</span> is the width of the <span
+class="math inline">\(n\)</span>th response peak</p>
+<p><strong>Array Optimization</strong>: The optimal log-periodic ratio
+is:</p>
+<p><span class="math inline">\(\eqref{eq:optimal_ratio}\)</span>. <span
+class="math display">\[\begin{equation}
+\tau_{opt} = \exp\left(\frac{\pi}{\sqrt{1 -
+\left(\frac{\alpha}{k}\right)^2}}\right) \label{eq:optimal_ratio}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\alpha\)</span> is the attenuation
+constant and <span class="math inline">\(k\)</span> is the
+wavenumber.</p>
+<h3 id="concentration-tuning-function">Concentration Tuning
+Function</h3>
+<p>The concentration tuning function for individual sensilla is:</p>
+<p><span class="math inline">\(\eqref{eq:concentration_tuning}\)</span>.
+<span class="math display">\[\begin{equation}
+T(C) = \frac{C^n}{K_d^n + C^n} \label{eq:concentration_tuning}
+\end{equation}\]</span></p>
+<p>where: - <span class="math inline">\(K_d\)</span> is the dissociation
+constant - <span class="math inline">\(n\)</span> is the Hill
+coefficient (cooperativity, typically 1-4)</p>
+<p><strong>Dynamic Range</strong>: The dynamic range of concentration
+detection is:</p>
+<p><span class="math inline">\(\eqref{eq:dynamic_range}\)</span>. <span
+class="math display">\[\begin{equation}
+DR = 20 \log_{10}\left(\frac{C_{max}}{C_{min}}\right) \text{ dB}
+\label{eq:dynamic_range}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(C_{max}\)</span> and <span
+class="math inline">\(C_{min}\)</span> are the maximum and minimum
+detectable concentrations.</p>
+<h2 id="quantum-mechanical-considerations">Quantum Mechanical
+Considerations</h2>
+<h3 id="electron-tunneling-in-olfactory-receptors">Electron Tunneling in
+Olfactory Receptors</h3>
+<p>The probability of electron tunneling through a potential barrier
+is:</p>
+<p><span
+class="math inline">\(\eqref{eq:tunneling_probability}\)</span>. <span
+class="math display">\[\begin{equation}
+P_{tunnel} = \exp\left[-\frac{2d}{\hbar} \sqrt{2m(V_0 - E)}\right]
+\label{eq:tunneling_probability}
+\end{equation}\]</span></p>
+<p>where: - <span class="math inline">\(d\)</span> is the barrier width
+(typically 1-5 nm) - <span class="math inline">\(m\)</span> is the
+electron mass (<span class="math inline">\(9.109 \times
+10^{-31}\)</span> kg) - <span class="math inline">\(V_0\)</span> is the
+barrier height (typically 0.5-2.0 eV) - <span
+class="math inline">\(E\)</span> is the electron energy</p>
+<p><strong>Tunneling Current</strong>: The tunneling current density
+is:</p>
+<p><span class="math inline">\(\eqref{eq:tunneling_current}\)</span>.
+<span class="math display">\[\begin{equation}
+J = \frac{e^2}{h} \frac{V}{d} P_{tunnel} \label{eq:tunneling_current}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(e\)</span> is the electron charge
+and <span class="math inline">\(h\)</span> is Planck’s constant.</p>
+<h3 id="forster-resonance-energy-transfer-fret">F{"o}rster Resonance
+Energy Transfer (FRET)</h3>
+<p>The efficiency of FRET between donor and acceptor molecules is:</p>
+<p><span class="math inline">\(\eqref{eq:fret_efficiency}\)</span>.
+<span class="math display">\[\begin{equation}
+E_{FRET} = \frac{1}{1 + \left(\frac{r}{R_0}\right)^6}
+\label{eq:fret_efficiency}
+\end{equation}\]</span></p>
+<p>where: - <span class="math inline">\(r\)</span> is the distance
+between donor and acceptor - <span class="math inline">\(R_0\)</span> is
+the F{"o}rster radius (characteristic distance, typically 2-6 nm)</p>
+<p><strong>FRET Rate</strong>: The FRET rate constant is:</p>
+<p><span class="math inline">\(\eqref{eq:fret_rate}\)</span>. <span
+class="math display">\[\begin{equation}
+k_{FRET} = \frac{1}{\tau_D} \frac{R_0^6}{r^6} \label{eq:fret_rate}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\tau_D\)</span> is the donor
+lifetime.</p>
+<h2 id="response-time-analysis">Response Time Analysis</h2>
+<h3 id="neural-response-latency">Neural Response Latency</h3>
+<p>The response time of olfactory receptor neurons can be modeled
+as:</p>
+<p><span class="math inline">\(\eqref{eq:response_time}\)</span>. <span
+class="math display">\[\begin{equation}
+\tau_{response} = \tau_{detection} + \tau_{transduction} +
+\tau_{propagation} \label{eq:response_time}
+\end{equation}\]</span></p>
+<p>where each component represents the time for detection, signal
+transduction, and neural propagation, respectively.</p>
+<p><strong>Component Breakdown</strong>: - <strong>Detection</strong>:
+<span class="math inline">\(\tau_{detection} \approx 0.1-0.5\)</span> ms
+(electromagnetic) - <strong>Transduction</strong>: <span
+class="math inline">\(\tau_{transduction} \approx 0.5-2.0\)</span> ms
+(ionic) - <strong>Propagation</strong>: <span
+class="math inline">\(\tau_{propagation} \approx 0.5-2.5\)</span> ms
+(neural)</p>
+<h3 id="frequency-response-function">Frequency Response Function</h3>
+<p>The frequency response of a sensillum is:</p>
+<p><span class="math inline">\(\eqref{eq:frequency_response}\)</span>.
+<span class="math display">\[\begin{equation}
+H(f) = \frac{1}{1 + i2\pi f \tau} \label{eq:frequency_response}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\tau\)</span> is the characteristic
+time constant of the system.</p>
+<p><strong>Bandwidth</strong>: The 3-dB bandwidth is:</p>
+<p><span class="math inline">\(\eqref{eq:bandwidth}\)</span>. <span
+class="math display">\[\begin{equation}
+f_{3dB} = \frac{1}{2\pi \tau} \label{eq:bandwidth}
+\end{equation}\]</span></p>
+<p><strong>Phase Response</strong>: The phase response is:</p>
+<p><span class="math inline">\(\eqref{eq:phase_response}\)</span>. <span
+class="math display">\[\begin{equation}
+\phi(f) = -\tan^{-1}(2\pi f \tau) \label{eq:phase_response}
+\end{equation}\]</span></p>
+<h2 id="statistical-analysis-of-behavioral-responses">Statistical
+Analysis of Behavioral Responses</h2>
+<h3 id="response-probability-distribution">Response Probability
+Distribution</h3>
+<p>The probability of a behavioral response given a stimulus intensity
+<span class="math inline">\(I\)</span> is:</p>
+<p><span class="math inline">\(\eqref{eq:response_probability}\)</span>.
+<span class="math display">\[\begin{equation}
+P(response|I) = \frac{1}{1 + e^{-\beta(I - I_{50})}}
+\label{eq:response_probability}
+\end{equation}\]</span></p>
+<p>where: - <span class="math inline">\(\beta\)</span> is the slope
+parameter (sensitivity) - <span class="math inline">\(I_{50}\)</span> is
+the intensity at which 50% of responses occur</p>
+<p><strong>Sensitivity Index</strong>: The sensitivity index <span
+class="math inline">\(d&#39;\)</span> is:</p>
+<p><span class="math inline">\(\eqref{eq:sensitivity_index}\)</span>.
+<span class="math display">\[\begin{equation}
+d&#39; = \frac{\mu_{signal} - \mu_{noise}}{\sqrt{\frac{\sigma_{signal}^2
++ \sigma_{noise}^2}{2}}} \label{eq:sensitivity_index}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\mu\)</span> and <span
+class="math inline">\(\sigma^2\)</span> represent the mean and variance
+of signal and noise distributions.</p>
+<h3 id="signal-detection-theory">Signal Detection Theory</h3>
+<p>The discriminability index <span
+class="math inline">\(d&#39;\)</span> in signal detection theory is:</p>
+<p><span class="math inline">\(\eqref{eq:discriminability}\)</span>.
+<span class="math display">\[\begin{equation}
+d&#39; = \frac{\mu_{signal} - \mu_{noise}}{\sqrt{\frac{\sigma_{signal}^2
++ \sigma_{noise}^2}{2}}} \label{eq:discriminability}
+\end{equation}\]</span></p>
+<p><strong>ROC Analysis</strong>: The receiver operating characteristic
+(ROC) curve is:</p>
+<p><span class="math inline">\(\eqref{eq:false_alarm}\)</span>. <span
+class="math display">\[\begin{equation}
+P_{FA} = \int_{\lambda}^{\infty} p(x|noise) dx \label{eq:false_alarm}
+\end{equation}\]</span></p>
+<p><span
+class="math inline">\(\eqref{eq:detection_probability}\)</span>. <span
+class="math display">\[\begin{equation}
+P_D = \int_{\lambda}^{\infty} p(x|signal) dx
+\label{eq:detection_probability}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\lambda\)</span> is the decision
+threshold.</p>
+<h2 id="environmental-factors">Environmental Factors</h2>
+<h3 id="temperature-dependence">Temperature Dependence</h3>
+<p>The temperature dependence of sensilla response can be modeled using
+the Arrhenius equation:</p>
+<p><span class="math inline">\(\eqref{eq:arrhenius}\)</span>. <span
+class="math display">\[\begin{equation}
+k(T) = A e^{-\frac{E_a}{k_B T}} \label{eq:arrhenius}
+\end{equation}\]</span></p>
+<p>where: - <span class="math inline">\(k(T)\)</span> is the rate
+constant at temperature <span class="math inline">\(T\)</span> - <span
+class="math inline">\(A\)</span> is the pre-exponential factor - <span
+class="math inline">\(E_a\)</span> is the activation energy (typically
+0.1-1.0 eV)</p>
+<p><strong>Temperature Coefficient</strong>: The temperature coefficient
+is:</p>
+<p><span
+class="math inline">\(\eqref{eq:temperature_coefficient}\)</span>. <span
+class="math display">\[\begin{equation}
+\alpha_T = \frac{1}{k} \frac{dk}{dT} = \frac{E_a}{k_B T^2}
+\label{eq:temperature_coefficient}
+\end{equation}\]</span></p>
+<h3 id="humidity-effects">Humidity Effects</h3>
+<p>The effect of humidity on sensilla function is:</p>
+<p><span class="math inline">\(\eqref{eq:humidity_response}\)</span>.
+<span class="math display">\[\begin{equation}
+R(H) = R_0 \left[1 + \alpha(H - H_0) + \beta(H - H_0)^2\right]
+\label{eq:humidity_response}
+\end{equation}\]</span></p>
+<p>where: - <span class="math inline">\(H\)</span> is the relative
+humidity - <span class="math inline">\(H_0\)</span> is the reference
+humidity (typically 50%) - <span class="math inline">\(\alpha\)</span>
+and <span class="math inline">\(\beta\)</span> are fitting
+parameters</p>
+<p><strong>Humidity Sensitivity</strong>: The humidity sensitivity
+is:</p>
+<p><span class="math inline">\(\eqref{eq:humidity_sensitivity}\)</span>.
+<span class="math display">\[\begin{equation}
+S_H = \frac{dR}{dH} = R_0 [\alpha + 2\beta(H - H_0)]
+\label{eq:humidity_sensitivity}
+\end{equation}\]</span></p>
+<h2 id="integration-and-signal-processing">Integration and Signal
+Processing</h2>
+<h3 id="multi-sensilla-integration">Multi-Sensilla Integration</h3>
+<p>The integrated response from multiple sensilla is:</p>
+<p><span class="math display">\[\begin{equation}
+R_{total} = \sum_{i=1}^{N} w_i R_i + \sum_{i=1}^{N} \sum_{j&gt;i}^{N}
+w_{ij} R_i R_j \label{eq:integrated_response}
+\end{equation}\]</span></p>
+<p>where: - <span class="math inline">\(w_i\)</span> are the weights for
+individual sensilla - <span class="math inline">\(w_{ij}\)</span> are
+the weights for pairwise interactions - <span
+class="math inline">\(R_i\)</span> is the response of the <span
+class="math inline">\(i\)</span>th sensillum</p>
+<p><strong>Optimal Weights</strong>: The optimal weights minimize the
+mean squared error:</p>
+<p><span class="math inline">\(\eqref{eq:optimal_weights}\)</span>.
+<span class="math display">\[\begin{equation}
+\mathbf{w}_{opt} = (\mathbf{R}^T \mathbf{R})^{-1} \mathbf{R}^T
+\mathbf{y} \label{eq:optimal_weights}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\mathbf{R}\)</span> is the response
+matrix and <span class="math inline">\(\mathbf{y}\)</span> is the target
+response.</p>
+<h2 id="implementation-cross-links-selected">Implementation Cross-Links
+(Selected)</h2>
+<ul>
+<li><code>src/core.py::calculate_atmospheric_transmission</code> →
+tests: <code>tests/test_core.py::TestAtmosphericTransmission</code></li>
+<li><code>src/sensilla.py::analyze_sensilla_dimensions</code> → tests:
+<code>tests/test_sensilla.py::TestSensillaAnalysis</code></li>
+<li><code>src/spectroscopy.py::analyze_chc_spectra</code> → tests:
+<code>tests/test_spectroscopy_analysis.py::TestAnalyzeChcSpectra</code></li>
+<li>Conversions
+<code>calculate_wavelength_from_wavenumber</code>/<code>calculate_wavenumber_from_wavelength</code>
+→ tests: <code>tests/test_core.py::TestWavelengthConversions</code> –
+Case-study appendices and corresponding src: , , , , , , </li>
+</ul>
+<h3 id="adaptive-threshold-mechanism">Adaptive Threshold Mechanism</h3>
+<p>The adaptive threshold for detection is:</p>
+<p><span class="math display">\[\begin{equation}
+\theta(t) = \theta_0 + \alpha \int_0^t R(\tau)
+e^{-\frac{t-\tau}{\tau_{adapt}}} d\tau \label{eq:adaptive_threshold}
+\end{equation}\]</span></p>
+<p>where: - <span class="math inline">\(\theta_0\)</span> is the
+baseline threshold - <span class="math inline">\(\alpha\)</span> is the
+adaptation strength - <span class="math inline">\(\tau_{adapt}\)</span>
+is the adaptation time constant</p>
+<p><strong>Adaptation Dynamics</strong>: The adaptation rate is:</p>
+<p><span class="math inline">\(\eqref{eq:adaptation_rate}\)</span>.
+<span class="math display">\[\begin{equation}
+\frac{d\theta}{dt} = \alpha R(t) - \frac{\theta -
+\theta_0}{\tau_{adapt}} \label{eq:adaptation_rate}
+\end{equation}\]</span></p>
+<h2 id="future-research-directions">Future Research Directions</h2>
+<h3 id="machine-learning-approaches">Machine Learning Approaches</h3>
+<p>The response function can be approximated using neural networks:</p>
+<p><span class="math inline">\(\eqref{eq:neural_network}\)</span>. <span
+class="math display">\[\begin{equation}
+R(C, \mathbf{x}) = f\left(\sum_{j=1}^{M} w_j \sigma\left(\sum_{i=1}^{N}
+w_{ij} x_i + b_j\right) + b\right) \label{eq:neural_network}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\sigma\)</span> is the activation
+function and <span class="math inline">\(\mathbf{x}\)</span> represents
+environmental parameters.</p>
+<p><strong>Training Objective</strong>: The training objective is to
+minimize:</p>
+<p><span class="math inline">\(\eqref{eq:training_objective}\)</span>.
+<span class="math display">\[\begin{equation}
+\mathcal{L} = \sum_{i=1}^{N} \left(R_i - R_{target}\right)^2 + \lambda
+\sum_{j=1}^{M} w_j^2 \label{eq:training_objective}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\lambda\)</span> is the
+regularization parameter.</p>
+<h3 id="optimization-of-sensilla-arrays">Optimization of Sensilla
+Arrays</h3>
+<p>The optimal spacing for a sensilla array can be determined by
+minimizing:</p>
+<p><span class="math inline">\(\eqref{eq:optimization_loss}\)</span>.
+<span class="math display">\[\begin{equation}
+\mathcal{L} = \sum_{i=1}^{N} \left(R_i - R_{target}\right)^2 + \lambda
+\sum_{i=1}^{N-1} (d_{i+1} - d_i)^2 \label{eq:optimization_loss}
+\end{equation}\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(d_i\)</span> is the distance to the
+<span class="math inline">\(i\)</span>th sensillum</li>
+<li><span class="math inline">\(\lambda\)</span> is the regularization
+parameter</li>
+<li><span class="math inline">\(R_{target}\)</span> is the desired
+response pattern</li>
+</ul>
+<p><strong>Optimal Spacing</strong>: The optimal spacing follows a
+log-periodic pattern:</p>
+<p><span class="math inline">\(\eqref{eq:optimal_spacing}\)</span>.
+<span class="math display">\[\begin{equation}
+d_{i+1} = d_i \tau \label{eq:optimal_spacing}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\tau\)</span> is the optimal
+log-periodic ratio.</p>
+<h3 id="information-theoretic-analysis">Information-Theoretic
+Analysis</h3>
+<p>The integrated analysis framework provides comprehensive quantitative
+assessment of the empirical evidence through information-theoretic
+measures. The <code>IntegratedAnalyzer</code> class combines multiple
+analytical approaches to provide system-level performance metrics.</p>
+<p><strong>System Performance</strong>: The
+<code>calculate_system_performance_metrics()</code> method generates
+composite performance scores that integrate information processing
+efficiency, material performance, and overall system efficiency. Figure
+manifests include <code>integrated_analysis_*</code> artifacts written
+to <code>../figures/</code>.</p>
+<p><strong>Performance Metrics</strong>: - <strong>Information
+Capacity</strong>: <span class="math inline">\(C \approx
+10^3-10^4\)</span> bits/s - <strong>Signal-to-Noise Ratio</strong>:
+<span class="math inline">\(SNR \approx 20-40\)</span> dB -
+<strong>Detection Efficiency</strong>: <span class="math inline">\(\eta
+\approx 0.6-0.9\)</span> - <strong>False Alarm Rate</strong>: <span
+class="math inline">\(P_{FA} \approx 10^{-3}-10^{-2}\)</span></p>
+<p><strong>Cross-Domain Validation</strong>: The framework integration
+allows validation of theoretical predictions across multiple domains,
+from molecular spectroscopy to behavioral response.</p>
+<h3 id="predictive-capability-assessment">Predictive Capability
+Assessment</h3>
+<p>The meta-material analytical framework enables prediction of system
+performance under different conditions. The
+<code>analyze_information_capacity()</code> method calculates channel
+capacity, signal-to-noise ratios, and quantum limits for information
+processing.</p>
+<p><strong>Channel Capacity</strong>: The information capacity of the
+infrared detection channel is:</p>
+<p><span class="math display">\[\begin{equation}
+C = B \log_2(1 + SNR)
+\label{eq:channel_capacity_empirical}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(B\)</span> is the bandwidth and
+<span class="math inline">\(SNR\)</span> is the signal-to-noise
+ratio.</p>
+<p><strong>Quantum Limits</strong>: The framework incorporates quantum
+mechanical limits on information processing: - <strong>Heisenberg
+Uncertainty</strong>: <span class="math inline">\(\Delta x \Delta p \geq
+\hbar/2\)</span> - <strong>Quantum Noise</strong>: Zero-point
+fluctuations - <strong>Entanglement Effects</strong>: Quantum
+correlations in receptor arrays</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>This mathematical appendix provides the theoretical foundation for
+understanding the vibrational theory of olfaction in insects. The
+equations presented here can be used to:</p>
+<ol type="1">
+<li><strong>Model sensilla responses</strong> to different infrared
+frequencies with quantitative accuracy</li>
+<li><strong>Predict optimal sensilla dimensions</strong> for specific
+detection tasks using electromagnetic theory</li>
+<li><strong>Analyze signal processing</strong> in the insect nervous
+system through statistical and information theory</li>
+<li><strong>Design experiments</strong> to test the vibrational theory
+with specific experimental parameters</li>
+<li><strong>Develop biomimetic sensors</strong> inspired by insect
+sensilla with predictable performance characteristics</li>
+</ol>
+<p><strong>Computational Validation</strong>: All equations are
+implemented in tested source code that generates the visualizations and
+analyses presented throughout this manuscript, ensuring empirical
+grounding for the theoretical framework.</p>
+<p><strong>Experimental Predictions</strong>: The mathematical framework
+provides specific, testable predictions for: - Sensilla response
+characteristics across different frequencies - Detection range and
+sensitivity under various environmental conditions - Optimal array
+configurations for different detection tasks - Performance limits based
+on fundamental physical principles</p>
+<p>The mathematical framework demonstrates that the vibrational theory
+is not only biologically plausible but also mathematically rigorous,
+providing testable predictions for future experimental validation. This
+integration of theory, computation, and empirical validation represents
+a comprehensive approach to understanding the remarkable capabilities of
+insect chemosensation.</p>
+</body>
+</html>

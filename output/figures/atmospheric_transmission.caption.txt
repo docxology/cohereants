@@ -1,0 +1,12 @@
+Atmospheric transmission window analysis for the CohereAnts model.
+
+Methodology: Computed using src.core.calculate_atmospheric_transmission() across 1-30 μm. The function is a coarse
+window-level model, not a line-by-line radiative-transfer calculation.
+
+Interpretation:
+• 2-5 μm and 8-14 μm are the principal modeled transmission opportunities.
+• 17-25 μm is retained as a lower-confidence sensitivity band and should not carry strong range claims.
+• Window overlap is a necessary physical condition for any IR semiochemical hypothesis, not evidence that insects use
+  these wavelengths for distant chemical communication.
+
+Literature anchors: HITRAN2020 atmospheric line data; insect IR and thermal-receptor literature cited in the manuscript. Generation method: Coarse window model from src.core.calculate_atmospheric_transmission(). Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Marks atmospheric window opportunity only; not a measured insect communication range. Registry metadata records the generation method, source artifact, and claim boundary for validation.

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>12_appendix_environmental_channel</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<h1 id="sec:app_environmental_channel">Appendix B: Environmental Channel
+Modeling</h1>
+<h2 id="objective">Objective</h2>
+<p>Comprehensive atmospheric channel modeling benchmarked against
+atmospheric spectroscopy concepts: molecular absorption (HO, CO, CH, O),
+Rayleigh scattering, aerosol effects, channel-capacity mapping with 8-14
+<span class="math inline">\(\mu\mathrm{m}\)</span> window emphasis,
+wavelength optimization over selected ranges, and environmental
+sensitivity analysis for candidate IR communication scenarios <span
+class="citation"
+data-cites="gordon2022hitran">[@gordon2022hitran]</span>.</p>
+<h2 id="interpretation">Interpretation</h2>
+<p>The case study compares how humidity, temperature, and path length
+shift usable windows and Shannon capacity under simplified atmospheric
+models. Results inform where narrowband signatures could propagate,
+complementing without replacing line-by-line radiative transfer.</p>
+<h2 id="claim-boundary">Claim boundary</h2>
+<p> reports engineering channel bounds under modeled conditions; it is
+not a measured insect communication range.</p>
+<h2 id="methods-src">Methods (src)</h2>
+<ul>
+<li><code>src/case_studies/environmental_channel.py</code>
+<ul>
+<li><code>molecular_absorption_cross_section(wavelengths, molecule_type)</code>
+— H2O, CO2, CH4 absorption</li>
+<li><code>rayleigh_scattering_coefficient(wavelengths, air_density)</code>
+— molecular scattering</li>
+<li><code>atmospheric_transmission_comprehensive(wavelengths, conditions)</code>
+— multi‑component transmission</li>
+<li><code>channel_capacity_analysis(wavelengths, environmental_conditions)</code>
+— Shannon capacity mapping</li>
+<li><code>optimize_wavelength_for_range(target_range, capacity_requirements)</code>
+— wavelength selection</li>
+<li><code>environmental_sensitivity_analysis(parameter_variations)</code>
+— parameter sensitivity</li>
+<li><code>atmospheric_transmission_detailed(wavelengths, humidity, temperature, path)</code>
+— basic transmission utility</li>
+<li><code>channel_capacity_vs_env(material_props, env_grid)</code> —
+grid mapping of capacity vs environment</li>
+</ul></li>
+</ul>
+<h2 id="script-and-outputs">Script and outputs</h2>
+<ul>
+<li>Script:
+<code>scripts/generate_environmental_channel_analysis.py</code></li>
+<li>Data:
+<code>output/data/environmental_channel_comprehensive.npz</code></li>
+<li>Figure:
+<code>../figures/environmental_channel_comprehensive_analysis.png</code></li>
+</ul>
+<h2 id="figure">Figure</h2>
+<!-- alt: Atmospheric channel model with absorption, scattering, and capacity maps across humidity and temperature; engineering channel bounds. -->
+<!-- Removed duplicate figure: uses the primary `app_env_channel` figure above -->
+<!-- alt: Integrated information decomposition across molecular, receptor, neural, and environmental terms; bounds sensor throughput, not biological proof. -->
+<h2 id="equation-references">Equation references</h2>
+<ul>
+<li>Atmospheric transmission: see <span
+class="math inline">\(\eqref{eq:atmospheric_transmission}\)</span></li>
+<li>Channel capacity: see <span
+class="math inline">\(\eqref{eq:channel_capacity_gloss}\)</span></li>
+</ul>
+<h2 id="reproducibility">Reproducibility</h2>
+<ul>
+<li>Run:
+<code>python3 scripts/generate_environmental_channel_analysis.py</code></li>
+<li>Artifacts saved to <code>output/data/</code> and
+<code>../figures/</code>.</li>
+<li>Deterministic grids via
+<code>src/config.set_random_seed(42)</code>.</li>
+</ul>
+<h2 id="context-note-on-biological-ranges">Context Note on Biological
+Ranges</h2>
+<p>Some insects exhibit sensitivity to thermal IR in natural behaviors.
+<em>Aedes aegypti</em> integrates thermal IR around the human
+skin-temperature spectrum with other host cues <span class="citation"
+data-cites="chandel2024thermal">[@chandel2024thermal]</span>.
+<em>Rhodnius prolixus</em> discriminates radiant IR from convective heat
+via antennal warm-cell combinatorial coding; forced convection disrupts
+that quotient <span class="citation"
+data-cites="zopf2014infrared zopf2015convection">[@zopf2014infrared;
+@zopf2015convection]</span>. Lazzari reviewed how radiant IR operates at
+longer range than convective heat near hosts <span class="citation"
+data-cites="lazzari2009orientation">[@lazzari2009orientation]</span>.
+These behavioral constraints complement the electromagnetic window
+analysis and motivate species- and wavelength-specific range
+predictions.</p>
+<h2 id="crossreferences">Cross‑references</h2>
+<ul>
+<li>Methods: </li>
+<li>Symbols: </li>
+<li>Math appendix: </li>
+</ul>
+</body>
+</html>

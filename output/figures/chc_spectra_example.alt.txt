@@ -1,0 +1,1 @@
+Synthetic cuticular-hydrocarbon infrared spectrum with C-H stretch and bend regions annotated; fixture for spectral feature extraction, not a measured ant spectrum.

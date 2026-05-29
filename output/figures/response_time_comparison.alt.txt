@@ -1,0 +1,1 @@
+Bar chart comparing visual, auditory, insect ORN, model IR-stage, and slow-comparator response times in milliseconds; engineering timing bounds, not biological proof.

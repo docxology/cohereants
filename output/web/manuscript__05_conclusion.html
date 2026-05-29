@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>05_conclusion</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<h1 id="sec:conclusion">Conclusion</h1>
+<h2 id="summary-of-findings">Summary of findings</h2>
+<p>We present a reproducible computational framework that implements,
+tests, and evaluates a contested IR/vibrational hypothesis for insect
+olfaction. Integrating morphology, spectroscopy, neural timing, and
+environmental modeling, the framework produces quantitative predictions
+and explicit falsifiers suitable for experimental validation.</p>
+<h3 id="reproducible-framework">Reproducible framework</h3>
+<p>All predictions are anchored in deterministic, unit-tested code with
+documented case studies and reproducible figure generation. Traceability
+runs from equations through <code>src/</code> modules to figures and
+tests.</p>
+<h3 id="empirical-highlights">Empirical highlights</h3>
+<ol type="1">
+<li>Morphology: Representative sensilla dimensions can be mapped onto
+IR-scale quarter- and half-wave estimates (); the needed empirical test
+is a preregistered, cross-taxa correlation analysis <span
+class="citation"
+data-cites="liu2021thripidae">[@liu2021thripidae]</span>.</li>
+<li>Neural timing: Published insect ORN timing is fast enough that any
+IR stage must be experimentally separated from already-rapid molecular
+responses () <span class="citation"
+data-cites="egeaweiss2018rapid gorurshandilya2017gain">[@egeaweiss2018rapid;
+@gorurshandilya2017gain]</span>.</li>
+<li>Behavior: Photomechanic beetle IR organs, kissing-bug combinatorial
+warm cells, ant thermosensitive sensilla, cycad thermogenic pollination
+IR, and mosquito thermal-IR host seeking establish biological IR/radiant
+sensing precedents, not direct semiochemical IR olfaction () <span
+class="citation"
+data-cites="schmitz2011infrared zopf2014infrared ruchty2009thermosensitive valenciamontoya2025infrared chandel2024thermal">[@schmitz2011infrared;
+@zopf2014infrared; @ruchty2009thermosensitive;
+@valenciamontoya2025infrared; @chandel2024thermal]</span>.</li>
+<li>Spectroscopy: Automated peak detection identifies CHC-associated
+bands that can support species discrimination in ATR-FTIR data, while
+perceptual use of those bands remains to be tested () <span
+class="citation"
+data-cites="durak2022atrftir">[@durak2022atrftir]</span>.</li>
+</ol>
+<p>The cross-domain evidence ladder () links atmospheric windows,
+sensilla geometry, CHC bands, and timing constraints without claiming
+direct semiochemical IR olfaction.</p>
+<p>Recent 2025–2026 literature—including cycad pollination IR <span
+class="citation"
+data-cites="valenciamontoya2025infrared">[@valenciamontoya2025infrared]</span>
+and dragonfly near-IR opsin tuning <span class="citation"
+data-cites="sato2026dragonfly">[@sato2026dragonfly]</span>—expands the
+IR relevance landscape without establishing semiochemical IR olfaction
+in ordinary antennal sensilla.</p>
+<h2 id="preregistered-falsifiers-and-translation-targets">Preregistered
+falsifiers and translation targets</h2>
+<p>The Discussion lists five minimal falsifiers; they are the
+operational closure for this framework:</p>
+<ol type="1">
+<li><strong>Spectral nulls</strong> — no frequency-specific response
+under matched thermal load and power deposition.</li>
+<li><strong>Geometric mismatch</strong> — sensilla dimensions
+uncorrelated with predicted resonances across taxa (N ≥ 50,
+phylogeny-aware).</li>
+<li><strong>Environmental misalignment</strong> — CHC peaks consistently
+outside modeled transmission windows under controlled humidity and
+temperature.</li>
+<li><strong>Temporal indistinguishability</strong> — ORN latencies to IR
+stimulation statistically indistinguishable from thermal stimulation at
+matched power.</li>
+<li><strong>Behavioral independence</strong> — no IR-only orientation
+without chemical gradients under preregistered olfactometer
+protocols.</li>
+</ol>
+<p><strong>Translation targets</strong> (grounded in model outputs, not
+biological proof):</p>
+<ul>
+<li>Biomimetic uncooled IR sensors informed by pit-organ and sensilla
+geometry (bands 2.8–6 µm, thresholds 11–17.3 mW/cm²) <span
+class="citation"
+data-cites="siebke2014biomimetic">[@siebke2014biomimetic]</span>.</li>
+<li>Pest-monitoring assay design with wavelength-specific stimulation
+and thermal controls.</li>
+<li>Channel-capacity and detection-limit estimates from
+<code>src/case_studies/environmental_channel.py</code> and
+<code>src/case_studies/detection_limits.py</code> as engineering upper
+bounds.</li>
+</ul>
+<p>Quantum-coherence and broad quantum-biology claims remain out of
+scope; the framework focuses on measurable sensor bounds and
+preregistered protocols.</p>
+<h2 id="reproducibility">Reproducibility</h2>
+<p>The Appendices and <code>src/</code> modules provide computational
+anchors for every figure label in the registry. Independent groups can
+regenerate artifacts via
+<code>./run.sh --project cohereants --core-only</code> or the documented
+script entry points, then validate outputs against
+<code>../figures/figure_registry.json</code>.</p>
+</body>
+</html>

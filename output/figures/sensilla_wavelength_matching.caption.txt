@@ -1,0 +1,14 @@
+Sensilla wavelength-matching analysis using representative morphometric inputs.
+
+Methodology: Computed with src.sensilla.analyze_sensilla_dimensions() on representative coeloconica, basiconica,
+and trichodea length/diameter inputs. Quarter- and half-wave estimates are model probes, not measured insect IR
+receptor tuning curves.
+
+Model summary:
+• Input length range: 5.0-150.0 μm; diameter range: 1.0-6.0 μm.
+• Quarter-wave mean: 189.0 μm; overlap with modeled atmospheric windows: 1/8.
+• Half-wave mean: 94.5 μm; overlap with modeled atmospheric windows: 2/8.
+• The broad spread shows why wavelength matching is a falsifiable constraint rather than a proof of IR olfaction.
+
+Literature anchors: ant sensilla morphometrics and taxonomy from Liu et al. 2021; thermo-sensitive sensilla from
+Ruchty et al. 2009; biomimetic IR-receptor modeling from Siebke et al. 2014. Generation method: Representative sensilla inputs via src.sensilla.analyze_sensilla_dimensions(). Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Quarter- and half-wave estimates are model probes, not measured receptor tuning curves. Registry metadata records the generation method, source artifact, and claim boundary for validation.

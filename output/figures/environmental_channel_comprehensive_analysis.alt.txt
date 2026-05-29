@@ -1,0 +1,1 @@
+Atmospheric channel model with absorption, scattering, and capacity maps across humidity and temperature; engineering channel bounds.

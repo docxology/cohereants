@@ -1,0 +1,12 @@
+Cuticular-hydrocarbon (CHC) infrared spectrum fixture analyzed with src.spectroscopy.analyze_chc_spectra().
+
+Methodology: Deterministic synthetic spectrum passed through the production CHC analyzer (3 detected peaks).
+The output is a reproducible model fixture for manuscript figures, not a measured ant spectrum.
+
+Bounded interpretation:
+• CHC molecules form the primary component of insect cuticles
+• FTIR/ATR spectra can classify insect cuticular chemistry in empirical studies
+• The figure supports spectral feature extraction and hypothesis generation
+• It does not establish that insects directly read these IR absorbance bands as olfactory signals
+
+Literature anchors: CHC biology from Blomquist and Ginzel 2021; ATR-FTIR classification evidence from Durak et al. 2022. Generation method: Fixture spectrum analyzed with src.spectroscopy.analyze_chc_spectra(). Registry metadata records the generation method, source artifact, and claim boundary for validation. Claim boundary: Synthetic CHC-band fixture for feature extraction; not a measured ant spectrum. Registry metadata records the generation method, source artifact, and claim boundary for validation.

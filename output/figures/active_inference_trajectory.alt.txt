@@ -1,0 +1,1 @@
+Deterministic active-inference trajectory on a grid with IR cue beliefs; behavioral demo model output, not field data.

@@ -26,5 +26,17 @@
   "title": "When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus",
   "upload_type": "publication",
   "publication_type": "preprint",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/docxology/cohereants",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "10.5281/zenodo.20450880",
+      "relation": "isVersionOf",
+      "scheme": "doi"
+    }
+  ]
 }

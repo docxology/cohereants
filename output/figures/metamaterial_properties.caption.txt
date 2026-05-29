@@ -1,0 +1,1 @@
+Meta-material dielectric and plasmonic response computed from MetaMaterialAnalyzer outputs. Shows epsilon real/imag, refractive index, absorption, resonance Q and field enhancement. Values are example outputs from integrated analysis.

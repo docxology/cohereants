@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>02_methodology</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<h1 id="sec:methodology">Methodology</h1>
+<h2 id="the-vibrational-theory-of-olfaction">The Vibrational Theory of
+Olfaction</h2>
+<p>The vibrational theory of olfaction proposes that molecular
+vibrations may contribute to odor recognition, potentially through
+electron-transfer or related spectroscopic mechanisms <span
+class="citation"
+data-cites="turin1996spectroscopic">[@turin1996spectroscopic]</span>.
+CohereAnts extends that idea into an insect-focused computational
+hypothesis: IR cues associated with semiochemicals could complement
+molecular binding in specific sensory contexts. Because receptor-level
+evidence remains contested <span class="citation"
+data-cites="block2015implausibility">[@block2015implausibility]</span>,
+the code is written as a falsification framework rather than as a proof
+of biological IR olfaction.</p>
+<h3 id="core-theoretical-framework">Core Theoretical Framework</h3>
+<p>The modeled mechanisms are deliberately separated so each can fail
+independently:</p>
+<ul>
+<li><strong>Electromagnetic resonance</strong> in micron-scale sensilla
+treated as candidate dielectric antenna structures.</li>
+<li><strong>Atmospheric propagation</strong> through simplified IR
+transmission windows, with HITRAN-style spectroscopy as the relevant
+external reference class <span class="citation"
+data-cites="gordon2022hitran">[@gordon2022hitran]</span>.</li>
+<li><strong>Molecular vibration</strong> in CHC-associated spectral
+regions measured by ATR-FTIR and related methods <span class="citation"
+data-cites="durak2022atrftir blomquist2021hydrocarbons">[@durak2022atrftir;
+@blomquist2021hydrocarbons]</span>.</li>
+<li><strong>Mechanotransduction</strong> as an analogy for converting
+physical deformation or thermal expansion into neural response, not as
+direct evidence for olfactory IR transduction <span class="citation"
+data-cites="di2023mechanotransduction">[@di2023mechanotransduction]</span>.</li>
+<li><strong>Electron-transfer vibration theory</strong> as a contested
+theoretical mechanism that must survive receptor-level tests <span
+class="citation"
+data-cites="turin1996spectroscopic block2015implausibility">[@turin1996spectroscopic;
+@block2015implausibility]</span>.</li>
+</ul>
+<p>All computational mechanisms are deterministic and unit-tested;
+biological interpretation is constrained by the external sources
+above.</p>
+<h2 id="environmental-channel-and-atmospheric-propagation">Environmental
+Channel and Atmospheric Propagation</h2>
+<h3 id="atmospheric-transmission-modeling">Atmospheric Transmission
+Modeling</h3>
+<p>Earth’s atmosphere exhibits IR transmission windows that determine
+signal propagation characteristics and range limits. The baseline
+<code>src.core.calculate_atmospheric_transmission()</code> model is an
+intentionally coarse window model, while the case-study module adds
+humidity, temperature, scattering, and path-length sensitivity terms.
+The code should therefore be read as a scenario generator, not as a
+substitute for line-by-line radiative transfer.</p>
+<ul>
+<li><strong>Molecular absorption</strong> (HO, CO, CH, O)</li>
+<li><strong>Rayleigh scattering</strong> from air molecules</li>
+<li><strong>Aerosol extinction</strong> from particulates</li>
+<li><strong>Temperature/humidity dependence</strong></li>
+<li><strong>Path-length effects</strong> for long-range propagation</li>
+</ul>
+<p><strong>Principal windows represented in the baseline model</strong>:
+- <strong>2–5 <span class="math inline">\(\mu\mathrm{m}\)</span>
+(mid-IR)</strong>: represented as a favorable transmission band. -
+<strong>8–14 <span class="math inline">\(\mu\mathrm{m}\)</span>
+(long-wave IR)</strong>: represented as the strongest atmospheric
+window. - <strong>17–25 <span
+class="math inline">\(\mu\mathrm{m}\)</span> (far-IR
+extension)</strong>: represented as a lower-confidence exploratory band
+with stronger environmental dependence.</p>
+<p>These windows overlap some CHC- and cuticle-associated vibrational
+bands, but overlap is only a necessary physical condition. Blackbody
+peaks from ecologically relevant sources fall near 3 µm for forest fires
+and ~9.4 µm for human skin at 34 °C, aligning pyrophilous and
+hematophagy IR precedents with the modeled windows <span
+class="citation"
+data-cites="schmitztrenner2003spectral chandel2024thermal">[@schmitztrenner2003spectral;
+@chandel2024thermal]</span>. Detection-range estimates in this
+manuscript are model outputs from <span
+class="math inline">\(\eqref{eq:atmospheric_transmission}\)</span>, not
+measured insect ranges. See and the environmental channel case study
+.</p>
+<!-- alt: Atmospheric transmission versus wavelength with shaded mid-IR, long-wave, and far-IR windows and a biomimetic 2.8–6 µm band; coarse model scope, not a range proof. -->
+<h2 id="insect-antenna-morphology-and-electromagnetic-design">Insect
+Antenna Morphology and Electromagnetic Design</h2>
+<h3 id="sensilla-as-dielectric-antennas">Sensilla as Dielectric
+Antennas</h3>
+<p>Insect antennae host micron-scale sensilla that can be compared
+against IR wavelengths using simple quarter- and half-wave estimates.
+Callahan proposed that sensilla function as dielectric waveguides for
+far-IR molecular emissions—a mechanism that remains contested but
+motivates geometric screening <span class="citation"
+data-cites="callahan1965fir callahan1977moth">[@callahan1965fir;
+@callahan1977moth]</span>. The current figures use representative
+sensilla classes from the literature and the published Thripidae
+measurements of Liu et al. as an anchor, rather than claiming an already
+completed 500-specimen morphometric dataset <span class="citation"
+data-cites="liu2021thripidae">[@liu2021thripidae]</span>. We analyze
+this correspondence through:</p>
+<ul>
+<li><strong>Representative morphometric ranges</strong> across sensillum
+classes and taxa</li>
+<li><strong>Resonance frequency calculations</strong> using cavity
+resonator theory</li>
+<li><strong>Waveguide mode analysis</strong> for cylindrical and conical
+geometries</li>
+<li><strong>Array effects</strong> including mutual coupling and beam
+forming</li>
+</ul>
+<p>Key functions in <code>src/sensilla.py</code>: -
+<code>analyze_sensilla_dimensions()</code>: Correlates morphology with
+IR resonances - <code>calculate_sensilla_resonance_frequency()</code>:
+Computes fundamental modes -
+<code>calculate_wavelength_matching()</code>: Quantifies spectral
+alignment</p>
+<p>See for representative morphometric inputs and modeled resonance
+estimates versus atmospheric windows.</p>
+<!-- alt: Representative sensilla dimensions and modeled quarter- and half-wave resonance estimates plotted against atmospheric windows; geometry screening, not receptor tuning proof. -->
+<h3 id="molecular-spectroscopy-and-vibrational-signatures">Molecular
+Spectroscopy and Vibrational Signatures</h3>
+<p>Isotope discrimination studies support the possibility of a molecular
+vibration-sensing component in Drosophila, while receptor-level
+critiques argue against broad claims for vibrational olfaction <span
+class="citation"
+data-cites="franco2011molecular block2015implausibility">[@franco2011molecular;
+@block2015implausibility]</span>. Our spectroscopic pipeline therefore
+treats vibrational features as discriminative spectral variables, not as
+settled perceptual mechanisms. It includes:</p>
+<ul>
+<li><strong>Robust wavenumber<span
+class="math inline">\(\leftrightarrow\)</span>wavelength
+conversions</strong> with unit testing</li>
+<li><strong>Peak detection algorithms</strong> with <span
+class="math inline">\(\pm 0.1\,\mu\mathrm{m}\)</span> localization
+accuracy</li>
+<li><strong>Isotope effect modeling</strong> for validation against
+experimental data</li>
+<li><strong>Spectral unmixing</strong> for complex CHC mixtures</li>
+</ul>
+<p>See for a deterministic CHC fixture analyzed via .</p>
+<!-- alt: Synthetic cuticular-hydrocarbon infrared spectrum with C-H stretch and bend regions annotated; fixture for spectral feature extraction, not a measured ant spectrum. -->
+<h2 id="computational-implementation-and-validation">Computational
+Implementation and Validation</h2>
+<h3 id="mathematical-framework">Mathematical Framework</h3>
+<p>The computational framework integrates multiple physical domains:</p>
+<ul>
+<li><strong>Maxwell’s equations</strong> for electromagnetic field
+propagation in dielectric media</li>
+<li><strong>Waveguide theory</strong> for sensilla as cylindrical
+dielectric waveguides</li>
+<li><strong>Resonant cavity formulas</strong> for antenna impedance
+matching</li>
+<li><strong>Piezoelectric coupling models</strong> for electromechanical
+transduction</li>
+<li><strong>Information theory</strong> for channel capacity and
+detection limits</li>
+</ul>
+<p>All theoretical expressions are implemented in <code>src/</code>
+modules with comprehensive unit testing that exercises:</p>
+<ul>
+<li>Scalar vs. array input handling with consistent broadcasting</li>
+<li>Numerical stability across parameter ranges (validated against
+analytical limits)</li>
+<li>Edge conditions and boundary cases (empty arrays, extreme
+values)</li>
+<li>Cross-platform reproducibility with fixed random seeds</li>
+</ul>
+<p><strong>Implementation Scope and Limitations:</strong> - Models
+assume linear, isotropic dielectric materials with frequency-dependent
+permittivity - Quasi-static approximations apply for sensilla dimensions
+&lt;&lt; wavelength - Single-mode waveguide propagation in cylindrical
+geometries - Temperature-independent properties within biological ranges
+(15-35<span class="math inline">\(^{\circ}\mathrm{C}\)</span>) -
+Negligible radiative losses compared to dielectric absorption -
+Electromechanical coupling terms are exploratory; the manuscript does
+not claim a verified insect olfactory transduction pathway.</p>
+<h3 id="testing-and-validation-strategy">Testing and Validation
+Strategy</h3>
+<p>The project enforces the template’s <span class="math inline">\(\geq
+90\%\)</span> <code>src/</code> coverage gate and maps core computations
+to tests:</p>
+<p><strong>Core Functions:</strong> -
+<code>src/core.py::calculate_atmospheric_transmission()</code> →
+<code>tests/test_core.py::TestAtmosphericTransmission</code> -
+<code>src/sensilla.py::analyze_sensilla_dimensions()</code> →
+<code>tests/test_sensilla.py::TestSensillaAnalysis</code> -
+<code>src/spectroscopy.py::analyze_chc_spectra()</code> →
+<code>tests/test_spectroscopy_analysis.py::TestAnalyzeChcSpectra</code></p>
+<p><strong>Advanced Case Studies:</strong> -
+<code>src/case_studies/detection_limits.py</code> →
+<code>tests/test_case_studies.py::TestDetectionLimits</code> -
+<code>src/case_studies/neural_encoding.py</code> →
+<code>tests/test_case_studies.py::TestNeuralEncoding</code> -
+<code>src/case_studies/environmental_channel.py</code> →
+<code>tests/test_case_studies.py::TestEnvironmentalChannel</code></p>
+<p>All tests use fixed random seeds (42) and validate numerical
+stability, broadcasting behavior, and edge conditions.</p>
+<h3 id="experimental-protocol-specification">Experimental Protocol
+Specification</h3>
+<p>Engineering deliverables prioritize preregistered, IR-only assays
+with thermal controls:</p>
+<table>
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 38%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Specification</th>
+<th>Source tier</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QCL/LED band</td>
+<td>2–25 µm</td>
+<td><code>src/manuscript_fixtures.py</code></td>
+</tr>
+<tr>
+<td>Power density</td>
+<td>0.1–2 mW/cm²</td>
+<td>protocol default</td>
+</tr>
+<tr>
+<td>Thermal control</td>
+<td>matched power deposition</td>
+<td>preregistered assay</td>
+</tr>
+<tr>
+<td>Minimum N</td>
+<td>≥50 per condition</td>
+<td>preregistration</td>
+</tr>
+<tr>
+<td>SNR operating point</td>
+<td>10 dB (model)</td>
+<td><code>output/data/detection_limits_spec.json</code></td>
+</tr>
+</tbody>
+</table>
+<p>Mosquito thermal-IR host-seeking assays use skin-temperature
+blackbody sources (34 °C, peak ~9.4 µm, range ~0.7 m) and are not
+interchangeable with narrowband QCL olfactometry <span class="citation"
+data-cites="chandel2024thermal corfas2015trpa1">[@chandel2024thermal;
+@corfas2015trpa1]</span>. <em>Melanophila</em> pit-organ photomechanic
+precedents anchor biomimetic bands 2.8–6 µm and literature thresholds
+11–17.3 mW/cm² <span class="citation"
+data-cites="schmitz2011infrared hammer2001sensitivity schmitztrenner2003spectral evans2005thermopneumatic siebke2014biomimetic">[@schmitz2011infrared;
+@hammer2001sensitivity; @schmitztrenner2003spectral;
+@evans2005thermopneumatic; @siebke2014biomimetic]</span>.</p>
+<h3 id="experimental-validation-protocols">Experimental Validation
+Protocols</h3>
+<p>Three complementary experimental approaches are specified for
+hypothesis testing:</p>
+<ol type="1">
+<li><strong>Single-Sensillum Electrophysiology:</strong>
+<ul>
+<li>Isolated sensilla under controlled IR illumination (2–25 <span
+class="math inline">\(\mu\mathrm{m}\)</span> wavelength range)</li>
+<li>Thermal-matched controls to distinguish electromagnetic from thermal
+effects</li>
+<li>Success criterion: frequency-specific responses with quality factor
+Q &gt; 10</li>
+<li>Measurement: neural spike trains, impedance spectroscopy</li>
+</ul></li>
+<li><strong>Behavioral IR-Only Assays:</strong>
+<ul>
+<li>Orientation chamber with narrowband IR LEDs (tunable
+wavelengths)</li>
+<li>Matched thermal controls with identical power deposition</li>
+<li>Success criterion: directional responses to IR-only stimulation</li>
+<li>Measurement: walking trajectories, turning angles, search
+efficiency</li>
+</ul></li>
+<li><strong>Cross-Taxa Morphometric Analysis:</strong>
+<ul>
+<li>Scanning electron microscopy (SEM) across species (N ≥ 50 per
+species)</li>
+<li>Statistical testing for resonance–dimension correlations (target r ≥
+0.8)</li>
+<li>Measurement: sensilla length, diameter, spacing, angular
+distribution</li>
+<li>Analysis: correlation statistics, phylogenetic patterns</li>
+</ul></li>
+</ol>
+<h2 id="reproducibility-and-quality-assurance">Reproducibility and
+Quality Assurance</h2>
+<h3 id="environment-and-dependencies">Environment and Dependencies</h3>
+<ul>
+<li><strong>Pinned environment</strong>: <code>pyproject.toml</code> and
+<code>uv.lock</code> ensure consistent dependencies across supported
+Python versions.</li>
+<li><strong>Deterministic execution</strong>:
+<code>src/config.set_random_seed(42)</code> for all stochastic
+processes</li>
+<li><strong>Platform independence</strong>: Numerical code avoids
+current known CWD assumptions; full cross-platform CI for this
+local-only project is outside the present artifact.</li>
+</ul>
+<h3 id="pipeline-and-automation">Pipeline and Automation</h3>
+<ul>
+<li><strong>Complete workflow</strong>:
+<code>MPLBACKEND=Agg .venv/bin/python scripts/generate_research_figures.py</code>
+regenerates the core figures, and the template renderer consumes the
+manuscript sections.</li>
+<li><strong>Unit testing</strong>:
+<code>MPLBACKEND=Agg .venv/bin/python -m pytest tests/ --cov=src --cov-report=term-missing</code>
+exercises the local project gate.</li>
+<li><strong>Integration testing</strong>: End-to-end validation of
+complete analysis pipelines with artifact verification</li>
+<li><strong>Artifact verification</strong>: Automated checking of output
+file integrity and figure generation</li>
+<li><strong>Build validation</strong>: All generated figures and data
+files verified for existence and correct format</li>
+</ul>
+<h3 id="data-management">Data Management</h3>
+<ul>
+<li><strong>Input validation</strong>: All functions perform
+comprehensive input checking with type hints and runtime validation</li>
+<li><strong>Output verification</strong>: Generated figures and data
+verified against expected ranges and formats</li>
+<li><strong>Version control</strong>: Complete provenance tracking for
+all computational artifacts with git integration</li>
+<li><strong>Data persistence</strong>: All intermediate results saved to
+<code>output/data/</code> with structured naming conventions</li>
+<li><strong>Error recovery</strong>: Graceful handling of computational
+failures with informative error messages</li>
+</ul>
+</body>
+</html>

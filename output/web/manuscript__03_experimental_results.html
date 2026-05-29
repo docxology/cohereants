@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>03_experimental_results</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<h1 id="sec:experimental_results">Experimental Results</h1>
+<h2 id="neurological-evidence">Neurological Evidence</h2>
+<h3 id="response-time-analysis">Response Time Analysis</h3>
+<p>Insect ORNs show short response latencies that constrain any
+candidate transduction mechanism. We quantify model contrasts using
+<code>src/core.py::calculate_response_time_improvement</code>, which
+decomposes latency into detection, transduction, and propagation
+terms:</p>
+<p><span class="math display">\[\begin{equation}
+\tau_{response} = \tau_{detection} + \tau_{transduction} +
+\tau_{propagation}
+\label{eq:response_time_components}
+\end{equation}\]</span></p>
+<p>Typical reference ranges used in the model comparison: - Insect ORNs:
+millisecond-scale responses, including first spikes down to 3 ms in
+Drosophila ORNs <span class="citation"
+data-cites="egeaweiss2018rapid">[@egeaweiss2018rapid]</span>. -
+Intermittent odor encoding: gain control and complementary kinetics
+under naturalistic stimuli <span class="citation"
+data-cites="gorurshandilya2017gain">[@gorurshandilya2017gain]</span>. -
+Moth pheromone ORNs: duration encoding appears early in the olfactory
+pathway <span class="citation"
+data-cites="barta2024stimulus">[@barta2024stimulus]</span>. - Slower
+comparison cases: diffusion-plus-binding terms are treated as model
+parameters, not as a single empirical constant.</p>
+<p>Model outputs indicate improvement factors of <span
+class="math inline">\(\approx 1.2\text{--}4\times\)</span> when the
+hypothetical IR-detection term is set below slower diffusion-dominated
+terms. This is a sensitivity result: it identifies the timing regime an
+IR pathway would need to occupy, rather than proving that the pathway
+exists.</p>
+<p>See for the comparison.</p>
+<!-- alt: Response-time constraint map comparing insect ORN latencies, slower model terms, and a hypothetical IR-stage target; engineering bounds, not biological proof. -->
+<h3 id="multimodal-detection-mechanisms">Multimodal Detection
+Mechanisms</h3>
+<p>The conservative interpretation is multimodal possibility, not
+multimodal proof. Molecular receptors and neural circuits already
+support fast olfactory coding, while photomechanic IR organs in
+pyrophilous beetles show that radiant-energy detection can evolve in
+insects under particular ecological pressures <span class="citation"
+data-cites="billesbolle2023odorant schmitz2011infrared schmitz2007mechanosensory">[@billesbolle2023odorant;
+@schmitz2011infrared; @schmitz2007mechanosensory]</span>. Any multimodal
+IR + molecular scheme remains an open test target, not an established
+pathway.</p>
+<p><strong>Quantum Mechanical Coupling (contested):</strong> Turin’s
+inelastic electron-tunneling model supplies a concrete mechanism for
+vibrational olfaction, but Block et al. report receptor-level and
+theoretical evidence against broad application of that mechanism <span
+class="citation"
+data-cites="turin1996spectroscopic block2015implausibility">[@turin1996spectroscopic;
+@block2015implausibility]</span>. The code exposes coupling parameters
+for sensitivity analysis; it does not assert they operate in insect
+antennae.</p>
+<h2 id="behavioral-evidence">Behavioral Evidence</h2>
+<h3 id="sensilla-orientation-and-directional-detection">Sensilla
+Orientation and Directional Detection</h3>
+<p>If sensilla function as directional electromagnetic antennas, this
+would explain observed self-orienting behaviors where sensilla hairs
+align toward odor sources. This orientation optimizes electromagnetic
+coupling and signal detection.</p>
+<p><strong>Directional Properties</strong>: Sensilla exhibit properties
+consistent with directional antennas: - <strong>Beam Width</strong>:
+15–30<span class="math inline">\(^{\circ}\)</span> half-power beamwidth
+- <strong>Front-to-Back Ratio</strong>: 10-20 dB directional selectivity
+- <strong>Gain Pattern</strong>: Maximum sensitivity in the forward
+direction</p>
+<p><strong>Behavioral validation</strong>: Experimental studies show
+localization accuracy of <span class="math inline">\(\pm
+15\text{--}30^{\circ}\)</span> in wind-tunnel assays, which is
+consistent with antenna-like gain patterns having 15-30<span
+class="math inline">\(^{\circ}\)</span> half-power beamwidths. However,
+these studies used chemical gradients, so controlled IR-only assays are
+required to disambiguate electromagnetic detection from volatile plume
+structure. See array directionality case study in . We provide minimal
+falsifiers in the Discussion.</p>
+<h3 id="specialized-infrared-sensors">Specialized Infrared Sensors</h3>
+<p>Pyrophilous beetles provide the clearest insect precedent for
+specialized IR organs. Schmitz et al. described photomechanic Golay-cell
+transduction in <em>Melanophila acuminata</em>; Evans modeled the organ
+thermopneumatically; Siebke et al. translated it into a biomimetic
+sensor concept <span class="citation"
+data-cites="schmitz2011infrared evans2005thermopneumatic siebke2014biomimetic">[@schmitz2011infrared;
+@evans2005thermopneumatic; @siebke2014biomimetic]</span>. Convergent
+photomechanic sensilla occur in <em>Aradus</em> flat bugs <span
+class="citation"
+data-cites="schmitza2010aradus">[@schmitza2010aradus]</span>, while
+<em>Acanthocnemus nigricans</em> uses a microbolometer disc organ <span
+class="citation"
+data-cites="schmitz2002acanthocnemus kreiss2007acanthocnemus">[@schmitz2002acanthocnemus;
+@kreiss2007acanthocnemus]</span>. <em>Merimna atrata</em> abdominal
+organs were reinterpreted as landing-hazard avoidance sensors rather
+than fire attractors <span class="citation"
+data-cites="schmitz2012merimna">[@schmitz2012merimna]</span>.</p>
+<p><strong>Sensor Characteristics</strong> (plasmonic/geometry links in
+):</p>
+<ul>
+<li><strong>Species</strong>: <em>Melanophila acuminata</em>,
+<em>Acanthocnemus nigricans</em>, <em>Aradus</em> spp., <em>Merimna
+atrata</em></li>
+<li><strong>Evolutionary Origin</strong>: Mechanosensory or
+thermosensory sensilla modified for radiant-energy detection
+(photomechanic or microbolometer)</li>
+<li><strong>Detection Range</strong>: 2.8–6 µm infrared wavelengths
+(literature-anchored <em>Melanophila</em> band)</li>
+<li><strong>Response Threshold</strong>: <span
+class="math inline">\(11--17.3\,\mathrm{mW}/\mathrm{cm}^2\)</span>
+(electrophysiology literature range)</li>
+<li><strong>Organ Structure</strong>: Pit-organ photomechanic sensilla,
+flat-bug thoracic sensilla, or prothoracic disc organs depending on
+species</li>
+</ul>
+<p><strong>Evolutionary Implications</strong>: These beetle organs
+support the plausibility of insect IR sensing in fire-associated
+contexts. They do not by themselves demonstrate semiochemical IR
+olfaction, so the manuscript uses them as anatomical and transduction
+precedents rather than as direct evidence for the central
+hypothesis.</p>
+<h3 id="thermo-sensitive-sensilla-response">Thermo-sensitive Sensilla
+Response</h3>
+<p>Leaf-cutting ants (<em>Atta vollenweideri</em>) add a social-insect
+precedent for thermosensitive sensilla coeloconica. Ruchty et al. report
+peg-in-pit sensilla whose neurons respond to convective temperature
+change and radiant heat <span class="citation"
+data-cites="ruchty2009thermosensitive">[@ruchty2009thermosensitive]</span>.</p>
+<p><strong>Experimental Protocol</strong>: - <strong>Stimulus</strong>:
+Broad-band IR emitter (0.4-11.2 <span
+class="math inline">\(\mu\mathrm{m}\)</span>) - <strong>Response
+Measurement</strong>: Cold-sensitive neuron activity -
+<strong>Penetration Depth</strong>: 6 <span
+class="math inline">\(\mu\mathrm{m}\)</span> for 3-<span
+class="math inline">\(\mu\mathrm{m}\)</span> wavelength radiation -
+<strong>Response Threshold</strong>: <span
+class="math inline">\(0.5\text{--}2.0\,\mathrm{mW}\,/\,\mathrm{cm}^2\)</span></p>
+<p><strong>Mechanistic Insights</strong>: This evidence is best treated
+as thermal/radiant sensing, not as proof of direct semiochemical
+spectroscopy. It motivates the thermal-control logic used in the
+proposed single-sensillum protocols.</p>
+<p>See for the cross-domain computational overview.</p>
+<!-- alt: Cross-domain computational overview linking atmospheric windows, sensilla resonance estimates, CHC bands, and timing constraints; hypothesis map, not an experimental setup. -->
+<h2 id="cuticular-hydrocarbon-spectroscopy">Cuticular Hydrocarbon
+Spectroscopy</h2>
+<h3 id="spectral-analysis-and-species-identification">Spectral Analysis
+and Species Identification</h3>
+<p>ATR-FTIR has been used to distinguish aphid species from body
+chemistry, with nine key absorption peaks giving high discrimination in
+Durak et al.’s study <span class="citation"
+data-cites="durak2022atrftir">[@durak2022atrftir]</span>. More broadly,
+CHCs are central waterproofing and communication traits across insects
+<span class="citation"
+data-cites="blomquist2021hydrocarbons">[@blomquist2021hydrocarbons]</span>.
+The <code>analyze_chc_spectra()</code> function processes synthetic and
+user-supplied spectra to identify characteristic vibrational
+regions.</p>
+<p><strong>Spectral Characteristics</strong>: - <strong>Aphid
+CHCs</strong>: Peak at 2.85-3.5 <span
+class="math inline">\(\mu\mathrm{m}\)</span> (2850-3500 cm<span
+class="math inline">\(^{-1}\)</span>) - <strong>Grasshopper
+CHCs</strong>: Transmission peak at 2850 cm<span
+class="math inline">\(^{-1}\)</span> (3.5 <span
+class="math inline">\(\mu\mathrm{m}\)</span>) - <strong>Ant
+CHCs</strong>: Multiple peaks in 2.9-3.1 <span
+class="math inline">\(\mu\mathrm{m}\)</span> range</p>
+<p><strong>Species discrimination</strong>: Durak et al. report 98%
+discrimination across 12 aphid species, dropping to 90% under jackknife
+validation, using ATR-FTIR ranges tied to lipids, amides, carbohydrates,
+and chitin <span class="citation"
+data-cites="durak2022atrftir">[@durak2022atrftir]</span>. CohereAnts
+uses these bands as spectroscopic anchors for feature extraction; field
+deployment would still require calibration across age, diet,
+environment, and preparation protocol.</p>
+<h3 id="intra-individual-variation">Intra-individual Variation</h3>
+<p>Fourier Transform Infrared Spectroscopy studies reveal significant
+intra-individual variation in cuticular lipid profiles. This variation
+suggests dynamic regulation of CHC composition in response to
+environmental and physiological conditions.</p>
+<p><strong>Variation Sources</strong>: - <strong>Environmental
+Factors</strong>: Temperature, humidity, and food availability -
+<strong>Physiological State</strong>: Age, reproductive status, and
+health condition - <strong>Social Context</strong>: Colony membership
+and social interactions</p>
+<p><strong>Detection Implications (open hypothesis):</strong> CHC
+variation could, in principle, support fine-grained social signaling if
+an electromagnetic readout pathway existed. Current evidence supports
+chemical and spectroscopic discrimination; controlled IR-only
+stimulation is required before attributing behavioral responses to
+vibrational IR sensing rather than thermal or molecular channels.</p>
+<h2 id="sensilla-array-log-periodicity">Sensilla Array
+Log-Periodicity</h2>
+<h3 id="concentration-tuning-and-array-response">Concentration Tuning
+and Array Response</h3>
+<p>The log-periodic arrangement of sensilla arrays provides
+concentration tuning capabilities that enhance detection sensitivity and
+dynamic range. Different degrees of ORN dendritic branching allow for
+fine-tuning and concentration information extraction.</p>
+<p><strong>Array Properties</strong>: - <strong>Log-Periodic
+Ratio</strong>: <span class="math inline">\(\tau \approx
+1.2-1.5\)</span> between adjacent elements - <strong>Concentration
+Range</strong>: 3-4 orders of magnitude dynamic range -
+<strong>Sensitivity Tuning</strong>: Individual sensilla tuned to
+different concentration ranges</p>
+<p><strong>Mathematical Model</strong>: The response of a log-periodic
+sensilla array follows the relationship:</p>
+<p><span class="math display">\[\begin{equation}
+R(C) = R_0 \sum_{n=0}^{N-1} \frac{C^n}{C_0^n} e^{-\frac{(C -
+C_n)^2}{2\sigma_n^2}}
+\label{eq:log_periodic_response_empirical}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(C\)</span> is the concentration,
+<span class="math inline">\(C_n = C_0 \tau^n\)</span> defines the
+log-periodic spacing, and <span class="math inline">\(\sigma_n\)</span>
+determines the width of each response peak.</p>
+<h2 id="allosteric-modulation-and-photomodulation">Allosteric Modulation
+and Photomodulation</h2>
+<h3 id="gpcr-conformational-dynamics">GPCR Conformational Dynamics</h3>
+<p>Allosteric modulation of olfactory GPCRs involves constant atomic
+motion, with receptors oscillating at femto- to millisecond frequencies
+between different conformational states. The vibrational theory suggests
+that photomodulation affects the probability and stability of these
+states.</p>
+<p><strong>Conformational States</strong>: - <strong>Active
+State</strong>: G-protein coupled conformation - <strong>Inactive
+State</strong>: Uncoupled conformation - <strong>Intermediate
+States</strong>: Multiple metastable conformations</p>
+<p><strong>Photomodulation Effects (model parameters):</strong> Infrared
+radiation could modulate conformational state probabilities through
+direct absorption, indirect water coupling, or resonant
+enhancement—these are exposed as test parameters, not established OR
+mechanisms.</p>
+<p><strong>Quantum Effects (exploratory only):</strong> Some GPCR models
+explore weak-field sensitivity near quantum-critical regimes. CohereAnts
+treats THz-scale coupling terms as falsifiable placeholders pending
+receptor-level evidence; they are not used to claim operational quantum
+olfaction in insects.</p>
+<h3 id="alpha-helical-resonance">Alpha-Helical Resonance</h3>
+<p>GPCR transmembrane elements consist of 7 alpha-helices that exhibit
+optical resonance properties similar to photosynthetic pigment proteins.
+This structural similarity suggests that OR alpha-helices may be
+responsive to electromagnetic radiation in the infrared range.</p>
+<ul>
+<li><strong>Resonant Properties</strong>:</li>
+<li><strong>Helix Dimensions</strong>: 3.6 amino acids per turn, 5.4
+pitch</li>
+<li><strong>Resonant Wavelengths</strong>: 2-10 <span
+class="math inline">\(\mu\mathrm{m}\)</span> corresponding to infrared
+range</li>
+<li><strong>Coupling Mechanisms</strong>: Dipole-dipole interactions and
+charge transfer</li>
+</ul>
+<h2 id="airflow-studies-and-sensilla-function">Airflow Studies and
+Sensilla Function</h2>
+<h3 id="airflow-patterns-and-molecular-transport">Airflow Patterns and
+Molecular Transport</h3>
+<p>Plumose moth antennae intercept only a fraction of upwind air. Vogel
+measured <em>Actias luna</em> and other saturniid antennae and found
+antenna flow can be much lower than free airspeed <span class="citation"
+data-cites="vogel1983silkmoth">[@vogel1983silkmoth]</span>.</p>
+<p><strong>Quantitative Measurements</strong>: - <strong>Free
+Airspeed</strong>: 2.0 m/sec - <strong>Antenna Flow Rate</strong>: 0.26
+m/sec - <strong>Flow Efficiency</strong>: Only 13% of upwind air passes
+through antennae</p>
+<p><strong>Functional Implications:</strong> Low airflow efficiency
+constrains how much odorant volume an antenna samples per unit time.
+That transport limit is compatible with fast molecular ORN responses
+when plumes are structured and intermittent <span class="citation"
+data-cites="barta2024stimulus">[@barta2024stimulus]</span>. It does not,
+by itself, imply that antennae primarily function as electromagnetic
+detectors rather than molecular capture surfaces.</p>
+<p><strong>Open computational question:</strong> Under what geometries,
+powers, and preregistered controls could wavelength-specific
+electromagnetic cues add information beyond molecular plume capture and
+turbulent transport? CohereAnts models that question; Vogel’s
+measurements supply a transport anchor, not an answer.</p>
+</body>
+</html>

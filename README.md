@@ -2,8 +2,15 @@
 
 **When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus**
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20450880.svg)](https://doi.org/10.5281/zenodo.20450880)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+
 Computational research on insect IR sensing and olfaction modeling — engineering bounds and
 protocol design, not biological proof of IR olfaction.
+
+**Cite this work** via the concept DOI [10.5281/zenodo.20450880](https://doi.org/10.5281/zenodo.20450880)
+(always resolves to the latest version). The v1.0.0 deposit is
+[10.5281/zenodo.20450881](https://doi.org/10.5281/zenodo.20450881). See [`CITATION.cff`](CITATION.cff).
 
 | Context | Name |
 | --- | --- |

@@ -1,0 +1,1 @@
+Neural encoding panels with spike trains, population PCA, and information metrics on synthetic ORN time series; model output only.

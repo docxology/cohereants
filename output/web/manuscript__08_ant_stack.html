@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>08_ant_stack</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<h1 id="sec:ant_stack_appendix">Ant Stack Implementation Appendix</h1>
+<h2 id="introduction">Introduction</h2>
+<p>This appendix maps CohereAnts computational modules onto the Ant
+Stack three-layer framework (AntBody, AntBrain, AntMind) as a
+<strong>sensor-fusion control model</strong>, not a mind/brain metaphor.
+The stack coordinates physical sensing (sensilla IR models), state
+estimation (channel capacity), and action selection (active inference
+demos) for protocol design and assay simulation.</p>
+<h3 id="antbody-layer-physical-simulation-and-sensing">AntBody Layer:
+Physical Simulation and Sensing</h3>
+<h4 id="sensilla-morphology-integration">Sensilla Morphology
+Integration</h4>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># AntBody sensilla configuration (adapter pattern)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> AntBodySensilla:</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, species_preset: <span class="bu">str</span>):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Load species-specific sensilla parameters via CohereAnts presets</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.lengths <span class="op">=</span> load_sensilla_lengths(species_preset)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.diameters <span class="op">=</span> load_sensilla_diameters(species_preset)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Delegate resonance calculation to tested src utilities</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="im">from</span> src.sensilla <span class="im">import</span> calculate_wavelength_matching</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.optimal_wavelengths <span class="op">=</span> calculate_wavelength_matching(<span class="va">self</span>.lengths, <span class="va">self</span>.diameters)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> export_io(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> {</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;lengths_um&#39;</span>: <span class="va">self</span>.lengths,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;diameters_um&#39;</span>: <span class="va">self</span>.diameters,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;optimal_wavelengths_um&#39;</span>: <span class="va">self</span>.optimal_wavelengths,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        }</span></code></pre></div>
+<p><strong>I/O Contract</strong>: - <strong>Observations</strong>:
+Sensilla dimensions (<span
+class="math inline">\(\mu\mathrm{m}\)</span>), resonance frequencies
+(THz), quality factors - <strong>Actions</strong>: Antenna positioning,
+sensilla orientation - <strong>Physics</strong>: 1 kHz update rate,
+contact dynamics for substrate interaction</p>
+<h4 id="spectroscopy-and-atmospheric-transmission">Spectroscopy and
+Atmospheric Transmission</h4>
+<p>Integration of CohereAnts atmospheric transmission models:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> AntBodySpectroscopy:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, environment_preset: <span class="bu">str</span>):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.transmission_curves <span class="op">=</span> load_atmospheric_data(environment_preset)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.spectral_resolution <span class="op">=</span> <span class="fl">0.01</span>  <span class="co"># um</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> get_transmission(<span class="va">self</span>, wavelength: <span class="bu">float</span>, distance: <span class="bu">float</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Delegate to CohereAnts atmospheric transmission model in src/core</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> calculate_atmospheric_transmission(wavelength, distance)</span></code></pre></div>
+<p><strong>Configuration Parameters</strong>: - Atmospheric windows: 2-5
+<span class="math inline">\(\mu\mathrm{m}\)</span>, 8-14 <span
+class="math inline">\(\mu\mathrm{m}\)</span>, 17-25 <span
+class="math inline">\(\mu\mathrm{m}\)</span> - Transmission
+coefficients: 0.7-0.9 for optimal windows - Distance-dependent
+attenuation models</p>
+<p><strong>Layer handoff:</strong> AntBody exports wavelength-dependent
+transmission, sensilla resonance estimates, and spectral features as
+observation tensors. AntBrain consumes those tensors as channel inputs
+for encoding and discrimination models; it does not imply a literal
+insect central nervous system implementation.</p>
+<h3 id="antbrain-layer-neural-architecture">AntBrain Layer: Neural
+Architecture</h3>
+<h4 id="olfactory-processing-pipeline">Olfactory Processing
+Pipeline</h4>
+<p>Mapping CohereAnts vibrational theory to AntBrain’s AL→MB→CX
+architecture:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> AntBrainOlfaction:</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, neuron_count: <span class="bu">int</span> <span class="op">=</span> <span class="dv">100000</span>):</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Antennal Lobe (AL) - odor coding</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.al_neurons <span class="op">=</span> <span class="va">self</span>._initialize_al_circuit()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Mushroom Body (MB) - associative learning</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.mb_neurons <span class="op">=</span> <span class="va">self</span>._initialize_mb_circuit()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Central Complex (CX) - spatial integration</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.cx_neurons <span class="op">=</span> <span class="va">self</span>._initialize_cx_circuit()</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _initialize_al_circuit(<span class="va">self</span>):</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Delegate vibrational detection to src components in production</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Each glomerulus responds to specific molecular vibrations</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> VibrationalGlomeruliCircuit()</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _initialize_mb_circuit(<span class="va">self</span>):</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Kenyon cells for odor-memory associations</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> KenyonCellCircuit()</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _initialize_cx_circuit(<span class="va">self</span>):</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Ring attractor for heading representation</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> RingAttractorCircuit()</span></code></pre></div>
+<p><strong>Neural Implementation Details</strong>: - <strong>AL
+Layer</strong>: 50 glomeruli, each tuned to specific vibrational
+frequencies - <strong>MB Layer</strong>: 2500 Kenyon cells with sparse
+coding (5% activity) - <strong>CX Layer</strong>: 16-heading ring
+attractor with 100 neurons per heading</p>
+<h4 id="vibrational-detection-circuit">Vibrational Detection
+Circuit</h4>
+<p>Implementation of CohereAnts electromagnetic theory:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> VibrationalGlomeruliCircuit:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.frequency_tuning <span class="op">=</span> np.linspace(<span class="dv">2</span>, <span class="dv">25</span>, <span class="dv">50</span>)  <span class="co"># um to THz</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.quality_factors <span class="op">=</span> np.ones(<span class="dv">50</span>) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> process_spectral_input(<span class="va">self</span>, spectral_data: np.ndarray) <span class="op">-&gt;</span> np.ndarray:</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Implement CohereAnts resonance detection</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        responses <span class="op">=</span> np.zeros(<span class="dv">50</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i, freq <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="va">self</span>.frequency_tuning):</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>            responses[i] <span class="op">=</span> <span class="va">self</span>._calculate_vibrational_response(spectral_data, freq)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> responses</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _calculate_vibrational_response(<span class="va">self</span>, spectrum: np.ndarray, </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                                     resonant_freq: <span class="bu">float</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Placeholder: call src electromagnetic coupling utilities in production</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        coupling_strength <span class="op">=</span> <span class="va">self</span>._calculate_coupling(spectrum, resonant_freq)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> coupling_strength <span class="op">*</span> <span class="va">self</span>.quality_factors[i]</span></code></pre></div>
+<p><strong>Layer handoff:</strong> AntBrain maps encoded spectral and
+timing features to population responses and information metrics (see ).
+AntMind applies policy steps—active inference demos in —to simulate
+search trajectories under IR cue beliefs. This is a control-theoretic
+stack for protocol design, not a claim about insect cognition.</p>
+<h3 id="antmind-layer-cognitive-modeling">AntMind Layer: Cognitive
+Modeling</h3>
+<h4 id="active-inference-for-olfactory-search">Active Inference for
+Olfactory Search</h4>
+<p>Integration of CohereAnts behavioral models with active
+inference:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> AntMindOlfaction:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.generative_model <span class="op">=</span> <span class="va">self</span>._build_olfactory_model()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.policy_horizon <span class="op">=</span> <span class="fl">2.0</span>  <span class="co"># seconds</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _build_olfactory_model(<span class="va">self</span>):</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Implement CohereAnts behavioral predictions</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> OlfactoryGenerativeModel()</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> select_policy(<span class="va">self</span>, current_state: Dict) <span class="op">-&gt;</span> np.ndarray:</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Active inference policy selection</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        expected_free_energy <span class="op">=</span> <span class="va">self</span>._calculate_efe()</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._minimize_free_energy(expected_free_energy)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _calculate_efe(<span class="va">self</span>) <span class="op">-&gt;</span> Dict[<span class="bu">str</span>, <span class="bu">float</span>]:</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Decompose into epistemic and pragmatic value</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> {</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;epistemic&#39;</span>: <span class="va">self</span>._calculate_epistemic_value(),</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;pragmatic&#39;</span>: <span class="va">self</span>._calculate_pragmatic_value()</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        }</span></code></pre></div>
+<h4 id="stigmergy-for-trail-following">Stigmergy for Trail
+Following</h4>
+<p>Implementation of CohereAnts pheromone dynamics:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> AntMindStigmergy:</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.pheromone_field <span class="op">=</span> np.zeros((<span class="dv">100</span>, <span class="dv">100</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.decay_rate <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.diffusion_coefficient <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> update_pheromone_field(<span class="va">self</span>, deposits: List[Tuple[<span class="bu">int</span>, <span class="bu">int</span>, <span class="bu">float</span>]]):</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Implement CohereAnts pheromone diffusion model</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> x, y, amount <span class="kw">in</span> deposits:</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.pheromone_field[x, y] <span class="op">+=</span> amount</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Apply diffusion and decay</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.pheromone_field <span class="op">=</span> <span class="va">self</span>._diffuse_and_decay()</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _diffuse_and_decay(<span class="va">self</span>) <span class="op">-&gt;</span> np.ndarray:</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Fick&#39;s law implementation from CohereAnts</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        laplacian <span class="op">=</span> <span class="va">self</span>._calculate_laplacian(<span class="va">self</span>.pheromone_field)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        diffusion <span class="op">=</span> <span class="va">self</span>.diffusion_coefficient <span class="op">*</span> laplacian</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        decay <span class="op">=</span> <span class="op">-</span><span class="va">self</span>.decay_rate <span class="op">*</span> <span class="va">self</span>.pheromone_field</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>.pheromone_field <span class="op">+</span> diffusion <span class="op">+</span> decay</span></code></pre></div>
+<h2 id="species-specific-implementations">Species-Specific
+Implementations</h2>
+<h3 id="formica-species-configuration">Formica Species
+Configuration</h3>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Formica species preset for Ant Stack</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>FORMICA_PRESET <span class="op">=</span> {</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;body&#39;</span>: {</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;sensilla_lengths&#39;</span>: [<span class="fl">15.2</span>, <span class="fl">18.7</span>, <span class="fl">22.1</span>, <span class="fl">19.8</span>, <span class="fl">16.5</span>],  <span class="co"># um</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;sensilla_diameters&#39;</span>: [<span class="fl">2.1</span>, <span class="fl">2.8</span>, <span class="fl">3.2</span>, <span class="fl">2.9</span>, <span class="fl">2.3</span>],     <span class="co"># um</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;optimal_wavelengths&#39;</span>: [<span class="fl">60.8</span>, <span class="fl">74.8</span>, <span class="fl">88.4</span>, <span class="fl">79.2</span>, <span class="fl">66.0</span>], <span class="co"># um</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;antenna_length&#39;</span>: <span class="fl">2.5</span>,  <span class="co"># mm</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;leg_count&#39;</span>: <span class="dv">6</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;body_mass&#39;</span>: <span class="fl">0.015</span>  <span class="co"># g</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;brain&#39;</span>: {</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;al_glomeruli_count&#39;</span>: <span class="dv">50</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;mb_kenyon_cells&#39;</span>: <span class="dv">2500</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;cx_heading_resolution&#39;</span>: <span class="dv">16</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;spiking_threshold&#39;</span>: <span class="fl">0.1</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;learning_rate&#39;</span>: <span class="fl">0.01</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;mind&#39;</span>: {</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;policy_horizon&#39;</span>: <span class="fl">2.0</span>,  <span class="co"># seconds</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;pheromone_decay&#39;</span>: <span class="fl">0.01</span>,</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;diffusion_coefficient&#39;</span>: <span class="fl">0.1</span>,</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;exploration_rate&#39;</span>: <span class="fl">0.2</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="camponotus-species-configuration">Camponotus Species
+Configuration</h3>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Camponotus species preset for Ant Stack</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>CAMPONOTUS_PRESET <span class="op">=</span> {</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;body&#39;</span>: {</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;sensilla_lengths&#39;</span>: [<span class="fl">22.5</span>, <span class="fl">28.1</span>, <span class="fl">31.7</span>, <span class="fl">26.8</span>, <span class="fl">24.3</span>],  <span class="co"># um</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;sensilla_diameters&#39;</span>: [<span class="fl">3.2</span>, <span class="fl">4.1</span>, <span class="fl">4.8</span>, <span class="fl">4.2</span>, <span class="fl">3.6</span>],     <span class="co"># um</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;optimal_wavelengths&#39;</span>: [<span class="fl">90.0</span>, <span class="fl">112.4</span>, <span class="fl">126.8</span>, <span class="fl">107.2</span>, <span class="fl">97.2</span>], <span class="co"># um</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;antenna_length&#39;</span>: <span class="fl">3.8</span>,  <span class="co"># mm</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;leg_count&#39;</span>: <span class="dv">6</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;body_mass&#39;</span>: <span class="fl">0.045</span>  <span class="co"># g</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;brain&#39;</span>: {</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;al_glomeruli_count&#39;</span>: <span class="dv">60</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;mb_kenyon_cells&#39;</span>: <span class="dv">3000</span>,</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;cx_heading_resolution&#39;</span>: <span class="dv">20</span>,</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;spiking_threshold&#39;</span>: <span class="fl">0.08</span>,</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;learning_rate&#39;</span>: <span class="fl">0.015</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;mind&#39;</span>: {</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;policy_horizon&#39;</span>: <span class="fl">2.5</span>,  <span class="co"># seconds</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;pheromone_decay&#39;</span>: <span class="fl">0.008</span>,</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;diffusion_coefficient&#39;</span>: <span class="fl">0.12</span>,</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;exploration_rate&#39;</span>: <span class="fl">0.15</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h2 id="evaluation-and-benchmarking">Evaluation and Benchmarking</h2>
+<h3 id="navigation-performance-metrics">Navigation Performance
+Metrics</h3>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> AntStackEvaluator:</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, test_scenarios: List[<span class="bu">str</span>]):</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.scenarios <span class="op">=</span> test_scenarios</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.metrics <span class="op">=</span> {}</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> evaluate_navigation(<span class="va">self</span>, ant_stack: AntStack) <span class="op">-&gt;</span> Dict[<span class="bu">str</span>, <span class="bu">float</span>]:</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        results <span class="op">=</span> {}</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> scenario <span class="kw">in</span> <span class="va">self</span>.scenarios:</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> scenario <span class="op">==</span> <span class="st">&#39;trail_following&#39;</span>:</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                results[scenario] <span class="op">=</span> <span class="va">self</span>._evaluate_trail_following(ant_stack)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> scenario <span class="op">==</span> <span class="st">&#39;food_search&#39;</span>:</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>                results[scenario] <span class="op">=</span> <span class="va">self</span>._evaluate_food_search(ant_stack)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">elif</span> scenario <span class="op">==</span> <span class="st">&#39;nest_return&#39;</span>:</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>                results[scenario] <span class="op">=</span> <span class="va">self</span>._evaluate_nest_return(ant_stack)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> results</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _evaluate_trail_following(<span class="va">self</span>, ant_stack: AntStack) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Implement CohereAnts trail following metrics (calls src/behavioral metrics)</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        trail_deviation <span class="op">=</span> <span class="va">self</span>._calculate_trail_deviation()</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        pheromone_detection <span class="op">=</span> <span class="va">self</span>._calculate_pheromone_detection()</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._combine_metrics([trail_deviation, pheromone_detection])</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> _evaluate_food_search(<span class="va">self</span>, ant_stack: AntStack) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Implement CohereAnts search efficiency metrics (calls src/behavioral metrics)</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>        search_time <span class="op">=</span> <span class="va">self</span>._measure_search_time()</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>        energy_efficiency <span class="op">=</span> <span class="va">self</span>._calculate_energy_efficiency()</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._combine_metrics([search_time, energy_efficiency])</span></code></pre></div>
+<h3 id="robustness-testing">Robustness Testing</h3>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> RobustnessTester:</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.noise_levels <span class="op">=</span> [<span class="fl">0.01</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.adversary_types <span class="op">=</span> [<span class="st">&#39;sensor_noise&#39;</span>, <span class="st">&#39;pheromone_contamination&#39;</span>, <span class="st">&#39;path_obstruction&#39;</span>]</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_noise_robustness(<span class="va">self</span>, ant_stack: AntStack) <span class="op">-&gt;</span> Dict[<span class="bu">str</span>, <span class="bu">float</span>]:</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        results <span class="op">=</span> {}</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> noise_level <span class="kw">in</span> <span class="va">self</span>.noise_levels:</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>            performance <span class="op">=</span> <span class="va">self</span>._run_noisy_scenario(ant_stack, noise_level)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>            results[<span class="ss">f&#39;noise_</span><span class="sc">{</span>noise_level<span class="sc">}</span><span class="ss">&#39;</span>] <span class="op">=</span> performance</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> results</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> test_adversary_robustness(<span class="va">self</span>, ant_stack: AntStack) <span class="op">-&gt;</span> Dict[<span class="bu">str</span>, <span class="bu">float</span>]:</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>        results <span class="op">=</span> {}</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> adversary <span class="kw">in</span> <span class="va">self</span>.adversary_types:</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>            performance <span class="op">=</span> <span class="va">self</span>._run_adversarial_scenario(ant_stack, adversary)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>            results[<span class="ss">f&#39;adversary_</span><span class="sc">{</span>adversary<span class="sc">}</span><span class="ss">&#39;</span>] <span class="op">=</span> performance</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> results</span></code></pre></div>
+<h2 id="implementation-workflow">Implementation Workflow</h2>
+<h3 id="development-pipeline">Development Pipeline</h3>
+<ol type="1">
+<li><strong>Module Mapping</strong>: Identify CohereAnts functions for
+Ant Stack integration</li>
+<li><strong>I/O Contract Definition</strong>: Establish standardized
+interfaces between layers</li>
+<li><strong>Species Preset Creation</strong>: Develop parameterized
+configurations</li>
+<li><strong>Testing Framework</strong>: Implement evaluation metrics and
+benchmarks</li>
+<li><strong>Documentation</strong>: Create implementation guides and
+examples</li>
+</ol>
+<h3 id="code-organization">Code Organization</h3>
+<pre><code>ant_stack_cohereants/
+├── antbody/
+│   ├── sensilla_physics.py      # CohereAnts vibrational theory
+│   ├── spectroscopy_sensors.py  # atmospheric transmission models
+│   └── morphology_models.py     # species-specific parameters
+├── antbrain/
+│   ├── olfactory_circuits.py    # AL→MB→CX implementation
+│   ├── vibrational_detection.py # electromagnetic coupling
+│   └── learning_mechanisms.py   # STDP and plasticity
+├── antmind/
+│   ├── olfactory_inference.py   # active inference models
+│   ├── stigmergy_models.py      # pheromone dynamics
+│   └── behavioral_policies.py   # search and navigation
+├── presets/
+│   ├── formica_config.py        # Formica species preset
+│   ├── camponotus_config.py     # Camponotus species preset
+│   └── custom_species.py        # Template for new species
+└── evaluation/
+    ├── navigation_tests.py      # Trail following, search
+    ├── robustness_tests.py      # Noise, adversary testing
+    └── performance_metrics.py   # Standardized benchmarks</code></pre>
+<h2 id="integration-benefits">Integration Benefits</h2>
+<h3 id="reproducibility">Reproducibility</h3>
+<ul>
+<li><strong>Standardized I/O</strong>: All experiments use consistent
+interfaces</li>
+<li><strong>Version Pinning</strong>: Dependencies and parameters are
+explicitly tracked</li>
+<li><strong>Seed Management</strong>: Reproducible random number
+generation</li>
+<li><strong>Artifact Tracking</strong>: Complete experiment
+provenance</li>
+</ul>
+<h3 id="extensibility">Extensibility</h3>
+<ul>
+<li><strong>Species Presets</strong>: Easy addition of new ant
+species</li>
+<li><strong>Module Swapping</strong>: Interchangeable components across
+layers</li>
+<li><strong>Parameter Tuning</strong>: Systematic exploration of
+parameter space</li>
+<li><strong>Benchmark Addition</strong>: New evaluation scenarios</li>
+</ul>
+<h3 id="validation">Validation</h3>
+<ul>
+<li><strong>Biological Plausibility</strong>: Grounded in empirical
+data</li>
+<li><strong>Performance Metrics</strong>: Quantified success
+criteria</li>
+<li><strong>Robustness Testing</strong>: Resilience to real-world
+challenges</li>
+<li><strong>Cross-Species Transfer</strong>: Generalization across
+taxa</li>
+</ul>
+<h2 id="future-directions">Future Directions</h2>
+<h3 id="advanced-learning-mechanisms">Advanced Learning Mechanisms</h3>
+<ul>
+<li><strong>Meta-Learning</strong>: Adaptation across different
+environments</li>
+<li><strong>Collective Intelligence</strong>: Emergent behaviors in
+colonies</li>
+<li><strong>Transfer Learning</strong>: Knowledge transfer between
+species</li>
+</ul>
+<h3 id="hardware-integration">Hardware Integration</h3>
+<ul>
+<li><strong>Robotic Platforms</strong>: Physical ant-inspired
+robots</li>
+<li><strong>Sensor Networks</strong>: Distributed environmental
+monitoring</li>
+<li><strong>Edge Computing</strong>: Efficient on-device processing</li>
+</ul>
+<h3 id="biological-validation">Biological Validation</h3>
+<ul>
+<li><strong>Field Studies</strong>: Comparison with natural ant
+behavior</li>
+<li><strong>Neural Recording</strong>: Validation against biological
+data</li>
+<li><strong>Evolutionary Analysis</strong>: Phylogenetic patterns in
+behavior</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>The integration of CohereAnts research into the Ant Stack framework
+provides a robust, reproducible platform for studying ant intelligence.
+By mapping our vibrational theory of olfaction, spectroscopic analysis,
+and behavioral modeling to the standardized three-layer architecture, we
+create a comprehensive system that bridges theoretical insights with
+computational implementation.</p>
+<p>This implementation enables systematic exploration of ant behavior
+across species, environments, and experimental conditions while
+maintaining the biological plausibility that underpins our research. The
+modular design facilitates both hypothesis testing in myrmecology and
+applications in swarm robotics, cognitive security, and AI
+alignment.</p>
+<p><strong>Key Contributions</strong>: 1. <strong>Systematic
+Integration</strong>: Methodical mapping of CohereAnts to Ant Stack
+layers 2. <strong>Species Parameterization</strong>: Reproducible
+configurations for multiple ant taxa 3. <strong>Evaluation
+Framework</strong>: Standardized metrics and robustness testing 4.
+<strong>Implementation Workflow</strong>: Clear development pipeline and
+code organization 5. <strong>Future Roadmap</strong>: Extensibility and
+validation pathways</p>
+<p>The resulting framework serves as a bridge between theoretical
+entomology and computational neuroscience, enabling reproducible
+research that advances our understanding of both natural ant
+intelligence and artificial intelligence systems.</p>
+</body>
+</html>
