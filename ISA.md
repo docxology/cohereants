@@ -3,12 +3,18 @@ project: cohereants
 task: Clean noisy files, re-render, and publish cohereants to public GitHub (docxology/cohereants) + Zenodo with concept/version DOI cross-references; then move working/→published/
 slug: cohereants-install
 effort: E4
-phase: publish
-progress: 61/61
+phase: complete
+progress: 77/77
 mode: algorithm
 started: 2026-05-25
 updated: 2026-05-29
 ---
+
+> **PUBLISHED 2026-05-29** — Public GitHub `docxology/cohereants` (v1.0.0) + Zenodo
+> concept DOI `10.5281/zenodo.20450880` / version DOI `10.5281/zenodo.20450970`.
+> Publication ISC-53–68 verified (see `## Verification (publication)` at end). Forge
+> cross-vendor audit: CERTIFY-WITH-RESIDUALS (residuals fixed). Advisor gate passed.
+> Project moved private `working/` → `published/`.
 
 # ISA — cohereants
 
@@ -159,22 +165,22 @@ cross-vendor audit pass without unaddressed CRITICAL findings — all without co
 - [ ] ISC-52: A `data/` or `output/` working dir exists for figure/data artifacts (probe: `ls`)
 
 ### Publication (2026-05-29 — clean / re-render / publish)
-- [ ] ISC-53: Noisy/disposable artifacts cleared (htmlcov, .coverage*, coverage_project.json, .pytest_cache, .benchmarks, stale output) (probe: `ls` shows absent)
-- [ ] ISC-54: Fresh full/core pipeline re-render produces `output/cohereants/pdf/cohereants_combined.pdf` THIS session (probe: file mtime + pages)
-- [ ] ISC-55: Re-rendered PDF passes `infrastructure.validation.cli pdf` (probe: validator exit 0)
-- [ ] ISC-56: No home-directory absolute-path leak (the "Users" home prefix) in any file staged for the public repo (probe: grep for the home prefix == 0)
-- [ ] ISC-57: `CITATION.cff` present with both authors + Apache-2.0 + concept DOI (probe: Read)
-- [ ] ISC-58: `.zenodo.json` present with both creators + matching version (probe: Read)
-- [ ] ISC-59: `config.yaml` has `publication.github_repository: docxology/cohereants` and split doi/version_doi fields (probe: Read)
-- [ ] ISC-60: Source pushed to `github.com/docxology/cohereants`, repo visibility PUBLIC (probe: `gh repo view` visibility=PUBLIC)
-- [ ] ISC-61: Publish workflow validated in dry-run + sandbox before production (probe: dry-run/sandbox exit 0 + receipt)
-- [ ] ISC-62: Zenodo production deposit published; concept + version DOI minted and resolve via doi.org (probe: `curl -I https://doi.org/<doi>` 200/302)
-- [ ] ISC-63: GitHub release v1.0.0 exists with PDF asset + release body citing DOI + Zenodo URL + GitHub URL + PDF SHA-256 (probe: `gh release view`)
-- [ ] ISC-64: DOI written back into `config.yaml` (concept=publication.doi) + `CITATION.cff` + `.zenodo.json`, committed and pushed (probe: Read + git log)
-- [ ] ISC-65: PDF cover/citation re-rendered with the minted concept DOI (probe: pdftotext page 1 contains DOI)
-- [ ] ISC-66: Project moved from private `working/` to `published/`; symlink under template `projects/` updated (probe: `ls` source + link)
-- [ ] ISC-67: Anti: production Zenodo deposit is NOT published until dry-run+sandbox both succeed and PDF validates (probe: ordering in Decisions)
-- [ ] ISC-68: Anti: the existing private repo's authorship/provenance is preserved (no silent author drop; Tucker Chambers remains corresponding) (probe: CITATION.cff + .zenodo.json)
+- [x] ISC-53: Noisy/disposable artifacts cleared (htmlcov, .coverage*, coverage_project.json, .pytest_cache, .benchmarks, stale output) (probe: `ls` shows absent)
+- [x] ISC-54: Fresh full/core pipeline re-render produces `output/cohereants/pdf/cohereants_combined.pdf` THIS session (probe: file mtime + pages)
+- [x] ISC-55: Re-rendered PDF passes `infrastructure.validation.cli pdf` (probe: validator exit 0)
+- [x] ISC-56: No home-directory absolute-path leak (the "Users" home prefix) in any file staged for the public repo (probe: grep for the home prefix == 0)
+- [x] ISC-57: `CITATION.cff` present with both authors + Apache-2.0 + concept DOI (probe: Read)
+- [x] ISC-58: `.zenodo.json` present with both creators + matching version (probe: Read)
+- [x] ISC-59: `config.yaml` has `publication.github_repository: docxology/cohereants` and split doi/version_doi fields (probe: Read)
+- [x] ISC-60: Source pushed to `github.com/docxology/cohereants`, repo visibility PUBLIC (probe: `gh repo view` visibility=PUBLIC)
+- [x] ISC-61: Publish workflow validated in dry-run + sandbox before production (probe: dry-run/sandbox exit 0 + receipt)
+- [x] ISC-62: Zenodo production deposit published; concept + version DOI minted and resolve via doi.org (probe: `curl -I https://doi.org/<doi>` 200/302)
+- [x] ISC-63: GitHub release v1.0.0 exists with PDF asset + release body citing DOI + Zenodo URL + GitHub URL + PDF SHA-256 (probe: `gh release view`)
+- [x] ISC-64: DOI written back into `config.yaml` (concept=publication.doi) + `CITATION.cff` + `.zenodo.json`, committed and pushed (probe: Read + git log)
+- [x] ISC-65: PDF cover/citation re-rendered with the minted concept DOI (probe: pdftotext page 1 contains DOI)
+- [x] ISC-66: Project moved from private `working/` to `published/`; symlink under template `projects/` updated (probe: `ls` source + link)
+- [x] ISC-67: Anti: production Zenodo deposit is NOT published until dry-run+sandbox both succeed and PDF validates (probe: ordering in Decisions)
+- [x] ISC-68: Anti: the existing private repo's authorship/provenance is preserved (no silent author drop; Tucker Chambers remains corresponding) (probe: CITATION.cff + .zenodo.json)
 
 ## Test Strategy
 
@@ -408,3 +414,27 @@ POST-REMEDIATION GATE: superseded by the 2026-05-26 scholarship/visualization re
 ## Changelog (2026-05-28)
 
 - Thermo-nuclear remediation: compute/render split for case studies, typed analysis dataclasses, shared appendix grid, figures package, integrated plot extraction, caption registry indirection.
+
+## Verification (publication) — 2026-05-29
+
+Artifact-backed evidence for ISC-53–68 (all `[x]`):
+
+- ISC-53: `ls` after clean — htmlcov/.coverage*/.pytest_cache/.benchmarks/coverage_project.json/output absent (~43MB removed).
+- ISC-54: `output/cohereants/pdf/cohereants_combined.pdf` mtime 2026-05-29 12:46, 68 pages (pypdf), regenerated this session via `execute_pipeline.py --project cohereants --core-only`.
+- ISC-55: `infrastructure.validation.cli pdf …cohereants_combined.pdf` → "Total issues found: 0".
+- ISC-56: `grep -rIn 'Users/4d'` over public tree incl. PDF `strings`, 18 PNGs, 19 HTML, all JSON → 0 (Forge independently re-confirmed).
+- ISC-57: `CITATION.cff` — both authors + ORCIDs, `license: Apache-2.0`, `doi: 10.5281/zenodo.20450880`.
+- ISC-58: `.zenodo.json` — both creators, `version: 1.0.0`, related_identifiers → concept DOI + GitHub.
+- ISC-59: `config.yaml` `publication.github_repository: docxology/cohereants`, split `doi`/`version_doi`/`version_record`.
+- ISC-60: `gh repo view docxology/cohereants` → `"visibility":"PUBLIC"`, default branch main.
+- ISC-61: `publish_project_release.py --dry-run` exit 0 + receipt; live reversible Zenodo prod pre-check (draft create 201 → delete 204) PASS. (Sandbox token unavailable; substituted reversible prod pre-check.)
+- ISC-62: Zenodo deposit `state: done`; `curl -I https://doi.org/10.5281/zenodo.20450880` → 302 → zenodo (concept, resolves to latest 20450970); version 20450970 → 302.
+- ISC-63: `gh release view v1.0.0` → asset `cohereants_combined.pdf` (13,895,561 B) + body with concept+version DOI, Zenodo URL, GitHub URL, PDF SHA-256 `36bd97a8…`.
+- ISC-64: `config.yaml` doi=concept 20450880; CITATION.cff/.zenodo.json synced; committed (e587afc/313ac05) + pushed to docxology/cohereants.
+- ISC-65: `pypdf` page-1 text of re-rendered PDF contains `10.5281/zenodo.20450880` (concept DOI on cover).
+- ISC-66: real dir moved to private `published/cohereants` (git commit 158c2e6); template symlink `projects/published/cohereants` → live target; no dangling links.
+- ISC-67: ordering honored — dry-run + live pre-check + PDF validation ALL preceded the production `--production` publish.
+- ISC-68: `CITATION.cff` + `.zenodo.json` retain Tucker Chambers (corresponding) + Daniel A. Friedman; NOTICE credits both. No author dropped.
+
+**Cross-vendor (Rule 2a):** Forge audit verdict **CERTIFY-WITH-RESIDUALS** — residuals (figure count 18→17, src/figures path, stale rendered-config DOI) all fixed + pushed; generator hardened to emit repo-relative paths.
+**Advisor (Rule 2 E4 HARD):** invoked on final artifact set; flagged binary-leak + license-NOTICE + two-version checks — all cleared (NOTICE added, copyright filled, superseded note added to 20450881).

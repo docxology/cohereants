@@ -53,8 +53,14 @@ def build_figure_registry(project_root: Path) -> Path:
             caption = f"Figure generated for {label}. Generation method: {figure_method(label)} {FIGURE_VALIDATION_NOTE}"
         claim_boundary = FIGURE_CLAIM_BOUNDARIES.get(label, DEFAULT_CLAIM_BOUNDARY)
         alt_text = _resolve_alt_text(label, caption, figure_dir, filename)
+        # Store a project-root-relative path so the registry is portable and never
+        # leaks an absolute home-directory path into the published artifact.
+        try:
+            rel_path = figure_path.relative_to(project_root).as_posix()
+        except ValueError:
+            rel_path = figure_path.as_posix()
         records[label] = {
-            "path": str(figure_path),
+            "path": rel_path,
             "caption": caption,
             "filename": filename,
             "label": label,

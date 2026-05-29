@@ -6,6 +6,7 @@ Author: Tucker Chambers, Daniel A. Friedman
 Keywords: entomology,insect-olfaction,infrared-detection,vibrational-theory,semiochemicals,sensilla,antennae,electromagnetic-sensing,neuroscience,behavioral-ecology,active-inference
 Requires-Python: >=3.10
 License-File: LICENSE
+License-File: NOTICE
 Requires-Dist: numpy>=1.24.0
 Requires-Dist: scipy>=1.10.0
 Requires-Dist: matplotlib>=3.7.0
