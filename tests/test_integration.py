@@ -7,7 +7,6 @@ This file tests the integration between modules and end-to-end workflows.
 import numpy as np
 import pytest
 import matplotlib.pyplot as plt
-from unittest.mock import patch, MagicMock
 
 # Import modules for integration testing
 from src.core import calculate_atmospheric_transmission, calculate_response_time_improvement
@@ -15,7 +14,12 @@ from src.sensilla import analyze_sensilla_dimensions, calculate_wavelength_match
 from src.spectroscopy import analyze_chc_spectra, calculate_spectral_overlap
 from src.visualization import AdvancedVisualizer, PlotStyler
 from src.behavioral import analyze_behavioral_response
-from src.integrated_analysis import IntegratedAnalyzer
+from src.integrated_analysis import IntegratedAnalyzer, create_sample_integrated_analysis
+
+
+def _results_for_visualization():
+    _, results = create_sample_integrated_analysis()
+    return results
 
 
 class TestModuleIntegration:
@@ -250,7 +254,8 @@ class TestEndToEndWorkflows:
         y = np.sin(x) * np.exp(-x/5)
 
         # Step 3: Create figure with styling
-        fig, ax = styler.create_figure_grid(1, 1)
+        fig, axes = styler.create_figure_grid(1, 1)
+        ax = axes[0]
         ax.plot(x, y, color=styler.get_colors(1)[0])
         styler.format_axes(ax, xlabel='Time', ylabel='Amplitude', title='Test Signal')
 
@@ -321,3 +326,93 @@ class TestDataFlowIntegration:
         overlap = calculate_spectral_overlap(original_spectrum, modified_spectrum)
         assert 0.0 <= overlap <= 1.0
 
+# --- merged from test_coverage_integrated_analysis.py ---
+
+def test_generate_visualization_all_branches():
+    analyzer = IntegratedAnalyzer()
+    fig = analyzer.generate_visualization(_results_for_visualization())
+    assert hasattr(fig, "savefig")
+    # 2x2 panel grid is created regardless of which branches fire.
+    assert len(fig.axes) >= 4
+    plt.close(fig)
+
+
+def test_generate_visualization_none_and_empty():
+    analyzer = IntegratedAnalyzer()
+    fig_none = analyzer.generate_visualization(None)
+    assert hasattr(fig_none, "savefig")
+    plt.close(fig_none)
+
+    fig_empty = analyzer.generate_visualization({})
+    assert hasattr(fig_empty, "savefig")
+    plt.close(fig_empty)
+
+
+def test_comprehensive_report_alias_matches_full_report():
+    analyzer, results = create_sample_integrated_analysis()
+    alias = analyzer.comprehensive_report(results)
+    direct = analyzer.generate_comprehensive_report(results)
+    assert isinstance(alias, str)
+    assert len(alias) > 0
+    assert alias == direct
+    plt.close("all")
+
+
+def test_create_sample_and_full_chain():
+    analyzer, results = create_sample_integrated_analysis()
+    assert "fermi_analysis" in results
+    assert "metamaterial_analysis" in results
+
+    metrics = analyzer.calculate_system_performance_metrics(results)
+    assert "system_efficiency" in metrics
+    assert np.isfinite(metrics["system_efficiency"])
+    assert metrics["system_efficiency"] >= 0.0
+
+    figures = analyzer.create_visualization_figures(results)
+    assert set(figures.keys()) == {
+        "information_breakdown",
+        "metamaterial_properties",
+        "system_performance",
+    }
+    for fig in figures.values():
+        assert hasattr(fig, "savefig")
+    plt.close("all")
+
+# --- merged from test_coverage_demock_extra.py (integrated) ---
+
+# ── IntegratedAnalyzer real factory + visualization/report/save paths ───────
+class TestIntegratedAnalyzerReal:
+    def test_sample_analysis_structure(self):
+        analyzer, results = create_sample_integrated_analysis()
+        assert isinstance(analyzer, IntegratedAnalyzer)
+        assert isinstance(results, dict) and len(results) > 0
+
+    def test_comprehensive_report_has_content(self):
+        analyzer, results = create_sample_integrated_analysis()
+        report = analyzer.generate_comprehensive_report(results)
+        assert isinstance(report, str) and len(report) > 100
+        assert any(c.isdigit() for c in report)
+
+    def test_generate_visualization_real_figure(self):
+        analyzer, results = create_sample_integrated_analysis()
+        fig = analyzer.generate_visualization(results)
+        assert isinstance(fig, plt.Figure)
+        assert len(fig.axes) >= 1
+        plt.close("all")
+
+    def test_create_visualization_figures_real(self):
+        analyzer, results = create_sample_integrated_analysis()
+        figs = analyzer.create_visualization_figures(results)
+        assert isinstance(figs, dict) and len(figs) >= 1
+        for f in figs.values():
+            assert isinstance(f, plt.Figure)
+        plt.close("all")
+
+    def test_save_analysis_figures_writes_files(self, tmp_path):
+        analyzer, results = create_sample_integrated_analysis()
+        figs = analyzer.create_visualization_figures(results)
+        analyzer.save_analysis_figures(figs, str(tmp_path))
+        written = list(tmp_path.glob("*.png"))
+        assert len(written) >= 1
+        assert all(p.stat().st_size > 0 for p in written)
+        plt.close("all")

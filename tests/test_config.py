@@ -9,7 +9,8 @@ import pytest
 import tempfile
 import os
 import json
-from unittest.mock import patch, MagicMock
+import warnings
+import matplotlib.pyplot as plt
 
 # Import the module under test
 try:
@@ -54,12 +55,14 @@ class TestConfigManager:
         finally:
             os.unlink(temp_file)
 
-    def test_environment_variable_override(self):
+    def test_environment_variable_override(self, monkeypatch):
         """Test that environment variables override defaults."""
-        with patch.dict(os.environ, {'INSECT_TEMPERATURE': '315.0', 'INSECT_PLOT_DPI': '450'}):
-            config = ConfigManager()
-            assert config.get('temperature') == 315.0
-            assert config.get('plot_dpi') == 450
+        monkeypatch.setenv('INSECT_TEMPERATURE', '315.0')
+        monkeypatch.setenv('INSECT_PLOT_DPI', '450')
+
+        config = ConfigManager()
+        assert config.get('temperature') == 315.0
+        assert config.get('plot_dpi') == 450
 
     def test_get_method(self):
         """Test the get method with various scenarios."""
@@ -199,30 +202,38 @@ class TestGlobalConfigFunctions:
         # Reset
         set_temperature(original_temp)
 
-    @patch('src.config.get_config')
-    def test_convenience_functions(self, mock_get_config):
-        """Test convenience functions."""
-        mock_config = MagicMock()
-        mock_get_config.return_value = mock_config
+    def test_convenience_functions(self):
+        """Test convenience functions with real matplotlib + config state."""
+        from src import config as config_module
+        config = init_config()
+        original_verbose = config.get('verbose_logging')
+        original_seed = config.get('random_seed')
 
-        # Test set_plot_style - this doesn't call config.set, just sets matplotlib style
         from src.config import set_plot_style
-        with patch('matplotlib.pyplot.style.use') as mock_style_use:
-            set_plot_style('default')
-            mock_style_use.assert_called_with('default')
 
-        # Test enable_verbose_logging - this does call config.set
+        # Real call: 'default' is a valid matplotlib style and resets rcParams.
+        # Perturb a parameter, then assert set_plot_style actually changed it back.
+        plt.rcParams['lines.linewidth'] = 99.0
+        set_plot_style('default')
+        assert plt.rcParams['lines.linewidth'] != 99.0
+        assert plt.rcParams['lines.linewidth'] == plt.rcParamsDefault['lines.linewidth']
+
+        # Real except-OSError branch: an unknown style warns and does NOT raise.
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            set_plot_style('this_style_does_not_exist_12345')
+        assert any("not found" in str(w.message) for w in caught)
+
         from src.config import enable_verbose_logging
         enable_verbose_logging()
-        mock_config.set.assert_called_with('verbose_logging', True)
+        assert config_module.get_config().get('verbose_logging') is True
 
-        # Reset mock
-        mock_config.reset_mock()
-
-        # Test set_random_seed - this does call config.set
         from src.config import set_random_seed
         set_random_seed(123)
-        mock_config.set.assert_called_with('random_seed', 123)
+        assert config_module.get_config().get('random_seed') == 123
+
+        config_module.get_config().set('verbose_logging', original_verbose)
+        config_module.get_config().set('random_seed', original_seed)
 
 
 class TestConfigManagerEdgeCases:
@@ -273,7 +284,7 @@ class TestConfigManagerEdgeCases:
         assert config.get('nested.level1.level2') == 'updated'
         assert config.get('nested.level1.level3') == 'new'
 
-    def test_environment_variable_types(self):
+    def test_environment_variable_types(self, monkeypatch):
         """Test different environment variable types."""
         test_cases = [
             ('INSECT_TEMPERATURE', '300.5', 300.5),
@@ -284,19 +295,18 @@ class TestConfigManagerEdgeCases:
         ]
 
         for env_var, env_value, expected_value in test_cases:
-            with patch.dict(os.environ, {env_var: env_value}):
-                config = ConfigManager()
-                config_key = env_var.replace('INSECT_', '').lower()
-                assert config.get(config_key) == expected_value
+            monkeypatch.setenv(env_var, env_value)
+            config = ConfigManager()
+            config_key = env_var.replace('INSECT_', '').lower()
+            assert config.get(config_key) == expected_value
+            monkeypatch.delenv(env_var, raising=False)
 
-    def test_invalid_environment_variable(self):
+    def test_invalid_environment_variable(self, monkeypatch):
         """Test invalid environment variable value."""
-        with patch.dict(os.environ, {'INSECT_TEMPERATURE': 'invalid'}):
-            # Should handle invalid environment variable gracefully
-            try:
-                config = ConfigManager()
-                # Should fall back to default due to validation error
-                assert config.get('temperature') == 298.15
-            except (ValueError, TypeError):
-                # If validation fails during initialization, that's also acceptable
-                pass
+        monkeypatch.setenv('INSECT_TEMPERATURE', 'invalid')
+
+        try:
+            config = ConfigManager()
+            assert config.get('temperature') == 298.15
+        except (ValueError, TypeError):
+            pass

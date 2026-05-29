@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Test runner script for cohereAnts project.
+"""Test runner script for CohereAnts project.
 
 This script provides an easy way to run tests with various options
 including coverage reporting, test selection, and output formatting.
@@ -15,7 +15,7 @@ from pathlib import Path
 def run_tests_with_coverage(verbose: bool = False, 
                            html_report: bool = False,
                            xml_report: bool = False,
-                           fail_under: int = 100) -> int:
+                           fail_under: int = 90) -> int:
     """Run tests with coverage reporting.
     
     Args:
@@ -140,7 +140,7 @@ def show_test_coverage() -> None:
 def main():
     """Main function for the test runner."""
     parser = argparse.ArgumentParser(
-        description="Test runner for cohereAnts project",
+        description="Test runner for CohereAnts project",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
@@ -175,8 +175,8 @@ Examples:
     parser.add_argument(
         "--fail-under",
         type=int,
-        default=100,
-        help="Minimum coverage percentage required (default: 100)"
+        default=90,
+        help="Minimum coverage percentage required (default: 90; matches pyproject.toml)",
     )
     
     parser.add_argument(

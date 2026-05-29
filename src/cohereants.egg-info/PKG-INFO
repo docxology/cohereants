@@ -1,0 +1,17 @@
+Metadata-Version: 2.4
+Name: cohereants
+Version: 0.1.0
+Summary: When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus
+Author: Tucker Chambers, Daniel A. Friedman
+Keywords: entomology,insect-olfaction,infrared-detection,vibrational-theory,semiochemicals,sensilla,antennae,electromagnetic-sensing,neuroscience,behavioral-ecology,active-inference
+Requires-Python: >=3.10
+License-File: LICENSE
+Requires-Dist: numpy>=1.24.0
+Requires-Dist: scipy>=1.10.0
+Requires-Dist: matplotlib>=3.7.0
+Requires-Dist: scikit-learn>=1.3.0
+Requires-Dist: pyyaml>=6.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.1.0; extra == "dev"
+Dynamic: license-file

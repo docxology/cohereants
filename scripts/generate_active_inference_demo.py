@@ -4,7 +4,7 @@ from __future__ import annotations
 import os
 import sys
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
-from _utils import ensure_src_on_path, setup_paths, set_mpl_backend, write_caption
+from _utils import ensure_src_on_path, setup_paths, set_mpl_backend, write_figure_bundle_from_script
 import numpy as np
 import matplotlib.pyplot as plt
 ensure_src_on_path()
@@ -46,7 +46,15 @@ def main() -> int:
     fig.savefig(out_png, dpi=300, bbox_inches="tight")
     plt.close(fig)
 
-    write_caption(os.path.join(fig_dir, "active_inference_trajectory.caption.txt"), "Deterministic gradient-following trajectory under a simple active-inference step model.")
+    caption = (
+        "Deterministic gradient-following trajectory under a simple active-inference step model. "
+        "Behavioral demo only; not field data."
+    )
+    write_figure_bundle_from_script(
+        out_png,
+        caption,
+        label="fig:app_active_inference",
+    )
 
     np.savez(os.path.join(data_dir, "active_inference_demo.npz"), x=x, y=y)
 

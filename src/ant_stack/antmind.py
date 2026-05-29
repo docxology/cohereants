@@ -68,5 +68,3 @@ class AntMindStigmergy:
         diffusion = self.diffusion_coefficient * laplacian
         decay = -self.decay_rate * field
         return field + diffusion + decay
-
-

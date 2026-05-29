@@ -1,0 +1,30 @@
+{
+  "creators": [
+    {
+      "affiliation": "Independent Researcher",
+      "name": "Chambers, Tucker",
+      "orcid": "0009-0008-3793-7872"
+    },
+    {
+      "affiliation": "Active Inference Institute",
+      "name": "Friedman, Daniel A.",
+      "orcid": "0000-0001-6232-9096"
+    }
+  ],
+  "description": "Source code and manuscript for 'When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus' (2026) — computational research on insect infra-red sensing and olfaction modeling: engineering bounds and protocol design.",
+  "keywords": [
+    "insect olfaction",
+    "infrared detection",
+    "vibrational theory of olfaction",
+    "semiochemicals",
+    "sensilla morphology",
+    "electromagnetic sensing",
+    "active inference",
+    "reproducible research"
+  ],
+  "license": "Apache-2.0",
+  "title": "When do bugs see (infra)red? On the Visual and Infra-red in the Insect Perceptual Apparatus",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "version": "1.0.0"
+}

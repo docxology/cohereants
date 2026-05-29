@@ -7,7 +7,6 @@ including all methods and edge cases.
 
 import pytest
 import numpy as np
-from unittest.mock import patch, MagicMock
 
 # Import the module under test
 try:
@@ -335,20 +334,18 @@ class TestCreateSampleMetamaterialAnalysis:
 
 class TestMetaMaterialAnalyzerMainExecution:
     """Test the main execution block of meta_material_framework module."""
-    
-    @patch('builtins.print')
-    def test_main_execution(self, mock_print):
+
+    def test_main_execution(self, capsys):
         """Test the main execution block."""
         import src.meta_material_framework
-        
-        # Execute the main block logic directly
+
         analyzer, dielec_data, plasm_data, quant_data, info_data = src.meta_material_framework.create_sample_metamaterial_analysis()
-        
         report = analyzer.generate_metamaterial_report(dielec_data, plasm_data, quant_data, info_data)
         print(report)
-        
-        # Check that print was called
-        mock_print.assert_called()
+        captured = capsys.readouterr()
+
+        assert "COMPREHENSIVE META-MATERIAL ANALYSIS" in captured.out
+        assert "PLASMONIC PROPERTIES" in captured.out
 
 
 class TestMetaMaterialAnalyzerEdgeCases:

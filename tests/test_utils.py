@@ -1,7 +1,7 @@
 """Test utilities and common test functionality.
 
 This module provides common utilities, fixtures, and helper functions
-for testing across the cohereAnts project.
+for testing across the CohereAnts project.
 """
 
 import os

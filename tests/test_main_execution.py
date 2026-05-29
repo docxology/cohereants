@@ -1,286 +1,140 @@
 """
-Comprehensive tests for main execution blocks.
-
-This file tests main execution blocks and direct execution to achieve 100% coverage.
+Real execution tests for module entrypoints and sample factories.
 """
 
-import pytest
+import importlib
+import os
 import subprocess
 import sys
-import os
-import importlib
-from unittest.mock import patch, MagicMock
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+from src.fermi_estimation import create_sample_fermi_analysis
+from src.insect_analysis import run_comprehensive_analysis
+from src.integrated_analysis import create_sample_integrated_analysis
+from src.meta_material_framework import create_sample_metamaterial_analysis
+
+_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def _run_script(script_path: str) -> subprocess.CompletedProcess[str]:
+    env = os.environ.copy()
+    env["PYTHONPATH"] = _PROJECT_ROOT
+    env.setdefault("MPLBACKEND", "Agg")
+    result = subprocess.run(
+        [sys.executable, script_path],
+        capture_output=True,
+        text=True,
+        cwd=_PROJECT_ROOT,
+        env=env,
+    )
+    assert result.returncode == 0, result.stderr
+    return result
 
 
 class TestMainExecutionBlocks:
-    """Test main execution blocks for missing coverage."""
+    """Test main execution blocks for real scripts."""
 
     def test_fermi_estimation_main_block(self):
-        """Test fermi estimation main execution block (lines 345-348)."""
-        # Execute the script as a module to trigger the main block
-        result = subprocess.run([
-            sys.executable, "src/fermi_estimation.py"
-        ], capture_output=True, text=True, cwd=os.getcwd())
-
-        # The script should execute without error
-        assert result.returncode == 0 or "report" in result.stdout.lower()
+        result = _run_script("src/fermi_estimation.py")
+        assert "COMPREHENSIVE FERMI ESTIMATION ANALYSIS" in result.stdout
 
     def test_meta_material_framework_main_block(self):
-        """Test meta material framework main execution block (lines 417-420)."""
-        # Execute the script as a module to trigger the main block
-        result = subprocess.run([
-            sys.executable, "src/meta_material_framework.py"
-        ], capture_output=True, text=True, cwd=os.getcwd())
-
-        # The script should execute without error
-        assert result.returncode == 0 or "report" in result.stdout.lower()
+        result = _run_script("src/meta_material_framework.py")
+        assert "COMPREHENSIVE META-MATERIAL ANALYSIS" in result.stdout
+        assert "DIELECTRIC PROPERTIES:" in result.stdout
 
     def test_integrated_analysis_main_block(self):
-        """Test integrated analysis main execution block."""
-        # Execute the script as a module to trigger the main block
-        result = subprocess.run([
-            sys.executable, "src/integrated_analysis.py"
-        ], capture_output=True, text=True, cwd=os.getcwd())
-
-        # The script should execute without error
-        assert result.returncode == 0 or "analysis" in result.stdout.lower()
+        result = _run_script("src/integrated_analysis.py")
+        assert "INTEGRATED ANALYSIS SUMMARY" in result.stdout
+        assert "Analysis complete! Check output/figures/" in result.stdout
 
     def test_insect_analysis_main_block(self):
-        """Test insect analysis main execution block."""
-        # Execute the script as a module to trigger the main block
-        result = subprocess.run([
-            sys.executable, "src/insect_analysis.py"
-        ], capture_output=True, text=True, cwd=os.getcwd())
-
-        # The script should execute without error
-        assert result.returncode == 0 or "analysis" in result.stdout.lower()
+        result = _run_script("src/insect_analysis.py")
+        assert "Insect Analysis Module - Comprehensive Analysis" in result.stdout
+        assert "Analysis completed successfully!" in result.stdout
 
     def test_package_init_main_block(self):
-        """Test package init main execution block."""
-        # Execute the script as a module to trigger the main block
-        result = subprocess.run([
-            sys.executable, "src/__init__.py"
-        ], capture_output=True, text=True, cwd=os.getcwd())
-
-        # The script should execute without error
-        assert result.returncode == 0 or "package" in result.stdout.lower()
+        result = _run_script("src/__init__.py")
+        assert "CohereAnts v3.0.0" in result.stdout
+        assert "Running demo analysis..." in result.stdout
 
 
-class TestMainExecution:
-    """Test main execution blocks to cover missing lines."""
+class TestSampleFactories:
+    """Test the real sample factory functions."""
 
-    def test_fermi_estimation_main_execution(self):
-        """Test fermi estimation main execution block."""
-        # Import and execute the main block
-        try:
-            import src.fermi_estimation
-            # The main block should execute when imported
-            assert True
-        except Exception:
-            # If it fails, that's okay - we just need to cover the lines
-            pass
+    def test_fermi_estimation_factory(self):
+        estimator, molecular, receptor, neural, environmental = create_sample_fermi_analysis()
 
-    def test_meta_material_framework_main_execution(self):
-        """Test meta material framework main execution block."""
-        # Import and execute the main block
-        try:
-            import src.meta_material_framework
-            # The main block should execute when imported
-            assert True
-        except Exception:
-            # If it fails, that's okay - we just need to cover the lines
-            pass
+        assert estimator is not None
+        # Real structural identity: total_bits is exactly the sum of the three
+        # component entropies. (total_bits is NEGATIVE here because the src model
+        # uses 3/2*log2(molecular_mass_in_kg)+15 for translational entropy, which
+        # is deeply negative for realistic masses — a questionable physical model,
+        # but consistent and deterministic; see report. We assert the real identity,
+        # not a guessed sign.)
+        expected_molecular_total = (
+            molecular["translational_bits"]
+            + molecular["rotational_bits"]
+            + molecular["vibrational_bits"]
+        )
+        assert np.isclose(molecular["total_bits"], expected_molecular_total)
+        assert np.isclose(molecular["total_bytes"], molecular["total_bits"] / 8.0)
+        assert 0.0 <= receptor["specificity_index"] <= 1.0
+        assert neural["channel_capacity_bits"] > 0.0
+        expected_env_total = (
+            environmental["temperature_bits"]
+            + environmental["humidity_bits"]
+            + environmental["pressure_bits"]
+        )
+        assert np.isclose(environmental["total_environmental_bits"], expected_env_total)
 
-    def test_integrated_analysis_main_execution(self):
-        """Test integrated analysis main execution block."""
-        # Import and execute the main block
-        try:
-            import src.integrated_analysis
-            # The main block should execute when imported
-            assert True
-        except Exception:
-            # If it fails, that's okay - we just need to cover the lines
-            pass
+    def test_meta_material_factory(self):
+        analyzer, dielectric, plasmonic, quantum, info_capacity = create_sample_metamaterial_analysis()
 
-    def test_insect_analysis_main_execution(self):
-        """Test insect analysis main execution block."""
-        # Import and execute the main block
-        try:
-            import src.insect_analysis
-            # The main block should execute when imported
-            assert True
-        except Exception:
-            # If it fails, that's okay - we just need to cover the lines
-            pass
+        assert analyzer is not None
+        assert dielectric["frequency"].shape == dielectric["refractive_index"].shape
+        assert plasmonic["quality_factor"] > 0.0
+        assert quantum["coupling_matrix"].shape == (4, 4)
+        assert info_capacity["channel_capacity_bits_per_sec"] > 0.0
 
+    def test_integrated_analysis_factory(self):
+        analyzer, results = create_sample_integrated_analysis()
+        figures = analyzer.create_visualization_figures(results)
 
-class TestDirectExecution:
-    """Test direct execution of main blocks."""
-    
-    def test_fermi_estimation_direct_execution(self):
-        """Test direct execution of fermi estimation main block."""
-        try:
-            # Create a mock for the create_sample_fermi_analysis function
-            with patch('src.fermi_estimation.create_sample_fermi_analysis') as mock_create:
-                mock_create.return_value = (MagicMock(), {}, {}, {}, {})
-                
-                # Execute the main block code directly
-                import src.fermi_estimation
-                # The main block should execute when imported
-                assert True
-        except Exception:
-            # If it fails, that's okay - we just need to cover the lines
-            pass
-    
-    def test_meta_material_framework_direct_execution(self):
-        """Test direct execution of meta material framework main block."""
-        try:
-            # Create a mock for the create_sample_metamaterial_analysis function
-            with patch('src.meta_material_framework.create_sample_metamaterial_analysis') as mock_create:
-                mock_create.return_value = (MagicMock(), {}, {}, {}, {})
-                
-                # Execute the main block code directly
-                import src.meta_material_framework
-                # The main block should execute when imported
-                assert True
-        except Exception:
-            # If it fails, that's okay - we just need to cover the lines
-            pass
-    
-    def test_integrated_analysis_direct_execution(self):
-        """Test direct execution of integrated analysis main block."""
-        try:
-            # Create a mock for the create_sample_integrated_analysis function
-            with patch('src.integrated_analysis.create_sample_integrated_analysis') as mock_create:
-                mock_analyzer = MagicMock()
-                mock_analyzer.generate_comprehensive_report.return_value = "Test Report"
-                mock_analyzer.create_visualization_figures.return_value = {'test': MagicMock()}
-                mock_analyzer.save_analysis_figures.return_value = None
-                
-                mock_create.return_value = (mock_analyzer, {'test': 'results'})
-                
-                # Execute the main block code directly
-                import src.integrated_analysis
-                # The main block should execute when imported
-                assert True
-        except Exception:
-            # If it fails, that's okay - we just need to cover the lines
-            pass
-    
-    def test_insect_analysis_direct_execution(self):
-        """Test direct execution of insect analysis main block."""
-        try:
-            # Create a mock for the run_comprehensive_analysis function
-            with patch('src.insect_analysis.run_comprehensive_analysis') as mock_run:
-                mock_run.return_value = {
-                    'performance_metrics': {'a': 1, 'b': 2, 'c': 3},
-                    'comprehensive_report': "Test Report",
-                    'analysis_results': {'test': 'data'}
-                }
-                
-                # Execute the main block code directly
-                import src.insect_analysis
-                # The main block should execute when imported
-                assert True
-        except Exception:
-            # If it fails, that's okay - we just need to cover the lines
-            pass
+        assert set(results) == {"fermi_analysis", "metamaterial_analysis"}
+        assert set(figures) == {
+            "information_breakdown",
+            "metamaterial_properties",
+            "system_performance",
+        }
+        assert all(isinstance(fig, plt.Figure) for fig in figures.values())
+        plt.close("all")
+
+    def test_run_comprehensive_analysis_real(self):
+        np.random.seed(0)
+        result = run_comprehensive_analysis()
+
+        assert set(result) == {"analysis_results", "performance_metrics", "comprehensive_report"}
+        assert result["performance_metrics"]["system_efficiency"] >= 0.0
+        assert "INTEGRATED ANALYSIS SUMMARY" in result["comprehensive_report"]
 
 
-class TestModuleReload:
-    """Test module reloading to cover main execution blocks."""
-    
-    def test_fermi_estimation_reload(self):
-        """Test reloading fermi estimation module."""
-        try:
-            import importlib
-            import src.fermi_estimation
-            
-            # Mock the create_sample_fermi_analysis function
-            with patch('src.fermi_estimation.create_sample_fermi_analysis') as mock_create:
-                mock_create.return_value = (MagicMock(), {}, {}, {}, {})
-                
-                # Reload the module to trigger main execution
-                importlib.reload(src.fermi_estimation)
-                assert True
-        except Exception:
-            # If it fails, that's okay - we just need to cover the lines
-            pass
-    
-    def test_meta_material_framework_reload(self):
-        """Test reloading meta material framework module."""
-        try:
-            import importlib
-            import src.meta_material_framework
-            
-            # Mock the create_sample_metamaterial_analysis function
-            with patch('src.meta_material_framework.create_sample_metamaterial_analysis') as mock_create:
-                mock_create.return_value = (MagicMock(), {}, {}, {}, {})
-                
-                # Reload the module to trigger main execution
-                importlib.reload(src.meta_material_framework)
-                assert True
-        except Exception:
-            # If it fails, that's okay - we just need to cover the lines
-            pass
-    
-    def test_integrated_analysis_reload(self):
-        """Test reloading integrated analysis module."""
-        try:
-            import importlib
-            import src.integrated_analysis
-            
-            # Mock the create_sample_integrated_analysis function
-            with patch('src.integrated_analysis.create_sample_integrated_analysis') as mock_create:
-                mock_analyzer = MagicMock()
-                mock_analyzer.generate_comprehensive_report.return_value = "Test Report"
-                mock_analyzer.create_visualization_figures.return_value = {'test': MagicMock()}
-                mock_analyzer.save_analysis_figures.return_value = None
-                
-                mock_create.return_value = (mock_analyzer, {'test': 'results'})
-                
-                # Reload the module to trigger main execution
-                importlib.reload(src.integrated_analysis)
-                assert True
-        except Exception:
-            # If it fails, that's okay - we just need to cover the lines
-            pass
-    
-    def test_insect_analysis_reload(self):
-        """Test reloading insect analysis module."""
-        try:
-            import importlib
-            import src.insect_analysis
-            
-            # Mock the run_comprehensive_analysis function
-            with patch('src.insect_analysis.run_comprehensive_analysis') as mock_run:
-                mock_run.return_value = {
-                    'performance_metrics': {'a': 1, 'b': 2, 'c': 3},
-                    'comprehensive_report': "Test Report",
-                    'analysis_results': {'test': 'data'}
-                }
-                
-                # Reload the module to trigger main execution
-                importlib.reload(src.insect_analysis)
-                assert True
-        except Exception:
-            # If it fails, that's okay - we just need to cover the lines
-            pass
+class TestImportsAndReloads:
+    """Test module imports and reloads without substitutes."""
 
+    def test_reload_keeps_integrated_analyzer_export(self):
+        module = importlib.import_module("src.integrated_analysis")
+        reloaded = importlib.reload(module)
+        assert hasattr(reloaded, "IntegratedAnalyzer")
 
-class TestMainExecutionMissingCoverage:
-    """Test the specific missing lines to achieve 100% coverage."""
-    
+    def test_reload_keeps_insect_analysis_export(self):
+        module = importlib.import_module("src.insect_analysis")
+        reloaded = importlib.reload(module)
+        assert hasattr(reloaded, "run_comprehensive_analysis")
+
     def test_edge_case_imports_and_fallbacks(self):
-        """Test import fallbacks and edge cases."""
-        # Test that modules can handle import errors gracefully
-        modules_to_test = ['src.behavioral', 'src.spectroscopy', 'src.integrated_analysis']
-        
-        for module_name in modules_to_test:
-            try:
-                # Try to import the module
-                __import__(module_name)
-                assert True
-            except ImportError:
-                # Import errors are handled by fallback mechanisms
-                assert True
+        for module_name in ["src.behavioral", "src.spectroscopy", "src.integrated_analysis"]:
+            module = importlib.import_module(module_name)
+            assert module.__name__ == module_name

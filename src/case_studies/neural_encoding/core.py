@@ -1,0 +1,264 @@
+"""Appendix D: Neural encoding efficiency and temporal dynamics analysis.
+
+This module provides comprehensive neural encoding analysis for olfactory receptor neurons
+(ORNs), including temporal dynamics, spike train analysis, population coding metrics,
+and information-theoretic measures.
+"""
+
+from __future__ import annotations
+
+from typing import Dict, List, Tuple, Union
+import numpy as np
+
+from sklearn.decomposition import PCA
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+
+
+def information_rate_time_series(responses: np.ndarray, dt_s: float, noise_std: float) -> Dict[str, float]:
+    """
+    Estimate information metrics using a Gaussian channel approximation.
+    Deterministic and vectorized.
+    """
+    x = np.asarray(responses, dtype=float)
+    n = x.size
+    if n == 0 or dt_s <= 0:
+        return {"channel_capacity_bits": 0.0, "information_rate_bits": 0.0, "snr": 0.0}
+    signal_power = float(np.var(x))
+    noise_power = float(noise_std**2)
+    snr = signal_power / (noise_power + 1e-30)
+    capacity = 0.5 * np.log2(1.0 + snr)
+    info_rate = capacity * n
+    return {"channel_capacity_bits": float(capacity), "information_rate_bits": float(info_rate), "snr": float(snr)}
+
+
+def rate_coding_metrics(responses: np.ndarray, labels: np.ndarray) -> Dict[str, float]:
+    """
+    Compute simple separability metrics (means/stds) deterministically.
+    """
+    r = np.asarray(responses, dtype=float)
+    y = np.asarray(labels)
+    if r.size == 0 or y.size == 0 or r.size != y.size:
+        return {"d_prime": 0.0, "mean_diff": 0.0}
+    classes = np.unique(y)
+    if classes.size != 2:
+        return {"d_prime": 0.0, "mean_diff": 0.0}
+    m0 = float(np.mean(r[y == classes[0]]))
+    m1 = float(np.mean(r[y == classes[1]]))
+    s0 = float(np.std(r[y == classes[0]]) + 1e-12)
+    s1 = float(np.std(r[y == classes[1]]) + 1e-12)
+    dprime = (m1 - m0) / np.sqrt(0.5 * (s0**2 + s1**2))
+    return {"d_prime": float(dprime), "mean_diff": float(m1 - m0)}
+
+
+def generate_spike_trains(
+    stimuli: np.ndarray,
+    dt: float = 1e-4,
+    baseline_rate: float = 10.0,
+    max_rate: float = 100.0,
+    response_dynamics: str = "exponential",
+    seed: int = 42,
+) -> Dict[str, np.ndarray]:
+    """
+    Generate realistic spike trains for ORN responses to odor stimuli.
+
+    Args:
+        stimuli: Array of stimulus intensities (shape: n_time or n_trials x n_time)
+        dt: Time step in seconds
+        baseline_rate: Baseline firing rate (Hz)
+        max_rate: Maximum firing rate (Hz)
+        response_dynamics: Type of response dynamics ('exponential', 'adaptive', 'phasic-tonic')
+        seed: Random seed for reproducibility
+
+    Returns:
+        Dictionary with spike times, spike trains, and rate profiles
+    """
+    np.random.seed(seed)
+    stimuli = np.asarray(stimuli)
+
+    if stimuli.ndim == 1:
+        stimuli = stimuli[np.newaxis, :]
+
+    n_trials, n_time = stimuli.shape
+    time_axis = np.arange(n_time) * dt
+
+    spike_trains = []
+    spike_times_all = []
+    rate_profiles = []
+
+    for trial_idx in range(n_trials):
+        stimulus = stimuli[trial_idx]
+
+        # Convert stimulus to firing rate
+        if response_dynamics == "exponential":
+            # Simple exponential response
+            rate = baseline_rate + (max_rate - baseline_rate) * (1 - np.exp(-stimulus))
+        elif response_dynamics == "adaptive":
+            # Adaptation dynamics
+            tau_fast = 0.01  # 10 ms
+            tau_slow = 0.1  # 100 ms
+            rate = np.zeros_like(stimulus, dtype=float)
+            r_fast, r_slow = 0.0, 0.0
+
+            for i in range(len(stimulus)):
+                r_fast = r_fast * np.exp(-dt / tau_fast) + stimulus[i] * dt / tau_fast
+                r_slow = r_slow * np.exp(-dt / tau_slow) + stimulus[i] * dt / tau_slow
+                rate[i] = baseline_rate + (max_rate - baseline_rate) * (r_fast - 0.5 * r_slow)
+                rate[i] = max(0, rate[i])
+        else:  # phasic-tonic
+            # Phasic-tonic response
+            rate = baseline_rate + (max_rate - baseline_rate) * stimulus
+            # Add phasic component for stimulus onset
+            diff_stim = np.concatenate([[0], np.diff(stimulus)])
+            phasic = 50.0 * np.maximum(0, diff_stim) * np.exp(-time_axis * 20)
+            rate = rate + phasic
+
+        rate_profiles.append(rate)
+
+        # Generate spikes using inhomogeneous Poisson process
+        spike_probs = rate * dt
+        spike_train = np.random.rand(n_time) < spike_probs
+        spike_times = time_axis[spike_train]
+
+        spike_trains.append(spike_train.astype(int))
+        spike_times_all.append(spike_times)
+
+    return {
+        "spike_trains": np.array(spike_trains),
+        "spike_times": spike_times_all,
+        "rate_profiles": np.array(rate_profiles),
+        "time_axis": time_axis,
+        "stimuli": stimuli,
+    }
+
+
+def analyze_spike_train_statistics(spike_data: Dict[str, np.ndarray]) -> Dict[str, Union[float, np.ndarray]]:
+    """
+    Compute comprehensive spike train statistics.
+
+    Args:
+        spike_data: Output from generate_spike_trains
+
+    Returns:
+        Dictionary with firing rates, ISI statistics, CV, Fano factor, etc.
+    """
+    spike_trains = spike_data["spike_trains"]
+    spike_times_all = spike_data["spike_times"]
+    time_axis = spike_data["time_axis"]
+    dt = time_axis[1] - time_axis[0]
+
+    n_trials, n_time = spike_trains.shape
+
+    # Firing rates
+    firing_rates = np.sum(spike_trains, axis=1) / (n_time * dt)
+    mean_firing_rate = float(np.mean(firing_rates))
+
+    # Inter-spike interval analysis
+    all_isis = []
+    cv_values = []
+
+    for spike_times in spike_times_all:
+        if len(spike_times) > 1:
+            isis = np.diff(spike_times)
+            all_isis.extend(isis)
+            cv = np.std(isis) / (np.mean(isis) + 1e-10)
+            cv_values.append(cv)
+
+    all_isis = np.array(all_isis)
+    mean_isi = float(np.mean(all_isis)) if len(all_isis) > 0 else 0.0
+    std_isi = float(np.std(all_isis)) if len(all_isis) > 0 else 0.0
+    mean_cv = float(np.mean(cv_values)) if len(cv_values) > 0 else 0.0
+
+    # Fano factor (variance-to-mean ratio)
+    spike_counts_per_trial = np.sum(spike_trains, axis=1)
+    fano_factor = float(np.var(spike_counts_per_trial) / (np.mean(spike_counts_per_trial) + 1e-10))
+
+    # Time-binned analysis
+    bin_size = 0.01  # 10 ms bins
+    n_bins = int(time_axis[-1] / bin_size)
+    binned_spikes = np.zeros((n_trials, n_bins))
+
+    for trial_idx, spike_times in enumerate(spike_times_all):
+        bin_indices = np.floor(spike_times / bin_size).astype(int)
+        bin_indices = bin_indices[bin_indices < n_bins]
+        binned_spikes[trial_idx, bin_indices] += 1
+
+    return {
+        "mean_firing_rate_hz": mean_firing_rate,
+        "firing_rates_per_trial": firing_rates,
+        "mean_isi_s": mean_isi,
+        "std_isi_s": std_isi,
+        "cv_isi": mean_cv,
+        "fano_factor": fano_factor,
+        "binned_spikes": binned_spikes,
+        "bin_size_s": bin_size,
+        "isi_distribution": all_isis,
+    }
+
+
+def temporal_coding_analysis(
+    spike_data: Dict[str, np.ndarray], stimulus_times: np.ndarray
+) -> Dict[str, Union[float, np.ndarray]]:
+    """
+    Analyze temporal coding precision and response latency.
+
+    Args:
+        spike_data: Output from generate_spike_trains
+        stimulus_times: Times of stimulus onset/offset
+
+    Returns:
+        Dictionary with latency statistics, temporal precision, etc.
+    """
+    spike_times_all = spike_data["spike_times"]
+    time_axis = spike_data["time_axis"]
+
+    latencies = []
+    jitters = []
+
+    for trial_idx, spike_times in enumerate(spike_times_all):
+        for stim_time in stimulus_times:
+            # Find first spike after stimulus onset
+            post_stim_spikes = spike_times[spike_times >= stim_time]
+            if len(post_stim_spikes) > 0:
+                latency = post_stim_spikes[0] - stim_time
+                latencies.append(latency)
+
+    latencies = np.array(latencies)
+
+    if len(latencies) > 0:
+        mean_latency = float(np.mean(latencies))
+        std_latency = float(np.std(latencies))
+        temporal_precision = 1.0 / (std_latency + 1e-10)
+    else:
+        mean_latency = std_latency = temporal_precision = 0.0
+
+    # Phase locking analysis (if periodic stimulus)
+    if len(stimulus_times) > 1:
+        period = stimulus_times[1] - stimulus_times[0]
+        all_phases = []
+
+        for spike_times in spike_times_all:
+            for stim_time in stimulus_times:
+                post_stim = spike_times[spike_times >= stim_time]
+                if len(post_stim) > 0:
+                    relative_time = (post_stim[0] - stim_time) % period
+                    phase = 2 * np.pi * relative_time / period
+                    all_phases.append(phase)
+
+        if len(all_phases) > 0:
+            phases = np.array(all_phases)
+            # Vector strength (phase locking measure)
+            vector_strength = float(np.abs(np.mean(np.exp(1j * phases))))
+        else:
+            vector_strength = 0.0
+    else:
+        vector_strength = 0.0
+
+    return {
+        "mean_latency_s": mean_latency,
+        "std_latency_s": std_latency,
+        "temporal_precision": temporal_precision,
+        "vector_strength": vector_strength,
+        "latencies": latencies,
+    }
+
+

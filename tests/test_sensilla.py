@@ -11,7 +11,18 @@ from src.sensilla import (
     SensillaData,
     analyze_sensilla_dimensions,
     generate_sensilla_visualization,
-    calculate_sensilla_resonance_frequency
+    calculate_sensilla_resonance_frequency,
+)
+from src.case_studies.sensilla_array_directionality import (
+    array_gain,
+    array_pattern_2d,
+    analyze_sensilla_morphology,
+    compute_beam_pattern,
+    design_circular_array,
+    design_log_periodic_array,
+    frequency_response_analysis,
+    mutual_coupling_matrix,
+    sensilla_element_pattern,
 )
 
 
@@ -446,3 +457,239 @@ class TestSensillaMissingCoverage:
             except ImportError:
                 # Import errors are handled by fallback mechanisms
                 assert True
+
+# --- merged from test_coverage_sensilla_array.py ---
+
+def test_array_pattern_2d_with_and_without_coupling():
+    wavelengths = np.array([10.0, 12.0])
+    positions = np.array([[0.0, 0.0, 0.0], [50.0, 0.0, 0.0], [0.0, 50.0, 0.0]])
+    weights = np.ones(3)
+
+    expected_keys = {
+        "wavelengths_um",
+        "theta_deg",
+        "phi_deg",
+        "patterns",
+        "directivity",
+        "gain_db",
+        "positions",
+        "currents_used",
+    }
+
+    with_coupling = array_pattern_2d(
+        wavelengths,
+        positions,
+        weights,
+        theta_range_deg=(0, 90),
+        phi_range_deg=(0, 180),
+        resolution_deg=45.0,
+        include_coupling=True,
+    )
+    assert expected_keys.issubset(with_coupling.keys())
+    n_theta = with_coupling["theta_deg"].size
+    n_phi = with_coupling["phi_deg"].size
+    assert with_coupling["patterns"].shape == (2, n_theta, n_phi)
+    assert with_coupling["gain_db"].shape == (2,)
+    assert np.all(with_coupling["patterns"] >= 0.0)
+    assert np.all(np.isfinite(with_coupling["directivity"]))
+
+    without_coupling = array_pattern_2d(
+        wavelengths,
+        positions,
+        weights,
+        theta_range_deg=(0, 90),
+        phi_range_deg=(0, 180),
+        resolution_deg=45.0,
+        include_coupling=False,
+    )
+    assert without_coupling["patterns"].shape == (2, n_theta, n_phi)
+    assert np.all(np.isfinite(without_coupling["gain_db"]))
+
+
+def test_array_pattern_2d_weights_size_mismatch_raises():
+    with pytest.raises(ValueError):
+        array_pattern_2d(
+            np.array([10.0]),
+            np.array([[0.0, 0.0, 0.0], [50.0, 0.0, 0.0]]),
+            np.ones(3),
+        )
+
+
+def test_frequency_response_analysis_drives_bandwidth_and_q_helpers():
+    geometry = {
+        "positions": np.array(
+            [[0.0, 0.0, 0.0], [40.0, 0.0, 0.0], [80.0, 0.0, 0.0], [120.0, 0.0, 0.0]]
+        )
+    }
+    result = frequency_response_analysis(geometry, (2.0, 25.0), n_frequencies=30)
+
+    expected_keys = {
+        "frequencies_thz",
+        "wavelengths_um",
+        "gain_db",
+        "impedance_real",
+        "impedance_imag",
+        "resonance_frequencies_thz",
+        "resonance_wavelengths_um",
+        "bandwidth_3db_thz",
+        "q_factor_avg",
+    }
+    assert expected_keys.issubset(result.keys())
+    assert result["frequencies_thz"].shape == (30,)
+    assert result["gain_db"].shape == (30,)
+    assert np.all(np.isfinite(result["gain_db"]))
+    assert float(result["bandwidth_3db_thz"]) >= 0.0
+    assert float(result["q_factor_avg"]) >= 0.0
+
+
+def test_frequency_response_single_element_zero_gain_path():
+    geometry = {"positions": np.array([[0.0, 0.0, 0.0]])}
+    result = frequency_response_analysis(geometry, (2.0, 25.0), n_frequencies=10)
+    # Single element falls into the gain_db = 0.0 branch.
+    assert np.allclose(result["gain_db"], 0.0)
+
+
+def test_mutual_coupling_matrix_1d_and_invalid_shape():
+    coupling = mutual_coupling_matrix(np.array([0.0, 50.0, 100.0]), wavelength_um=10.0)
+    assert coupling.shape == (3, 3)
+    assert np.iscomplexobj(coupling)
+    # Self-impedance on the diagonal is real-valued (==1).
+    assert np.allclose(np.diag(coupling), np.diag(coupling).real)
+
+    with pytest.raises(ValueError):
+        mutual_coupling_matrix(np.zeros((2, 2, 2)), wavelength_um=10.0)
+
+
+@pytest.mark.parametrize("element_type", ["dipole", "monopole", "patch"])
+def test_sensilla_element_pattern_types_are_normalized(element_type):
+    theta = np.linspace(0.0, 180.0, 19)
+    pattern = sensilla_element_pattern(
+        theta, length_um=100.0, wavelength_um=10.0, element_type=element_type
+    )
+    assert pattern.shape == theta.shape
+    assert np.all(pattern >= 0.0)
+    assert np.max(pattern) <= 1.0 + 1e-9
+
+
+def test_sensilla_element_pattern_invalid_inputs():
+    theta = np.linspace(0.0, 180.0, 10)
+    with pytest.raises(ValueError):
+        sensilla_element_pattern(theta, 100.0, 10.0, element_type="unknown")
+    with pytest.raises(ValueError):
+        sensilla_element_pattern(np.array([200.0]), 100.0, 10.0)
+
+
+def test_compute_beam_pattern_error_branches():
+    with pytest.raises(ValueError):
+        compute_beam_pattern(
+            np.array([10.0, 12.0]), np.array([0.0, 50.0]), np.array([1.0])
+        )
+    with pytest.raises(ValueError):
+        compute_beam_pattern(
+            np.array([-1.0, 10.0]), np.array([0.0]), np.array([1.0])
+        )
+
+
+def test_compute_beam_pattern_normalized_range():
+    wavelengths = np.linspace(2.0, 25.0, 12)
+    positions = np.array([0.0, 60.0, 120.0])
+    gains = np.ones(3)
+    result = compute_beam_pattern(wavelengths, positions, gains)
+    assert result["pattern"].shape == wavelengths.shape
+    assert np.all((result["pattern"] >= 0.0) & (result["pattern"] <= 1.0))
+
+
+def test_array_gain_edge_cases():
+    assert array_gain(np.array([])) == 0.0
+    assert array_gain(np.zeros(5)) == 0.0
+    gain = array_gain(np.array([1.0, 0.5, 0.0, 0.25]))
+    assert gain > 0.0
+    assert isinstance(gain, float)
+
+
+def test_design_log_periodic_array_rescale_and_validation():
+    # max aperture smaller than natural extent forces the rescale branch.
+    positions = design_log_periodic_array(
+        min_len_um=50.0, max_len_um=80.0, tau=1.5, count=6
+    )
+    assert positions.shape == (6,)
+    assert np.allclose(positions, np.sort(positions))
+    # Centered at origin -> mean ~ 0.
+    assert abs(float(np.mean(positions))) < 1e-6
+
+    with pytest.raises(ValueError):
+        design_log_periodic_array(min_len_um=0.0, max_len_um=200.0, tau=1.2, count=5)
+
+
+def test_design_circular_array_phase_center_and_validation():
+    with_center = design_circular_array(radius_um=200.0, count=6, phase_center=True)
+    without_center = design_circular_array(radius_um=200.0, count=6, phase_center=False)
+    assert with_center["x_positions"].shape[0] == 7  # central element added
+    assert without_center["x_positions"].shape[0] == 6
+    # Perimeter elements sit on the circle of given radius.
+    radii = np.sqrt(
+        without_center["x_positions"] ** 2 + without_center["y_positions"] ** 2
+    )
+    assert np.allclose(radii, 200.0)
+
+    with pytest.raises(ValueError):
+        design_circular_array(radius_um=0.0, count=6)
+
+
+def test_analyze_sensilla_morphology_returns_match_quality_in_range():
+    lengths = np.array([50.0, 100.0, 150.0])
+    diameters = np.array([5.0, 10.0, 15.0])
+    wavelengths = np.array([10.0, 20.0, 30.0])
+    result = analyze_sensilla_morphology(lengths, diameters, wavelengths)
+    assert "best_wavelength_matches" in result
+    assert "match_quality_scores" in result
+    assert result["q_factors"].shape == lengths.shape
+    # Match quality is a Gaussian proximity score in [0, 1].
+    assert np.all((result["match_quality_scores"] >= 0.0) & (result["match_quality_scores"] <= 1.0))
+    # Quarter-wave resonance equals 4 * length by construction.
+    assert np.allclose(result["quarter_wave_resonances_um"], 4.0 * lengths)
+
+
+def test_compute_beam_pattern_constant_power_normalizes_to_zero():
+    """Flat interference field yields normalized pattern of zeros."""
+    wavelengths = np.array([10.0])
+    positions = np.array([0.0, 50.0])
+    gains = np.array([1.0, -1.0])
+    result = compute_beam_pattern(wavelengths, positions, gains)
+    assert np.allclose(result["pattern"], 0.0)
+
+
+def test_array_gain_zero_mean_nonzero_peak_returns_inf():
+    assert array_gain(np.zeros(4)) == 0.0
+    assert array_gain(np.array([1.0, -1.0])) == np.inf
+
+
+def test_array_pattern_2d_singular_coupling_falls_back_to_weights():
+    """Ill-conditioned coupling matrix triggers the LinAlgError fallback branch."""
+    wavelengths = np.array([10.0])
+    positions = np.array([[0.0, 0.0], [1e-6, 0.0]])
+    weights = np.array([1.0 + 0j, 1.0 + 0j])
+    result = array_pattern_2d(
+        wavelengths,
+        positions,
+        weights,
+        theta_range_deg=(0, 0),
+        phi_range_deg=(0, 0),
+        resolution_deg=1.0,
+        include_coupling=True,
+    )
+    assert result["patterns"].shape == (1, 1, 1)
+    assert np.isfinite(result["gain_db"][0])
+
+
+def test_frequency_response_default_positions_single_element():
+    result = frequency_response_analysis({}, (5.0, 6.0), n_frequencies=5)
+    assert result["frequencies_thz"].shape == (5,)
+    assert np.allclose(result["gain_db"], 0.0)
+    assert float(result["q_factor_avg"]) == 0.0
+
+
+def test_design_log_periodic_array_without_rescale_branch():
+    positions = design_log_periodic_array(min_len_um=5.0, max_len_um=500.0, tau=1.2, count=4)
+    assert positions.shape == (4,)
+    assert positions[-1] <= 500.0 + 1e-6

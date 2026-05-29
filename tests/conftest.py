@@ -1,32 +1,40 @@
 import os
+import shutil
 import sys
+
+import pytest
 
 # Force headless backend for matplotlib in tests
 os.environ.setdefault("MPLBACKEND", "Agg")
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
-SRC = os.path.join(ROOT, "src")
 
 # Ensure project root is importable so that `import src.*` works
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
-# Also make bare-module imports (e.g., `import core`) work when needed
-if SRC not in sys.path:
-    sys.path.insert(0, SRC)
 
-class TestConftestMissingCoverage:
-    """Test the specific missing lines to achieve 100% coverage."""
-    
-    def test_edge_case_imports_and_fallbacks(self):
-        """Test import fallbacks and edge cases."""
-        # Test that modules can handle import errors gracefully
-        modules_to_test = ['src.behavioral', 'src.spectroscopy', 'src.integrated_analysis']
-        
-        for module_name in modules_to_test:
-            try:
-                # Try to import the module
-                __import__(module_name)
-                assert True
-            except ImportError:
-                # Import errors are handled by fallback mechanisms
-                assert True
+_PLOTLY_MODULE_KEYS = ("plotly", "plotly.graph_objects", "plotly.express")
+
+
+@pytest.fixture(autouse=True)
+def _cleanup_plotly_module_stubs():
+    """Remove plotly stubs injected by individual tests."""
+    saved = {key: sys.modules.get(key) for key in _PLOTLY_MODULE_KEYS}
+    yield
+    for key in _PLOTLY_MODULE_KEYS:
+        prior = saved.get(key)
+        if prior is None:
+            sys.modules.pop(key, None)
+        else:
+            sys.modules[key] = prior
+
+
+def pytest_configure(config: pytest.Config) -> None:
+    config.addinivalue_line("markers", "requires_latex: tests requiring xelatex installation")
+
+
+@pytest.fixture
+def skip_if_no_latex() -> None:
+    if not shutil.which("xelatex"):
+        pytest.skip("xelatex not installed")
+

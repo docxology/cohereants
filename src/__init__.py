@@ -1,331 +1,175 @@
 """
-Insect Analysis Package
+CohereAnts analysis package (pipeline id: cohereants).
 
-This package provides comprehensive analysis capabilities for the vibrational theory
-of olfaction and infrared sensing in insects. It integrates multiple analytical
-frameworks to provide quantitative, empirically-grounded analysis.
-
-Modules:
-- core: Basic physical calculations and conversions
-- sensilla: Sensilla morphology analysis and visualization
-- spectroscopy: CHC spectral analysis and processing
-- behavioral: Behavioral response analysis and statistics
-- fermi_estimation: Comprehensive Fermi Estimation type analysis
-- meta_material_framework: Meta-material analytical framework
-- integrated_analysis: Cross-domain synthesis and integration
-- insect_analysis: Main interface and comprehensive analysis
-
-The package provides both individual module access and integrated analysis
-capabilities for comprehensive manuscript analysis.
+Lightweight exports load eagerly; case-study and visualization symbols load on demand.
 """
 
-# Version information
+from __future__ import annotations
+
+from typing import Any
+
 __version__ = "3.0.0"
 __author__ = "Tucker Chambers, Daniel A. Friedman"
 
-# Import main analysis classes and functions
-try:
-    from .core import (
-        calculate_wavelength_from_wavenumber,
-        calculate_wavenumber_from_wavelength,
-        calculate_atmospheric_transmission,
-        calculate_response_time_improvement
-    )
-    
-    from .sensilla import (
-        analyze_sensilla_dimensions,
-        generate_sensilla_visualization,
-        calculate_wavelength_matching
-    )
-    
-    from .spectroscopy import (
-        analyze_chc_spectra,
-        calculate_spectral_overlap,
-        generate_spectral_plots
-    )
-    
-    from .behavioral import (
-        analyze_behavioral_response,
-        calculate_response_statistics,
-        generate_behavioral_plots
-    )
-    
-    from .fermi_estimation import (
-        FermiEstimator,
-        create_sample_fermi_analysis
-    )
-    
-    from .meta_material_framework import (
-        MetaMaterialAnalyzer,
-        create_sample_metamaterial_analysis
-    )
-    
-    from .integrated_analysis import (
-        IntegratedAnalyzer,
-        create_sample_integrated_analysis
-    )
-    
-    from .insect_analysis import (
-        run_comprehensive_analysis
-    )
+from src.behavioral import analyze_behavioral_response, calculate_response_statistics, generate_behavioral_plots
+from src.config import (
+    ConfigManager,
+    enable_verbose_logging,
+    get_config,
+    init_config,
+    set_plot_style,
+    set_random_seed,
+    set_temperature,
+)
+from src.core import (
+    calculate_atmospheric_transmission,
+    calculate_response_time_improvement,
+    calculate_wavelength_from_wavenumber,
+    calculate_wavenumber_from_wavelength,
+)
+from src.fermi_estimation import FermiEstimator, create_sample_fermi_analysis
+from src.integrated_analysis import IntegratedAnalyzer, create_sample_integrated_analysis
+from src.meta_material_framework import MetaMaterialAnalyzer, create_sample_metamaterial_analysis
+from src.sensilla import analyze_sensilla_dimensions, calculate_wavelength_matching, generate_sensilla_visualization
+from src.spectroscopy import analyze_chc_spectra, calculate_spectral_overlap, generate_spectral_plots
 
-    from .config import (
-        ConfigManager,
-        get_config,
-        init_config,
-        set_temperature,
-        set_plot_style,
-        enable_verbose_logging,
-        set_random_seed
-    )
+_LAZY_EXPORTS: dict[str, tuple[str, str]] = {
+    "run_comprehensive_analysis": ("src.insect_analysis", "run_comprehensive_analysis"),
+    "AdvancedVisualizer": ("src.visualization", "AdvancedVisualizer"),
+    "PlotStyler": ("src.visualization", "PlotStyler"),
+    "create_publication_figure": ("src.visualization", "create_publication_figure"),
+    "get_colorblind_palette": ("src.visualization", "get_colorblind_palette"),
+    "create_subplots": ("src.visualization", "create_subplots"),
+    "compute_beam_pattern": ("src.case_studies.sensilla_array_directionality", "compute_beam_pattern"),
+    "array_gain": ("src.case_studies.sensilla_array_directionality", "array_gain"),
+    "design_log_periodic_array": ("src.case_studies.sensilla_array_directionality", "design_log_periodic_array"),
+    "atmospheric_transmission_detailed": ("src.case_studies.environmental_channel", "atmospheric_transmission_detailed"),
+    "channel_capacity_vs_env": ("src.case_studies.environmental_channel", "channel_capacity_vs_env"),
+    "min_detectable_power": ("src.case_studies.detection_limits", "min_detectable_power"),
+    "snr_curve": ("src.case_studies.detection_limits", "snr_curve"),
+    "operating_point": ("src.case_studies.detection_limits", "operating_point"),
+    "information_rate_time_series": ("src.case_studies.neural_encoding", "information_rate_time_series"),
+    "rate_coding_metrics": ("src.case_studies.neural_encoding", "rate_coding_metrics"),
+    "nmf_unmix": ("src.case_studies.spectral_unmixing", "nmf_unmix"),
+    "lda_baseline": ("src.case_studies.spectral_unmixing", "lda_baseline"),
+    "sweep_plasmonic_quality": ("src.case_studies.plasmonic_geometry", "sweep_plasmonic_quality"),
+    "olfactory_active_inference_step": (
+        "src.case_studies.active_inference",
+        "olfactory_active_inference_step",
+    ),
+}
 
-    from .visualization import (
-        AdvancedVisualizer,
-        PlotStyler,
-        create_publication_figure,
-        get_colorblind_palette,
-        create_subplots
-    )
-
-    # Case-study modules (Appendices A–G)
-    from .case_studies import (
-        compute_beam_pattern,
-        array_gain,
-        design_log_periodic_array,
-        atmospheric_transmission_detailed,
-        channel_capacity_vs_env,
-        min_detectable_power,
-        snr_curve,
-        operating_point,
-        information_rate_time_series,
-        rate_coding_metrics,
-        nmf_unmix,
-        lda_baseline,
-        sweep_plasmonic_quality,
-        olfactory_active_inference_step,
-    )
-
-except ImportError:
-    # Fallback for when running tests or as standalone script
-    import sys
-    import os
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-    
-    from src.core import (
-        calculate_wavelength_from_wavenumber,
-        calculate_wavenumber_from_wavelength,
-        calculate_atmospheric_transmission,
-        calculate_response_time_improvement
-    )
-    
-    from src.sensilla import (
-        analyze_sensilla_dimensions,
-        generate_sensilla_visualization,
-        calculate_wavelength_matching
-    )
-    
-    from src.spectroscopy import (
-        analyze_chc_spectra,
-        calculate_spectral_overlap,
-        generate_spectral_plots
-    )
-    
-    from src.behavioral import (
-        analyze_behavioral_response,
-        calculate_response_statistics,
-        generate_behavioral_plots
-    )
-    
-    from src.fermi_estimation import (
-        FermiEstimator,
-        create_sample_fermi_analysis
-    )
-    
-    from src.meta_material_framework import (
-        MetaMaterialAnalyzer,
-        create_sample_metamaterial_analysis
-    )
-    
-    from src.integrated_analysis import (
-        IntegratedAnalyzer,
-        create_sample_integrated_analysis
-    )
-    
-    from src.insect_analysis import (
-        run_comprehensive_analysis
-    )
-
-    from src.config import (
-        ConfigManager,
-        get_config,
-        init_config,
-        set_temperature,
-        set_plot_style,
-        enable_verbose_logging,
-        set_random_seed
-    )
-
-    from src.visualization import (
-        AdvancedVisualizer,
-        PlotStyler,
-        create_publication_figure,
-        get_colorblind_palette,
-        create_subplots
-    )
-
-    # Case-study modules (Appendices A–G)
-    from src.case_studies import (
-        compute_beam_pattern,
-        array_gain,
-        design_log_periodic_array,
-        atmospheric_transmission_detailed,
-        channel_capacity_vs_env,
-        min_detectable_power,
-        snr_curve,
-        operating_point,
-        information_rate_time_series,
-        rate_coding_metrics,
-        nmf_unmix,
-        lda_baseline,
-        sweep_plasmonic_quality,
-        olfactory_active_inference_step,
-    )
-
-# Package-level exports
 __all__ = [
-    # Core physics functions
-    'calculate_wavelength_from_wavenumber',
-    'calculate_wavenumber_from_wavelength',
-    'calculate_atmospheric_transmission',
-    'calculate_response_time_improvement',
-    
-    # Sensilla analysis
-    'analyze_sensilla_dimensions',
-    'generate_sensilla_visualization',
-    'calculate_wavelength_matching',
-    
-    # Spectroscopy analysis
-    'analyze_chc_spectra',
-    'calculate_spectral_overlap',
-    'generate_spectral_plots',
-    
-    # Behavioral analysis
-    'analyze_behavioral_response',
-    'calculate_response_statistics',
-    'generate_behavioral_plots',
-    
-    # Fermi Estimation framework
-    'FermiEstimator',
-    'create_sample_fermi_analysis',
-    
-    # Meta-material framework
-    'MetaMaterialAnalyzer',
-    'create_sample_metamaterial_analysis',
-    
-    # Integrated analysis
-    'IntegratedAnalyzer',
-    'create_sample_integrated_analysis',
-    
-    # Comprehensive analysis
-    'run_comprehensive_analysis',
-
-    # Configuration system
-    'ConfigManager',
-    'get_config',
-    'init_config',
-    'set_temperature',
-    'set_plot_style',
-    'enable_verbose_logging',
-    'set_random_seed',
-
-    # Advanced visualization
-    'AdvancedVisualizer',
-    'PlotStyler',
-    'create_publication_figure',
-    'get_colorblind_palette',
-    'create_subplots',
-
-    # Case-study exports (Appendices A–G)
-    'compute_beam_pattern', 'array_gain', 'design_log_periodic_array',
-    'atmospheric_transmission_detailed', 'channel_capacity_vs_env',
-    'min_detectable_power', 'snr_curve', 'operating_point',
-    'information_rate_time_series', 'rate_coding_metrics',
-    'nmf_unmix', 'lda_baseline',
-    'sweep_plasmonic_quality',
-    'olfactory_active_inference_step',
-
-    # Package utilities
-    'get_package_info',
-    'run_demo_analysis'
+    "calculate_wavelength_from_wavenumber",
+    "calculate_wavenumber_from_wavelength",
+    "calculate_atmospheric_transmission",
+    "calculate_response_time_improvement",
+    "analyze_sensilla_dimensions",
+    "generate_sensilla_visualization",
+    "calculate_wavelength_matching",
+    "analyze_chc_spectra",
+    "calculate_spectral_overlap",
+    "generate_spectral_plots",
+    "analyze_behavioral_response",
+    "calculate_response_statistics",
+    "generate_behavioral_plots",
+    "FermiEstimator",
+    "create_sample_fermi_analysis",
+    "MetaMaterialAnalyzer",
+    "create_sample_metamaterial_analysis",
+    "IntegratedAnalyzer",
+    "create_sample_integrated_analysis",
+    "run_comprehensive_analysis",
+    "ConfigManager",
+    "get_config",
+    "init_config",
+    "set_temperature",
+    "set_plot_style",
+    "enable_verbose_logging",
+    "set_random_seed",
+    "AdvancedVisualizer",
+    "PlotStyler",
+    "create_publication_figure",
+    "get_colorblind_palette",
+    "create_subplots",
+    "compute_beam_pattern",
+    "array_gain",
+    "design_log_periodic_array",
+    "atmospheric_transmission_detailed",
+    "channel_capacity_vs_env",
+    "min_detectable_power",
+    "snr_curve",
+    "operating_point",
+    "information_rate_time_series",
+    "rate_coding_metrics",
+    "nmf_unmix",
+    "lda_baseline",
+    "sweep_plasmonic_quality",
+    "olfactory_active_inference_step",
+    "get_package_info",
+    "run_demo_analysis",
 ]
 
-def get_package_info():
-    """
-    Get comprehensive package information.
-    
-    Returns:
-        Dictionary with package details
-    """
+
+def __getattr__(name: str) -> Any:
+    if name not in _LAZY_EXPORTS:
+        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+    module_path, attr = _LAZY_EXPORTS[name]
+    import importlib
+
+    module = importlib.import_module(module_path)
+    value = getattr(module, attr)
+    globals()[name] = value
+    return value
+
+
+def get_package_info() -> dict[str, Any]:
+    """Return package metadata for tooling and demos."""
     return {
-        'name': 'Insect Analysis Package',
-        'version': __version__,
-        'author': __author__,
-        'description': 'Comprehensive analysis for vibrational theory of olfaction and infrared sensing in insects',
-        'modules': [
-            'core - Basic physical calculations',
-            'sensilla - Sensilla morphology analysis',
-            'spectroscopy - CHC spectral analysis',
-            'behavioral - Behavioral response analysis',
-            'fermi_estimation - Fermi Estimation framework',
-            'meta_material_framework - Meta-material analysis',
-            'integrated_analysis - Cross-domain synthesis',
-            'insect_analysis - Main interface'
+        "name": "CohereAnts",
+        "pipeline_id": "cohereants",
+        "version": __version__,
+        "author": __author__,
+        "description": "Engineering bounds for insect-inspired IR sensing and olfaction modeling",
+        "modules": [
+            "core — physical conversions and atmospheric windows",
+            "sensilla — morphology and wavelength matching",
+            "spectroscopy — CHC spectral analysis",
+            "behavioral — response statistics",
+            "fermi_estimation — order-of-magnitude bounds",
+            "meta_material_framework — dielectric/plasmonic models",
+            "integrated_analysis — cross-domain synthesis",
+            "insect_analysis — comprehensive orchestration entry",
         ],
-        'frameworks': [
-            'Fermi Estimation Analysis',
-            'Meta-Material Analytical Framework',
-            'Integrated Cross-Domain Analysis'
-        ]
+        "frameworks": [
+            "Fermi Estimation Analysis",
+            "Meta-Material Analytical Framework",
+            "Integrated Cross-Domain Analysis",
+        ],
     }
 
-def run_demo_analysis():
-    """
-    Run a demonstration analysis using all available frameworks.
-    
-    Returns:
-        Dictionary with demo results
-    """
-    print("Insect Analysis Package - Demo Analysis")
-    print("=" * 50)
-    
-    try:
-        # Run comprehensive analysis
-        results = run_comprehensive_analysis()
-        
-        print("\nDemo analysis completed successfully!")
-        print(f"Generated {len(results['performance_metrics'])} performance metrics")
-        print(f"Comprehensive report: {len(results['comprehensive_report'])} characters")
-        
-        return results
-        
-    except Exception as e:
-        print(f"Error during demo analysis: {e}")
-        import traceback
-        traceback.print_exc()
-        return None
+
+def run_demo_analysis() -> dict | None:
+    """Run demonstration comprehensive analysis."""
+    from src.insect_analysis import run_comprehensive_analysis
+
+    print("CohereAnts — demo analysis")
+    result = run_comprehensive_analysis()
+    print("Demo analysis completed successfully!")
+    print(f"Generated {len(result['performance_metrics'])} performance metrics")
+    return result
+
 
 if __name__ == "__main__":
-    # Display package information
     info = get_package_info()
     print(f"{info['name']} v{info['version']}")
     print(f"Author: {info['author']}")
     print(f"Description: {info['description']}")
     print("\nAvailable modules:")
-    for module in info['modules']:
+    for module in info["modules"]:
         print(f"  - {module}")
     print("\nAnalytical frameworks:")
-    for framework in info['frameworks']:
+    for framework in info["frameworks"]:
         print(f"  - {framework}")
-    
     print("\nRunning demo analysis...")
-    demo_results = run_demo_analysis()
+    run_demo_analysis()

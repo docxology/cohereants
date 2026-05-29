@@ -7,11 +7,9 @@ coverage including edge cases, error conditions, and integration scenarios.
 import pytest
 import numpy as np
 import matplotlib.pyplot as plt
-from unittest.mock import patch, MagicMock
 import tempfile
 import os
-import subprocess
-import sys
+import importlib
 
 from insect_analysis import (
     calculate_wavelength_from_wavenumber,
@@ -21,8 +19,10 @@ from insect_analysis import (
     analyze_chc_spectra,
     calculate_response_time_improvement,
     generate_sensilla_visualization,
-    analyze_behavioral_response
+    analyze_behavioral_response,
+    run_comprehensive_analysis,
 )
+from src.spectroscopy import SpectralData
 
 
 class TestWavelengthConversions:
@@ -479,23 +479,18 @@ class TestBehavioralAnalysis:
         assert np.isnan(result['cohens_d'])
         assert result['significant'] == False
         
-    @patch('scipy.stats.ttest_ind')
-    def test_analyze_behavioral_response_ttest_exception(self, mock_ttest):
-        """Test handling of t-test exceptions."""
-        # Mock ttest_ind to raise an exception
-        mock_ttest.side_effect = Exception("Test exception")
-        
-        treatment = "Exception test"
-        response_times = [1.0, 2.0, 3.0]
-        control_times = [4.0, 5.0, 6.0]
-        
+    def test_analyze_behavioral_response_separated_samples(self):
+        """Test that real separated samples produce a negative t-statistic."""
+        treatment = "Separated samples"
+        response_times = [1.0, 1.2, 1.1, 1.3]
+        control_times = [4.0, 4.2, 3.9, 4.1]
+
         result = analyze_behavioral_response(treatment, response_times, control_times)
-        
-        # Should handle exception gracefully - function adds 0.1 offset to [1.0, 2.0, 3.0] -> mean = 2.1
-        assert np.isnan(result['t_statistic'])
-        assert np.isnan(result['p_value'])
-        assert result['treatment_mean'] == 2.1
-        assert result['control_mean'] == 5.1  # Function also adds 0.1 offset to control times
+
+        assert result["treatment_mean"] < result["control_mean"]
+        assert result["difference"] < 0.0
+        assert result["t_statistic"] < 0.0
+        assert 0.0 <= result["p_value"] <= 1.0
         
     def test_analyze_behavioral_response_variance_exception(self):
         """Test handling of variance calculation exceptions."""
@@ -552,82 +547,113 @@ class TestIntegration:
             assert len(fig.axes) == 2
 
 
-class TestInsectAnalysisMissingCoverage:
-    """Test the specific missing lines to achieve 100% coverage."""
-    
-    def test_lines_209_212_main_block_exception_handling(self):
-        """Test insect analysis lines 209-212 (main block exception handling)."""
-        # Create a script that will trigger the exception handling in the main block
-        test_script = """
-import sys
-import os
-sys.path.insert(0, 'src')
-
-# Force an exception by breaking the IntegratedAnalyzer import
-import src.insect_analysis
-# Manually trigger the main block by setting __name__
-src.insect_analysis.__name__ = "__main__"
-
-# Patch to cause an exception
-from unittest.mock import patch
-with patch.object(src.insect_analysis, 'IntegratedAnalyzer', side_effect=Exception("Test error")):
-    # Execute the main block code manually
-    try:
-        print("Insect Analysis Module - Comprehensive Analysis")
-        print("=" * 50)
-        results = src.insect_analysis.run_comprehensive_analysis()
-        print("\\nAnalysis completed successfully!")
-    except Exception as e:
-        print(f"Error during analysis: {e}")
-        import traceback
-        traceback.print_exc()
-"""
-        
-        result = subprocess.run([
-            sys.executable, "-c", test_script
-        ], capture_output=True, text=True, cwd=os.getcwd())
-        
-        # Should execute without crashing (exception handling should work)
-        assert True
-
-
 class TestInsectAnalysisEdgeCases:
     """Test edge cases that might cover missing lines."""
-    
-    def test_insect_analysis_edge_cases(self):
-        """Test insect analysis edge cases."""
-        # Test the run_comprehensive_analysis function
-        try:
-            with patch('src.insect_analysis.IntegratedAnalyzer') as mock_analyzer_class:
-                mock_analyzer = MagicMock()
-                mock_analyzer.analyze_olfactory_system.return_value = {'test': 'result'}
-                mock_analyzer.generate_comprehensive_report.return_value = "Test Report"
-                mock_analyzer.calculate_system_performance_metrics.return_value = {'metric': 1.0}
-                mock_analyzer_class.return_value = mock_analyzer
-                
-                result = run_comprehensive_analysis()
-                assert isinstance(result, dict)
-        except Exception:
-            pass  # Expected to fail, but should cover missing lines
+
+    def test_run_comprehensive_analysis_real(self):
+        """Test the real comprehensive analysis path."""
+        np.random.seed(0)
+        result = run_comprehensive_analysis()
+
+        assert set(result) == {"analysis_results", "performance_metrics", "comprehensive_report"}
+        assert result["performance_metrics"]["system_efficiency"] >= 0.0
+        assert "INTEGRATED ANALYSIS SUMMARY" in result["comprehensive_report"]
+
+    def test_insect_analysis_module_relative_imports(self):
+        """Import insect_analysis as a package submodule (no ImportError fallback)."""
+        mod = importlib.import_module("src.insect_analysis")
+        nested = mod.run_comprehensive_analysis()
+        assert "performance_metrics" in nested
+        assert nested["performance_metrics"]["system_efficiency"] >= 0.0
 
 
-class TestInsectAnalysisEdgeCasesMissingCoverage:
-    """Test the specific missing lines to achieve 100% coverage."""
-    
-    def test_edge_case_imports_and_fallbacks(self):
-        """Test import fallbacks and edge cases."""
-        # Test that modules can handle import errors gracefully
-        modules_to_test = ['src.behavioral', 'src.spectroscopy', 'src.integrated_analysis']
-        
-        for module_name in modules_to_test:
-            try:
-                # Try to import the module
-                __import__(module_name)
-                assert True
-            except ImportError:
-                # Import errors are handled by fallback mechanisms
-                assert True
+class TestPackageLazyExports:
+    """Lazy exports from src package."""
+
+    def test_lazy_visualization_export(self):
+        pkg = importlib.import_module("src")
+        visualizer_cls = pkg.AdvancedVisualizer
+        assert visualizer_cls.__name__ == "AdvancedVisualizer"
 
 
 if __name__ == "__main__":
     pytest.main([__file__])
+
+# --- merged from test_coverage_insect_analysis.py ---
+
+def test_run_comprehensive_analysis_returns_full_results():
+    results = run_comprehensive_analysis()
+    assert "analysis_results" in results
+    assert "performance_metrics" in results
+    assert "comprehensive_report" in results
+
+    analysis = results["analysis_results"]
+    assert "fermi_analysis" in analysis
+    assert "metamaterial_analysis" in analysis
+
+    metrics = results["performance_metrics"]
+    assert "system_efficiency" in metrics
+    assert np.isfinite(metrics["system_efficiency"])
+
+    report = results["comprehensive_report"]
+    assert isinstance(report, str)
+    assert len(report) > 50
+    assert any(c.isdigit() for c in report)  # a real report carries numeric results
+
+# --- merged from test_coverage_demock_extra.py (spectral) ---
+
+class TestSpectralDataValidation:
+    def test_length_mismatch_raises(self):
+        with pytest.raises(ValueError, match="same length"):
+            SpectralData(np.array([2900.0, 2950.0]), np.array([1.0]))
+
+    def test_empty_raises(self):
+        with pytest.raises(ValueError, match="empty"):
+            SpectralData(np.array([]), np.array([]))
+
+    def test_nonpositive_wavenumber_raises(self):
+        with pytest.raises(ValueError, match="positive"):
+            SpectralData(np.array([0.0, 2900.0]), np.array([1.0, 1.0]))
+
+    def test_negative_intensity_raises(self):
+        with pytest.raises(ValueError, match="non-negative"):
+            SpectralData(np.array([2900.0, 2950.0]), np.array([1.0, -0.5]))
+
+    def test_out_of_ir_range_raises(self):
+        with pytest.raises(ValueError, match="IR range"):
+            SpectralData(np.array([10.0, 50.0]), np.array([1.0, 1.0]))
+
+    def test_valid_construction_properties(self):
+        wn = np.linspace(2800.0, 3000.0, 50)
+        inten = np.exp(-((wn - 2900.0) / 30.0) ** 2)
+        sd = SpectralData(wn, inten, species="Test")
+        assert sd.num_points == 50
+        lo, hi = sd.spectral_range
+        assert lo == pytest.approx(2800.0) and hi == pytest.approx(3000.0)
+        imin, imax = sd.intensity_range
+        assert 0.0 <= imin <= imax <= 1.0 + 1e-9
+
+    def test_region_mask_and_data(self):
+        wn = np.linspace(2800.0, 3000.0, 100)
+        inten = np.ones(100)
+        sd = SpectralData(wn, inten)
+        mask = sd.get_region_mask(2850.0, 2950.0)
+        assert mask.sum() > 0 and mask.sum() < 100  # a strict sub-region
+        rwn, rin = sd.get_region_data(2850.0, 2950.0)
+        assert rwn.min() >= 2850.0 and rwn.max() <= 2950.0
+        assert len(rwn) == len(rin) == int(mask.sum())
+
+    def test_region_mask_bad_bounds_raises(self):
+        sd = SpectralData(np.linspace(2800.0, 3000.0, 10), np.ones(10))
+        with pytest.raises(ValueError, match="less than"):
+            sd.get_region_mask(2950.0, 2850.0)
+
+    def test_analyze_chc_spectra_real_values(self):
+        wn = np.linspace(2700.0, 3100.0, 400)
+        inten = np.exp(-((wn - 2920.0) / 25.0) ** 2)  # one CH-stretch peak
+        result = analyze_chc_spectra(wn, inten)
+        # intensity-weighted centroid must sit near the dominant peak, not the mean
+        assert abs(result["spectral_centroid"] - 2920.0) < abs(
+            result["spectral_centroid"] - float(np.mean(wn))
+        )
+        assert result["total_spectral_area"] > 0.0

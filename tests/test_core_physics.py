@@ -7,7 +7,6 @@ This test suite ensures high code coverage for the core physics calculations.
 import pytest
 import numpy as np
 import matplotlib.pyplot as plt
-from unittest.mock import patch, MagicMock
 
 # Import the module under test
 try:
@@ -337,48 +336,32 @@ class TestCorePhysicsMissingCoverage:
     
     def test_function_edge_cases_comprehensive(self):
         """Test comprehensive edge cases for all functions."""
-        # Test calculate_response_statistics with edge cases
-        try:
-            # Convert to numpy arrays (function expects numpy arrays)
-            result = calculate_response_statistics(np.array([]), np.array([]))
-            assert isinstance(result, dict)
-        except (ValueError, IndexError):
-            pass
-        
-        try:
-            # Single data point
-            result = calculate_response_statistics(np.array([1.0]), np.array([2.0]))
-            assert isinstance(result, dict)
-        except (ValueError, IndexError):
-            pass
-        
-        # Test generate_behavioral_plots with edge cases
-        with patch('matplotlib.pyplot.subplots') as mock_subplots:
-            mock_fig = MagicMock()
-            mock_ax = MagicMock()
-            mock_subplots.return_value = (mock_fig, mock_ax)
-            
-            try:
-                # Test with valid data
-                result = generate_behavioral_plots(
-                    np.array([1.0, 2.0, 1.5]), 
-                    np.array([0, 1, 2]),
-                    plot_type='time_series'
-                )
-                assert isinstance(result, plt.Figure)
-            except Exception:
-                pass
-            
-            try:
-                # Test with 'both' plot type (lines 476-500)
-                result = generate_behavioral_plots(
-                    np.array([1.0, 2.0, 1.5, 3.0]), 
-                    np.array([0, 1, 2, 3]),
-                    plot_type='both'
-                )
-                assert isinstance(result, plt.Figure)
-            except Exception:
-                pass
+        with pytest.raises((ValueError, IndexError)):
+            calculate_response_statistics(np.array([]), np.array([]))
+
+        single_point = calculate_response_statistics(np.array([1.0]), np.array([2.0]))
+        assert single_point["baseline_response"] == 0.0
+        assert single_point["min_response_time"] == 2.0
+
+        time_series = generate_behavioral_plots(
+            np.array([1.0, 2.0, 1.5]),
+            np.array([0, 1, 2]),
+            stimulus_times=[0.5],
+            plot_type="time_series",
+        )
+        assert isinstance(time_series, plt.Figure)
+        assert time_series.axes[0].get_ylabel() == "Response Amplitude"
+        plt.close(time_series)
+
+        both = generate_behavioral_plots(
+            np.array([1.0, 2.0, 1.5, 3.0]),
+            np.array([0, 1, 2, 3]),
+            stimulus_times=[1.0, 2.0],
+            plot_type="both",
+        )
+        assert isinstance(both, plt.Figure)
+        assert len(both.axes) == 2
+        plt.close(both)
 
     def test_edge_case_imports_and_fallbacks(self):
         """Test import fallbacks and edge cases."""

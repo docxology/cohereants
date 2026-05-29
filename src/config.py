@@ -15,7 +15,7 @@ Key Features:
 
 import os
 import json
-from typing import Dict, Any, Optional, Union
+from typing import Dict, Any, Optional
 from pathlib import Path
 import warnings
 
@@ -65,52 +65,47 @@ class ConfigManager:
         """
         return {
             # Physical constants
-            'temperature': 298.15,  # K (25°C)
-            'boltzmann_constant': 1.380649e-23,  # J/K
-            'plancks_constant': 6.62607015e-34,  # J⋅s
-            'speed_of_light': 2.99792458e8,  # m/s
-
+            "temperature": 298.15,  # K (25°C)
+            "boltzmann_constant": 1.380649e-23,  # J/K
+            "plancks_constant": 6.62607015e-34,  # J⋅s
+            "speed_of_light": 2.99792458e8,  # m/s
             # Analysis parameters
-            'frequency_range': [1e12, 1e15],  # Hz
-            'wavenumber_range': [500, 4000],  # cm⁻¹
-            'wavelength_range': [2.5, 25],  # μm
-
+            "frequency_range": [1e12, 1e15],  # Hz
+            "wavenumber_range": [500, 4000],  # cm⁻¹
+            "wavelength_range": [2.5, 25],  # μm
             # Visualization settings
-            'plot_dpi': 300,
-            'plot_format': 'png',
-            'colormap': 'viridis',
-            'figure_size': [12, 8],
-
+            "plot_dpi": 300,
+            "plot_format": "png",
+            "colormap": "viridis",
+            "figure_size": [12, 8],
             # Computational settings
-            'max_iterations': 1000,
-            'convergence_threshold': 1e-6,
-            'random_seed': 42,
-            'parallel_processing': True,
-
+            "max_iterations": 1000,
+            "convergence_threshold": 1e-6,
+            "random_seed": 42,
+            "parallel_processing": True,
             # Output settings
-            'output_directory': 'output',
-            'save_intermediate_results': True,
-            'verbose_logging': False,
-
+            "output_directory": "output",
+            "save_intermediate_results": True,
+            "verbose_logging": False,
             # Analysis-specific defaults
-            'analysis': {
-                'fermi_estimation': {
-                    'vibrational_modes': 15,
-                    'binding_energy_range': [-30, 10],  # kJ/mol
-                    'signal_to_noise_ratio': 10.0
+            "analysis": {
+                "fermi_estimation": {
+                    "vibrational_modes": 15,
+                    "binding_energy_range": [-30, 10],  # kJ/mol
+                    "signal_to_noise_ratio": 10.0,
                 },
-                'meta_material': {
-                    'particle_radius': 50e-9,  # m
-                    'plasma_frequency': 5e15,  # Hz
-                    'damping_rate': 1e13,  # Hz
-                    'refractive_index_medium': 1.5
+                "meta_material": {
+                    "particle_radius": 50e-9,  # m
+                    "plasma_frequency": 5e15,  # Hz
+                    "damping_rate": 1e13,  # Hz
+                    "refractive_index_medium": 1.5,
                 },
-                'behavioral': {
-                    'alpha': 0.05,  # significance level
-                    'bootstrap_samples': 1000,
-                    'response_time_bins': 50
-                }
-            }
+                "behavioral": {
+                    "alpha": 0.05,  # significance level
+                    "bootstrap_samples": 1000,
+                    "response_time_bins": 50,
+                },
+            },
         }
 
     def _load_from_environment(self) -> None:
@@ -120,20 +115,20 @@ class ConfigManager:
         Environment variables should be prefixed with 'INSECT_' and use
         uppercase with underscores (e.g., INSECT_TEMPERATURE=310.15)
         """
-        env_prefix = 'INSECT_'
+        env_prefix = "INSECT_"
 
         for key, value in os.environ.items():
             if key.startswith(env_prefix):
-                config_key = key[len(env_prefix):].lower()
+                config_key = key[len(env_prefix) :].lower()
 
                 # Convert string values to appropriate types
                 if value.isdigit():
                     converted_value = int(value)
-                elif value.replace('.', '').replace('-', '').isdigit():
+                elif value.replace(".", "").replace("-", "").isdigit():
                     converted_value = float(value)
-                elif value.lower() in ('true', 'false'):
-                    converted_value = value.lower() == 'true'
-                elif value.startswith('[') and value.endswith(']'):
+                elif value.lower() in ("true", "false"):
+                    converted_value = value.lower() == "true"
+                elif value.startswith("[") and value.endswith("]"):
                     # Simple list parsing
                     try:
                         converted_value = json.loads(value)
@@ -152,24 +147,24 @@ class ConfigManager:
             ValueError: If configuration contains invalid values
         """
         # Temperature validation
-        if self._config['temperature'] <= 0:
+        if self._config["temperature"] <= 0:
             raise ValueError("Temperature must be positive")
 
         # Range validations
-        if self._config['frequency_range'][0] >= self._config['frequency_range'][1]:
+        if self._config["frequency_range"][0] >= self._config["frequency_range"][1]:
             raise ValueError("Frequency range must be increasing")
 
-        if self._config['wavenumber_range'][0] >= self._config['wavenumber_range'][1]:
+        if self._config["wavenumber_range"][0] >= self._config["wavenumber_range"][1]:
             raise ValueError("Wavenumber range must be increasing")
 
-        if self._config['wavelength_range'][0] >= self._config['wavelength_range'][1]:
+        if self._config["wavelength_range"][0] >= self._config["wavelength_range"][1]:
             raise ValueError("Wavelength range must be increasing")
 
         # Positive value checks
-        if self._config['plot_dpi'] <= 0:
+        if self._config["plot_dpi"] <= 0:
             raise ValueError("Plot DPI must be positive")
 
-        if self._config['max_iterations'] <= 0:
+        if self._config["max_iterations"] <= 0:
             raise ValueError("Max iterations must be positive")
 
     def get(self, key: str, default: Any = None) -> Any:
@@ -190,7 +185,7 @@ class ConfigManager:
             >>> config.get('analysis.fermi_estimation.vibrational_modes')
             15
         """
-        keys = key.split('.')
+        keys = key.split(".")
         value = self._config
 
         try:
@@ -212,7 +207,7 @@ class ConfigManager:
             >>> config.set('temperature', 310.15)
             >>> config.set('analysis.fermi_estimation.vibrational_modes', 20)
         """
-        keys = key.split('.')
+        keys = key.split(".")
         config = self._config
 
         # Navigate to the nested dictionary
@@ -238,7 +233,7 @@ class ConfigManager:
             FileNotFoundError: If file doesn't exist
             json.JSONDecodeError: If file contains invalid JSON
         """
-        with open(filename, 'r') as f:
+        with open(filename, "r") as f:
             loaded_config = json.load(f)
 
         # Merge with current configuration
@@ -257,7 +252,7 @@ class ConfigManager:
         # Create directory if it doesn't exist
         Path(filename).parent.mkdir(parents=True, exist_ok=True)
 
-        with open(filename, 'w') as f:
+        with open(filename, "w") as f:
             json.dump(self._config, f, indent=2, sort_keys=True)
 
     def _merge_dicts(self, base: Dict, update: Dict) -> None:
@@ -290,7 +285,7 @@ class ConfigManager:
         Returns:
             Dictionary with analysis-specific configuration
         """
-        return self._config.get('analysis', {}).get(analysis_type, {})
+        return self._config.get("analysis", {}).get(analysis_type, {})
 
     def update_analysis_config(self, analysis_type: str, updates: Dict[str, Any]) -> None:
         """
@@ -300,18 +295,19 @@ class ConfigManager:
             analysis_type: Type of analysis to update
             updates: Dictionary with configuration updates
         """
-        if 'analysis' not in self._config:
-            self._config['analysis'] = {}
+        if "analysis" not in self._config:
+            self._config["analysis"] = {}
 
-        if analysis_type not in self._config['analysis']:
-            self._config['analysis'][analysis_type] = {}
+        if analysis_type not in self._config["analysis"]:
+            self._config["analysis"][analysis_type] = {}
 
-        self._config['analysis'][analysis_type].update(updates)
+        self._config["analysis"][analysis_type].update(updates)
         self._validate_config()
 
 
 # Global configuration instance
 _config_manager = None
+
 
 def get_config() -> ConfigManager:
     """
@@ -324,6 +320,7 @@ def get_config() -> ConfigManager:
     if _config_manager is None:
         _config_manager = ConfigManager()
     return _config_manager
+
 
 def init_config(config_file: Optional[str] = None) -> ConfigManager:
     """
@@ -343,23 +340,27 @@ def init_config(config_file: Optional[str] = None) -> ConfigManager:
 # Convenience functions for common operations
 def set_temperature(temp: float) -> None:
     """Set analysis temperature in Kelvin."""
-    get_config().set('temperature', temp)
+    get_config().set("temperature", temp)
 
-def set_plot_style(style: str = 'seaborn-v0_8') -> None:
+
+def set_plot_style(style: str = "seaborn-v0_8") -> None:
     """Set matplotlib plot style."""
     import matplotlib.pyplot as plt
+
     try:
         plt.style.use(style)
     except OSError:
         warnings.warn(f"Plot style '{style}' not found, using default")
 
+
 def enable_verbose_logging() -> None:
     """Enable verbose logging for debugging."""
-    get_config().set('verbose_logging', True)
+    get_config().set("verbose_logging", True)
+
 
 def set_random_seed(seed: int) -> None:
     """Set random seed for reproducible results."""
-    get_config().set('random_seed', seed)
+    get_config().set("random_seed", seed)
     import numpy as np
-    np.random.seed(seed)
 
+    np.random.seed(seed)

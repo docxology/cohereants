@@ -1,15 +1,12 @@
 #!/usr/bin/env python3
-"""Run all seven case study generators in sequence.
-
-Thin orchestrator that simply executes each script as a module to ensure
-non-redundant generation of data/figures required by the PDF pipeline.
-"""
+"""Run all seven case study generators (parallel when safe)."""
 from __future__ import annotations
+
 import subprocess
 import sys
 import time
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
-
 
 SCRIPTS = [
     "generate_sensilla_array_directionality.py",
@@ -22,63 +19,43 @@ SCRIPTS = [
 ]
 
 
+def _run_script(path: Path) -> tuple[str, float, str, int]:
+    start = time.time()
+    result = subprocess.run([sys.executable, str(path)], capture_output=True, text=True)
+    return path.name, time.time() - start, result.stdout, result.returncode
+
+
 def main() -> int:
-    """Execute all case study scripts with enhanced progress reporting."""
+    """Execute all case study scripts with deterministic summary ordering."""
     repo_root = Path(__file__).resolve().parent
-    runner = [sys.executable]
-    failed: list[str] = []
-    timings: list[tuple[str, float]] = []
-    
-    print(f"🚀 Starting execution of {len(SCRIPTS)} case studies...")
-    total_start_time = time.time()
+    script_paths = [repo_root / name for name in SCRIPTS]
+    print(f"Starting execution of {len(SCRIPTS)} case studies...")
+    total_start = time.time()
+    results: dict[str, tuple[float, str, int]] = {}
 
-    for i, script in enumerate(SCRIPTS, 1):
-        path = repo_root / script
-        print(f"\n📊 [{i}/{len(SCRIPTS)}] Running case study: {script}")
-        
-        start_time = time.time()
-        try:
-            result = subprocess.run(runner + [str(path)], 
-                                  capture_output=True, text=True, check=True)
-            end_time = time.time()
-            duration = end_time - start_time
-            timings.append((script, duration))
-            
-            print(f"✅ Success: {script} ({duration:.2f}s)")
-            # Print the output path if it's in stdout
-            if result.stdout.strip():
-                output_lines = result.stdout.strip().split('\n')
-                # Look for the output path (typically the last line)
-                for line in reversed(output_lines):
-                    if line.strip() and ('figures/' in line or 'output/' in line):
-                        print(f"   📁 Output: {line.strip()}")
-                        break
-                        
-        except subprocess.CalledProcessError as e:
-            end_time = time.time()
-            duration = end_time - start_time
-            print(f"❌ Failed: {script} (after {duration:.2f}s)")
-            if e.stderr:
-                print(f"   Error: {e.stderr.strip()}")
-            failed.append(script)
+    with ProcessPoolExecutor(max_workers=min(4, len(script_paths))) as pool:
+        futures = {pool.submit(_run_script, path): path.name for path in script_paths}
+        for future in as_completed(futures):
+            name, duration, stdout, code = future.result()
+            results[name] = (duration, stdout, code)
+            status = "Success" if code == 0 else "Failed"
+            print(f"{status}: {name} ({duration:.2f}s)")
 
-    total_end_time = time.time()
-    total_duration = total_end_time - total_start_time
-    
-    # Summary report
-    print(f"\n📋 Execution Summary ({total_duration:.2f}s total):")
-    print(f"   ✅ Successful: {len(SCRIPTS) - len(failed)}/{len(SCRIPTS)}")
+    failed = [name for name in SCRIPTS if results.get(name, (0, "", 1))[2] != 0]
+    total_duration = time.time() - total_start
+    print(f"\nExecution summary ({total_duration:.2f}s total): {len(SCRIPTS) - len(failed)}/{len(SCRIPTS)} succeeded")
     if failed:
-        print(f"   ❌ Failed: {len(failed)} scripts: {', '.join(failed)}")
-        
-    # Timing report
-    if timings:
-        print(f"\n⏱️  Timing Report:")
-        for script, duration in sorted(timings, key=lambda x: x[1], reverse=True):
-            print(f"   {duration:6.2f}s - {script}")
-
-    if failed:
+        print(f"Failed scripts: {', '.join(failed)}")
         return 1
+
+    print("\nTiming report (declared script order):")
+    for name in SCRIPTS:
+        duration, stdout, _ = results[name]
+        print(f"  {duration:6.2f}s - {name}")
+        for line in reversed(stdout.strip().splitlines()):
+            if "figures/" in line or "output/" in line:
+                print(f"           Output: {line.strip()}")
+                break
     return 0
 
 

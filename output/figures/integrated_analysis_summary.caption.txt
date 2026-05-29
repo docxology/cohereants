@@ -1,1 +1,0 @@
-Composite summary of dielectric and absorption vs frequency with normalized performance metrics.

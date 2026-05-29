@@ -8,6 +8,10 @@ olfactory processing pipeline stub with clear I/O contracts.
 from typing import Optional
 import numpy as np
 
+# numpy>=2.0 renamed ``np.trapz`` to ``np.trapezoid``; bind whichever this numpy
+# provides so the module works on both numpy 1.x and 2.x.
+_trapezoid = getattr(np, "trapezoid", None) or getattr(np, "trapz")
+
 
 class VibrationalGlomeruliCircuit:
     """
@@ -47,7 +51,7 @@ class VibrationalGlomeruliCircuit:
         for i, center in enumerate(self.frequency_tuning):
             width = max(0.2, center / self.q_factor)
             coupling = self._gaussian_coupling(wavelengths, center, width)
-            responses[i] = float(np.trapz(coupling * intensities, wavelengths))
+            responses[i] = float(_trapezoid(coupling * intensities, wavelengths))
         return responses
 
     def get_channel_centers(self) -> np.ndarray:
@@ -88,10 +92,8 @@ class AntBrainOlfaction:
         centers = self.al.get_channel_centers()
         widths = self.al.get_effective_bandwidths()
         return {
-            'num_channels': int(self.al.num_channels),
-            'centers_um_min': float(centers.min()),
-            'centers_um_max': float(centers.max()),
-            'median_bandwidth_um': float(np.median(widths))
+            "num_channels": int(self.al.num_channels),
+            "centers_um_min": float(centers.min()),
+            "centers_um_max": float(centers.max()),
+            "median_bandwidth_um": float(np.median(widths)),
         }
-
-

@@ -7,7 +7,6 @@ including all methods and edge cases.
 
 import pytest
 import numpy as np
-from unittest.mock import patch, MagicMock
 
 # Import the module under test
 try:
@@ -143,25 +142,33 @@ class TestFermiEstimator:
         # Should handle division by zero gracefully
         assert np.isfinite(result['signal_to_noise_ratio'])
     
-    @patch('sklearn.mixture.GaussianMixture')
-    def test_gaussian_variational_analysis(self, mock_gmm_class):
-        """Test Gaussian variational analysis."""
-        # Mock the GaussianMixture
-        mock_gmm = MagicMock()
-        mock_gmm.means_ = np.array([[1.0], [2.0], [3.0]])
-        mock_gmm.covariances_ = np.array([0.1, 0.2, 0.3])
-        mock_gmm.weights_ = np.array([0.3, 0.4, 0.3])
-        mock_gmm_class.return_value = mock_gmm
-        
-        data = np.array([1.0, 1.1, 2.0, 2.1, 3.0, 3.1])
-        result = self.estimator.gaussian_variational_analysis(data)
-        
+    def test_gaussian_variational_analysis(self):
+        """Real (no-mock) GMM fit + Gaussian-entropy verification.
+
+        De-mocked per RedTeam/Forge cross-vendor CRITICAL: the prior version patched
+        sklearn GaussianMixture and asserted only len()==3, binding neither the fit
+        nor the entropy math. This fits a real trimodal sample and checks recovered
+        structure plus both entropy identities.
+        """
+        rng = np.random.default_rng(0)
+        data = np.concatenate([
+            rng.normal(1.0, 0.05, 80),
+            rng.normal(2.0, 0.05, 80),
+            rng.normal(3.0, 0.05, 80),
+        ])
+        result = self.estimator.gaussian_variational_analysis(data, n_components=3)
+
         required_keys = ['means', 'variances', 'weights', 'entropies_bits', 'total_entropy_bits']
         assert all(key in result for key in required_keys)
         assert len(result['means']) == 3
-        assert len(result['variances']) == 3
-        assert len(result['weights']) == 3
-        assert len(result['entropies_bits']) == 3
+        # Real fit must recover the three clusters {1,2,3}.
+        recovered = np.sort(result['means'])
+        assert np.allclose(recovered, [1.0, 2.0, 3.0], atol=0.3), recovered
+        # Entropy identities: each = 0.5*log2(2*pi*e*var); total = sum(weights*entropies).
+        expected = 0.5 * np.log2(2 * np.pi * np.e * result['variances'])
+        assert np.allclose(result['entropies_bits'], expected)
+        assert np.isclose(result['total_entropy_bits'],
+                          np.sum(result['weights'] * result['entropies_bits']))
     
     def test_calculate_environmental_information_content(self):
         """Test environmental information content calculation."""
@@ -255,22 +262,18 @@ class TestCreateSampleFermiAnalysis:
 
 class TestFermiEstimatorMainExecution:
     """Test the main execution block of fermi_estimation module."""
-    
-    @patch('builtins.print')
-    def test_main_execution(self, mock_print):
+
+    def test_main_execution(self, capsys):
         """Test the main execution block."""
-        # Import the module
         import src.fermi_estimation
-        
-        # Execute the main block directly by calling the function that's in the main block
+
         estimator, mol_data, rec_data, neu_data, env_data = src.fermi_estimation.create_sample_fermi_analysis()
         report = estimator.generate_fermi_analysis_report(mol_data, rec_data, neu_data, env_data)
-        
-        # Call print with the report (this simulates what the main block does)
         print(report)
-        
-        # Check that print was called
-        mock_print.assert_called()
+        captured = capsys.readouterr()
+
+        assert "COMPREHENSIVE FERMI ESTIMATION ANALYSIS" in captured.out
+        assert "SYSTEM SUMMARY" in captured.out
 
 
 class TestFermiEstimatorEdgeCases:
@@ -340,15 +343,10 @@ class TestFermiEstimatorEdgeCases:
     
     def test_gaussian_analysis_single_point(self):
         """Test Gaussian analysis with single data point."""
-        with patch('sklearn.mixture.GaussianMixture') as mock_gmm_class:
-            mock_gmm = MagicMock()
-            mock_gmm.means_ = np.array([[1.0]])
-            mock_gmm.covariances_ = np.array([0.1])
-            mock_gmm.weights_ = np.array([1.0])
-            mock_gmm_class.return_value = mock_gmm
-            
-            data = np.array([1.0])
-            result = self.estimator.gaussian_variational_analysis(data, n_components=1)
-            
-            assert isinstance(result, dict)
-            assert len(result['means']) == 1
+        data = np.array([1.0, 1.0, 1.0, 1.0])
+        result = self.estimator.gaussian_variational_analysis(data, n_components=1)
+
+        assert isinstance(result, dict)
+        assert len(result['means']) == 1
+        assert np.isclose(result['means'][0], 1.0, atol=1e-6)
+        assert np.isclose(np.sum(result['weights']), 1.0)

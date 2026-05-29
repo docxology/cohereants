@@ -1,0 +1,51 @@
+domain: insect_biophysics
+display_name: Insect Infra-red Perception
+required_packages:
+  - numpy
+  - scipy
+  - matplotlib
+  - scikit-learn
+preferred_outputs:
+  - pdf
+  - html
+validation_gates:
+  - experiment_method_design
+  - artifact_manifest
+  - evidence_grounding
+  - render_validation
+  - publication_readiness
+figure_types:
+  - spectral_plot
+  - sensilla_morphology
+  - atmospheric_transmission
+  - response_time_comparison
+  - detection_limit_curve
+citation_policy: official_or_scholarly
+source_policy: "Prefer primary project outputs, peer-reviewed entomology/biophysics literature, and the project's own generated spectra/figures."
+review_gates:
+  - experiment_method_design
+  - render_validation
+  - publication_readiness
+artifact_expectations:
+  - output/figures/atmospheric_transmission.png
+  - output/figures/chc_spectra_example.png
+  - output/figures/sensilla_wavelength_matching.png
+  - output/figures/response_time_comparison.png
+  - output/data/chc_spectra.npz
+  - output/data/response_time_comparison.npz
+benchmark_rubric:
+  name: insect-biophysics-readiness
+  dimensions:
+    - name: output_validity
+      weight: 1.0
+    - name: reproducibility_bundle
+      weight: 1.0
+    - name: artifact_manifest
+      weight: 1.0
+    - name: evidence_grounding
+      weight: 2.0
+    - name: render_success
+      weight: 1.0
+    - name: publication_readiness
+      weight: 1.0
+llm_prompt_guidance: "Use the project's generated spectra, detection-limit curves, and morphology data as the evidence source; do not invent numeric results or assert the vibrational theory as established fact — present it as the hypothesis under investigation."

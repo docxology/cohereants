@@ -5,7 +5,7 @@ Implements sensilla morphology utilities and atmospheric spectroscopy accessors 
 existing, tested src utilities to preserve thin orchestrator constraints.
 """
 
-from typing import Dict, Tuple, Optional
+from typing import Dict, Optional
 import numpy as np
 
 from src.sensilla import analyze_sensilla_dimensions
@@ -14,7 +14,7 @@ from src.core import calculate_atmospheric_transmission
 
 class AntBodySensilla:
     """
-    Sensilla configuration using cohereAnts morphology analysis.
+    Sensilla configuration using CohereAnts morphology analysis.
 
     Args:
         lengths: array of sensilla lengths (μm)
@@ -45,8 +45,8 @@ class AntBodySensilla:
             Dictionary with numpy arrays for 'quarter' and 'half' resonance wavelengths (μm).
         """
         return {
-            'quarter': self.optimal_wavelengths_quarter.copy(),
-            'half': self.optimal_wavelengths_half.copy(),
+            "quarter": self.optimal_wavelengths_quarter.copy(),
+            "half": self.optimal_wavelengths_half.copy(),
         }
 
 
@@ -74,5 +74,3 @@ class AntBodySpectroscopy:
         Alias for get_transmission for backward compatibility.
         """
         return self.get_transmission(wavelength, distance)
-
-

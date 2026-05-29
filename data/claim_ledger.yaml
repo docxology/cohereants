@@ -1,0 +1,624 @@
+claims:
+- claim_id: manuscript-numeric-1
+  kind: number
+  value: -34
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-2
+  kind: number
+  value: -31
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-3
+  kind: number
+  value: -23
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-4
+  kind: number
+  value: -19
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-5
+  kind: number
+  value: -15
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-6
+  kind: number
+  value: -12
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-7
+  kind: number
+  value: -10
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-8
+  kind: number
+  value: -9
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-9
+  kind: number
+  value: -7
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-10
+  kind: number
+  value: -6
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-11
+  kind: number
+  value: -3
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-12
+  kind: number
+  value: -2
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-13
+  kind: number
+  value: -1
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-14
+  kind: number
+  value: 0.01
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-15
+  kind: number
+  value: 0.05
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-16
+  kind: number
+  value: 0.1
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-17
+  kind: number
+  value: 0.16
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-18
+  kind: number
+  value: 0.26
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-19
+  kind: number
+  value: 0.3
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-20
+  kind: number
+  value: 0.5
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-21
+  kind: number
+  value: 0.7
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-22
+  kind: number
+  value: 0.707
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-23
+  kind: number
+  value: 0.8
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-24
+  kind: number
+  value: 0.85
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-25
+  kind: number
+  value: 0.9
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-26
+  kind: number
+  value: 1
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-27
+  kind: number
+  value: 1.055
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-28
+  kind: number
+  value: 1.2
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-29
+  kind: number
+  value: 1.23
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-30
+  kind: number
+  value: 1.26
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-31
+  kind: number
+  value: 1.381
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-32
+  kind: number
+  value: 1.4
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-33
+  kind: number
+  value: 1.5
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-34
+  kind: number
+  value: 1.602
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-35
+  kind: number
+  value: 1.79
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-36
+  kind: number
+  value: 1.841
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-37
+  kind: number
+  value: 2
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-38
+  kind: number
+  value: 2.3
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-39
+  kind: number
+  value: 2.62
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-40
+  kind: number
+  value: 2.8
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-41
+  kind: number
+  value: 2.998
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-42
+  kind: number
+  value: 3
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-43
+  kind: number
+  value: 3.5
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-44
+  kind: number
+  value: 3.6
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-45
+  kind: number
+  value: 5.4
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-46
+  kind: number
+  value: 6
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-47
+  kind: number
+  value: 6.626
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-48
+  kind: number
+  value: 6.86
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-49
+  kind: number
+  value: 7
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-50
+  kind: number
+  value: 8
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-51
+  kind: number
+  value: 8.35
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-52
+  kind: number
+  value: 8.854
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-53
+  kind: number
+  value: 9
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-54
+  kind: number
+  value: 9.109
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-55
+  kind: number
+  value: 11
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-56
+  kind: number
+  value: 12
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-57
+  kind: number
+  value: 13%
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-58
+  kind: number
+  value: 14
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-59
+  kind: number
+  value: 15
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-60
+  kind: number
+  value: 17
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-61
+  kind: number
+  value: 20
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-62
+  kind: number
+  value: 25
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-63
+  kind: number
+  value: 30
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-64
+  kind: number
+  value: 33
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-65
+  kind: number
+  value: 35
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-66
+  kind: number
+  value: 35.9
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-67
+  kind: number
+  value: 42
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-68
+  kind: number
+  value: 50
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-69
+  kind: number
+  value: 50%
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-70
+  kind: number
+  value: 53.42
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-71
+  kind: number
+  value: 80%
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-72
+  kind: number
+  value: 90
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-73
+  kind: number
+  value: 90%
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-74
+  kind: number
+  value: 98%
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-75
+  kind: number
+  value: 300
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-76
+  kind: number
+  value: 1408
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-77
+  kind: number
+  value: 1737
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-78
+  kind: number
+  value: 2500
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-79
+  kind: number
+  value: 2849
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-80
+  kind: number
+  value: 2850
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-81
+  kind: number
+  value: 2913
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: manuscript-numeric-82
+  kind: number
+  value: 2958
+  source: cohereants engineering remediation claim ledger
+  source_tier: manuscript_claim
+  freshness: active
+  artifact_path: data/claim_ledger.yaml
+- claim_id: chandel-ir-source-temp-c
+  kind: number
+  value: 34
+  source: chandel2024thermal skin-temperature blackbody source
+  source_tier: bibliography
+  freshness: active
+  artifact_path: manuscript/references.bib
+- claim_id: chandel-ir-peak-um
+  kind: number
+  value: 9.4
+  source: chandel2024thermal peak emission wavelength um
+  source_tier: bibliography
+  freshness: active
+  artifact_path: manuscript/references.bib
+- claim_id: chandel-ir-range-m
+  kind: number
+  value: 0.7
+  source: chandel2024thermal host-seeking detection range m
+  source_tier: bibliography
+  freshness: active
+  artifact_path: manuscript/references.bib
+- claim_id: melanophila-ir-threshold-low-mw-cm2
+  kind: number
+  value: 11.0
+  source: hammer2001sensitivity schmitz2002acanthocnemus lower bound mW/cm2
+  source_tier: primary_literature
+  freshness: active
+  artifact_path: manuscript/references.bib
+- claim_id: melanophila-ir-threshold-high-mw-cm2
+  kind: number
+  value: 17.3
+  source: hammer2001sensitivity Melanophila 3.39 um threshold mW/cm2
+  source_tier: primary_literature
+  freshness: active
+  artifact_path: manuscript/references.bib
+- claim_id: fire-blackbody-peak-um
+  kind: number
+  value: 3.0
+  source: Wien displacement forest fire blackbody peak um
+  source_tier: primary_literature
+  freshness: active
+  artifact_path: src/manuscript_fixtures.py
+- claim_id: skin-blackbody-peak-um
+  kind: number
+  value: 9.4
+  source: Wien displacement human skin blackbody peak um
+  source_tier: primary_literature
+  freshness: active
+  artifact_path: src/manuscript_fixtures.py

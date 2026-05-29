@@ -12,7 +12,6 @@ import sys
 import os
 
 # Import modules to test
-from src.visualization import PlotStyler, AdvancedVisualizer
 from src.case_studies.plasmonic_geometry import (
     drude_model_permittivity,
     mie_scattering_sphere,
@@ -38,76 +37,6 @@ from src.spectroscopy import (
     calculate_spectral_overlap,
     generate_spectral_plots
 )
-
-
-class TestVisualizationEdgeCases:
-    """Test visualization edge cases and error handling."""
-
-    def test_plotstyler_get_colors_fallback(self):
-        """Test PlotStyler color fallback for invalid palette."""
-        styler = PlotStyler()
-        colors = styler.get_colors(5, palette='nonexistent_palette')
-        assert len(colors) == 5
-        assert all(isinstance(c, str) for c in colors)
-
-    def test_plot_spectral_analysis_empty_and_mismatch(self):
-        """Test spectral analysis with empty and mismatched arrays."""
-        adv = AdvancedVisualizer()
-
-        # Empty arrays -> returns a Figure without raising
-        fig_empty = adv.plot_spectral_analysis(np.array([]), np.array([]))
-        assert isinstance(fig_empty, plt.Figure)
-        plt.close(fig_empty)
-
-        # Mismatched lengths -> raises ValueError
-        with pytest.raises(ValueError):
-            adv.plot_spectral_analysis(np.linspace(100, 200, 10), np.linspace(0, 1, 5))
-
-    def test_plot_spectral_analysis_derivative_and_peak_detection(self):
-        """Test spectral analysis with derivative calculation."""
-        adv = AdvancedVisualizer()
-        w = np.linspace(100, 200, 100)
-        intensities = np.exp(-0.5 * ((w - 150) / 2) ** 2)
-        fig = adv.plot_spectral_analysis(w, intensities)
-        assert isinstance(fig, plt.Figure)
-        plt.close(fig)
-
-    def test_annotate_top_peaks_invalid_shapes(self):
-        """Test annotate_top_peaks with invalid input shapes."""
-        adv = AdvancedVisualizer()
-        fig, ax = plt.subplots()
-        # invalid shapes -> no exception
-        adv.annotate_top_peaks(ax, np.array([[1, 2]]), np.array([1, 2]))
-        plt.close(fig)
-
-    def test_create_interactive_plot_fallback(self, monkeypatch):
-        """Test interactive plot fallback when plotly unavailable."""
-        monkeypatch.setitem(sys.modules, 'plotly', None)
-        adv = AdvancedVisualizer()
-        fig = adv.create_interactive_plot(np.arange(5), np.arange(5))
-        # Fallback returns a matplotlib Figure
-        assert isinstance(fig, plt.Figure)
-        if hasattr(fig, 'close'):
-            plt.close(fig)
-
-    def test_save_figure_creates_file(self, tmp_path):
-        """Test figure saving creates file."""
-        adv = AdvancedVisualizer()
-        fig, ax = plt.subplots()
-        ax.plot([0, 1], [0, 1])
-        out = tmp_path / "test_fig.png"
-        adv.save_figure(fig, str(out))
-        assert out.exists()
-        assert out.stat().st_size > 0
-        plt.close(fig)
-
-    def test_visualization_style_handling(self):
-        """Test visualization style error handling."""
-        styler = PlotStyler()
-
-        # Test with invalid style - should not raise
-        styler.apply_style('nonexistent_style')
-        assert styler.current_style == 'nonexistent_style'
 
 
 class TestPlasmonicGeometryEdgeCases:

@@ -5,6 +5,7 @@ Functions:
 - generate_markdown_table(entries): Build a Markdown table from entries
 - inject_between_markers(text, begin_marker, end_marker, content): Replace content between markers
 """
+
 from __future__ import annotations
 
 import ast
@@ -16,13 +17,14 @@ from typing import Iterable, List
 @dataclass
 class ApiEntry:
     """Represents a public API entry from source code.
-    
+
     Attributes:
         module: The module name where the API is defined
         name: The name of the function or class
         kind: The type of API ("function" or "class")
         summary: A brief description extracted from the docstring
     """
+
     module: str
     name: str
     kind: str  # "function" | "class"
@@ -32,21 +34,21 @@ class ApiEntry:
 def _first_sentence(doc: str | None) -> str:
     if not doc:
         return ""
-    
+
     # Clean up the document and split into sentences
     cleaned = doc.strip()
-    
+
     # Split on periods to get sentences
-    sentences = cleaned.split('.')
+    sentences = cleaned.split(".")
     first_sentence = sentences[0].strip()
-    
+
     # Handle newlines within the first sentence
-    first_sentence = ' '.join(first_sentence.split())
-    
+    first_sentence = " ".join(first_sentence.split())
+
     # Keep it short
     if len(first_sentence) > 200:
         first_sentence = first_sentence[:197] + "..."
-    
+
     return first_sentence
 
 
@@ -101,10 +103,10 @@ def build_api_index(src_dir: str) -> List[ApiEntry]:
 
 def generate_markdown_table(entries: List[ApiEntry]) -> str:
     """Generate a Markdown table from API entries.
-    
+
     Args:
         entries: List of API entries to format
-        
+
     Returns:
         Markdown table string with headers and data rows
     """

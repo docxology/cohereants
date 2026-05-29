@@ -67,6 +67,8 @@ from src.case_studies.spectral_unmixing import (
     independent_component_analysis_spectra,
     spectral_feature_extraction,
     lda_baseline,
+    advanced_classification_suite,
+    performance_metrics_comprehensive,
 )
 
 # Sensilla Array Directionality
@@ -84,6 +86,49 @@ from src.case_studies.sensilla_array_directionality import (
 
 # Active Inference
 from src.case_studies.active_inference import olfactory_active_inference_step
+
+
+def _multi_trial_stimulus(n_trials: int = 5, n_samples: int = 200, seed: int = 0) -> np.ndarray:
+    rng = np.random.default_rng(seed)
+    return np.clip(rng.normal(0.5, 0.2, (n_trials, n_samples)), 0.0, 1.0)
+
+
+def _make_nonnegative_spectra(n_samples: int, n_wavelengths: int, seed: int) -> np.ndarray:
+    rng = np.random.default_rng(seed)
+    return np.abs(rng.normal(0.5, 0.2, (n_samples, n_wavelengths)))
+
+
+def _spectral_unmixing_api():
+    import importlib
+
+    return importlib.import_module("src.case_studies.spectral_unmixing")
+
+
+def _make_feature_data(n: int = 80, seed: int = 7):
+    rng = np.random.default_rng(seed)
+    half = n // 2
+    features = np.vstack(
+        [
+            rng.normal(0.0, 0.3, (half, 4)),
+            rng.normal(3.0, 0.3, (half, 4)),
+        ]
+    )
+    labels = np.array([0] * half + [1] * half)
+    return features, labels
+
+
+def _make_three_class_feature_data(n: int = 90, seed: int = 11):
+    rng = np.random.default_rng(seed)
+    third = n // 3
+    features = np.vstack(
+        [
+            rng.normal(0.0, 0.3, (third, 4)),
+            rng.normal(3.0, 0.3, (third, 4)),
+            rng.normal(6.0, 0.3, (n - 2 * third, 4)),
+        ]
+    )
+    labels = np.array([0] * third + [1] * third + [2] * (n - 2 * third))
+    return features, labels
 
 
 class TestDetectionLimits:
@@ -537,6 +582,34 @@ class TestSensillaArrayDirectionality:
         assert 'gain_db' in result
 
 
+CASE_STUDY_CONTRACTS = [
+    ("detection_limits", "src.case_studies.detection_limits", "compute_detection_limits_analysis"),
+    ("environmental_channel", "src.case_studies.environmental_channel", "compute_environmental_channel_analysis"),
+    ("neural_encoding", "src.case_studies.neural_encoding", "compute_neural_encoding_analysis"),
+    ("plasmonic_geometry", "src.case_studies.plasmonic_geometry", "compute_plasmonic_geometry_analysis"),
+    ("sensilla_array_directionality", "src.case_studies.sensilla_array_directionality", "compute_sensilla_array_analysis"),
+    ("spectral_unmixing", "src.case_studies.spectral_unmixing", "compute_spectral_unmixing_analysis"),
+]
+
+
+@pytest.mark.parametrize("name,module_path,compute_name", CASE_STUDY_CONTRACTS, ids=[c[0] for c in CASE_STUDY_CONTRACTS])
+def test_case_study_typed_compute_contract(name: str, module_path: str, compute_name: str) -> None:
+    """Each appendix compute returns a typed analysis object with stable dict export."""
+    import importlib
+
+    module = importlib.import_module(module_path)
+    compute_fn = getattr(module, compute_name)
+    render_fn = getattr(module, "render_comprehensive_figure")
+    analysis = compute_fn()
+    assert hasattr(analysis, "as_dict"), f"{name} should return typed analysis dataclass"
+    payload = analysis.as_dict()
+    assert isinstance(payload, dict) and payload
+    fig, metrics = render_fn(analysis)
+    assert fig is not None
+    assert isinstance(metrics, dict) and metrics
+    plt.close(fig)
+
+
 class TestActiveInference:
     """Test active inference functions."""
 
@@ -551,3 +624,499 @@ class TestActiveInference:
         assert 'y' in result
         assert isinstance(result, dict)
 
+# --- merged from test_coverage_detection_limits.py ---
+
+def test_min_detectable_power_array_and_scalar():
+    bandwidths = np.array([1e5, 1e6, 1e7])
+    array_result = min_detectable_power(300.0, bandwidths, snr_min_db=10.0)
+    assert isinstance(array_result, np.ndarray)
+    assert array_result.shape == (3,)
+    assert np.all(array_result > 0.0)
+    # Power scales linearly with bandwidth.
+    assert np.all(np.diff(array_result) > 0.0)
+
+    scalar_result = min_detectable_power(300.0, 1e6, snr_min_db=10.0)
+    assert isinstance(scalar_result, float)
+    assert scalar_result > 0.0
+
+
+def test_detection_performance_no_detection_falls_through():
+    # Very low SNR range: no point reaches pd_target=0.9, so mds defaults to last.
+    snr_db = np.linspace(-40.0, -30.0, 5)
+    result = detection_performance_vs_snr(snr_db, pfa_target=1e-3)
+    assert np.all((result["pd"] >= 0.0) & (result["pd"] <= 1.0))
+    assert result["mds_snr_db"] == snr_db[-1]
+    # Identity check (derivable, not reverse-engineered).
+    assert np.allclose(result["snr_linear"], 10 ** (snr_db / 10.0))
+
+
+def test_detection_performance_high_snr_reaches_target():
+    snr_db = np.linspace(0.0, 30.0, 10)
+    result = detection_performance_vs_snr(snr_db)
+    # With a high enough SNR, mds should be selected within the provided range.
+    assert snr_db[0] <= result["mds_snr_db"] <= snr_db[-1]
+
+
+def test_roc_analysis_with_explicit_threshold_range():
+    thresholds = np.linspace(-2.0, 2.0, 200)
+    roc = roc_analysis(1.0, 0.1, threshold_range=thresholds, n_points=200)
+    assert np.array_equal(roc["thresholds"], thresholds)
+    assert 0.0 <= roc["auc"] <= 1.0
+    assert np.all((roc["pfa"] >= 0.0) & (roc["pfa"] <= 1.0))
+    assert np.all((roc["pd"] >= 0.0) & (roc["pd"] <= 1.0))
+    assert 0.0 <= roc["eer_rate"] <= 1.0
+
+
+def test_noise_floor_with_components_disabled():
+    frequencies = np.array([1e3, 1e4, 1e5])
+    result = noise_floor_analysis(
+        frequencies,
+        temperature_k=300.0,
+        include_shot_noise=False,
+        include_flicker_noise=False,
+    )
+    assert np.all(result["shot_noise_power"] == 0.0)
+    assert np.all(result["flicker_noise_power"] == 0.0)
+    # Thermal noise is always present and positive.
+    assert np.all(result["thermal_noise_power"] > 0.0)
+    assert np.allclose(result["total_noise_power"], result["thermal_noise_power"])
+
+
+def test_optimize_detection_parameters_with_power_efficiency_objective():
+    constraints = {
+        "temperature_k": (290.0, 310.0),
+        "bandwidth_hz": (1e5, 1e7),
+        "current_a": (1e-7, 1e-5),
+    }
+    objectives = {"mdp_target": 1e-15, "power_efficiency": 1e6}
+    fixed_params = {"snr_min_db": 3.0}
+    result = optimize_detection_parameters(constraints, objectives, fixed_params)
+    assert "optimization_success" in result
+    assert "final_performance" in result
+    assert "optimized_parameters" in result
+    assert np.isfinite(result["objective_value"])
+    # Optimized parameters stay within the requested bounds.
+    for name, (low, high) in constraints.items():
+        assert low - 1e-6 <= result["optimized_parameters"][name] <= high + 1e-6
+
+
+def test_operating_point_snr_linear_identity():
+    op = operating_point(1234.0, 10.0)
+    assert op["capacity_bits_s"] == 1234.0
+    assert np.isclose(op["snr_linear"], 10 ** (10.0 / 10.0))
+
+# --- merged from test_coverage_neural_encoding.py ---
+
+@pytest.mark.parametrize("dynamics", ["tonic", "phasic", "phasic-tonic", "adaptive"])
+def test_generate_spike_trains_all_dynamics(dynamics):
+    stimuli = _multi_trial_stimulus()
+    spike_data = generate_spike_trains(
+        stimuli, dt=1e-3, response_dynamics=dynamics, seed=7
+    )
+    assert spike_data["spike_trains"].shape == stimuli.shape
+    assert spike_data["rate_profiles"].shape == stimuli.shape
+    # Spike trains are binary {0, 1}.
+    assert set(np.unique(spike_data["spike_trains"])).issubset({0, 1})
+    # Firing rates are non-negative everywhere.
+    assert np.all(spike_data["rate_profiles"] >= 0.0)
+
+
+def test_generate_spike_trains_1d_input_is_promoted():
+    stimulus_1d = np.clip(np.linspace(0.0, 1.0, 200), 0.0, 1.0)
+    spike_data = generate_spike_trains(stimulus_1d, dt=1e-3, seed=3)
+    # 1D input is promoted to a single-trial 2D array.
+    assert spike_data["spike_trains"].shape == (1, 200)
+
+
+def test_adaptive_dynamics_full_analysis_chain():
+    stimuli = _multi_trial_stimulus()
+    spike_data = generate_spike_trains(
+        stimuli, dt=1e-3, response_dynamics="adaptive", seed=21
+    )
+
+    stats = analyze_spike_train_statistics(spike_data)
+    assert "fano_factor" in stats and "cv_isi" in stats
+    assert stats["mean_firing_rate_hz"] >= 0.0
+    assert np.isfinite(stats["fano_factor"])
+
+    adaptation = adaptation_dynamics_analysis(spike_data, stimulus_duration=0.2)
+    assert "mean_time_constant_s" in adaptation
+    assert adaptation["mean_peak_response"] >= 0.0
+    assert 0.0 <= adaptation["mean_adaptation_index"] <= 1.0 + 1e-9
+
+
+def test_temporal_coding_single_vs_multi_stimulus():
+    stimuli = _multi_trial_stimulus()
+    spike_data = generate_spike_trains(
+        stimuli, dt=1e-3, response_dynamics="phasic-tonic", seed=5
+    )
+
+    single = temporal_coding_analysis(spike_data, np.array([0.05]))
+    # A single stimulus time cannot define a period -> vector strength is 0.
+    assert single["vector_strength"] == 0.0
+    assert single["temporal_precision"] >= 0.0
+
+    multi = temporal_coding_analysis(spike_data, np.arange(0.0, 0.25, 0.05))
+    # Vector strength is a phase-locking magnitude in [0, 1].
+    assert 0.0 <= multi["vector_strength"] <= 1.0
+
+
+def test_information_rate_time_series_degenerate_inputs():
+    empty = information_rate_time_series(np.array([]), dt_s=1e-3, noise_std=0.1)
+    assert empty == {
+        "channel_capacity_bits": 0.0,
+        "information_rate_bits": 0.0,
+        "snr": 0.0,
+    }
+    bad_dt = information_rate_time_series(np.ones(5), dt_s=0.0, noise_std=0.1)
+    assert bad_dt["information_rate_bits"] == 0.0
+
+
+def test_information_rate_time_series_positive_snr():
+    responses = np.array([0.0, 5.0, 0.0, 5.0, 0.0, 5.0], dtype=float)
+    result = information_rate_time_series(responses, dt_s=1e-3, noise_std=0.5)
+    assert result["channel_capacity_bits"] > 0.0
+    assert result["information_rate_bits"] > 0.0
+    assert result["snr"] > 0.0
+
+
+def test_rate_coding_metrics_early_return_branches():
+    # Mismatched sizes -> zeroed metrics.
+    assert rate_coding_metrics(np.ones(5), np.ones(3)) == {
+        "d_prime": 0.0,
+        "mean_diff": 0.0,
+    }
+    # Three classes (not exactly two) -> zeroed metrics.
+    assert rate_coding_metrics(np.arange(6.0), np.array([0, 1, 2, 0, 1, 2])) == {
+        "d_prime": 0.0,
+        "mean_diff": 0.0,
+    }
+
+
+def test_rate_coding_metrics_two_class_separation():
+    responses = np.array([0.0, 0.1, 0.2, 5.0, 5.1, 5.2])
+    labels = np.array([0, 0, 0, 1, 1, 1])
+    metrics = rate_coding_metrics(responses, labels)
+    assert metrics["mean_diff"] > 0.0
+    assert np.isfinite(metrics["d_prime"])
+
+
+def test_population_coding_single_class_returns_zero_accuracy():
+    rng = np.random.default_rng(1)
+    population = np.abs(rng.normal(1.0, 0.3, (4, 20, 30)))
+    labels = np.zeros(20, dtype=int)
+    result = population_coding_analysis(population, labels)
+    # Only one class -> classification accuracy is 0 by the guarded branch.
+    assert result["classification_accuracy"] == 0.0
+    assert result["explained_variance_ratio"].ndim == 1
+    assert np.all(np.isfinite(result["cumulative_variance"]))
+
+
+def test_population_coding_multi_class_accuracy_in_range():
+    rng = np.random.default_rng(2)
+    population = np.abs(rng.normal(1.0, 0.3, (4, 20, 30)))
+    labels = np.array([0] * 10 + [1] * 10)
+    result = population_coding_analysis(population, labels)
+    assert 0.0 <= result["classification_accuracy"] <= 1.0
+
+
+def test_mutual_information_length_mismatch_raises():
+    with pytest.raises(ValueError):
+        mutual_information_analysis(np.ones(5), np.ones(4))
+
+
+def test_mutual_information_nonnegative_entropies():
+    rng = np.random.default_rng(9)
+    stimuli = rng.integers(0, 2, 400)
+    responses = rng.poisson(stimuli * 5 + 1)
+    result = mutual_information_analysis(stimuli, responses)
+    assert result["mutual_information_bits"] >= -1e-9
+    assert result["response_entropy_bits"] >= 0.0
+    assert result["stimulus_entropy_bits"] >= 0.0
+    assert 0.0 <= result["normalized_mutual_information"] <= 1.0 + 1e-6
+
+
+def test_odor_discrimination_single_odor_zero_accuracy():
+    rng = np.random.default_rng(4)
+    population = np.abs(rng.normal(1.0, 0.3, (4, 20, 40)))
+    odor_ids = np.zeros(20, dtype=int)
+    result = odor_discrimination_analysis(
+        population, odor_ids, [(0.0, 0.01), (0.01, 0.02)], dt=1e-3
+    )
+    assert set(result.keys()) == {"window_0", "window_1"}
+    # A single odor identity yields zero classification accuracy.
+    assert result["window_0"]["classification_accuracy"] == 0.0
+
+# --- merged from test_coverage_spectral_unmixing.py ---
+
+def test_nmf_unmix_happy_path_and_validation():
+    api = _spectral_unmixing_api()
+    spectra = _make_nonnegative_spectra(n_samples=7, n_wavelengths=18, seed=100)
+    result = api.nmf_unmix(spectra, n_components=3, seed=17)
+
+    assert set(result) == {"W", "H"}
+    assert result["W"].shape == (7, 3)
+    assert result["H"].shape == (3, 18)
+    assert np.all(result["W"] >= 0)
+    assert np.all(result["H"] >= 0)
+
+    with pytest.raises(ValueError):
+        api.nmf_unmix(np.arange(10.0), n_components=2)
+
+    with pytest.raises(ValueError):
+        api.nmf_unmix(spectra, n_components=0)
+
+
+def test_generate_realistic_chc_spectra_contract():
+    api = _spectral_unmixing_api()
+    result = api.generate_realistic_chc_spectra(
+        n_samples=12,
+        n_wavelengths=40,
+        n_components=4,
+        seed=23,
+    )
+
+    expected_keys = {
+        "wavelengths_um",
+        "mixed_spectra",
+        "pure_components",
+        "mixing_coefficients",
+        "dominant_labels",
+        "component_centers",
+        "component_widths",
+        "noise_level",
+        "snr_db",
+    }
+    assert expected_keys.issubset(result.keys())
+    assert result["mixed_spectra"].shape == (12, 40)
+    assert np.all(result["mixed_spectra"] >= 0)
+    assert np.allclose(result["mixing_coefficients"].sum(axis=1), 1.0, atol=1e-6)
+    assert result["dominant_labels"].shape == (12,)
+    assert np.all((result["dominant_labels"] >= 0) & (result["dominant_labels"] < 4))
+    assert np.isfinite(result["snr_db"])
+
+
+def test_vertex_component_analysis_happy_path_and_validation():
+    api = _spectral_unmixing_api()
+    spectra = api.generate_realistic_chc_spectra(
+        n_samples=10,
+        n_wavelengths=30,
+        n_components=3,
+        seed=19,
+    )["mixed_spectra"]
+    result = api.vertex_component_analysis(spectra, n_components=3)
+
+    assert {
+        "endmembers",
+        "abundances",
+        "endmember_indices",
+        "reconstruction",
+        "explained_variance_ratio",
+    }.issubset(result.keys())
+    assert result["endmembers"].shape == (3, 30)
+    assert result["abundances"].shape == (10, 3)
+    assert result["reconstruction"].shape == spectra.shape
+    assert np.allclose(result["abundances"].sum(axis=1), 1.0, atol=1e-6)
+
+    with pytest.raises(ValueError):
+        api.vertex_component_analysis(np.arange(12.0), n_components=2)
+
+    with pytest.raises(ValueError):
+        api.vertex_component_analysis(spectra, n_components=10)
+
+
+def test_independent_component_analysis_spectra_happy_path_and_validation():
+    api = _spectral_unmixing_api()
+    spectra = api.generate_realistic_chc_spectra(
+        n_samples=9,
+        n_wavelengths=20,
+        n_components=3,
+        seed=41,
+    )["mixed_spectra"]
+    result = api.independent_component_analysis_spectra(
+        spectra,
+        n_components=50,
+        max_iter=200,
+        tol=1e-4,
+    )
+
+    expected_keys = {
+        "independent_components",
+        "mixing_matrix",
+        "whitening_matrix",
+        "unmixing_matrix",
+        "reconstructed_spectra",
+        "n_iterations",
+        "converged",
+    }
+    assert expected_keys == set(result.keys())
+    assert result["reconstructed_spectra"].shape == spectra.shape
+    assert isinstance(result["converged"], bool)
+    assert isinstance(result["n_iterations"], int)
+    assert result["n_iterations"] >= 1
+
+    with pytest.raises(ValueError):
+        api.independent_component_analysis_spectra(np.arange(8.0), n_components=2)
+
+
+def test_spectral_feature_extraction_methods_and_zero_peak_branch():
+    api = _spectral_unmixing_api()
+    wavelengths = np.linspace(2.5, 20.0, 60)
+    base = np.linspace(0.2, 1.0, 60)
+    peak1 = np.exp(-0.5 * ((wavelengths - 7.0) / 0.7) ** 2)
+    peak2 = 0.8 * np.exp(-0.5 * ((wavelengths - 14.0) / 1.2) ** 2)
+    spectra = np.vstack(
+        [
+            base + 0.4 * peak1,
+            base + 0.5 * peak2,
+            base + 0.25 * peak1 + 0.2 * peak2,
+            base[::-1] + 0.35 * peak1,
+            0.6 * base + 0.15 * peak2,
+        ]
+    )
+
+    peaks = api.spectral_feature_extraction(spectra, wavelengths, method="peaks")
+    assert set(peaks) == {"statistical_features", "peak_features"}
+    assert peaks["statistical_features"].shape == (5, 8)
+    assert peaks["peak_features"].shape == (5, 10)
+
+    derivatives = api.spectral_feature_extraction(spectra, wavelengths, method="derivatives")
+    assert set(derivatives) == {"statistical_features", "derivative_features"}
+    assert derivatives["statistical_features"].shape == (5, 8)
+    assert derivatives["derivative_features"].shape == (5, 6)
+
+    pca = api.spectral_feature_extraction(spectra, wavelengths, method="pca")
+    assert set(pca) == {
+        "statistical_features",
+        "pca_features",
+        "pca_explained_variance",
+    }
+    assert pca["statistical_features"].shape == (5, 8)
+    assert pca["pca_features"].shape[0] == 5
+    assert np.all(np.isfinite(pca["pca_explained_variance"]))
+
+    all_features = api.spectral_feature_extraction(spectra, wavelengths, method="all")
+    assert set(all_features) == {
+        "statistical_features",
+        "peak_features",
+        "derivative_features",
+        "pca_features",
+        "pca_explained_variance",
+    }
+    assert all_features["statistical_features"].shape == (5, 8)
+    assert all_features["peak_features"].shape == (5, 10)
+    assert all_features["derivative_features"].shape == (5, 6)
+    assert all_features["pca_features"].shape[0] == 5
+
+    monotonic_spectra = np.vstack([np.linspace(i, i + 1.0, 60) for i in range(1, 6)])
+    zero_peak_result = api.spectral_feature_extraction(
+        monotonic_spectra,
+        wavelengths,
+        method="peaks",
+    )
+    assert np.array_equal(zero_peak_result["peak_features"][0], np.zeros(10))
+
+
+def test_advanced_classification_suite_binary_multiclass_and_validation():
+    api = _spectral_unmixing_api()
+    features_2c, labels_2c = _make_feature_data()
+    binary_result = api.advanced_classification_suite(
+        features_2c,
+        labels_2c,
+        test_size=0.25,
+        seed=11,
+    )
+
+    assert set(binary_result) == {"lda", "qda", "naive_bayes", "knn", "logistic"}
+    for classifier_result in binary_result.values():
+        assert 0.0 <= classifier_result["accuracy"] <= 1.0
+        # Clusters are well-separated: a working classifier must beat chance by a margin.
+        assert classifier_result["accuracy"] > 0.7
+        assert np.isfinite(classifier_result["accuracy"])
+        assert classifier_result["predictions"].ndim == 1
+        assert len(classifier_result["predictions"]) == 20
+
+    features_3c, labels_3c = _make_three_class_feature_data()
+    multiclass_result = api.advanced_classification_suite(
+        features_3c,
+        labels_3c,
+        test_size=0.2,
+        seed=13,
+    )
+    assert set(multiclass_result) == {"lda", "qda", "naive_bayes", "knn"}
+    assert "logistic" not in multiclass_result
+    for classifier_result in multiclass_result.values():
+        assert 0.0 <= classifier_result["accuracy"] <= 1.0
+        # Clusters are well-separated: a working classifier must beat chance by a margin.
+        assert classifier_result["accuracy"] > 0.7
+        assert len(classifier_result["predictions"]) == 18
+
+    with pytest.raises(ValueError):
+        api.advanced_classification_suite(features_2c, labels_2c[:-1])
+
+
+def test_performance_metrics_comprehensive_perfect_and_imperfect_cases():
+    api = _spectral_unmixing_api()
+    y_true = np.array([0, 1, 2, 1, 0, 2])
+    perfect = api.performance_metrics_comprehensive(
+        y_true,
+        y_true.copy(),
+        class_names=["alpha", "beta", "gamma"],
+    )
+
+    assert set(perfect) == {
+        "accuracy",
+        "confusion_matrix",
+        "precision_per_class",
+        "recall_per_class",
+        "f1_score_per_class",
+        "macro_precision",
+        "macro_recall",
+        "macro_f1",
+        "weighted_precision",
+        "weighted_recall",
+        "weighted_f1",
+        "classes",
+        "class_names",
+    }
+    assert perfect["accuracy"] == 1.0
+    assert perfect["confusion_matrix"].shape == (3, 3)
+    assert np.issubdtype(perfect["confusion_matrix"].dtype, np.integer)
+    perfect_off_diagonal = perfect["confusion_matrix"].copy()
+    np.fill_diagonal(perfect_off_diagonal, 0)
+    assert not perfect_off_diagonal.any()
+    assert perfect["class_names"] == ["alpha", "beta", "gamma"]
+    for key in (
+        "precision_per_class",
+        "recall_per_class",
+        "f1_score_per_class",
+    ):
+        assert np.all((perfect[key] >= 0.0) & (perfect[key] <= 1.0))
+    for key in (
+        "macro_precision",
+        "macro_recall",
+        "macro_f1",
+        "weighted_precision",
+        "weighted_recall",
+        "weighted_f1",
+    ):
+        assert 0.0 <= perfect[key] <= 1.0
+
+    y_pred = np.array([0, 2, 2, 1, 0, 1])
+    imperfect = api.performance_metrics_comprehensive(y_true, y_pred)
+    assert 0.0 <= imperfect["accuracy"] < 1.0
+    assert imperfect["confusion_matrix"].shape == (3, 3)
+    assert imperfect["confusion_matrix"].sum() == len(y_true)
+
+
+def test_lda_baseline_error_branches():
+    api = _spectral_unmixing_api()
+    features, labels = _make_feature_data()
+
+    with pytest.raises(ValueError):
+        api.lda_baseline(np.arange(features.shape[0], dtype=float), labels)
+
+    three_class_labels = np.array([0, 1, 2, 0, 1, 2])
+    three_class_features = np.arange(18, dtype=float).reshape(6, 3)
+    with pytest.raises(ValueError):
+        api.lda_baseline(three_class_features, three_class_labels)
