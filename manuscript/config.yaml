@@ -20,8 +20,8 @@ authors:
 
 publication:
   doi: "10.5281/zenodo.20450880" # Concept DOI — stable citation; cover page + CITATION.cff
-  version_doi: "10.5281/zenodo.20450881" # Latest Zenodo deposit (set by publish_project_release.py)
-  version_record: "https://zenodo.org/records/20450881"
+  version_doi: "10.5281/zenodo.20450970" # Latest Zenodo deposit (set by publish_project_release.py)
+  version_record: "https://zenodo.org/records/20450970"
   github_repository: "docxology/cohereants"
   journal: ""
   year: "2026"
