@@ -27,7 +27,7 @@ Derived from the project README — the authoritative module-to-domain mapping:
 | --- | --- | --- |
 | **`src/`** | Domain algorithms, figure builders, variable generation | Tested; ≥90% coverage; no new mocks |
 | **`scripts/`** | I/O, matplotlib saves, subprocess orchestration | No domain algorithms; print output paths |
-| **`manuscript/`** | Narrative, config, bibliography | Registry-backed figures and `{{TOKEN}}` numbers |
+| **`docs/manuscript/`** | Narrative, config, bibliography | Registry-backed figures and `{{TOKEN}}` numbers |
 | **`output/`** | Generated figures, data, PDF intermediates | Disposable; regenerate from pipeline |
 | **`infrastructure/`** (template) | Render, validate, discover, test runner | Generic; no cohereants-specific math |
 
@@ -44,7 +44,7 @@ No cross-project imports. Domain modules may import sibling `src/` packages; the
 
 ```mermaid
 graph TD
-    CFG[manuscript/config.yaml] --> MV[src/manuscript_variables.py]
+    CFG[docs/manuscript/config.yaml] --> MV[src/manuscript_variables.py]
     CFG --> FIG[src/figures/]
 
     GR[scripts/generate_research_figures.py] --> FIG
@@ -85,7 +85,7 @@ graph TD
 1. Implement in `src/` (or `src/case_studies/`) with type hints and docstrings.
 2. Add tests under `tests/` using deterministic fixtures; keep coverage ≥90%.
 3. Add a thin `scripts/generate_*.py` that imports from `src/` and prints paths.
-4. Register figures in `src/figure_registry_builder.py` and document labels in `manuscript/AGENTS.md`.
+4. Register figures in `src/figure_registry_builder.py` and document labels in `docs/manuscript/AGENTS.md`.
 5. Extend `src/manuscript_variables.py::generate_variables()` if prose needs new tokens.
 6. Re-run analysis → variable hydration → render (see [`rendering_pipeline.md`](rendering_pipeline.md)).
 

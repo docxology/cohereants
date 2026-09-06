@@ -48,7 +48,7 @@ uv run python scripts/z_generate_manuscript_variables.py --allow-draft
 src/                 domain modules (core, figures, integrated_figures, viz/, case_studies/, …)
 tests/               zero-mock pytest over src/
 scripts/             generate_*.py, run_all_case_studies.py, z_generate_manuscript_variables.py
-manuscript/          NN_*.md + config.yaml + AGENTS.md
+docs/manuscript/          NN_*.md + config.yaml + AGENTS.md
 data/claim_ledger.yaml   evidence registry numeric claims
 docs/                engineering remediation hub (12 files)
 ISA.md               verification block + phase status

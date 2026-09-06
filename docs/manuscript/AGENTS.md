@@ -4,7 +4,7 @@ type: "manuscript_guide"
 version: "1.0"
 ---
 
-# Manuscript (`manuscript/`)
+# Manuscript (`docs/manuscript/`)
 
 Agent rules for the **cohereants** engineering monograph on insect infra-red perception and biomimetic sensor design. Repository-wide constraints: [`../docs/agent_instructions.md`](../docs/agent_instructions.md).
 
@@ -125,7 +125,7 @@ Captions include a **generation method** sentence and validation note per `src/f
 
 ## Section Modification Workflow
 
-1. Edit source `manuscript/*.md` (not `output/manuscript/`).
+1. Edit source `docs/manuscript/*.md` (not `output/manuscript/`).
 2. Update `src/` and tests if models change.
 3. Regenerate figures: `scripts/generate_research_figures.py`, case-study scripts.
 4. Hydrate variables: `scripts/z_generate_manuscript_variables.py`.

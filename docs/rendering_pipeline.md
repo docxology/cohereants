@@ -1,6 +1,6 @@
 # Rendering Pipeline: Manuscript → PDF
 
-The `manuscript/` tree is a multi-section engineering monograph on insect IR perception and biomimetic sensor design. The template rendering infrastructure compiles it to PDF, HTML, and slides when the project is invoked with `--project cohereants`.
+The `docs/manuscript/` tree is a multi-section engineering monograph on insect IR perception and biomimetic sensor design. The template rendering infrastructure compiles it to PDF, HTML, and slides when the project is invoked with `--project cohereants`.
 
 ## WIP Path Resolution
 
@@ -12,7 +12,7 @@ While **cohereants** remains **passive**, the canonical source lives in the priv
 | Template WIP symlink | `template/projects_in_progress/cohereants` |
 | Pipeline resolution | `infrastructure.project.discovery.resolve_project_root(repo_root, "cohereants")` |
 
-`resolve_project_root()` prefers `projects/cohereants` when that tree has `src/`, `tests/`, `scripts/`, and `manuscript/`. Otherwise it uses `projects_in_progress/cohereants` when the symlink exists. Rendering and validation therefore operate on the WIP tree without promoting the project to active discovery.
+`resolve_project_root()` prefers `projects/cohereants` when that tree has `src/`, `tests/`, `scripts/`, and `docs/manuscript/`. Otherwise it uses `projects_in_progress/cohereants` when the symlink exists. Rendering and validation therefore operate on the WIP tree without promoting the project to active discovery.
 
 **Passive implication:** `./run.sh` does not list cohereants until promoted to `active/` in the private lifecycle repo. Targeted runs still work:
 
@@ -64,7 +64,7 @@ Use `--allow-draft` only for early drafts that may omit analysis outputs.
 
 **Script (template root):** `uv run python scripts/03_render_pdf.py --project cohereants`
 
-**Inputs:** Resolved markdown under `output/manuscript/`, plus `manuscript/config.yaml`, `preamble.md`, `references.bib`
+**Inputs:** Resolved markdown under `output/manuscript/`, plus `docs/manuscript/config.yaml`, `preamble.md`, `references.bib`
 
 **Outputs:**
 

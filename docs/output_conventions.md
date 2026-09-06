@@ -7,7 +7,7 @@ Project-relative `output/` holds all generated artifacts from analysis and rende
 `output/` is **disposable but regeneratable**. Source of truth:
 
 - Domain code in `src/`
-- Parameters in `manuscript/config.yaml` and `src/manuscript_fixtures.py`
+- Parameters in `docs/manuscript/config.yaml` and `src/manuscript_fixtures.py`
 - Thin orchestrators in `scripts/`
 
 ## Directory Structure
@@ -90,7 +90,7 @@ Used at render time and by evidence-registry checks. Authoritative token list: `
 ## Version-Control Policy
 
 - **`output/` is gitignored** in normal workflow — do not commit generated PNGs or PDFs to the private repo unless explicitly releasing an evidence bundle.
-- Edit generators in `src/` or templates in `manuscript/`, not files in `output/`.
+- Edit generators in `src/` or templates in `docs/manuscript/`, not files in `output/`.
 
 ## Adding a New Output File
 

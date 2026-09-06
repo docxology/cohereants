@@ -579,35 +579,35 @@ claims:
   source: chandel2024thermal skin-temperature blackbody source
   source_tier: bibliography
   freshness: active
-  artifact_path: manuscript/references.bib
+  artifact_path: docs/manuscript/references.bib
 - claim_id: chandel-ir-peak-um
   kind: number
   value: 9.4
   source: chandel2024thermal peak emission wavelength um
   source_tier: bibliography
   freshness: active
-  artifact_path: manuscript/references.bib
+  artifact_path: docs/manuscript/references.bib
 - claim_id: chandel-ir-range-m
   kind: number
   value: 0.7
   source: chandel2024thermal host-seeking detection range m
   source_tier: bibliography
   freshness: active
-  artifact_path: manuscript/references.bib
+  artifact_path: docs/manuscript/references.bib
 - claim_id: melanophila-ir-threshold-low-mw-cm2
   kind: number
   value: 11.0
   source: hammer2001sensitivity schmitz2002acanthocnemus lower bound mW/cm2
   source_tier: primary_literature
   freshness: active
-  artifact_path: manuscript/references.bib
+  artifact_path: docs/manuscript/references.bib
 - claim_id: melanophila-ir-threshold-high-mw-cm2
   kind: number
   value: 17.3
   source: hammer2001sensitivity Melanophila 3.39 um threshold mW/cm2
   source_tier: primary_literature
   freshness: active
-  artifact_path: manuscript/references.bib
+  artifact_path: docs/manuscript/references.bib
 - claim_id: fire-blackbody-peak-um
   kind: number
   value: 3.0

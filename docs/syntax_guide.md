@@ -14,7 +14,7 @@ Dynamic numeric or typeset values use doubled-brace tokens. Values come from `sr
 **BAD:** The operating SNR was 10 dB.  
 **GOOD:** The operating SNR was {{SNR_OPERATING_DB}} dB.
 
-Never hard-code values that change when analysis outputs or `manuscript/config.yaml` change.
+Never hard-code values that change when analysis outputs or `docs/manuscript/config.yaml` change.
 
 ### Authoritative token list
 
@@ -22,7 +22,7 @@ Treat **`generate_variables()`** as source of truth. Illustrative tokens:
 
 | Token | Description | Source |
 | --- | --- | --- |
-| `{{PROJECT_TITLE}}` | Paper title | `manuscript/config.yaml` |
+| `{{PROJECT_TITLE}}` | Paper title | `docs/manuscript/config.yaml` |
 | `{{RANDOM_SEED}}` | Reproducibility seed | `metadata.random_seed` |
 | `{{IMPROVEMENT_FACTOR_LOW}}` | Response-time improvement lower bound | `output/data/response_time_comparison.npz` |
 | `{{IMPROVEMENT_FACTOR_HIGH}}` | Response-time improvement upper bound | same |
@@ -44,7 +44,7 @@ Treat **`generate_variables()`** as source of truth. Illustrative tokens:
 
 1. Add key in `generate_variables()` in `src/manuscript_variables.py`.
 2. Add assertion in `tests/test_manuscript_variables.py`.
-3. Reference as `{{NEW_TOKEN}}` in `manuscript/*.md`.
+3. Reference as `{{NEW_TOKEN}}` in `docs/manuscript/*.md`.
 4. Run `scripts/z_generate_manuscript_variables.py`.
 
 ### Detect unresolved tokens
@@ -115,7 +115,7 @@ Generation methods are documented in `src/figure_registry_contract.py::_FIGURE_M
 
 ## 4. Citations
 
-Use Pandoc citekeys `[@authorYearKeyword]` with entries in `manuscript/references.bib`. Prefer primary entomology, spectroscopy, and olfaction literature — the upstream manuscript was rebuilt with DOI-verified sources.
+Use Pandoc citekeys `[@authorYearKeyword]` with entries in `docs/manuscript/references.bib`. Prefer primary entomology, spectroscopy, and olfaction literature — the upstream manuscript was rebuilt with DOI-verified sources.
 
 ---
 

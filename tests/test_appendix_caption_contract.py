@@ -51,7 +51,7 @@ def test_appendix_caption_includes_registry_claim_boundary(label: str) -> None:
     registry = _load_registry()
     record = registry[label]
     claim = str(record["metadata"]["claim_boundary"]).strip().rstrip(".")
-    manuscript = PROJECT_ROOT / "manuscript" / LABEL_TO_MANUSCRIPT[label]
+    manuscript = PROJECT_ROOT / "docs" / "manuscript" / LABEL_TO_MANUSCRIPT[label]
     caption = _extract_caption(manuscript, label)
     assert "Claim boundary:" in caption
     caption_claim = caption.split("Claim boundary:", 1)[1].strip().rstrip(".")

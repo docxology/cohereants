@@ -59,13 +59,13 @@ def discover_manuscript_files():
 
 
 def test_discover_manuscript_includes_all_sections(discover_manuscript_files) -> None:
-    manuscript_dir = PROJECT_ROOT / "manuscript"
+    manuscript_dir = PROJECT_ROOT / "docs" / "manuscript"
     discovered = [path.name for path in discover_manuscript_files(manuscript_dir)]
     assert discovered == EXPECTED_SECTIONS
 
 
 def test_manuscript_section_headings_are_unique(discover_manuscript_files) -> None:
-    manuscript_dir = PROJECT_ROOT / "manuscript"
+    manuscript_dir = PROJECT_ROOT / "docs" / "manuscript"
     headings: list[str] = []
     for path in discover_manuscript_files(manuscript_dir):
         if path.name in FILES_WITHOUT_H1:

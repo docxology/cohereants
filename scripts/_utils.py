@@ -70,10 +70,3 @@ def analysis_as_dict(analysis: Any) -> dict[str, Any]:
     if isinstance(analysis, dict):
         return analysis
     raise TypeError(f"Unsupported analysis type: {type(analysis)!r}")
-
-
-def write_caption(caption_path: str, text: str) -> None:
-    """Deprecated: prefer write_figure_bundle_from_script with a registry label."""
-    os.makedirs(os.path.dirname(caption_path), exist_ok=True)
-    with open(caption_path, "w") as fh:
-        fh.write(text)

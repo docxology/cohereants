@@ -64,7 +64,7 @@ grep -r "unittest.mock\|MagicMock\|@patch" tests/ || echo "Clean"
 | `src/figure_registry_builder.py`, `figure_registry_contract.py` | REQUIRED | Figure validation stage |
 | `scripts/generate_research_figures.py` | REQUIRED | Core figure outputs |
 | `scripts/z_generate_manuscript_variables.py` | REQUIRED | PDF variable hydration |
-| `manuscript/config.yaml`, `*.md`, `references.bib` | REQUIRED | Render pipeline |
+| `docs/manuscript/config.yaml`, `*.md`, `references.bib` | REQUIRED | Render pipeline |
 | `data/claim_ledger.yaml` | REQUIRED | Evidence-registry gates |
 | `docs/*.md` | AESTHETIC | No automated parser — keep aligned manually |
 | `ISA.md` | AESTHETIC (load-bearing) | Human/agent system of record |

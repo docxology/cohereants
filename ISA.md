@@ -67,7 +67,7 @@ manuscript in template form, because the adaptation respected what was already s
 
 ## Constraints
 
-- Project must satisfy `discover_projects()`: `src/` with Python modules + `tests/` (manuscript/scripts optional).
+- Project must satisfy `discover_projects()`: `src/` with Python modules + `tests/` (docs/manuscript/scripts optional).
 - `pyproject.toml` must carry `[tool.pytest.ini_options] pythonpath=[".","src"]` and `[tool.coverage]`
   with `source=["src"]`, `fail_under=90` (mirror `template_code_project`).
 - Imports inside `src/` are relative (`from .core import …`); tests/scripts use `from src.X import …`.
@@ -91,7 +91,7 @@ cross-vendor audit pass without unaddressed CRITICAL findings — all without co
 ## Criteria
 
 ### Structure & layout
-- [ ] ISC-1: `projects/cohereants/` exists with `src/`, `tests/`, `scripts/`, `manuscript/` subdirs (probe: `ls -d`)
+- [ ] ISC-1: `projects/cohereants/` exists with `src/`, `tests/`, `scripts/`, `docs/manuscript/` subdirs (probe: `ls -d`)
 - [ ] ISC-2: All 22 source modules present under `src/` incl. `ant_stack/` and `case_studies/` subpkgs (probe: `find src -name '*.py' | wc -l`)
 - [ ] ISC-3: Total ported `src/` line count ≈ 8.5k preserved, no truncation (probe: `wc -l`)
 - [ ] ISC-4: All 32 `test_*.py` files present under `tests/` (probe: `ls tests/test_*.py | wc -l`)
@@ -105,12 +105,12 @@ cross-vendor audit pass without unaddressed CRITICAL findings — all without co
 - [ ] ISC-10: `pyproject.toml` has `[tool.coverage.run] source=["src"]` + `[tool.coverage.report] fail_under=90` (probe: `grep`)
 - [ ] ISC-11: `pyproject.toml` declares deps numpy/scipy/matplotlib/scikit-learn (probe: `grep`)
 - [ ] ISC-12: `domain_profile.yaml` present with a biophysics/entomology domain block (probe: `Read`)
-- [ ] ISC-13: `manuscript/config.yaml` present, `yaml.safe_load` parses, has `paper`/`authors`/`keywords` (probe: python yaml.safe_load)
-- [ ] ISC-14: `manuscript/references.bib` present and non-empty (probe: `wc -l`)
-- [ ] ISC-15: `manuscript/preamble.md` present with a latex block (probe: `grep '```latex'`)
+- [ ] ISC-13: `docs/manuscript/config.yaml` present, `yaml.safe_load` parses, has `paper`/`authors`/`keywords` (probe: python yaml.safe_load)
+- [ ] ISC-14: `docs/manuscript/references.bib` present and non-empty (probe: `wc -l`)
+- [ ] ISC-15: `docs/manuscript/preamble.md` present with a latex block (probe: `grep '```latex'`)
 
 ### Manuscript adaptation
-- [ ] ISC-16: cohereants 17 markdown sections re-homed to `manuscript/NN_*.md` template naming (probe: `ls manuscript/[0-9][0-9]_*.md`)
+- [ ] ISC-16: cohereants 17 markdown sections re-homed to `docs/manuscript/NN_*.md` template naming (probe: `ls docs/manuscript/[0-9][0-9]_*.md`)
 - [ ] ISC-17: Abstract section is `00_abstract.md` or `01_abstract.md` and non-empty (probe: `Read`)
 - [ ] ISC-18: Appendices preserved as supplementary `SNN_*.md` or appended numbered sections (probe: `ls`)
 - [ ] ISC-19: No manuscript section lost vs source 17 (probe: count map source→dest)
@@ -235,7 +235,7 @@ cross-vendor audit pass without unaddressed CRITICAL findings — all without co
   - **CRITICAL (both, FIXED):** `tests/test_fermi_estimation.py` `test_gaussian_variational_analysis`
     mocked `sklearn.GaussianMixture`, asserting only `len==3` → bound neither the fit nor the entropy
     math. De-mocked: real trimodal fit + recovered-means + entropy-identity assertions.
-  - **RENDER-BREAKING (RedTeam V-E, FIXED):** `manuscript/preamble.md` lacked `\usepackage{cleveref}`
+  - **RENDER-BREAKING (RedTeam V-E, FIXED):** `docs/manuscript/preamble.md` lacked `\usepackage{cleveref}`
     while 61 `\Cref` calls exist across 14 sections; pdflatex would abort. Peer `template_code_project`
     declares it and the pipeline does NOT inject it (verified) → added the identical declaration.
   - **LATENT RUNTIME BUG (Forge MAJOR, FIXED):** `src/integrated_analysis.py:226` `if refractive_indices:`
@@ -268,7 +268,7 @@ cross-vendor audit pass without unaddressed CRITICAL findings — all without co
 
 - **D3 render — ADVANCED.** The manuscript now renders to a 1.35 MB combined PDF (18 sections) with
   **0 undefined control sequences** (was 45). Two stable-layer root causes fixed:
-  1. `manuscript/preamble.md` had an **unclosed ` ```latex ` code fence** → `extract_preamble`
+  1. `docs/manuscript/preamble.md` had an **unclosed ` ```latex ` code fence** → `extract_preamble`
      (`_pdf_latex_helpers.py:149`, regex needs the closing fence) injected NOTHING → cleveref + all
      macros absent → 62 `\Cref` undefined. Closed the fence → full preamble now injects.
   2. cohereants' preamble used 17 `\DeclareUnicodeCharacter` (a pdflatex+inputenc idiom) **undefined
@@ -290,7 +290,7 @@ cross-vendor audit pass without unaddressed CRITICAL findings — all without co
 - Reframed the manuscript around a source-governed, contested hypothesis rather than an established
   IR-olfaction mechanism. Direct semiochemical IR olfaction is now marked as unproven; empirical anchors
   are separated from analogies and model targets.
-- Rebuilt `manuscript/references.bib` around DOI-verified primary and review literature spanning
+- Rebuilt `docs/manuscript/references.bib` around DOI-verified primary and review literature spanning
   vibrational olfaction, insect IR/thermal receptors, ORN timing, ant sensilla morphology, CHC
   spectroscopy, mechanotransduction, GPCR/odorant receptor structure, and HITRAN atmospheric data.
 - Replaced seed/raw-link citation language across the manuscript with BibTeX-backed citations; local
@@ -343,7 +343,7 @@ cross-vendor audit pass without unaddressed CRITICAL findings — all without co
 
 Artifact-backed evidence (R1 — quoted tokens only):
 
-- ISC-1: `ls` → `src/ tests/ scripts/ manuscript/` all present in `projects/cohereants/`.
+- ISC-1: `ls` → `src/ tests/ scripts/ docs/manuscript/` all present in `projects/cohereants/`.
 - ISC-2: `find src -name '*.py' | wc -l` enumerated 22 modules incl. `ant_stack/{antbody,antbrain,antmind}.py` and `case_studies/{detection_limits,neural_encoding,spectral_unmixing,…}.py`.
 - ISC-3: `find src -name '*.py' | xargs cat | wc -l` → `8572` (matches source exactly).
 - ISC-4: `ls tests/test_*.py | wc -l` → `30`. NOTE: 2 of the source's 32 (`test_repo_utilities.py`, `test_render_pdf_pipeline.py`) intentionally dropped — they only drive the bespoke `repo_utilities/*.sh` build via subprocess and import nothing from `src/` (logged in Decisions). Reframed: 30/30 ported tests present; 2 bespoke-build tests retired.
@@ -353,7 +353,7 @@ Artifact-backed evidence (R1 — quoted tokens only):
 - ISC-13: `yaml.safe_load(config.yaml)` → parsed; keys `['authors','keywords','paper','render','testing']`.
 - ISC-14: `grep -c '^@' references.bib` → `19` DOI-verified bibliography entries after the 2026-05-26 scholarship refresh.
 - ISC-15: `grep -c '```latex' preamble.md` → `1`.
-- ISC-16,19: manuscript port script → "mapped 17 sections + preamble + 99_references"; `ls manuscript/[0-9][0-9]_*.md` → 18 numbered sections.
+- ISC-16,19: manuscript port script → "mapped 17 sections + preamble + 99_references"; `ls docs/manuscript/[0-9][0-9]_*.md` → 18 numbered sections.
 - ISC-21..24: `pytest` collection/run after the 2026-05-26 refresh → "collected 638 items"; `import src.ant_stack.antbody`, `src.case_studies.spectral_unmixing` OK.
 - ISC-26,27: `MPLBACKEND=Agg .venv/bin/python -m pytest tests/ --cov=src --cov-report=term-missing` → `638 passed, 0 failed`.
 - ISC-29: coverage read from a THIS-SESSION run, never cohereants' shipped `.coverage` (which was excluded from the copy).
@@ -396,8 +396,8 @@ POST-REMEDIATION GATE: superseded by the 2026-05-26 scholarship/visualization re
 
 ## Verification (cont. — 2026-05-26 IR scholarship integration)
 
-- Bibliography: `manuscript/references.bib` expanded with ~28 DOI-verified entries (pyrophilous photomechanic, hematophagy, cycad pollination, TRPA1, cuticle optics, applied NIRS).
-- Empirical studies: `manuscript/07_empirical_studies.md` restructured around active detection / passive cuticle / applied IR axes with comparative table.
+- Bibliography: `docs/manuscript/references.bib` expanded with ~28 DOI-verified entries (pyrophilous photomechanic, hematophagy, cycad pollination, TRPA1, cuticle optics, applied NIRS).
+- Empirical studies: `docs/manuscript/07_empirical_studies.md` restructured around active detection / passive cuticle / applied IR axes with comparative table.
 - Fixtures: `BIOMIMETIC_IR_BAND_UM` → 2.8–6.0 µm; `BIOMIMETIC_RESPONSE_THRESHOLD_MW_CM2` → 11–17.3 mW/cm² (Hammer 2001 / Kreiss 2007 literature); `FIRE_BLACKBODY_PEAK_UM`, `SKIN_BLACKBODY_PEAK_UM` tokens added.
 - Claim ledger: `melanophila-ir-threshold-*`, `fire-blackbody-peak-um`, `skin-blackbody-peak-um` rows.
 - Pre-render: all new citekeys resolve; zero undefined citations.

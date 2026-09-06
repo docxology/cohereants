@@ -11,15 +11,6 @@ ensure_src_on_path()
 from src.case_studies import olfactory_active_inference_step
 
 
-def _setup_paths() -> tuple[str, str]:
-    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    fig_dir = os.path.join(repo_root, "output", "figures")
-    data_dir = os.path.join(repo_root, "output", "data")
-    os.makedirs(fig_dir, exist_ok=True)
-    os.makedirs(data_dir, exist_ok=True)
-    return fig_dir, data_dir
-
-
 def main() -> int:
     set_mpl_backend()
     fig_dir, data_dir = setup_paths()
