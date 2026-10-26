@@ -14,7 +14,7 @@ Nestmate recognition in eusocial Hymenoptera depends heavily on CHC signals, but
 
 ### Pheromone specificity and range
 
-Pheromone and CHC-associated functional groups occupy discriminative IR regions, especially lipid-associated bands around 2958, 2913, 2849, 1737, and 1408 cm$^{-1}$ in the aphid ATR-FTIR study [@durak2022atrftir]. Under modeled atmospheric transmission and assumed source strengths, narrowband signatures can be propagated through favorable windows; these ranges are quantified as model outputs in `src/case_studies/detection_limits.py`, not as measured insect sensing distances.
+Pheromone and CHC-associated functional groups occupy discriminative IR regions, especially lipid-associated bands around 2958, 2913, 2849, 1737, and 1408 cm$^{-1}$ in the aphid ATR-FTIR study [@durak2022atrftir]. Under modeled atmospheric transmission and assumed source strengths, narrowband signatures can be propagated through favorable windows; these ranges are quantified as model outputs in `src/case_studies/detection_limits/`, not as measured insect sensing distances.
 
 ### Evolutionary and ecological implications
 
@@ -22,7 +22,7 @@ Comparative analyses show physical overlap between representative sensilla dimen
 
 ## Computational and applied consequences
 
-Effective IR sensing would require wavelength-specific stimulation, directional processing, sufficiently fast transduction, and SNR above thermal and environmental backgrounds. Channel-capacity estimates (`src/case_studies/environmental_channel.py`) should be read as engineering upper bounds under selected assumptions. *Rhodnius* combinatorial warm-cell coding motivates preregistered controls that separate radiant IR from convective temperature change [@zopf2014infrared; @zopf2015convection]. Applications include biomimetic uncooled sensors [@schmitz2011infrared; @siebke2014biomimetic], mosquito trap design with skin-temperature IR [@chandel2024thermal], and NIR monitoring networks [@potamitis2022monitoring].
+Effective IR sensing would require wavelength-specific stimulation, directional processing, sufficiently fast transduction, and SNR above thermal and environmental backgrounds. Channel-capacity estimates (`src/case_studies/environmental_channel/`) should be read as engineering upper bounds under selected assumptions. *Rhodnius* combinatorial warm-cell coding motivates preregistered controls that separate radiant IR from convective temperature change [@zopf2014infrared; @zopf2015convection]. Applications include biomimetic uncooled sensors [@schmitz2011infrared; @siebke2014biomimetic], mosquito trap design with skin-temperature IR [@chandel2024thermal], and NIR monitoring networks [@potamitis2022monitoring].
 
 ## Limitations and Critical Experimental Controls
 

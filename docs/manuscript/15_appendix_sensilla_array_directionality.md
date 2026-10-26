@@ -12,7 +12,7 @@ Beam patterns and coupling matrices translate morphometric presets into directio
 \Cref{fig:app_sensilla_beam} reports model gain and resonance maps; it is not field proof of semiochemical IR olfaction.
 
 ## Methods (src)
-- `src/case_studies/sensilla_array_directionality.py`
+- `src/case_studies/sensilla_array_directionality/`
   - `design_circular_array(n_elements: int, radius_m: float, wavelength_m: float) -> np.ndarray`
   - `sensilla_element_pattern(sensilla_type: str, frequency_hz: float, dimensions: dict) -> np.ndarray`
   - `mutual_coupling_matrix(positions: np.ndarray, wavelength_m: float) -> np.ndarray`

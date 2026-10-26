@@ -14,7 +14,7 @@ Synthetic mixtures benchmark unmixing and classification pipelines against known
 
 ## Methods (src)
 
-- `src/case_studies/spectral_unmixing.py`
+- `src/case_studies/spectral_unmixing/`
   - `generate_realistic_chc_spectra(n_compounds: int, n_wavelengths: int, seed: int=42) -> dict` — synthetic CHC spectra with ground truth
   - `nmf_unmix(spectra: np.ndarray, n_components: int, seed: int=42) -> (W, H)` — deterministic NMF
   - `vertex_component_analysis(spectra: np.ndarray, n_endmembers: int) -> np.ndarray` — VCA endmember extraction

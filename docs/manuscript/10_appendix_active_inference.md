@@ -10,11 +10,11 @@ The demo shows how a minimal belief-update policy could navigate a grid when IR 
 
 ## Claim boundary
 
-\Cref{fig:app_active_inference} is a deterministic trajectory from `src/behavioral_models.py`; it is not evidence that insects perform active inference on semiochemical IR gradients.
+\Cref{fig:app_active_inference} is a deterministic trajectory from `src/case_studies/active_inference.py`; it is not evidence that insects perform active inference on semiochemical IR gradients.
 
 ## Implemented (stub) Methods (src)
 
-- `src/behavioral_models.py`
+- `src/case_studies/active_inference.py`
   - `olfactory_active_inference_step(state, params)` — deterministic single‑step update used in the demo
 
 ## Script and Outputs

@@ -31,7 +31,7 @@ flowchart TB
 | Path | Role | Producer |
 | --- | --- | --- |
 | `output/figures/*.png` | Manuscript and appendix figures | `scripts/generate_research_figures.py`, case-study scripts |
-| `output/figures/*.caption.txt` | Caption text for registry | `src/figures.py` |
+| `output/figures/*.caption.txt` | Caption text for registry | `src/figures/` |
 | `output/figures/figure_registry.json` | Label → path → method metadata for validation | `src/figure_registry_builder.py` |
 | `output/data/*.npz` | Numerical arrays (timing, detection limits, sensilla) | Case-study and core analysis |
 | `output/data/detection_limits_spec.json` | SNR operating point spec | Detection-limits pipeline |
@@ -97,7 +97,7 @@ Used at render time and by evidence-registry checks. Authoritative token list: `
 1. Write from `src/` with a fixed filename under `output/figures/` or `output/data/`.
 2. Register label in `src/figure_registry_builder.py` if it is a manuscript figure.
 3. Add tokens to `generate_variables()` if prose references numeric results.
-4. Document the label in [`../manuscript/AGENTS.md`](../manuscript/AGENTS.md).
+4. Document the label in [`manuscript/AGENTS.md`](manuscript/AGENTS.md).
 
 ## See Also
 

@@ -1,7 +1,7 @@
 # AGENTS.md — CohereAnts
 
 Agent guide for **CohereAnts** (display name). Pipeline / folder id: `cohereants`.
-Read with the repo-root [`AGENTS.md`](../../AGENTS.md) and [`CLAUDE.md`](../../CLAUDE.md).
+Read with the workspace-level `AGENTS.md` one directory above this repository.
 
 ## Naming
 
@@ -77,7 +77,7 @@ ISA.md               verification block + phase status
 
 | Script | Role |
 | --- | --- |
-| `generate_research_figures.py` | Core figures via `src/figures.py` + registry |
+| `generate_research_figures.py` | Core figures via `src/figures/` + registry |
 | `generate_integrated_analysis.py` | Integrated panels via `src/integrated_figures.py` |
 | `generate_*` (appendices A–G) | Case-study orchestrators; `write_figure_bundle_from_script()` writes `.caption.txt` + `.alt.txt` |
 | `run_all_case_studies.py` | Runs appendix generators |

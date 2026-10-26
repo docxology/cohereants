@@ -40,7 +40,7 @@ The `docs/` directory holds behavioral and architectural rules for modifying **c
 
 1. Read **[Rendering Pipeline](rendering_pipeline.md)**
 2. Read **[Syntax Guide](syntax_guide.md)**
-3. Read **[../manuscript/AGENTS.md](../manuscript/AGENTS.md)** — figure tokens, VAR tokens, engineering claim policy
+3. Read **[manuscript/AGENTS.md](manuscript/AGENTS.md)** — figure tokens, VAR tokens, engineering claim policy
 
 ### Before Writing Source Code
 
@@ -74,4 +74,4 @@ MPLBACKEND=Agg .venv/bin/python -m pytest tests/ --cov=src --cov-fail-under=90 -
 - [../AGENTS.md](../AGENTS.md) — Project-level agent guide
 - [../README.md](../README.md) — Project overview and domain module table
 - [../ISA.md](../ISA.md) — Ideal-State Artifact (system of record)
-- [../manuscript/AGENTS.md](../manuscript/AGENTS.md) — Manuscript editing protocol
+- [manuscript/AGENTS.md](manuscript/AGENTS.md) — Manuscript editing protocol

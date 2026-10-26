@@ -73,6 +73,6 @@ grep -r "unittest.mock\|MagicMock\|@patch" tests/ || echo "Clean"
 
 - [`README.md`](README.md) — Hub navigation
 - [`../AGENTS.md`](../AGENTS.md) — Project root agent guide
-- [`../manuscript/AGENTS.md`](../manuscript/AGENTS.md) — Manuscript protocol
+- [`manuscript/AGENTS.md`](manuscript/AGENTS.md) — Manuscript protocol
 - [`../pyproject.toml`](../pyproject.toml) — Coverage and pytest config
 - [`../domain_profile.yaml`](../domain_profile.yaml) — Advisory validation gates

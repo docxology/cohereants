@@ -14,7 +14,7 @@ Synthetic spike trains and population metrics explore how fast ORN-like encoders
 
 ## Methods (src)
 
-- `src/case_studies/neural_encoding.py`
+- `src/case_studies/neural_encoding/`
   - `generate_spike_trains(stimuli, dt, baseline_rate, max_rate, dynamics)` — realistic spike generation
   - `analyze_spike_train_statistics(spike_data)` — ISI, CV, Fano factor
   - `temporal_coding_analysis(spike_data, stimulus_times)` — latency and precision metrics

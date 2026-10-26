@@ -14,7 +14,7 @@ The case study compares how humidity, temperature, and path length shift usable 
 
 ## Methods (src)
 
-- `src/case_studies/environmental_channel.py`
+- `src/case_studies/environmental_channel/`
   - `molecular_absorption_cross_section(wavelengths, molecule_type)` — H2O, CO2, CH4 absorption
   - `rayleigh_scattering_coefficient(wavelengths, air_density)` — molecular scattering
   - `atmospheric_transmission_comprehensive(wavelengths, conditions)` — multi‑component transmission

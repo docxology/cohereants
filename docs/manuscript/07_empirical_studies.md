@@ -24,7 +24,7 @@ These axes constrain CohereAnts models and preregistered protocols. They do **no
 - **Primary evidence**: Durak et al. used ATR-FTIR to distinguish 12 aphid species and reported 98% classification with selected peaks, dropping to 90% under jackknife validation [@durak2022atrftir].
 - **Chemical ecology context**: CHCs are central insect waterproofing and communication traits, with strong variation across taxa and social contexts [@blomquist2021hydrocarbons].
 - **Implication for CohereAnts**: CHC-associated spectra can be discriminative; spectroscopic separability does not imply that insects directly sense the same bands electromagnetically.
-- **Code anchors**: `src/spectroscopy.py::analyze_chc_spectra`; `src/case_studies/spectral_unmixing.py`.
+- **Code anchors**: `src/spectroscopy.py::analyze_chc_spectra`; `src/case_studies/spectral_unmixing/`.
 
 ## Active IR Detection in Insects
 
@@ -37,7 +37,7 @@ The thoracic pit organ of *Melanophila acuminata* is the best-characterized inse
 *Merimna atrata* carries abdominal IR organs with bimodal thermo- and mechanosensory innervation [@schmitz2000merimna; @schmitz2012merimna]. Flight-tethering experiments revised the functional interpretation from fire attraction to **landing-hazard avoidance** on surfaces hotter than ~60 °C. Evans (2010) argued that inverse-square physics limits reliable long-range fire detection by *Melanophila* to less than often-claimed distances [@evans2010reproductive].
 
 - **Implication for CohereAnts**: Pyrophilous organs establish that insect MIR detection evolves under fire-associated ecology. They are anatomical and transduction precedents for biomimetic bands {{BIOMIMETIC_IR_BAND_UM}} and literature thresholds {{BIOMIMETIC_THRESHOLD_MW_CM2}} mW/cm²—not evidence for semiochemical IR olfaction in ordinary sensilla.
-- **Code anchors**: `src/case_studies/plasmonic_geometry.py`; `src/case_studies/detection_limits.py`.
+- **Code anchors**: `src/case_studies/plasmonic_geometry/`; `src/case_studies/detection_limits/`.
 
 ### Hematophagy and Host-Finding
 
@@ -46,14 +46,14 @@ Chandel et al. showed that *Aedes aegypti* uses thermal IR near skin temperature
 *Rhodnius prolixus* lacks specialized IR organs but discriminates radiant IR from convective heat via combinatorial coding of peg-in-pit (PSw) and tapered-hair (THw) warm cells; forced convection disrupts the response quotient [@zopf2014infrared; @zopf2015convection]. Lazzari reviewed how physics shapes hematophagous orientation: radiant IR operates at longer range than convective heat within ~10 cm of the host [@lazzari2009orientation].
 
 - **Implication for CohereAnts**: Mosquito and kissing-bug studies motivate thermal-IR protocol separation ({{MOSQUITO_IR_SOURCE_TEMP_C}} °C blackbody, peak ~{{MOSQUITO_IR_PEAK_UM}} µm) and Rhodnius-style controls that distinguish T oscillations from IR power.
-- **Code anchors**: `src/case_studies/active_inference.py`; `src/case_studies/environmental_channel.py`.
+- **Code anchors**: `src/case_studies/active_inference.py`; `src/case_studies/environmental_channel/`.
 
 ### Pollination and Mutualism
 
 Valencia-Montoya et al. reported that thermogenic cycad cones radiate IR in circadian patterns that attract beetle pollinators with IR-activated antennal neurons [@valenciamontoya2025infrared]. Glover and Webb noted that IR is most detectable at night, constraining cycads to nocturnal beetle pollination in contrast to diurnal angiosperm visual signals [@glover2025pollination].
 
 - **Implication for CohereAnts**: Plant-generated thermal IR is a mutualism cue precedent. It does not extend semiochemical IR olfaction claims to ordinary olfactory sensilla.
-- **Code anchors**: `src/case_studies/environmental_channel.py`.
+- **Code anchors**: `src/case_studies/environmental_channel/`.
 
 ### Near-IR Photonic Opsins
 
@@ -70,34 +70,34 @@ Zhang et al. resolved Drosophila TRPA1 gating architecture, with ankyrin-repeat 
 Callahan proposed that nocturnal moth antennae function as dielectric waveguides detecting far-IR molecular emission lines, including overlap with the 7–14 µm atmospheric window [@callahan1965fir; @callahan1977moth]. The waveguide mechanism remains contested, but the proposal motivates sensilla-as-antenna geometric screening in CohereAnts without endorsing FIR pheromone reception.
 
 - **Implication for CohereAnts**: Callahan supplies historical context for dielectric-antenna modeling; Campbell and Ford provide a broader biological IR sensing review frame [@campbell2001biological].
-- **Code anchors**: `src/sensilla.py::analyze_sensilla_dimensions`; `src/case_studies/sensilla_array_directionality.py`.
+- **Code anchors**: `src/sensilla.py::analyze_sensilla_dimensions`; `src/case_studies/sensilla_array_directionality/`.
 
 ## Morphology and Antennal Sensilla
 
 - **Primary evidence**: Liu et al. measured antennal sensilla in three Thripidae species [@liu2021thripidae].
 - **Thermosensitive ant sensilla**: Ruchty et al. described thermosensitive coeloconic sensilla in *Atta vollenweideri* responding to convective and radiant heat [@ruchty2009thermosensitive].
 - **Implication for CohereAnts**: Morphometric resonance estimates remain predictions pending cross-taxa SEM validation.
-- **Code anchors**: `src/sensilla.py::analyze_sensilla_dimensions`; `src/case_studies/sensilla_array_directionality.py`.
+- **Code anchors**: `src/sensilla.py::analyze_sensilla_dimensions`; `src/case_studies/sensilla_array_directionality/`.
 
 ## Passive Cuticle and Wing IR Optics
 
 Krishna et al. and Phan et al. showed that mid-IR wing emissivity (7.5–14 µm) correlates with habitat temperature, enhancing radiative cooling in warm climates [@krishna2020infrared; @phan2021emissivity]. Sheppard and de Boer found that NIR reflectance predicts beetle heating rates more strongly than visible reflectance [@sheppard2021heating]; Stavenga et al. reported similar NIR/visible partitioning in Christmas beetles [@stavenga2022beetles].
 
 - **Implication for CohereAnts**: Passive optics shape body temperature and background IR; they support environmental-channel modeling, not olfactory transduction claims.
-- **Code anchors**: `src/case_studies/environmental_channel.py`; `src/core.py::calculate_atmospheric_transmission`.
+- **Code anchors**: `src/case_studies/environmental_channel/`; `src/core.py::calculate_atmospheric_transmission`.
 
 ## Applied Infrared Spectroscopy and Monitoring
 
 Dowell et al. demonstrated NIRS classification of stored-grain beetles [@dowell1999nirs]. Moraes Barros et al. reviewed FTIR applications in forensic entomology [@moraesbarros2021forensic]. Potamitis et al. deployed unsupervised NIR sensor networks for field insect monitoring [@potamitis2022monitoring]. These parallel Durak et al.'s CHC spectroscopy [@durak2022atrftir] as **human-applied** IR tools.
 
 - **Implication for CohereAnts**: Applied spectroscopy validates species-discriminating IR structure in insect bodies; it does not demonstrate in vivo semiochemical IR detection.
-- **Code anchors**: `src/spectroscopy.py`; `src/case_studies/spectral_unmixing.py`.
+- **Code anchors**: `src/spectroscopy.py`; `src/case_studies/spectral_unmixing/`.
 
 ## Neurophysiology and ORN Timing
 
 - **Primary evidence**: Egea-Weiss et al. reported Drosophila ORN first-spike latencies down to 3 ms [@egeaweiss2018rapid]. Gorur-Shandilya et al. showed gain control under intermittent odor stimuli [@gorurshandilya2017gain]. Barta et al. showed stimulus-duration encoding early in the moth pathway [@barta2024stimulus].
 - **Implication for CohereAnts**: Any proposed IR stage must produce timing distinguishable from established ORN kinetics and thermal transduction.
-- **Code anchors**: `src/core.py::calculate_response_time_improvement`; `src/case_studies/neural_encoding.py`.
+- **Code anchors**: `src/core.py::calculate_response_time_improvement`; `src/case_studies/neural_encoding/`.
 
 ## Comparative Overview
 
@@ -142,7 +142,7 @@ Photomechanic *Melanophila* sensilla and *Acanthocnemus* microbolometers inform 
 
 - **Atmospheric spectroscopy**: HITRAN2020 is the relevant source class for line-by-line absorption modeling [@gordon2022hitran].
 - **Model boundary**: The core transmission function is intentionally coarse; precise range predictions require measured source spectra, humidity, path length, and background IR. See \Cref{fig:atmospheric_transmission} and \Cref{sec:app_environmental_channel}.
-- **Code anchors**: `src/core.py::calculate_atmospheric_transmission`; `src/case_studies/environmental_channel.py`.
+- **Code anchors**: `src/core.py::calculate_atmospheric_transmission`; `src/case_studies/environmental_channel/`.
 
 ## Molecular Receptor Context
 

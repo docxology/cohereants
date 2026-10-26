@@ -13,7 +13,7 @@ Sweeps identify nanoparticle sizes and materials that maximize near-field enhanc
 
 ## Methods (src)
 
-- `src/case_studies/plasmonic_geometry.py`
+- `src/case_studies/plasmonic_geometry/`
   - `drude_model_permittivity(frequency_hz, metal_type)` — material permittivity model
   - `mie_scattering_sphere(radius_m, wavelength_m, eps_particle, eps_medium)` — Mie solutions
   - `coupled_dipoles_near_field(positions, polarizabilities, wavelength)` — multi‑particle interactions

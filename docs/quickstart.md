@@ -88,7 +88,7 @@ Uses `resolve_project_root()` to find `projects_in_progress/cohereants`.
 ## Next Steps
 
 - Read [`docs/agent_instructions.md`](agent_instructions.md) before editing code
-- Read [`../manuscript/AGENTS.md`](../manuscript/AGENTS.md) before editing prose
+- Read [`manuscript/AGENTS.md`](manuscript/AGENTS.md) before editing prose
 - See [`../ISA.md`](../ISA.md) for remediation backlog and ideal state
 
 ## See Also

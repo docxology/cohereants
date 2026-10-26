@@ -27,7 +27,7 @@ def test_atmospheric_transmission_window():
 
 ## 2. Thin Orchestrator Pattern
 
-`scripts/generate_research_figures.py` imports `generate_core_manuscript_figures()` from `src/figures.py` — it does not plot sensilla matching inline.
+`scripts/generate_research_figures.py` imports `generate_core_manuscript_figures()` from `src/figures/` — it does not plot sensilla matching inline.
 
 **Decision rule:** If a line computes physics or statistics that define a scientific result, it belongs in `src/` with tests.
 
@@ -107,4 +107,4 @@ Historical prose may say "CohereAnts" as the research name; commands and paths u
 ## See Also
 
 - [`agent_instructions.md`](agent_instructions.md)
-- [`../manuscript/AGENTS.md`](../manuscript/AGENTS.md) — Claim policy
+- [`manuscript/AGENTS.md`](manuscript/AGENTS.md) — Claim policy

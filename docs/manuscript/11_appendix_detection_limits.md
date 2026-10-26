@@ -14,7 +14,7 @@ Panels map literature-anchored SNR and power thresholds into ROC and operating-r
 
 ## Methods (src)
 
-- `src/case_studies/detection_limits.py`
+- `src/case_studies/detection_limits/`
   - `min_detectable_power(temperature_k, bandwidth_hz, snr_min_db)` — thermal‑noise‑limited detection
   - `roc_analysis(signal_power, noise_power)` — ROC curves and optimal thresholds
   - `detection_performance_vs_snr(snr_range_db, pfa_target)` — performance curves and MDS

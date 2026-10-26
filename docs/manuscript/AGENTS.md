@@ -6,7 +6,7 @@ version: "1.0"
 
 # Manuscript (`docs/manuscript/`)
 
-Agent rules for the **cohereants** engineering monograph on insect infra-red perception and biomimetic sensor design. Repository-wide constraints: [`../docs/agent_instructions.md`](../docs/agent_instructions.md).
+Agent rules for the **cohereants** engineering monograph on insect infra-red perception and biomimetic sensor design. Repository-wide constraints: [`../agent_instructions.md`](../agent_instructions.md).
 
 ## Scope
 
@@ -44,7 +44,7 @@ Numeric or protocol-bound prose must use **`{{TOKEN}}`** syntax resolved by:
 
 ### VAR tokens (registry)
 
-Authoritative list: **`src/manuscript_variables.py::generate_variables()`**. See [`../docs/syntax_guide.md`](../docs/syntax_guide.md) for the reference table.
+Authoritative list: **`src/manuscript_variables.py::generate_variables()`**. See [`../syntax_guide.md`](../syntax_guide.md) for the reference table.
 
 **Policy:**
 
@@ -139,8 +139,8 @@ While the project stays in `passive/`, manuscript work commits to the private re
 
 ## See Also
 
-- [`../docs/syntax_guide.md`](../docs/syntax_guide.md) — Full token and label tables
-- [`../docs/rendering_pipeline.md`](../docs/rendering_pipeline.md) — PDF pipeline
-- [`../docs/style_guide.md`](../docs/style_guide.md) — Prose tone
-- [`../data/claim_ledger.yaml`](../data/claim_ledger.yaml) — Evidence bindings
-- [`../domain_profile.yaml`](../domain_profile.yaml) — Validation gates
+- [`../syntax_guide.md`](../syntax_guide.md) — Full token and label tables
+- [`../rendering_pipeline.md`](../rendering_pipeline.md) — PDF pipeline
+- [`../style_guide.md`](../style_guide.md) — Prose tone
+- [`../../data/claim_ledger.yaml`](../../data/claim_ledger.yaml) — Evidence bindings
+- [`../../domain_profile.yaml`](../../domain_profile.yaml) — Validation gates

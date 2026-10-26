@@ -125,9 +125,9 @@ The project enforces the template's $\geq 90\%$ `src/` coverage gate and maps co
 - `src/spectroscopy.py::analyze_chc_spectra()` → `tests/test_spectroscopy_analysis.py::TestAnalyzeChcSpectra`
 
 **Advanced Case Studies:**
-- `src/case_studies/detection_limits.py` → `tests/test_case_studies.py::TestDetectionLimits`
-- `src/case_studies/neural_encoding.py` → `tests/test_case_studies.py::TestNeuralEncoding`
-- `src/case_studies/environmental_channel.py` → `tests/test_case_studies.py::TestEnvironmentalChannel`
+- `src/case_studies/detection_limits/` → `tests/test_case_studies.py::TestDetectionLimits`
+- `src/case_studies/neural_encoding/` → `tests/test_case_studies.py::TestNeuralEncoding`
+- `src/case_studies/environmental_channel/` → `tests/test_case_studies.py::TestEnvironmentalChannel`
 
 All tests use fixed random seeds ({{RANDOM_SEED}}) and validate numerical stability, broadcasting behavior, and edge conditions.
 

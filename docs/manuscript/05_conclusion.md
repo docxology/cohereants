@@ -33,7 +33,7 @@ The Discussion lists five minimal falsifiers; they are the operational closure f
 
 - Biomimetic uncooled IR sensors informed by pit-organ and sensilla geometry (bands {{BIOMIMETIC_IR_BAND_UM}}, thresholds {{BIOMIMETIC_THRESHOLD_MW_CM2}} mW/cm²) [@siebke2014biomimetic].
 - Pest-monitoring assay design with wavelength-specific stimulation and thermal controls.
-- Channel-capacity and detection-limit estimates from `src/case_studies/environmental_channel.py` and `src/case_studies/detection_limits.py` as engineering upper bounds.
+- Channel-capacity and detection-limit estimates from `src/case_studies/environmental_channel/` and `src/case_studies/detection_limits/` as engineering upper bounds.
 
 Quantum-coherence and broad quantum-biology claims remain out of scope; the framework focuses on measurable sensor bounds and preregistered protocols.
 

@@ -97,10 +97,10 @@ Experiment-specific bounds also live in `src/manuscript_fixtures.py` (protocol Q
 | --- | --- |
 | Literal `{{TOKEN}}` in PDF | [`troubleshooting.md`](troubleshooting.md) |
 | Missing NPZ during hydration | [`troubleshooting.md`](troubleshooting.md) |
-| Figure `\Cref` unresolved | [`../manuscript/AGENTS.md`](../manuscript/AGENTS.md) |
+| Figure `\Cref` unresolved | [`manuscript/AGENTS.md`](manuscript/AGENTS.md) |
 | Chrome / mmdc failure | [`troubleshooting.md`](troubleshooting.md) |
 
 ## See Also
 
 - [`output_conventions.md`](output_conventions.md) — Artifact inventory
-- [`../manuscript/AGENTS.md`](../manuscript/AGENTS.md) — Figure and claim protocol
+- [`manuscript/AGENTS.md`](manuscript/AGENTS.md) — Figure and claim protocol

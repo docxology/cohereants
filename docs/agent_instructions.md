@@ -14,7 +14,7 @@ Read this file before modifying **cohereants**. Pair with [`../AGENTS.md`](../AG
 | [`rendering_pipeline.md`](rendering_pipeline.md) | Manuscript and PDF |
 | [`style_guide.md`](style_guide.md) | Code and prose tone |
 | [`syntax_guide.md`](syntax_guide.md) | `{{TOKEN}}` and figures |
-| [`../manuscript/AGENTS.md`](../manuscript/AGENTS.md) | Claims and registry |
+| [`manuscript/AGENTS.md`](manuscript/AGENTS.md) | Claims and registry |
 
 ---
 
@@ -70,7 +70,7 @@ Do not strengthen prose beyond what generated artifacts support.
 
 ## Rule 7: `output/` Is Disposable
 
-Edit generators (`src/figures.py`, case studies) and manuscript templates — not `output/figures/*.png` or resolved `output/manuscript/*.md`.
+Edit generators (`src/figures/`, case studies) and manuscript templates — not `output/figures/*.png` or resolved `output/manuscript/*.md`.
 
 Regeneration order: figures → case studies → `z_generate_manuscript_variables.py` → `03_render_pdf.py`.
 

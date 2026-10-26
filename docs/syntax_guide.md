@@ -133,6 +133,6 @@ Use descriptive link text. Internal references to code should name the module pa
 
 ## See Also
 
-- [`../manuscript/AGENTS.md`](../manuscript/AGENTS.md) — Figure tokens, VAR policy, claims
+- [`manuscript/AGENTS.md`](manuscript/AGENTS.md) — Figure tokens, VAR policy, claims
 - [`rendering_pipeline.md`](rendering_pipeline.md) — Hydration and render order
 - [`output_conventions.md`](output_conventions.md) — Registry file location

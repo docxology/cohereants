@@ -26,7 +26,7 @@ Orchestration modules (`manuscript_variables.py`, figure registry writers) may i
 
 ### Why is the vibrational theory described as contested?
 
-Empirical receptor-level evidence remains disputed. The codebase is a **falsification framework** for IR-associated olfactory hypotheses, not a proof of biological IR olfaction. See [`../manuscript/AGENTS.md`](../manuscript/AGENTS.md) for claim policy.
+Empirical receptor-level evidence remains disputed. The codebase is a **falsification framework** for IR-associated olfactory hypotheses, not a proof of biological IR olfaction. See [`manuscript/AGENTS.md`](manuscript/AGENTS.md) for claim policy.
 
 ## Testing
 
@@ -64,7 +64,7 @@ Working copy: `output/pdf/cohereants_combined.pdf` under the project tree. After
 
 ### I edited `output/figures/*.png` by hand
 
-Changes are lost on the next pipeline run. Edit `src/figures.py` or the relevant case study module.
+Changes are lost on the next pipeline run. Edit `src/figures/` or the relevant case study module.
 
 ### I used "CohereAnts" in a script flag
 
