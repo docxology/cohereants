@@ -5,7 +5,7 @@
 ## Scope
 - Local-only path under `projects/ongoing/` — matched by the root `.gitignore`
   rule `projects/*`; never commit, add, or push anything here.
-- Parent standard: see `/Volumes/external_drive/Git/template/projects/ongoing/AGENTS.md`; parent project docs: `cohereants/src/AGENTS.md`.
+- Repository-wide policy for template projects is maintained in the template repository, not restated here; parent project docs: `cohereants/src/AGENTS.md`.
 
 ## Layout
 Files: `AGENTS.md`, `README.md`, `__init__.py`, `antbody.py`, `antbrain.py`, `antmind.py`

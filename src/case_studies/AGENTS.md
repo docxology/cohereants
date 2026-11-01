@@ -5,7 +5,7 @@
 ## Scope
 - Local-only path under `projects/ongoing/` — matched by the root `.gitignore`
   rule `projects/*`; never commit, add, or push anything here.
-- Parent standard: see `/Volumes/external_drive/Git/template/projects/ongoing/AGENTS.md`; parent project docs: `cohereants/src/AGENTS.md`.
+- Repository-wide policy for template projects is maintained in the template repository, not restated here; parent project docs: `cohereants/src/AGENTS.md`.
 
 ## Layout
 Subfolders: `detection_limits/`, `environmental_channel/`, `neural_encoding/`, `plasmonic_geometry/`, `sensilla_array_directionality/`, `spectral_unmixing/`
