@@ -18,7 +18,7 @@ authors = [
     {name = "Tucker Chambers"},
     {name = "Daniel A. Friedman"},
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 keywords = [
     "entomology", "insect-olfaction", "infrared-detection", "vibrational-theory",
     "semiochemicals", "sensilla", "antennae", "electromagnetic-sensing",
