@@ -3,8 +3,6 @@
 > Manuscript/documentation sources of the parent project. Verified by direct listing (fleet doc pass, 2026-08-29).
 
 ## Scope
-- Local-only path under `projects/ongoing/` — matched by the root `.gitignore`
-  rule `projects/*`; never commit, add, or push anything here.
 - Repository-wide policy for template projects is maintained in the template repository, not restated here; parent project docs: `cohereants/output/AGENTS.md`.
 
 ## Layout
@@ -17,4 +15,4 @@ Files: `00_abstract.md`, `01_introduction.md`, `02_methodology.md`, `03_experime
 - Author-facing sources. Edit these, not the rendered copies under `output/`.
 
 ## Gotchas
-- None beyond the local-only rule above.
+- None.

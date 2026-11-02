@@ -3,8 +3,6 @@
 > Generated figure assets. Verified by direct listing (fleet doc pass, 2026-08-29).
 
 ## Scope
-- Local-only path under `projects/ongoing/` — matched by the root `.gitignore`
-  rule `projects/*`; never commit, add, or push anything here.
 - Repository-wide policy for template projects is maintained in the template repository, not restated here; parent project docs: `cohereants/output/AGENTS.md`.
 
 ## Layout
@@ -17,4 +15,4 @@ Files: `AGENTS.md`, `README.md`, `active_inference_trajectory.alt.txt`, `active_
 - Regenerable output; regenerate via the parent project's scripts rather than editing.
 
 ## Gotchas
-- None beyond the local-only rule above.
+- None.

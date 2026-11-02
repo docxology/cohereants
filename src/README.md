@@ -2,7 +2,7 @@
 
 `src/` of the parent project.
 
-Part of `cohereants` (EntoTech lane, local-only under `projects/ongoing/`).
+Part of `cohereants`.
 
 ## Contents
 Subfolders: `ant_stack/`, `case_studies/`, `figures/`, `viz/`

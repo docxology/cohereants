@@ -2,7 +2,7 @@
 
 Directory `output` inside the `cohereants` tree of EntoTech.
 
-Part of `cohereants` (EntoTech lane, local-only under `projects/ongoing/`).
+Part of `cohereants`.
 
 ## Contents
 Subfolders: `data/`, `figures/`, `manuscript/`, `pdf/`, `web/`

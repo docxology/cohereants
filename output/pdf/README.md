@@ -2,7 +2,7 @@
 
 Directory `pdf` inside the `cohereants/output` tree of EntoTech.
 
-Part of `cohereants/output` (EntoTech lane, local-only under `projects/ongoing/`).
+Part of `cohereants/output`.
 
 ## Contents
 Files: `AGENTS.md`, `README.md`, `cohereants_combined.pdf`

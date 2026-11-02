@@ -2,7 +2,7 @@
 
 Directory `detection_limits` inside the `cohereants/src/case_studies` tree of EntoTech.
 
-Part of `cohereants/src/case_studies` (EntoTech lane, local-only under `projects/ongoing/`).
+Part of `cohereants/src/case_studies`.
 
 ## Contents
 Files: `AGENTS.md`, `README.md`, `__init__.py`, `compute.py`, `core.py`, `figures.py`, `noise.py`, `types.py`

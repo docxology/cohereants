@@ -2,7 +2,7 @@
 
 `data/` of the parent project.
 
-Part of `cohereants` (EntoTech lane, local-only under `projects/ongoing/`).
+Part of `cohereants`.
 
 ## Contents
 Files: `AGENTS.md`, `README.md`, `claim_ledger.yaml`
