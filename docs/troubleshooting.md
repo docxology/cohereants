@@ -161,6 +161,9 @@ uv run python scripts/03_render_pdf.py --project cohereants
 uv run python -m infrastructure.validation.cli pdf output/cohereants/pdf/cohereants_combined.pdf
 ```
 
+## Mermaid (`mmdc`) cannot find Chrome
+
+Combined PDF rendering runs `mmdc` for ` ```mermaid ` blocks, which needs `chrome-headless-shell`. Install it once if the render aborts with a missing-Chrome error:
 
 ```bash
 npx --yes puppeteer browsers install chrome-headless-shell
