@@ -4,7 +4,7 @@
 
 Technical guide for `docs/` inside **cohereants** — the operational rulebook for AI agents and developers working on biomimetic IR sensor engineering and insect infra-red perception models. Every document in this directory is a hard constraint, not a suggestion.
 
-**Project name (commands):** `cohereants` — always lowercase, never `cohereants` or `CohereAnts` in CLI flags or `--project` arguments.
+**Project name (commands):** `cohereants` — always lowercase; never `CohereAnts` (or other capitalized variants) in CLI flags or `--project` arguments.
 
 ## File Inventory
 
