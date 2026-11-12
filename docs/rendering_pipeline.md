@@ -87,7 +87,7 @@ Copies working artifacts to template root `output/cohereants/` for CI artifacts 
 | `paper.title`, `authors`, `keywords` | PDF front matter, `{{PROJECT_TITLE}}` |
 | `metadata.random_seed` | `{{RANDOM_SEED}}`, deterministic runs |
 | `publication.doi` | Title page (when set) |
-| `llm.*` | Optional LLM stages (skipped in `--core-only`) |
+| `llm.*` | Optional LLM stages (core mode) |
 
 Experiment-specific bounds also live in `src/manuscript_fixtures.py` (protocol QCL bands, biomimetic thresholds).
 
