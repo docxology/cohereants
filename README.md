@@ -8,6 +8,8 @@
 Computational research on insect IR sensing and olfaction modeling — engineering bounds and
 protocol design, not biological proof of IR olfaction.
 
+![CohereAnts evidence map: what is modeled, anchored, and still untested across atmospheric, geometric, spectral and evidence-status panels](output/figures/composite_cross_domain_overview.png)
+
 **Cite this work** via the concept DOI [10.5281/zenodo.20450880](https://doi.org/10.5281/zenodo.20450880)
 (always resolves to the latest version). The v1.0.0 deposit is
 [10.5281/zenodo.20450970](https://doi.org/10.5281/zenodo.20450970). See [`CITATION.cff`](CITATION.cff).
