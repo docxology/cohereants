@@ -35,7 +35,7 @@ Panels map literature-anchored SNR and power thresholds into ROC and operating-r
 <!-- alt: Detection limits panels with ROC curves, SNR operating regions, and noise floors for IR sensor bounds; model output only. -->
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{../output/figures/detection_limits_comprehensive_analysis.png}
+\includegraphics[width=0.9\textwidth]{../../output/figures/detection_limits_comprehensive_analysis.png}
 \caption{Detection limits analysis with ROC curves, SNR operating regions, noise floors, and range trade-offs for IR sensor bounds. Claim boundary: bounds sensor feasibility and model assumptions; does not establish biological IR olfaction.}
 \label{fig:app_detection_limits}
 \end{figure}

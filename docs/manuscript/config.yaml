@@ -39,6 +39,7 @@ keywords:
 metadata:
   license: "Apache-2.0"
   language: "en"
+  composite_figure_width: 0.95
 
 # Render format toggles. Defaults mirror the code exemplar: pdf/html on; docx/epub off.
 render:

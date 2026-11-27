@@ -67,15 +67,16 @@ def _fmt_range(low: float, high: float, *, unit: str = "") -> str:
 
 
 def _load_config(project_root: Path) -> dict[str, Any]:
-    config_path = project_root / "manuscript" / "config.yaml"
-    if not config_path.exists():
-        return {}
-    with config_path.open(encoding="utf-8") as handle:
-        return yaml.safe_load(handle) or {}
+    for manuscript_dir in (project_root / "docs" / "manuscript", project_root / "manuscript"):
+        config_path = manuscript_dir / "config.yaml"
+        if config_path.is_file():
+            with config_path.open(encoding="utf-8") as handle:
+                return yaml.safe_load(handle) or {}
+    return {}
 
 
 def generate_variables(project_root: Path, *, require_analysis_outputs: bool = False) -> dict[str, str]:
-    """Build manuscript substitution tokens from measured outputs and fixtures."""
+    """Build manuscript substitution tokens from model outputs and fixtures."""
     project_root = project_root.resolve()
     missing: list[str] = []
 
@@ -121,7 +122,9 @@ def generate_variables(project_root: Path, *, require_analysis_outputs: bool = F
 
     config = _load_config(project_root)
     paper_title = str((config.get("paper") or {}).get("title", "cohereants"))
-    random_seed = str((config.get("metadata") or {}).get("random_seed", 42))
+    metadata = config.get("metadata") or {}
+    random_seed = str(metadata.get("random_seed", 42))
+    composite_figure_width = str(metadata.get("composite_figure_width", 0.95))
 
     variables: dict[str, str] = {
         "PROJECT_TITLE": paper_title,
@@ -144,7 +147,7 @@ def generate_variables(project_root: Path, *, require_analysis_outputs: bool = F
         "FIRE_BLACKBODY_PEAK_UM": f"{FIRE_BLACKBODY_PEAK_UM:g}",
         "SKIN_BLACKBODY_PEAK_UM": f"{SKIN_BLACKBODY_PEAK_UM:g}",
         "FIGURE_WIDTH_RESPONSE_TIME": "1.0",
-        "FIGURE_WIDTH_COMPOSITE": "0.95",
+        "FIGURE_WIDTH_COMPOSITE": composite_figure_width,
         "GENERATED_AT_UTC": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     }
     return variables

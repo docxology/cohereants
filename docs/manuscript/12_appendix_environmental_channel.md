@@ -35,7 +35,7 @@ The case study compares how humidity, temperature, and path length shift usable 
 <!-- alt: Atmospheric channel model with absorption, scattering, and capacity maps across humidity and temperature; engineering channel bounds. -->
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{../output/figures/environmental_channel_comprehensive_analysis.png}
+\includegraphics[width=0.9\textwidth]{../../output/figures/environmental_channel_comprehensive_analysis.png}
 \caption{Environmental channel model with absorption, scattering, and capacity maps across humidity and temperature grids. Claim boundary: channel-capacity sensitivity demo under modeled clear/humid conditions; not a measured insect range.}
 \label{fig:app_env_channel}
 \end{figure}
@@ -45,7 +45,7 @@ The case study compares how humidity, temperature, and path length shift usable 
 <!-- alt: Integrated information decomposition across molecular, receptor, neural, and environmental terms; bounds sensor throughput, not biological proof. -->
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{../output/figures/integrated_analysis_information_analysis.png}
+\includegraphics[width=0.9\textwidth]{../../output/figures/integrated_analysis_information_analysis.png}
 \caption{Integrated information decomposition across molecular, receptor, neural, and environmental terms. Claim boundary: bounds sensor throughput; does not establish biological IR olfaction.}
 \label{fig:integrated_info}
 \end{figure}

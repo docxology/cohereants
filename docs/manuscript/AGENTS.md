@@ -128,14 +128,7 @@ Captions include a **generation method** sentence and validation note per `src/f
 1. Edit source `docs/manuscript/*.md` (not `output/manuscript/`).
 2. Update `src/` and tests if models change.
 3. Regenerate figures: `scripts/generate_research_figures.py`, case-study scripts.
-4. Hydrate variables: `scripts/z_generate_manuscript_variables.py`.
-5. Verify: `grep -r "{{" output/manuscript/ || echo OK`
-6. Render from template root: `uv run python scripts/03_render_pdf.py --project cohereants`.
-7. Validate: `uv run python scripts/04_validate_output.py --project cohereants`.
-
-## Passive / WIP Note
-
-While the project stays in `passive/`, manuscript work commits to the private repo. Pipeline rendering uses `projects_in_progress/cohereants` via `resolve_project_root()` when symlinked.
+4. Hydrate, render, and validate from a disposable checkout using the [pinned stages](../rendering_pipeline.md).
 
 ## See Also
 

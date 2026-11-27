@@ -29,6 +29,7 @@ def _minimal_project(tmp_path: Path) -> Path:
 def test_generate_variables_from_outputs(tmp_path: Path) -> None:
     root = _minimal_project(tmp_path)
     variables = generate_variables(root, require_analysis_outputs=True)
+    assert variables["PROJECT_TITLE"] == "Test"
     assert variables["IMPROVEMENT_FACTOR_LOW"] == "2.3"
     assert variables["IMPROVEMENT_FACTOR_HIGH"] == "7"
     assert variables["BEAM_WIDTH_LOW_DEG"] == "15"
@@ -55,3 +56,14 @@ def test_no_double_textwidth_in_includegraphics_pattern(tmp_path: Path) -> None:
     for key in ("FIGURE_WIDTH_RESPONSE_TIME", "FIGURE_WIDTH_COMPOSITE"):
         line = f"\\includegraphics[width={variables[key]}\\textwidth]{{../output/figures/example.png}}"
         assert "\\textwidth\\textwidth" not in line
+
+
+def test_canonical_config_has_priority_over_legacy(tmp_path: Path) -> None:
+    root = _minimal_project(tmp_path)
+    canonical = root / "docs" / "manuscript"
+    canonical.mkdir(parents=True)
+    (canonical / "config.yaml").write_text("paper:\n  title: Canonical\nmetadata:\n  random_seed: 99\n")
+
+    variables = generate_variables(root, require_analysis_outputs=True)
+    assert variables["PROJECT_TITLE"] == "Canonical"
+    assert variables["RANDOM_SEED"] == "99"

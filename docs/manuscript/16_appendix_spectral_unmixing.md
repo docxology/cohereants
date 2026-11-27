@@ -35,7 +35,7 @@ Synthetic mixtures benchmark unmixing and classification pipelines against known
 <!-- alt: Synthetic CHC spectral unmixing and classification benchmarks with NMF/VCA/ICA panels; algorithm evaluation, not species identification proof. -->
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{../output/figures/spectral_unmixing_comprehensive_analysis.png}
+\includegraphics[width=0.9\textwidth]{../../output/figures/spectral_unmixing_comprehensive_analysis.png}
 \caption{Synthetic CHC spectral unmixing and classification benchmarks with NMF/VCA/ICA panels. Claim boundary: algorithm evaluation; not species identification proof.}
 \label{fig:app_spectral_unmixing}
 \end{figure}
@@ -43,7 +43,7 @@ Synthetic mixtures benchmark unmixing and classification pipelines against known
 <!-- alt: Cross-domain synthesis of normalized performance metrics across information, material, and efficiency domains; evidence ladder panel. -->
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{../output/figures/integrated_analysis_cross_domain_synthesis.png}
+\includegraphics[width=0.9\textwidth]{../../output/figures/integrated_analysis_cross_domain_synthesis.png}
 \caption{Cross-domain synthesis from \texttt{scripts/generate\_integrated\_analysis.py}: normalized model metrics across information, material, and efficiency domains. Panel D reports unitless model sensitivity demo values, not predictive accuracy on live specimens. Claim boundary: engineering synthesis panel, not empirical classification proof.}
 \label{fig:integrated_classification}
 \end{figure}

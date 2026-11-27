@@ -28,7 +28,7 @@ The demo shows how a minimal belief-update policy could navigate a grid when IR 
 <!-- alt: Deterministic active-inference trajectory on a grid with IR cue beliefs; behavioral demo model output, not field data. -->
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{../output/figures/active_inference_trajectory.png}
+\includegraphics[width=0.9\textwidth]{../../output/figures/active_inference_trajectory.png}
 \caption{Deterministic gradient-following trajectory under a simple active-inference step model. Claim boundary: behavioral demo only; not field data.}
 \label{fig:app_active_inference}
 \end{figure}

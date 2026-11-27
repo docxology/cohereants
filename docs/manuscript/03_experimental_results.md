@@ -24,7 +24,7 @@ See \Cref{fig:response_time_comparison} for the comparison.
 <!-- alt: Response-time constraint map comparing insect ORN latencies, slower model terms, and a hypothetical IR-stage target; engineering bounds, not biological proof. -->
 \begin{figure}[h]
 \centering
-\includegraphics[width={{FIGURE_WIDTH_RESPONSE_TIME}}\textwidth]{../output/figures/response_time_comparison.png}
+\includegraphics[width={{FIGURE_WIDTH_RESPONSE_TIME}}\textwidth]{../../output/figures/response_time_comparison.png}
 \caption{Response-time constraint map. Literature-anchored insect ORN timing is plotted beside slower model terms and faster visual/auditory reference bands. The figure asks where a proposed IR stage would need to fall to add information beyond already-fast molecular ORN responses; it does not treat IR olfaction as established.}
 \label{fig:response_time_comparison}
 \end{figure}
@@ -79,7 +79,7 @@ See \Cref{fig:composite_cross_domain_overview} for the cross-domain computationa
 <!-- alt: Cross-domain computational overview linking atmospheric windows, sensilla resonance estimates, CHC bands, and timing constraints; hypothesis map, not an experimental setup. -->
 \begin{figure}[h]
 \centering
-\includegraphics[width={{FIGURE_WIDTH_COMPOSITE}}\textwidth]{../output/figures/composite_cross_domain_overview.png}
+\includegraphics[width={{FIGURE_WIDTH_COMPOSITE}}\textwidth]{../../output/figures/composite_cross_domain_overview.png}
 \caption{Cross-domain evidence map linking atmospheric transmission (\Cref{fig:atmospheric_transmission}), sensilla resonance estimates (\Cref{fig:sensilla_wavelength_matching}), CHC-associated bands (\Cref{fig:chc_spectra_example}), and literature-constrained timing (\Cref{fig:response_time_comparison}). Claim boundary: hypothesis ladder identifying testable overlaps; not an experimental setup diagram.}
 \label{fig:composite_cross_domain_overview}
 \end{figure}

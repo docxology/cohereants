@@ -1,7 +1,7 @@
 # AGENTS.md — `cohereants/scripts`
 
 Thin-orchestrator contract for this directory. Read with the repo-root
-[`AGENTS.md`](../AGENTS.md) and [`ISA.md`](../ISA.md).
+[`AGENTS.md`](../AGENTS.md) and [`ISA.md`](../docs/project/ISA.md).
 
 ## Contract
 
@@ -37,9 +37,7 @@ progress prints, and delegated calls into `src/` entrypoints.
 ## Gotchas
 
 - This directory is part of the tracked repo (origin `github.com/docxology/cohereants`);
-  commit here normally. The template-root pipeline scripts (`01_run_tests.py`,
-  `03_render_pdf.py`, `execute_pipeline.py`) are external — never present them as living
-  in this `scripts/`.
+  commit here normally. The [pinned Template build](../docs/rendering_pipeline.md) runs from a separate checkout.
 - Every script bootstraps its own `sys.path` (script dir for `_utils`, repo root for
   `src.*`); run them from the project directory with `uv run python scripts/...`.
 - `MPLBACKEND=Agg` (or `set_mpl_backend()`) is required for headless rendering.

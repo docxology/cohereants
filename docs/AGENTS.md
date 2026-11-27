@@ -15,12 +15,12 @@ Technical guide for `docs/` inside **cohereants** — the operational rulebook f
 | `agent_instructions.md` | Behavioral constraints (read-first) | Comprehensive |
 | `architecture.md` | Domain module map, dependency direction | Comprehensive |
 | `testing_philosophy.md` | Zero-mock policy, 90% gate, mock-debt note | Comprehensive |
-| `rendering_pipeline.md` | Four-phase pipeline; WIP `resolve_project_root` | Comprehensive |
+| `rendering_pipeline.md` | Pinned PDF/HTML build | Comprehensive |
 | `style_guide.md` | Understated engineering prose; code rules | Comprehensive |
 | `syntax_guide.md` | `{{TOKEN}}` and figure cross-reference syntax | Comprehensive |
 | `output_conventions.md` | `output/` layout, registries, regeneration | Comprehensive |
 | `troubleshooting.md` | Symptom-driven recipes | Comprehensive |
-| `quickstart.md` | Passive/WIP quick start | Comprehensive |
+| `quickstart.md` | Locked setup and offline checks | Comprehensive |
 | `faq.md` | Recurring questions | Comprehensive |
 
 ## Key Conventions
@@ -45,10 +45,7 @@ Technical guide for `docs/` inside **cohereants** — the operational rulebook f
 ## Verification Commands
 
 ```bash
-# From template root (symlink present under projects_in_progress/)
-uv run python scripts/01_run_tests.py --project cohereants --project-only
-
-# From project root (private repo or symlink)
+# From the project root, after the quick-start setup
 MPLBACKEND=Agg .venv/bin/python -m pytest tests/ --cov=src --cov-fail-under=90 -q
 
 # Mock audit (new tests must stay clean; legacy debt may still fail grep)

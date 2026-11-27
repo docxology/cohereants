@@ -16,7 +16,7 @@ Read with the workspace-level `AGENTS.md` one directory above this repository.
 Engineering remediation of the cohereants science codebase into the template two-layer
 structure. Business logic in `src/`; thin `scripts/` orchestrators; manuscript with
 registry-backed `{{TOKEN}}` injection and `data/claim_ledger.yaml`. Ideal-State Artifact:
-[`ISA.md`](ISA.md). Documentation hub: [`docs/`](docs/).
+[`ISA.md`](docs/project/ISA.md). Documentation hub: [`docs/`](docs/).
 
 ## Invariants
 
@@ -25,17 +25,13 @@ registry-backed `{{TOKEN}}` injection and `data/claim_ledger.yaml`. Ideal-State 
 - **Coverage ≥90%** on `src/` (`pyproject.toml` `fail_under = 90`).
 - **numpy 2.x:** use `np.trapezoid` or module `_trapezoid` shims.
 - **CWD-independence:** resolve paths from `__file__` / project root in tests.
-- **Private repo:** commit in `path/to/cohereants`;
-  template symlink at `projects_in_progress/cohereants`.
+- **Local rendering:** register a disposable checkout as `projects/working/cohereants` in the pinned Template checkout.
 
 ## Run
 
 ```bash
-# Authoritative gate (template root):
-uv run python scripts/01_run_tests.py --project cohereants --project-only
-
-# Direct (project dir):
-cd path/to/cohereants
+# From the CohereAnts checkout:
+uv sync --locked --python 3.13 --extra dev
 MPLBACKEND=Agg uv run pytest tests/ --cov=src --cov-report=term-missing
 
 # Manuscript variables (allow draft when outputs missing):
@@ -50,7 +46,7 @@ tests/               zero-mock pytest over src/
 scripts/             generate_*.py, run_all_case_studies.py, z_generate_manuscript_variables.py
 docs/manuscript/          NN_*.md + config.yaml + AGENTS.md
 data/claim_ledger.yaml   evidence registry numeric claims
-docs/                engineering remediation hub (12 files)
+docs/                maintained guides and manuscript
 ISA.md               verification block + phase status
 ```
 
@@ -83,4 +79,4 @@ ISA.md               verification block + phase status
 | `run_all_case_studies.py` | Runs appendix generators |
 | `z_generate_manuscript_variables.py` | Writes `output/data/manuscript_variables.json` |
 
-PDF rendering uses template root `scripts/03_render_pdf.py --project cohereants`.
+Use the [pinned rendering guide](docs/rendering_pipeline.md) for PDF and HTML.

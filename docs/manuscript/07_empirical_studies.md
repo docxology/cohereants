@@ -8,7 +8,7 @@ Insect engagement with infrared (IR) radiation spans three functional axes that 
 2. **Passive interaction** — cuticle and wing optical properties that govern absorption, reflection, and emission for thermoregulation.
 3. **Applied IR** — NIRS, FTIR, and optical sensors used by researchers to profile insects (not insect sensing).
 
-These axes constrain CohereAnts models and preregistered protocols. They do **not** prove that ordinary antennal olfactory sensilla detect semiochemical IR vibrational signatures. The central vibrational-olfaction hypothesis remains contested [@turin1996spectroscopic; @franco2011molecular; @block2015implausibility].
+These axes constrain CohereAnts models and proposed protocols. They do **not** prove that ordinary antennal olfactory sensilla detect semiochemical IR vibrational signatures. The central vibrational-olfaction hypothesis remains contested [@turin1996spectroscopic; @franco2011molecular; @block2015implausibility].
 
 ## Molecular Spectroscopy and Olfactory Theory
 
@@ -119,7 +119,7 @@ See \Cref{fig:empirical_ir_axes} for a schematic synthesis of the three function
 <!-- alt: Three-axis schematic of active photomechanic detection, passive cuticle optics, and applied IR spectroscopy with literature threshold bands; synthesis figure, not new data. -->
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.95\textwidth]{../output/figures/empirical_ir_axes.png}
+\includegraphics[width=0.95\textwidth]{../../output/figures/empirical_ir_axes.png}
 \caption{Three-axis schematic of insect IR biology synthesized from the comparative table above. Active photomechanic organs anchor biomimetic bands {{BIOMIMETIC_IR_BAND_UM}} and thresholds {{BIOMIMETIC_THRESHOLD_MW_CM2}}~mW/cm²; passive cuticle/thermosensory pathways set background IR context; applied spectroscopy validates discriminative structure without demonstrating in vivo semiochemical IR olfaction. Claim boundary: literature synthesis, not new empirical measurement.}
 \label{fig:empirical_ir_axes}
 \end{figure}

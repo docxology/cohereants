@@ -36,7 +36,7 @@ Synthetic spike trains and population metrics explore how fast ORN-like encoders
 <!-- alt: Neural encoding panels with spike trains, population PCA, and information metrics on synthetic ORN time series; model output only. -->
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{../output/figures/neural_encoding_comprehensive_analysis.png}
+\includegraphics[width=0.9\textwidth]{../../output/figures/neural_encoding_comprehensive_analysis.png}
 \caption{Neural encoding panels with spike trains, population PCA, and information metrics on synthetic ORN time series. Claim boundary: model output only; does not establish biological IR olfaction.}
 \label{fig:app_neural_encoding_full}
 \end{figure}

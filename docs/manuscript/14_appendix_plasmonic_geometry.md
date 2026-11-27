@@ -32,7 +32,7 @@ Sweeps identify nanoparticle sizes and materials that maximize near-field enhanc
 <!-- alt: Plasmonic geometry sweep with Drude permittivity, Mie scattering, and near-field enhancement maps for receptor-scale sensor design. -->
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{../output/figures/plasmonic_geometry_comprehensive_analysis.png}
+\includegraphics[width=0.9\textwidth]{../../output/figures/plasmonic_geometry_comprehensive_analysis.png}
 \caption{Plasmonic geometry sweep with Drude permittivity, Mie scattering, and near-field enhancement maps for receptor-scale sensor design. Claim boundary: bounds sensor feasibility and model assumptions; does not establish biological IR olfaction.}
 \label{fig:app_plasmonic_sweep}
 \end{figure}
@@ -40,7 +40,7 @@ Sweeps identify nanoparticle sizes and materials that maximize near-field enhanc
 <!-- alt: Integrated metamaterial dielectric and plasmonic response with information-capacity summaries; engineering model panels. -->
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{../output/figures/integrated_analysis_metamaterial_properties.png}
+\includegraphics[width=0.9\textwidth]{../../output/figures/integrated_analysis_metamaterial_properties.png}
 \caption{Integrated metamaterial dielectric and plasmonic response with information-capacity summaries. Claim boundary: engineering model panels only; does not establish biological IR olfaction.}
 \label{fig:integrated_metamaterial}
 \end{figure}

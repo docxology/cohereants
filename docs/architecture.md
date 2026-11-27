@@ -78,7 +78,7 @@ graph TD
 | Hard-coded SNR or timing numbers in manuscript | Drifts from analysis | Use `{{SNR_OPERATING_DB}}` etc. |
 | Asserting vibrational IR olfaction as proven | Hypothesis is contested | Frame as falsifiable prediction; cite `data/claim_ledger.yaml` |
 | New `unittest.mock` in tests | Template contract | Real arrays, `tmp_path`, subprocess |
-| Committing under public `template/projects/cohereants` | Confidentiality invariant | Commit only in private `passive/cohereants` |
+| Editing resolved output as source | Source and deposit drift | Edit `docs/manuscript/` and rebuild in a disposable checkout |
 
 ## Adding a New Analysis Module
 
