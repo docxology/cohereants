@@ -2,8 +2,9 @@
 
 The eighteen numbered files in [`docs/manuscript/`](manuscript/) are the maintained sources. The
 same directory owns the publication metadata, bibliography, and LaTeX preamble.
-`output/manuscript/` contains a historical resolved snapshot. Use a separate clean
-CohereAnts checkout to rebuild so the original tracked deposit remains intact.
+`output/manuscript/` contains a historical resolved snapshot. Rebuild in a
+separate clean checkout to preserve the original tracked deposit. Its physical
+directory must be named `cohereants` so Stage 04 can locate the combined PDF.
 
 ## Prepare the resolved sources
 
