@@ -36,8 +36,15 @@ uv sync --locked --no-dev
 mkdir -p projects/working
 ln -s "$cohereants_checkout" projects/working/cohereants
 uv run --no-sync python scripts/pipeline/stage_03_render.py --project working/cohereants --skip-manuscript-hydration
+python "$cohereants_checkout/scripts/link_web_references.py" "$cohereants_checkout/output"
 uv run --no-sync python scripts/pipeline/stage_04_validate.py --project working/cohereants
 ```
+
+The reference step reads the combined PDF's numbered equation and figure
+records and the matching generated HTML. It links equations and figures in the
+combined and chapter readers. In aligned math, the link selects the
+corresponding number below the shared display. It leaves formulas and the PDF
+untouched. Rerun it on the same Stage 03 output after an interruption.
 
 Open `output/pdf/cohereants_combined.pdf`, `output/web/index.html`, and
 `output/reports/validation_report.json` in the CohereAnts checkout. The format
