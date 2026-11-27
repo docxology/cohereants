@@ -2,11 +2,11 @@ authors:
 - affiliation: Independent Researcher
   family-names: Chambers
   given-names: Tucker
-  orcid: 0009-0008-3793-7872
+  orcid: https://orcid.org/0009-0008-3793-7872
 - affiliation: Active Inference Institute
   family-names: Friedman
   given-names: Daniel A.
-  orcid: 0000-0001-6232-9096
+  orcid: https://orcid.org/0000-0001-6232-9096
 cff-version: 1.2.0
 date-released: '2026-05-29'
 doi: 10.5281/zenodo.20450880
