@@ -72,7 +72,7 @@ Link claims to code paths and artifacts.
 
 ## 6. Explicit Paths
 
-When documenting from the private repo, anchor paths at the project root:
+When documenting from the project checkout, anchor paths at the project root:
 
 | Artifact | Path |
 | --- | --- |
@@ -81,7 +81,7 @@ When documenting from the private repo, anchor paths at the project root:
 | Figure registry | `output/figures/figure_registry.json` |
 | Claim ledger | `data/claim_ledger.yaml` |
 
-From the template checkout, prefix with `projects_in_progress/cohereants/` when citing symlink locations.
+From the template checkout, prefix with `projects/working/cohereants/` when citing symlink locations.
 
 ---
 

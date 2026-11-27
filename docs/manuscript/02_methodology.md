@@ -38,7 +38,7 @@ These windows overlap some CHC- and cuticle-associated vibrational bands, but ov
 <!-- alt: Atmospheric transmission versus wavelength with shaded mid-IR, long-wave, and far-IR windows and a biomimetic 2.8–6 µm band; coarse model scope, not a range proof. -->
 \begin{figure}[h]
 \centering
-\includegraphics[width=1.0\textwidth]{../output/figures/atmospheric_transmission.png}
+\includegraphics[width=1.0\textwidth]{../../output/figures/atmospheric_transmission.png}
 \caption{Atmospheric transmission window analysis from \texttt{src.core.calculate\_atmospheric\_transmission()} across 1--30~\(\mu\mathrm{m}\). Shaded bands mark modeled windows and the literature-anchored biomimetic band {{BIOMIMETIC_IR_BAND_UM}}. Claim boundary: window overlap is necessary but not sufficient for semiochemical IR communication.}
 \label{fig:atmospheric_transmission}
 \end{figure}
@@ -64,7 +64,7 @@ See \Cref{fig:sensilla_wavelength_matching} for representative morphometric inpu
 <!-- alt: Representative sensilla dimensions and modeled quarter- and half-wave resonance estimates plotted against atmospheric windows; geometry screening, not receptor tuning proof. -->
 \begin{figure}[h]
 \centering
-\includegraphics[width=1.0\textwidth]{../output/figures/sensilla_wavelength_matching.png}
+\includegraphics[width=1.0\textwidth]{../../output/figures/sensilla_wavelength_matching.png}
 \caption{Representative sensilla dimensions and quarter-/half-wave resonance estimates from \texttt{src.sensilla.analyze\_sensilla\_dimensions()}. Claim boundary: model probes, not measured insect IR receptor tuning curves.}
 \label{fig:sensilla_wavelength_matching}
 \end{figure}
@@ -83,7 +83,7 @@ See \Cref{fig:chc_spectra_example} for a deterministic CHC fixture analyzed via 
 <!-- alt: Synthetic cuticular-hydrocarbon infrared spectrum with C-H stretch and bend regions annotated; fixture for spectral feature extraction, not a measured ant spectrum. -->
 \begin{figure}[h]
 \centering
-\includegraphics[width=1.0\textwidth]{../output/figures/chc_spectra_example.png}
+\includegraphics[width=1.0\textwidth]{../../output/figures/chc_spectra_example.png}
 \caption{CHC infrared spectrum fixture processed by \texttt{analyze\_chc\_spectra()}. Claim boundary: supports feature extraction and hypothesis generation; does not establish in vivo semiochemical IR olfaction.}
 \label{fig:chc_spectra_example}
 \end{figure}
@@ -133,13 +133,13 @@ All tests use fixed random seeds ({{RANDOM_SEED}}) and validate numerical stabil
 
 ### Experimental Protocol Specification
 
-Engineering deliverables prioritize preregistered, IR-only assays with thermal controls:
+Engineering deliverables describe proposed IR-only assays with thermal controls:
 
 | Parameter | Specification | Source tier |
 |-----------|---------------|-------------|
 | QCL/LED band | {{PROTOCOL_QCL_BAND_UM}} | `src/manuscript_fixtures.py` |
 | Power density | {{PROTOCOL_POWER_DENSITY_MW_CM2}} mW/cm² | protocol default |
-| Thermal control | {{PROTOCOL_THERMAL_CONTROL}} | preregistered assay |
+| Thermal control | {{PROTOCOL_THERMAL_CONTROL}} | proposed assay |
 | Minimum N | ≥{{PROTOCOL_MIN_N}} per condition | preregistration |
 | SNR operating point | {{SNR_OPERATING_DB}} dB (model) | `output/data/detection_limits_spec.json` |
 

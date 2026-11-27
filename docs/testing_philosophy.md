@@ -17,18 +17,10 @@ Insect IR models combine atmospheric transmission, sensilla geometry, and neural
 | Branch coverage | Enabled |
 | Runner | Project env via `uv run` (template) or project `.venv` (direct) |
 
-**Authoritative gate from template root** (uses `uv run --directory` for project deps such as `scikit-learn`):
+Use the [locked environment](quickstart.md) and run from the project root:
 
 ```bash
-uv run python scripts/01_run_tests.py --project cohereants --project-only
-```
-
-**Direct gate (project directory):**
-
-```bash
-cd /path/to/cohereants
-uv sync
-MPLBACKEND=Agg uv run pytest tests/ --cov=src --cov-fail-under=90 --cov-report=term-missing
+MPLBACKEND=Agg uv run --no-sync python -m pytest tests/ --cov=src --cov-fail-under=90 --cov-report=term-missing
 ```
 
 A green exit with **0 tests collected** is not a pass. Confirm collected count > 0 and coverage ≥ 90%.

@@ -1,6 +1,6 @@
 # AI Agent Instructions — cohereants
 
-Read this file before modifying **cohereants**. Pair with [`../AGENTS.md`](../AGENTS.md), [`../ISA.md`](../ISA.md), and the template root agent docs when running pipeline stages.
+Read this file before modifying **cohereants**. Pair with [`../AGENTS.md`](../AGENTS.md), [`../ISA.md`](project/ISA.md), and the template root agent docs when running pipeline stages.
 
 ---
 
@@ -20,7 +20,7 @@ Read this file before modifying **cohereants**. Pair with [`../AGENTS.md`](../AG
 
 ## Rule 2: Coverage Gate — ≥90% on `src/`
 
-Enforced by `pyproject.toml` and `scripts/01_run_tests.py --project cohereants --project-only`.
+Enforced by `pyproject.toml` and the project-local pytest coverage command.
 
 After any `src/` change:
 
@@ -59,20 +59,17 @@ Do not strengthen prose beyond what generated artifacts support.
 
 ---
 
-## Rule 6: Passive / WIP Workflow
+## Rule 6: Separate Template checkout
 
-- Canonical git tree: `path/to/cohereants/`
-- Template symlink: `projects_in_progress/cohereants`
-- Pipeline flag: **`--project cohereants`** (never `cohereants`)
-- Do not commit under public `template/projects/cohereants/`
+Follow the [pinned build](rendering_pipeline.md) and explicitly target `working/cohereants`. Use a disposable project checkout.
 
 ---
 
-## Rule 7: `output/` Is Disposable
+## Rule 7: Preserve tracked release outputs
 
 Edit generators (`src/figures/`, case studies) and manuscript templates — not `output/figures/*.png` or resolved `output/manuscript/*.md`.
 
-Regeneration order: figures → case studies → `z_generate_manuscript_variables.py` → `03_render_pdf.py`.
+The offline build hydrates the manuscript from the tracked arrays and figures. Rebuild only in a disposable checkout.
 
 ---
 
@@ -103,5 +100,5 @@ test -f output/data/manuscript_variables.json && echo "variables ok"
 
 ## See Also
 
-- [`../ISA.md`](../ISA.md) — Ideal state and remediation backlog
+- [`../ISA.md`](project/ISA.md) — Ideal state and remediation backlog
 - [`quickstart.md`](quickstart.md) — Run commands

@@ -18,6 +18,8 @@ updated: 2026-05-29
 
 # ISA — cohereants
 
+This record describes the original adaptation and publication. Use the [current build guide](../rendering_pipeline.md) for present commands and paths.
+
 > "When do bugs see (infra)red?" — adapting the insect infra-red / vibrational-theory-of-olfaction
 > research codebase (`github.com/docxology/cohereants`, authors Tucker Chambers & Daniel A. Friedman)
 > into the Research Project Template as a first-class, pipeline-discoverable, fully-tested project.

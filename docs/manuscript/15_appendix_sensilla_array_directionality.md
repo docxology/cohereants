@@ -33,7 +33,7 @@ Beam patterns and coupling matrices translate morphometric presets into directio
 <!-- alt: Sensilla array beam patterns, coupling, and morphology-to-resonance maps from antenna models; bounds directional gain, not field proof. -->
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.9\textwidth]{../output/figures/sensilla_array_comprehensive_analysis.png}
+\includegraphics[width=0.9\textwidth]{../../output/figures/sensilla_array_comprehensive_analysis.png}
 \caption{Sensilla array beam patterns, coupling, and morphology-to-resonance maps from antenna models. Claim boundary: bounds directional gain; not field proof of semiochemical IR olfaction.}
 \label{fig:app_sensilla_beam}
 \end{figure}

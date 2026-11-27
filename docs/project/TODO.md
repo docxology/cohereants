@@ -1,6 +1,6 @@
 # cohereants — canonical backlog
 
-Open, owner-local work only. Completed work belongs in `CHANGELOG.md` and Git history.
+Open, owner-local work only. Completed work belongs in Git history.
 
 ## Workflowz review — 2026-11-10
 

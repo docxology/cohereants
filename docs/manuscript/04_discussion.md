@@ -99,7 +99,7 @@ The primary empirical challenge is distinguishing direct electromagnetic detecti
 
 5. **Behavioral independence**: No detectable orientation responses to narrowband IR stimulation in the absence of chemical gradients, with responses <10% of positive controls using identical experimental setups.
 
-Each falsifier requires adequately powered, preregistered protocols (N ≥ 50) and is described in Methods and Appendices.
+Methods and Appendices describe the proposed falsifiers. An empirical test would require preregistration and a sample size justified by its design.
 
 ## Future directions
 

@@ -10,7 +10,7 @@ All predictions are anchored in deterministic, unit-tested code with documented 
 
 ### Empirical highlights
 
-1. Morphology: Representative sensilla dimensions can be mapped onto IR-scale quarter- and half-wave estimates (\Cref{fig:sensilla_wavelength_matching}); the needed empirical test is a preregistered, cross-taxa correlation analysis [@liu2021thripidae].
+1. Morphology: Representative sensilla dimensions can be mapped onto IR-scale quarter- and half-wave estimates (\Cref{fig:sensilla_wavelength_matching}); the proposed empirical test would use a preregistered, cross-taxa correlation analysis [@liu2021thripidae].
 2. Neural timing: Published insect ORN timing is fast enough that any IR stage must be experimentally separated from already-rapid molecular responses (\Cref{fig:response_time_comparison}) [@egeaweiss2018rapid; @gorurshandilya2017gain].
 3. Behavior: Photomechanic beetle IR organs, kissing-bug combinatorial warm cells, ant thermosensitive sensilla, cycad thermogenic pollination IR, and mosquito thermal-IR host seeking establish biological IR/radiant sensing precedents, not direct semiochemical IR olfaction (\Cref{fig:empirical_ir_axes}) [@schmitz2011infrared; @zopf2014infrared; @ruchty2009thermosensitive; @valenciamontoya2025infrared; @chandel2024thermal].
 4. Spectroscopy: Automated peak detection identifies CHC-associated bands that can support species discrimination in ATR-FTIR data, while perceptual use of those bands remains to be tested (\Cref{fig:chc_spectra_example}) [@durak2022atrftir].
@@ -27,7 +27,7 @@ The Discussion lists five minimal falsifiers; they are the operational closure f
 2. **Geometric mismatch** — sensilla dimensions uncorrelated with predicted resonances across taxa (N ≥ 50, phylogeny-aware).
 3. **Environmental misalignment** — CHC peaks consistently outside modeled transmission windows under controlled humidity and temperature.
 4. **Temporal indistinguishability** — ORN latencies to IR stimulation statistically indistinguishable from thermal stimulation at matched power.
-5. **Behavioral independence** — no IR-only orientation without chemical gradients under preregistered olfactometer protocols.
+5. **Behavioral independence** — no IR-only orientation without chemical gradients in proposed olfactometer studies.
 
 **Translation targets** (grounded in model outputs, not biological proof):
 
@@ -35,7 +35,7 @@ The Discussion lists five minimal falsifiers; they are the operational closure f
 - Pest-monitoring assay design with wavelength-specific stimulation and thermal controls.
 - Channel-capacity and detection-limit estimates from `src/case_studies/environmental_channel/` and `src/case_studies/detection_limits/` as engineering upper bounds.
 
-Quantum-coherence and broad quantum-biology claims remain out of scope; the framework focuses on measurable sensor bounds and preregistered protocols.
+Quantum-coherence and broad quantum-biology claims remain out of scope; the framework focuses on measurable sensor bounds and proposed protocols.
 
 ## Reproducibility
 

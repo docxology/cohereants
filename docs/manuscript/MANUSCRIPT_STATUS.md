@@ -1,7 +1,7 @@
-# Manuscript Status
+# Manuscript status
 
-- **Project:** cohereants
-- **Manuscript title:** When do bugs see (infra)red?
-- **Location:** `docs/manuscript/` (canonical default; legacy `docs/manuscript/` fallback resolved by `infrastructure.core.project_paths.resolve_manuscript_dir`)
-- **Type:** Active publication-target manuscript (18 section files)
-- **Status file purpose:** Tracks publication-readiness of the manuscript content in this directory. Migrated from legacy `docs/manuscript/` location.
+The [eighteen numbered sections](README.md) in this directory are the maintained
+publication source. The [offline build](../rendering_pipeline.md) resolves tokens
+from tracked simulation artifacts. Historical resolved sections, the deposited
+PDF, and the web release are tracked under `output/`. Published studies,
+hypothetical tests, and modeled estimates retain their original evidence scope.
