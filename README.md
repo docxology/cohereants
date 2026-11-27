@@ -44,6 +44,8 @@ science modules use numpy-2 shims and thin orchestrators.
 
 ## Documentation
 
+The package requires Python 3.11 or later. The [offline reproduction guide](docs/quickstart.md) selects Python 3.13 for its locked verification environment.
+
 Use the [documentation index](docs/README.md) for setup, architecture, and
 verification. The [quick start](docs/quickstart.md) runs the offline tests.
 The [manuscript](docs/manuscript/README.md) and
